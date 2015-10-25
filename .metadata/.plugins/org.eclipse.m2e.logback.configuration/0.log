@@ -1,0 +1,15 @@
+2015-10-25 09:20:24,892 [Worker-12] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.nju.sec.yz:ExpressSystem:0.0.1-SNAPSHOT @ F:\Git\SEC2\SEC2\ExpressSystem\pom.xml.
+2015-10-25 09:20:24,892 [Worker-1] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.nju.sec.yz:ExpressSystem:0.0.1-SNAPSHOT @ F:\Git\SEC2\SEC2\ExpressSystem\pom.xml.
+2015-10-25 09:20:26,617 [Worker-12] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2015-10-25 09:20:26,618 [Worker-12] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory F:\Git\SEC2\SEC2\ExpressSystem\src\main\resources
+2015-10-25 09:20:26,621 [Worker-12] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2015-10-25 09:20:26,621 [Worker-12] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory F:\Git\SEC2\SEC2\ExpressSystem\src\test\resources
+2015-10-25 09:20:29,143 [Worker-15] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.nju.sec.yz:ExpressSystem:0.0.1-SNAPSHOT @ F:\Git\SEC2\SEC2\ExpressSystem\pom.xml.
+2015-10-25 09:20:30,334 [Worker-11] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2015-10-25 09:20:30,334 [Worker-11] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory F:\Git\SEC2\SEC2\ExpressSystem\src\main\resources
+2015-10-25 09:20:30,339 [Worker-11] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2015-10-25 09:20:30,339 [Worker-11] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory F:\Git\SEC2\SEC2\ExpressSystem\src\test\resources
+2015-10-25 09:20:32,424 [Worker-15] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2015-10-25 09:20:32,424 [Worker-15] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory F:\Git\SEC2\SEC2\ExpressSystem\src\main\resources
+2015-10-25 09:20:32,426 [Worker-15] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2015-10-25 09:20:32,426 [Worker-15] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory F:\Git\SEC2\SEC2\ExpressSystem\src\test\resources
