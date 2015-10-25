@@ -13,7 +13,7 @@ import nju.sec.yz.ExpressSystem.po.InventoryPO;
  * @author zhangqi
  *
  */
-public class inventoryDataStub implements InventoryDataService{
+public class InventoryDataStub implements InventoryDataService{
 	
 	@Override
 	public ResultMessage insert(InventoryPO ipo) throws RemoteException{

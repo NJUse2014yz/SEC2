@@ -7,7 +7,11 @@ import nju.sec.yz.ExpressSystem.common.Power;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.dataservice.userDataSevice.UserDataService;
 import nju.sec.yz.ExpressSystem.po.UserPO;
-
+/**
+ * 
+ * @author zhangqi
+ *
+ */
 public class UserDataStub implements UserDataService {
 	@Override
 	public ResultMessage insert(UserPO upo) throws RemoteException{

@@ -15,5 +15,5 @@ import nju.sec.yz.ExpressSystem.po.UserPO;
 public interface LogDataService {
 	public ResultMessage insert(LogPO lpo) throws RemoteException;
 	public LogPO find(String time) throws RemoteException;
-	public ArrayList<UserPO> findAll( ) throws RemoteException;
+	public ArrayList<LogPO> findAll( ) throws RemoteException;
 }
