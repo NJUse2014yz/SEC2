@@ -24,11 +24,11 @@ import nju.sec.yz.ExpressSystem.common.TransitInformation;
  */
 public class DeliverPO {
 	private OrderInformation ordermation; 
-	private LoadInformation officeLoad;
-	private ArriveInformation officeArrive;
-	private ArriveInformation transitArrive;
-	private LoadInformation transitLoad;
-	private TransitInformation transit;
+	private ArrayList<LoadInformation> officeLoads;
+	private ArrayList<ArriveInformation> officeArrives;
+	private ArrayList<ArriveInformation> transitArrives;
+	private ArrayList<LoadInformation> transitLoads;
+	private ArrayList<TransitInformation> transits;
 	private InventoryInInformation inventoryIn;
 	private InventoryOutInformation inventoryOut;
 	private DeliveryInformation delivery;
@@ -41,35 +41,35 @@ public class DeliverPO {
 	public void setOrdermation(OrderInformation ordermation) {
 		this.ordermation = ordermation;
 	}
-	public LoadInformation getOfficeLoad() {
-		return officeLoad;
+	public ArrayList<LoadInformation> getOfficeLoad() {
+		return officeLoads;
 	}
-	public void setOfficeLoad(LoadInformation officeLoad) {
-		this.officeLoad = officeLoad;
+	public void setOfficeLoad(ArrayList<LoadInformation> officeLoads) {
+		this.officeLoads = officeLoads;
 	}
-	public ArriveInformation getOfficeArrive() {
-		return officeArrive;
+	public ArrayList<ArriveInformation> getOfficeArrive() {
+		return officeArrives;
 	}
-	public void setOfficeArrive(ArriveInformation officeArrive) {
-		this.officeArrive = officeArrive;
+	public void setOfficeArrive(ArrayList<ArriveInformation> officeArrives) {
+		this.officeArrives = officeArrives;
 	}
-	public ArriveInformation getTransitArrive() {
-		return transitArrive;
+	public ArrayList<ArriveInformation> getTransitArrive() {
+		return transitArrives;
 	}
-	public void setTransitArrive(ArriveInformation transitArrive) {
-		this.transitArrive = transitArrive;
+	public void setTransitArrive(ArrayList<ArriveInformation> transitArrives) {
+		this.transitArrives = transitArrives;
 	}
-	public LoadInformation getTransitLoad() {
-		return transitLoad;
+	public ArrayList<LoadInformation> getTransitLoad() {
+		return transitLoads;
 	}
-	public void setTransitLoad(LoadInformation transitLoad) {
-		this.transitLoad = transitLoad;
+	public void setTransitLoad(ArrayList<LoadInformation> transitLoads) {
+		this.transitLoads = transitLoads;
 	}
-	public TransitInformation getTransit() {
-		return transit;
+	public ArrayList<TransitInformation> getTransit() {
+		return transits;
 	}
-	public void setTransit(TransitInformation transit) {
-		this.transit = transit;
+	public void setTransit(ArrayList<TransitInformation> transit) {
+		this.transits = transit;
 	}
 	public InventoryInInformation getInventoryIn() {
 		return inventoryIn;

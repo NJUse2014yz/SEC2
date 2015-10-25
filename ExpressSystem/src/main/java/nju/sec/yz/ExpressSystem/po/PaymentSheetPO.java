@@ -7,6 +7,8 @@ package nju.sec.yz.ExpressSystem.po;
 
 import java.util.ArrayList;
 
+
+
 /**
  * 
  * @author YU Fan
@@ -30,5 +32,4 @@ public class PaymentSheetPO extends ReceiptPO{
 	public void setBarIds(ArrayList<String> barIds) {
 		this.barIds = barIds;
 	}
-	
 }

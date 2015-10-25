@@ -1,10 +1,20 @@
 package nju.sec.yz.ExpressSystem.po;
+
+import nju.sec.yz.ExpressSystem.common.OutInformation;
+
 /**
  * 
  * @author YU Fan
- * 未确定
  *
  */
 public class OutSheetPO extends ReceiptPO{
+	private OutInformation outInformation;
 
+	public OutInformation getOutInformation() {
+		return outInformation;
+	}
+
+	public void setOutInformation(OutInformation outInformation) {
+		this.outInformation = outInformation;
+	}
 }

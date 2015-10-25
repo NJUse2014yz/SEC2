@@ -29,5 +29,5 @@ public class DeliverySheetPO extends ReceiptPO{
 	}
 	public void setBarIds(ArrayList<String> barIds) {
 		this.barIds = barIds;
-	}
+	}	
 }
