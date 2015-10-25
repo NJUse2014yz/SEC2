@@ -1,9 +1,9 @@
 package nju.sec.yz.ExpressSystem.blservice.inventoryBlService;
 
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
-import nju.sec.yz.ExpressSystem.po.InventoryPO;
 import nju.sec.yz.ExpressSystem.vo.InventoryInSheetVO;
 import nju.sec.yz.ExpressSystem.vo.InventoryOutSheetVO;
+import nju.sec.yz.ExpressSystem.vo.InventoryVO;
 
 /**
  * @author xiaosaisai

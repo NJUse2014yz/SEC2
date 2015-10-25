@@ -1,9 +1,6 @@
 package nju.sec.yz.ExpressSystem.vo;
 
 import java.util.List;
-
-
-
 /**
  * 
  * @author 周聪 初期建账
@@ -11,7 +8,7 @@ import java.util.List;
 public class InitialVO {
 
 	// 机构
-	private String agency;
+	private AgencyVO agency;
 
 	// 人员
 	private List<StaffVO> staffs;
@@ -25,7 +22,7 @@ public class InitialVO {
 	// TODO 库存
 	private List<InventoryVO> inventories;
 
-	public InitialVO(String agency, List<StaffVO> staffs, List<CarVO> cars, List<AccountVO> accounts,
+	public InitialVO(AgencyVO agency, List<StaffVO> staffs, List<CarVO> cars, List<AccountVO> accounts,
 				List<InventoryVO> inventories) {
 			
 			this.agency = agency;
@@ -35,11 +32,11 @@ public class InitialVO {
 			this.inventories = inventories;
 		}
 
-	public String getAgency() {
+	public AgencyVO getAgency() {
 		return agency;
 	}
 
-	public void setAgency(String agency) {
+	public void setAgency(AgencyVO agency) {
 		this.agency = agency;
 	}
 
