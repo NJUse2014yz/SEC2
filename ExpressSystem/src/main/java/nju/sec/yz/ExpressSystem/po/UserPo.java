@@ -2,12 +2,12 @@ package nju.sec.yz.ExpressSystem.po;
 
 import nju.sec.yz.ExpressSystem.Power;
 
-public class UserPo {
+public class UserPO {
 	private String id;
 	private String name;
 	private String password;
 	private Power  power;
-	public UserPo(String id,String name,String password,Power power){
+	public UserPO(String id,String name,String password,Power power){
 		this.id=id;
 		this.name=name;
 		this.password=password;
