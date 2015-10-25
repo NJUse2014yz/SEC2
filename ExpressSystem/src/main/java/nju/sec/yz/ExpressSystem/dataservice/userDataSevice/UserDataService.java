@@ -1,9 +1,12 @@
 package nju.sec.yz.ExpressSystem.dataservice.userDataSevice;
-
+/**
+ * @Author YU Fan
+*/
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import nju.sec.yz.ExpressSystem.ResultMessage;
+import nju.sec.yz.ExpressSystem.po.UserPO;
 
 public interface UserDataService 
 {
