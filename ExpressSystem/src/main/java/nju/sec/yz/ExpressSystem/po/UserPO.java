@@ -1,7 +1,7 @@
 package nju.sec.yz.ExpressSystem.po;
 import java.io.Serializable;
 
-import nju.sec.yz.ExpressSystem.Power;
+import nju.sec.yz.ExpressSystem.common.Power;;
 /**
  * 
  * @author xiaosaisai
