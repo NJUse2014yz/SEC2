@@ -2,7 +2,7 @@ package nju.sec.yz.ExpressSystem.vo;
 
 
 
-import nju.sec.yz.ExpressSystem.Power;
+import nju.sec.yz.ExpressSystem.common.Power;
 /**
  * 
  * @author 周聪
