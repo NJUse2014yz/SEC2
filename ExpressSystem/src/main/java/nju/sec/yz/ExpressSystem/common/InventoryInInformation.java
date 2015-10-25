@@ -7,10 +7,10 @@ package nju.sec.yz.ExpressSystem.common;
 public class InventoryInInformation {
 	private String time;
 	private String destination;
-	private String block;
-	private String row;
-	private String shelf;
-	private String positon;
+	private int block;
+	private int row;
+	private int shelf;
+	private int positon;
 	
 	public String getTime() {
 		return time;
@@ -24,28 +24,28 @@ public class InventoryInInformation {
 	public void setDestination(String destination) {
 		this.destination = destination;
 	}
-	public String getBlock() {
+	public int getBlock() {
 		return block;
 	}
-	public void setBlock(String block) {
+	public void setBlock(int block) {
 		this.block = block;
 	}
-	public String getRow() {
+	public int getRow() {
 		return row;
 	}
-	public void setRow(String row) {
+	public void setRow(int row) {
 		this.row = row;
 	}
-	public String getShelf() {
+	public int getShelf() {
 		return shelf;
 	}
-	public void setShelf(String shelf) {
+	public void setShelf(int shelf) {
 		this.shelf = shelf;
 	}
-	public String getPositon() {
+	public int getPositon() {
 		return positon;
 	}
-	public void setPositon(String positon) {
+	public void setPositon(int positon) {
 		this.positon = positon;
 	}
 	

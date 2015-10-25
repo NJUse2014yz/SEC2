@@ -4,7 +4,8 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
-
+import nju.sec.yz.ExpressSystem.po.LogPO;
+import nju.sec.yz.ExpressSystem.po.UserPO;
 
 /**
  * 
