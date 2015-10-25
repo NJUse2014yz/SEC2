@@ -1,8 +1,6 @@
 package nju.sec.yz.ExpressSystem.bl.stub;
 
 import java.util.ArrayList;
-
-import demo.po.SupplierPO;
 import nju.sec.yz.ExpressSystem.blservice.accountBlService.AccountBlService;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 
