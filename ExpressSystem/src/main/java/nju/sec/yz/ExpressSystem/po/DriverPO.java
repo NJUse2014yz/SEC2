@@ -1,6 +1,8 @@
 package nju.sec.yz.ExpressSystem.po;
 
 import java.io.Serializable;
+
+import nju.sec.yz.ExpressSystem.common.Sex;
 /**
  * 
  * @author 周聪
@@ -26,7 +28,10 @@ public class DriverPO implements Serializable{
 	private String phoneNumber;
 	
 	//
-	private 
+	private Sex sex;
+	
+	//
+	private String 
 	
 	
 	
