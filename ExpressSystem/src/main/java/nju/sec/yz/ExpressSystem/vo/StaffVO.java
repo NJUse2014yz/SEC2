@@ -22,6 +22,15 @@ public class StaffVO {
 	// 所属机构
 	private String agency;
 	
+	
+	public StaffVO(String name, String id, Power power, String agency) {
+		super();
+		this.name = name;
+		this.id = id;
+		this.power = power;
+		this.agency = agency;
+	}
+
 	public String getName() {
 		return name;
 	}

@@ -4,19 +4,19 @@ package nju.sec.yz.ExpressSystem.blservice.userBlService;
 import java.util.ArrayList;
 
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
-import nju.sec.yz.ExpressSystem.vo.AgencyV;
+import nju.sec.yz.ExpressSystem.vo.UserVO;
 
 public interface UserBLService {
 	
 	public ResultMessage login(String id,String password);
 	
-	public ArrayList<AgencyV> getAll();
+	public ArrayList<UserVO> getAll();
 	
-	public AgencyV getSingle(String id);
+	public UserVO getSingle(String id);
 	
-	public ResultMessage add(AgencyV vo);
+	public ResultMessage add(UserVO vo);
 	
 	public ResultMessage del(String id);
 	
-	public ResultMessage modify(AgencyV vo);
+	public ResultMessage modify(UserVO vo);
 }

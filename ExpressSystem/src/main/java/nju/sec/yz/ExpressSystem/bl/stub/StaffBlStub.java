@@ -1,0 +1,44 @@
+package nju.sec.yz.ExpressSystem.bl.stub;
+
+import java.util.ArrayList;
+
+import nju.sec.yz.ExpressSystem.blservice.managerBlService.StaffBlService;
+import nju.sec.yz.ExpressSystem.common.Power;
+import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.vo.StaffVO;
+
+public class StaffBlStub implements StaffBlService {
+
+	@Override
+	public ResultMessage addStaff(StaffVO sv) {
+		// TODO 自动生成的方法存根
+		return ResultMessage.SUCCESS;
+	}
+
+	@Override
+	public ResultMessage deleteStaff(String id) {
+		// TODO 自动生成的方法存根
+		return ResultMessage.SUCCESS;
+	}
+
+	@Override
+	public ResultMessage modifyStaff(StaffVO sv) {
+		// TODO 自动生成的方法存根
+		return ResultMessage.SUCCESS;
+	}
+
+	@Override
+	public StaffVO observeStaff(String id) {
+		// TODO 自动生成的方法存根
+		return new StaffVO("刘强东", "s001", Power.MANAGER,"京东");
+	}
+
+	@Override
+	public ArrayList<StaffVO> observeStaff() {
+		StaffVO svo=new StaffVO("刘强东", "s001", Power.MANAGER,"京东");
+		ArrayList<StaffVO> list = new ArrayList<StaffVO>();
+		list.add(svo);
+		return  list;
+	}
+
+}
