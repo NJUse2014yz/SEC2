@@ -4,12 +4,9 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
-<<<<<<< HEAD
 import nju.sec.yz.ExpressSystem.vo.CityVO;
 import nju.sec.yz.ExpressSystem.vo.PrizeVO;
-=======
-import nju.sec.yz.ExpressSystem.po.CityPO;
->>>>>>> origin/master
+
 
 /**
  * @author xiaosaisai
