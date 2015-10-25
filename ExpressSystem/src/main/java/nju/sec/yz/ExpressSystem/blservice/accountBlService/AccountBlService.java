@@ -1,6 +1,8 @@
 package nju.sec.yz.ExpressSystem.blservice.accountBlService;
 
-import nju.sec.yz.ExpressSystem.ResultMessage;
+import java.util.ArrayList;
+
+import nju.sec.yz.ExpressSystem.common.ResultMessage;
 
 /**
  * 
@@ -8,7 +10,7 @@ import nju.sec.yz.ExpressSystem.ResultMessage;
  * 对账户进行增删改查的接口
  *
  */
-public interface AccountService{
+public interface AccountBlService{
 	//add
 	public ResultMessage addAccount(AccountVO);
 	//delete

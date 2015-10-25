@@ -1,7 +1,4 @@
 package nju.sec.yz.ExpressSystem.vo;
-
-
-
 import nju.sec.yz.ExpressSystem.common.Power;
 /**
  * 
