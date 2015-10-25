@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import nju.sec.yz.ExpressSystem.blservice.carAndDriverBlService.DriverBlService;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.Sex;
-import nju.sec.yz.ExpressSystem.vo.CarVO;
 import nju.sec.yz.ExpressSystem.vo.DriverVO;
 
 public class DriverBlStub implements DriverBlService{
