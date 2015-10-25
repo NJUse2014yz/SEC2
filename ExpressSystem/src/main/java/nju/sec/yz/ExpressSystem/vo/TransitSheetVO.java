@@ -2,7 +2,7 @@ package nju.sec.yz.ExpressSystem.vo;
 /**
  * 
  * @author YU Fan
- *
+ *中转单
  */
 import java.util.ArrayList;
 

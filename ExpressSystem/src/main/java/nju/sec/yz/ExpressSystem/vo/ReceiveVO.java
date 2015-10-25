@@ -1,5 +1,8 @@
 package nju.sec.yz.ExpressSystem.vo;
-
+/**
+ * @author YU Fan
+ * 收件信息
+ */
 import nju.sec.yz.ExpressSystem.common.ReceiveInformation;
 
 public class ReceiveVO {

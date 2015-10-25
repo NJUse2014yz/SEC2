@@ -2,7 +2,7 @@ package nju.sec.yz.ExpressSystem.vo;
 /**
  * 
  * @author YU Fan
- *
+ *营业厅装车单
  */
 
 import java.util.ArrayList;

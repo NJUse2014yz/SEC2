@@ -18,21 +18,7 @@ public class InventoryPO implements Serializable{
 	private InventoryOutInformation inventoryOutInformation;
 	private String barId;
 
-	public InventoryPO(String id, String inDate, String destination, int area, int row, int shelf, int location,
-			String outDate, TransportType loadingWay, String loadingNum) {
-		super();
-		barId=id;
-		inventoryInformation.setBlock(area);
-		inventoryInformation.setTime(inDate);
-		inventoryInformation.setDestination(destination);
-		inventoryInformation.setPositon(location);
-		inventoryInformation.setRow(row);
-		inventoryInformation.setShelf(shelf);
-		inventoryOutInformation.setTime(outDate);
-		inventoryOutInformation.setDestination(destination);
-		inventoryOutInformation.setTransportType(loadingWay);
-		inventoryOutInformation.setTransitId(loadingNum);
-	}
+	
 
 	public InventoryInInformation getInventoryInformation() {
 		return inventoryInformation;

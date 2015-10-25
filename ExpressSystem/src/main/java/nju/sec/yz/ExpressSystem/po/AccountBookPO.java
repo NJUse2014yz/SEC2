@@ -2,6 +2,9 @@ package nju.sec.yz.ExpressSystem.po;
 
 import java.util.List;
 
+import nju.sec.yz.ExpressSystem.vo.CarVO;
+import nju.sec.yz.ExpressSystem.vo.StaffVO;
+
 /**
  * 
  * @author 周聪
