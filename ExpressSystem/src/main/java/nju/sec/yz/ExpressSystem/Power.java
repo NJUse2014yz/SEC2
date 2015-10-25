@@ -1,0 +1,12 @@
+package nju.sec.yz.ExpressSystem;
+
+public enum Power {
+	MANAGER,
+	SENIOR_ACCOUNTANCY,
+	JUNIOR_ACCOUNTANCY,
+	TRANSIT,
+	INVENTORY,
+	POSITION,
+	DELIVER,
+	ADMINISTRATOR
+}
