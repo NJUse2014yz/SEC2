@@ -1,4 +1,4 @@
-package nju.sec.yz.ExpressSystem.po;
+package nju.sec.yz.ExpressSystem.vo;
 /**
  * 
  * @author YU Fan
@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 import nju.sec.yz.ExpressSystem.common.LoadInformation;
 
-public class TransitLoadSheetPO extends ReceiptPO{
+public class TransitLoadSheetVO extends ReceiptVO{
 	private LoadInformation transitLoadInformation;
 	private ArrayList<String> barIds;
 	

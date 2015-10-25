@@ -1,10 +1,9 @@
-package nju.sec.yz.ExpressSystem.po;
+package nju.sec.yz.ExpressSystem.vo;
 /**
  * 
  * @author YU Fan
  *
  */
-
 import java.util.ArrayList;
 
 /**
@@ -14,7 +13,7 @@ import java.util.ArrayList;
  */
 import nju.sec.yz.ExpressSystem.common.TransitInformation;
 
-public class TransitSheetPO extends ReceiptPO{
+public class TransitSheetVO extends ReceiptVO{
 	private TransitInformation transitInformation;
 	private ArrayList<String> barIds;
 	private double fare;

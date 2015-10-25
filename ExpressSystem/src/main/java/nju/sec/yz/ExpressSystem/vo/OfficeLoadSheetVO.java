@@ -1,4 +1,4 @@
-package nju.sec.yz.ExpressSystem.po;
+package nju.sec.yz.ExpressSystem.vo;
 /**
  * 
  * @author YU Fan
@@ -12,18 +12,18 @@ import java.util.ArrayList;
  * @author YU Fan
  *
  */
-import nju.sec.yz.ExpressSystem.common.TransitInformation;
+import nju.sec.yz.ExpressSystem.common.LoadInformation;
 
-public class TransitSheetPO extends ReceiptPO{
-	private TransitInformation transitInformation;
+public class OfficeLoadSheetVO {
+	private LoadInformation officeLoadInformation;
 	private ArrayList<String> barIds;
 	private double fare;
 	
-	public TransitInformation getTransitInformation() {
-		return transitInformation;
+	public LoadInformation getOfficeLoadInformation() {
+		return officeLoadInformation;
 	}
-	public void setTransitInformation(TransitInformation transitInformation) {
-		this.transitInformation = transitInformation;
+	public void setOfficeLoadInformation(LoadInformation officeLoadInformation) {
+		this.officeLoadInformation = officeLoadInformation;
 	}
 	public ArrayList<String> getBarIds() {
 		return barIds;
