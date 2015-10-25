@@ -31,7 +31,7 @@ public class DriverPO implements Serializable{
 	private Sex sex;
 	
 	//
-	private String 
+	private String ;
 	
 	
 	
