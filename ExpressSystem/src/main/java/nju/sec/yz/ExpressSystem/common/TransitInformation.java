@@ -1,5 +1,9 @@
 package nju.sec.yz.ExpressSystem.common;
-
+/**
+ * 
+ * @author YU Fan
+ *
+ */
 public class TransitInformation {
 	private String time;
 	private String transitSheetId;

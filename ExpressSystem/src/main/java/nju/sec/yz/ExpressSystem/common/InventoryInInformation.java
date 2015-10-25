@@ -1,5 +1,9 @@
 package nju.sec.yz.ExpressSystem.common;
-
+/**
+ * 
+ * @author YU Fan
+ *
+ */
 public class InventoryInInformation {
 	private String time;
 	private String destination;

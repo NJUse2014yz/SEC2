@@ -1,5 +1,9 @@
 package nju.sec.yz.ExpressSystem.common;
-
+/**
+ * 
+ * @author YU Fan
+ *
+ */
 public class DeliveryInformation {
 	private String time;
 	private String outDeliverId;
