@@ -13,10 +13,10 @@ import nju.sec.yz.ExpressSystem.po.PrizePO;
 public interface ConstDataService {
 	public ResultMessage update(CityPO cp) throws RemoteException;
 	//public CityPO find(String beginPlace,String endPlace) throws RemoteException;
-	public ArrayList<CityPO> findAll() throws RemoteException;
+	public ArrayList<CityPO> findAllCity() throws RemoteException;
 	public ResultMessage insert(CityPO cp) throws RemoteException;
 	public ResultMessage delete(String beginPlace,String endPlace) throws RemoteException;
 	
 	public ResultMessage update(PrizePO pp) throws RemoteException;
-	public ArrayList<PrizePO pp> findAll() throws RemoteException;
+	public ArrayList<PrizePO> findAllPrize() throws RemoteException;
 }

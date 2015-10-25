@@ -16,7 +16,7 @@ public class ConstDataStub implements ConstDataService{
 	}
 
 	@Override
-	public ArrayList<CityPO> findAll() throws RemoteException {
+	public ArrayList<CityPO> findAllCity() throws RemoteException {
 		// TODO 自动生成的方法存根
 		return new ArrayList<CityPO>();
 	}
@@ -38,6 +38,12 @@ public class ConstDataStub implements ConstDataService{
 	public ResultMessage update(PrizePO pp) throws RemoteException {
 		// TODO 自动生成的方法存根
 		return ResultMessage.SUCCESS;
+	}
+
+	@Override
+	public ArrayList<PrizePO> findAllPrize() throws RemoteException {
+		// TODO 自动生成的方法存根
+		return null;
 	}
 
 }
