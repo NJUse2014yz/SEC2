@@ -2,7 +2,7 @@ package nju.sec.yz.ExpressSystem.vo;
 /**
  * 
  * @author YU Fan
- *
+ *寄件单
  */
 import nju.sec.yz.ExpressSystem.common.SendInformation;
 

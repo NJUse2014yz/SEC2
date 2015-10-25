@@ -2,7 +2,7 @@ package nju.sec.yz.ExpressSystem.vo;
 /**
  * 
  * @author YU Fan
- *
+ *中转中心到达单 
  */
 import nju.sec.yz.ExpressSystem.common.ArriveInformation;
 

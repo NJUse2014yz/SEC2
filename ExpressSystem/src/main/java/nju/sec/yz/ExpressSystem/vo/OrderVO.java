@@ -2,7 +2,7 @@ package nju.sec.yz.ExpressSystem.vo;
 /**
  * 
  * @author YU Fan
- *
+ *订单信息
  */
 import nju.sec.yz.ExpressSystem.common.OrderInformation;
 

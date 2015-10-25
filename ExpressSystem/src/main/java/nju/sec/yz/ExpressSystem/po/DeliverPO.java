@@ -1,5 +1,6 @@
 package nju.sec.yz.ExpressSystem.po;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import nju.sec.yz.ExpressSystem.common.ArriveInformation;
@@ -22,7 +23,7 @@ import nju.sec.yz.ExpressSystem.common.TransitInformation;
  * @author YU Fan
  *
  */
-public class DeliverPO {
+public class DeliverPO implements Serializable{
 	private OrderInformation ordermation; 
 	private ArrayList<LoadInformation> officeLoads;
 	private ArrayList<ArriveInformation> officeArrives;

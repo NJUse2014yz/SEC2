@@ -2,7 +2,7 @@ package nju.sec.yz.ExpressSystem.vo;
 /**
  * 
  * @author YU Fan
- *
+ *出库单
  */
 import nju.sec.yz.ExpressSystem.common.InventoryOutInformation;
 
