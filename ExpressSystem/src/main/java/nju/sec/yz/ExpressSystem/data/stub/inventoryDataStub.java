@@ -32,25 +32,16 @@ public class InventoryDataStub implements InventoryDataService{
 
 	@Override
 	public ArrayList<InventoryPO> findByTime(String timeIn,String timeOut)throws RemoteException{
-		ArrayList<InventoryPO> array=new ArrayList<InventoryPO>();
-		array.add(new InventoryPO("0000000001","20151011","杭州",1,1,1,1,"20151023",TransportType.CAR,"0000000002"));
-		array.add(new InventoryPO("000000B004","20150927","苏州",2,1,1,1,"20150929",TransportType.PLANE,"0000000012"));
-		return array;
+		return new ArrayList<InventoryPO>();
 	}
 
 	@Override
 	public ArrayList<InventoryPO> findByPosition(String position) throws RemoteException{
-		ArrayList<InventoryPO> array=new ArrayList<InventoryPO>();
-		array.add(new InventoryPO("0000000001","20151011","杭州",1,1,1,1,"20151023",TransportType.CAR,"0000000002"));
-		array.add(new InventoryPO("000000B004","20150927","苏州",2,1,1,1,"20150929",TransportType.PLANE,"0000000012"));
-		return array;
+		return new ArrayList<InventoryPO>();
 	}
 
 	@Override
 	public ArrayList<InventoryPO> findAll( ) throws RemoteException{
-		ArrayList<InventoryPO> array=new ArrayList<InventoryPO>();
-		array.add(new InventoryPO("0000000001","20151011","杭州",1,1,1,1,"20151023",TransportType.CAR,"0000000002"));
-		array.add(new InventoryPO("000000B004","20150927","苏州",2,1,1,1,"20150929",TransportType.PLANE,"0000000012"));
-		return array;
+		return new ArrayList<InventoryPO>();
 	}
 }
