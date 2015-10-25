@@ -1,7 +1,13 @@
 package nju.sec.yz.ExpressSystem.po;
-import nju.sec.yz.ExpressSystem.Power;
+import java.io.Serializable;
 
-public class UserPO {
+import nju.sec.yz.ExpressSystem.Power;
+/**
+ * 
+ * @author xiaosaisai
+ *
+ */
+public class UserPO implements Serializable{
 	private String id;
 	private String name;
 	private String password;

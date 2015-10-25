@@ -8,15 +8,15 @@ import nju.sec.yz.ExpressSystem.vo.UserVO;
 
 public interface UserBLService {
 	
-	ResultMessage login(String id,String password);
+	public ResultMessage login(String id,String password);
 	
-	ArrayList<UserVO> getAll();
+	public ArrayList<UserVO> getAll();
 	
-	UserVO getSingle(String id);
+	public UserVO getSingle(String id);
 	
-	ResultMessage add(UserVO vo);
+	public ResultMessage add(UserVO vo);
 	
-	ResultMessage del(String id);
+	public ResultMessage del(String id);
 	
-	ResultMessage modify(UserVO vo);
+	public ResultMessage modify(UserVO vo);
 }
