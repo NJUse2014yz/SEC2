@@ -5,4 +5,4 @@
  * @author Administrator
  *
  */
-package nju.sec.yz.ExpressSystem.po;
+package nju.sec.yz.ExpressSystem.common;

@@ -5,8 +5,5 @@ package nju.sec.yz.ExpressSystem.vo;
  *
  */
 public class OrderVO {
-	public String barId;
-	private String fromName;
-	private String fromAddress;
-	private String from
+
 }

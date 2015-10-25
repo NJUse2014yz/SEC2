@@ -1,9 +1,10 @@
 package nju.sec.yz.ExpressSystem.po;
-<<<<<<< HEAD
 
-public class DeliverPO {
+import nju.sec.yz.ExpressSystem.common.DeliveryType;
+import nju.sec.yz.ExpressSystem.common.GoodInformation;
+import nju.sec.yz.ExpressSystem.common.PackType;
+import nju.sec.yz.ExpressSystem.common.ToAndFromInformation;
 
-=======
 /**
  * 
  * @author YU Fan
@@ -20,7 +21,5 @@ public class DeliverPO {
 	private double costForPack;//?
 	private double costForAll;
 	private String predictTime;
-	private 
 	
->>>>>>> origin/master
 }

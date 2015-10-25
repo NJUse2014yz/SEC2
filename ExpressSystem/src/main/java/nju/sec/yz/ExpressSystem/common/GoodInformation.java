@@ -1,4 +1,4 @@
-package nju.sec.yz.ExpressSystem.po;
+package nju.sec.yz.ExpressSystem.common;
 
 public class GoodInformation {
 	private String total;
