@@ -3,7 +3,7 @@ package nju.sec.yz.ExpressSystem.blservice.userBlService;
 
 import java.util.ArrayList;
 
-import nju.sec.yz.ExpressSystem.ResultMessage;
+import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.UserVO;
 
 public interface UserBLService {
