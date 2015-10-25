@@ -1,8 +1,10 @@
 package nju.sec.yz.ExpressSystem.bl.stub;
 
 import java.util.ArrayList;
+
 import nju.sec.yz.ExpressSystem.blservice.accountBlService.AccountBlService;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.vo.AccountVO;
 
 /**
  * 
@@ -10,10 +12,10 @@ import nju.sec.yz.ExpressSystem.common.ResultMessage;
  * 对账户进行增删改查的接口实现桩
  *
  */
-public class AccountBlServiceStub implements AccountBlService{
+public class AccountBlStub implements AccountBlService{
 
 	@Override
-	public ResultMessage addAccount(){
+	public ResultMessage addAccount(AccountVO av){
 		return ResultMessage.SUCCESS;
 	}
 
@@ -35,14 +37,14 @@ public class AccountBlServiceStub implements AccountBlService{
 
 	@Override
 	public ArrayList<AccountVO> observeList() {
-		AccountVO avo1 = new AccountVO(1, "供应商1", false);
-		AccountVO avo2 = new AccountVO(2, "供应商2", false);
+		AccountVO avo1 = new AccountVO("八方达物流有限公司", 10000);
+		AccountVO avo2 = new AccountVO("八方达物流有限公司", 20000);
 		ArrayList<AccountVO> list = new ArrayList<AccountVO>();
 		list.add(avo1);
 		list.add(avo2);
 		return  list;
 	}
 	
-	}
+}
 	
 	

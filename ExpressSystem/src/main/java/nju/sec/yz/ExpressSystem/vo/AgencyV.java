@@ -5,12 +5,12 @@ import nju.sec.yz.ExpressSystem.common.Power;
  * @author 周聪
  *
  */
-public class UserVO {
+public class AgencyV {
 	private String id;
 	private String name;
 	private String password;
 	private Power  power;
-	public UserVO(String id,String name,String password,Power power){
+	public AgencyV(String id,String name,String password,Power power){
 		this.id=id;
 		this.name=name;
 		this.password=password;

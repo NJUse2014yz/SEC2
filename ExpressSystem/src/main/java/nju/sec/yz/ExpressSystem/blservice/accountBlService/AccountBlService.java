@@ -3,6 +3,7 @@ package nju.sec.yz.ExpressSystem.blservice.accountBlService;
 import java.util.ArrayList;
 
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.vo.AccountVO;
 
 /**
  * 
@@ -12,7 +13,7 @@ import nju.sec.yz.ExpressSystem.common.ResultMessage;
  */
 public interface AccountBlService{
 	//add
-	public ResultMessage addAccount(AccountVO);
+	public ResultMessage addAccount(AccountVO av);
 	//delete
 	public ResultMessage deleteAccount(String id);
 	//modify

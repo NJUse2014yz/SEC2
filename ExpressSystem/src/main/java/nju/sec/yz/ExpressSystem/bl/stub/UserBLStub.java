@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import nju.sec.yz.ExpressSystem.blservice.userBlService.UserBLService;
 import nju.sec.yz.ExpressSystem.common.Power;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
-import nju.sec.yz.ExpressSystem.vo.UserVO;
+import nju.sec.yz.ExpressSystem.vo.AgencyV;
 
 public class UserBLStub implements UserBLService {
 
@@ -16,23 +16,23 @@ public class UserBLStub implements UserBLService {
 	}
 
 	@Override
-	public ArrayList<UserVO> getAll() {
-		UserVO uvo1 = new UserVO("s001","刘强东","jingdong",Power.MANAGER);
-		UserVO uvo2 = new UserVO("s002","章泽天","jingdong",Power.DELIVER);
-		ArrayList<UserVO> list = new ArrayList<UserVO>();
+	public ArrayList<AgencyV> getAll() {
+		AgencyV uvo1 = new AgencyV("s001","刘强东","jingdong",Power.MANAGER);
+		AgencyV uvo2 = new AgencyV("s002","章泽天","jingdong",Power.DELIVER);
+		ArrayList<AgencyV> list = new ArrayList<AgencyV>();
 		list.add(uvo1);
 		list.add(uvo2);
 		return  list;
 	}
 
 	@Override
-	public UserVO getSingle(String id) {
+	public AgencyV getSingle(String id) {
 		// TODO 自动生成的方法存根
-		return new UserVO("s001","刘强东","jingdong",Power.MANAGER);
+		return new AgencyV("s001","刘强东","jingdong",Power.MANAGER);
 	}
 
 	@Override
-	public ResultMessage add(UserVO vo) {
+	public ResultMessage add(AgencyV vo) {
 		// TODO 自动生成的方法存根
 		return ResultMessage.SUCCESS;
 	}
@@ -44,7 +44,7 @@ public class UserBLStub implements UserBLService {
 	}
 
 	@Override
-	public ResultMessage modify(UserVO vo) {
+	public ResultMessage modify(AgencyV vo) {
 		// TODO 自动生成的方法存根
 		return ResultMessage.SUCCESS;
 	}
