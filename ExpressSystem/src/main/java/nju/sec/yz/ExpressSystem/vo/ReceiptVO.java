@@ -5,5 +5,11 @@ package nju.sec.yz.ExpressSystem.vo;
  *单据
  */
 public class ReceiptVO {
-	
+	protected String id;
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 }
