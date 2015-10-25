@@ -11,7 +11,7 @@ import nju.sec.yz.ExpressSystem.po.ReceiptPO;
  * @author zhangqi
  *
  */
-public interface ReceipDataService {
+public interface ReceiptDataService {
 
 	public ResultMessage insert(ReceiptPO rpo) throws RemoteException;
 	public ReceiptPO find(String id) throws RemoteException;
