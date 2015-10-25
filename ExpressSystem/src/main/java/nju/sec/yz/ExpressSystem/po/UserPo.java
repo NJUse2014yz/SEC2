@@ -1,5 +1,4 @@
 package nju.sec.yz.ExpressSystem.po;
-
 import nju.sec.yz.ExpressSystem.Power;
 
 public class UserPO {
