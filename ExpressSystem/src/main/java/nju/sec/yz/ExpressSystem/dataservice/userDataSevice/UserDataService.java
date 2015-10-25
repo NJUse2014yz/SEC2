@@ -4,10 +4,8 @@ package nju.sec.yz.ExpressSystem.dataservice.userDataSevice;
 */
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import nju.sec.yz.ExpressSystem.po.*;
 import nju.sec.yz.ExpressSystem.ResultMessage;
 import nju.sec.yz.ExpressSystem.po.UserPO;
-
 public interface UserDataService 
 {
 	public ResultMessage insert(UserPO upo) throws RemoteException;

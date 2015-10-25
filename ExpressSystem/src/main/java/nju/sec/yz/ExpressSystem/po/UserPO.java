@@ -1,6 +1,10 @@
 package nju.sec.yz.ExpressSystem.po;
 import nju.sec.yz.ExpressSystem.Power;
-
+/**
+ * 
+ * @author xiaosaisai
+ *
+ */
 public class UserPO {
 	private String id;
 	private String name;
