@@ -1,12 +1,19 @@
-package nju.sec.yz.ExpressSystem.vo;
-
+package nju.sec.yz.ExpressSystem.po;
 import nju.sec.yz.ExpressSystem.common.SalaryImformation;
+import java.io.Serializable;
+/**
+ * 
+ * @author 周聪
+ *
+ * 薪水策略
+ */
 
-public class SalaryVO {
+
+public class SalaryPO implements Serializable{
 
 	private SalaryImformation salaryImformation;
 
-	public SalaryVO(SalaryImformation salaryImformation) {
+	public SalaryPO(SalaryImformation salaryImformation) {
 		super();
 		this.salaryImformation = salaryImformation;
 	}
@@ -18,6 +25,9 @@ public class SalaryVO {
 	public void setSalaryImformation(SalaryImformation salaryImformation) {
 		this.salaryImformation = salaryImformation;
 	}
+	
+	
+	
 	
 	
 	
