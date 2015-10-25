@@ -3,7 +3,11 @@ package nju.sec.yz.ExpressSystem.vo;
 
 
 import nju.sec.yz.ExpressSystem.Power;
-
+/**
+ * 
+ * @author 周聪
+ *
+ */
 public class UserVO {
 	private String id;
 	private String name;
