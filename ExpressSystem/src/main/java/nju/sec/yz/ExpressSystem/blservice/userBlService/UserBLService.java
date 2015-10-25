@@ -1,12 +1,16 @@
 package nju.sec.yz.ExpressSystem.blservice.userBlService;
 
-import java.awt.List;
+
+import java.util.ArrayList;
+
+import nju.sec.yz.ExpressSystem.ResultMessage;
+import nju.sec.yz.ExpressSystem.vo.UserVO;
 
 public interface UserBLService {
 	
 	ResultMessage login(String id,String password);
 	
-	List<UserVO> getAll();
+	ArrayList<UserVO> getAll();
 	
 	UserVO getSingle(String id);
 	
@@ -14,5 +18,5 @@ public interface UserBLService {
 	
 	ResultMessage del(String id);
 	
-	ResultMessge modify(UserVO vo);
+	ResultMessage modify(UserVO vo);
 }
