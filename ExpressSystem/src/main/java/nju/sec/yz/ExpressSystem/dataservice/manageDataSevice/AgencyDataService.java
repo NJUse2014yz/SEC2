@@ -1,5 +1,20 @@
 package nju.sec.yz.ExpressSystem.dataservice.manageDataSevice;
 
-public class AgencyDataService {
+import java.rmi.RemoteException;
+import java.util.ArrayList;
 
+import nju.sec.yz.ExpressSystem.ResultMessage;
+
+/**
+ * 
+ * @author zhangqi
+ *
+ */
+public interface AgencyDataService {
+	public ResultMessage insert(AgencyPO agpo) throws RemoteException;
+	public AgencyPO find(String id) throws RemoteException;
+	public ResultMessage delete(String id) throws RemoteException;
+	public ResultMessage update(AgencyPO agpo) throws RemoteException;
+	public ResultMessage init( ) throws RemoteException;
+	public ArrayList<AgencyPO> findAll( ) throws RemoteException;
 }
