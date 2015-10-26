@@ -11,25 +11,25 @@ import nju.sec.yz.ExpressSystem.vo.PriceVO;
 public class ConstBlStub implements ConstBlService {
 
 	@Override
-	public ResultMessage updateCity(CityVO cv) throws RemoteException {
+	public ResultMessage modifyCity(CityVO cv) throws RemoteException {
 		// TODO 自动生成的方法存根
 		return ResultMessage.SUCCESS;
 	}
 
 	@Override
-	public ArrayList<CityVO> findAllCity() throws RemoteException {
+	public CityVO observeCity(String beginPlace,String endPlace) throws RemoteException {
 		// TODO 自动生成的方法存根
-		return new ArrayList<CityVO>();
+		return new CityVO();
 	}
 
 	@Override
-	public ResultMessage insert(CityVO cp) throws RemoteException {
+	public ResultMessage addCity(CityVO cp) throws RemoteException {
 		// TODO 自动生成的方法存根
 		return ResultMessage.SUCCESS;
 	}
 
 	@Override
-	public ResultMessage delete(String beginPlace, String endPlace)
+	public ResultMessage deleteCity(String beginPlace, String endPlace)
 			throws RemoteException {
 		// TODO 自动生成的方法存根
 		return ResultMessage.SUCCESS;
@@ -37,14 +37,14 @@ public class ConstBlStub implements ConstBlService {
 
 	@Override
 
-	public ResultMessage updatePrice(PriceVO pp) throws RemoteException {
+	public ResultMessage modifyPrice(PriceVO pp) throws RemoteException {
 		// TODO 自动生成的方法存根
 		return ResultMessage.SUCCESS;
 	}
 
 	@Override
-	public ArrayList<PriceVO> findAllPrize() throws RemoteException {
+	public PriceVO observePrize() throws RemoteException {
 		// TODO 自动生成的方法存根
-		return new ArrayList<PriceVO>();
+		return new PriceVO();
 	}
 }
