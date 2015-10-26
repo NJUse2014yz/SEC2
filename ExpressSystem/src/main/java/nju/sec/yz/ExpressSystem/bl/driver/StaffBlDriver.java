@@ -7,7 +7,10 @@ import nju.sec.yz.ExpressSystem.blservice.managerBlService.StaffBlService;
 import nju.sec.yz.ExpressSystem.common.Power;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.StaffVO;
-
+/**
+ * @author xiaosaisai
+ * StaffBlService的驱动
+ */
 public class StaffBlDriver {
 	public  void drive(StaffBlService staffBlService){
 		//1
