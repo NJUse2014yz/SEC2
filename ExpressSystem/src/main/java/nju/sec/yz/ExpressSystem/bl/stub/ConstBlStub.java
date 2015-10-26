@@ -4,6 +4,8 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import nju.sec.yz.ExpressSystem.blservice.managerBlService.ConstBlService;
+import nju.sec.yz.ExpressSystem.common.CityInformation;
+import nju.sec.yz.ExpressSystem.common.PriceInformation;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.CityVO;
 import nju.sec.yz.ExpressSystem.vo.PriceVO;
@@ -19,7 +21,7 @@ public class ConstBlStub implements ConstBlService {
 	@Override
 	public CityVO observeCity(String beginPlace,String endPlace) throws RemoteException {
 		// TODO 自动生成的方法存根
-		return new CityVO();
+		return new CityVO(new CityInformation());
 	}
 
 	@Override
@@ -45,6 +47,8 @@ public class ConstBlStub implements ConstBlService {
 	@Override
 	public PriceVO observePrize() throws RemoteException {
 		// TODO 自动生成的方法存根
-		return new PriceVO();
+		PriceVO price=new PriceVO();
+		price.setPriceInformation(new PriceInformation());
+		return price;
 	}
 }
