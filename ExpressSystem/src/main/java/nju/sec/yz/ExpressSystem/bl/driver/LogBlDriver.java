@@ -3,7 +3,7 @@ package nju.sec.yz.ExpressSystem.bl.driver;
 import java.util.ArrayList;
 
 import nju.sec.yz.ExpressSystem.bl.stub.LogBlStub;
-import nju.sec.yz.ExpressSystem.blservice.accountBlService.LogBlService;
+import nju.sec.yz.ExpressSystem.blservice.accountBlService.LogBlService2;
 import nju.sec.yz.ExpressSystem.vo.LogVO;
 
 /**
@@ -11,7 +11,7 @@ import nju.sec.yz.ExpressSystem.vo.LogVO;
  * LogBlService对应的驱动
  */
 public class LogBlDriver {
-	public void drive(LogBlService service) {
+	public void drive(LogBlService2 service) {
 		//1
 		LogVO lvo=service.getSingle(0);
 		System.out.println(lvo.getPerson()+" "+lvo.getOperation()+" "+lvo.getTime());
@@ -27,7 +27,7 @@ public class LogBlDriver {
 		}
 	}
 	public static void main(String[] args) {
-		LogBlService service=new LogBlStub();
+		LogBlService2 service=new LogBlStub();
 		LogBlDriver driver=new LogBlDriver();
 		driver.drive(service);
 	}

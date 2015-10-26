@@ -14,7 +14,7 @@ public interface FinanceBlSevice {
 	//查看经营情况表
 	public BussinessVO checkBusinessCircumstance (String begin,String end);
 	//查看收款单
-	public ResultMessage checkReceipt(PaymentSheetVO rv,String day,int positionId);
+	public PaymentSheetVO checkReceipt (String day,int positionId);
 	//制定付款单
 	public ResultMessage makePayment(OutVO pro);
 	//生成成本收益表
@@ -24,5 +24,5 @@ public interface FinanceBlSevice {
 	//查看初期建帐
 	public InitialVO observeIni();
 	//初期建账
-	public ResultMessage initial(AccountVO av) ;
+	public ResultMessage initial(AccountVO av);
 }
