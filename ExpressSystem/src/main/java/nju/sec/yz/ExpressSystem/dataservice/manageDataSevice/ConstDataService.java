@@ -18,5 +18,5 @@ public interface ConstDataService {
 	public ResultMessage delete(String beginPlace,String endPlace) throws RemoteException;
 	
 	public ResultMessage updatePrice(PricePO pp) throws RemoteException;
-	public ArrayList<PricePO> findAllPrize() throws RemoteException;
+	public ArrayList<PricePO> findAllPrice() throws RemoteException;
 }
