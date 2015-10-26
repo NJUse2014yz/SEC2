@@ -36,7 +36,11 @@ public class ConstBlStub implements ConstBlService {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public ResultMessage updatePrice(PriceVO pp) throws RemoteException {
+=======
+	public ResultMessage update(PriceVO pp) throws RemoteException {
+>>>>>>> origin/master
 		// TODO 自动生成的方法存根
 		return null;
 	}

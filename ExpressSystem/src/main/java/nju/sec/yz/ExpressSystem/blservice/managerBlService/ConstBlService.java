@@ -19,6 +19,10 @@ public interface ConstBlService {
 	public ResultMessage insert(CityVO cp) throws RemoteException;
 	public ResultMessage delete(String beginPlace,String endPlace) throws RemoteException;
 	
+<<<<<<< HEAD
 	public ResultMessage updatePrice(PriceVO pp) throws RemoteException;
+=======
+	public ResultMessage update(PriceVO pp) throws RemoteException;
+>>>>>>> origin/master
 	public ArrayList<PriceVO> findAllPrize() throws RemoteException;
 }
