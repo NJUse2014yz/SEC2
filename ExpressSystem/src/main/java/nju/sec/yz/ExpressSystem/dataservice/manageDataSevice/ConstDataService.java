@@ -11,12 +11,12 @@ import nju.sec.yz.ExpressSystem.po.CityPO;
 import nju.sec.yz.ExpressSystem.po.PricePO;
 
 public interface ConstDataService {
-	public ResultMessage update(CityPO cp) throws RemoteException;
+	public ResultMessage updateCity(CityPO cp) throws RemoteException;
 	//public CityPO find(String beginPlace,String endPlace) throws RemoteException;
 	public ArrayList<CityPO> findAllCity() throws RemoteException;
 	public ResultMessage insert(CityPO cp) throws RemoteException;
 	public ResultMessage delete(String beginPlace,String endPlace) throws RemoteException;
 	
-	public ResultMessage update(PricePO pp) throws RemoteException;
+	public ResultMessage updatePrice(PricePO pp) throws RemoteException;
 	public ArrayList<PricePO> findAllPrize() throws RemoteException;
 }

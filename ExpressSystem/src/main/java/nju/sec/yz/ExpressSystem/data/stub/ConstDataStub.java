@@ -10,7 +10,7 @@ import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.ConstDataService;
 public class ConstDataStub implements ConstDataService{
 
 	@Override
-	public ResultMessage update(CityPO cp) throws RemoteException {
+	public ResultMessage updateCity(CityPO cp) throws RemoteException {
 		// TODO 自动生成的方法存根
 		return ResultMessage.SUCCESS;
 	}
@@ -35,7 +35,7 @@ public class ConstDataStub implements ConstDataService{
 	}
 
 	@Override
-	public ResultMessage update(PricePO pp) throws RemoteException {
+	public ResultMessage updatePrice(PricePO pp) throws RemoteException {
 		// TODO 自动生成的方法存根
 		return ResultMessage.SUCCESS;
 	}
