@@ -7,7 +7,6 @@ import nju.sec.yz.ExpressSystem.blservice.managerBlService.ConstBlService;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.CityVO;
 import nju.sec.yz.ExpressSystem.vo.PriceVO;
-import nju.sec.yz.ExpressSystem.common.*;
 
 /**
  * 
@@ -49,7 +48,7 @@ public class ConstBlDriver {
 			
 			//
 			CityVO city = constBl.observeCity(null, null);
-			System.out.println("Distance: ");
+			System.out.println("Distance: "+city.getCityInformation());
 			
 			//
 			PriceVO prize=constBl.observePrize();
