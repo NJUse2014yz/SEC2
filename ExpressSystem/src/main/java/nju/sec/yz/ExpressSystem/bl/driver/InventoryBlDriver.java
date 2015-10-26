@@ -35,9 +35,9 @@ public class InventoryBlDriver {
 		else 
 			System.out.println("不好意思，操作失败哟");
 	}		
-	public static void main(String[] args) {
-		InventoryBlService service=new InventoryBlStub();
-		InventoryBlDriver driver=new InventoryBlDriver();
-		driver.drive(service);
-	}
+//	public static void main(String[] args) {
+//		InventoryBlService service=new InventoryBlStub();
+//		InventoryBlDriver driver=new InventoryBlDriver();
+//		driver.drive(service);
+//	}
 }

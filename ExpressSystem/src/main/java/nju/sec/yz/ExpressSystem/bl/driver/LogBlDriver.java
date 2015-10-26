@@ -26,11 +26,11 @@ public class LogBlDriver {
 			System.out.println(list2.get(i).getPerson()+" "+list2.get(i).getOperation()+" "+list2.get(i).getTime());
 		}
 	}
-	public static void main(String[] args) {
-		LogBlService service=new LogBlStub();
-		LogBlDriver driver=new LogBlDriver();
-		driver.drive(service);
-	}
+//	public static void main(String[] args) {
+//		LogBlService service=new LogBlStub();
+//		LogBlDriver driver=new LogBlDriver();
+//		driver.drive(service);
+//	}
 
 	
 }

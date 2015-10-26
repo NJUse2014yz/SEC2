@@ -53,9 +53,9 @@ public class DriverBlDriver {
 		
 	}
 	
-	public static void main(String[] args) {
-		DriverBlService driverBl_stub=new DriverBlStub();
-		new DriverBlDriver().drive(driverBl_stub);
-	}
+//	public static void main(String[] args) {
+//		DriverBlService driverBl_stub=new DriverBlStub();
+//		new DriverBlDriver().drive(driverBl_stub);
+//	}
 
 }

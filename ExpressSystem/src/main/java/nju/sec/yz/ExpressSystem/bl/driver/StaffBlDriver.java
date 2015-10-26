@@ -41,9 +41,9 @@ public class StaffBlDriver {
 					" "+list.get(i).getName()+" "+list.get(i).getPower());
 		}
 	}
-	public static void main(String[] args) {
-		StaffBlService service=new StaffBlStub();
-		StaffBlDriver driver=new StaffBlDriver();
-		driver.drive(service);
-	}
+//	public static void main(String[] args) {
+//		StaffBlService service=new StaffBlStub();
+//		StaffBlDriver driver=new StaffBlDriver();
+//		driver.drive(service);
+//	}
 }

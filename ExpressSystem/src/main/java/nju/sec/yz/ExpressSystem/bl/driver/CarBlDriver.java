@@ -55,9 +55,9 @@ public class CarBlDriver {
 	
 
 	}
-	public static void main(String[] args) {
-		CarBlService carBl_stub=new CarBlStub();
-		new CarBlDriver().drive(carBl_stub);
-	}
+//	public static void main(String[] args) {
+//		CarBlService carBl_stub=new CarBlStub();
+//		new CarBlDriver().drive(carBl_stub);
+//	}
 
 }

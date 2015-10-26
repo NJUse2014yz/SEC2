@@ -64,9 +64,9 @@ public class ConstBlDriver {
 		
 	}
 	
-	public static void main(String[] args) {
-		ConstBlService constBl_stub=new ConstBlStub();
-		new ConstBlDriver().drive(constBl_stub);
-	}
+//	public static void main(String[] args) {
+//		ConstBlService constBl_stub=new ConstBlStub();
+//		new ConstBlDriver().drive(constBl_stub);
+//	}
 	
 }

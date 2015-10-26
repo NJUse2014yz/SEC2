@@ -6,7 +6,6 @@ import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.BussinessVO;
 import nju.sec.yz.ExpressSystem.vo.InitialVO;
 import nju.sec.yz.ExpressSystem.vo.ProfitVO;
-import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 
 /**
  * 
@@ -21,7 +20,7 @@ public class FinanceBlDriver {
 		BussinessVO bussinessVO=financeBl_stub.checkBusinessCircumstance(null, null);
 		System.out.println("收款单：" + bussinessVO.getIn().get(0));
 		//TODO
-		financeBl_stub.checkReceipt( null, 0);
+		financeBl_stub.checkReceipt(null, 0);
 		
 		//导出excel
 		financeBl_stub.exportCostToExcel(null);
@@ -45,9 +44,9 @@ public class FinanceBlDriver {
 		
 	}
 	
-	public static void main(String[] args) {
-		FinanceBlSevice financeBl_stub=new FinanceBlStub();
-		new FinanceBlDriver().drive(financeBl_stub);
-	}
+//	public static void main(String[] args) {
+//		FinanceBlSevice financeBl_stub=new FinanceBlStub();
+//		new FinanceBlDriver().drive(financeBl_stub);
+//	}
 	
 }

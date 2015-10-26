@@ -64,10 +64,10 @@ public class DeliverBlDriver {
 			System.out.println("中转中心装车单填写失败");
 	}
 	
-	public static void main(String[] args) {
-		DeliverBlService deliverBl_stub=new DeliverBlStub();
-		new DeliverBlDriver().drive(deliverBl_stub);
-	}
+//	public static void main(String[] args) {
+//		DeliverBlService deliverBl_stub=new DeliverBlStub();
+//		new DeliverBlDriver().drive(deliverBl_stub);
+//	}
 	
 	
 }

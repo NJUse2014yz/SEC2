@@ -40,9 +40,9 @@ public class ReceiptBlDriver {
 		
 	}
 	
-	public static void main(String[] args) {
-		ReceiptBlService receiptBl_stub=new ReceiptBlStub();
-		new ReceiptBlDriver().drive(receiptBl_stub);
-	}
+//	public static void main(String[] args) {
+//		ReceiptBlService receiptBl_stub=new ReceiptBlStub();
+//		new ReceiptBlDriver().drive(receiptBl_stub);
+//	}
 	
 }

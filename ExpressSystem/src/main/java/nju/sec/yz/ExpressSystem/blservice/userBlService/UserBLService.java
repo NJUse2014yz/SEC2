@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.UserVO;
 
-public interface UserBLService {
+public interface UserBlService {
 	
 	public ResultMessage login(String id,String password);
 	
