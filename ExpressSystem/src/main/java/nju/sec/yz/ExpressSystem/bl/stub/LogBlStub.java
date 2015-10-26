@@ -2,10 +2,10 @@ package nju.sec.yz.ExpressSystem.bl.stub;
 
 import java.util.ArrayList;
 
-import nju.sec.yz.ExpressSystem.blservice.accountBlService.LogBlService2;
+import nju.sec.yz.ExpressSystem.blservice.accountBlService.LogBlService;
 import nju.sec.yz.ExpressSystem.vo.LogVO;
 
-public class LogBlStub implements LogBlService2 {
+public class LogBlStub implements LogBlService {
 
 	@Override
 	public ArrayList<LogVO> getAll() {
