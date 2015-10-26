@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import nju.sec.yz.ExpressSystem.blservice.managerBlService.ConstBlService;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.CityVO;
-import nju.sec.yz.ExpressSystem.vo.PrizeVO;
+import nju.sec.yz.ExpressSystem.vo.PriceVO;
 
 public class ConstBlStub implements ConstBlService {
 
 	@Override
-	public ResultMessage update(CityVO cv) throws RemoteException {
+	public ResultMessage updateCity(CityVO cv) throws RemoteException {
 		// TODO 自动生成的方法存根
 		return null;
 	}
@@ -36,13 +36,13 @@ public class ConstBlStub implements ConstBlService {
 	}
 
 	@Override
-	public ResultMessage update(PrizeVO pp) throws RemoteException {
+	public ResultMessage updatePrice(PriceVO pp) throws RemoteException {
 		// TODO 自动生成的方法存根
 		return null;
 	}
 
 	@Override
-	public ArrayList<PrizeVO> findAllPrize() throws RemoteException {
+	public ArrayList<PriceVO> findAllPrize() throws RemoteException {
 		// TODO 自动生成的方法存根
 		return null;
 	}
