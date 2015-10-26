@@ -3,7 +3,6 @@ package nju.sec.yz.ExpressSystem.blservice.carAndDriverBlService;
 import java.util.ArrayList;
 
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
-import nju.sec.yz.ExpressSystem.po.UserPO;
 import nju.sec.yz.ExpressSystem.vo.CarVO;
 
 /**
