@@ -43,9 +43,9 @@ public class DriverDataDriver {
 				
 	}
 	
-	public static void main(String[] args) throws RemoteException {
-		DriverDataService dds=new DriverDataStub();
-		DriverDataDriver ddd=new DriverDataDriver();
-		ddd.drive(dds);
-	}
+//	public static void main(String[] args) throws RemoteException {
+//		DriverDataService dds=new DriverDataStub();
+//		DriverDataDriver ddd=new DriverDataDriver();
+//		ddd.drive(dds);
+//	}
 }

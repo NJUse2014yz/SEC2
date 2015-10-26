@@ -42,9 +42,9 @@ public class InventoryDataDriver {
 		
 	}
 	
-	public static void main(String[] args) throws RemoteException {
-		InventoryDataService ids=new InventoryDataStub();
-		InventoryDataDriver idd=new InventoryDataDriver ();
-		idd.drive(ids);
-	}
+//	public static void main(String[] args) throws RemoteException {
+//		InventoryDataService ids=new InventoryDataStub();
+//		InventoryDataDriver idd=new InventoryDataDriver ();
+//		idd.drive(ids);
+//	}
 }

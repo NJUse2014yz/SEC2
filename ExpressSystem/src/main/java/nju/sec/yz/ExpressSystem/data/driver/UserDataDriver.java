@@ -44,11 +44,11 @@ public class UserDataDriver {
 		
 	}
 	
-	public static void main(String[] args) throws RemoteException {
-		UserDataService uds=new UserDataStub();
-		UserDataDriver sdd=new UserDataDriver();
-		sdd.drive(uds);
-	}
+//	public static void main(String[] args) throws RemoteException {
+//		UserDataService uds=new UserDataStub();
+//		UserDataDriver sdd=new UserDataDriver();
+//		sdd.drive(uds);
+//	}
 
 	
 }

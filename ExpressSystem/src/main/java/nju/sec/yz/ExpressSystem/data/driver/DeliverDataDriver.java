@@ -34,10 +34,10 @@ public class DeliverDataDriver {
 				
 	}
 	
-	public static void main(String[] args) throws RemoteException {
-		DeliverDataService dds=new DeliverDataStub();
-		DeliverDataDriver ddd=new DeliverDataDriver();
-		ddd.drive(dds);
-		
-		}
+//	public static void main(String[] args) throws RemoteException {
+//		DeliverDataService dds=new DeliverDataStub();
+//		DeliverDataDriver ddd=new DeliverDataDriver();
+//		ddd.drive(dds);
+//		
+//		}
 }

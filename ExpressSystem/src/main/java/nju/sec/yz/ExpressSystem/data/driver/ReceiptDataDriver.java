@@ -34,9 +34,9 @@ public class ReceiptDataDriver {
 		
 	}
 	
-	public static void main(String[] args) throws RemoteException {
-		ReceiptDataService rds=new ReceiptDataStub();
-		ReceiptDataDriver rdd=new ReceiptDataDriver();
-		rdd.drive(rds);
+//	public static void main(String[] args) throws RemoteException {
+//		ReceiptDataService rds=new ReceiptDataStub();
+//		ReceiptDataDriver rdd=new ReceiptDataDriver();
+//		rdd.drive(rds);
 	}
 }

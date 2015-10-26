@@ -45,9 +45,9 @@ public class CarDataDriver {
 	
 	
 	
-	public static void main(String[] args) throws RemoteException {
-		CarDataService cds=new CarDataStub();
-		CarDataDriver cdd=new CarDataDriver();
-		cdd.drive(cds);
-	}
+//	public static void main(String[] args) throws RemoteException {
+//		CarDataService cds=new CarDataStub();
+//		CarDataDriver cdd=new CarDataDriver();
+//		cdd.drive(cds);
+//	}
 }
