@@ -32,7 +32,7 @@ public class AccountBlStub implements AccountBlService{
 	@Override
 	public AccountVO observeAccount(String id) {
 		// TODO 自动生成的方法存根
-		return null;
+		return new AccountVO("八方达物流有限公司", 10000);
 	}
 
 	@Override
