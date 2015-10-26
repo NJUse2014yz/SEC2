@@ -1,7 +1,6 @@
 package nju.sec.yz.ExpressSystem.bl.stub;
 
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 
 import nju.sec.yz.ExpressSystem.blservice.managerBlService.ConstBlService;
 import nju.sec.yz.ExpressSystem.common.CityInformation;
