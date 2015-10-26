@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.po.CityPO;
-import nju.sec.yz.ExpressSystem.po.PrizePO;
+import nju.sec.yz.ExpressSystem.po.PricePO;
 
 public interface ConstDataService {
 	public ResultMessage update(CityPO cp) throws RemoteException;
@@ -17,6 +17,6 @@ public interface ConstDataService {
 	public ResultMessage insert(CityPO cp) throws RemoteException;
 	public ResultMessage delete(String beginPlace,String endPlace) throws RemoteException;
 	
-	public ResultMessage update(PrizePO pp) throws RemoteException;
-	public ArrayList<PrizePO> findAllPrize() throws RemoteException;
+	public ResultMessage update(PricePO pp) throws RemoteException;
+	public ArrayList<PricePO> findAllPrize() throws RemoteException;
 }

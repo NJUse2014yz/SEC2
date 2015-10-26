@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.CityVO;
-import nju.sec.yz.ExpressSystem.vo.PrizeVO;
+import nju.sec.yz.ExpressSystem.vo.PriceVO;
 
 
 /**
@@ -19,6 +19,6 @@ public interface ConstBlService {
 	public ResultMessage insert(CityVO cp) throws RemoteException;
 	public ResultMessage delete(String beginPlace,String endPlace) throws RemoteException;
 	
-	public ResultMessage update(PrizeVO pp) throws RemoteException;
-	public ArrayList<PrizeVO> findAllPrize() throws RemoteException;
+	public ResultMessage update(PriceVO pp) throws RemoteException;
+	public ArrayList<PriceVO> findAllPrize() throws RemoteException;
 }

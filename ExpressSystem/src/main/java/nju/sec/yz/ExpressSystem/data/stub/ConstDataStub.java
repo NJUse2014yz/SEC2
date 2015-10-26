@@ -3,7 +3,7 @@ package nju.sec.yz.ExpressSystem.data.stub;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import nju.sec.yz.ExpressSystem.po.CityPO;
-import nju.sec.yz.ExpressSystem.po.PrizePO;
+import nju.sec.yz.ExpressSystem.po.PricePO;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.ConstDataService;
 
@@ -35,13 +35,13 @@ public class ConstDataStub implements ConstDataService{
 	}
 
 	@Override
-	public ResultMessage update(PrizePO pp) throws RemoteException {
+	public ResultMessage update(PricePO pp) throws RemoteException {
 		// TODO 自动生成的方法存根
 		return ResultMessage.SUCCESS;
 	}
 
 	@Override
-	public ArrayList<PrizePO> findAllPrize() throws RemoteException {
+	public ArrayList<PricePO> findAllPrize() throws RemoteException {
 		// TODO 自动生成的方法存根
 		return null;
 	}
