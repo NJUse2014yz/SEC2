@@ -2,12 +2,12 @@ package nju.sec.yz.ExpressSystem.bl.stub;
 
 import java.util.ArrayList;
 
-import nju.sec.yz.ExpressSystem.blservice.userBlService.UserBLService;
+import nju.sec.yz.ExpressSystem.blservice.userBlService.UserBlService;
 import nju.sec.yz.ExpressSystem.common.Power;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.UserVO;
 
-public class UserBLStub implements UserBLService {
+public class UserBlStub implements UserBlService {
 
 	@Override
 	public ResultMessage login(String id, String password) {

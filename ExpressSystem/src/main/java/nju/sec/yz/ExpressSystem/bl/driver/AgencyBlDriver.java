@@ -41,9 +41,9 @@ public class AgencyBlDriver {
 			System.out.println(list.get(i).getLocation()+" "+list.get(i).getId()+" "+list.get(i).getName());
 		}
 	}
-	public static void main(String[] args) {
-		AgencyBlService service=new AgencyBlStub();
-		AgencyBlDriver driver=new AgencyBlDriver();
-		driver.drive(service);
-	}
+//	public static void main(String[] args) {
+//		AgencyBlService service=new AgencyBlStub();
+//		AgencyBlDriver driver=new AgencyBlDriver();
+//		driver.drive(service);
+//	}
 }

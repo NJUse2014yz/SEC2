@@ -4,7 +4,6 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
-import nju.sec.yz.ExpressSystem.data.stub.ReceiptDataStub;
 import nju.sec.yz.ExpressSystem.dataservice.receiptDataSevice.ReceiptDataService;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 
@@ -38,5 +37,4 @@ public class ReceiptDataDriver {
 //		ReceiptDataService rds=new ReceiptDataStub();
 //		ReceiptDataDriver rdd=new ReceiptDataDriver();
 //		rdd.drive(rds);
-	}
-
+}
