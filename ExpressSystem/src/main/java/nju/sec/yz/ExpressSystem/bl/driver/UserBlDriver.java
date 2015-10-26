@@ -2,8 +2,8 @@ package nju.sec.yz.ExpressSystem.bl.driver;
 
 import java.util.ArrayList;
 
-import nju.sec.yz.ExpressSystem.bl.stub.UserBlStub2;
-import nju.sec.yz.ExpressSystem.blservice.userBlService.UserBlService2;
+import nju.sec.yz.ExpressSystem.bl.stub.UserBlStub;
+import nju.sec.yz.ExpressSystem.blservice.userBlService.UserBlService;
 import nju.sec.yz.ExpressSystem.common.Power;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.UserVO;
@@ -14,7 +14,7 @@ import nju.sec.yz.ExpressSystem.vo.UserVO;
  * rename
  */
 public class UserBlDriver {
-	public  void drive(UserBlService2 userBlService){
+	public  void drive(UserBlService userBlService){
 		//1
 		ResultMessage message1=userBlService.add(new UserVO("s001","刘强东","jingdong",Power.MANAGER));
 		if(message1==ResultMessage.SUCCESS)
