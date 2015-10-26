@@ -17,7 +17,9 @@ public class ReceiptBlStub implements ReceiptBlService {
 	@Override
 	public ReceiptVO getSingle(int i) {
 		// TODO 自动生成的方法存根
-		return new ReceiptVO();
+		ReceiptVO receiptVO=new ReceiptVO();
+		receiptVO.setId("yyy");
+		return receiptVO;
 	}
 
 	@Override
