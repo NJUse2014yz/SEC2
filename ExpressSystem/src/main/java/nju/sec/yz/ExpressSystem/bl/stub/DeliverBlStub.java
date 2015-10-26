@@ -1,6 +1,7 @@
 package nju.sec.yz.ExpressSystem.bl.stub;
 
 import nju.sec.yz.ExpressSystem.blservice.deliverBlService.DeliverBlService;
+import nju.sec.yz.ExpressSystem.common.OrderInformation;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.DeliverySheetVO;
 import nju.sec.yz.ExpressSystem.vo.OfficeArriveSheetVO;
@@ -14,7 +15,10 @@ import nju.sec.yz.ExpressSystem.vo.TransitLoadSheetVO;
 public class DeliverBlStub implements DeliverBlService{
 	//物流历史轨迹
 	public OrderVO  checkDeliver(String id){
-		return new OrderVO();
+		OrderVO order=new OrderVO();
+		order.setOrderInformation(new OrderInformation());
+		
+		return order;
 	}
 	//寄件单
 	public ResultMessage deliverReceipt (SendSheetVO vo){

@@ -15,7 +15,10 @@ public class FinanceBlStub implements FinanceBlSevice {
 	@Override
 	public BussinessVO checkBusinessCircumstance(String begin, String end) {
 		// TODO 自动生成的方法存根
-		return new BussinessVO();
+		
+		BussinessVO bussinessVO=new BussinessVO();
+		bussinessVO.addInVO(new PaymentSheetVO());
+		return bussinessVO;
 	}
 
 	@Override
