@@ -1,15 +1,12 @@
 package nju.sec.yz.ExpressSystem.data.driver;
 
 import java.rmi.RemoteException;
-<<<<<<< HEAD
-=======
 import java.util.ArrayList;
->>>>>>> 9a72e8d01700005c68afc04cf55ee8acd0ad7745
 
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
-import nju.sec.yz.ExpressSystem.data.stub.AgencyDataStub;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.AgencyDataService;
-<<<<<<< HEAD
+import nju.sec.yz.ExpressSystem.po.AgencyPO;
+
 
 public class AgencyDataDriver {
 	public void drive(AgencyDataService ads) throws RemoteException
@@ -26,17 +23,8 @@ public class AgencyDataDriver {
 			System.out.println("#agency delete SUCCESS");
 		if(ads.update(null)==ResultMessage.SUCCESS)
 			System.out.println("#agency update SUCCESS");
-	}
-=======
-import nju.sec.yz.ExpressSystem.po.AgencyPO;
-
-/**
- * 
- * @author zhangqi
- *
- */
-public class AgencyDataDriver {
-	public void drive(AgencyDataService ads) throws RemoteException{
+		
+		
 		ResultMessage result=ads.insert(null);
 		if(result==ResultMessage.SUCCESS){
 			System.out.println("Insert!");
@@ -63,11 +51,18 @@ public class AgencyDataDriver {
 		ArrayList<AgencyPO> array=ads.findAll();
 		System.out.println(array.size());
 	}
-	
+}
+
+/**
+ * 
+ * @author zhangqi
+ *
+ */
+
 //	public static void main(String[] args) throws RemoteException {
 //		AgencyDataService ads=new AgencyDataStub();
 //		AgencyDataDriver add=new AgencyDataDriver();
 //		add.drive(ads);
 //	}
->>>>>>> 9a72e8d01700005c68afc04cf55ee8acd0ad7745
-}
+
+
