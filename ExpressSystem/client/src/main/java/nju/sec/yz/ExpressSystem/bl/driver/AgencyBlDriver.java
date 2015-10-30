@@ -2,7 +2,6 @@ package nju.sec.yz.ExpressSystem.bl.driver;
 
 import java.util.ArrayList;
 
-import nju.sec.yz.ExpressSystem.bl.stub.AgencyBlStub;
 import nju.sec.yz.ExpressSystem.blservice.managerBlService.AgencyBlService;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.AgencyVO;
