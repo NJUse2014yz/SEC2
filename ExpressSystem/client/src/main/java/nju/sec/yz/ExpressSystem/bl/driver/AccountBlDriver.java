@@ -39,9 +39,9 @@ public class AccountBlDriver {
 			System.out.println(list.get(i).getName()+" "+list.get(i).getBalance());
 		}
 	}
-//	public static void main(String[] args) {
-//		AccountBlService service=new AccountBlStub();
-//		AccountBlDriver driver=new AccountBlDriver();
-//		driver.drive(service);
-//	}
+	public static void main(String[] args) {
+		AccountBlService service=new AccountBlStub();
+		AccountBlDriver driver=new AccountBlDriver();
+		driver.drive(service);
+	}
 }
