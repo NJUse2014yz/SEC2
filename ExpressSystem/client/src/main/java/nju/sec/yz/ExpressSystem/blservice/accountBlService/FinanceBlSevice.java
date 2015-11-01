@@ -15,6 +15,15 @@ public interface FinanceBlSevice {
 	public BussinessVO checkBusinessCircumstance (String begin,String end);
 	//查看收款单
 	public PaymentSheetVO checkReceipt (String day,int positionId);
+	
+	
+	/**
+	 * 制定收款单
+	 * @author cong
+	 */
+	public ResultMessage makeReceipt (PaymentSheetVO psv);
+	
+	
 	//制定付款单
 	public ResultMessage makePayment(OutVO pro);
 	//生成成本收益表

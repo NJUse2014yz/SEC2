@@ -58,4 +58,10 @@ public class FinanceBlStub implements FinanceBlSevice {
 		return ResultMessage.SUCCESS;
 	}
 
+	@Override
+	public ResultMessage makeReceipt(PaymentSheetVO psv) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
