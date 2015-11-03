@@ -1,5 +1,7 @@
 package nju.sec.yz.ExpressSystem.blservice.accountBlService;
 
+import java.util.List;
+
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.AccountVO;
 import nju.sec.yz.ExpressSystem.vo.BussinessVO;
@@ -13,8 +15,12 @@ public interface FinanceBlSevice {
 	
 	//查看经营情况表
 	public BussinessVO checkBusinessCircumstance (String begin,String end);
-	//查看收款单
-	public PaymentSheetVO checkReceipt (String day,int positionId);
+	/**
+	 * 查看收款单
+	 * 返回值改为List
+	 * @author cong
+	 */
+	public List<PaymentSheetVO> checkReceipt (String day,int positionId);
 	
 	
 	/**
