@@ -8,7 +8,7 @@ import nju.sec.yz.ExpressSystem.vo.OutVO;
  * @author 周聪
  *
  */
-public class PaymentReceipt {
+public class Payment {
 	/**
 	 * 制定付款单
 	 */
