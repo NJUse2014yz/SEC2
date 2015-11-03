@@ -20,4 +20,10 @@ public interface InventoryBlService {
 	public ResultMessage in(InventoryInSheetVO iisvo);
 	//出库
 	public ResultMessage out(InventoryOutSheetVO iosvo);
+	/**
+	 * @author cong
+	 * 设置库存警报比例
+	 * @param rate 库存警报比例，为0-1的double值
+	 */
+	public ResultMessage setAlertRate(double rate);
 }
