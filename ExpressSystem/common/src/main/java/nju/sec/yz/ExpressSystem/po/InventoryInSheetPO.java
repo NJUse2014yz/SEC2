@@ -10,6 +10,12 @@ public class InventoryInSheetPO extends ReceiptPO{
 	private InventoryInInformation inventoryInInformation;
 	private String barId;
 	
+	public InventoryInSheetPO(InventoryInInformation inventoryInInformation,
+			String barId) {
+		super();
+		this.inventoryInInformation = inventoryInInformation;
+		this.barId = barId;
+	}
 	public InventoryInInformation getInventoryInInformation() {
 		return inventoryInInformation;
 	}
