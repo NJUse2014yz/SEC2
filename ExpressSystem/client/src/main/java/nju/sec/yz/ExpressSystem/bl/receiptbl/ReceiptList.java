@@ -3,6 +3,7 @@ package nju.sec.yz.ExpressSystem.bl.receiptbl;
 import java.util.ArrayList;
 
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 
 /**
@@ -10,7 +11,7 @@ import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
  * 负责存放未被审批的单据，并且控制和外部交互
  * @author 周聪
  */
-public class ReceiptList {
+public class ReceiptList implements ReceiptService{
 	
 	//TODO 单据审批的流程
 	
@@ -48,6 +49,16 @@ public class ReceiptList {
 
 	
 	public ResultMessage modify(ReceiptVO vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	/**
+	 * 保存单据信息
+	 */
+	public ResultMessage saveReceipt(ReceiptPO po) {
 		// TODO Auto-generated method stub
 		return null;
 	}

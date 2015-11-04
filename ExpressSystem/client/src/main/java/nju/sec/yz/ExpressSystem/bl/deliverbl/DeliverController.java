@@ -25,8 +25,9 @@ public class DeliverController implements DeliverBlService{
 
 	@Override
 	public ResultMessage deliverReceipt(SendSheetVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		DeliverReceipt receipt=new DeliverReceipt();
+		receipt.makeDeliverReceipt(vo);
+		return ResultMessage.SUCCESS;
 	}
 
 	@Override

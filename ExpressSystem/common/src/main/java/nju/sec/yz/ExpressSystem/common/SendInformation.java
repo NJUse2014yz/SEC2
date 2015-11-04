@@ -5,14 +5,23 @@ package nju.sec.yz.ExpressSystem.common;
  *
  */
 public class SendInformation {
+	//订单条形码号
 	private String barId;
+	//收件人姓名、住址、单位、电话、手机
 	private ToAndFromInformation toPerson;
+	//寄件人姓名、住址、单位、电话、手机
 	private ToAndFromInformation fromPerson;
+	//托运货物信息（原件数、实际重量、体积、内件品名）
 	private GoodInformation good;
+	//经济快递，标准快递，特快专递
 	private DeliveryType deliveryType;
+	//
 	private PackType packType;
+	//包装费（纸箱（5元）、木箱（10元）、快递袋（1元）、其它）
 	private double costForPack;//?
+	//费用合计（自动计算，运费+包装费）
 	private double costForAll;
+	//
 	private String predictTime;
 	
 	public String getBarId() {

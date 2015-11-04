@@ -2,6 +2,7 @@ package nju.sec.yz.ExpressSystem.bl.driver;
 
 import java.util.ArrayList;
 
+import nju.sec.yz.ExpressSystem.bl.accountbl.AccountController;
 import nju.sec.yz.ExpressSystem.bl.stub.AccountBlStub;
 import nju.sec.yz.ExpressSystem.blservice.accountBlService.AccountBlService;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
@@ -41,7 +42,7 @@ public class AccountBlDriver {
 		}
 	}
 	public static void main(String[] args) {
-		AccountBlService service=new AccountBlStub();
+		AccountBlService service=new AccountController();
 		AccountBlDriver driver=new AccountBlDriver();
 		driver.drive(service);
 	}
