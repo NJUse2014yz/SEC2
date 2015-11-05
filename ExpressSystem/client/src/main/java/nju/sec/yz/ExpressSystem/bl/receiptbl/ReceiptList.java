@@ -11,7 +11,7 @@ import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
  * 负责存放未被审批的单据，并且控制和外部交互
  * @author 周聪
  */
-public class ReceiptList implements ReceiptService{
+public class ReceiptList implements ReceiptSaveService{
 	
 	//TODO 单据审批的流程
 	
@@ -56,7 +56,7 @@ public class ReceiptList implements ReceiptService{
 
 	@Override
 	/**
-	 * 保存单据信息
+	 * 制定单据完成后通过此方法保存
 	 */
 	public ResultMessage saveReceipt(ReceiptPO po) {
 		// TODO Auto-generated method stub

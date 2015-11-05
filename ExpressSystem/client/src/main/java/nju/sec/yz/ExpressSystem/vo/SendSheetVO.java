@@ -6,7 +6,7 @@ package nju.sec.yz.ExpressSystem.vo;
  */
 import nju.sec.yz.ExpressSystem.common.SendInformation;
 
-public class SendSheetVO {
+public class SendSheetVO extends ReceiptVO{
 	private SendInformation sendInformation;
 
 	public SendInformation getSendInformation() {

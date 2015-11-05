@@ -1,8 +1,8 @@
 package nju.sec.yz.ExpressSystem.bl.deliverbl;
 
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.po.SendSheetPO;
 import nju.sec.yz.ExpressSystem.vo.OrderVO;
-import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 
 /**
  * 物流信息的领域模型对象
@@ -20,11 +20,10 @@ public class Deliver {
 	}
 	
 	/**
-	 * TODO  暂定
-	 * 前置条件	物流单据通过审批
-	 * 后置条件       将vo中的信息解析为物流信息并更新到DeliverDataBase中
+	 * 寄件单通过审批后通过此方法更新寄件单信息
 	 */
-	public ResultMessage updateDeliver(ReceiptVO vo){
+	public ResultMessage updateDeliverReceipt(SendSheetPO po){
 		return null;
 	}
+	
 }

@@ -26,8 +26,8 @@ public class DeliverController implements DeliverBlService{
 	@Override
 	public ResultMessage deliverReceipt(SendSheetVO vo) {
 		DeliverReceipt receipt=new DeliverReceipt();
-		receipt.makeDeliverReceipt(vo);
-		return ResultMessage.SUCCESS;
+		ResultMessage resultMessage=receipt.makeDeliverReceipt(vo);
+		return resultMessage;
 	}
 
 	@Override
