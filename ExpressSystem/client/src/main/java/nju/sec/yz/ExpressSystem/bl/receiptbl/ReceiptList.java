@@ -1,10 +1,14 @@
 package nju.sec.yz.ExpressSystem.bl.receiptbl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
+import nju.sec.yz.ExpressSystem.bl.deliverbl.DeliverReceipt;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
+import nju.sec.yz.ExpressSystem.vo.SendSheetVO;
 
 /**
  * 表单列表的领域模型对象
@@ -17,6 +21,14 @@ public class ReceiptList implements ReceiptSaveService{
 	
 	
 	
+	/**
+	 * 获取相应的Receipt
+	 */
+	private static Map<String, Class<? extends ReceiptService>> RECEIPT_MAP = new HashMap<>();
+	
+	static{
+		RECEIPT_MAP.put("1", DeliverReceipt.class);
+	}
 	
 	
 	public ArrayList<ReceiptVO> getAll() {
@@ -32,7 +44,16 @@ public class ReceiptList implements ReceiptSaveService{
 
 	
 	public ResultMessage approve(ReceiptVO vo) {
-		// TODO Auto-generated method stub
+		try {
+			//单据信息更新交给相应receipt处理
+			ReceiptService receipt=RECEIPT_MAP.get(vo.getId()).newInstance();
+			receipt.approve(vo);
+			
+			//单据删除
+			
+		} catch (InstantiationException | IllegalAccessException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
@@ -62,4 +83,11 @@ public class ReceiptList implements ReceiptSaveService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	/*public static void main(String[] args) {
+		ReceiptList list=new ReceiptList();
+		ReceiptVO receiptVO=new SendSheetVO();
+		receiptVO.setId("1");
+		list.approve(receiptVO);
+	}*/
 }

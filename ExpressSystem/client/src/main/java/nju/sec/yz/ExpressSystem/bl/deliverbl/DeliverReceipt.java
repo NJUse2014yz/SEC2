@@ -16,13 +16,13 @@ import nju.sec.yz.ExpressSystem.vo.SendSheetVO;
  */
 public class DeliverReceipt implements ReceiptService{
 	/**
-	 * 检验输入信息是否有错
+	 * 检验输入信息
 	 * 生成PO
 	 */
 	public ResultMessage makeDeliverReceipt(SendSheetVO vo) {
 		SendInformation information=vo.getSendInformation();
 		
-		//验证information是否有错
+		//验证information
 		
 		
 		//创建PO交给receipt
@@ -41,11 +41,13 @@ public class DeliverReceipt implements ReceiptService{
 	 */
 	public ResultMessage approve(ReceiptVO vo) {
 		SendSheetVO receipt=(SendSheetVO)vo;
+		Deliver deliver=new Deliver();
 		SendInformation information=receipt.getSendInformation();
 		SendSheetPO po=new SendSheetPO();
+		//
 		po.setSendInformation(information);
-		Deliver deliver=new Deliver();
 		ResultMessage resultMessage=deliver.updateDeliverReceipt(po);
+		System.out.println("Approving...");
 		return resultMessage;
 	}
 }
