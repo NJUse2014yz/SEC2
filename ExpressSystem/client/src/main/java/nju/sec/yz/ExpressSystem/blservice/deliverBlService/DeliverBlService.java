@@ -9,6 +9,7 @@ import nju.sec.yz.ExpressSystem.vo.ReceiveVO;
 import nju.sec.yz.ExpressSystem.vo.SendSheetVO;
 import nju.sec.yz.ExpressSystem.vo.TransitArriveSheetVO;
 import nju.sec.yz.ExpressSystem.vo.TransitLoadSheetVO;
+import nju.sec.yz.ExpressSystem.vo.TransitSheetVO;
 
 /**
  * @author xiaosaisai
@@ -33,8 +34,6 @@ public interface DeliverBlService {
 	//中转中心装车单
 	public ResultMessage transitLoadingReceipt (TransitLoadSheetVO vo);
 	//中转单
-	public ResultMessage transitReceipt (TransitLoadSheetVO vo);
-	
-	
+	public ResultMessage transitReceipt (TransitSheetVO vo);
 }
 

@@ -10,6 +10,7 @@ import nju.sec.yz.ExpressSystem.vo.ReceiveVO;
 import nju.sec.yz.ExpressSystem.vo.SendSheetVO;
 import nju.sec.yz.ExpressSystem.vo.TransitArriveSheetVO;
 import nju.sec.yz.ExpressSystem.vo.TransitLoadSheetVO;
+import nju.sec.yz.ExpressSystem.vo.TransitSheetVO;
 /**
  * 负责物流信息模块的逻辑控制
  * @author 周聪
@@ -26,7 +27,7 @@ public class DeliverController implements DeliverBlService{
 	@Override
 	public ResultMessage deliverReceipt(SendSheetVO vo) {
 		DeliverReceipt receipt=new DeliverReceipt();
-		ResultMessage resultMessage=receipt.makeDeliverReceipt(vo);
+		ResultMessage resultMessage=receipt.make(vo);
 		return resultMessage;
 	}
 
@@ -66,9 +67,10 @@ public class DeliverController implements DeliverBlService{
 		return null;
 	}
 
+
 	@Override
-	public ResultMessage transitReceipt(TransitLoadSheetVO vo) {
-		
+	public ResultMessage transitReceipt(TransitSheetVO vo) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

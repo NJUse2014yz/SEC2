@@ -12,25 +12,26 @@ import nju.sec.yz.ExpressSystem.vo.SendSheetVO;
 /**
  * 寄件单的领域模型
  * @author 周聪
- *
  */
 public class DeliverReceipt implements ReceiptService{
+	@Override
 	/**
 	 * 检验输入信息
 	 * 生成PO
 	 */
-	public ResultMessage makeDeliverReceipt(SendSheetVO vo) {
-		SendInformation information=vo.getSendInformation();
+	public ResultMessage make(ReceiptVO vo) {
+		SendSheetVO sendReceipt=(SendSheetVO)vo;
+		SendInformation information=sendReceipt.getSendInformation();
 		
 		//验证information
 		
 		
 		//创建PO交给receipt
-		SendSheetPO sendReceipt=new SendSheetPO();
+		SendSheetPO receipt=new SendSheetPO();
 		sendReceipt.setId(null);
 		sendReceipt.setSendInformation(information);
 		ReceiptSaveService receiptList=new ReceiptList();
-		receiptList.saveReceipt(sendReceipt);
+		receiptList.saveReceipt(receipt);
 		
 		return ResultMessage.SUCCESS;
 	}
@@ -50,4 +51,10 @@ public class DeliverReceipt implements ReceiptService{
 		System.out.println("Approving...");
 		return resultMessage;
 	}
+
+	@Override
+	public ResultMessage modify(ReceiptVO vo) {
+		return null;
+	}
+
 }

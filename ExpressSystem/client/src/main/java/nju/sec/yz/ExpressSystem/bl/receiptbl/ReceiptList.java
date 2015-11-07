@@ -8,7 +8,6 @@ import nju.sec.yz.ExpressSystem.bl.deliverbl.DeliverReceipt;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
-import nju.sec.yz.ExpressSystem.vo.SendSheetVO;
 
 /**
  * 表单列表的领域模型对象
@@ -57,11 +56,6 @@ public class ReceiptList implements ReceiptSaveService{
 		return null;
 	}
 
-	
-	public ResultMessage deny(ReceiptVO vo, String reason) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	public ArrayList<ReceiptVO> getByType(String type) {
 		// TODO Auto-generated method stub

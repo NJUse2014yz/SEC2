@@ -11,6 +11,7 @@ import nju.sec.yz.ExpressSystem.vo.ReceiveVO;
 import nju.sec.yz.ExpressSystem.vo.SendSheetVO;
 import nju.sec.yz.ExpressSystem.vo.TransitArriveSheetVO;
 import nju.sec.yz.ExpressSystem.vo.TransitLoadSheetVO;
+import nju.sec.yz.ExpressSystem.vo.TransitSheetVO;
 
 public class DeliverBlStub implements DeliverBlService{
 	//物流历史轨迹
@@ -48,4 +49,10 @@ public class DeliverBlStub implements DeliverBlService{
 	public ResultMessage transitLoadingReceipt (TransitLoadSheetVO vo){
 		return ResultMessage.SUCCESS;
 	}
+	@Override
+	public ResultMessage transitReceipt(TransitSheetVO vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }

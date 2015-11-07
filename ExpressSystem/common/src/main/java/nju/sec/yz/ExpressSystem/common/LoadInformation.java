@@ -55,6 +55,4 @@ public class LoadInformation {
 	public void setDriverId(String driverId) {
 		this.driverId = driverId;
 	}
-	
-	
 }

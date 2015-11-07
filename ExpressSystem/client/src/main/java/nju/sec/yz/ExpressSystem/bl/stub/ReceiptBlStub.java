@@ -28,11 +28,6 @@ public class ReceiptBlStub implements ReceiptBlService {
 		return ResultMessage.SUCCESS;
 	}
 
-	@Override
-	public ResultMessage deny(ReceiptVO vo, String reason) {
-		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
-	}
 
 	@Override
 	public ArrayList<ReceiptVO> getByType(String type) {
