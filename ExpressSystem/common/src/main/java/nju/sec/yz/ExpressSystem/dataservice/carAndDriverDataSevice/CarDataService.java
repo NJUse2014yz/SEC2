@@ -1,5 +1,6 @@
 package nju.sec.yz.ExpressSystem.dataservice.carAndDriverDataSevice;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -11,7 +12,7 @@ import nju.sec.yz.ExpressSystem.po.CarPO;
  * @author zhangqi
  *
  */
-public interface CarDataService {
+public interface CarDataService extends Remote{
 
 	public ResultMessage insert(CarPO cpo) throws RemoteException;
 

@@ -1,5 +1,6 @@
 package nju.sec.yz.ExpressSystem.po;
 
+import java.io.Serializable;
 import java.util.List;
 
 
@@ -9,7 +10,7 @@ import java.util.List;
  * @author 周聪
  * 账目信息：机构、人员、车辆、库存、 银行账户信息（名称，余额）
  */
-public class AccountBookPO {
+public class AccountBookPO implements Serializable{
 
 	//每个机构一套账？
 	

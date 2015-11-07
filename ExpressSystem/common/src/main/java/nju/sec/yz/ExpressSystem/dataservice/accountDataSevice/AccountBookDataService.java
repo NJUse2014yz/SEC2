@@ -1,5 +1,6 @@
 package nju.sec.yz.ExpressSystem.dataservice.accountDataSevice;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -11,7 +12,7 @@ import nju.sec.yz.ExpressSystem.po.AccountBookPO;
  * @author zhangqi
  *
  */
-public interface AccountBookDataService {
+public interface AccountBookDataService extends Remote{
 	public ArrayList<AccountBookPO> findAll( ) throws RemoteException;
 	public AccountBookPO init() throws RemoteException;
 	public ResultMessage update(AccountBookPO abp) throws RemoteException;
