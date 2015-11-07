@@ -8,6 +8,7 @@ import java.rmi.RemoteException;
 
 import nju.sec.yz.ExpressSystem.dataservice.datafactory.DatafactoryService;
 import nju.sec.yz.ExpressSystem.dataservice.deliverDataSevice.DeliverDataService;
+import nju.sec.yz.ExpressSystem.po.DeliverPO;
 
 public class RMIHelper {
 
@@ -34,8 +35,7 @@ public class RMIHelper {
     	String urlPrefix = "rmi://" + IP + "/";
         datafactory = (DatafactoryService) Naming.lookup(urlPrefix + "DataFactorySerializableImpl");
         System.out.println("get datafactory");
-        DeliverDataService deliverData=datafactory.getDeliverDataService();
-        System.out.println("get deliverData");
+        datafactory.getDeliverDataService().insert(new DeliverPO());
     }
 
     public static DatafactoryService getDatafactory() {

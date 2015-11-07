@@ -5,14 +5,14 @@ import java.io.IOException;
 
 public class SerializableFileHelper {
 
-//    public static final String COMMODITY_FILE_NAME = "commodities";
+    public static final String DELIVER_FILE_NAME = "deliver_data";
    
 
-    /*public static File getCommodityFile() throws IOException {
-        File file = new File(getDirectory(), COMMODITY_FILE_NAME);
+    public static File getDeliverFile() throws IOException {
+        File file = new File(DELIVER_FILE_NAME);
         createFileIfNotExists(file);
         return file;
-    }*/
+    }
 
     
 
