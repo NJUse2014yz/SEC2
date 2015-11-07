@@ -1,6 +1,8 @@
 package nju.sec.yz.ExpressSystem.bl.deliverbl;
 
+import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiveVO;
 
 /**
@@ -8,9 +10,24 @@ import nju.sec.yz.ExpressSystem.vo.ReceiveVO;
  * @author 周聪
  *
  */
-public class RecieveReceipt {
-	public ResultMessage makeRecieveReceipt(ReceiveVO vo) {
+public class RecieveReceipt implements ReceiptService{
+
+	@Override
+	public ResultMessage approve(ReceiptVO vo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public ResultMessage make(ReceiptVO vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultMessage modify(ReceiptVO vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }

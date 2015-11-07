@@ -1,20 +1,30 @@
 package nju.sec.yz.ExpressSystem.bl.accountbl;
 
+import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.PaymentSheetVO;
+import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 /**
  * 收款单的领域模型对象
  * @author 周聪
  *
  */
-public class Collection {
+public class Collection implements ReceiptService{
 
-	/**
-	 * 制定收款单
-	 * @param psv
-	 * @return
-	 */
-	public ResultMessage makeReceiveReceipt(PaymentSheetVO psv) {
+	@Override
+	public ResultMessage approve(ReceiptVO vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultMessage make(ReceiptVO vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultMessage modify(ReceiptVO vo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
