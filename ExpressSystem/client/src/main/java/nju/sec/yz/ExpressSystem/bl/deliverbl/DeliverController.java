@@ -66,4 +66,10 @@ public class DeliverController implements DeliverBlService{
 		return null;
 	}
 
+	@Override
+	public ResultMessage transitReceipt(TransitLoadSheetVO vo) {
+		
+		return null;
+	}
+
 }

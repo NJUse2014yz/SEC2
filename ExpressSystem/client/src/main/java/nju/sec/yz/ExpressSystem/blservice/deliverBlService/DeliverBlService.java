@@ -32,5 +32,9 @@ public interface DeliverBlService {
 	public ResultMessage transitReceiveReceipt(TransitArriveSheetVO vo);
 	//中转中心装车单
 	public ResultMessage transitLoadingReceipt (TransitLoadSheetVO vo);
+	//中转单
+	public ResultMessage transitReceipt (TransitLoadSheetVO vo);
+	
+	
 }
 
