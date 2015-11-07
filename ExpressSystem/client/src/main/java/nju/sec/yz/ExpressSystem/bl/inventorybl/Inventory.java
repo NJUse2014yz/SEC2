@@ -1,6 +1,7 @@
 package nju.sec.yz.ExpressSystem.bl.inventorybl;
 
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.po.InventoryInSheetPO;
 import nju.sec.yz.ExpressSystem.vo.InventoryVO;
 
 /**
@@ -34,5 +35,11 @@ public class Inventory {
 	public void exportToExcel() {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	public ResultMessage updateInReceipt(InventoryInSheetPO inPO) {
+		// TODO 自动生成的方法存根
+		return null;
 	}
 }

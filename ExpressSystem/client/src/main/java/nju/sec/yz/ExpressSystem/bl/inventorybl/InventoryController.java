@@ -1,5 +1,6 @@
 package nju.sec.yz.ExpressSystem.bl.inventorybl;
 
+import nju.sec.yz.ExpressSystem.bl.deliverbl.DeliverReceipt;
 import nju.sec.yz.ExpressSystem.blservice.inventoryBlService.InventoryBlService;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.InventoryInSheetVO;
@@ -31,7 +32,9 @@ public class InventoryController implements InventoryBlService{
 
 	@Override
 	public ResultMessage in(InventoryInSheetVO iisvo) {
-		return null;
+		InventoryInSheet receipt=new InventoryInSheet();
+		ResultMessage resultMessage=receipt.make(iisvo);
+		return resultMessage;
 	}
 
 	@Override

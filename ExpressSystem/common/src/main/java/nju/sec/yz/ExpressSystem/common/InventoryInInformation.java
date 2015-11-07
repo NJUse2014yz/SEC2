@@ -12,6 +12,16 @@ public class InventoryInInformation {
 	private int shelf;
 	private int positon;
 	
+	public InventoryInInformation(String time, String destination, int block,
+			int row, int shelf, int positon) {
+		super();
+		this.time = time;
+		this.destination = destination;
+		this.block = block;
+		this.row = row;
+		this.shelf = shelf;
+		this.positon = positon;
+	}
 	public String getTime() {
 		return time;
 	}
