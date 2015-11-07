@@ -8,10 +8,11 @@ public class LoadInformation {
 	private String time;
 	private String agencyId;
 	private String transportId;
-	private String destination;
+	private String destinationId;
 	private String carId;
 	private String officerId;
 	private String driverId;
+	private double fare;
 	
 	public String getTime() {
 		return time;
@@ -32,10 +33,10 @@ public class LoadInformation {
 		this.transportId = transportId;
 	}
 	public String getDestination() {
-		return destination;
+		return destinationId;
 	}
-	public void setDestination(String destination) {
-		this.destination = destination;
+	public void setDestination(String destinationId) {
+		this.destinationId = destinationId;
 	}
 	public String getCarId() {
 		return carId;
@@ -54,5 +55,17 @@ public class LoadInformation {
 	}
 	public void setDriverId(String driverId) {
 		this.driverId = driverId;
+	}
+	public String getDestinationId() {
+		return destinationId;
+	}
+	public void setDestinationId(String destinationId) {
+		this.destinationId = destinationId;
+	}
+	public double getFare() {
+		return fare;
+	}
+	public void setFare(double fare) {
+		this.fare = fare;
 	}
 }

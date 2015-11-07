@@ -1,35 +1,25 @@
 package nju.sec.yz.ExpressSystem.common;
+
+import java.util.ArrayList;
+
 /**
  * 
  * @author YU Fan
  *
  */
 public class TransitInformation {
-	private String time;
-	private String transitSheetId;
-	private String flightId;
-	private String departure;
-	private String destination;
-	private String transiterId;
-	private String shelfId;
+	protected String time;
+	protected String departure;
+	protected String destination;
+	protected String transiterId;
+	protected ArrayList<String> barIds;
+	protected double fare;
 	
 	public String getTime() {
 		return time;
 	}
 	public void setTime(String time) {
 		this.time = time;
-	}
-	public String getTransitSheetId() {
-		return transitSheetId;
-	}
-	public void setTransitSheetId(String transitSheetId) {
-		this.transitSheetId = transitSheetId;
-	}
-	public String getFlightId() {
-		return flightId;
-	}
-	public void setFlightId(String flightId) {
-		this.flightId = flightId;
 	}
 	public String getDeparture() {
 		return departure;
@@ -49,12 +39,17 @@ public class TransitInformation {
 	public void setTransiterId(String transiterId) {
 		this.transiterId = transiterId;
 	}
-	public String getShelfId() {
-		return shelfId;
+	public ArrayList<String> getBarIds() {
+		return barIds;
 	}
-	public void setShelfId(String shelfId) {
-		this.shelfId = shelfId;
+	public void setBarIds(ArrayList<String> barIds) {
+		this.barIds = barIds;
 	}
-	
+	public double getFare() {
+		return fare;
+	}
+	public void setFare(double fare) {
+		this.fare = fare;
+	}
 	
 }
