@@ -19,12 +19,6 @@ public class ReceiptBlDriver {
 	public void drive(ReceiptBlService receiptBl_stub){
 		//
 		ResultMessage approveResult=receiptBl_stub.approve(null);
-		if(approveResult==ResultMessage.SUCCESS)
-			System.out.println("审批单据成功");
-		//
-		ResultMessage denyResult=receiptBl_stub.deny(null, null);
-		if(denyResult==ResultMessage.SUCCESS)
-			System.out.println("驳回单据成功");
 		//
 		List<ReceiptVO> receipts= receiptBl_stub.getAll();
 		System.out.println("待审批单据："+receipts);

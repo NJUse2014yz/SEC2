@@ -32,12 +32,6 @@ public class ReceiptController implements ReceiptBlService{
 	}
 
 	@Override
-	public ResultMessage deny(ReceiptVO vo, String reason) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public ArrayList<ReceiptVO> getByType(String type) {
 		// TODO Auto-generated method stub
 		return null;

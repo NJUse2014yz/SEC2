@@ -20,7 +20,6 @@ public class DeliverController implements DeliverBlService{
 
 	@Override
 	public OrderVO checkDeliver(String id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
