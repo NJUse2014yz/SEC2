@@ -3,6 +3,7 @@ package nju.sec.yz.ExpressSystem.bl.deliverbl;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptSaveService;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
+import nju.sec.yz.ExpressSystem.bl.tool.ObjectDeepCopy;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.SendInformation;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
@@ -46,7 +47,8 @@ public class DeliverReceipt implements ReceiptService{
 		SendInformation information=receipt.getSendInformation();
 		SendSheetPO po=new SendSheetPO();
 		//
-		po.setSendInformation(information);
+		SendInformation saveInformation = (SendInformation) ObjectDeepCopy.deepCopy(information);
+		po.setSendInformation(saveInformation);
 		ResultMessage resultMessage=deliver.updateDeliverReceipt(po);
 		System.out.println("Approving...");
 		return resultMessage;

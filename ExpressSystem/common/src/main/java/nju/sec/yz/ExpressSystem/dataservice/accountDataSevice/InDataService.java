@@ -1,5 +1,6 @@
 package nju.sec.yz.ExpressSystem.dataservice.accountDataSevice;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -11,7 +12,7 @@ import nju.sec.yz.ExpressSystem.po.InPO;
  * @author zhangqi
  *
  */
-public interface InDataService {
+public interface InDataService extends Remote{
 	public ResultMessage insert(InPO inpo) throws RemoteException;
 	public InPO find(String id) throws RemoteException;
 	public ResultMessage delete(String id) throws RemoteException;
