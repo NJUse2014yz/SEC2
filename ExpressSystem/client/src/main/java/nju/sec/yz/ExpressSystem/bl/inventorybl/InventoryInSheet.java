@@ -42,7 +42,6 @@ public class InventoryInSheet implements ReceiptService {
 		//创建PO交给receipt
 		
 		return ResultMessage.SUCCESS;
-		return null;
 	}
 
 	@Override

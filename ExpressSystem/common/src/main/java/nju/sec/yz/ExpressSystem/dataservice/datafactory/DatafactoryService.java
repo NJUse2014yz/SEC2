@@ -1,5 +1,8 @@
 package nju.sec.yz.ExpressSystem.dataservice.datafactory;
 
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
 import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.AccountBookDataService;
 import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.AccountDataService;
 import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.InDataService;
@@ -20,36 +23,36 @@ import nju.sec.yz.ExpressSystem.dataservice.userDataSevice.UserDataService;
  * @author 周聪
  *
  */
-public interface DatafactoryService {
+public interface DatafactoryService extends Remote{
 
-	public DeliverDataService getDeliverDataService();
+	public DeliverDataService getDeliverDataService() throws RemoteException;
 	
-	public AccountBookDataService getAccountBookDataService();
-	
-	public AccountDataService getAccountDataService();
-	
-	public InDataService getInDataService();
-	
-	public OutDataService getOutDataService();
-	
-	public CarDataService getCarDataService();
-	
-	public DriverDataService getDriverDataService();
-	
-	public InventoryDataService getInventoryDataService();
-	
-	public LogDataService getLogDataService();
-	
-	public AgencyDataService getAgencyDataService();
-	
-	public ConstDataService getConstDataService();
-	
-	public SalaryDataService getSalaryDataService();
-	
-	public StaffDataService getStaffDataService();
-	
-	public ReceiptDataService getReceiptDataService();
-	
-	public UserDataService getUserDataService();
+//	public AccountBookDataService getAccountBookDataService();
+//	
+//	public AccountDataService getAccountDataService();
+//	
+//	public InDataService getInDataService();
+//	
+//	public OutDataService getOutDataService();
+//	
+//	public CarDataService getCarDataService();
+//	
+//	public DriverDataService getDriverDataService();
+//	
+//	public InventoryDataService getInventoryDataService();
+//	
+//	public LogDataService getLogDataService();
+//	
+//	public AgencyDataService getAgencyDataService();
+//	
+//	public ConstDataService getConstDataService();
+//	
+//	public SalaryDataService getSalaryDataService();
+//	
+//	public StaffDataService getStaffDataService();
+//	
+//	public ReceiptDataService getReceiptDataService();
+//	
+//	public UserDataService getUserDataService();
 	
 }
