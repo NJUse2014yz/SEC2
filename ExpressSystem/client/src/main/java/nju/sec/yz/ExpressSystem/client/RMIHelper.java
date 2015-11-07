@@ -18,7 +18,6 @@ public class RMIHelper {
         if (inited) {
             return;
         }
-
         try {
             initObjects();
             inited = true;
@@ -29,7 +28,7 @@ public class RMIHelper {
 
     private static void initObjects() throws MalformedURLException, RemoteException, NotBoundException {
         String urlPrefix = "rmi://" + IP + "/";
-//        orderBL = (OrderBL) Naming.lookup(urlPrefix + "order-businesslogic");
+//      orderBL = (OrderBL) Naming.lookup(urlPrefix + "order-businesslogic");
     }
 
    /* public static OrderBL getOrderBL() {
