@@ -1,6 +1,8 @@
 package nju.sec.yz.ExpressSystem.common;
 
-public class CityInformation {
+import java.io.Serializable;
+
+public class CityInformation  implements Serializable{
 	private String fromCity;
 	private String toCity;
 	private double distance;

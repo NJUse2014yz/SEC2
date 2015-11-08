@@ -1,10 +1,13 @@
 package nju.sec.yz.ExpressSystem.common;
+
+import java.io.Serializable;
+
 /**
  * 
  * @author YU Fan
  *
  */
-public class PaymentInformation {
+public class PaymentInformation  implements Serializable{
 	private String time;
 	private double amount;
 	private String inDeliverId;

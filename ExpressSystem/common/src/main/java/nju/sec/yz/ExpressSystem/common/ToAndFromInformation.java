@@ -1,10 +1,13 @@
 package nju.sec.yz.ExpressSystem.common;
+
+import java.io.Serializable;
+
 /**
  * 
  * @author YU Fan
  *	寄件人和收件人信息
  */
-public class ToAndFromInformation {
+public class ToAndFromInformation  implements Serializable{
 	private String name;
 	private String address;
 	private String organizaion;

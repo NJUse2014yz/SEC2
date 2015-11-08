@@ -1,10 +1,13 @@
 package nju.sec.yz.ExpressSystem.common;
+
+import java.io.Serializable;
+
 /**
  * 
  * @author YU Fan
  *
  */
-public class SendInformation {
+public class SendInformation  implements Serializable{
 	//订单条形码号
 	private String barId;
 	//收件人姓名、住址、单位、电话、手机

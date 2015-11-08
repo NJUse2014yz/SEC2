@@ -1,6 +1,8 @@
 package nju.sec.yz.ExpressSystem.common;
 
-public class PriceInformation {
+import java.io.Serializable;
+
+public class PriceInformation  implements Serializable{
 	private double priceForCar=2;
 	private double priceForTrain=0.2;
 	private double priceForPlane=20;

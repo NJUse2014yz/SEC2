@@ -1,4 +1,5 @@
 package nju.sec.yz.ExpressSystem.common;
+import java.io.Serializable;
 /**
  * 
  * @author YU Fan
@@ -6,7 +7,7 @@ package nju.sec.yz.ExpressSystem.common;
  */
 import java.util.ArrayList;
 
-public class OrderInformation {
+public class OrderInformation  implements Serializable{
 	private SendInformation sendInformation;
 	private DeliveryState deliveryState;
 	private ArrayList<String> trail;

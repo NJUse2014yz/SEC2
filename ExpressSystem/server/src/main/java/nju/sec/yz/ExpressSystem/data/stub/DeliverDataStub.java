@@ -21,16 +21,18 @@ public class DeliverDataStub implements DeliverDataService{
 		return ResultMessage.SUCCESS;
 	}
 
-	@Override
-	public DeliverPO find() throws RemoteException {
-		// TODO 自动生成的方法存根
-		return new DeliverPO();
-	}
+	
 
 	@Override
 	public ArrayList<DeliverPO> findAll() throws RemoteException {
 		// TODO 自动生成的方法存根
 		return new ArrayList<DeliverPO>();
+	}
+
+	@Override
+	public DeliverPO find(String barID) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

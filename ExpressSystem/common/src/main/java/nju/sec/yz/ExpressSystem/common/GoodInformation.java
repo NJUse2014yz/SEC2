@@ -1,6 +1,8 @@
 package nju.sec.yz.ExpressSystem.common;
 
-public class GoodInformation {
+import java.io.Serializable;
+
+public class GoodInformation  implements Serializable{
 	private String total;
 	private String weight;
 	private String vloume;

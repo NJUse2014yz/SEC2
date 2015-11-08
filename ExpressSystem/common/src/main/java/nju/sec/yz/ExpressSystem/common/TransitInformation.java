@@ -1,5 +1,6 @@
 package nju.sec.yz.ExpressSystem.common;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -7,7 +8,7 @@ import java.util.ArrayList;
  * @author YU Fan
  *
  */
-public class TransitInformation {
+public class TransitInformation  implements Serializable{
 	protected String time;
 	protected String departure;
 	protected String destination;

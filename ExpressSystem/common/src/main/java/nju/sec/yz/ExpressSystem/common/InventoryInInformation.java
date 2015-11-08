@@ -1,10 +1,13 @@
 package nju.sec.yz.ExpressSystem.common;
+
+import java.io.Serializable;
+
 /**
  * 
  * @author YU Fan
  *
  */
-public class InventoryInInformation {
+public class InventoryInInformation  implements Serializable{
 	private String time;
 	private String destination;
 	private int block;

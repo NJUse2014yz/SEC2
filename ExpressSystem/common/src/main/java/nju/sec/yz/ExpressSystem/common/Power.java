@@ -1,6 +1,8 @@
 package nju.sec.yz.ExpressSystem.common;
 
-public enum Power {
+import java.io.Serializable;
+
+public enum Power  implements Serializable{
 	MANAGER,
 	SENIOR_ACCOUNTANCY,
 	JUNIOR_ACCOUNTANCY,

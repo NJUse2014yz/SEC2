@@ -1,6 +1,8 @@
 package nju.sec.yz.ExpressSystem.common;
 
-public class OutInformation {
+import java.io.Serializable;
+
+public class OutInformation  implements Serializable{
 		//付款日期
 		private String date;
 		

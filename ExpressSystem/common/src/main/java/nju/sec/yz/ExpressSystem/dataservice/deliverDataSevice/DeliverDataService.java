@@ -16,6 +16,6 @@ public interface DeliverDataService extends Remote{
 
 	public ResultMessage insert(DeliverPO dpo) throws RemoteException;
 	public ResultMessage update(DeliverPO dpo) throws RemoteException;
-	public DeliverPO find() throws RemoteException;
 	public ArrayList<DeliverPO> findAll() throws RemoteException;
+	DeliverPO find(String barID) throws RemoteException;
 }

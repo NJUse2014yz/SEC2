@@ -1,5 +1,7 @@
 package nju.sec.yz.ExpressSystem.common;
 
-public enum Sex {
+import java.io.Serializable;
+
+public enum Sex  implements Serializable{
 	MALE,FEMALE
 }

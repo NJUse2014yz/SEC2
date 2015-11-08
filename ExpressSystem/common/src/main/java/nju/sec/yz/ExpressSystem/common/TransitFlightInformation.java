@@ -1,10 +1,13 @@
 package nju.sec.yz.ExpressSystem.common;
+
+import java.io.Serializable;
+
 /**
  * 
  * @author YU Fan
  *
  */
-public class TransitFlightInformation extends TransitInformation{
+public class TransitFlightInformation extends TransitInformation implements Serializable{
 	private String flightTransitId;
 	private String flightId;
 	private String shelfId;

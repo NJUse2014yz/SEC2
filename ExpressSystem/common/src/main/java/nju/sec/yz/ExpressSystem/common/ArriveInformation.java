@@ -1,10 +1,13 @@
 package nju.sec.yz.ExpressSystem.common;
+
+import java.io.Serializable;
+
 /**
  * 
  * @author YU Fan
  *
  */
-public class ArriveInformation {
+public class ArriveInformation implements Serializable{
 	private String time;
 	private String transitSheetId;
 	private String departure;

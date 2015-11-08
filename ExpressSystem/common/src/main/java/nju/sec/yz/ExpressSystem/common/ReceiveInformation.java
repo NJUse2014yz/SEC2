@@ -1,10 +1,13 @@
 package nju.sec.yz.ExpressSystem.common;
+
+import java.io.Serializable;
+
 /**
  * 
  * @author YU Fan
  *
  */
-public class ReceiveInformation {
+public class ReceiveInformation  implements Serializable{
 	private String id;
 	private String receiver;
 	private String time;
