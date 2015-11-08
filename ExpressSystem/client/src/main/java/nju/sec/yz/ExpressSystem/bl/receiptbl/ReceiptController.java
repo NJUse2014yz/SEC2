@@ -3,6 +3,7 @@ package nju.sec.yz.ExpressSystem.bl.receiptbl;
 import java.util.ArrayList;
 
 import nju.sec.yz.ExpressSystem.blservice.receiptBlService.ReceiptBlService;
+import nju.sec.yz.ExpressSystem.common.ReceiptType;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 
@@ -32,7 +33,7 @@ public class ReceiptController implements ReceiptBlService{
 	}
 
 	@Override
-	public ArrayList<ReceiptVO> getByType(String type) {
+	public ArrayList<ReceiptVO> getByType(ReceiptType type) {
 		// TODO Auto-generated method stub
 		return null;
 	}

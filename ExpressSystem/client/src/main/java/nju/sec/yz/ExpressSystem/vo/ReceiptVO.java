@@ -1,4 +1,7 @@
 package nju.sec.yz.ExpressSystem.vo;
+
+import nju.sec.yz.ExpressSystem.common.ReceiptType;
+
 /**
  * 
  * @author YU Fan
@@ -11,5 +14,15 @@ public class ReceiptVO {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	/**
+	 * 单据类型
+	 */
+	protected ReceiptType type;
+	public ReceiptType getType() {
+		return type;
+	}
+	public void setType(ReceiptType type) {
+		this.type = type;
 	}
 }

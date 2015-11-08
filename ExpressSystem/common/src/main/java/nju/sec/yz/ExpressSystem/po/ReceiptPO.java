@@ -2,6 +2,8 @@ package nju.sec.yz.ExpressSystem.po;
 
 import java.io.Serializable;
 
+import nju.sec.yz.ExpressSystem.common.ReceiptType;
+
 /**
  * 
  * @author YU Fan
@@ -14,5 +16,16 @@ public class ReceiptPO implements Serializable{
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	
+	/**
+	 * 单据类型
+	 */
+	protected ReceiptType type;
+	public ReceiptType getType() {
+		return type;
+	}
+	public void setType(ReceiptType type) {
+		this.type = type;
 	}
 }

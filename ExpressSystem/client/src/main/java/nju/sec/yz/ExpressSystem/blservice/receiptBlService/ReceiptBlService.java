@@ -2,6 +2,7 @@ package nju.sec.yz.ExpressSystem.blservice.receiptBlService;
 
 import java.util.ArrayList;
 
+import nju.sec.yz.ExpressSystem.common.ReceiptType;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 
@@ -16,7 +17,7 @@ public interface ReceiptBlService {
 	
 	public ResultMessage approve(ReceiptVO vo);
 	
-	public ArrayList<ReceiptVO> getByType(String type);
+	public ArrayList<ReceiptVO> getByType(ReceiptType type);
 	
 	public ResultMessage modify(ReceiptVO vo);
 	

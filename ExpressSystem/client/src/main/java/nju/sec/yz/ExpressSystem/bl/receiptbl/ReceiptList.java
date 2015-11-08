@@ -5,9 +5,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import nju.sec.yz.ExpressSystem.bl.deliverbl.DeliverReceipt;
+import nju.sec.yz.ExpressSystem.common.ReceiptType;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
+import nju.sec.yz.ExpressSystem.vo.SendSheetVO;
 
 /**
  * 表单列表的领域模型对象
@@ -23,10 +25,10 @@ public class ReceiptList implements ReceiptSaveService{
 	/**
 	 * 获取相应的Receipt
 	 */
-	private static Map<String, Class<? extends ReceiptService>> RECEIPT_MAP = new HashMap<>();
+	private static Map<ReceiptType, Class<? extends ReceiptService>> RECEIPT_MAP = new HashMap<>();
 	
 	static{
-		RECEIPT_MAP.put("1", DeliverReceipt.class);
+		RECEIPT_MAP.put(ReceiptType.DELIVER_RECEIPT, DeliverReceipt.class);
 	}
 	
 	
@@ -45,7 +47,7 @@ public class ReceiptList implements ReceiptSaveService{
 	public ResultMessage approve(ReceiptVO vo) {
 		try {
 			//单据信息更新交给相应receipt处理
-			ReceiptService receipt=RECEIPT_MAP.get(vo.getId()).newInstance();
+			ReceiptService receipt=RECEIPT_MAP.get(vo.getType()).newInstance();
 			receipt.approve(vo);
 			
 			//单据删除
@@ -57,7 +59,7 @@ public class ReceiptList implements ReceiptSaveService{
 	}
 
 
-	public ArrayList<ReceiptVO> getByType(String type) {
+	public ArrayList<ReceiptVO> getByType(ReceiptType type) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -81,7 +83,7 @@ public class ReceiptList implements ReceiptSaveService{
 	/*public static void main(String[] args) {
 		ReceiptList list=new ReceiptList();
 		ReceiptVO receiptVO=new SendSheetVO();
-		receiptVO.setId("1");
+		receiptVO.setType(ReceiptType.DELIVER_RECEIPT);
 		list.approve(receiptVO);
 	}*/
 }
