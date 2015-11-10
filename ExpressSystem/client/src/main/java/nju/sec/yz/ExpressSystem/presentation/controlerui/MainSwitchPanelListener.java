@@ -4,9 +4,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class MainSwitchPanelListener implements MouseListener{
-	private CONTROL_CONTROL order;
+	private MAIN_CONTROL order;
 	private ClientControler controler;
-	public MainSwitchPanelListener(CONTROL_CONTROL n,ClientControler controler)
+	public MainSwitchPanelListener(MAIN_CONTROL n,ClientControler controler)
 	{
 		this.order=n;
 		this.controler=controler;

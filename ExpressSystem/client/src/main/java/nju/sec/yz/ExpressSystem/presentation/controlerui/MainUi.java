@@ -34,7 +34,7 @@ public class MainUi extends JFrame{
 		this.setSize(493,560);
 		this.setLocation(screenSize.width/2-493/2,screenSize.height/2-560/2);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.add(new DeliverOrderInUi());
+		this.add(now);
 		this.setVisible(true);
 	}
 }

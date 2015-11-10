@@ -6,10 +6,15 @@ import java.awt.event.MouseListener;
 public class DeliverSwitchPanelListener implements MouseListener{
 	private DELIVER_CONTROL order;
 	private DeliverControler controler;
+	public DeliverSwitchPanelListener(DELIVER_CONTROL order,DeliverControler controler)
+	{
+		this.order=order;
+		this.controler=controler;
+	}
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+		controler.deliverChangePanel(order);
 	}
 
 	@Override

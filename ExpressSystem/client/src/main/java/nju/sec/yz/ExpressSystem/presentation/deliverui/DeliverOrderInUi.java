@@ -13,9 +13,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import ui.FrameGame;
-import ui.Panel2;
-
 public class DeliverOrderInUi extends JPanel {
 	//侧边栏功能选择项
 	private JButton OrderInButton;
