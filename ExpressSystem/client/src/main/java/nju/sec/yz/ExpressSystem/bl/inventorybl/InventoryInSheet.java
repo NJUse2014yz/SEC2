@@ -40,7 +40,11 @@ public class InventoryInSheet implements ReceiptService {
 		
 		
 		//创建PO交给receipt
-		
+		InventoryInSheetPO inPO = new InventoryInSheetPO(new InventoryInInformation(
+				ii.getTime(),ii.getDestination(), ii.getBlock(), ii.getRow(), 
+				ii.getShelf(), ii.getPositon()),inSheet.getBarId());
+		ReceiptList receiptList = new ReceiptList();
+		receiptList.saveReceipt(inPO);
 		return ResultMessage.SUCCESS;
 	}
 
@@ -51,9 +55,9 @@ public class InventoryInSheet implements ReceiptService {
 	}
 	public ResultMessage isValid(InventoryInInformation ii){
 		//假定柜子刚好99个
-		if(ii.getBlock()<0||ii.getBlock()>100){
+		if(ii.getBlock()==0){
 			return ResultMessage.FAIL;
-			//fail的具体原因
+			//增加ResultMessage，返回fail的具体原因
 		}
 		return ResultMessage.SUCCESS;
 	}
