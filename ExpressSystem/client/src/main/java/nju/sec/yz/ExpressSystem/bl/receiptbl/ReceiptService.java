@@ -23,4 +23,9 @@ public interface ReceiptService {
 	 * 修改单据,返回修改后的单据信息
 	 */
 	public ReceiptPO modify(ReceiptVO vo);
+	
+	/**
+	 * 将PO转换成VO
+	 */
+	public ReceiptVO show(ReceiptPO po);
 }
