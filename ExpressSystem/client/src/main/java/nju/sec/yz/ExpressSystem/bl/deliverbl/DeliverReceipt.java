@@ -55,7 +55,13 @@ public class DeliverReceipt implements ReceiptService{
 	}
 
 	@Override
-	public ResultMessage modify(ReceiptVO vo) {
+	public ReceiptPO modify(ReceiptVO vo) {
+		return null;
+	}
+
+	@Override
+	public ReceiptVO show(ReceiptPO po) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

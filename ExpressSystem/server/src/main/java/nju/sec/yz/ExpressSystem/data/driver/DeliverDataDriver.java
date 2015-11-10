@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import nju.sec.yz.ExpressSystem.common.OrderInformation;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.SendInformation;
-import nju.sec.yz.ExpressSystem.data.deliverdata.DeliverData;
+import nju.sec.yz.ExpressSystem.data.deliverdata.DeliverDataImpl;
 import nju.sec.yz.ExpressSystem.data.stub.DeliverDataStub;
 import nju.sec.yz.ExpressSystem.dataservice.deliverDataSevice.DeliverDataService;
 import nju.sec.yz.ExpressSystem.po.DeliverPO;
@@ -55,7 +55,7 @@ public class DeliverDataDriver {
 	}
 	
 	public static void main(String[] args) throws RemoteException {
-		DeliverDataService dds=new DeliverData();
+		DeliverDataService dds=new DeliverDataImpl();
 		DeliverDataDriver ddd=new DeliverDataDriver();
 		ddd.drive(dds);
 		

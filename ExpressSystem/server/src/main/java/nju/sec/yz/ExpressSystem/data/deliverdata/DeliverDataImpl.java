@@ -20,9 +20,9 @@ import nju.sec.yz.ExpressSystem.data.fileUtility.SerializableFileHelper;
  * @author 周聪
  *
  */
-public class DeliverData extends UnicastRemoteObject implements DeliverDataService {
+public class DeliverDataImpl extends UnicastRemoteObject implements DeliverDataService {
 	
-	public DeliverData() throws RemoteException {
+	public DeliverDataImpl() throws RemoteException {
 		super();
 	}
 

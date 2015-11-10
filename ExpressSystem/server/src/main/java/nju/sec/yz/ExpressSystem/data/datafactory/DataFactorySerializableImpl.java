@@ -3,7 +3,7 @@ package nju.sec.yz.ExpressSystem.data.datafactory;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-import nju.sec.yz.ExpressSystem.data.deliverdata.DeliverData;
+import nju.sec.yz.ExpressSystem.data.deliverdata.DeliverDataImpl;
 import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.AccountBookDataService;
 import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.AccountDataService;
 import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.InDataService;
@@ -33,91 +33,91 @@ public class DataFactorySerializableImpl extends UnicastRemoteObject implements 
 
 	@Override
 	public DeliverDataService getDeliverDataService() throws RemoteException{
-		return new DeliverData();
+		return new DeliverDataImpl();
 	}
 
-//	@Override
-//	public AccountBookDataService getAccountBookDataService() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public AccountDataService getAccountDataService() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public InDataService getInDataService() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public OutDataService getOutDataService() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public CarDataService getCarDataService() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public DriverDataService getDriverDataService() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public InventoryDataService getInventoryDataService() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public LogDataService getLogDataService() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public AgencyDataService getAgencyDataService() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public ConstDataService getConstDataService() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public SalaryDataService getSalaryDataService() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public StaffDataService getStaffDataService() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public ReceiptDataService getReceiptDataService() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public UserDataService getUserDataService() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	@Override
+	public AccountBookDataService getAccountBookDataService() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public AccountDataService getAccountDataService() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InDataService getInDataService() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public OutDataService getOutDataService() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CarDataService getCarDataService() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DriverDataService getDriverDataService() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InventoryDataService getInventoryDataService() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public LogDataService getLogDataService() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public AgencyDataService getAgencyDataService() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ConstDataService getConstDataService() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public SalaryDataService getSalaryDataService() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public StaffDataService getStaffDataService() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ReceiptDataService getReceiptDataService() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UserDataService getUserDataService() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

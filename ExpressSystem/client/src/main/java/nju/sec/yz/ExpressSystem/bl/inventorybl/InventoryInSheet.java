@@ -7,6 +7,7 @@ import nju.sec.yz.ExpressSystem.common.InventoryInInformation;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.SendInformation;
 import nju.sec.yz.ExpressSystem.po.InventoryInSheetPO;
+import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.po.SendSheetPO;
 import nju.sec.yz.ExpressSystem.vo.InventoryInSheetVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
@@ -40,21 +41,31 @@ public class InventoryInSheet implements ReceiptService {
 		
 		
 		//创建PO交给receipt
-		
+		InventoryInSheetPO inPO = new InventoryInSheetPO(new InventoryInInformation(
+				ii.getTime(),ii.getDestination(), ii.getBlock(), ii.getRow(), 
+				ii.getShelf(), ii.getPositon()),inSheet.getBarId());
+		ReceiptList receiptList = new ReceiptList();
+		receiptList.saveReceipt(inPO);
 		return ResultMessage.SUCCESS;
 	}
 
 	@Override
-	public ResultMessage modify(ReceiptVO vo) {
+	public ReceiptPO modify(ReceiptVO vo) {
 		// TODO 自动生成的方法存根
 		return null;
 	}
 	public ResultMessage isValid(InventoryInInformation ii){
 		//假定柜子刚好99个
-		if(ii.getBlock()<0||ii.getBlock()>100){
+		if(ii.getBlock()==0){
 			return ResultMessage.FAIL;
-			//fail的具体原因
+			//增加ResultMessage，返回fail的具体原因
 		}
 		return ResultMessage.SUCCESS;
+	}
+
+	@Override
+	public ReceiptVO show(ReceiptPO po) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

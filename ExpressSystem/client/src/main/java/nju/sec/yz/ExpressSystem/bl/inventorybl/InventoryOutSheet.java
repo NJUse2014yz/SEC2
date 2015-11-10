@@ -2,6 +2,7 @@ package nju.sec.yz.ExpressSystem.bl.inventorybl;
 
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.vo.InventoryOutSheetVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 
@@ -25,8 +26,14 @@ public class InventoryOutSheet implements ReceiptService{
 	}
 
 	@Override
-	public ResultMessage modify(ReceiptVO vo) {
+	public ReceiptPO modify(ReceiptVO vo) {
 		// TODO 自动生成的方法存根
+		return null;
+	}
+
+	@Override
+	public ReceiptVO show(ReceiptPO po) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 	

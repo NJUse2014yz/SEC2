@@ -6,6 +6,8 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import nju.sec.yz.ExpressSystem.presentation.deliverui.DeliverOrderInUi;
+
 public class MainUi extends JFrame{
 	private JPanel now;
 	public final static int WIDTH=491;
@@ -32,7 +34,7 @@ public class MainUi extends JFrame{
 		this.setSize(493,560);
 		this.setLocation(screenSize.width/2-493/2,screenSize.height/2-560/2);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.add(now);
+		this.add(new DeliverOrderInUi());
 		this.setVisible(true);
 	}
 }

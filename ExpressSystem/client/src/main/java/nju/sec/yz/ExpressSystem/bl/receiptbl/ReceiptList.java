@@ -5,8 +5,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import nju.sec.yz.ExpressSystem.bl.deliverbl.DeliverReceipt;
+import nju.sec.yz.ExpressSystem.client.RMIHelper;
 import nju.sec.yz.ExpressSystem.common.ReceiptType;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.dataservice.receiptDataSevice.ReceiptDataService;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 import nju.sec.yz.ExpressSystem.vo.SendSheetVO;
@@ -17,10 +19,6 @@ import nju.sec.yz.ExpressSystem.vo.SendSheetVO;
  * @author 周聪
  */
 public class ReceiptList implements ReceiptSaveService{
-	
-	//TODO 单据审批的流程
-	
-	
 	
 	/**
 	 * 获取相应的Receipt
@@ -36,6 +34,15 @@ public class ReceiptList implements ReceiptSaveService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	private ReceiptDataService receiptData;
+	
+	public ReceiptList(){
+		receiptData=RMIHelper.getDatafactory().getReceiptDataService();
+	}
+	
+	
+	
 
 	
 	public ReceiptVO getSingle(int i) {
@@ -51,6 +58,8 @@ public class ReceiptList implements ReceiptSaveService{
 			receipt.approve(vo);
 			
 			//单据删除
+			
+			
 			
 		} catch (InstantiationException | IllegalAccessException e) {
 			e.printStackTrace();
@@ -71,6 +80,13 @@ public class ReceiptList implements ReceiptSaveService{
 	}
 
 
+	private ResultMessage delete(){
+		
+		
+		
+		return ResultMessage.SUCCESS;
+	}
+	
 	@Override
 	/**
 	 * 制定单据完成后通过此方法保存
