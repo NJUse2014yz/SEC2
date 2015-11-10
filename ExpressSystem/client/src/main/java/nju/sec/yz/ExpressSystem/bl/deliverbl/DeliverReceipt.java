@@ -4,8 +4,10 @@ import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptSaveService;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
 import nju.sec.yz.ExpressSystem.bl.tool.ObjectDeepCopy;
+import nju.sec.yz.ExpressSystem.common.GoodInformation;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.SendInformation;
+import nju.sec.yz.ExpressSystem.common.ToAndFromInformation;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.po.SendSheetPO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
@@ -25,6 +27,7 @@ public class DeliverReceipt implements ReceiptService{
 		SendInformation information=sendReceipt.getSendInformation();
 		
 		//验证information
+		String validresult=isValid(information);
 		
 		
 		//创建PO交给receipt
@@ -64,5 +67,49 @@ public class DeliverReceipt implements ReceiptService{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	public String isValid(SendInformation sif){
+		//验证information
+		String barId=sif.getBarId();
+		String toCellphone=sif.getToPerson().getCellphone();
+		String fromCellphone=sif.getFromPerson().getCellphone();
+		String total=sif.getGood().getTotal();
+		
+		String str="";
+		if(!isBarId(barId))
+		//TODO 具体对应界面的显示方法				
+			str="亲，咱们的订单号是十位数字哟~";
+		if(!isCellphone(toCellphone))
+			str="亲，不要告诉我寄件人手机号不是11位数字~";
+		if(!isCellphone(fromCellphone))
+			str="亲，不要告诉我收件人手机号不是11位数字~";
+		if(!isTotal(total))
+			str="亲，件数x是要满足0<x<65536的数字哟";
+		return str;
+	}
+	public boolean isNumber(String str){
+		char[] numbers=str.toCharArray();
+		for(int i=0;i<numbers.length;i++)
+			if('0'>numbers[i]&&numbers[i]>'9')
+				return false;
+		return true;
+	}
+	
+	public boolean isBarId(String str){
+		if(str.length()!=10)
+			return false;
+		return isNumber(str);
+	}
+	
+	public boolean isCellphone(String str){
+		if(str.length()!=11)
+			return false;
+		return isNumber(str);
+	}
+	
+	public boolean isTotal(String str){
+		if(isNumber(str))
+			return false;
+		return false;
+	}
 }

@@ -25,7 +25,7 @@ public class SendInformation  implements Serializable{
 	//费用合计（自动计算，运费+包装费）
 	private double costForAll;
 	//
-	private String predictTime;
+	private int predictTime;
 	
 	public String getBarId() {
 		return barId;
@@ -75,10 +75,10 @@ public class SendInformation  implements Serializable{
 	public void setCostForAll(double costForAll) {
 		this.costForAll = costForAll;
 	}
-	public String getPredictTime() {
+	public int getPredictTime() {
 		return predictTime;
 	}
-	public void setPredictTime(String predictTime) {
+	public void setPredictTime(int predictTime) {
 		this.predictTime = predictTime;
 	}
 
