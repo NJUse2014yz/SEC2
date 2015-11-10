@@ -3,8 +3,11 @@ package nju.sec.yz.ExpressSystem.presentation.userui;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import nju.sec.yz.ExpressSystem.presentation.controlerui.AdminstraterControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
+import nju.sec.yz.ExpressSystem.presentation.controlerui.DELIVER_CONTROL;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.DeliverControler;
+import nju.sec.yz.ExpressSystem.presentation.controlerui.DeliverSwitchPanelListener;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.MainSwitchPanelListener;
 
 public class AdminstraterMainUiTest extends JPanel{
@@ -16,10 +19,10 @@ public class AdminstraterMainUiTest extends JPanel{
 		super();
 		this.setLayout(null);
 		this.mainControler=mainControler;
-		controler=mainControler.
+		controler=mainControler.adminstraterControler;
 		this.test=new JButton("test adminstrater");
 		test.setBounds(50,50,100,50);
-		test.addMouseListener(new MainSwitchPanelListener(2,this.controler));
+		test.addMouseListener(new AdminstraterSwitchPanelListener(ACCOUNT_CONTROL,this.controler));
 		add(test);
 		setSize(493,560);
 		setVisible(true);
