@@ -15,9 +15,15 @@ public class UserUiTest extends JPanel{
 		super();
 		this.setLayout(null);
 		this.controler=controler;
+<<<<<<< HEAD
 		this.test=new JButton("to deliver's panel");
 		test.setBounds(50,50,200,50);
 		test.addMouseListener(new MainSwitchPanelListener(MAIN_CONTROL.DELIVER,this.controler));
+=======
+		this.test=new JButton("test user");
+		test.setBounds(50,50,100,50);
+//		test.addMouseListener(new MainSwitchPanelListener(1,this.controler));
+>>>>>>> cf0901ec097690613db03208c37b7beb2c73167e
 		add(test);
 		setSize(493,560);
 		setVisible(true); 

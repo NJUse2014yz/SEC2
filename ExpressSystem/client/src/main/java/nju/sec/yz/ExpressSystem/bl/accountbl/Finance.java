@@ -38,7 +38,6 @@ public class Finance {
 	 * @return
 	 */
 	public BussinessVO checkBusinessCircumstance(String begin, String end) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	

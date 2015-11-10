@@ -11,9 +11,6 @@ import nju.sec.yz.ExpressSystem.vo.AccountVO;
  * @author 周聪
  */
 public class Account {
-
-	
-	
 	public ResultMessage addAccount(AccountVO av) {
 		// TODO Auto-generated method stub
 		return null;

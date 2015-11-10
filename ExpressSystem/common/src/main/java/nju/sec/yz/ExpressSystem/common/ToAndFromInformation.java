@@ -8,6 +8,14 @@ import java.io.Serializable;
  *	寄件人和收件人信息
  */
 public class ToAndFromInformation  implements Serializable{
+	public ToAndFromInformation(String name, String address, String organizaion, String telephone, String cellphone) {
+		super();
+		this.name = name;
+		this.address = address;
+		this.organizaion = organizaion;
+		this.telephone = telephone;
+		this.cellphone = cellphone;
+	}
 	private String name;
 	private String address;
 	private String organizaion;

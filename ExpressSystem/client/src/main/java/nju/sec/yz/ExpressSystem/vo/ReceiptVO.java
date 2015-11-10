@@ -25,4 +25,19 @@ public class ReceiptVO {
 	public void setType(ReceiptType type) {
 		this.type = type;
 	}
+	//填单人和填单时间
+	protected String makeTime;
+	protected String makePerson;
+	public String getMakeTime() {
+		return makeTime;
+	}
+	public void setMakeTime(String makeTime) {
+		this.makeTime = makeTime;
+	}
+	public String getMakePerson() {
+		return makePerson;
+	}
+	public void setMakePerson(String makePerson) {
+		this.makePerson = makePerson;
+	}
 }

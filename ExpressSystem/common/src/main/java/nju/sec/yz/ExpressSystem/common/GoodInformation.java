@@ -3,10 +3,25 @@ package nju.sec.yz.ExpressSystem.common;
 import java.io.Serializable;
 
 public class GoodInformation  implements Serializable{
+	public GoodInformation(String total, String weight, String vloume, String name, String size) {
+		super();
+		this.total = total;
+		this.weight = weight;
+		this.vloume = vloume;
+		this.name = name;
+		this.size = size;
+	}
 	private String total;
 	private String weight;
 	private String vloume;
 	private String name;
+	private String size;
+	public String getSize() {
+		return size;
+	}
+	public void setSize(String size) {
+		this.size = size;
+	}
 	public String getTotal() {
 		return total;
 	}
