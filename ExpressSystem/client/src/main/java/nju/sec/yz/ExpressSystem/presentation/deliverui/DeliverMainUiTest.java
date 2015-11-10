@@ -23,7 +23,7 @@ public class DeliverMainUiTest extends JPanel{
 		this.controler=controler;
 		this.test=new JButton("test deliver");
 		test.setBounds(50,50,100,50);
-		test.addMouseListener(new SwitchPanelListener(2,this.controler));
+		test.addMouseListener(new SwitchPanelListener(,this.controler));
 		add(test);
 		setSize(493,560);
 		setVisible(true);

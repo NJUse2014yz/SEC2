@@ -16,7 +16,7 @@ public class MainUi extends JFrame{
 		super();
 		now=panel;
 	}
-	public void nextPanle(JPanel next)
+	public void nextPanel(JPanel next)
 	{
 		remove(now);
 		now=next;
