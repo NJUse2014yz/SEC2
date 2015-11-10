@@ -1,5 +1,7 @@
 package nju.sec.yz.ExpressSystem.presentation.deliverui;
 
-public class DeliverMainUi {
+import javax.swing.JPanel;
 
+public class DeliverMainUi extends JPanel{
+	
 }
