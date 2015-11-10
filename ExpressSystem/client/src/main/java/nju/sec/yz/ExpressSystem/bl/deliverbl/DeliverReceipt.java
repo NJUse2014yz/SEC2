@@ -74,7 +74,9 @@ public class DeliverReceipt implements ReceiptService{
 		String toCellphone=sif.getToPerson().getCellphone();
 		String fromCellphone=sif.getFromPerson().getCellphone();
 		String total=sif.getGood().getTotal();
-		
+		String weight=sif.getGood().getWeight();
+		String vloume=sif.getGood().getVloume();
+		String size=sif.getGood().getSize();
 		String str="";
 		if(!isBarId(barId))
 		//TODO 具体对应界面的显示方法				
@@ -85,6 +87,12 @@ public class DeliverReceipt implements ReceiptService{
 			str="亲，不要告诉我收件人手机号不是11位数字~";
 		if(!isTotal(total))
 			str="亲，件数x是要满足0<x<65536的数字哟";
+		if(!isTotal(weight))
+			str="亲，重量x是要满足0<x<65536的数字哟";
+		if(!isTotal(vloume))
+			str="亲，体积x是要满足0<x<65536的数字哟";
+		if(!isSize(size))
+			str="亲，size可是要满足“数*数*数”的格式哟";
 		return str;
 	}
 	public boolean isNumber(String str){
@@ -108,8 +116,28 @@ public class DeliverReceipt implements ReceiptService{
 	}
 	
 	public boolean isTotal(String str){
-		if(isNumber(str))
+		if(!isNumber(str))
 			return false;
-		return false;
+		int n= Integer.parseInt(str);
+		if(n<0||n>65536)
+			return false;
+		return true;
 	}
+	
+	public boolean isSize(String str){
+		if(!str.contains("*")){
+			return false;
+		}
+		int one=str.indexOf("*");
+		if(!isNumber(str.substring(0, one)))
+			return false;
+		str=str.substring(one+1);
+		if(!str.contains("*"))
+			return false;
+		int two=str.indexOf("*");
+		if(!isNumber(str.substring(0, two))||!isNumber(str.substring(two)))
+			return false;
+		return true;
+	}	
 }
+
