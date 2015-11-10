@@ -1,6 +1,7 @@
 package nju.sec.yz.ExpressSystem.bl.receiptbl;
 
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 
 /**
@@ -19,7 +20,7 @@ public interface ReceiptService {
 	public ResultMessage make(ReceiptVO vo);
 	
 	/**
-	 * 修改单据
+	 * 修改单据,返回修改后的单据信息
 	 */
-	public ResultMessage modify(ReceiptVO vo);
+	public ReceiptPO modify(ReceiptVO vo);
 }

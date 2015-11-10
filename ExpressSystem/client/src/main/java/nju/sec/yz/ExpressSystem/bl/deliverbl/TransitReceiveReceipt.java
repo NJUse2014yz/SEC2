@@ -2,6 +2,7 @@ package nju.sec.yz.ExpressSystem.bl.deliverbl;
 
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 import nju.sec.yz.ExpressSystem.vo.TransitArriveSheetVO;
 
@@ -25,7 +26,7 @@ public class TransitReceiveReceipt implements ReceiptService{
 	}
 
 	@Override
-	public ResultMessage modify(ReceiptVO vo) {
+	public ReceiptPO modify(ReceiptVO vo) {
 		// TODO Auto-generated method stub
 		return null;
 	}

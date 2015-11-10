@@ -55,7 +55,7 @@ public class DeliverReceipt implements ReceiptService{
 	}
 
 	@Override
-	public ResultMessage modify(ReceiptVO vo) {
+	public ReceiptPO modify(ReceiptVO vo) {
 		return null;
 	}
 

@@ -2,6 +2,7 @@ package nju.sec.yz.ExpressSystem.bl.accountbl;
 
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.vo.PaymentSheetVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 /**
@@ -24,7 +25,7 @@ public class Collection implements ReceiptService{
 	}
 
 	@Override
-	public ResultMessage modify(ReceiptVO vo) {
+	public ReceiptPO modify(ReceiptVO vo) {
 		// TODO Auto-generated method stub
 		return null;
 	}

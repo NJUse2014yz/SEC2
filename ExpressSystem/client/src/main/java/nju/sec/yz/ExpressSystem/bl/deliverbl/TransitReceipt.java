@@ -2,6 +2,7 @@ package nju.sec.yz.ExpressSystem.bl.deliverbl;
 
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 /**
  * 中转单
@@ -23,7 +24,7 @@ public class TransitReceipt implements ReceiptService{
 	}
 
 	@Override
-	public ResultMessage modify(ReceiptVO vo) {
+	public ReceiptPO modify(ReceiptVO vo) {
 		
 		return null;
 	}

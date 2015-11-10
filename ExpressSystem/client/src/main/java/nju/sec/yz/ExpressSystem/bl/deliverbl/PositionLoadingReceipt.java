@@ -26,7 +26,7 @@ public class PositionLoadingReceipt implements ReceiptService{
 	}
 
 	@Override
-	public ResultMessage modify(ReceiptVO vo) {
+	public ReceiptPO modify(ReceiptVO vo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
