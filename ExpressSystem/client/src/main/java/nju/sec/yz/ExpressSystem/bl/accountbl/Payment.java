@@ -15,25 +15,21 @@ public class Payment implements ReceiptService{
 
 	@Override
 	public ResultMessage approve(ReceiptVO vo) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public ResultMessage make(ReceiptVO vo) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public ReceiptPO modify(ReceiptVO vo) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public ReceiptVO show(ReceiptPO po) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }
