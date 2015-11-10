@@ -38,12 +38,9 @@ public class ReceiptList implements ReceiptSaveService{
 	private ReceiptDataService receiptData;
 	
 	public ReceiptList(){
-		receiptData=RMIHelper.getDatafactory().getReceiptDataService();
+//		receiptData=RMIHelper.getDatafactory().getReceiptDataService();
 	}
 	
-	
-	
-
 	
 	public ReceiptVO getSingle(int i) {
 		// TODO Auto-generated method stub
@@ -80,8 +77,8 @@ public class ReceiptList implements ReceiptSaveService{
 	}
 
 
-	private ResultMessage delete(){
-		
+	private ResultMessage delete(String id){
+		System.out.println("deleting a receipt...");
 		
 		
 		return ResultMessage.SUCCESS;
@@ -96,10 +93,5 @@ public class ReceiptList implements ReceiptSaveService{
 		return null;
 	}
 	
-	/*public static void main(String[] args) {
-		ReceiptList list=new ReceiptList();
-		ReceiptVO receiptVO=new SendSheetVO();
-		receiptVO.setType(ReceiptType.DELIVER_RECEIPT);
-		list.approve(receiptVO);
-	}*/
+	
 }

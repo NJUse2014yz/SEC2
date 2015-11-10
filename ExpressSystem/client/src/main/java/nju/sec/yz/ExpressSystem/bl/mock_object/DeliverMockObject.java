@@ -8,6 +8,7 @@ public class DeliverMockObject {
 	 * 寄件单通过审批后通过此方法更新寄件单信息
 	 */
 	public ResultMessage updateDeliverReceipt(SendSheetPO po){
+		System.out.println("updating a deliver message...");
 		return null;
 	}
 }
