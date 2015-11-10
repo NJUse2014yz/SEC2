@@ -29,4 +29,10 @@ public class Collection implements ReceiptService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public ReceiptVO show(ReceiptPO po) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

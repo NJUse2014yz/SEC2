@@ -62,4 +62,10 @@ public class InventoryInSheet implements ReceiptService {
 		}
 		return ResultMessage.SUCCESS;
 	}
+
+	@Override
+	public ReceiptVO show(ReceiptPO po) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

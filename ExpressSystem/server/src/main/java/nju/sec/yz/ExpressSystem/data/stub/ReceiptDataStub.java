@@ -3,6 +3,7 @@ package nju.sec.yz.ExpressSystem.data.stub;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import nju.sec.yz.ExpressSystem.common.ReceiptType;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.dataservice.receiptDataSevice.ReceiptDataService;
 import nju.sec.yz.ExpressSystem.po.DeliverPO;
@@ -33,10 +34,17 @@ public class ReceiptDataStub implements ReceiptDataService{
 		return ResultMessage.SUCCESS;
 	}
 
+
 	@Override
-	public ArrayList<ReceiptPO> findByType(String type) throws RemoteException {
-		// TODO 自动生成的方法存根
-		return new ArrayList<ReceiptPO>();
+	public ArrayList<ReceiptPO> findByType(ReceiptType type) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultMessage delete(String id) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -31,4 +31,10 @@ public class PositionLoadingReceipt implements ReceiptService{
 		return null;
 	}
 
+	@Override
+	public ReceiptVO show(ReceiptPO po) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

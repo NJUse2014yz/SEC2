@@ -30,5 +30,11 @@ public class InventoryOutSheet implements ReceiptService{
 		// TODO 自动生成的方法存根
 		return null;
 	}
+
+	@Override
+	public ReceiptVO show(ReceiptPO po) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
