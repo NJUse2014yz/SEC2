@@ -13,45 +13,56 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import ui.FrameGame;
-import ui.Panel2;
+import nju.sec.yz.ExpressSystem.bl.deliverbl.DeliverReceipt;
+import nju.sec.yz.ExpressSystem.common.DeliveryType;
+import nju.sec.yz.ExpressSystem.common.GoodInformation;
+import nju.sec.yz.ExpressSystem.common.PackType;
+import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.common.SendInformation;
+import nju.sec.yz.ExpressSystem.common.ToAndFromInformation;
+import nju.sec.yz.ExpressSystem.vo.SendSheetVO;
 
 public class DeliverOrderInUi extends JPanel {
-	//侧边栏功能选择项
+	
+	DeliverReceipt deliver_receipt;
+	
+	// 侧边栏功能选择项
 	private JButton OrderInButton;
 	private JButton OrderSearchButton;
 	private JButton ReceiveInButton;
-	//确定选项
+	// 确定选项
 	private JButton confirmButton;
-	
-	//寄件人信息
+
+	// 寄件人信息
 	private JTextField nameSender;
 	private JTextField addressSender;
 	private JTextField organizaionSender;
 	private JTextField telephoneSender;
 	private JTextField cellphoneSender;
-	
-	//收件人信息
+
+	// 收件人信息
 	private JTextField nameConsignee;
 	private JTextField addressConsignee;
 	private JTextField organizaionConsignee;
 	private JTextField telephoneConsignee;
 	private JTextField cellphoneConsignee;
-	
-	//货物信息
+
+	// 货物信息
 	private JTextField nameGood;
 	private JTextField totalGood;
 	private JTextField weightGood;
 	private JTextField vloumeGood;
 	private JTextField sizeGood;
-	
-	//订单条码号
+
+	// 订单条码号
 	private JTextField barId;
-	
-	//包装费，快递种类
+
+	// 包装费，快递种类
 	private JComboBox packType;
 	private JComboBox deliveryType;
 	
+	//提示信息
+	private JLabel warning;
 
 	public DeliverOrderInUi() {
 
@@ -87,20 +98,19 @@ public class DeliverOrderInUi extends JPanel {
 
 		OrderInButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				//调用delivercontroler的方法
+				// 调用delivercontroler的方法
 			}
 		});
 		OrderSearchButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				//调用delivercontroler的方法
+				// 调用delivercontroler的方法
 			}
 		});
 		ReceiveInButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				//调用delivercontroler的方法
+				// 调用delivercontroler的方法
 			}
 		});
-		
 
 		/*
 		 * 确定
@@ -113,7 +123,27 @@ public class DeliverOrderInUi extends JPanel {
 
 		confirmButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				//translate data
+				// translate data
+				SendSheetVO sendsheet = new SendSheetVO();
+				ToAndFromInformation fromPerson = new ToAndFromInformation(nameSender.getText(),
+						addressSender.getText(), organizaionSender.getText(), telephoneSender.getText(),
+						cellphoneSender.getText());
+				ToAndFromInformation toPerson = new ToAndFromInformation(nameConsignee.getText(),
+						addressConsignee.getText(), organizaionConsignee.getText(), telephoneConsignee.getText(),
+						cellphoneConsignee.getText());
+				GoodInformation goodIn = new GoodInformation(totalGood.getText(), weightGood.getText(),
+						vloumeGood.getText(), nameGood.getText(), sizeGood.getText());
+				SendInformation sendIn = new SendInformation(barId.getText(), toPerson, fromPerson, goodIn,
+						(DeliveryType) deliveryType.getSelectedItem(), (PackType) packType.getSelectedItem());
+				sendsheet.setSendInformation(sendIn);
+				//判断输入的信息是否正确
+				if(deliver_receipt.make(sendsheet)==ResultMessage.FAIL){
+					warning=new JLabel("输入信息错误");
+					add(warning);
+				}else{
+					warning=new JLabel("提交成功");
+					add(warning);
+				}
 			}
 		});
 
@@ -124,80 +154,80 @@ public class DeliverOrderInUi extends JPanel {
 		nameSender = new JTextField();
 		nameSender.setBounds(185, 87, 58, 15);
 		add(nameSender);
-		
+
 		addressSender = new JTextField();
 		addressSender.setBounds(295, 87, 116, 15);
 		add(addressSender);
-		
+
 		organizaionSender = new JTextField();
 		organizaionSender.setBounds(185, 113, 85, 15);
 		add(organizaionSender);
-		
+
 		telephoneSender = new JTextField();
 		telephoneSender.setBounds(319, 113, 140, 15);
 		add(telephoneSender);
-		
+
 		cellphoneSender = new JTextField();
 		cellphoneSender.setBounds(185, 140, 140, 15);
 		add(cellphoneSender);
-		
+
 		nameConsignee = new JTextField();
 		nameConsignee.setBounds(185, 198, 58, 15);
 		add(nameConsignee);
-		
+
 		addressConsignee = new JTextField();
 		addressConsignee.setBounds(295, 198, 116, 15);
 		add(addressConsignee);
-		
+
 		organizaionConsignee = new JTextField();
 		organizaionConsignee.setBounds(185, 224, 85, 15);
 		add(organizaionConsignee);
-		
+
 		telephoneConsignee = new JTextField();
 		telephoneConsignee.setBounds(319, 224, 140, 15);
 		add(telephoneConsignee);
-		
+
 		cellphoneConsignee = new JTextField();
 		cellphoneConsignee.setBounds(185, 249, 140, 15);
 		add(cellphoneConsignee);
-		
-		totalGood=new JTextField();
+
+		totalGood = new JTextField();
 		totalGood.setBounds(185, 279, 58, 15);
 		add(totalGood);
-		
-		weightGood=new JTextField();
+
+		weightGood = new JTextField();
 		weightGood.setBounds(330, 279, 58, 15);
 		add(weightGood);
-		
-		vloumeGood=new JTextField();
-		vloumeGood.setBounds(185, 303,58, 15);
+
+		vloumeGood = new JTextField();
+		vloumeGood.setBounds(185, 303, 58, 15);
 		add(vloumeGood);
-		
-		nameGood=new JTextField();
+
+		nameGood = new JTextField();
 		nameGood.setBounds(332, 303, 58, 15);
 		add(nameGood);
-		
-		sizeGood=new JTextField();
+
+		sizeGood = new JTextField();
 		sizeGood.setBounds(185, 327, 85, 15);
 		add(sizeGood);
-		
-		barId=new JTextField();
+
+		barId = new JTextField();
 		barId.setBounds(252, 354, 140, 15);
 		add(barId);
-		
-		packType=new JComboBox();
-		packType.addItem("纸箱");
-		packType.addItem("木箱");
-		packType.addItem("快递袋");
-		packType.addItem("其他");
+
+		packType = new JComboBox();
+		packType.addItem(PackType.PAPER);
+		packType.addItem(PackType.WOOD);
+		packType.addItem(PackType.BAG);
+		packType.addItem(PackType.OTHER);
 		packType.setBounds(198, 378, 85, 20);
 		add(packType);
-		
-		deliveryType=packType=new JComboBox();
-		deliveryType.addItem("经济快递");
-		deliveryType.addItem("标准快递");
-		deliveryType.addItem("特快");
-		deliveryType.setBounds(225,407,85,20);
+
+		deliveryType = packType = new JComboBox();
+		deliveryType.addItem(DeliveryType.ECONOMIC);
+		deliveryType.addItem(DeliveryType.STANDARD);
+		deliveryType.addItem(DeliveryType.FAST);
+		deliveryType.setBounds(225, 407, 85, 20);
 		add(deliveryType);
 	}
 

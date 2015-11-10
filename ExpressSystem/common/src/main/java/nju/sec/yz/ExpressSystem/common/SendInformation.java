@@ -27,6 +27,19 @@ public class SendInformation  implements Serializable{
 	//
 	private int predictTime;
 	
+	public SendInformation(String barId, ToAndFromInformation toPerson, ToAndFromInformation fromPerson,
+			GoodInformation good, DeliveryType deliveryType, PackType packType) {
+		super();
+		this.barId = barId;
+		this.toPerson = toPerson;
+		this.fromPerson = fromPerson;
+		this.good = good;
+		this.deliveryType = deliveryType;
+		this.packType = packType;
+		this.costForPack = costForPack;
+		this.costForAll = costForAll;
+		this.predictTime = predictTime;
+	}
 	public String getBarId() {
 		return barId;
 	}

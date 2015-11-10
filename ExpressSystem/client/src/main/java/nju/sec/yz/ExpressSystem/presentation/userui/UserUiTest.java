@@ -16,7 +16,7 @@ public class UserUiTest extends JPanel{
 		this.controler=controler;
 		this.test=new JButton("test user");
 		test.setBounds(50,50,100,50);
-		test.addMouseListener(new MainSwitchPanelListener(1,this.controler));
+//		test.addMouseListener(new MainSwitchPanelListener(1,this.controler));
 		add(test);
 		setSize(493,560);
 		setVisible(true); 
