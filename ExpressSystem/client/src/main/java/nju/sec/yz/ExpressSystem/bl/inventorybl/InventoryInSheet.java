@@ -20,9 +20,6 @@ import nju.sec.yz.ExpressSystem.vo.SendSheetVO;
  */
 public class InventoryInSheet implements ReceiptService {
 	
-	 
-	
-	
 	//通过入库单的审批
 	@Override
 	public ResultMessage approve(ReceiptVO vo) {
