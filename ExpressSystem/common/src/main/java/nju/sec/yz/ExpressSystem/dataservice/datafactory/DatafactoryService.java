@@ -27,32 +27,32 @@ public interface DatafactoryService extends Remote{
 
 	public DeliverDataService getDeliverDataService() throws RemoteException;
 	
-	public AccountBookDataService getAccountBookDataService();
+	public AccountBookDataService getAccountBookDataService() throws RemoteException;
 	
-	public AccountDataService getAccountDataService();
+	public AccountDataService getAccountDataService() throws RemoteException;
 	
-	public InDataService getInDataService();
+	public InDataService getInDataService() throws RemoteException;
 	
-	public OutDataService getOutDataService();
+	public OutDataService getOutDataService() throws RemoteException;
 	
-	public CarDataService getCarDataService();
+	public CarDataService getCarDataService() throws RemoteException;
 	
-	public DriverDataService getDriverDataService();
+	public DriverDataService getDriverDataService() throws RemoteException;
 	
-	public InventoryDataService getInventoryDataService();
+	public InventoryDataService getInventoryDataService() throws RemoteException;
 	
-	public LogDataService getLogDataService();
+	public LogDataService getLogDataService() throws RemoteException;
 	
-	public AgencyDataService getAgencyDataService();
+	public AgencyDataService getAgencyDataService() throws RemoteException;
 	
-	public ConstDataService getConstDataService();
+	public ConstDataService getConstDataService() throws RemoteException;
 	
-	public SalaryDataService getSalaryDataService();
+	public SalaryDataService getSalaryDataService() throws RemoteException;
 	
-	public StaffDataService getStaffDataService();
+	public StaffDataService getStaffDataService() throws RemoteException;
 	
-	public ReceiptDataService getReceiptDataService();
+	public ReceiptDataService getReceiptDataService() throws RemoteException;
 	
-	public UserDataService getUserDataService();
+	public UserDataService getUserDataService() throws RemoteException;
 	
 }

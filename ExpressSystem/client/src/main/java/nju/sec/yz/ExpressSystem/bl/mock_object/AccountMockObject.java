@@ -6,8 +6,8 @@ import nju.sec.yz.ExpressSystem.vo.AccountVO;
 import nju.sec.yz.ExpressSystem.vo.OutVO;
 
 public class AccountMockObject {
-	public ResultMessage modifyAccount(AccountVO av) {
-		
+	public ResultMessage modifyAccount(AccountPO av) {
+		System.out.println("updating an account...");
 		return null;
 	}
 	

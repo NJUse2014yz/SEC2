@@ -37,6 +37,9 @@ public class SendInformation  implements Serializable{
 		this.deliveryType = deliveryType;
 		this.packType = packType;
 	}
+	public SendInformation() {
+		// TODO Auto-generated constructor stub
+	}
 	public String getBarId() {
 		return barId;
 	}
