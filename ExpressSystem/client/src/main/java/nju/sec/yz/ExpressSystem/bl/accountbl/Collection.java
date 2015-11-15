@@ -40,7 +40,7 @@ public class Collection implements ReceiptService{
 	/**
 	 * 保存收款单信息
 	 */
-	public ResultMessage addCollection(PaymentSheetPO po){
+	private ResultMessage addCollection(PaymentSheetPO po){
 		return null;
 	}
 }

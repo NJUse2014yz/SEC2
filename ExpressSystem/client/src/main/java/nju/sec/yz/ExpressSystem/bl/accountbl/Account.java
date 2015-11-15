@@ -63,7 +63,7 @@ public class Account {
 	/**
 	 * 保存更新
 	 */
-	public ResultMessage modifyAccount(AccountPO ap) {
+	private ResultMessage modifyAccount(AccountPO ap) {
 		// TODO Auto-generated method stub
 		return null;
 	}

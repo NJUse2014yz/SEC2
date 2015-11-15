@@ -1,6 +1,12 @@
 package nju.sec.yz.ExpressSystem.bl.deliverbl;
 
+import java.rmi.RemoteException;
+
+import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.common.SendInformation;
+import nju.sec.yz.ExpressSystem.dataservice.deliverDataSevice.DeliverDataService;
+import nju.sec.yz.ExpressSystem.po.DeliverPO;
 import nju.sec.yz.ExpressSystem.po.SendSheetPO;
 import nju.sec.yz.ExpressSystem.vo.OrderVO;
 
@@ -11,11 +17,27 @@ import nju.sec.yz.ExpressSystem.vo.OrderVO;
  *
  */
 public class Deliver {
+	private DeliverDataService data;
+	
+	public Deliver(){
+		try {
+			data=DatafactoryProxy.getDeliverDataService();
+		} catch (RemoteException e) {
+			//TODO 远程异常
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * 查看物流信息
 	 */
 	public OrderVO checkDeliver(String id) {
-		// TODO Auto-generated method stub
+		try {
+			DeliverPO po=data.find(id);
+		} catch (RemoteException e) {
+			//TODO 远程异常
+			e.printStackTrace();
+		}
 		return null;
 	}
 	
@@ -23,6 +45,7 @@ public class Deliver {
 	 * 寄件单通过审批后通过此方法更新寄件单信息
 	 */
 	public ResultMessage updateDeliverReceipt(SendSheetPO po){
+		SendInformation imfo=po.getSendInformation();
 		return null;
 	}
 	

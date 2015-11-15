@@ -2,20 +2,15 @@ package nju.sec.yz.ExpressSystem.po;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-
 import nju.sec.yz.ExpressSystem.common.ArriveInformation;
 import nju.sec.yz.ExpressSystem.common.DeliveryInformation;
 import nju.sec.yz.ExpressSystem.common.DeliveryState;
-import nju.sec.yz.ExpressSystem.common.DeliveryType;
-import nju.sec.yz.ExpressSystem.common.GoodInformation;
 import nju.sec.yz.ExpressSystem.common.InventoryInInformation;
 import nju.sec.yz.ExpressSystem.common.InventoryOutInformation;
 import nju.sec.yz.ExpressSystem.common.LoadInformation;
 import nju.sec.yz.ExpressSystem.common.OrderInformation;
-import nju.sec.yz.ExpressSystem.common.PackType;
-import nju.sec.yz.ExpressSystem.common.PaymentInformation;
 import nju.sec.yz.ExpressSystem.common.ReceiveInformation;
-import nju.sec.yz.ExpressSystem.common.ToAndFromInformation;
+import nju.sec.yz.ExpressSystem.common.SendInformation;
 import nju.sec.yz.ExpressSystem.common.TransitInformation;
 
 /**
@@ -24,24 +19,28 @@ import nju.sec.yz.ExpressSystem.common.TransitInformation;
  *
  */
 public class DeliverPO implements Serializable{
-	private OrderInformation ordermation; 
+	private DeliveryState state;
+	
+	private String id;//标识快递的十位数字条形码号
+	
+	private SendInformation sendInfo; 
 	private ArrayList<LoadInformation> officeLoads;
 	private ArrayList<ArriveInformation> officeArrives;
 	private ArrayList<ArriveInformation> transitArrives;
 	private ArrayList<LoadInformation> transitLoads;
 	private ArrayList<TransitInformation> transits;
-	private InventoryInInformation inventoryIn;
-	private InventoryOutInformation inventoryOut;
-	private DeliveryInformation delivery;
-	private PaymentInformation payment;
+	private ArrayList<InventoryPO> inventory;
+	private DeliveryInformation delivery;//派送信息
 	private ReceiveInformation receive;
 	
-	public OrderInformation getOrdermation() {
-		return ordermation;
+	//填写寄件单以后开始生成PO
+	public DeliverPO(SendInformation sendInfo){
+		this.id=sendInfo.getBarId();
+		this.state=DeliveryState.GATHER;
+		this.sendInfo=sendInfo;
 	}
-	public void setOrdermation(OrderInformation ordermation) {
-		this.ordermation = ordermation;
-	}
+	
+	
 	public ArrayList<LoadInformation> getOfficeLoad() {
 		return officeLoads;
 	}
@@ -72,17 +71,11 @@ public class DeliverPO implements Serializable{
 	public void setTransit(ArrayList<TransitInformation> transit) {
 		this.transits = transit;
 	}
-	public InventoryInInformation getInventoryIn() {
-		return inventoryIn;
+	public ArrayList<InventoryPO> getInventoryIn() {
+		return inventory;
 	}
-	public void setInventoryIn(InventoryInInformation inventoryIn) {
-		this.inventoryIn = inventoryIn;
-	}
-	public InventoryOutInformation getInventoryOut() {
-		return inventoryOut;
-	}
-	public void setInventoryOut(InventoryOutInformation inventoryOut) {
-		this.inventoryOut = inventoryOut;
+	public void setInventoryIn(ArrayList<InventoryPO> inventory) {
+		this.inventory = inventory;
 	}
 	public DeliveryInformation getDelivery() {
 		return delivery;
@@ -90,17 +83,29 @@ public class DeliverPO implements Serializable{
 	public void setDelivery(DeliveryInformation delivery) {
 		this.delivery = delivery;
 	}
-	public PaymentInformation getPayment() {
-		return payment;
-	}
-	public void setPayment(PaymentInformation payment) {
-		this.payment = payment;
-	}
 	public ReceiveInformation getReceive() {
 		return receive;
 	}
 	public void setReceive(ReceiveInformation receive) {
 		this.receive = receive;
+	}
+	public SendInformation getSendImfo() {
+		return sendInfo;
+	}
+	public void setSendImfo(SendInformation sendImfo) {
+		this.sendInfo = sendImfo;
+	}
+	public DeliveryState getState() {
+		return state;
+	}
+	public void setState(DeliveryState state) {
+		this.state = state;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 }
