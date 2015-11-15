@@ -13,7 +13,7 @@ public class InventoryMainUiTest extends JPanel{
 	ClientControler mainControler;
 	InventoryControler controler;
 	JButton test;
-	public InventoryMainUiTest(ClientControler controler)
+	public InventoryMainUiTest(ClientControler mainControler)
 	{
 		super();
 		this.setLayout(null);

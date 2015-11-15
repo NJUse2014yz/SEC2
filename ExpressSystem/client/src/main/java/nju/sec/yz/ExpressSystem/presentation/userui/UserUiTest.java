@@ -16,12 +16,14 @@ public class UserUiTest extends JPanel{
 	JButton testPosition;
 	JButton testInventory;
 	JButton testManager;
+	JButton testTransit;
 	
 	public UserUiTest(ClientControler controler)
 	{
 		super();
 		this.setLayout(null);
 		this.controler=controler;
+		
 		this.testDeliver=new JButton("to deliver's panel");
 		this.testDeliver.setBounds(50,50,200,50);
 		this.testDeliver.addMouseListener(new MainSwitchPanelListener(MAIN_CONTROL.DELIVER,this.controler));
@@ -36,19 +38,23 @@ public class UserUiTest extends JPanel{
 		
 		this.testInventory=new JButton("to inventory's panel");
 		this.testInventory.setBounds(50,200,200,50);
-		this.testInventory.addMouseListener(new MainSwitchPanelListener(MAIN_CONTROL.TRANSITER,this.controler));
+		this.testInventory.addMouseListener(new MainSwitchPanelListener(MAIN_CONTROL.INVENTORY,this.controler));
 		
 		this.testManager=new JButton("to manager's panel");
 		this.testManager.setBounds(50,250,200,50);
 		this.testManager.addMouseListener(new MainSwitchPanelListener(MAIN_CONTROL.MANAGER,this.controler));
 		
-		
+		this.testTransit=new JButton("to transit's panel");
+		this.testTransit.setBounds(50,300,200,50);
+		this.testTransit.addMouseListener(new MainSwitchPanelListener(MAIN_CONTROL.TRANSITER,this.controler));
 		
 		add(this.testDeliver);
 		add(this.testAccount);
 		add(this.testPosition);
 		add(this.testInventory);
 		add(this.testManager);
+		add(this.testTransit);
+		
 		setSize(493,560);
 		setVisible(true); 
 	}
