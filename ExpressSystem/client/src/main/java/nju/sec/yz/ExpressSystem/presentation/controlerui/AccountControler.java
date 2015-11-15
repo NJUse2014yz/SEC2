@@ -1,19 +1,16 @@
 package nju.sec.yz.ExpressSystem.presentation.controlerui;
 
-import nju.sec.yz.ExpressSystem.presentation.accountui.AccountMainUiTest;
-
 public class AccountControler {
-	MainUi mainFrame;
-	AccountControler(MainUi mainFrame)
+	private ClientControler mainControler;
+	AccountControler(ClientControler mainControler)
 	{
-		this.mainFrame=mainFrame;
+		this.mainControler=mainControler;
 	}
 	void accountChangePanel(ACCOUNT_CONTROL n)
 	{
 		switch(n)
 		{	
 		case ACCOUNT_MAIN:
-			mainFrame.nextPanel(new AccountMainUiTest(this));
 			break;
 		case INCOME:
 			break;

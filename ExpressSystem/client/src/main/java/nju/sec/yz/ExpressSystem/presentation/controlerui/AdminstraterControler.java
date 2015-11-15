@@ -13,18 +13,20 @@ public class AdminstraterControler {
 	{
 		switch(n)
 		{
-//		case :
-//			break;
-//		case :
-//			break;
-//		case :
-//			break;
-//		case :
-//			break;
-//		case :
-//			break;
-//		case :
-//			break;
+		case USER_ADD:
+			break;
+		case ADD_SUCCESS:
+			break;
+		case USER_DELETE:
+			break;
+		case USER_LIST:
+			break;
+		case USER_MODIFY:
+			break;
+		case MODIFY_SUCCESS:
+			break;
+		case USER_INQUIRY:
+			break;
 		default:
 			System.out.println("wrong control");
 			break;	

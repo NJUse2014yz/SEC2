@@ -10,13 +10,15 @@ import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.MainSwitchPanelListener;
 
 public class AccountMainUiTest extends JPanel{
+	ClientControler mainControler;
 	AccountControler controler;
 	JButton test;
-	public AccountMainUiTest(AccountControler controler)
+	public AccountMainUiTest(ClientControler mainControler)
 	{
 		super();
 		this.setLayout(null);
-		this.controler=controler;
+		this.mainControler=mainControler;
+		this.controler=mainControler.accountControler;
 		this.test=new JButton("test account");
 		test.setBounds(50,50,100,50);
 		test.addMouseListener(new AccountSwitchPanelListener(ACCOUNT_CONTROL.ADD_ACCOUNT,this.controler));

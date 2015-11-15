@@ -4,19 +4,24 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
+import nju.sec.yz.ExpressSystem.presentation.controlerui.INVENTORY_CONTROL;
+import nju.sec.yz.ExpressSystem.presentation.controlerui.InventoryControler;
+import nju.sec.yz.ExpressSystem.presentation.controlerui.InventroySwitchPanelListener;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.MainSwitchPanelListener;
 
 public class InventoryMainUiTest extends JPanel{
-	ClientControler controler;
+	ClientControler mainControler;
+	InventoryControler controler;
 	JButton test;
 	public InventoryMainUiTest(ClientControler controler)
 	{
 		super();
 		this.setLayout(null);
-		this.controler=controler;
-		this.test=new JButton("test inventory");
+		this.mainControler=mainControler;
+		this.controler=mainControler.inventoryControler;
+		this.test=new JButton("to …… panel");
 		test.setBounds(50,50,100,50);
-		test.addMouseListener(new MainSwitchPanelListener(2,this.controler));
+		test.addMouseListener(new InventroySwitchPanelListener(INVENTORY_CONTROL.IN_SUCCESS,this.controler));
 		add(test);
 		setSize(493,560);
 		setVisible(true);
