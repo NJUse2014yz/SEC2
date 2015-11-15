@@ -105,8 +105,8 @@ public class DatafactoryProxy {
 
 	
 	static public ReceiptDataService getReceiptDataService()  throws RemoteException{
-		// TODO Auto-generated method stub
-		return null;
+		
+		return datafactory.getReceiptDataService();
 	}
 
 	

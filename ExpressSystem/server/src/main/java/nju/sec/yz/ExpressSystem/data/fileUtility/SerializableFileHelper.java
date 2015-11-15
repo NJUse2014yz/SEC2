@@ -6,6 +6,7 @@ import java.io.IOException;
 public class SerializableFileHelper {
 
     public static final String DELIVER_FILE_NAME = "deliver_data";
+    public static final String RECEIPT_FILE_NAME = "receipt_data";
    
 
     public static File getDeliverFile() throws IOException {
@@ -14,7 +15,11 @@ public class SerializableFileHelper {
         return file;
     }
 
-    
+    public static File getReceiptFile() throws IOException {
+        File file = new File(RECEIPT_FILE_NAME);
+        createFileIfNotExists(file);
+        return file;
+    }
 
 
    

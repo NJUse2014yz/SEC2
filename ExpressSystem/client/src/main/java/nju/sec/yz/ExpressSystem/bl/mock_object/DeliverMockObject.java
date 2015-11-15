@@ -11,10 +11,10 @@ public class DeliverMockObject {
 	 */
 	public ResultMessage updateDeliverReceipt(SendSheetPO po){
 		System.out.println("updating a deliver message...");
-		DeliverPO deliverPO=new DeliverPO();
+		
 		OrderInformation ordermation=new OrderInformation();
 		ordermation.setSendInformation(po.getSendInformation());
-		deliverPO.setOrdermation(ordermation);
+		
 		return null;
 	}
 }

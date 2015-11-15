@@ -46,7 +46,15 @@ public class Deliver {
 	 */
 	public ResultMessage updateDeliverReceipt(SendSheetPO po){
 		SendInformation imfo=po.getSendInformation();
-		return null;
+		ResultMessage message=null;
+		DeliverPO deliverPO=new DeliverPO(imfo.getBarId());
+		try {
+			message=data.insert(deliverPO);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return message;
 	}
 	
 }
