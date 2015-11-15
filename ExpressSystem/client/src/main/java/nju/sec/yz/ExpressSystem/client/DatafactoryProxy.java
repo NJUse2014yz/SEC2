@@ -34,73 +34,61 @@ public class DatafactoryProxy {
 
 	
 	static public AccountBookDataService getAccountBookDataService()  throws RemoteException{
-		// TODO Auto-generated method stub
-		return null;
+		return datafactory.getAccountBookDataService();
 	}
 
 	public static AccountDataService getAccountDataService()  throws RemoteException{
-		
-		return null;
+		return datafactory.getAccountDataService();
 	}
 
 	
 	static public InDataService getInDataService()  throws RemoteException{
-		// TODO Auto-generated method stub
-		return null;
+		return datafactory.getInDataService();
 	}
 
 	
 	static public OutDataService getOutDataService()  throws RemoteException{
-		// TODO Auto-generated method stub
-		return null;
+		return datafactory.getOutDataService();
 	}
 
 	
 	static public CarDataService getCarDataService()  throws RemoteException{
-		// TODO Auto-generated method stub
-		return null;
+		return datafactory.getCarDataService();
 	}
 
 	
 	static public DriverDataService getDriverDataService()  throws RemoteException{
-		// TODO Auto-generated method stub
-		return null;
+		return datafactory.getDriverDataService();
 	}
 
 	
 	static public InventoryDataService getInventoryDataService()  throws RemoteException{
-		// TODO Auto-generated method stub
-		return null;
+		return datafactory.getInventoryDataService();
 	}
 
 	
 	static public LogDataService getLogDataService()  throws RemoteException{
-		// TODO Auto-generated method stub
-		return null;
+		return datafactory.getLogDataService();
 	}
 
 	
 	static public AgencyDataService getAgencyDataService()  throws RemoteException{
-		// TODO Auto-generated method stub
-		return null;
+		return datafactory.getAgencyDataService();
 	}
 
 	
 	static public ConstDataService getConstDataService()  throws RemoteException{
-		// TODO Auto-generated method stub
-		return null;
+		return datafactory.getConstDataService();
 	}
 
 	
 	static public SalaryDataService getSalaryDataService()  throws RemoteException{
-		// TODO Auto-generated method stub
-		return null;
+		return datafactory.getSalaryDataService();
 	}
 
 	
 	static public StaffDataService getStaffDataService()  throws RemoteException{
-		// TODO Auto-generated method stub
-		return null;
+		return datafactory.getStaffDataService();
 	}
 
 	
@@ -110,8 +98,7 @@ public class DatafactoryProxy {
 
 	
 	static public UserDataService getUserDataService()  throws RemoteException{
-		// TODO Auto-generated method stub
-		return null;
+		return datafactory.getUserDataService();
 	}
 
 
