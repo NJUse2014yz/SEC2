@@ -1,5 +1,7 @@
 package nju.sec.yz.ExpressSystem.presentation.deliverui;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -12,18 +14,21 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
 import nju.sec.yz.ExpressSystem.bl.deliverbl.DeliverReceipt;
+import nju.sec.yz.ExpressSystem.blservice.deliverBlService.DeliverBlService;
 import nju.sec.yz.ExpressSystem.common.DeliveryType;
 import nju.sec.yz.ExpressSystem.common.GoodInformation;
 import nju.sec.yz.ExpressSystem.common.PackType;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.SendInformation;
 import nju.sec.yz.ExpressSystem.common.ToAndFromInformation;
+import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.SendSheetVO;
 
 public class DeliverOrderInUi extends JPanel {
 	
-	DeliverReceipt deliver_receipt;
+	DeliverBlService deliverBlService;
 	
 	// 侧边栏功能选择项
 	private JButton OrderInButton;
@@ -31,6 +36,7 @@ public class DeliverOrderInUi extends JPanel {
 	private JButton ReceiveInButton;
 	// 确定选项
 	private JButton confirmButton;
+	private JButton exitButton;
 
 	// 寄件人信息
 	private JTextField nameSender;
@@ -63,7 +69,7 @@ public class DeliverOrderInUi extends JPanel {
 	//提示信息
 	private JLabel warning;
 
-	public DeliverOrderInUi() {
+	public DeliverOrderInUi(ClientControler controler) {
 
 		initDeliverOrderIn();
 
@@ -136,16 +142,39 @@ public class DeliverOrderInUi extends JPanel {
 						(DeliveryType) deliveryType.getSelectedItem(), (PackType) packType.getSelectedItem());
 				sendsheet.setSendInformation(sendIn);
 				//判断输入的信息是否正确
-				if(deliver_receipt.make(sendsheet)==ResultMessage.FAIL){
+				if(deliverBlService.deliverReceipt(sendsheet)==ResultMessage.FAIL){
 					warning=new JLabel("输入信息错误");
+					warning.setBounds(300,520,100,30);
+					warning.setFont(new Font("微软雅黑",1,30));
+					warning.setForeground(Color.red);
 					add(warning);
 				}else{
 					warning=new JLabel("提交成功");
+					warning.setBounds(300,520,50,30);
+					warning.setFont(new Font("微软雅黑",1,30));
+					warning.setForeground(Color.red);
 					add(warning);
 				}
 			}
 		});
 
+
+		
+		/*
+		 * exit
+		 */
+		
+		ImageIcon ExitIcon = new ImageIcon("graphic/common/exit.png");
+		exitButton= new JButton(ExitIcon);
+		exitButton.setBounds(490-15,0,15,15);
+		add(exitButton);
+		setVisible(true);
+		exitButton.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				System.exit(0);
+			}
+		});
+		
 		/*
 		 * textfield
 		 */
