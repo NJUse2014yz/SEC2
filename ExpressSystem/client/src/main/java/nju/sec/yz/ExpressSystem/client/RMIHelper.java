@@ -20,7 +20,6 @@ public class RMIHelper {
     
     private static boolean inited = false;
 
-    private static DatafactoryService datafactory;
 
     public synchronized static void init() throws ClientInitException {
         if (inited) {
@@ -57,11 +56,10 @@ public class RMIHelper {
 
     	System.out.println("client is running...");
     	String urlPrefix = "rmi://" + IP + "/";
-        datafactory = (DatafactoryService) Naming.lookup(urlPrefix + "DataFactorySerializableImpl");
+    	DatafactoryService datafactory=(DatafactoryService) 
+    									Naming.lookup(urlPrefix + "DataFactorySerializableImpl");
+        DatafactoryProxy.setDatafactory(datafactory);
         System.out.println("get datafactory");
     }
 
-    public static DatafactoryService getDatafactory() {
-        return datafactory;
-    }
 }

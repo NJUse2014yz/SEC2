@@ -1,9 +1,7 @@
-package nju.sec.yz.ExpressSystem.data.datafactory;
+package nju.sec.yz.ExpressSystem.client;
 
 import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
 
-import nju.sec.yz.ExpressSystem.data.deliverdata.DeliverDataImpl;
 import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.AccountBookDataService;
 import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.AccountDataService;
 import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.InDataService;
@@ -21,103 +19,105 @@ import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.StaffDataService;
 import nju.sec.yz.ExpressSystem.dataservice.receiptDataSevice.ReceiptDataService;
 import nju.sec.yz.ExpressSystem.dataservice.userDataSevice.UserDataService;
 /**
- * 
+ * datafactory在客户端的代理
  * @author 周聪
  *
  */
-public class DataFactorySerializableImpl extends UnicastRemoteObject implements DatafactoryService{
+public class DatafactoryProxy {
 
-	public DataFactorySerializableImpl() throws RemoteException {
-		super();
+	private static DatafactoryService datafactory;
+	
+	
+	static public DeliverDataService getDeliverDataService() throws RemoteException{
+		return datafactory.getDeliverDataService();
 	}
 
-	@Override
-	public DeliverDataService getDeliverDataService() throws RemoteException{
-		return new DeliverDataImpl();
-	}
-
-	@Override
-	public AccountBookDataService getAccountBookDataService() throws RemoteException {
+	
+	static public AccountBookDataService getAccountBookDataService()  throws RemoteException{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public AccountDataService getAccountDataService() throws RemoteException {
+	static AccountDataService getAccountDataService()  throws RemoteException{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public InDataService getInDataService() throws RemoteException {
+	
+	static public InDataService getInDataService()  throws RemoteException{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public OutDataService getOutDataService() throws RemoteException {
+	
+	static public OutDataService getOutDataService()  throws RemoteException{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public CarDataService getCarDataService() throws RemoteException {
+	
+	static public CarDataService getCarDataService()  throws RemoteException{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public DriverDataService getDriverDataService() throws RemoteException {
+	
+	static public DriverDataService getDriverDataService()  throws RemoteException{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public InventoryDataService getInventoryDataService() throws RemoteException {
+	
+	static public InventoryDataService getInventoryDataService()  throws RemoteException{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public LogDataService getLogDataService() throws RemoteException {
+	
+	static public LogDataService getLogDataService()  throws RemoteException{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public AgencyDataService getAgencyDataService() throws RemoteException {
+	
+	static public AgencyDataService getAgencyDataService()  throws RemoteException{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public ConstDataService getConstDataService() throws RemoteException {
+	
+	static public ConstDataService getConstDataService()  throws RemoteException{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public SalaryDataService getSalaryDataService() throws RemoteException {
+	
+	static public SalaryDataService getSalaryDataService()  throws RemoteException{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public StaffDataService getStaffDataService() throws RemoteException {
+	
+	static public StaffDataService getStaffDataService()  throws RemoteException{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public ReceiptDataService getReceiptDataService() throws RemoteException {
+	
+	static public ReceiptDataService getReceiptDataService()  throws RemoteException{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public UserDataService getUserDataService() throws RemoteException {
+	
+	static public UserDataService getUserDataService()  throws RemoteException{
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	public static void setDatafactory(DatafactoryService datafactory) {
+		DatafactoryProxy.datafactory = datafactory;
 	}
 
 }

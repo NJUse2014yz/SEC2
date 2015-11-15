@@ -36,9 +36,9 @@ public class SendInformation  implements Serializable{
 		this.good = good;
 		this.deliveryType = deliveryType;
 		this.packType = packType;
-		this.costForPack = costForPack;
-		this.costForAll = costForAll;
-		this.predictTime = predictTime;
+	}
+	public SendInformation() {
+		// TODO Auto-generated constructor stub
 	}
 	public String getBarId() {
 		return barId;

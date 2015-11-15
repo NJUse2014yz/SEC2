@@ -2,6 +2,7 @@ package nju.sec.yz.ExpressSystem.bl.accountbl;
 
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.po.OutPO;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.vo.OutVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
@@ -30,6 +31,13 @@ public class Payment implements ReceiptService{
 
 	@Override
 	public ReceiptVO show(ReceiptPO po) {
+		return null;
+	}
+	
+	/**
+	 * 保存付款单信息
+	 */
+	public ResultMessage addPayment(OutPO po){
 		return null;
 	}
 }

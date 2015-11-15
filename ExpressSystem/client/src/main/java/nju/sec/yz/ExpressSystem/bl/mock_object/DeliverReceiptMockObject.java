@@ -6,14 +6,17 @@ import nju.sec.yz.ExpressSystem.po.DeliverySheetPO;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.po.SendSheetPO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
+import nju.sec.yz.ExpressSystem.vo.SendSheetVO;
 
 public class DeliverReceiptMockObject implements ReceiptService{
 
 	@Override
 	public ResultMessage approve(ReceiptVO vo) {
 		System.out.println("handling a approved deliver receipt");
+		System.out.println("receipt id:"+vo.getId());
 		DeliverMockObject deliver=new DeliverMockObject();
 		SendSheetPO po=new SendSheetPO();
+		po.setId(vo.getId());
 		deliver.updateDeliverReceipt(po);
 		return null;
 	}
@@ -27,13 +30,18 @@ public class DeliverReceiptMockObject implements ReceiptService{
 	@Override
 	public ReceiptPO modify(ReceiptVO vo) {
 		System.out.println("modifying a deliver receipt...");
-		return null;
+		SendSheetPO po=new SendSheetPO();
+		po.setId(vo.getId());
+		return po;
 	}
 
 	@Override
 	public ReceiptVO show(ReceiptPO po) {
 		System.out.println("showing a deliver receipt...");
-		return null;
+		System.out.println("receipt id:"+po.getId());
+		SendSheetVO vo=new SendSheetVO();
+		vo.setId(po.getId());
+		return vo;
 	}
 
 }

@@ -48,7 +48,8 @@ public class ReceiptListMockObject implements ReceiptSaveService{
 	public ResultMessage modify(ReceiptVO vo) {
 		System.out.println("modifing a receipt");
 		DeliverReceiptMockObject receipt=new DeliverReceiptMockObject();
-		receipt.modify(vo);
+		ReceiptPO po=receipt.modify(vo);
+		System.out.println("receipt "+po.getId()+" modify success");
 		return null;
 	}
 
