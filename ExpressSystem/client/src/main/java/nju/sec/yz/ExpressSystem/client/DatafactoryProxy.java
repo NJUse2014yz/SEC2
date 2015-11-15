@@ -38,8 +38,8 @@ public class DatafactoryProxy {
 		return null;
 	}
 
-	static AccountDataService getAccountDataService()  throws RemoteException{
-		// TODO Auto-generated method stub
+	public static AccountDataService getAccountDataService()  throws RemoteException{
+		
 		return null;
 	}
 
@@ -105,7 +105,6 @@ public class DatafactoryProxy {
 
 	
 	static public ReceiptDataService getReceiptDataService()  throws RemoteException{
-		
 		return datafactory.getReceiptDataService();
 	}
 
