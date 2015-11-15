@@ -29,14 +29,12 @@ public class DeliverReceipt implements ReceiptService{
 		//验证information
 		String validresult=isValid(information);
 		
-		
 		//创建PO交给receipt
 		SendSheetPO receipt=new SendSheetPO();
 		sendReceipt.setId(null);
 		sendReceipt.setSendInformation(information);
 		ReceiptSaveService receiptList=new ReceiptList();
 		receiptList.saveReceipt(receipt);
-		
 		return ResultMessage.SUCCESS;
 	}
 
