@@ -12,9 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-
-<<<<<<< HEAD
-=======
 import nju.sec.yz.ExpressSystem.bl.deliverbl.DeliverReceipt;
 import nju.sec.yz.ExpressSystem.common.DeliveryType;
 import nju.sec.yz.ExpressSystem.common.GoodInformation;
@@ -24,7 +21,6 @@ import nju.sec.yz.ExpressSystem.common.SendInformation;
 import nju.sec.yz.ExpressSystem.common.ToAndFromInformation;
 import nju.sec.yz.ExpressSystem.vo.SendSheetVO;
 
->>>>>>> cf0901ec097690613db03208c37b7beb2c73167e
 public class DeliverOrderInUi extends JPanel {
 	
 	DeliverReceipt deliver_receipt;
