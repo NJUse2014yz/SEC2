@@ -20,7 +20,6 @@ public class ResultMessage {
 	}
 
 	
-	
 	public Result getResult() {
 		return result;
 	}

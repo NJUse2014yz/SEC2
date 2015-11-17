@@ -10,6 +10,7 @@ import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
 import nju.sec.yz.ExpressSystem.bl.tool.ObjectDeepCopy;
 import nju.sec.yz.ExpressSystem.common.DeliveryType;
 import nju.sec.yz.ExpressSystem.common.PackType;
+import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.SendInformation;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
@@ -36,7 +37,7 @@ public class DeliverReceipt implements ReceiptService{
 		//暂时是控制台输出，后期会变成界面显示
 		//System.out.println(validresult);
 		if(!validresult.equals("success"))
-			return ResultMessage.FAIL;
+			return new ResultMessage(Result.FAIL,validresult);
 		//自动计算运费和到达时间
 		String fromAddress=information.getFromPerson().getAddress();
 		String toAddress=information.getToPerson().getAddress();
@@ -55,7 +56,7 @@ public class DeliverReceipt implements ReceiptService{
 		sendReceipt.setSendInformation(information);
 		ReceiptSaveService receiptList=new ReceiptList();
 		receiptList.saveReceipt(receipt);
-		return ResultMessage.SUCCESS;
+		return new ResultMessage(Result.SUCCESS);
 	}
 
 

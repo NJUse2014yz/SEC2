@@ -19,6 +19,7 @@ import nju.sec.yz.ExpressSystem.bl.inventorybl.InventoryInSheet;
 import nju.sec.yz.ExpressSystem.bl.inventorybl.InventoryOutSheet;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
 import nju.sec.yz.ExpressSystem.common.ReceiptType;
+import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.dataservice.receiptDataSevice.ReceiptDataService;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
@@ -130,7 +131,7 @@ public class ReceiptList implements ReceiptSaveService{
 			
 		} catch (InstantiationException | IllegalAccessException e) {
 			e.printStackTrace();
-			return ResultMessage.FAIL;
+			return new ResultMessage(Result.FAIL,"系统错误");
 		}
 		return message;
 	}
@@ -148,7 +149,7 @@ public class ReceiptList implements ReceiptSaveService{
 			message=this.update(modifiedPO);
 		} catch (InstantiationException | IllegalAccessException e) {
 			e.printStackTrace();
-			return ResultMessage.FAIL;
+			return new ResultMessage(Result.FAIL,"系统错误");
 		}
 		return message;
 	}
@@ -160,7 +161,7 @@ public class ReceiptList implements ReceiptSaveService{
 			message=receiptData.update(po);
 		} catch (RemoteException e) {
 			e.printStackTrace();
-			return ResultMessage.FAIL;
+			return new ResultMessage(Result.FAIL,"系统错误");
 		}
 		return message;
 	}
@@ -171,10 +172,10 @@ public class ReceiptList implements ReceiptSaveService{
 			receiptData.delete(id);
 		} catch (RemoteException e) {
 			e.printStackTrace();
-			return ResultMessage.FAIL;
+			return new ResultMessage(Result.FAIL,"系统错误");
 		}
 		
-		return ResultMessage.SUCCESS;
+		return new ResultMessage(Result.SUCCESS);
 	}
 	
 	@Override
@@ -187,9 +188,9 @@ public class ReceiptList implements ReceiptSaveService{
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return ResultMessage.FAIL;
+			return new ResultMessage(Result.FAIL, "系统错误");
 		}
-		return ResultMessage.SUCCESS;
+		return new ResultMessage(Result.SUCCESS);
 	}
 	
 	
