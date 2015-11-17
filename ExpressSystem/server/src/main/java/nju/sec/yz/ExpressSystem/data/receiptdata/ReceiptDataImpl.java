@@ -56,7 +56,8 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataS
 	@Override
 	public ResultMessage update(ReceiptPO rpo) throws RemoteException {
 		if(rpo==null){
-			return ResultMessage.FAIL;
+			System.out.println("更新的ReceiptPO是空的！！！");
+			return new ResultMessage(Result.FAIL, "系统错误");
 		}
 			
 		String id=rpo.getId();
@@ -75,7 +76,7 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataS
 		}
 
 		//未找到
-		return ResultMessage.FAIL;
+		return new ResultMessage(Result.FAIL, "找不到要更新的内容");
 	}
 
 	@Override

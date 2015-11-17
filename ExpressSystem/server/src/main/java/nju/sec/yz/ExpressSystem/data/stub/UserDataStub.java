@@ -1,6 +1,7 @@
 package nju.sec.yz.ExpressSystem.data.stub;
 
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import nju.sec.yz.ExpressSystem.common.Status;
@@ -12,10 +13,10 @@ import nju.sec.yz.ExpressSystem.po.UserPO;
  * @author zhangqi
  *
  */
-public class UserDataStub implements UserDataService {
+public class UserDataStub extends UnicastRemoteObject implements UserDataService {
 	@Override
 	public ResultMessage insert(UserPO upo) throws RemoteException{
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 	
 	@Override
@@ -25,17 +26,17 @@ public class UserDataStub implements UserDataService {
 	
 	@Override
 	public ResultMessage delete(String id) throws RemoteException{
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 	
 	@Override
 	public ResultMessage update(UserPO upo) throws RemoteException{
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 	
 	@Override
 	public ResultMessage init() throws RemoteException{
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 	
 	@Override
