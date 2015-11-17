@@ -9,16 +9,18 @@ public class ResultMessage {
 	
 	private String message;//备注
 	
-	public ResultMessage(){
-		result=Result.SUCCESS;
+	public ResultMessage(Result result){
+		this.result=result;
 		message="success";
 	}
 	
-	public ResultMessage(String message){
-		result=Result.FAIL;
+	public ResultMessage(Result result,String message){
+		this.result=result;
 		this.message=message;
 	}
 
+	
+	
 	public Result getResult() {
 		return result;
 	}
