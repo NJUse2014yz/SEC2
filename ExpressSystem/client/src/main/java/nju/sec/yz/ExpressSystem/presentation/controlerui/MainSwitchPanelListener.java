@@ -6,6 +6,12 @@ import java.awt.event.MouseListener;
 public class MainSwitchPanelListener implements MouseListener{
 	private MAIN_CONTROL order;
 	private ClientControler controler;
+	public MainSwitchPanelListener(MAIN_CONTROL n,ClientControler controler,int x)
+	{
+		this.order=n;
+		this.controler=controler;
+		controler.mainChangePanel(order);
+	}
 	public MainSwitchPanelListener(MAIN_CONTROL n,ClientControler controler)
 	{
 		this.order=n;
