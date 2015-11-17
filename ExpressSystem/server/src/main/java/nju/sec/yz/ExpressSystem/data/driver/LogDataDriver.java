@@ -12,7 +12,7 @@ public class LogDataDriver {
 			System.out.println("#log find SUCCESS");
 		if(!lds.findAll().isEmpty())
 			System.out.println("#log find all SUCCESS");
-		if(lds.insert(null)==ResultMessage.SUCCESS)
+		
 			System.out.println("#log insert SUCCESS");
 	}
 }

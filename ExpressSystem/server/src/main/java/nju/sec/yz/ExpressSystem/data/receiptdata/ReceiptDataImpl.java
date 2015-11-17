@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nju.sec.yz.ExpressSystem.common.ReceiptType;
+import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.data.fileUtility.SerializableFileHelper;
 import nju.sec.yz.ExpressSystem.dataservice.receiptDataSevice.ReceiptDataService;
@@ -27,8 +28,8 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataS
 	public ResultMessage insert(ReceiptPO rpo) throws RemoteException {
 		System.out.println("inserting a ReceiptPO...");
 		if(rpo==null){
-			System.out.println("fail");
-			return ResultMessage.FAIL;
+			System.out.println("插入了一个空的ReceiptPO！！！");
+			return new ResultMessage(Result.FAIL, "系统错误");
 		}
 		
 		List<ReceiptPO> receiptPOs = findAll();
@@ -54,8 +55,10 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataS
 
 	@Override
 	public ResultMessage update(ReceiptPO rpo) throws RemoteException {
-		if(rpo==null)
+		if(rpo==null){
 			return ResultMessage.FAIL;
+		}
+			
 		String id=rpo.getId();
 
 		List<ReceiptPO> receiptPOs = findAll();

@@ -16,24 +16,24 @@ import nju.sec.yz.ExpressSystem.po.DriverPO;
 public class DriverDataDriver {
 	public void drive(DriverDataService dds) throws RemoteException{
 		ResultMessage result=dds.delete(null);
-		if(result==ResultMessage.SUCCESS){
+		
 			System.out.println("delete");
-		}
+		
 		
 		result=dds.init();
-		if(result==ResultMessage.SUCCESS){
+		
 			System.out.println("init");
-		}
+		
 		
 		result=dds.insert(null);
-		if(result==ResultMessage.SUCCESS){
+		
 			System.out.println("insert");
-		}
+		
 		
 		result=dds.update(null);
-		if(result==ResultMessage.SUCCESS){
+		
 			System.out.println("update");
-		}
+		
 		
 		DriverPO dpo=dds.find(null);
 				System.out.println(dpo.getLicenseDeadLine());

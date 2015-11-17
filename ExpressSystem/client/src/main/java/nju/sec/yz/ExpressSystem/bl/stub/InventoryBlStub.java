@@ -27,13 +27,13 @@ public class InventoryBlStub implements InventoryBlService {
 	@Override
 	public ResultMessage in(InventoryInSheetVO iisvo) {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override
 	public ResultMessage out(InventoryOutSheetVO iosvo) {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override

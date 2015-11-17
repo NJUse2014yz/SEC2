@@ -20,7 +20,7 @@ public class ReceiptDataMockObject implements ReceiptDataService{
 	@Override
 	public ResultMessage insert(ReceiptPO rpo) throws RemoteException {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override
@@ -32,7 +32,7 @@ public class ReceiptDataMockObject implements ReceiptDataService{
 	@Override
 	public ResultMessage update(ReceiptPO rpo) throws RemoteException {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 

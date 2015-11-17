@@ -26,7 +26,7 @@ public class ReceiptBlStub implements ReceiptBlService {
 	@Override
 	public ResultMessage approve(ReceiptVO vo) {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 
@@ -39,7 +39,7 @@ public class ReceiptBlStub implements ReceiptBlService {
 	@Override
 	public ResultMessage modify(ReceiptVO vo) {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 }

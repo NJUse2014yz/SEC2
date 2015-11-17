@@ -4,6 +4,7 @@ import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptSaveService;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
 import nju.sec.yz.ExpressSystem.common.InventoryInInformation;
+import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.SendInformation;
 import nju.sec.yz.ExpressSystem.po.InventoryInSheetPO;
@@ -47,7 +48,7 @@ public class InventoryInSheet implements ReceiptService {
 				ii.getShelf(), ii.getPositon()),inSheet.getBarId());
 		ReceiptList receiptList = new ReceiptList();
 		receiptList.saveReceipt(inPO);
-		return ResultMessage.SUCCESS;
+		return new ResultMessage(Result.FAIL);
 	}
 
 	@Override
@@ -60,10 +61,10 @@ public class InventoryInSheet implements ReceiptService {
 	public ResultMessage isValid(InventoryInInformation ii){
 		//假定柜子刚好99个
 		if(ii.getBlock()==0){
-			return ResultMessage.FAIL;
+			return new ResultMessage(Result.FAIL, "hhh");
 			//增加ResultMessage，返回fail的具体原因
 		}
-		return ResultMessage.SUCCESS;
+		return new ResultMessage(Result.SUCCESS);
 	}
 
 	@Override

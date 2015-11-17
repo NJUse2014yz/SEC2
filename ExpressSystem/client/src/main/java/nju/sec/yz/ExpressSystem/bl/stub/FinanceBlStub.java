@@ -33,7 +33,7 @@ public class FinanceBlStub implements FinanceBlSevice {
 	@Override
 	public ResultMessage makePayment(OutVO pro) {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class FinanceBlStub implements FinanceBlSevice {
 	@Override
 	public ResultMessage initial(AccountVO av) {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override

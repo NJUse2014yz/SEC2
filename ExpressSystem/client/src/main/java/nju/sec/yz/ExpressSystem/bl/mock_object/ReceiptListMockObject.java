@@ -56,7 +56,7 @@ public class ReceiptListMockObject implements ReceiptSaveService{
 
 	private ResultMessage delete(String id){
 		System.out.println("deleting a receipt...");
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 	
 	@Override

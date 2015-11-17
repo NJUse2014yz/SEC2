@@ -16,14 +16,14 @@ public class ReceiptDataDriver {
 	public void drive(ReceiptDataService rds) throws RemoteException{
 	
 		ResultMessage result=rds.update(null);
-		if(result==ResultMessage.SUCCESS){
+		
 			System.out.println("update");
-		}
+		
 		
 		result=rds.insert(null);
-		if(result==ResultMessage.SUCCESS){
+		
 			System.out.println("insert");
-		}
+		
 		
 		ReceiptPO rpo=rds.find(null);
 		System.out.println(rpo);

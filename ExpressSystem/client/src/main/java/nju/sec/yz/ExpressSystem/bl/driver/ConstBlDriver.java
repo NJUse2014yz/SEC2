@@ -20,30 +20,22 @@ public class ConstBlDriver {
 		try {
 			//
 			ResultMessage addCityResult=constBl.addCity(null);
-			if(addCityResult==ResultMessage.SUCCESS)
-				System.out.println("Add city const Success");
-			else
+			
 				System.out.println("Add city const Fail");
 			
 			//
 			ResultMessage deleteCityResult=constBl.deleteCity(null, null);
-			if(deleteCityResult==ResultMessage.SUCCESS)
-				System.out.println("Delete city const Success");
-			else
+			
 				System.out.println("Delete city const Fail");
 			
 			//
 			ResultMessage modifyCityResult=constBl.modifyCity(null);
-			if(modifyCityResult==ResultMessage.SUCCESS)
-				System.out.println("Modify city const Success");
-			else
+			
 				System.out.println("Modify city const Fail");
 			
 			//
 			ResultMessage modifyPriceResult=constBl.modifyPrice(null);
-			if(modifyPriceResult==ResultMessage.SUCCESS)
-				System.out.println("Modify price const Success");
-			else
+			
 				System.out.println("Modify price const Fail");
 			
 			//

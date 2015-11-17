@@ -14,7 +14,7 @@ public class UserBlStub implements UserBlService {
 	@Override
 	public ResultMessage login(String id, String password) {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override
@@ -36,19 +36,19 @@ public class UserBlStub implements UserBlService {
 	@Override
 	public ResultMessage add(UserVO vo) {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override
 	public ResultMessage del(String id) {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override
 	public ResultMessage modify(UserVO vo) {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 }

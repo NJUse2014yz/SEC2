@@ -11,12 +11,12 @@ public class DeliverDataMockObject implements DeliverDataService{
 
 	@Override
 	public ResultMessage insert(DeliverPO dpo) throws RemoteException {
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override
 	public ResultMessage update(DeliverPO dpo) throws RemoteException {
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	

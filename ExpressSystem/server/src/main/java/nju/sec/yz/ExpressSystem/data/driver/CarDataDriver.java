@@ -15,24 +15,24 @@ import nju.sec.yz.ExpressSystem.po.CarPO;
 public class CarDataDriver {
 	public void drive(CarDataService cds) throws RemoteException{
 		ResultMessage result=cds.delete(null);
-		if(result==ResultMessage.SUCCESS){
+		
 			System.out.println("delete");
-		}
+		
 		
 		result=cds.init();
-		if(result==ResultMessage.SUCCESS){
+		
 			System.out.println("init");
-		}
+		
 		
 		result=cds.insert(null);
-		if(result==ResultMessage.SUCCESS){
+	
 			System.out.println("insert");
-		}
+	
 		
 		result=cds.update(null);
-		if(result==ResultMessage.SUCCESS){
+		
 			System.out.println("update");
-		}
+		
 		
 		CarPO cpo=cds.find(null);
 			System.out.println(cpo.getId());

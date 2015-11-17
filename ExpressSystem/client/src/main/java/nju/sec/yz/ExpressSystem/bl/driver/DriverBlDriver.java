@@ -17,44 +17,38 @@ import nju.sec.yz.ExpressSystem.vo.DriverVO;
  */
 public class DriverBlDriver {
 
-	public void drive(DriverBlService driverBl){
-		
+	public void drive(DriverBlService driverBl) {
+
 		//
-		ResultMessage modifyResult=driverBl.modify(null);
-		if(modifyResult==ResultMessage.SUCCESS)
-			System.out.println("Modify driver Success");
-		else
-			System.out.println("Modify driver Fail");
-		
+		ResultMessage modifyResult = driverBl.modify(null);
+
+		System.out.println("Modify driver Fail");
+
 		//
-		ResultMessage result=driverBl.add(new DriverVO("025001A020","许贺","19680304",
-				"3214631968030400254","15483794533",Sex.MALE,"6年"));
-		if(result==ResultMessage.SUCCESS)
-			System.out.println("Add driver Success");
-		else
-			System.out.println("Add driver Fail");
-		
+		ResultMessage result = driverBl.add(
+				new DriverVO("025001A020", "许贺", "19680304", "3214631968030400254", "15483794533", Sex.MALE, "6年"));
+
+		System.out.println("Add driver Fail");
+
 		//
-		ResultMessage delResult=driverBl.del("hhh");
-		if(delResult==ResultMessage.SUCCESS)
-			System.out.println("Delete driver Success");
-		else
-			System.out.println("Delete driver Fail");
-		
+		ResultMessage delResult = driverBl.del("hhh");
+
+		System.out.println("Delete driver Fail");
+
 		//
-		ArrayList<DriverVO> drivers=driverBl.getAll();
-		System.out.println("driver name:"+drivers.get(0).getId());
-		System.out.println("driver birthDate:"+drivers.get(0).getBirthDate());
-		
+		ArrayList<DriverVO> drivers = driverBl.getAll();
+		System.out.println("driver name:" + drivers.get(0).getId());
+		System.out.println("driver birthDate:" + drivers.get(0).getBirthDate());
+
 		//
-		DriverVO driver=driverBl.getSingle("hhh");
-		System.out.println("driver name:"+driver.getId());
-		System.out.println("driver birthDate:"+driver.getBirthDate());
-		
+		DriverVO driver = driverBl.getSingle("hhh");
+		System.out.println("driver name:" + driver.getId());
+		System.out.println("driver birthDate:" + driver.getBirthDate());
+
 	}
-	
+
 	public static void main(String[] args) {
-		DriverBlService driverBl_stub=new DriverBlStub();
+		DriverBlService driverBl_stub = new DriverBlStub();
 		new DriverBlDriver().drive(driverBl_stub);
 	}
 

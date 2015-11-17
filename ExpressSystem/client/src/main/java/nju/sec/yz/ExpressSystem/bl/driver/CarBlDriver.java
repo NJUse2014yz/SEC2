@@ -5,14 +5,9 @@ import java.util.ArrayList;
 import nju.sec.yz.ExpressSystem.bl.stub.CarBlStub;
 import nju.sec.yz.ExpressSystem.blservice.carAndDriverBlService.CarBlService;
 
-
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 
 import nju.sec.yz.ExpressSystem.vo.CarVO;
-
-
-
-
 
 /**
  * 
@@ -26,24 +21,18 @@ public class CarBlDriver {
 
 		//
 		ResultMessage modifyResult = carBl.modify(null);
-		if (modifyResult == ResultMessage.SUCCESS)
-			System.out.println("Modify car Success");
-		else
-			System.out.println("Modify car Fail");
+
+		System.out.println("Modify car Fail");
 
 		//
 		ResultMessage result = carBl.add(null);
-		if (result == ResultMessage.SUCCESS)
-			System.out.println("Add car Success");
-		else
-			System.out.println("Add car Fail");
+
+		System.out.println("Add car Fail");
 
 		//
 		ResultMessage delResult = carBl.del("hhh");
-		if (delResult == ResultMessage.SUCCESS)
-			System.out.println("Delete car Success");
-		else
-			System.out.println("Delete car Fail");
+
+		System.out.println("Delete car Fail");
 
 		//
 		ArrayList<CarVO> drivers = carBl.getAll();
@@ -52,12 +41,11 @@ public class CarBlDriver {
 		//
 		CarVO driver = carBl.getSingle("hhh");
 		System.out.println("car name:" + driver.getId());
-	
 
 	}
-//	public static void main(String[] args) {
-//		CarBlService carBl_stub=new CarBlStub();
-//		new CarBlDriver().drive(carBl_stub);
-//	}
+	// public static void main(String[] args) {
+	// CarBlService carBl_stub=new CarBlStub();
+	// new CarBlDriver().drive(carBl_stub);
+	// }
 
 }

@@ -13,13 +13,13 @@ public class OutDataDriver {
 			System.out.println("#out data find SUCCESS");
 		if(!ods.findAll().isEmpty())
 			System.out.println("#out data find all SUCCESS");
-		if(ods.delete("")==ResultMessage.SUCCESS)
+		
 			System.out.println("#out data delete SUCCESS");
-		if(ods.init()==ResultMessage.SUCCESS)
+		
 			System.out.println("#out data delete SUCCESS");
-		if(ods.insert(null)==ResultMessage.SUCCESS)
+		
 		System.out.println("#out data insert SUCCESS");
-		if(ods.update(null)==ResultMessage.SUCCESS)
+		
 		System.out.println("#out data update SUCCESS");
 		
 	}

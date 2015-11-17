@@ -11,6 +11,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.dataservice.deliverDataSevice.DeliverDataService;
 import nju.sec.yz.ExpressSystem.po.DeliverPO;
@@ -22,6 +23,7 @@ import nju.sec.yz.ExpressSystem.data.fileUtility.SerializableFileHelper;
  */
 public class DeliverDataImpl extends UnicastRemoteObject implements DeliverDataService {
 	
+	
 	public DeliverDataImpl() throws RemoteException {
 		super();
 	}
@@ -30,8 +32,8 @@ public class DeliverDataImpl extends UnicastRemoteObject implements DeliverDataS
 	public synchronized ResultMessage insert(DeliverPO dpo) throws RemoteException {
 		System.out.println("inserting a DeliverPO...");
 		if(dpo==null){
-			System.out.println("fail");
-			return ResultMessage.FAIL;
+			System.out.println("插入了空DeliverPO！！！");
+			return new ResultMessage(Result.FAIL, "系统错误");
 		}
 		List<DeliverPO> deliverPOs = findAll();
 		deliverPOs.add(dpo);
@@ -41,8 +43,11 @@ public class DeliverDataImpl extends UnicastRemoteObject implements DeliverDataS
 
 	@Override
 	public synchronized ResultMessage update(DeliverPO dpo) throws RemoteException {
-		if(dpo==null)
-			return ResultMessage.FAIL;
+		if(dpo==null){
+			System.out.println("更新的DeliverPO为空！！！");
+			return new ResultMessage(Result.FAIL, "系统错误");
+		}
+			
 		String barID=dpo.getId();
 		
 		List<DeliverPO> deliverPOs = findAll();
@@ -59,7 +64,7 @@ public class DeliverDataImpl extends UnicastRemoteObject implements DeliverDataS
 		}
 		
 		//未找到
-		return ResultMessage.FAIL;
+		return new ResultMessage(Result.FAIL, "找不到要更新的内容");
 	}
 
 	@Override
@@ -87,10 +92,10 @@ public class DeliverDataImpl extends UnicastRemoteObject implements DeliverDataS
 				os.writeObject(deliverPOs);
 			}
 			System.out.println("success");
-			return ResultMessage.SUCCESS;
+			return new ResultMessage(Result.SUCCESS);
 		} catch (IOException e) {
 			e.printStackTrace();
-			return ResultMessage.FAIL;
+			return new ResultMessage(Result.FAIL, "文件读写出错");
 		}
 	}
 	

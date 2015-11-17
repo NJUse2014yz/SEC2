@@ -11,19 +11,19 @@ public class AgencyBlStub implements AgencyBlService {
 	@Override
 	public ResultMessage addAgency(AgencyVO av) {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override
 	public ResultMessage deleteAgency(String id) {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override
 	public ResultMessage modifyAgency(AgencyVO av) {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override

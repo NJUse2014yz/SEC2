@@ -16,19 +16,19 @@ import nju.sec.yz.ExpressSystem.po.UserPO;
 public class UserDataDriver {
 	public void drive(UserDataService uds) throws RemoteException{
 		ResultMessage result=uds.insert(new UserPO("E001","王明","E001",Status.JUNIOR_ACCOUNTANCY));
-		if(result==ResultMessage.SUCCESS){
+		
 			System.out.println("Insert!");
-		}
+		
 		
 		result=uds.delete("E0001");
-		if(result==ResultMessage.SUCCESS){
+		
 			System.out.println("delete!");
-		}
+		
 		
 		result=uds.update(new UserPO("E001","王明","E001",Status.JUNIOR_ACCOUNTANCY));
-		if(result==ResultMessage.SUCCESS){
+		
 			System.out.println("update!");
-		}
+		
 		
 		
 		UserPO upo = uds.find("E001");

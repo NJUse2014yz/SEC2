@@ -16,19 +16,19 @@ import nju.sec.yz.ExpressSystem.po.InventoryPO;
 public class InventoryDataDriver {
 	public void drive(InventoryDataService ids) throws RemoteException{
 		ResultMessage result=ids.insert(null);
-		if(result==ResultMessage.SUCCESS){
+		
 			System.out.println("Insert!");
-		}
+		
 		
 		result=ids.update(null);
-		if(result==ResultMessage.SUCCESS){
+		
 			System.out.println("update!");
-		}
+		
 		
 		result=ids.init();
-		if(result==ResultMessage.SUCCESS){
+		
 			System.out.println("init!");
-		}
+		
 		
 		ArrayList<InventoryPO> array1=ids.findByTime(null, null);
 		System.out.println(array1.size());

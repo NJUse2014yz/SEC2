@@ -12,19 +12,19 @@ public class StaffBlStub implements StaffBlService {
 	@Override
 	public ResultMessage addStaff(StaffVO sv) {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override
 	public ResultMessage deleteStaff(String id) {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override
 	public ResultMessage modifyStaff(StaffVO sv) {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override

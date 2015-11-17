@@ -16,9 +16,9 @@ import nju.sec.yz.ExpressSystem.po.SalaryPO;
 public class SalaryDataDriver {
 	public void drive(SalaryDataService sds) throws RemoteException{
 		ResultMessage result=sds.update(null);
-		if(result==ResultMessage.SUCCESS){
+		
 			System.out.println("update!");
-		}
+		
 		
 		ArrayList<SalaryPO> array =sds.findAll();
 		System.out.println(array.size());

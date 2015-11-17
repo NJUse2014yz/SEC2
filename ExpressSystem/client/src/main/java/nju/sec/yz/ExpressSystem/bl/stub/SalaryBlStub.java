@@ -14,7 +14,7 @@ public class SalaryBlStub implements SalaryBlService {
 	@Override
 	public ResultMessage modifySalary(SalaryVO sv) {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override

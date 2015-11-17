@@ -19,24 +19,24 @@ import nju.sec.yz.ExpressSystem.po.StaffPO;
 public class StaffDataDriver {
 	public void drive(StaffDataService sds)throws RemoteException{
 		ResultMessage result=sds.insert(null);
-		if(result==ResultMessage.SUCCESS){
+		
 			System.out.println("Insert!");
-		}
+		
 		
 		result=sds.update(null);
-		if(result==ResultMessage.SUCCESS){
+		
 			System.out.println("update!");
-		}
+		
 		
 		result=sds.delete(null);
-		if(result==ResultMessage.SUCCESS){
+		
 			System.out.println("delete!");
-		}
+		
 		
 		result=sds.init();
-		if(result==ResultMessage.SUCCESS){
+		
 			System.out.println("init!");
-		}
+		
 		
 		StaffPO spo=(StaffPO) sds.find(null);
 		System.out.println(spo.getName());

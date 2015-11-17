@@ -16,21 +16,15 @@ import nju.sec.yz.ExpressSystem.vo.AccountVO;
 public class AccountBlDriver {
 	public  void drive(AccountBlService accountBlService){
 		ResultMessage message1=accountBlService.addAccount(new AccountVO("八方物流", 10000));
-		if(message1==ResultMessage.SUCCESS)
-			System.out.println("添加账户成功");
-		else 
+		 
 			System.out.println("不好意思，操作失败哟");
 		
 		ResultMessage message2=accountBlService.deleteAccount("0000000001");
-		if(message2==ResultMessage.SUCCESS)
-			System.out.println("删除账户成功");
-		else 
+		
 			System.out.println("不好意思，操作失败哟");
 		
 		ResultMessage message3=accountBlService.modifyAccount(new AccountVO("八方物流", 10000));
-		if(message3==ResultMessage.SUCCESS)
-			System.out.println("修改账户成功");
-		else 
+		
 			System.out.println("不好意思，操作失败哟");
 		
 		AccountVO avo=accountBlService.observeAccount("0000000001");

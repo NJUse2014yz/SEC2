@@ -14,7 +14,7 @@ public class ConstBlStub implements ConstBlService {
 	@Override
 	public ResultMessage modifyCity(CityVO cv) throws RemoteException {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override
@@ -26,21 +26,21 @@ public class ConstBlStub implements ConstBlService {
 	@Override
 	public ResultMessage addCity(CityVO cp) throws RemoteException {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override
 	public ResultMessage deleteCity(String beginPlace, String endPlace)
 			throws RemoteException {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override
 
 	public ResultMessage modifyPrice(PriceVO pp) throws RemoteException {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override

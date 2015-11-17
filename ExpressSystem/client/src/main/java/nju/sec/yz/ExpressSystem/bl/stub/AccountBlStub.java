@@ -16,17 +16,17 @@ public class AccountBlStub implements AccountBlService{
 
 	@Override
 	public ResultMessage addAccount(AccountVO av){
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override
 	public ResultMessage deleteAccount(String id) {
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override
 	public ResultMessage modifyAccount(AccountVO av) {
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override
