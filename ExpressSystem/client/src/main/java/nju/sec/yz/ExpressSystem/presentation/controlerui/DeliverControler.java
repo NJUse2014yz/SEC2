@@ -1,6 +1,7 @@
 package nju.sec.yz.ExpressSystem.presentation.controlerui;
 
 import nju.sec.yz.ExpressSystem.presentation.deliverui.DeliverOrderInUi;
+import nju.sec.yz.ExpressSystem.presentation.deliverui.DeliverOrderSearchUi;
 import nju.sec.yz.ExpressSystem.presentation.userui.UserUiTest;
 
 /*
@@ -26,6 +27,7 @@ public class DeliverControler {
 		case ORDER_IN_SUCCESS:
 			break;
 		case DELIVERY_INQUIRY:
+			mainControler.mainFrame.nextPanel(new DeliverOrderSearchUi(mainControler));
 			break;
 		case RECEIVE_IN:
 			break;

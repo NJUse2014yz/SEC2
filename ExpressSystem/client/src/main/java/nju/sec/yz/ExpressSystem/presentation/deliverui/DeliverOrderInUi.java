@@ -38,8 +38,12 @@ public class DeliverOrderInUi extends JPanel {
 	private JButton ReceiveInButton;
 	// 确定选项
 	private JButton confirmButton;
+	// 退出系统
 	private JButton exitButton;
-
+	//退出当前帐户
+	private JLabel leaveButton;
+	
+	
 	// 寄件人信息
 	private JTextField nameSender;
 	private JTextField addressSender;
@@ -207,6 +211,17 @@ public class DeliverOrderInUi extends JPanel {
 		add(exitButton);
 		setVisible(true);
 		exitButton.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				System.exit(0);
+			}
+		});
+		
+		//离开当前账户
+		leaveButton=new JLabel();
+		leaveButton.setBounds(433, 21, 37, 20);
+		leaveButton.setVisible(true);
+		add(leaveButton);
+		leaveButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				System.exit(0);
 			}

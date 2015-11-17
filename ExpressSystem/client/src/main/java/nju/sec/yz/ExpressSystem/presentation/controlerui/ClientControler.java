@@ -3,6 +3,7 @@ package nju.sec.yz.ExpressSystem.presentation.controlerui;
 import javax.swing.JPanel;
 
 import nju.sec.yz.ExpressSystem.presentation.accountui.AccountMainUiTest;
+import nju.sec.yz.ExpressSystem.presentation.deliverui.DeliverMainUi;
 import nju.sec.yz.ExpressSystem.presentation.deliverui.DeliverMainUiTest;
 import nju.sec.yz.ExpressSystem.presentation.deliverui.DeliverOrderInUi;
 import nju.sec.yz.ExpressSystem.presentation.inventoryui.InventoryMainUiTest;
@@ -28,7 +29,7 @@ public class ClientControler{
 	
 	
 	JPanel userMainPanel=new UserUiTest(this);
-	JPanel deliverMainPanel=new DeliverMainUiTest(this);
+	JPanel deliverMainPanel=new DeliverMainUi(this);
 	JPanel inventoryMainPanel=new InventoryMainUiTest(this);
 	JPanel accountMainPanel=new AccountMainUiTest(this);
 	JPanel managerMainPanel=new ManagerMainUiTest(this);
