@@ -47,6 +47,9 @@ public class Deliver {
 		SendInformation imfo=po.getSendInformation();
 		ResultMessage message=null;
 		DeliverPO deliverPO=new DeliverPO(imfo.getBarId());
+		
+		//
+		
 		try {
 			message=data.insert(deliverPO);
 		} catch (RemoteException e) {

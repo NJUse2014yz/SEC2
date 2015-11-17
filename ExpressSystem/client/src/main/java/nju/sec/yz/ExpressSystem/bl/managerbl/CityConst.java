@@ -11,21 +11,19 @@ import nju.sec.yz.ExpressSystem.vo.PriceVO;
  * @author 周聪
  *
  */
-public class CityConst {
+public class CityConst implements CityDistanceService{
 	public ResultMessage modifyCity(CityVO cv) throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	
-	public CityVO observeCity(String beginPlace, String endPlace) throws RemoteException {
-		// TODO Auto-generated method stub
+	@Override
+	public CityVO observeCity(String beginPlace, String endPlace) {
 		return null;
 	}
 
 	
 	public ResultMessage addCity(CityVO cp) throws RemoteException {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

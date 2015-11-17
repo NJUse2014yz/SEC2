@@ -1,5 +1,7 @@
 package nju.sec.yz.ExpressSystem.bl.deliverbl;
 
+import nju.sec.yz.ExpressSystem.bl.managerbl.CityConst;
+import nju.sec.yz.ExpressSystem.bl.managerbl.CityDistanceService;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptSaveService;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
@@ -8,6 +10,7 @@ import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.SendInformation;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.po.SendSheetPO;
+import nju.sec.yz.ExpressSystem.vo.CityVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 import nju.sec.yz.ExpressSystem.vo.SendSheetVO;
 /**
@@ -168,7 +171,8 @@ public class DeliverReceipt implements ReceiptService{
 	}
 	
 	private int calculateTime(String to, String from) {
-		// TODO 自动生成的方法存根
+		CityDistanceService cities=new CityConst();
+		CityVO vo=cities.observeCity(from, to);
 		return 0;
 	}
 
