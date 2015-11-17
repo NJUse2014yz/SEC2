@@ -2,6 +2,7 @@ package nju.sec.yz.ExpressSystem.bl.userbl;
 
 import java.util.ArrayList;
 
+import nju.sec.yz.ExpressSystem.bl.deliverbl.DeliverReceipt;
 import nju.sec.yz.ExpressSystem.blservice.userBlService.UserBlService;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.UserVO;
@@ -15,8 +16,9 @@ public class UserController implements UserBlService{
 
 	@Override
 	public ResultMessage login(String id, String password) {
-		// TODO Auto-generated method stub
-		return null;
+		User user=new User();
+		ResultMessage resultMessage=user.login(id, password);
+		return resultMessage;
 	}
 
 	@Override
