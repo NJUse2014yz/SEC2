@@ -18,7 +18,7 @@ public class AgencyDataStub implements AgencyDataService{
 	@Override
 	public ResultMessage insert(AgencyPO agpo) throws RemoteException {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override
@@ -30,19 +30,19 @@ public class AgencyDataStub implements AgencyDataService{
 	@Override
 	public ResultMessage delete(String id) throws RemoteException {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override
 	public ResultMessage update(AgencyPO agpo) throws RemoteException {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override
 	public ResultMessage init() throws RemoteException {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override

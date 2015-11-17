@@ -17,17 +17,17 @@ public class InventoryDataStub implements InventoryDataService{
 	
 	@Override
 	public ResultMessage insert(InventoryPO ipo) throws RemoteException{
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override
 	public ResultMessage update(InventoryPO ipo) throws RemoteException{
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override
 	public ResultMessage init( ) throws RemoteException{
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override

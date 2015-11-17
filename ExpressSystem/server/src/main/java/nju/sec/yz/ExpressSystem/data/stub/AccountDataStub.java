@@ -19,7 +19,7 @@ public class AccountDataStub implements AccountDataService {
 	@Override
 	public ResultMessage insert(AccountPO apo) throws RemoteException {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override
@@ -31,19 +31,19 @@ public class AccountDataStub implements AccountDataService {
 	@Override
 	public ResultMessage delete(String id) throws RemoteException {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override
 	public ResultMessage update(AccountPO apo) throws RemoteException {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override
 	public ResultMessage init() throws RemoteException {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override

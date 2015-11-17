@@ -18,7 +18,7 @@ public class InDataStub implements InDataService{
 
 	@Override
 	public ResultMessage insert(InPO inpo) throws RemoteException {
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override
@@ -28,17 +28,17 @@ public class InDataStub implements InDataService{
 
 	@Override
 	public ResultMessage delete(String id) throws RemoteException {
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override
 	public ResultMessage update(InPO inpo) throws RemoteException {
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override
 	public ResultMessage init() throws RemoteException {
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override

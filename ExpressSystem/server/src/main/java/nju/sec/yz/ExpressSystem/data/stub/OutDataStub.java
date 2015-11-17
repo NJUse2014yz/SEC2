@@ -19,7 +19,7 @@ public class OutDataStub implements  OutDataService{
 	@Override
 	public ResultMessage insert(OutPO outpo) throws RemoteException {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override
@@ -31,19 +31,19 @@ public class OutDataStub implements  OutDataService{
 	@Override
 	public ResultMessage delete(String id) throws RemoteException {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override
 	public ResultMessage update(OutPO outpo) throws RemoteException {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override
 	public ResultMessage init() throws RemoteException {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override

@@ -13,7 +13,7 @@ public class ConstDataStub implements ConstDataService{
 	@Override
 	public ResultMessage updateCity(CityPO cp) throws RemoteException {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override
@@ -25,20 +25,20 @@ public class ConstDataStub implements ConstDataService{
 	@Override
 	public ResultMessage insert(CityPO cp) throws RemoteException {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override
 	public ResultMessage delete(String beginPlace, String endPlace)
 			throws RemoteException {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override
 	public ResultMessage updatePrice(PricePO pp) throws RemoteException {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override

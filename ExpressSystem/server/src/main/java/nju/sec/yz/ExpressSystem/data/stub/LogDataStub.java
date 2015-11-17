@@ -17,7 +17,7 @@ public class LogDataStub implements LogDataService {
 	@Override
 	public ResultMessage insert(LogPO lpo) throws RemoteException{
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override

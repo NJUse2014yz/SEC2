@@ -19,7 +19,7 @@ public class StaffDataStub implements StaffDataService{
 	@Override
 	public ResultMessage insert(StaffPO spo) throws RemoteException {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override
@@ -31,19 +31,19 @@ public class StaffDataStub implements StaffDataService{
 	@Override
 	public ResultMessage delete(String id) throws RemoteException {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override
 	public ResultMessage update(StaffPO spo) throws RemoteException {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override
 	public ResultMessage init() throws RemoteException {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override

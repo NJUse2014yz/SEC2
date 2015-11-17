@@ -15,7 +15,7 @@ import nju.sec.yz.ExpressSystem.po.DriverPO;
 public class DriverDataStub implements DriverDataService{
 	@Override
 	public ResultMessage insert(DriverPO dpo) throws RemoteException{
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 	@Override
 	public DriverPO find(String id) throws RemoteException{
@@ -23,15 +23,15 @@ public class DriverDataStub implements DriverDataService{
 	}
 	@Override
 	public ResultMessage delete(String id) throws RemoteException{
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 	@Override
 	public ResultMessage update(DriverPO dpo) throws RemoteException{
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 	@Override
 	public ResultMessage init() throws RemoteException{
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 	@Override
 	public ArrayList<DriverPO> findAll() throws RemoteException{
