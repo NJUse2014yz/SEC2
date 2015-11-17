@@ -2,7 +2,6 @@ package nju.sec.yz.ExpressSystem.bl.managerbl;
 
 import java.rmi.RemoteException;
 
-import nju.sec.yz.ExpressSystem.common.DeliveryType;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.PriceVO;
 
@@ -23,7 +22,7 @@ public class Price implements PriceService{
 	}
 
 	@Override
-	public double getPrice(DeliveryType type) {
+	public double getPrice() {
 		
 		return 23;
 	}

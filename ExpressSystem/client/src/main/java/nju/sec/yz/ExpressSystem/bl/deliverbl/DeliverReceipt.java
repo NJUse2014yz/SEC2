@@ -2,10 +2,14 @@ package nju.sec.yz.ExpressSystem.bl.deliverbl;
 
 import nju.sec.yz.ExpressSystem.bl.managerbl.CityConst;
 import nju.sec.yz.ExpressSystem.bl.managerbl.CityDistanceService;
+import nju.sec.yz.ExpressSystem.bl.managerbl.Price;
+import nju.sec.yz.ExpressSystem.bl.managerbl.PriceService;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptSaveService;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
 import nju.sec.yz.ExpressSystem.bl.tool.ObjectDeepCopy;
+import nju.sec.yz.ExpressSystem.common.DeliveryType;
+import nju.sec.yz.ExpressSystem.common.PackType;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.SendInformation;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
@@ -33,10 +37,14 @@ public class DeliverReceipt implements ReceiptService{
 		System.out.println(validresult);
 		
 		//自动计算运费和到达时间
-		String toAddress=information.getToPerson().getAddress();
 		String fromAddress=information.getFromPerson().getAddress();
-		double allCost=calculateCost(toAddress,fromAddress)+information.getCostForPack();
-		int time=calculateTime(toAddress,fromAddress);
+		String toAddress=information.getToPerson().getAddress();
+		double distance=calculataDistance(fromAddress, toAddress);
+		String weight=information.getGood().getWeight();
+		DeliveryType type = information.getDeliveryType();
+		
+		double allCost=calculateCost(distance,weight,type)+information.getCostForPack();
+		int time=calculateTime(fromAddress,toAddress);
 		information.setCostForAll(allCost);
 		information.setPredictTime(time);
 		
@@ -48,6 +56,7 @@ public class DeliverReceipt implements ReceiptService{
 		receiptList.saveReceipt(receipt);
 		return ResultMessage.SUCCESS;
 	}
+
 
 	@Override
 	/**
@@ -165,27 +174,57 @@ public class DeliverReceipt implements ReceiptService{
 		return true;
 	}	
 	
-	private double calculateCost(String to, String from) {
-		// TODO 自动生成的方法存根
-		return 0;
+	private double calculateCost(double distance, String weight, DeliveryType type) {
+		double cost=0.0;
+		double weight1=Double.parseDouble(weight);
+		double rate=1.0;
+		switch(type){
+		case ECONOMIC:rate=18.0/23;break;
+		case FAST:rate=25.0/23;break;
+		case STANDARD:rate=1.0;break;
+		default:
+			break;
+		}
+		PriceService price=new Price();
+		double baseprice=price.getPrice();
+		cost=distance/1000*rate*weight1*baseprice;
+		return cost;
 	}
 	
-	private int calculateTime(String to, String from) {
-		
-		return 0;
+	private int calculateTime(String from, String to) {
+		double distance=calculataDistance(from, to);
+		//以250km作为一天时间分割线
+		if(distance<0){
+			System.out.println("wrong distance");
+			return -1;
+		}
+		else if(distance<250){
+			return 1;
+		}
+		else if(distance<500){
+			return 2;
+		}
+		else if(distance<750){
+			return 3;
+		}
+		else if(distance<1000){
+			return 4;
+		}
+		else 
+			return 5;
 	}
 	
 	/**
 	 * 从CityConstBl中获得城市距离常量
 	 */
-	private double calculataDistance(String to, String from){
+	private double calculataDistance(String from, String to){
 		CityDistanceService cities=new CityConst();
 		double distance=cities.getDistance(from, to);
 		return distance;
 	}
 
 
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 		DeliverReceipt receipt=new DeliverReceipt();
 		System.out.println(receipt.isBarId("1234567890"));
 		System.out.println(receipt.isCellphone("1344577895"));
@@ -193,6 +232,7 @@ public class DeliverReceipt implements ReceiptService{
 		System.out.println(receipt.isSize("1*2*34"));
 		System.out.println(receipt.isTotal("34234566"));
 	}
+*/
 
 }
 
