@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.DELIVER_CONTROL;
+import nju.sec.yz.ExpressSystem.presentation.controlerui.MAIN_CONTROL;
 
 public class ButtonComponents{
 
@@ -89,7 +90,7 @@ public class ButtonComponents{
 			panel.add(leaveButton);
 			leaveButton.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
-					System.exit(0);
+					maincontroler.mainChangePanel(MAIN_CONTROL.LOGIN);
 				}
 			});
 		}

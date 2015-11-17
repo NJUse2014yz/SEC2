@@ -47,8 +47,9 @@ public class ClientControler{
 	{
 		switch(n)
 		{
-//		case LOGIN:
-//			break;
+		case LOGIN:
+			mainFrame.nextPanel(userMainPanel);
+			break;
 //		case DELIVERY_ENQUIRY:
 //			break;
 		case DELIVER:
