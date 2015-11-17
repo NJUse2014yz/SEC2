@@ -7,6 +7,11 @@ import nju.sec.yz.ExpressSystem.common.CityInformation;
 public class CityPO implements Serializable{
 	private CityInformation cityInformation;
 
+	public CityPO(CityInformation imfo){
+		this.cityInformation=imfo;
+	}
+	
+	
 	public CityInformation getCityInformation() {
 		return cityInformation;
 	}

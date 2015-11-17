@@ -5,6 +5,7 @@ import java.rmi.server.UnicastRemoteObject;
 
 import nju.sec.yz.ExpressSystem.data.deliverdata.DeliverDataImpl;
 import nju.sec.yz.ExpressSystem.data.receiptdata.ReceiptDataImpl;
+import nju.sec.yz.ExpressSystem.data.stub.ConstDataStub;
 import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.AccountBookDataService;
 import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.AccountDataService;
 import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.InDataService;
@@ -93,8 +94,7 @@ public class DataFactorySerializableImpl extends UnicastRemoteObject implements 
 
 	@Override
 	public ConstDataService getConstDataService() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		return new ConstDataStub();
 	}
 
 	@Override

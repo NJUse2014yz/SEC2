@@ -20,7 +20,7 @@ public class ConstBlStub implements ConstBlService {
 	@Override
 	public CityVO observeCity(String beginPlace,String endPlace) throws RemoteException {
 		// TODO 自动生成的方法存根
-		return new CityVO(new CityInformation());
+		return new CityVO(new CityInformation("hh","jj",1000));
 	}
 
 	@Override

@@ -7,6 +7,12 @@ public class CityInformation  implements Serializable{
 	private String toCity;
 	private double distance;
 	
+	public CityInformation(String from,String to,double distance) {
+		this.fromCity=from;
+		this.toCity=to;
+		this.distance=distance;
+	}
+	
 	public String getFromCity() {
 		return fromCity;
 	}

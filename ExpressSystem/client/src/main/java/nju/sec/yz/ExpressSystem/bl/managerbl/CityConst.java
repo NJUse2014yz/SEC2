@@ -19,6 +19,7 @@ public class CityConst implements CityDistanceService{
 
 	@Override
 	public CityVO observeCity(String beginPlace, String endPlace) {
+		
 		return null;
 	}
 
