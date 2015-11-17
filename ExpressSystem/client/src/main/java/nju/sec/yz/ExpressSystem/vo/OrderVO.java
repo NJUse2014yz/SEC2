@@ -11,7 +11,7 @@ import nju.sec.yz.ExpressSystem.common.OrderInformation;
  *　TODO 
  */
 public class OrderVO {
-	private OrderInformation orderInformation;
+	private OrderInformation orderInformation=null;
 
 	public OrderInformation getOrderInformation() {
 		return orderInformation;

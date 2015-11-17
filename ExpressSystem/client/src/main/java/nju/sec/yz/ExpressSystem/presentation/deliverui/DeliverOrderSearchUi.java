@@ -25,7 +25,7 @@ public class DeliverOrderSearchUi extends JPanel {
 	DeliverBlService deliver=new DeliverController();
 	
 		// 确定选项
-		private JButton confirmButton;
+		private JLabel confirmButton;
 		
 		
 		private JTextField searchnumber;
@@ -50,11 +50,9 @@ public class DeliverOrderSearchUi extends JPanel {
 			/*
 			 * 确定
 			 */
-			ImageIcon cinfirmIcon = new ImageIcon("graphic/deliver/button/confirm.png");
-			confirmButton = new JButton(cinfirmIcon);
-			confirmButton.setBounds(378, 456, 76, 27);
+			confirmButton = new JLabel();
+			confirmButton.setBounds(441, 72, 23, 21);
 			add(confirmButton);
-			setVisible(true);
 
 			confirmButton.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
@@ -88,7 +86,7 @@ public class DeliverOrderSearchUi extends JPanel {
 			 */
 
 			searchnumber = new JTextField();
-			searchnumber.setBounds(185, 87, 58, 15);
+			searchnumber.setBounds(221, 72, 219, 20);
 			add(searchnumber);
 			
 			

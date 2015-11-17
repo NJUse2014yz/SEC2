@@ -21,6 +21,7 @@ import nju.sec.yz.ExpressSystem.blservice.deliverBlService.DeliverBlService;
 import nju.sec.yz.ExpressSystem.common.DeliveryType;
 import nju.sec.yz.ExpressSystem.common.GoodInformation;
 import nju.sec.yz.ExpressSystem.common.PackType;
+import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.SendInformation;
 import nju.sec.yz.ExpressSystem.common.ToAndFromInformation;
@@ -107,10 +108,10 @@ public class DeliverOrderInUi extends JPanel {
 				//判断输入的信息是否正确
 				
 				//失败
-				if(deliverBlService.deliverReceipt(sendsheet)==ResultMessage.FAIL){
+				if(deliverBlService.deliverReceipt(sendsheet).getResult()==Result.FAIL){
 					warning=new JLabel();
-					warning.setText("输入信息错误");
-					warning.setBounds(250,490,100,30);
+					warning.setText(deliverBlService.deliverReceipt(sendsheet).getMessage());
+					warning.setBounds(200,490,190,30);
 					warning.setFont(new Font("Dialog",1,15));
 					warning.setForeground(Color.red);
 					add(warning);
