@@ -25,7 +25,7 @@ public class Price implements PriceService{
 	@Override
 	public double getPrice(DeliveryType type) {
 		
-		return 20;
+		return 23;
 	}
 	
 	
