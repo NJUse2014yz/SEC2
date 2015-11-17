@@ -12,17 +12,17 @@ public class SalaryImformation implements Serializable{
 
 	
 	
-	private Power power;
+	private Status power;
 	private int salary;
-	public SalaryImformation(Power power, int salary) {
+	public SalaryImformation(Status power, int salary) {
 		super();
 		this.power = power;
 		this.salary = salary;
 	}
-	public Power getPower() {
+	public Status getPower() {
 		return power;
 	}
-	public void setPower(Power power) {
+	public void setPower(Status power) {
 		this.power = power;
 	}
 	public int getSalary() {

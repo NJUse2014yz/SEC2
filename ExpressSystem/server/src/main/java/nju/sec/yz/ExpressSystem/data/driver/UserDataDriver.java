@@ -3,7 +3,7 @@ package nju.sec.yz.ExpressSystem.data.driver;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import nju.sec.yz.ExpressSystem.common.Power;
+import nju.sec.yz.ExpressSystem.common.Status;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.data.stub.UserDataStub;
 import nju.sec.yz.ExpressSystem.dataservice.userDataSevice.UserDataService;
@@ -15,7 +15,7 @@ import nju.sec.yz.ExpressSystem.po.UserPO;
  */
 public class UserDataDriver {
 	public void drive(UserDataService uds) throws RemoteException{
-		ResultMessage result=uds.insert(new UserPO("E001","王明","E001",Power.JUNIOR_ACCOUNTANCY));
+		ResultMessage result=uds.insert(new UserPO("E001","王明","E001",Status.JUNIOR_ACCOUNTANCY));
 		if(result==ResultMessage.SUCCESS){
 			System.out.println("Insert!");
 		}
@@ -25,7 +25,7 @@ public class UserDataDriver {
 			System.out.println("delete!");
 		}
 		
-		result=uds.update(new UserPO("E001","王明","E001",Power.JUNIOR_ACCOUNTANCY));
+		result=uds.update(new UserPO("E001","王明","E001",Status.JUNIOR_ACCOUNTANCY));
 		if(result==ResultMessage.SUCCESS){
 			System.out.println("update!");
 		}
@@ -33,7 +33,7 @@ public class UserDataDriver {
 		
 		UserPO upo = uds.find("E001");
 		if (("E001" == upo.getId()) && ("王明" == upo.getName()) && ("E001" == upo.getPassword())
-				&& (Power.JUNIOR_ACCOUNTANCY == upo.getPower())) {
+				&& (Status.JUNIOR_ACCOUNTANCY == upo.getPower())) {
 			System.out.println("find!");
 		}
 		

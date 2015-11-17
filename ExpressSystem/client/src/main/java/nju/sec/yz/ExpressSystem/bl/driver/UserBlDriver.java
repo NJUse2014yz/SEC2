@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import nju.sec.yz.ExpressSystem.bl.stub.UserBlStub;
 import nju.sec.yz.ExpressSystem.blservice.userBlService.UserBlService;
-import nju.sec.yz.ExpressSystem.common.Power;
+import nju.sec.yz.ExpressSystem.common.Status;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.UserVO;
 
@@ -16,7 +16,7 @@ import nju.sec.yz.ExpressSystem.vo.UserVO;
 public class UserBlDriver {
 	public  void drive(UserBlService userBlService){
 		//1
-		ResultMessage message1=userBlService.add(new UserVO("s001","刘强东","jingdong",Power.MANAGER));
+		ResultMessage message1=userBlService.add(new UserVO("s001","刘强东","jingdong",Status.MANAGER));
 		if(message1==ResultMessage.SUCCESS)
 			System.out.println("添加用户成功");
 		else 
@@ -28,7 +28,7 @@ public class UserBlDriver {
 		else 
 			System.out.println("不好意思，操作失败哟");
 		//3
-		ResultMessage message3=userBlService.modify(new UserVO("s001","刘强东","jingdong",Power.MANAGER));
+		ResultMessage message3=userBlService.modify(new UserVO("s001","刘强东","jingdong",Status.MANAGER));
 		if(message3==ResultMessage.SUCCESS)
 			System.out.println("修改用户成功");
 		else 

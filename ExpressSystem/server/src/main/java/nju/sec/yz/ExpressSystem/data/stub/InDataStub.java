@@ -3,7 +3,7 @@ package nju.sec.yz.ExpressSystem.data.stub;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import nju.sec.yz.ExpressSystem.common.Power;
+import nju.sec.yz.ExpressSystem.common.Status;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.InDataService;
 import nju.sec.yz.ExpressSystem.po.InPO;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import nju.sec.yz.ExpressSystem.bl.stub.StaffBlStub;
 import nju.sec.yz.ExpressSystem.blservice.managerBlService.StaffBlService;
-import nju.sec.yz.ExpressSystem.common.Power;
+import nju.sec.yz.ExpressSystem.common.Status;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.StaffVO;
 /**
@@ -14,7 +14,7 @@ import nju.sec.yz.ExpressSystem.vo.StaffVO;
 public class StaffBlDriver {
 	public  void drive(StaffBlService staffBlService){
 		//1
-		ResultMessage message1=staffBlService.addStaff(new StaffVO("刘强东", "s001", Power.MANAGER,"京东"));
+		ResultMessage message1=staffBlService.addStaff(new StaffVO("刘强东", "s001", Status.MANAGER,"京东"));
 		if(message1==ResultMessage.SUCCESS)
 			System.out.println("添加人员成功");
 		else 
@@ -26,7 +26,7 @@ public class StaffBlDriver {
 		else 
 			System.out.println("不好意思，操作失败哟");
 		//3
-		ResultMessage message3=staffBlService.modifyStaff(new StaffVO("刘强东", "s001", Power.MANAGER,"京东"));
+		ResultMessage message3=staffBlService.modifyStaff(new StaffVO("刘强东", "s001", Status.MANAGER,"京东"));
 		if(message3==ResultMessage.SUCCESS)
 			System.out.println("修改人员信息成功");
 		else 
