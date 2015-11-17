@@ -66,13 +66,8 @@ public class Inventory {
 		// TODO Auto-generated method stub
 		return null;
 	}
-<<<<<<< HEAD
 	public ResultMessage updateOutReceipt(InventoryOutSheetPO outPO) {
 		// TODO 自动生成的方法存根
 		return null;
-	}
-=======
-
->>>>>>> origin/master
-	
+	}	
 }
