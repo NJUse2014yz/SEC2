@@ -89,7 +89,7 @@ public class UserUi extends JPanel{
 		this.login.setBounds(login_x,login_y,login_w, height);
 		this.login.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				if(true)//userBlService.login(JTuserName.getText(),JTpassword.getText()).getResult()==Result.SUCCESS)
+				if(userBlService.login(JTuserName.getText(),JTpassword.getText()).getResult()==Result.SUCCESS)//
 				{
 					char id=JTuserName.getText().charAt(JTuserName.getText().length()-4);
 					switch(id)

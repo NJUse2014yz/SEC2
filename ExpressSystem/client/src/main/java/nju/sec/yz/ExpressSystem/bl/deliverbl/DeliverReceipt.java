@@ -35,8 +35,6 @@ public class DeliverReceipt implements ReceiptService{
 		
 		//验证information
 		String validresult=isValid(information);
-		//暂时是控制台输出，后期会变成界面显示
-		//System.out.println(validresult);
 		if(!validresult.equals("success"))
 			return new ResultMessage(Result.FAIL,validresult);
 		//自动计算运费和到达时间
@@ -98,23 +96,21 @@ public class DeliverReceipt implements ReceiptService{
 		String weight=sif.getGood().getWeight();
 		String vloume=sif.getGood().getVloume();
 		String size=sif.getGood().getSize();
-		String str="success";
-		if(!isBarId(barId))
-		//TODO 具体对应界面的显示方法				
-			str="亲，咱们的订单号是十位数字哟~";
-		if(!isCellphone(toCellphone))
-			str="亲，不要告诉我寄件人手机号不是11位数字~";
 		if(!isCellphone(fromCellphone))
-			str="亲，不要告诉我收件人手机号不是11位数字~";
+			return "亲，不要告诉我寄件人手机号不是11位数字~";
+		if(!isCellphone(toCellphone))
+			return "亲，不要告诉我收件人手机号不是11位数字~";
 		if(!isTotal(total))
-			str="亲，件数x是要满足0<x<65536的数字哟";
+			return "亲，件数x是要满足0<x<65536的数字哟";
 		if(!isTotal(weight))
-			str="亲，重量x是要满足0<x<65536的数字哟";
+			return "亲，重量x是要满足0<x<65536的数字哟";
+		if(!isBarId(barId))			
+			 return "亲，咱们的订单号是十位数字哟~";
 		if(!isTotal(vloume))
-			str="亲，体积x是要满足0<x<65536的数字哟";
+			return "亲，体积是要满足0<x<65536的数字哟";
 		if(!isSize(size))
-			str="亲，size可是要满足“数*数*数”的格式哟";
-		return str;
+			return "亲，尺寸可是要满足“数*数*数”的格式哟";
+		return "success";
 	}
 
 	

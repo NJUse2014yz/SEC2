@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,12 @@ import nju.sec.yz.ExpressSystem.po.DeliverPO;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.po.UserPO;
 
-public class UserDataImpl implements UserDataService{
+public class UserDataImpl extends UnicastRemoteObject implements UserDataService{
+
+	public UserDataImpl() throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public synchronized ResultMessage insert(UserPO upo) throws RemoteException {
