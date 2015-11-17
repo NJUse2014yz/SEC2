@@ -7,6 +7,8 @@ public class ResultMessage {
 
 	private Result result;
 	
+	
+
 	private String message;//备注
 	
 	public ResultMessage(Result result){
@@ -28,5 +30,11 @@ public class ResultMessage {
 		return message;
 	}
 	
-	
+	public void setResult(Result result) {
+		this.result = result;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
 }

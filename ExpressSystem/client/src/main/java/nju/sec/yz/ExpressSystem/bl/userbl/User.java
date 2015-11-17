@@ -4,9 +4,11 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
+import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.dataservice.deliverDataSevice.DeliverDataService;
 import nju.sec.yz.ExpressSystem.dataservice.userDataSevice.UserDataService;
+import nju.sec.yz.ExpressSystem.po.UserPO;
 import nju.sec.yz.ExpressSystem.vo.UserVO;
 
 /**
@@ -27,7 +29,26 @@ private UserDataService data;
 	}
 	public ResultMessage login(String id, String password) {
 		// TODO Auto-generated method stub
-		return null;
+		ResultMessage result=new ResultMessage(Result.SUCCESS);
+		UserPO userPo = null;
+		try {
+			userPo = data.find(id);
+		} catch (RemoteException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+		
+		if(userPo==null){
+			result.setResult(Result.FAIL);
+			result.setMessage("该账号不存在请重新输入");
+			return result;
+		}
+		if(userPo.getPassword()!=password){
+			result.setResult(Result.FAIL);
+			result.setMessage("密码不对哟，看看大小写输对了没");
+			return result;
+		}	
+		return result;
 	}
 
 	
