@@ -26,7 +26,17 @@ public class DeliverReceipt implements ReceiptService{
 		
 		//验证information
 		String validresult=isValid(information);
+		//暂时是控制台输出，后期会变成界面显示
 		System.out.println(validresult);
+		
+		//自动计算运费和到达时间
+		String toAddress=information.getToPerson().getAddress();
+		String fromAddress=information.getFromPerson().getAddress();
+		double allCost=calculateCost(toAddress,fromAddress)+information.getCostForPack();
+		int time=calculateTime(toAddress,fromAddress);
+		information.setCostForAll(allCost);
+		information.setPredictTime(time);
+		
 		//创建PO交给receipt
 		SendSheetPO receipt=new SendSheetPO();
 		sendReceipt.setId(null);
@@ -128,7 +138,7 @@ public class DeliverReceipt implements ReceiptService{
 		return true;
 	}
 	
-	public boolean isSize(String str){
+	private boolean isSize(String str){
 		if(str==null)
 			return false;
 		if(!str.contains("*")){
@@ -145,5 +155,16 @@ public class DeliverReceipt implements ReceiptService{
 			return false;
 		return true;
 	}	
+	
+	private double calculateCost(String to, String from) {
+		// TODO 自动生成的方法存根
+		return 0;
+	}
+	
+	private int calculateTime(String to, String from) {
+		// TODO 自动生成的方法存根
+		return 0;
+	}
+
 }
 
