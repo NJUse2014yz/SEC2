@@ -22,18 +22,10 @@ import nju.sec.yz.ExpressSystem.vo.OrderVO;
 
 public class DeliverOrderSearchUi extends JPanel {
 	
-	Deliver deliver=new Deliver();
+	DeliverBlService deliver=new DeliverController();
 	
-	// 侧边栏功能选择项
-		private JButton OrderInButton;
-		private JButton OrderSearchButton;
-		private JButton ReceiveInButton;
 		// 确定选项
 		private JButton confirmButton;
-		// 退出系统
-		private JButton exitButton;
-		//退出当前帐户
-		private JLabel leaveButton;
 		
 		
 		private JTextField searchnumber;
@@ -44,9 +36,8 @@ public class DeliverOrderSearchUi extends JPanel {
 		
 		
 		public DeliverOrderSearchUi(ClientControler controler) {
-
 			initDeliverOrderSearch();
-
+			ButtonComponents bc=new ButtonComponents(controler,this);
 		}
 
 
@@ -56,43 +47,6 @@ public class DeliverOrderSearchUi extends JPanel {
 			setSize(490, 550);
 			setVisible(true);
 
-			/*
-			 * button OrderInButton,OrderSearchButton,ReceiveInButton
-			 */
-			ImageIcon OrderInIcon = new ImageIcon("graphic/deliver/button/buttonOrderIn.png");
-			OrderInButton = new JButton(OrderInIcon);
-			OrderInButton.setBounds(14, 50, 108, 41);
-			add(OrderInButton);
-			setVisible(true);
-
-			ImageIcon OrderSearchIcon = new ImageIcon("graphic/deliver/button/buttonOrderSearch.png");
-			OrderSearchButton = new JButton(OrderSearchIcon);
-			OrderSearchButton.setBounds(14, 92, 108, 41);
-			add(OrderSearchButton);
-			setVisible(true);
-
-			ImageIcon ReceiveInIcon = new ImageIcon("graphic/deliver/button/buttonReceiveIn.png");
-			ReceiveInButton = new JButton(ReceiveInIcon);
-			ReceiveInButton.setBounds(14, 134, 108, 41);
-			add(ReceiveInButton);
-			setVisible(true);
-
-			OrderInButton.addMouseListener(new MouseAdapter() {
-				public void mouseClicked(MouseEvent e) {
-					// 调用delivercontroler的方法
-				}
-			});
-			OrderSearchButton.addMouseListener(new MouseAdapter() {
-				public void mouseClicked(MouseEvent e) {
-					// 调用delivercontroler的方法
-				}
-			});
-			ReceiveInButton.addMouseListener(new MouseAdapter() {
-				public void mouseClicked(MouseEvent e) {
-					// 调用delivercontroler的方法
-				}
-			});
-			
 			/*
 			 * 确定
 			 */
@@ -128,35 +82,6 @@ public class DeliverOrderSearchUi extends JPanel {
 			
 			
 
-			/*
-			 * exit
-			 */
-			
-			ImageIcon ExitIcon = new ImageIcon("graphic/common/exit.gif");
-			exitButton= new JButton(ExitIcon);
-			exitButton.setOpaque(false);
-			exitButton.setBorder(null);
-			exitButton.setContentAreaFilled(false); 
-			exitButton.setBounds(490-19,0,19,19);
-			add(exitButton);
-			setVisible(true);
-			exitButton.addMouseListener(new MouseAdapter() {
-				public void mouseClicked(MouseEvent e) {
-					System.exit(0);
-				}
-			});
-			
-			//离开当前账户
-			leaveButton=new JLabel();
-			leaveButton.setBounds(433, 21, 37, 20);
-			leaveButton.setVisible(true);
-			add(leaveButton);
-			leaveButton.addMouseListener(new MouseAdapter() {
-				public void mouseClicked(MouseEvent e) {
-					System.exit(0);
-				}
-			});
-			
 			
 			/*
 			 * textfield
