@@ -21,7 +21,7 @@ public class DeliverControler {
 		case DELIVER_MAIN:
 			break;
 		case ORDER_IN:
-			mainControler.mainFrame.nextPanel(new DeliverOrderInUi());
+			mainControler.mainFrame.nextPanel(new DeliverOrderInUi(mainControler));
 			break;
 		case ORDER_IN_SUCCESS:
 			break;

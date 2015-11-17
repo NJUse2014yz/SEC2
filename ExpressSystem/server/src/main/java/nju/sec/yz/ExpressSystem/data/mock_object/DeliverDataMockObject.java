@@ -28,7 +28,7 @@ public class DeliverDataMockObject implements DeliverDataService{
 
 	@Override
 	public DeliverPO find(String barID) throws RemoteException {
-		return new DeliverPO();
+		return null;
 	}
 	
 }

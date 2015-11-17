@@ -2,6 +2,7 @@ package nju.sec.yz.ExpressSystem.bl.accountbl;
 
 import java.util.ArrayList;
 
+import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.LogVO;
 
 /**
@@ -25,6 +26,10 @@ public class Log {
 	
 	public ArrayList<LogVO> getByTime(String startTime, String endTime) {
 		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public ResultMessage addLog(LogVO vo){
 		return null;
 	}
 }

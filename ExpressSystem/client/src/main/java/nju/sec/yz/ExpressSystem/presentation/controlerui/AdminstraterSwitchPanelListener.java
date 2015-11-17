@@ -3,19 +3,19 @@ package nju.sec.yz.ExpressSystem.presentation.controlerui;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class AccountSwitchPanelListener implements MouseListener{
-	private ACCOUNT_CONTROL order;
-	private AccountControler controler;
+public class AdminstraterSwitchPanelListener implements MouseListener {
+	private AdminstraterControler controler;
+	private ADMINSTRATER_CONTROL order;
 	
-	public AccountSwitchPanelListener(ACCOUNT_CONTROL order,AccountControler controler)
+	public AdminstraterSwitchPanelListener(ADMINSTRATER_CONTROL order,AdminstraterControler controler)
 	{
-		this.order=order;
 		this.controler=controler;
+		this.order=order;
 	}
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		controler.accountChangePanel(order);
+		controler.adminstraterChangePanel(order);
 	}
 
 	@Override
@@ -41,6 +41,5 @@ public class AccountSwitchPanelListener implements MouseListener{
 		// TODO Auto-generated method stub
 		
 	}
-
 
 }

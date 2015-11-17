@@ -1,5 +1,7 @@
 package nju.sec.yz.ExpressSystem.presentation.deliverui;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -13,21 +15,22 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-<<<<<<< HEAD
-=======
+import nju.sec.yz.ExpressSystem.bl.deliverbl.DeliverController;
 import nju.sec.yz.ExpressSystem.bl.deliverbl.DeliverReceipt;
+import nju.sec.yz.ExpressSystem.blservice.deliverBlService.DeliverBlService;
 import nju.sec.yz.ExpressSystem.common.DeliveryType;
 import nju.sec.yz.ExpressSystem.common.GoodInformation;
 import nju.sec.yz.ExpressSystem.common.PackType;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.SendInformation;
 import nju.sec.yz.ExpressSystem.common.ToAndFromInformation;
+import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
+import nju.sec.yz.ExpressSystem.presentation.controlerui.MAIN_CONTROL;
 import nju.sec.yz.ExpressSystem.vo.SendSheetVO;
 
->>>>>>> cf0901ec097690613db03208c37b7beb2c73167e
 public class DeliverOrderInUi extends JPanel {
 	
-	DeliverReceipt deliver_receipt;
+	DeliverBlService deliverBlService=new DeliverController();
 	
 	// 侧边栏功能选择项
 	private JButton OrderInButton;
@@ -35,6 +38,7 @@ public class DeliverOrderInUi extends JPanel {
 	private JButton ReceiveInButton;
 	// 确定选项
 	private JButton confirmButton;
+	private JButton exitButton;
 
 	// 寄件人信息
 	private JTextField nameSender;
@@ -61,13 +65,13 @@ public class DeliverOrderInUi extends JPanel {
 	private JTextField barId;
 
 	// 包装费，快递种类
-	private JComboBox packType;
-	private JComboBox deliveryType;
+	private static JComboBox packType;
+	private static JComboBox deliveryType;
 	
 	//提示信息
 	private JLabel warning;
 
-	public DeliverOrderInUi() {
+	public DeliverOrderInUi(ClientControler controler) {
 
 		initDeliverOrderIn();
 
@@ -137,19 +141,77 @@ public class DeliverOrderInUi extends JPanel {
 				GoodInformation goodIn = new GoodInformation(totalGood.getText(), weightGood.getText(),
 						vloumeGood.getText(), nameGood.getText(), sizeGood.getText());
 				SendInformation sendIn = new SendInformation(barId.getText(), toPerson, fromPerson, goodIn,
-						(DeliveryType) deliveryType.getSelectedItem(), (PackType) packType.getSelectedItem());
+						getdeliveryType(deliveryType), getpackType(packType));
 				sendsheet.setSendInformation(sendIn);
 				//判断输入的信息是否正确
-				if(deliver_receipt.make(sendsheet)==ResultMessage.FAIL){
-					warning=new JLabel("输入信息错误");
+				
+				//失败
+				if(deliverBlService.deliverReceipt(sendsheet)==ResultMessage.FAIL){
+					warning=new JLabel();
+					warning.setText("输入信息错误");
+					warning.setBounds(250,490,100,30);
+					warning.setFont(new Font("Dialog",1,15));
+					warning.setForeground(Color.red);
 					add(warning);
+					repaint();
 				}else{
-					warning=new JLabel("提交成功");
+					//提交成功
+					warning=new JLabel();
+					warning.setText("提交成功");
+					warning.setBounds(270,490,70,30);
+					warning.setFont(new Font("Dialog",1,15));
+					warning.setForeground(Color.red);
+					warning.setVisible(true);
 					add(warning);
+					
+					int time=sendsheet.getSendInformation().getPredictTime();
+					double cost=sendsheet.getSendInformation().getCostForAll();
+					
+					JLabel predictTime=new JLabel();
+					predictTime.setText(Integer.toString(time)+"天");
+					predictTime.setBounds(305,428,70,30);
+					predictTime.setForeground(Color.GRAY);
+					predictTime.setFont(new Font("Dialog",0,18));
+					predictTime.setVisible(true);
+					add(predictTime);
+					
+					JLabel costForAll=new JLabel();
+					costForAll.setText(Double.toString(cost)+"元");
+					costForAll.setBounds(193,428,70,30);
+					costForAll.setForeground(Color.GRAY);
+					costForAll.setFont(new Font("Dialog",0,18));
+					costForAll.setVisible(true);
+					add(costForAll);
+					
+					
+					
+					
+					repaint();
+					
 				}
 			}
 		});
 
+
+		
+		/*
+		 * exit
+		 */
+		
+		ImageIcon ExitIcon = new ImageIcon("graphic/common/exit.gif");
+		exitButton= new JButton(ExitIcon);
+		exitButton.setOpaque(false);
+		exitButton.setBorder(null);
+		exitButton.setContentAreaFilled(false); 
+		exitButton.setBounds(490-19,0,19,19);
+		add(exitButton);
+		setVisible(true);
+		exitButton.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				System.exit(0);
+			}
+		});
+		
 		/*
 		 * textfield
 		 */
@@ -219,21 +281,63 @@ public class DeliverOrderInUi extends JPanel {
 		add(barId);
 
 		packType = new JComboBox();
-		packType.addItem(PackType.PAPER);
-		packType.addItem(PackType.WOOD);
-		packType.addItem(PackType.BAG);
-		packType.addItem(PackType.OTHER);
+		packType.addItem("纸箱");
+		packType.addItem("木箱");
+		packType.addItem("快递袋");
+		packType.addItem("其它");
+//		packType.addItem(PackType.PAPER);
+//		packType.addItem(PackType.WOOD);
+//		packType.addItem(PackType.BAG);
+//		packType.addItem(PackType.OTHER);
 		packType.setBounds(198, 378, 85, 20);
 		add(packType);
 
-		deliveryType = packType = new JComboBox();
-		deliveryType.addItem(DeliveryType.ECONOMIC);
-		deliveryType.addItem(DeliveryType.STANDARD);
-		deliveryType.addItem(DeliveryType.FAST);
+		deliveryType = new JComboBox();
+		deliveryType.addItem("经济快递");
+		deliveryType.addItem("标准快递");
+		deliveryType.addItem("特快");
+//		deliveryType.addItem(DeliveryType.ECONOMIC);
+//		deliveryType.addItem(DeliveryType.STANDARD);
+//		deliveryType.addItem(DeliveryType.FAST);
 		deliveryType.setBounds(225, 407, 85, 20);
 		add(deliveryType);
 	}
+	
+	
 
+	public static PackType getpackType(JComboBox packType){
+			switch(deliveryType.getSelectedItem().toString()){
+			case "纸箱":
+				return PackType.PAPER;
+			case "木箱":
+				return PackType.WOOD;
+			case "快递袋":
+				return PackType.BAG;
+			case "其它":
+				return PackType.OTHER;
+			default:
+				return null;
+		
+		}
+	}
+	
+	public static DeliveryType getdeliveryType(JComboBox deliveryType){
+			switch(deliveryType.getSelectedItem().toString()){
+			case "经济快递":
+				return DeliveryType.ECONOMIC;
+			case "标准快递":
+				return DeliveryType.STANDARD;
+			case "特快":
+				return DeliveryType.FAST;
+			default:
+				return null;
+		
+		}
+	}
+	
+	
+	
+	
 	@Override
 	public void paintComponent(Graphics g) {
 

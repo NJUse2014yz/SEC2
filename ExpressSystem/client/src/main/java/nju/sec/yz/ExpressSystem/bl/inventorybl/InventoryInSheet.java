@@ -19,6 +19,7 @@ import nju.sec.yz.ExpressSystem.vo.SendSheetVO;
  *
  */
 public class InventoryInSheet implements ReceiptService {
+	
 	//通过入库单的审批
 	@Override
 	public ResultMessage approve(ReceiptVO vo) {
@@ -54,6 +55,8 @@ public class InventoryInSheet implements ReceiptService {
 		// TODO 自动生成的方法存根
 		return null;
 	}
+	
+	
 	public ResultMessage isValid(InventoryInInformation ii){
 		//假定柜子刚好99个
 		if(ii.getBlock()==0){

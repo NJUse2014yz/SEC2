@@ -2,6 +2,7 @@ package nju.sec.yz.ExpressSystem.data.stub;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
 
 import nju.sec.yz.ExpressSystem.common.ReceiptType;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
@@ -43,6 +44,12 @@ public class ReceiptDataStub implements ReceiptDataService{
 
 	@Override
 	public ResultMessage delete(String id) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ReceiptPO> findAll() throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}

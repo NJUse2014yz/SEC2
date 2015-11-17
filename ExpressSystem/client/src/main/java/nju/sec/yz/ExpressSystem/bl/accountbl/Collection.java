@@ -2,6 +2,8 @@ package nju.sec.yz.ExpressSystem.bl.accountbl;
 
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.po.OutPO;
+import nju.sec.yz.ExpressSystem.po.PaymentSheetPO;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.vo.PaymentSheetVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
@@ -33,6 +35,12 @@ public class Collection implements ReceiptService{
 	@Override
 	public ReceiptVO show(ReceiptPO po) {
 		// TODO Auto-generated method stub
+		return null;
+	}
+	/**
+	 * 保存收款单信息
+	 */
+	private ResultMessage addCollection(PaymentSheetPO po){
 		return null;
 	}
 }

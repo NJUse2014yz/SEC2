@@ -33,10 +33,55 @@ public class DeliverDataImpl extends UnicastRemoteObject implements DeliverDataS
 			System.out.println("fail");
 			return ResultMessage.FAIL;
 		}
-		try {
-			List<DeliverPO> deliverPOs = findAll();
-			deliverPOs.add(dpo);
+		List<DeliverPO> deliverPOs = findAll();
+		deliverPOs.add(dpo);
+		ResultMessage message=saveData(deliverPOs);
+		return message;
+	}
 
+	@Override
+	public synchronized ResultMessage update(DeliverPO dpo) throws RemoteException {
+		if(dpo==null)
+			return ResultMessage.FAIL;
+		String barID=dpo.getId();
+		
+		List<DeliverPO> deliverPOs = findAll();
+		for (int i = 0; i < deliverPOs.size(); i++) {
+			DeliverPO po = deliverPOs.get(i);
+			String id = po.getId();
+			if (id.equals(barID)) {
+				deliverPOs.remove(i);
+				deliverPOs.add(dpo);
+				ResultMessage message=saveData(deliverPOs);
+				return message;
+			}
+
+		}
+		
+		//未找到
+		return ResultMessage.FAIL;
+	}
+
+	@Override
+	public DeliverPO find(String barID) throws RemoteException {
+		
+		List<DeliverPO> deliverPOs = findAll();
+		for (DeliverPO po : deliverPOs) {
+			String id = po.getId();
+			if (id.equals(barID))
+				return po;
+		}
+		
+		
+		return null;
+	}
+	
+	
+	/**
+	 * 保存数据到文件
+	 */
+	private synchronized ResultMessage saveData(List<DeliverPO> deliverPOs){
+		try {
 			File file = SerializableFileHelper.getDeliverFile();
 			try (ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(file))) {
 				os.writeObject(deliverPOs);
@@ -48,48 +93,8 @@ public class DeliverDataImpl extends UnicastRemoteObject implements DeliverDataS
 			return ResultMessage.FAIL;
 		}
 	}
-
-	@Override
-	public ResultMessage update(DeliverPO dpo) throws RemoteException {
-		if(dpo==null)
-			return ResultMessage.FAIL;
-		String barID=dpo.getOrdermation().getSendInformation().getBarId();
-		try{
-			List<DeliverPO> deliverPOs=findAll();
-			for(int i=0;i<deliverPOs.size();i++){
-				DeliverPO po=deliverPOs.get(i);
-				String id=po.getOrdermation().getSendInformation().getBarId();
-				if(id.equals(barID)){
-					deliverPOs.remove(i);
-					deliverPOs.add(dpo);
-					return ResultMessage.SUCCESS;
-				}
-					
-			}
-		}catch(RemoteException e){
-			e.printStackTrace();
-			return ResultMessage.FAIL;
-		}
-		//未找到
-		return ResultMessage.FAIL;
-	}
-
-	@Override
-	public DeliverPO find(String barID) throws RemoteException {
-		try{
-			List<DeliverPO> deliverPOs=findAll();
-			for(DeliverPO po:deliverPOs){
-				String id=po.getOrdermation().getSendInformation().getBarId();
-				if(id.equals(barID))
-					return po;
-			}
-		}catch(RemoteException e){
-			e.printStackTrace();
-		}
-		
-		return null;
-	}
-
+	
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public ArrayList<DeliverPO> findAll() throws RemoteException {

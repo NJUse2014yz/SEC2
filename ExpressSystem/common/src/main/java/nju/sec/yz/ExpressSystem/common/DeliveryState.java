@@ -8,5 +8,12 @@ import java.io.Serializable;
  *
  */
 public enum DeliveryState  implements Serializable{
-	GATHER,OFFICE_IN,OFFICE_OUT,STORE_IN,STORE_OUT,DELIVING,RECEICE;
+	GATHER,
+	BROKEN,//损坏
+	OFFICE_IN,
+	OFFICE_OUT,
+	STORE_IN,
+	STORE_OUT,
+	DELIVING,//派件
+	RECEICE;
 }

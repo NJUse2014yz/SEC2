@@ -5,7 +5,11 @@ package nju.sec.yz.ExpressSystem.vo;
  *订单信息
  */
 import nju.sec.yz.ExpressSystem.common.OrderInformation;
-
+/**
+ * 用于传递deliverＰＯ的值
+ * @author 周聪
+ *　TODO 
+ */
 public class OrderVO {
 	private OrderInformation orderInformation;
 

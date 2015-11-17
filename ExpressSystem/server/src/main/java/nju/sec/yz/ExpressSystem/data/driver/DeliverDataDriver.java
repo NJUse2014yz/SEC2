@@ -20,30 +20,23 @@ public class DeliverDataDriver {
 
 	public void drive(DeliverDataService dds) throws RemoteException{
 		//插入的po
-		DeliverPO po=new DeliverPO();
+		
 		SendInformation sendInformation=new SendInformation();
 		sendInformation.setBarId("1");
 		OrderInformation orderInformation=new OrderInformation();
 		orderInformation.setSendInformation(sendInformation);
-		po.setOrdermation(orderInformation);
+	
 		
 		//更新的po
-		DeliverPO updatePO=new DeliverPO();
+		
 		SendInformation updateSendInformation=new SendInformation();
 		updateSendInformation.setBarId("1");
 		OrderInformation updateOrderInformation=new OrderInformation();
 		updateOrderInformation.setSendInformation(updateSendInformation);
-		updatePO.setOrdermation(updateOrderInformation);
 		
-		ResultMessage result=dds.insert(po);
-		if(result==ResultMessage.SUCCESS){
-			System.out.println("insert");
-		}
 		
-		result=dds.update(updatePO);
-		if(result==ResultMessage.SUCCESS){
-			System.out.println("update");
-		}
+		
+		
 		
 		DeliverPO getPO=dds.find("1");
 		if(getPO!=null)
