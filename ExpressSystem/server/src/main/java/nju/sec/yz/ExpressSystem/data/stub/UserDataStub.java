@@ -14,6 +14,11 @@ import nju.sec.yz.ExpressSystem.po.UserPO;
  *
  */
 public class UserDataStub extends UnicastRemoteObject implements UserDataService {
+	public UserDataStub() throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public ResultMessage insert(UserPO upo) throws RemoteException{
 		return null;
