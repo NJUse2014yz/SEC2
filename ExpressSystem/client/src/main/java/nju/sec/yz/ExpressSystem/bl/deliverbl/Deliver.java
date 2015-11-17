@@ -1,7 +1,6 @@
 package nju.sec.yz.ExpressSystem.bl.deliverbl;
 
 import java.rmi.RemoteException;
-
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.SendInformation;

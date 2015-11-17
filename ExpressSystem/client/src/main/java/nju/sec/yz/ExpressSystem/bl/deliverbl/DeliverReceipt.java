@@ -94,6 +94,8 @@ public class DeliverReceipt implements ReceiptService{
 		return str;
 	}
 	public boolean isNumber(String str){
+		if(str.length()==0)
+			return false;
 		char[] numbers=str.toCharArray();
 		for(int i=0;i<numbers.length;i++)
 			if('0'>numbers[i]||numbers[i]>'9')
@@ -127,15 +129,28 @@ public class DeliverReceipt implements ReceiptService{
 			return false;
 		}
 		int one=str.indexOf("*");
-		if(!isNumber(str.substring(0, one)))
+		if(!isNumber(str.substring(0, one))){
 			return false;
+		}
 		str=str.substring(one+1);
-		if(!str.contains("*"))
+		if(!str.contains("*")){
 			return false;
+		}
+			
 		int two=str.indexOf("*");
-		if(!isNumber(str.substring(0, two))||!isNumber(str.substring(two)))
+		if(!isNumber(str.substring(0, two))||!isNumber(str.substring(two+1))){
 			return false;
+		}
+			
 		return true;
 	}	
+	public static void main(String[] args) {
+		DeliverReceipt receipt=new DeliverReceipt();
+		System.out.println(receipt.isBarId("1234567890"));
+		System.out.println(receipt.isCellphone("1344577895"));
+		System.out.println(receipt.isNumber(" 1"));
+		System.out.println(receipt.isSize("1*2*34"));
+		System.out.println(receipt.isTotal("34234566"));
+	}
 }
 
