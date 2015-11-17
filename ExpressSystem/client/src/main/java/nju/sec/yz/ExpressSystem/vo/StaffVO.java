@@ -1,6 +1,6 @@
 package nju.sec.yz.ExpressSystem.vo;
 
-import nju.sec.yz.ExpressSystem.common.Power;
+import nju.sec.yz.ExpressSystem.common.Status;
 
 
 /**
@@ -17,13 +17,13 @@ public class StaffVO {
 	private String id;
 
 	// 职位，权限
-	private Power power;
+	private Status power;
 
 	// 所属机构
 	private String agency;
 	
 	
-	public StaffVO(String name, String id, Power power, String agency) {
+	public StaffVO(String name, String id, Status power, String agency) {
 		super();
 		this.name = name;
 		this.id = id;
@@ -47,11 +47,11 @@ public class StaffVO {
 		this.id = id;
 	}
 
-	public Power getPower() {
+	public Status getPower() {
 		return power;
 	}
 
-	public void setPower(Power power) {
+	public void setPower(Status power) {
 		this.power = power;
 	}
 

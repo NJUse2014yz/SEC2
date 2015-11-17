@@ -2,7 +2,7 @@ package nju.sec.yz.ExpressSystem.po;
 
 import java.io.Serializable;
 
-import nju.sec.yz.ExpressSystem.common.Power;
+import nju.sec.yz.ExpressSystem.common.Status;
 
 /**
  * 
@@ -18,7 +18,7 @@ public class StaffPO implements Serializable{
 	private String id;
 	
 	//职位，权限
-	private Power power;
+	private Status power;
 	
 	public String getName() {
 		return name;
@@ -36,11 +36,11 @@ public class StaffPO implements Serializable{
 		this.id = id;
 	}
 
-	public Power getPower() {
+	public Status getPower() {
 		return power;
 	}
 
-	public void setPower(Power power) {
+	public void setPower(Status power) {
 		this.power = power;
 	}
 
@@ -55,7 +55,7 @@ public class StaffPO implements Serializable{
 	//所属机构
 	private AgencyPO agency;
 
-	public StaffPO(String name, String id, Power power, AgencyPO agency) {
+	public StaffPO(String name, String id, Status power, AgencyPO agency) {
 		super();
 		this.name = name;
 		this.id = id;

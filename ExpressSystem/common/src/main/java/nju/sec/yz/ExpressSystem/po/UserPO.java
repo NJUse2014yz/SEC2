@@ -1,7 +1,7 @@
 package nju.sec.yz.ExpressSystem.po;
 import java.io.Serializable;
 
-import nju.sec.yz.ExpressSystem.common.Power;;
+import nju.sec.yz.ExpressSystem.common.Status;;
 /**
  * 
  * @author xiaosaisai
@@ -11,8 +11,8 @@ public class UserPO implements Serializable{
 	private String id;
 	private String name;
 	private String password;
-	private Power  power;
-	public UserPO(String id,String name,String password,Power power){
+	private Status  power;
+	public UserPO(String id,String name,String password,Status power){
 		this.id=id;
 		this.name=name;
 		this.password=password;
@@ -37,10 +37,10 @@ public class UserPO implements Serializable{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Power getPower() {
+	public Status getPower() {
 		return power;
 	}
-	public void setPower(Power power) {
+	public void setPower(Status power) {
 		this.power = power;
 	}
 }
