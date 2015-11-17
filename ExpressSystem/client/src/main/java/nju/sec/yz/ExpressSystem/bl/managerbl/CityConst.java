@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.CityVO;
-import nju.sec.yz.ExpressSystem.vo.PriceVO;
+
 
 /**
  * 城市距离常量信息的领域模型对象

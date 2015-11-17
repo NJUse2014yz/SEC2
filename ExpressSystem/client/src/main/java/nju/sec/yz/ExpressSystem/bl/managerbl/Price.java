@@ -2,6 +2,7 @@ package nju.sec.yz.ExpressSystem.bl.managerbl;
 
 import java.rmi.RemoteException;
 
+import nju.sec.yz.ExpressSystem.common.DeliveryType;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.PriceVO;
 
@@ -10,7 +11,7 @@ import nju.sec.yz.ExpressSystem.vo.PriceVO;
  * @author 周聪
  *
  */
-public class Price {
+public class Price implements PriceService{
 	public ResultMessage modifyPrice(PriceVO pp) throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
@@ -20,4 +21,12 @@ public class Price {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public double getPrice(DeliveryType type) {
+		
+		return 20;
+	}
+	
+	
 }

@@ -13,6 +13,7 @@ import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
  *
  */
 public class Payment implements ReceiptService{
+	
 
 	@Override
 	public ResultMessage approve(ReceiptVO vo) {
