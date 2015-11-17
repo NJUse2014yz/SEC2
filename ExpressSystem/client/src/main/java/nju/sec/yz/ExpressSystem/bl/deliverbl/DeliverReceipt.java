@@ -4,10 +4,8 @@ import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptSaveService;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
 import nju.sec.yz.ExpressSystem.bl.tool.ObjectDeepCopy;
-import nju.sec.yz.ExpressSystem.common.GoodInformation;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.SendInformation;
-import nju.sec.yz.ExpressSystem.common.ToAndFromInformation;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.po.SendSheetPO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
@@ -28,7 +26,7 @@ public class DeliverReceipt implements ReceiptService{
 		
 		//验证information
 		String validresult=isValid(information);
-		
+		System.out.println(validresult);
 		//创建PO交给receipt
 		SendSheetPO receipt=new SendSheetPO();
 		sendReceipt.setId(null);
@@ -66,7 +64,7 @@ public class DeliverReceipt implements ReceiptService{
 		return null;
 	}
 	
-	public String isValid(SendInformation sif){
+	private String isValid(SendInformation sif){
 		//验证information
 		String barId=sif.getBarId();
 		String toCellphone=sif.getToPerson().getCellphone();
@@ -93,7 +91,9 @@ public class DeliverReceipt implements ReceiptService{
 			str="亲，size可是要满足“数*数*数”的格式哟";
 		return str;
 	}
-	public boolean isNumber(String str){
+	private boolean isNumber(String str){
+		if(str==null)
+			return false;
 		char[] numbers=str.toCharArray();
 		for(int i=0;i<numbers.length;i++)
 			if('0'>numbers[i]||numbers[i]>'9')
@@ -101,19 +101,25 @@ public class DeliverReceipt implements ReceiptService{
 		return true;
 	}
 	
-	public boolean isBarId(String str){
+	private boolean isBarId(String str){
+		if(str==null)
+			return false;
 		if(str.length()!=10)
 			return false;
 		return isNumber(str);
 	}
 	
-	public boolean isCellphone(String str){
+	private boolean isCellphone(String str){
+		if(str==null)
+			return false;
 		if(str.length()!=11)
 			return false;
 		return isNumber(str);
 	}
 	
-	public boolean isTotal(String str){
+	private boolean isTotal(String str){
+		if(str==null)
+			return false;
 		if(!isNumber(str))
 			return false;
 		int n= Integer.parseInt(str);
@@ -123,6 +129,8 @@ public class DeliverReceipt implements ReceiptService{
 	}
 	
 	public boolean isSize(String str){
+		if(str==null)
+			return false;
 		if(!str.contains("*")){
 			return false;
 		}
