@@ -31,13 +31,14 @@ public class UserController implements UserBlService{
 
 	@Override
 	public UserVO getSingle(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		User user=new User();
+		return user.getSingle(id);
 	}
 
 	@Override
 	public ResultMessage add(UserVO vo) {
-		// TODO Auto-generated method stub
+		User user=new User();
+		ResultMessage resultMessage=user.add(vo);
 		return null;
 	}
 
