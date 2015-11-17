@@ -34,10 +34,4 @@ public class CityConst {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	
-	public ResultMessage modifyPrice(PriceVO pp) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

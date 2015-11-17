@@ -7,6 +7,7 @@ import nju.sec.yz.ExpressSystem.client.RMIHelper;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice.InventoryDataService;
 import nju.sec.yz.ExpressSystem.po.InventoryInSheetPO;
+import nju.sec.yz.ExpressSystem.po.InventoryOutSheetPO;
 import nju.sec.yz.ExpressSystem.vo.InventoryVO;
 
 /**
@@ -65,6 +66,8 @@ public class Inventory {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	
+	public ResultMessage updateOutReceipt(InventoryOutSheetPO outPO) {
+		// TODO 自动生成的方法存根
+		return null;
+	}	
 }
