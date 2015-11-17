@@ -2,6 +2,8 @@ package nju.sec.yz.ExpressSystem.client;
 
 import javax.swing.JOptionPane;
 
+import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
+
 
 public class Client {
 
@@ -9,6 +11,8 @@ public class Client {
         try {
             RMIHelper.init();
 //            new ClientFrame();
+            ClientControler control=new ClientControler();
+    		control.showFrame();
         } catch (ClientInitException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(

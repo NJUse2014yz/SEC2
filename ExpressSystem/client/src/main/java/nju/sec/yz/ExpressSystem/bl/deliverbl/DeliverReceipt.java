@@ -117,7 +117,7 @@ public class DeliverReceipt implements ReceiptService{
 	
 
 	private boolean isNumber(String str){
-		if(str==null)
+		if(str==null||str.length()==0)
 			return false;
 		char[] numbers=str.toCharArray();
 		for(int i=0;i<numbers.length;i++)
@@ -127,7 +127,7 @@ public class DeliverReceipt implements ReceiptService{
 	}
 	
 	private boolean isBarId(String str){
-		if(str==null)
+		if(str==null||str.length()==0)
 			return false;
 		if(str.length()!=10)
 			return false;
@@ -135,7 +135,7 @@ public class DeliverReceipt implements ReceiptService{
 	}
 	
 	private boolean isCellphone(String str){
-		if(str==null)
+		if(str==null||str.length()==0)
 			return false;
 		if(str.length()!=11)
 			return false;
@@ -143,10 +143,11 @@ public class DeliverReceipt implements ReceiptService{
 	}
 	
 	private boolean isTotal(String str){
-		if(str==null)
+		if(str==null||str.length()==0)
 			return false;
 		if(!isNumber(str))
 			return false;
+		System.out.println(str);
 		int n= Integer.parseInt(str);
 		if(n<0||n>65536)
 			return false;
@@ -154,7 +155,7 @@ public class DeliverReceipt implements ReceiptService{
 	}
 	
 	private boolean isSize(String str){
-		if(str==null)
+		if(str==null||str.length()==0)
 			return false;
 		if(!str.contains("*")){
 			return false;

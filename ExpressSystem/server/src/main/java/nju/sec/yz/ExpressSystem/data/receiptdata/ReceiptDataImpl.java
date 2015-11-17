@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,11 @@ import nju.sec.yz.ExpressSystem.data.fileUtility.SerializableFileHelper;
 import nju.sec.yz.ExpressSystem.dataservice.receiptDataSevice.ReceiptDataService;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 
-public class ReceiptDataImpl implements ReceiptDataService{
+public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataService {
+
+	public ReceiptDataImpl() throws RemoteException {
+		super();
+	}
 
 	@Override
 	public ResultMessage insert(ReceiptPO rpo) throws RemoteException {
