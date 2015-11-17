@@ -101,8 +101,13 @@ public class DeliverReceipt implements ReceiptService{
 			str="亲，size可是要满足“数*数*数”的格式哟";
 		return str;
 	}
+<<<<<<< HEAD
+	public boolean isNumber(String str){
+		if(str.length()==0)
+=======
 	private boolean isNumber(String str){
 		if(str==null)
+>>>>>>> origin/master
 			return false;
 		char[] numbers=str.toCharArray();
 		for(int i=0;i<numbers.length;i++)
@@ -145,16 +150,22 @@ public class DeliverReceipt implements ReceiptService{
 			return false;
 		}
 		int one=str.indexOf("*");
-		if(!isNumber(str.substring(0, one)))
+		if(!isNumber(str.substring(0, one))){
 			return false;
+		}
 		str=str.substring(one+1);
-		if(!str.contains("*"))
+		if(!str.contains("*")){
 			return false;
+		}
+			
 		int two=str.indexOf("*");
-		if(!isNumber(str.substring(0, two))||!isNumber(str.substring(two)))
+		if(!isNumber(str.substring(0, two))||!isNumber(str.substring(two+1))){
 			return false;
+		}
+			
 		return true;
 	}	
+<<<<<<< HEAD
 	
 	private double calculateCost(String to, String from) {
 		// TODO 自动生成的方法存根
@@ -166,5 +177,15 @@ public class DeliverReceipt implements ReceiptService{
 		return 0;
 	}
 
+=======
+	public static void main(String[] args) {
+		DeliverReceipt receipt=new DeliverReceipt();
+		System.out.println(receipt.isBarId("1234567890"));
+		System.out.println(receipt.isCellphone("1344577895"));
+		System.out.println(receipt.isNumber(" 1"));
+		System.out.println(receipt.isSize("1*2*34"));
+		System.out.println(receipt.isTotal("34234566"));
+	}
+>>>>>>> origin/master
 }
 
