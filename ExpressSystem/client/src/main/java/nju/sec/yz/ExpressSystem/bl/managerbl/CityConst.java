@@ -17,7 +17,6 @@ public class CityConst implements CityDistanceService{
 		return null;
 	}
 
-	@Override
 	public CityVO observeCity(String beginPlace, String endPlace) {
 		
 		return null;
@@ -32,5 +31,11 @@ public class CityConst implements CityDistanceService{
 	public ResultMessage deleteCity(String beginPlace, String endPlace) throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public double getDistance(String beginPlace, String endPlace) {
+		// TODO Auto-generated method stub
+		return 1000;
 	}
 }

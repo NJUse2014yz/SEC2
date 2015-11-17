@@ -1,7 +1,11 @@
 package nju.sec.yz.ExpressSystem.bl.accountbl;
 
+import java.rmi.RemoteException;
+
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
+import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.InDataService;
 import nju.sec.yz.ExpressSystem.po.OutPO;
 import nju.sec.yz.ExpressSystem.po.PaymentSheetPO;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
@@ -14,6 +18,18 @@ import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
  */
 public class Collection implements ReceiptService{
 
+	private InDataService inDaata;
+	
+	public Collection() {
+		try {
+			inDaata=DatafactoryProxy.getInDataService();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
 	@Override
 	public ResultMessage approve(ReceiptVO vo) {
 		// TODO Auto-generated method stub

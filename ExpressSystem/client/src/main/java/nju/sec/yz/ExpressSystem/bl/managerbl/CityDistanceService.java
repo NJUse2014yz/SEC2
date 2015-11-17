@@ -1,9 +1,13 @@
 package nju.sec.yz.ExpressSystem.bl.managerbl;
 
 
-import nju.sec.yz.ExpressSystem.vo.CityVO;
 
+/**
+ * 获得城市距离的接口
+ * @author 周聪
+ *
+ */
 public interface CityDistanceService {
 
-	public CityVO observeCity(String beginPlace, String endPlace);
+	public double getDistance(String beginPlace, String endPlace);
 }

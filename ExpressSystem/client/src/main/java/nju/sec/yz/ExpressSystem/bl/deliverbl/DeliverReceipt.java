@@ -171,9 +171,17 @@ public class DeliverReceipt implements ReceiptService{
 	}
 	
 	private int calculateTime(String to, String from) {
-		CityDistanceService cities=new CityConst();
-		CityVO vo=cities.observeCity(from, to);
+		
 		return 0;
+	}
+	
+	/**
+	 * 从CityConstBl中获得城市距离常量
+	 */
+	private double calculataDistance(String to, String from){
+		CityDistanceService cities=new CityConst();
+		double distance=cities.getDistance(from, to);
+		return distance;
 	}
 
 

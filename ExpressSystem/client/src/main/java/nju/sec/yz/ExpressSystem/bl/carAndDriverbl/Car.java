@@ -1,8 +1,11 @@
 package nju.sec.yz.ExpressSystem.bl.carAndDriverbl;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.dataservice.carAndDriverDataSevice.CarDataService;
 import nju.sec.yz.ExpressSystem.vo.CarVO;
 
 /**
@@ -11,6 +14,17 @@ import nju.sec.yz.ExpressSystem.vo.CarVO;
  *
  */
 public class Car {
+	
+	private CarDataService carData;
+	
+	public Car() {
+		try {
+			carData=DatafactoryProxy.getCarDataService();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	public ArrayList<CarVO> getAll() {
 		// TODO Auto-generated method stub
