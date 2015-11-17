@@ -29,8 +29,9 @@ private UserDataService data;
 	public ResultMessage login(String id, String password) {
 		// TODO Auto-generated method stub
 		ResultMessage result=new ResultMessage(Result.SUCCESS);
-		if(id=="D110"&&password=="120")
+		if(id.equals("D110")&&password.equals("120"))
 			return result;
+		
 		UserPO userPo = null;
 		try {
 			userPo = data.find(id);
