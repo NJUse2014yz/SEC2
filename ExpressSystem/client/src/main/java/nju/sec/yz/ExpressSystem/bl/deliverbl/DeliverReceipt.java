@@ -34,8 +34,9 @@ public class DeliverReceipt implements ReceiptService{
 		//验证information
 		String validresult=isValid(information);
 		//暂时是控制台输出，后期会变成界面显示
-		System.out.println(validresult);
-		
+		//System.out.println(validresult);
+		if(!validresult.equals("success"))
+			return ResultMessage.FAIL;
 		//自动计算运费和到达时间
 		String fromAddress=information.getFromPerson().getAddress();
 		String toAddress=information.getToPerson().getAddress();
@@ -95,7 +96,7 @@ public class DeliverReceipt implements ReceiptService{
 		String weight=sif.getGood().getWeight();
 		String vloume=sif.getGood().getVloume();
 		String size=sif.getGood().getSize();
-		String str="";
+		String str="success";
 		if(!isBarId(barId))
 		//TODO 具体对应界面的显示方法				
 			str="亲，咱们的订单号是十位数字哟~";
@@ -175,7 +176,7 @@ public class DeliverReceipt implements ReceiptService{
 		return true;
 	}	
 	
-	private double calculateCost(double distance, String weight, DeliveryType type) {
+	private double calculateCost(double distance, String weight, DeliveryType type){
 		double cost=0.0;
 		double weight1=Double.parseDouble(weight);
 		double rate=1.0;
