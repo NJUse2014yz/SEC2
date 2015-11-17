@@ -106,7 +106,6 @@ public class DeliverReceipt implements ReceiptService{
 
 	private boolean isNumber(String str){
 		if(str==null)
-
 			return false;
 		char[] numbers=str.toCharArray();
 		for(int i=0;i<numbers.length;i++)
@@ -156,15 +155,12 @@ public class DeliverReceipt implements ReceiptService{
 		if(!str.contains("*")){
 			return false;
 		}
-			
 		int two=str.indexOf("*");
 		if(!isNumber(str.substring(0, two))||!isNumber(str.substring(two+1))){
 			return false;
 		}
-			
 		return true;
 	}	
-<<<<<<< HEAD
 	
 	private double calculateCost(String to, String from) {
 		// TODO 自动生成的方法存根
@@ -176,7 +172,7 @@ public class DeliverReceipt implements ReceiptService{
 		return 0;
 	}
 
-=======
+
 	public static void main(String[] args) {
 		DeliverReceipt receipt=new DeliverReceipt();
 		System.out.println(receipt.isBarId("1234567890"));
@@ -185,6 +181,6 @@ public class DeliverReceipt implements ReceiptService{
 		System.out.println(receipt.isSize("1*2*34"));
 		System.out.println(receipt.isTotal("34234566"));
 	}
->>>>>>> origin/master
+
 }
 
