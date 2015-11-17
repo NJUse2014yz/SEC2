@@ -91,13 +91,12 @@ public class DeliverReceipt implements ReceiptService{
 			str="亲，size可是要满足“数*数*数”的格式哟";
 		return str;
 	}
-<<<<<<< HEAD
-	public boolean isNumber(String str){
-		if(str.length()==0)
-=======
+
+	
+
 	private boolean isNumber(String str){
 		if(str==null)
->>>>>>> origin/master
+
 			return false;
 		char[] numbers=str.toCharArray();
 		for(int i=0;i<numbers.length;i++)
