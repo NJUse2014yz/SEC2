@@ -24,7 +24,9 @@ public class UserController implements UserBlService{
 	@Override
 	public ArrayList<UserVO> getAll() {
 		// TODO Auto-generated method stub
-		return null;
+		User user=new User();
+		ArrayList<UserVO> list=user.getAll();
+		return list;
 	}
 
 	@Override
