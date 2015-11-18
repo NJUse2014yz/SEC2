@@ -90,17 +90,56 @@ public class User {
 	
 	public ResultMessage add(UserVO vo) {
 		// TODO Auto-generated method stub
+		//验证information
+		String validresult=isValid(vo);
+		if(!validresult.equals("success"))
+			return new ResultMessage(Result.FAIL,validresult);
+		//创建PO并保存
 		return null;
 	}
 
 	public ResultMessage del(String id) {
 		// TODO Auto-generated method stub
+		//验证id是否存在
+		//调用data层方法
 		return null;
 	}
 
 	public ResultMessage modify(UserVO vo) {
 		// TODO Auto-generated method stub
+		//管理员修改?
+		//用户修改密码?
+		//要不要输入原密码?
 		return null;
+	}
+	
+	private String isValid(UserVO vo) {
+		// TODO 自动生成的方法存根
+		String id=vo.getId();
+		String name=vo.getName();
+		String password=vo.getPassword();
+		Status pow=vo.getPower();
+		
+		if(!isId(id,pow))
+			return "亲，不要告诉我寄件人手机号不是11位数字~";
+		if(!isName(name))
+			return "亲，不要告诉我收件人手机号不是11位数字~";
+		if(!isPassword(password))
+			return "亲，件数x是要满足0<x<65536的数字哟";
+		return "success";
+	}
+	
+	private boolean isPassword(String password) {
+		// TODO 自动生成的方法存根
+		return false;
+	}
+	private boolean isName(String name) {
+		// TODO 自动生成的方法存根
+		return false;
+	}
+	private boolean isId(String id, Status pow) {
+		// TODO 自动生成的方法存根
+		return false;
 	}
 	private UserVO changePoToVo(UserPO po){
 		String id=po.getId();
