@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.common.Status;
 import nju.sec.yz.ExpressSystem.dataservice.userDataSevice.UserDataService;
 import nju.sec.yz.ExpressSystem.po.UserPO;
 import nju.sec.yz.ExpressSystem.vo.UserVO;
@@ -29,8 +30,8 @@ public class User {
 	public ResultMessage login(String id, String password) {
 		// TODO Auto-generated method stub
 		ResultMessage result=new ResultMessage(Result.SUCCESS);
-		if(id.equals("D110")&&password.equals("120"))
-			return result;
+//		if(id.equals("D110")&&password.equals("120"))
+//			return result;
 		
 		UserPO userPo = null;
 		try {
@@ -55,14 +56,35 @@ public class User {
 
 	
 	public ArrayList<UserVO> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<UserPO> listPO = null;
+		ArrayList<UserVO> listVO = new ArrayList<UserVO>();
+		//获取数据库中的userpo列表
+		try {
+			listPO=data.findAll();
+		} catch (RemoteException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+		//将userpo列表转换成uservo列表
+		for(int i=0;i<listPO.size();i++){
+			UserVO vo=changePoToVo(listPO.get(i));
+			listVO.add(vo);
+		}
+		return listVO;
 	}
 
 	
 	public UserVO getSingle(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		UserPO po=null;
+		UserVO vo;
+		try {
+			po=data.find(id);
+		} catch (RemoteException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+		vo=changePoToVo(po);
+		return vo;
 	}
 
 	
@@ -80,5 +102,12 @@ public class User {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	private UserVO changePoToVo(UserPO po){
+		String id=po.getId();
+		String name=po.getName();
+		String password=po.getPassword();
+		Status status=po.getPower();
+		UserVO vo=new UserVO(id, name, password, status);
+		return vo;
+	}
 }

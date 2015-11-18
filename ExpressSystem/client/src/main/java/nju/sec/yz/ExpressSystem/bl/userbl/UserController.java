@@ -1,8 +1,6 @@
 package nju.sec.yz.ExpressSystem.bl.userbl;
 
 import java.util.ArrayList;
-
-import nju.sec.yz.ExpressSystem.bl.deliverbl.DeliverReceipt;
 import nju.sec.yz.ExpressSystem.blservice.userBlService.UserBlService;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.UserVO;
@@ -23,7 +21,6 @@ public class UserController implements UserBlService{
 
 	@Override
 	public ArrayList<UserVO> getAll() {
-		// TODO Auto-generated method stub
 		User user=new User();
 		ArrayList<UserVO> list=user.getAll();
 		return list;
@@ -39,19 +36,21 @@ public class UserController implements UserBlService{
 	public ResultMessage add(UserVO vo) {
 		User user=new User();
 		ResultMessage resultMessage=user.add(vo);
-		return null;
+		return resultMessage;
 	}
 
 	@Override
 	public ResultMessage del(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		User user=new User();
+		ResultMessage resultMessage=user.del(id);
+		return resultMessage;
 	}
 
 	@Override
 	public ResultMessage modify(UserVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		User user=new User();
+		ResultMessage resultMessage=user.modify(vo);
+		return resultMessage;
 	}
 
 }
