@@ -243,20 +243,20 @@ public class DeliverOrderInUi extends JPanel {
 	
 
 	public static PackType getpackType(JComboBox packType){
-			switch(deliveryType.getSelectedItem().toString()){
-			case "纸箱":
-				return PackType.PAPER;
-			case "木箱":
-				return PackType.WOOD;
-			case "快递袋":
-				return PackType.BAG;
-			case "其它":
-				return PackType.OTHER;
-			default:
-				return null;
-		
-		}
+		String type =  packType.getSelectedItem().toString();
+		System.out.println(type);
+		if (type.equals("纸箱"))
+			return PackType.PAPER;
+		else if (type.equals("木箱"))
+			return PackType.WOOD;
+		else if (type.equals("快递袋"))
+			return PackType.BAG;
+		else if (type.equals("其他"))
+			return PackType.OTHER;
+		return null;
+			
 	}
+
 	
 	public static DeliveryType getdeliveryType(JComboBox deliveryType){
 			switch(deliveryType.getSelectedItem().toString()){

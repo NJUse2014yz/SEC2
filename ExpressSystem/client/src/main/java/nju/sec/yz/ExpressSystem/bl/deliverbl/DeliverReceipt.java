@@ -49,7 +49,7 @@ public class DeliverReceipt implements ReceiptService{
 		String weight=information.getGood().getWeight();
 		DeliveryType type = information.getDeliveryType();
 		PackType packType=information.getPackType();
-		
+		System.out.println(type);
 		information.setCostForPack(packType.getPrice());
 		
 		
@@ -79,10 +79,10 @@ public class DeliverReceipt implements ReceiptService{
 		ToAndFromInformation from=info.getFromPerson();
 		
 		ToAndFromInformation toPerson=new ToAndFromInformation(to.getName(), to.getAddress(),
-														to.getTelephone(), to.getCellphone());
+													to.getOrg(),to.getTelephone(), to.getCellphone());
 		
 		ToAndFromInformation fromPerson=new ToAndFromInformation(from.getName(), from.getAddress(), 
-														from.getTelephone(), from.getCellphone());
+													from.getOrg(),from.getTelephone(), from.getCellphone());
 		
 		SendInformation information=new SendInformation(info.getBarId(), toPerson,fromPerson, 
 														info.getGood(), info.getDeliveryType(), info.getPackType());
