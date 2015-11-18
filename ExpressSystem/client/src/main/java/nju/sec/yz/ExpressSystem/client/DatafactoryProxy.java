@@ -16,6 +16,7 @@ import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.AgencyDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.ConstDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.SalaryDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.StaffDataService;
+import nju.sec.yz.ExpressSystem.dataservice.receiptDataSevice.ReceiptCounterDataService;
 import nju.sec.yz.ExpressSystem.dataservice.receiptDataSevice.ReceiptDataService;
 import nju.sec.yz.ExpressSystem.dataservice.userDataSevice.UserDataService;
 /**
@@ -27,6 +28,10 @@ public class DatafactoryProxy {
 
 	private static DatafactoryService datafactory;
 	
+	
+	static public ReceiptCounterDataService getCounterDataService() throws RemoteException {
+		return datafactory.getCounterDataService();
+	}
 	
 	static public DeliverDataService getDeliverDataService() throws RemoteException{
 		return datafactory.getDeliverDataService();

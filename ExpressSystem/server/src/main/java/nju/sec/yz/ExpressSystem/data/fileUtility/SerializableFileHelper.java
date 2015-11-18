@@ -24,6 +24,7 @@ public class SerializableFileHelper {
     public static final String SALARY_FILE_NAME = "salary_data";
     public static final String STAFF_FILE_NAME = "staff_data";
     public static final String USER_FILE_NAME = "user_data";
+    public static final String RECEIPT_COUNTER_FILE_NAME = "receipt_counter_data";
    
 
     public static File getDeliverFile() throws IOException {
@@ -88,6 +89,12 @@ public class SerializableFileHelper {
 
     public static File getReceiptFile() throws IOException {
         File file = new File(RECEIPT_FILE_NAME);
+        createFileIfNotExists(file);
+        return file;
+    }
+    
+    public static File getReceiptCounterFile() throws IOException {
+        File file = new File(RECEIPT_COUNTER_FILE_NAME);
         createFileIfNotExists(file);
         return file;
     }
