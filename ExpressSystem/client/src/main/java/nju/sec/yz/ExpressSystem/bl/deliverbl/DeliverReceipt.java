@@ -1,5 +1,7 @@
 package nju.sec.yz.ExpressSystem.bl.deliverbl;
 
+import java.awt.image.ImageFilter;
+
 import nju.sec.yz.ExpressSystem.bl.managerbl.CityConst;
 import nju.sec.yz.ExpressSystem.bl.managerbl.CityDistanceService;
 import nju.sec.yz.ExpressSystem.bl.managerbl.Price;
@@ -9,9 +11,12 @@ import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptSaveService;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
 import nju.sec.yz.ExpressSystem.bl.tool.ObjectDeepCopy;
 import nju.sec.yz.ExpressSystem.common.DeliveryType;
+import nju.sec.yz.ExpressSystem.common.PackType;
+import nju.sec.yz.ExpressSystem.common.ReceiptType;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.SendInformation;
+import nju.sec.yz.ExpressSystem.common.ToAndFromInformation;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.po.SendSheetPO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
@@ -34,28 +39,62 @@ public class DeliverReceipt implements ReceiptService{
 		String validresult=isValid(information);
 		if(!validresult.equals("success"))
 			return new ResultMessage(Result.FAIL,validresult);
+		
 		//自动计算运费和到达时间
+		//TODO	将城市从地址中取出
 		String fromAddress=information.getFromPerson().getAddress();
 		String toAddress=information.getToPerson().getAddress();
 		double distance=calculataDistance(fromAddress, toAddress);
+		
 		String weight=information.getGood().getWeight();
 		DeliveryType type = information.getDeliveryType();
+		PackType packType=information.getPackType();
+		
+		information.setCostForPack(packType.getPrice());
+		
 		
 		double allCost=calculateCost(distance,weight,type)+information.getCostForPack();
 		int time=calculateTime(fromAddress,toAddress);
 		information.setCostForAll(allCost);
 		information.setPredictTime(time);
 		
+		
 		//创建PO交给receipt
 		SendSheetPO receipt=new SendSheetPO();
-		sendReceipt.setId(null);
-		sendReceipt.setSendInformation(information);
+		SendInformation info=copyImfo(information);
+		receipt.setId(null);
+		receipt.setType(ReceiptType.DELIVER_RECEIPT);
+		receipt.setSendInformation(info);
 		ReceiptSaveService receiptList=new ReceiptList();
 		receiptList.saveReceipt(receipt);
-		return new ResultMessage(Result.SUCCESS);
+		//成功时返回预计时间和费用合计
+		return new ResultMessage(Result.SUCCESS,time+" "+allCost);
 	}
 
-
+	/**
+	 * 复制info的所有数据
+	 */
+	private SendInformation copyImfo(SendInformation info){
+		ToAndFromInformation to=info.getToPerson();
+		ToAndFromInformation from=info.getFromPerson();
+		
+		ToAndFromInformation toPerson=new ToAndFromInformation(to.getName(), to.getAddress(),
+														to.getTelephone(), to.getCellphone());
+		
+		ToAndFromInformation fromPerson=new ToAndFromInformation(from.getName(), from.getAddress(), 
+														from.getTelephone(), from.getCellphone());
+		
+		SendInformation information=new SendInformation(info.getBarId(), toPerson,fromPerson, 
+														info.getGood(), info.getDeliveryType(), info.getPackType());
+		
+		information.setCostForAll(info.getCostForAll());
+		information.setCostForPack(info.getCostForPack());
+		information.setPredictTime(info.getPredictTime());
+		
+		return information;
+	}
+	
+	
 	@Override
 	/**
 	 * 审批完成后更新信息

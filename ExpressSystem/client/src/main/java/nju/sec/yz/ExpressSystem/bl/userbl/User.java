@@ -16,7 +16,7 @@ import nju.sec.yz.ExpressSystem.vo.UserVO;
  *
  */
 public class User {
-private UserDataService data;
+	private UserDataService data;
 	
 	public User(){
 		try {
