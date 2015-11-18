@@ -11,6 +11,7 @@ import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptSaveService;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
 import nju.sec.yz.ExpressSystem.bl.tool.ObjectDeepCopy;
 import nju.sec.yz.ExpressSystem.common.DeliveryType;
+import nju.sec.yz.ExpressSystem.common.GoodInformation;
 import nju.sec.yz.ExpressSystem.common.PackType;
 import nju.sec.yz.ExpressSystem.common.ReceiptType;
 import nju.sec.yz.ExpressSystem.common.Result;
@@ -77,15 +78,18 @@ public class DeliverReceipt implements ReceiptService{
 	private SendInformation copyImfo(SendInformation info){
 		ToAndFromInformation to=info.getToPerson();
 		ToAndFromInformation from=info.getFromPerson();
+		GoodInformation good=info.getGood();
 		
 		ToAndFromInformation toPerson=new ToAndFromInformation(to.getName(), to.getAddress(),
 													to.getOrg(),to.getTelephone(), to.getCellphone());
 		
 		ToAndFromInformation fromPerson=new ToAndFromInformation(from.getName(), from.getAddress(), 
 													from.getOrg(),from.getTelephone(), from.getCellphone());
+		GoodInformation goodInfo=new GoodInformation(good.getTotal(), good.getWeight(), 
+										good.getVloume(), good.getName(), good.getSize());
 		
 		SendInformation information=new SendInformation(info.getBarId(), toPerson,fromPerson, 
-														info.getGood(), info.getDeliveryType(), info.getPackType());
+														goodInfo, info.getDeliveryType(), info.getPackType());
 		
 		information.setCostForAll(info.getCostForAll());
 		information.setCostForPack(info.getCostForPack());
