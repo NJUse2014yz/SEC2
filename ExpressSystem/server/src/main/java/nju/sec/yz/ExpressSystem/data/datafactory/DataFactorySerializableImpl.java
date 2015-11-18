@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 import nju.sec.yz.ExpressSystem.data.deliverdata.DeliverDataImpl;
+import nju.sec.yz.ExpressSystem.data.receiptdata.ReceiptCounterDataImpl;
 import nju.sec.yz.ExpressSystem.data.receiptdata.ReceiptDataImpl;
 import nju.sec.yz.ExpressSystem.data.stub.ConstDataStub;
 import nju.sec.yz.ExpressSystem.data.stub.UserDataStub;
@@ -22,6 +23,7 @@ import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.AgencyDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.ConstDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.SalaryDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.StaffDataService;
+import nju.sec.yz.ExpressSystem.dataservice.receiptDataSevice.ReceiptCounterDataService;
 import nju.sec.yz.ExpressSystem.dataservice.receiptDataSevice.ReceiptDataService;
 import nju.sec.yz.ExpressSystem.dataservice.userDataSevice.UserDataService;
 /**
@@ -118,8 +120,13 @@ public class DataFactorySerializableImpl extends UnicastRemoteObject implements 
 
 	@Override
 	public UserDataService getUserDataService() throws RemoteException {
-		// TODO Auto-generated method stub
+		
 		return new UserDataImpl();
+	}
+
+	@Override
+	public ReceiptCounterDataService getCounterDataService() throws RemoteException {
+		return new ReceiptCounterDataImpl();
 	}
 
 }

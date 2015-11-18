@@ -1,15 +1,15 @@
 package nju.sec.yz.ExpressSystem.bl.deliverbl;
 
-import java.awt.image.ImageFilter;
-
 import nju.sec.yz.ExpressSystem.bl.managerbl.CityConst;
 import nju.sec.yz.ExpressSystem.bl.managerbl.CityDistanceService;
 import nju.sec.yz.ExpressSystem.bl.managerbl.Price;
 import nju.sec.yz.ExpressSystem.bl.managerbl.PriceService;
+import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptCounter;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptSaveService;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
 import nju.sec.yz.ExpressSystem.bl.tool.ObjectDeepCopy;
+import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.common.DeliveryType;
 import nju.sec.yz.ExpressSystem.common.GoodInformation;
 import nju.sec.yz.ExpressSystem.common.PackType;
@@ -18,6 +18,7 @@ import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.SendInformation;
 import nju.sec.yz.ExpressSystem.common.ToAndFromInformation;
+import nju.sec.yz.ExpressSystem.po.ReceiptCountPO;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.po.SendSheetPO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
@@ -50,7 +51,6 @@ public class DeliverReceipt implements ReceiptService{
 		String weight=information.getGood().getWeight();
 		DeliveryType type = information.getDeliveryType();
 		PackType packType=information.getPackType();
-		System.out.println(type);
 		information.setCostForPack(packType.getPrice());
 		
 		
@@ -63,7 +63,7 @@ public class DeliverReceipt implements ReceiptService{
 		//创建PO交给receipt
 		SendSheetPO receipt=new SendSheetPO();
 		SendInformation info=copyImfo(information);
-		receipt.setId(null);
+		receipt.setId(createID("hh"));
 		receipt.setType(ReceiptType.DELIVER_RECEIPT);
 		receipt.setSendInformation(info);
 		ReceiptSaveService receiptList=new ReceiptList();
@@ -71,6 +71,41 @@ public class DeliverReceipt implements ReceiptService{
 		//成功时返回预计时间和费用合计
 		return new ResultMessage(Result.SUCCESS,time+" "+allCost);
 	}
+
+	/**
+	 * 生成寄件单id
+	 * @param deliverID
+	 */
+	private String createID(String deliverID) {
+		String receiptID=deliverID;
+		String date=TimeTool.getDate();
+		receiptID=receiptID+"j"+date;
+		
+		ReceiptCounter counter=new ReceiptCounter();
+		ReceiptCountPO po=counter.get(deliverID, ReceiptType.DELIVER_RECEIPT);
+		
+		//找不到或日期不是今天 
+		if(po==null){
+			counter.add(new ReceiptCountPO(deliverID, date, ReceiptType.DELIVER_RECEIPT));
+			return receiptID+"00001";
+		}else if(!po.getDate().equals(date)){
+			counter.update(new ReceiptCountPO(deliverID, date, ReceiptType.DELIVER_RECEIPT));
+			return receiptID+"00001";
+		}
+		
+		//
+		String count=po.getCount()+"";
+		while(count.length()!=5){
+			count="0"+count;
+		}
+		po.addCount();
+		counter.update(po);
+		receiptID=receiptID+count;
+		
+		return receiptID;
+	}
+
+	
 
 	/**
 	 * 复制info的所有数据
