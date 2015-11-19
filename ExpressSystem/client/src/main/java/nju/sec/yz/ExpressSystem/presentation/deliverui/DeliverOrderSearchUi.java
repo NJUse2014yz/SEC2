@@ -1,6 +1,7 @@
 package nju.sec.yz.ExpressSystem.presentation.deliverui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -16,6 +17,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
 
 import nju.sec.yz.ExpressSystem.bl.deliverbl.Deliver;
 import nju.sec.yz.ExpressSystem.bl.deliverbl.DeliverController;
@@ -61,10 +63,10 @@ public class DeliverOrderSearchUi extends JPanel {
 			confirmButton.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
 					OrderVO ordervo=deliver.checkDeliver(searchnumber.getText());
-					OrderInformation orderInformation=ordervo.getOrderInformation();
+					
 					
 //					快递单号填写错误的情况如何考虑
-					if(orderInformation==null){
+					if(ordervo==null){
 						warning=new JLabel();
 						warning.setText("输入信息错误");
 						warning.setBounds(250,490,100,30);
@@ -73,7 +75,7 @@ public class DeliverOrderSearchUi extends JPanel {
 						add(warning);
 						repaint();
 					}else{
-						
+						OrderInformation orderInformation=ordervo.getOrderInformation();
 						JScrollPane scp=new JScrollPane();
 						scp.setBounds(144,105,315,177);
 						add(scp);
@@ -116,21 +118,36 @@ public class DeliverOrderSearchUi extends JPanel {
 			
 			
 			
-//			
-//			
+			
+			
 //			JScrollPane scp=new JScrollPane();
 //			scp.setBounds(144,105,315,177);
 //			add(scp);
-//			Object[][] info=new Object[12][2];
+//			Object[][] info={{"张三","阿萨德","到达单","11111111","11111111111","杭州"}};
 //			
 //			
-//			String[] title={"寄件人姓名","住址","单位","电话","手机"};
-//			JTable tab=new JTable(info,null);
+//			String[] title={"寄件人姓名","住址","单位","电话","手机","城市"};
+//			JTable tab=new JTable(info,title);
+//			 tab.setPreferredScrollableViewportSize(new Dimension(200,30));
+//			 tab.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+//			 tab.setVisible(true);
 //			JTableHeader jth=tab.getTableHeader();
 //			scp.getViewport().add(tab);
 			
-			
-			
+			Object[][] p={
+				      {"阿呆",new Integer(66),new Integer(32),new Integer(98),new Boolean(false),new Boolean(false)},
+				      {"阿呆",new Integer(82),new Integer(69),new Integer(128),new Boolean(true),new Boolean(false)},
+				    };
+				    String[] n={"姓名","语文","数学","总分","及格","作弊"};
+				    TableColumn column=null;
+				    JTable table=new JTable(p,n);
+				    table.setPreferredScrollableViewportSize(new Dimension(200,30));
+				    table.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+				    table.setVisible(true);
+				    add(table);
+				   
+//				      JScrollPane scrollPane=new JScrollPane(table);
+//				      add(scrollPane);
 		}
 
 
