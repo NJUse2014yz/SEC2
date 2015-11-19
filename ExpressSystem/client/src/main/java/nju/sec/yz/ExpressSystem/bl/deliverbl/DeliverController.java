@@ -18,6 +18,16 @@ import nju.sec.yz.ExpressSystem.vo.TransitSheetVO;
  */
 public class DeliverController implements DeliverBlService{
 
+	
+	@Override
+	/**
+	 * 快递员查询订单信息
+	 */
+	public SendSheetVO checkDeliverReceipt(String barID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	@Override
 	public OrderVO checkDeliver(String id) {
 		

@@ -156,6 +156,8 @@ public class DeliverReceipt implements ReceiptService{
 		String weight=sif.getGood().getWeight();
 		String vloume=sif.getGood().getVloume();
 		String size=sif.getGood().getSize();
+		
+	
 		if(!isCellphone(fromCellphone))
 			return "亲，不要告诉我寄件人手机号不是11位数字~";
 		if(!isCellphone(toCellphone))
