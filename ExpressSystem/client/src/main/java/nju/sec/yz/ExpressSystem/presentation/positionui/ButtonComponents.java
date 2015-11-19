@@ -1,4 +1,4 @@
-package nju.sec.yz.ExpressSystem.presentation.deliverui;
+package nju.sec.yz.ExpressSystem.presentation.positionui;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.DELIVER_CONTROL;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.MAIN_CONTROL;
+import nju.sec.yz.ExpressSystem.presentation.controlerui.POSITION_CONTROL;
 
 public class ButtonComponents{
 
@@ -18,9 +19,12 @@ public class ButtonComponents{
 		private ClientControler maincontroler;
 	
 		// 侧边栏功能选择项
-		private JButton OrderInButton;
-		private JButton OrderSearchButton;
-		private JButton ReceiveInButton;
+		private JButton arriveButton;
+		private JButton deliveButton;
+		private JButton payButton;
+		private JButton carButton;
+		private JButton driverButton;
+		private JButton loadButton;
 		// 退出系统
 		private JButton exitButton;
 		//退出当前帐户
@@ -31,37 +35,37 @@ public class ButtonComponents{
 			/*
 			 * button OrderInButton,OrderSearchButton,ReceiveInButton
 			 */
-			ImageIcon OrderInIcon = new ImageIcon("graphic/deliver/button/buttonOrderIn.png");
-			OrderInButton = new JButton(OrderInIcon);
-			OrderInButton.setBounds(14, 50, 108, 41);
-			panel.add(OrderInButton);
+			ImageIcon arriveIcon = new ImageIcon("graphic/position/button/button_arrive.png");
+			arriveButton = new JButton(arriveIcon);
+			arriveButton.setBounds(14, 50, 108, 41);
+			panel.add(arriveButton);
 			panel.setVisible(true);
 
-			ImageIcon OrderSearchIcon = new ImageIcon("graphic/deliver/button/buttonOrderSearch.png");
-			OrderSearchButton = new JButton(OrderSearchIcon);
-			OrderSearchButton.setBounds(14, 92, 108, 41);
-			panel.add(OrderSearchButton);
+			ImageIcon deliveIcon = new ImageIcon("graphic/position/button/button_delive.png");
+			deliveButton = new JButton(deliveIcon);
+			deliveButton.setBounds(14, 92, 108, 41);
+			panel.add(deliveButton);
 			panel.setVisible(true);
 
-			ImageIcon ReceiveInIcon = new ImageIcon("graphic/deliver/button/buttonReceiveIn.png");
-			ReceiveInButton = new JButton(ReceiveInIcon);
-			ReceiveInButton.setBounds(14, 134, 108, 41);
-			panel.add(ReceiveInButton);
+			ImageIcon payIcon = new ImageIcon("graphic/position/button/button_pay.png");
+			payButton = new JButton(payIcon);
+			payButton.setBounds(14, 134, 108, 41);
+			panel.add(payButton);
 			panel.setVisible(true);
 
-			OrderInButton.addMouseListener(new MouseAdapter() {
+			arriveButton.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
-					maincontroler.positionControler.deliverChangePanel(DELIVER_CONTROL.ORDER_IN);
+					maincontroler.positionControler.positionChangePanel(POSITION_CONTROL.ARRIVE);
 				}
 			});
-			OrderSearchButton.addMouseListener(new MouseAdapter() {
+			deliveButton.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
-					maincontroler.positionControler.deliverChangePanel(DELIVER_CONTROL.DELIVERY_INQUIRY);
+					maincontroler.positionControler.positionChangePanel(POSITION_CONTROL.DELIVE);
 				}
 			});
-			ReceiveInButton.addMouseListener(new MouseAdapter() {
+			payButton.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
-					maincontroler.positionControler.deliverChangePanel(DELIVER_CONTROL.RECEIVE_IN);
+					maincontroler.positionControler.positionChangePanel(POSITION_CONTROL.GETPAY);
 				}
 			});
 			

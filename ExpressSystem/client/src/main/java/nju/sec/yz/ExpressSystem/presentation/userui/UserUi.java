@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import nju.sec.yz.ExpressSystem.bl.deliverbl.DeliverController;
 import nju.sec.yz.ExpressSystem.bl.userbl.User;
 import nju.sec.yz.ExpressSystem.bl.userbl.UserController;
 import nju.sec.yz.ExpressSystem.blservice.deliverBlService.DeliverBlService;
@@ -68,6 +69,7 @@ public class UserUi extends JPanel{
 	{
 		super();
 		this.userBlService=new UserController();
+		this.deliverBlService=new DeliverController();
 		this.controler=controler;
 		this.initMainUi();
 	}
@@ -75,6 +77,13 @@ public class UserUi extends JPanel{
 		this.setLayout(null);
 		this.setSize(B_WIDTH,B_HEIGHT);
 
+		this.warning=new JLabel();
+		this.warning.setFont(new Font("Dialog",1,12));
+		this.warning.setForeground(Color.red);
+		this.warning.setBounds(warning_x,warning_y,warning_w,height);
+		this.add(warning);
+		this.warning.setVisible(false);
+		
 		this.JTbarId=new JTextField();
 		this.JTbarId.setBounds(searchin_x,searchin_y,searchin_w,height);
 		this.add(JTbarId);
@@ -123,12 +132,8 @@ public class UserUi extends JPanel{
 				}
 				else
 				{
-					warning=new JLabel();
+					warning.setVisible(true);
 					warning.setText(userBlService.login(JTuserName.getText(),JTpassword.getText()).getMessage());
-					warning.setBounds(warning_x,warning_y,warning_w,height);
-					warning.setFont(new Font("Dialog",1,12));
-					warning.setForeground(Color.red);
-					add(warning);
 					repaint();
 				}
 			}
@@ -141,16 +146,12 @@ public class UserUi extends JPanel{
 			public void mouseClicked(MouseEvent e) {
 				if(deliverBlService.checkDeliver(JTbarId.getText())!=null)
 				{
-					new MainSwitchPanelListener(MAIN_CONTROL.DELIVERY_ENQUIRY,controler,0);
+					new MainSwitchPanelListener(MAIN_CONTROL.DELIVERY_ENQUIRY,controler,0);//暂时使用快递员的查询界面
 				}
 				else
 				{
-					warning=new JLabel();
+					warning.setVisible(true);
 					warning.setText("订单条形码号有误，请再次检查");
-					warning.setBounds(warning_x,warning_y,warning_w,height);
-					warning.setFont(new Font("Dialog",1,12));
-					warning.setForeground(Color.red);
-					add(warning);
 					repaint();
 				}
 			}

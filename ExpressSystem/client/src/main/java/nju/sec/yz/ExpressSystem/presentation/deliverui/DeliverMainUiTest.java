@@ -16,7 +16,7 @@ public class DeliverMainUiTest extends JPanel{
 	{
 		super();
 		this.mainControler=mainControler;
-		controler=mainControler.deliverControler;
+		controler=mainControler.positionControler;
 		this.setLayout(null);
 		this.test=new JButton("to fill the order");
 		test.setBounds(50,50,100,50);
