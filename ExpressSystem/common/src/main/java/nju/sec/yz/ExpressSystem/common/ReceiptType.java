@@ -44,7 +44,14 @@ public enum ReceiptType {
 		this.length=length;
 	}
 	
+	/**
+	 * 生成表单id时要加的字符
+	 */
 	private String idStr;
+	
+	/**
+	 * 表单的后几位编号的长度
+	 */
 	private int length;
 	
 	public String getIdStr() {

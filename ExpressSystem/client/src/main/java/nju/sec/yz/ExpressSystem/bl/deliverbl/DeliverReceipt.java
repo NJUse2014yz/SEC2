@@ -62,13 +62,13 @@ public class DeliverReceipt implements ReceiptService{
 
 		SendInformation info=copyInfo(information);
 		receipt.setId(createID("hh"));
-		System.out.println("receiptID"+receipt.getId());
+		System.out.println(receipt.getId());
 		receipt.setType(ReceiptType.DELIVER_RECEIPT);
 		receipt.setSendInformation(info);
 
 		ReceiptSaveService receiptList=new ReceiptList();
 		receiptList.saveReceipt(receipt);
-		return new ResultMessage(Result.SUCCESS);
+		return new ResultMessage(Result.SUCCESS,allCost+" "+time);
 	}
 
 
@@ -136,7 +136,6 @@ public class DeliverReceipt implements ReceiptService{
 
 	@Override
 	public ReceiptVO show(ReceiptPO po) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	
@@ -199,7 +198,6 @@ public class DeliverReceipt implements ReceiptService{
 			return false;
 		if(!isNumber(str))
 			return false;
-		System.out.println(str);
 		int n= Integer.parseInt(str);
 		if(n<0||n>65536)
 			return false;
