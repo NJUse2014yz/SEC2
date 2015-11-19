@@ -41,9 +41,9 @@ public class DeliverReceipt implements ReceiptService{
 		if(!validresult.equals("success"))
 			return new ResultMessage(Result.FAIL,validresult);
 		//自动计算运费和到达时间
-		String fromAddress=information.getFromPerson().getAddress();
-		String toAddress=information.getToPerson().getAddress();
-		double distance=calculataDistance(fromAddress, toAddress);
+		String fromCity=information.getFromPerson().getCity();
+		String toCity=information.getToPerson().getCity();
+		double distance=calculataDistance(fromCity, toCity);
 		String weight=information.getGood().getWeight();
 		DeliveryType type = information.getDeliveryType();
 
@@ -53,7 +53,7 @@ public class DeliverReceipt implements ReceiptService{
 
 		
 		double allCost=calculateCost(distance,weight,type)+information.getCostForPack();
-		int time=calculateTime(fromAddress,toAddress);
+		int time=calculateTime(fromCity,toCity);
 		information.setCostForAll(allCost);
 		information.setPredictTime(time);
 		
@@ -88,25 +88,25 @@ public class DeliverReceipt implements ReceiptService{
 	 * 复制info的所有数据
 	 */
 	private SendInformation copyInfo(SendInformation info){
-		ToAndFromInformation to=info.getToPerson();
-		ToAndFromInformation from=info.getFromPerson();
-		GoodInformation good=info.getGood();
-		
-		ToAndFromInformation toPerson=new ToAndFromInformation(to.getName(), to.getAddress(),
-													to.getOrg(),to.getTelephone(), to.getCellphone());
-		
-		ToAndFromInformation fromPerson=new ToAndFromInformation(from.getName(), from.getAddress(), 
-													from.getOrg(),from.getTelephone(), from.getCellphone());
-		GoodInformation goodInfo=new GoodInformation(good.getTotal(), good.getWeight(), 
-										good.getVloume(), good.getName(), good.getSize());
-		
-		SendInformation information=new SendInformation(info.getBarId(), toPerson,fromPerson, 
-														goodInfo, info.getDeliveryType(), info.getPackType());
-		
+		ToAndFromInformation to = info.getToPerson();
+		ToAndFromInformation from = info.getFromPerson();
+		GoodInformation good = info.getGood();
+
+		ToAndFromInformation toPerson = new ToAndFromInformation(to.getName(), to.getCity(), to.getAddress(),
+				to.getOrg(), to.getTelephone(), to.getCellphone());
+
+		ToAndFromInformation fromPerson = new ToAndFromInformation(from.getName(), from.getCity(), from.getAddress(),
+				from.getOrg(), from.getTelephone(), from.getCellphone());
+		GoodInformation goodInfo = new GoodInformation(good.getTotal(), good.getWeight(), good.getVloume(),
+				good.getName(), good.getSize());
+
+		SendInformation information = new SendInformation(info.getBarId(), toPerson, fromPerson, goodInfo,
+				info.getDeliveryType(), info.getPackType());
+
 		information.setCostForAll(info.getCostForAll());
 		information.setCostForPack(info.getCostForPack());
 		information.setPredictTime(info.getPredictTime());
-		
+
 		return information;
 	}
 	
