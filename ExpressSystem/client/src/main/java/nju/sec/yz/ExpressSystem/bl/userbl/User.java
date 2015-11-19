@@ -128,7 +128,9 @@ public class User implements UserInfo{
 		return vo;
 	}
 
-	
+	/**
+	 * TODO 用户名已存在
+	 */
 	public ResultMessage add(UserVO vo) {
 		ResultMessage message=null;
 		//验证information

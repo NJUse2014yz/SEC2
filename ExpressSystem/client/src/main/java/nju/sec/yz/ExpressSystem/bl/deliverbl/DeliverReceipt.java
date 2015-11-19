@@ -225,62 +225,23 @@ public class DeliverReceipt implements ReceiptService{
 		String size=sif.getGood().getSize();
 		
 	
-		if(!isCellphone(fromCellphone))
+		if(!ValidHelper.isCellphone(fromCellphone))
 			return "亲，不要告诉我寄件人手机号不是11位数字~";
-		if(!isCellphone(toCellphone))
+		if(!ValidHelper.isCellphone(toCellphone))
 			return "亲，不要告诉我收件人手机号不是11位数字~";
-		if(!isTotal(total))
+		if(!ValidHelper.isTotal(total))
 			return "亲，件数x是要满足0<x<65536的数字哟";
-		if(!isTotal(weight))
+		if(!ValidHelper.isTotal(weight))
 			return "亲，重量x是要满足0<x<65536的数字哟";
-		if(!isBarId(barId))			
+		if(!ValidHelper.isBarId(barId))			
 			 return "亲，咱们的订单号是十位数字哟~";
-		if(!isTotal(vloume))
+		if(!ValidHelper.isTotal(vloume))
 			return "亲，体积是要满足0<x<65536的数字哟";
 		if(!isSize(size))
 			return "亲，尺寸可是要满足“数*数*数”的格式哟";
 		return "success";
 	}
 
-	
-
-	private boolean isNumber(String str){
-		if(str==null||str.length()==0)
-			return false;
-		char[] numbers=str.toCharArray();
-		for(int i=0;i<numbers.length;i++)
-			if('0'>numbers[i]||numbers[i]>'9')
-				return false;
-		return true;
-	}
-	
-	private boolean isBarId(String str){
-		if(str==null||str.length()==0)
-			return false;
-		if(str.length()!=10)
-			return false;
-		return isNumber(str);
-	}
-	
-	private boolean isCellphone(String str){
-		if(str==null||str.length()==0)
-			return false;
-		if(str.length()!=11)
-			return false;
-		return isNumber(str);
-	}
-	
-	private boolean isTotal(String str){
-		if(str==null||str.length()==0)
-			return false;
-		if(!isNumber(str))
-			return false;
-		int n= Integer.parseInt(str);
-		if(n<0||n>65536)
-			return false;
-		return true;
-	}
-	
 	private boolean isSize(String str){
 		if(str==null||str.length()==0)
 			return false;
@@ -288,7 +249,7 @@ public class DeliverReceipt implements ReceiptService{
 			return false;
 		}
 		int one=str.indexOf("*");
-		if(!isNumber(str.substring(0, one))){
+		if(!ValidHelper.isNumber(str.substring(0, one))){
 			return false;
 		}
 		str=str.substring(one+1);
@@ -296,7 +257,7 @@ public class DeliverReceipt implements ReceiptService{
 			return false;
 		}
 		int two=str.indexOf("*");
-		if(!isNumber(str.substring(0, two))||!isNumber(str.substring(two+1))){
+		if(!ValidHelper.isNumber(str.substring(0, two))||!ValidHelper.isNumber(str.substring(two+1))){
 			return false;
 		}
 		return true;

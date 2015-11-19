@@ -1,40 +1,39 @@
 package nju.sec.yz.ExpressSystem.bl.deliverbl;
 
-import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
+import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
-import nju.sec.yz.ExpressSystem.po.ReceiptPO;
-import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiveVO;
 
 /**
  * 收件单的领域模型
+ * 收件单不用审批
  * @author 周聪
  *
  */
-public class RecieveReceipt implements ReceiptService{
+public class RecieveReceipt {
 
-	@Override
-	public ResultMessage approve(ReceiptVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+
+	public ResultMessage make(ReceiveVO vo) {
+		
+		String validResult=isValid(vo);
+		if(!validResult.equals("success"))
+			return new ResultMessage(Result.FAIL,validResult);
+		Deliver deliver=new Deliver();
+		//更新历史轨迹
+		ResultMessage message=deliver.updateReceiveReceipt();
+		return message;
+	}
+	
+	private String isValid(ReceiveVO vo){
+		String barID=vo.getReceiveInformation().getBarID();
+		String date=vo.getReceiveInformation().getTime();
+		if(!ValidHelper.isBarId(barID))
+			return "亲，咱们的订单号是十位数字哟~";
+		if(!ValidHelper.isDate(date))
+			return "时间格式错误";
+		return "success";
 	}
 
-	@Override
-	public ResultMessage make(ReceiptVO vo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public ReceiptPO modify(ReceiptVO vo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ReceiptVO show(ReceiptPO po) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 }

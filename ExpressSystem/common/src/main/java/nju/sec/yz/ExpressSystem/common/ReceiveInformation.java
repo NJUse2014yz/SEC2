@@ -8,16 +8,11 @@ import java.io.Serializable;
  *
  */
 public class ReceiveInformation  implements Serializable{
-	private String id;
+	private String barID;//订单条形码号
 	private String receiver;
 	private String time;
 	
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
+	
 	public String getReceiver() {
 		return receiver;
 	}
@@ -29,5 +24,11 @@ public class ReceiveInformation  implements Serializable{
 	}
 	public void setTime(String time) {
 		this.time = time;
+	}
+	public String getBarID() {
+		return barID;
+	}
+	public void setBarID(String barID) {
+		this.barID = barID;
 	}
 }

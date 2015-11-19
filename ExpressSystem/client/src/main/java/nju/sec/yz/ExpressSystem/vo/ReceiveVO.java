@@ -5,7 +5,7 @@ package nju.sec.yz.ExpressSystem.vo;
  */
 import nju.sec.yz.ExpressSystem.common.ReceiveInformation;
 
-public class ReceiveVO {
+public class ReceiveVO extends ReceiptVO{
 	private ReceiveInformation receiveInformation;
 
 	public ReceiveInformation getReceiveInformation() {
