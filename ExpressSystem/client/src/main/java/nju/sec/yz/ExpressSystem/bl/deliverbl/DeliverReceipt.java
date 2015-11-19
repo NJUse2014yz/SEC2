@@ -1,5 +1,7 @@
 package nju.sec.yz.ExpressSystem.bl.deliverbl;
 
+import java.rmi.RemoteException;
+
 import nju.sec.yz.ExpressSystem.bl.managerbl.CityConst;
 import nju.sec.yz.ExpressSystem.bl.managerbl.CityDistanceService;
 import nju.sec.yz.ExpressSystem.bl.managerbl.Price;
@@ -8,6 +10,7 @@ import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptID;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptSaveService;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
+import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
 import nju.sec.yz.ExpressSystem.common.DeliveryType;
 import nju.sec.yz.ExpressSystem.common.GoodInformation;
 import nju.sec.yz.ExpressSystem.common.PackType;
@@ -16,6 +19,7 @@ import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.SendInformation;
 import nju.sec.yz.ExpressSystem.common.ToAndFromInformation;
+import nju.sec.yz.ExpressSystem.dataservice.deliverDataSevice.OrderDataService;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.po.SendSheetPO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
@@ -25,6 +29,18 @@ import nju.sec.yz.ExpressSystem.vo.SendSheetVO;
  * @author 周聪
  */
 public class DeliverReceipt implements ReceiptService{
+	
+	private OrderDataService orderData;
+	
+	public DeliverReceipt() {
+		try {
+			orderData=DatafactoryProxy.getOrderDataService();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	@Override
 	/**
 	 * 检验输入信息
@@ -84,7 +100,38 @@ public class DeliverReceipt implements ReceiptService{
 	 * 从数据层获得订单信息
 	 */
 	public SendSheetVO getOrder(String barID){
-		return null;
+		SendSheetPO po=null;
+		
+		try {
+			po=orderData.get(barID);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		
+		if(po==null)
+			return null;
+		
+		SendSheetVO vo=new SendSheetVO();
+		SendInformation info=copyInfo(po.getSendInformation());
+		vo.setSendInformation(info);
+		vo.setId(po.getId());
+		vo.setType(po.getType());
+		
+		return vo;
+	}
+	
+	private ResultMessage saveOrder(SendSheetPO po){
+		ResultMessage message=null;
+		try {
+			message=orderData.add(po);
+		} catch (RemoteException e) {
+			
+			e.printStackTrace();
+			return new ResultMessage(Result.FAIL, "网络异常");
+		}
+		return message;
 	}
 	
 	/**

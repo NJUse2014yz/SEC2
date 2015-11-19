@@ -25,10 +25,16 @@ public class SerializableFileHelper {
     public static final String STAFF_FILE_NAME = "staff_data";
     public static final String USER_FILE_NAME = "user_data";
     public static final String RECEIPT_COUNTER_FILE_NAME = "receipt_counter_data";
-   
+    public static final String ORDER_FILE_NAME = "order_data";
 
     public static File getDeliverFile() throws IOException {
         File file = new File(DELIVER_FILE_NAME);
+        createFileIfNotExists(file);
+        return file;
+    }
+    
+    public static File getOrderFile() throws IOException {
+        File file = new File(ORDER_FILE_NAME);
         createFileIfNotExists(file);
         return file;
     }
