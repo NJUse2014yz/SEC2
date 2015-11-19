@@ -17,7 +17,6 @@ import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.SendInformation;
 import nju.sec.yz.ExpressSystem.common.ToAndFromInformation;
-import nju.sec.yz.ExpressSystem.po.ReceiptCountPO;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.po.SendSheetPO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
@@ -49,8 +48,6 @@ public class DeliverReceipt implements ReceiptService{
 
 		PackType packType=information.getPackType();
 		information.setCostForPack(packType.getPrice());
-		
-
 		
 		double allCost=calculateCost(distance,weight,type)+information.getCostForPack();
 		int time=calculateTime(fromCity,toCity);
@@ -122,7 +119,7 @@ public class DeliverReceipt implements ReceiptService{
 		SendInformation information=receipt.getSendInformation();
 		SendSheetPO po=new SendSheetPO();
 		//
-		SendInformation saveInformation = (SendInformation) ObjectDeepCopy.deepCopy(information);
+		SendInformation saveInformation =this.copyInfo(information) ;
 		po.setSendInformation(saveInformation);
 		ResultMessage resultMessage=deliver.updateDeliverReceipt(po);
 		System.out.println("Approving...");
@@ -131,9 +128,17 @@ public class DeliverReceipt implements ReceiptService{
 
 	@Override
 	public ReceiptPO modify(ReceiptVO vo) {
-		return null;
+		SendSheetVO receipt=(SendSheetVO)vo;
+		SendInformation information=receipt.getSendInformation();
+		SendSheetPO po=new SendSheetPO();
+		//
+		SendInformation saveInformation =this.copyInfo(information) ;
+		po.setSendInformation(saveInformation);
+		return po;
 	}
 
+	
+	
 	@Override
 	public ReceiptVO show(ReceiptPO po) {
 		return null;
