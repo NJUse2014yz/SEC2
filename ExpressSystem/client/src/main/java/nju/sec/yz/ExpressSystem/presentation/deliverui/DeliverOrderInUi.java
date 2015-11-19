@@ -95,33 +95,33 @@ public class DeliverOrderInUi extends JPanel {
 
 		confirmButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
+				
 				// translate data
 				SendSheetVO sendsheet = new SendSheetVO();
-				ToAndFromInformation fromPerson = new ToAndFromInformation(nameSender.getText(),
+				ToAndFromInformation fromPerson = new ToAndFromInformation(nameSender.getText(),citySender.getText(),
 						addressSender.getText(), organizaionSender.getText(), telephoneSender.getText(),
-						cellphoneSender.getText(),citySender.getText());
-				ToAndFromInformation toPerson = new ToAndFromInformation(nameConsignee.getText(),
+						cellphoneSender.getText());
+				ToAndFromInformation toPerson = new ToAndFromInformation(nameConsignee.getText(),cityConsignee.getText(),
 						addressConsignee.getText(), organizaionConsignee.getText(), telephoneConsignee.getText(),
-						cellphoneConsignee.getText(),cityConsignee.getText());
+						cellphoneConsignee.getText());
 				GoodInformation goodIn = new GoodInformation(totalGood.getText(), weightGood.getText(),
 						vloumeGood.getText(), nameGood.getText(), sizeGood.getText());
 				SendInformation sendIn = new SendInformation(barId.getText(), toPerson, fromPerson, goodIn,
 						getdeliveryType(deliveryType), getpackType(packType));
 				sendsheet.setSendInformation(sendIn);
 				//判断输入的信息是否正确
-				
+				ResultMessage result=deliverBlService.deliverReceipt(sendsheet);
 				//失败
-				if(deliverBlService.deliverReceipt(sendsheet).getResult()==Result.FAIL){
+				if(result.getResult()==Result.FAIL){
 					
 					warning.setText(deliverBlService.deliverReceipt(sendsheet).getMessage());
-					warning.setBounds(138,490,190,30);
+					warning.setBounds(138,490,463-138,30);
 					warning.setFont(new Font("Dialog",1,15));
 					warning.setForeground(Color.red);
 					add(warning);
 					repaint();
 				}else{
 					//提交成功
-					warning=new JLabel();
 					warning.setText("提交成功");
 					warning.setBounds(270,490,70,30);
 					warning.setFont(new Font("Dialog",1,15));
@@ -129,10 +129,10 @@ public class DeliverOrderInUi extends JPanel {
 					warning.setVisible(true);
 					add(warning);
 					
+					String temp=result.getMessage();
 					
-					
-					int time=sendsheet.getSendInformation().getPredictTime();
-					double cost=sendsheet.getSendInformation().getCostForAll();
+					double cost=Double.parseDouble(temp.substring(0, temp.indexOf(' ')));
+					int time=Integer.parseInt(temp.substring(temp.indexOf(' ')+1,temp.length()));
 					
 					JLabel predictTime=new JLabel();
 					predictTime.setText(Integer.toString(time)+"天");
