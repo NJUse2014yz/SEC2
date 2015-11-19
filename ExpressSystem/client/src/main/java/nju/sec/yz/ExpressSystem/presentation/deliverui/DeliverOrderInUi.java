@@ -43,6 +43,7 @@ public class DeliverOrderInUi extends JPanel {
 	private JTextField organizaionSender;
 	private JTextField telephoneSender;
 	private JTextField cellphoneSender;
+	private JTextField citySender;
 
 	// 收件人信息
 	private JTextField nameConsignee;
@@ -50,6 +51,7 @@ public class DeliverOrderInUi extends JPanel {
 	private JTextField organizaionConsignee;
 	private JTextField telephoneConsignee;
 	private JTextField cellphoneConsignee;
+	private JTextField cityConsignee;
 
 	// 货物信息
 	private JTextField nameGood;
@@ -66,7 +68,8 @@ public class DeliverOrderInUi extends JPanel {
 	private static JComboBox deliveryType;
 	
 	//提示信息
-	private JLabel warning;
+	private JLabel warning=new JLabel();
+	
 
 	public DeliverOrderInUi(ClientControler controler) {
 
@@ -96,10 +99,10 @@ public class DeliverOrderInUi extends JPanel {
 				SendSheetVO sendsheet = new SendSheetVO();
 				ToAndFromInformation fromPerson = new ToAndFromInformation(nameSender.getText(),
 						addressSender.getText(), organizaionSender.getText(), telephoneSender.getText(),
-						cellphoneSender.getText());
+						cellphoneSender.getText(),citySender.getText());
 				ToAndFromInformation toPerson = new ToAndFromInformation(nameConsignee.getText(),
 						addressConsignee.getText(), organizaionConsignee.getText(), telephoneConsignee.getText(),
-						cellphoneConsignee.getText());
+						cellphoneConsignee.getText(),cityConsignee.getText());
 				GoodInformation goodIn = new GoodInformation(totalGood.getText(), weightGood.getText(),
 						vloumeGood.getText(), nameGood.getText(), sizeGood.getText());
 				SendInformation sendIn = new SendInformation(barId.getText(), toPerson, fromPerson, goodIn,
@@ -109,9 +112,9 @@ public class DeliverOrderInUi extends JPanel {
 				
 				//失败
 				if(deliverBlService.deliverReceipt(sendsheet).getResult()==Result.FAIL){
-					warning=new JLabel();
+					
 					warning.setText(deliverBlService.deliverReceipt(sendsheet).getMessage());
-					warning.setBounds(200,490,190,30);
+					warning.setBounds(138,490,190,30);
 					warning.setFont(new Font("Dialog",1,15));
 					warning.setForeground(Color.red);
 					add(warning);
@@ -125,6 +128,8 @@ public class DeliverOrderInUi extends JPanel {
 					warning.setForeground(Color.red);
 					warning.setVisible(true);
 					add(warning);
+					
+					
 					
 					int time=sendsheet.getSendInformation().getPredictTime();
 					double cost=sendsheet.getSendInformation().getCostForAll();
@@ -179,6 +184,10 @@ public class DeliverOrderInUi extends JPanel {
 		cellphoneSender = new JTextField();
 		cellphoneSender.setBounds(185, 140, 140, 15);
 		add(cellphoneSender);
+		
+		citySender=new JTextField();
+		citySender.setBounds(389, 140, 70, 15);
+		add(citySender);
 
 		nameConsignee = new JTextField();
 		nameConsignee.setBounds(185, 198, 58, 15);
@@ -200,6 +209,10 @@ public class DeliverOrderInUi extends JPanel {
 		cellphoneConsignee.setBounds(185, 249, 140, 15);
 		add(cellphoneConsignee);
 
+		cityConsignee=new JTextField();
+		cityConsignee.setBounds(389, 249, 70, 15);
+		add(cityConsignee);
+		
 		totalGood = new JTextField();
 		totalGood.setBounds(185, 279, 58, 15);
 		add(totalGood);

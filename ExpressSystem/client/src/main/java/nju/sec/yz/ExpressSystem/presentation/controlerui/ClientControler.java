@@ -38,7 +38,7 @@ public class ClientControler{
 	JPanel transitMainPanel=new TransitMainUiTest(this);
 	JPanel adminstraterMainPanel=new AdminstraterMainUiTest(this);
 	
-	public MainUi mainFrame=new MainUi(userMainPanel);
+	public MainUi mainFrame=new MainUi(deliverMainPanel);
 
 	public void showFrame()
 	{
