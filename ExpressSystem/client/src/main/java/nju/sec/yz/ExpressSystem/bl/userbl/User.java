@@ -88,19 +88,34 @@ public class User {
 
 	
 	public ResultMessage add(UserVO vo) {
+		ResultMessage message=null;
 		//验证information
 		String validresult=isValid(vo);
 		if(!validresult.equals("success"))
 			return new ResultMessage(Result.FAIL,validresult);
 		//创建PO并保存
-		return null;
+		UserPO po=changeVoToPo(vo);
+		try {
+			message=data.insert(po);
+		} catch (RemoteException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+			return new ResultMessage(Result.FAIL,"系统错误");
+		}
+		return message;
 	}
 
 	public ResultMessage del(String id) {
-		// TODO Auto-generated method stub
-		//验证id是否存在
-		//调用data层方法
-		return null;
+		ResultMessage result=null;
+		//调用data层方法,验证id是否存在
+		try {
+			result=data.delete(id);
+		} catch (RemoteException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+			return new ResultMessage(Result.FAIL,"系统错误");
+		}
+		return result;
 	}
 
 	public ResultMessage modify(UserVO vo) {
@@ -125,37 +140,95 @@ public class User {
 		return message;
 	}
 	
-	private UserPO changeVoToPo(UserVO vo) {
-		// TODO 自动生成的方法存根
-		return null;
-	}
 	private String isValid(UserVO vo) {
-		// TODO 自动生成的方法存根
 		String id=vo.getId();
 		String name=vo.getName();
 		String password=vo.getPassword();
 		Status pow=vo.getPower();
 		
 		if(!isId(id,pow))
-			return "亲，不要告诉我寄件人手机号不是11位数字~";
+			return "亲，id不符合身份验证规则";
 		if(!isName(name))
-			return "亲，不要告诉我收件人手机号不是11位数字~";
+			return "亲，名字不要太长哦(length<=8)";
 		if(!isPassword(password))
-			return "亲，件数x是要满足0<x<65536的数字哟";
+			return "亲，密码长度要多于6个少于15个字符哦";
 		return "success";
 	}
 	
 	private boolean isPassword(String password) {
-		// TODO 自动生成的方法存根
-		return false;
+		if(password.length()<6||password.length()>15)
+			return false;
+		return true;
 	}
 	private boolean isName(String name) {
-		// TODO 自动生成的方法存根
-		return false;
+		if(name.length()>8)
+			return false;
+		return true;
 	}
 	private boolean isId(String id, Status pow) {
-		// TODO 自动生成的方法存根
-		return false;
+		if(id.length()<4)
+			return false;
+		char letter=id.charAt(id.length()-4);
+		switch(letter){
+		case 'A':
+			if(pow!=Status.INVENTORY)
+				return false;
+			String number=id.substring(id.length()-3);
+			if(!is3Number(number))
+				return false;
+			break;
+		case 'B':
+			if(pow!=Status.TRANSIT)
+				return false;
+			String number1=id.substring(id.length()-3);
+			if(!is3Number(number1))
+				return false;
+			break;
+		case 'C':
+			if(pow!=Status.POSITION)
+				return false;
+			String number2=id.substring(id.length()-3);
+			if(!is3Number(number2))
+				return false;
+			break;
+		case 'D':
+			if(pow!=Status.DELIVER)
+				return false;
+			String number3=id.substring(id.length()-3);
+			if(!is3Number(number3))
+				return false;
+			break;
+		case 'E':
+			if(pow!=Status.JUNIOR_ACCOUNTANCY||pow!=Status.SENIOR_ACCOUNTANCY)
+				return false;
+			String number4=id.substring(id.length()-3);
+			if(!is3Number(number4))
+				return false;
+			break;
+		case 'S':
+			if(pow!=Status.MANAGER)
+				return false;
+			String number5=id.substring(id.length()-3);
+			if(!is3Number(number5))
+				return false;
+			break;
+		case 'F':
+			if(pow!=Status.ADMINISTRATOR)
+				return false;
+			String number6=id.substring(id.length()-3);
+			if(!is3Number(number6))
+				return false;
+			break;
+		default:return false;
+		}
+		return true;
+	}
+	private boolean is3Number(String number) {
+		char[] numbers=number.toCharArray();
+		for(int i=0;i<3;i++)
+			if('0'>numbers[i]||numbers[i]>'9')
+				return false;
+		return true;
 	}
 	private UserVO changePoToVo(UserPO po){
 		String id=po.getId();
@@ -164,5 +237,13 @@ public class User {
 		Status status=po.getPower();
 		UserVO vo=new UserVO(id, name, password, status);
 		return vo;
+	}
+	private UserPO changeVoToPo(UserVO vo) {
+		String id=vo.getId();
+		String name=vo.getName();
+		String password=vo.getPassword();
+		Status status=vo.getPower();
+		UserPO po=new UserPO(id, name, password, status);
+		return po;
 	}
 }
