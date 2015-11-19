@@ -80,8 +80,13 @@ public class DeliverReceipt implements ReceiptService{
 		return id;
 	}
 
+	/**
+	 * 从数据层获得订单信息
+	 */
+	public SendSheetVO getOrder(String barID){
+		return null;
+	}
 	
-
 	/**
 	 * 复制info的所有数据
 	 */
