@@ -2,7 +2,10 @@ package nju.sec.yz.ExpressSystem.client;
 
 import javax.swing.JOptionPane;
 
+import nju.sec.yz.ExpressSystem.bl.userbl.User;
+import nju.sec.yz.ExpressSystem.common.Status;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
+import nju.sec.yz.ExpressSystem.vo.UserVO;
 
 
 public class Client {

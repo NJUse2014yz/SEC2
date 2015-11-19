@@ -1,5 +1,11 @@
 package nju.sec.yz.ExpressSystem.bl.userbl;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -16,7 +22,7 @@ import nju.sec.yz.ExpressSystem.vo.UserVO;
  * @author 周聪
  *
  */
-public class User {
+public class User implements UserInfo{
 	private UserDataService data;
 	
 	public User(){
@@ -50,10 +56,46 @@ public class User {
 			result.setResult(Result.FAIL);
 			result.setMessage("密码不对哟，看看大小写输对了没");
 			return result;
-		}	
+		}
+		this.saveCurrentUser(userPo);
 		return result;
 	}
 
+	/**
+	 * 保存当前用户的信息
+	 */
+	private void saveCurrentUser(UserPO po){
+		File file=new File("File/current_user");
+		try {
+			ObjectOutputStream out=new ObjectOutputStream(new FileOutputStream(file));
+			out.writeObject(po);
+			out.close();
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	/**
+	 * 获得当前用户id
+	 */
+	public String getCurrentID(){
+		UserPO po=null;
+		File file=new File("File/current_user");
+		try {
+			ObjectInputStream in=new ObjectInputStream(new FileInputStream(file));
+			po=(UserPO)in.readObject();
+			in.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		if(po==null)
+			return null;
+		return po.getId();
+	}
 	
 	public ArrayList<UserVO> getAll() {
 		ArrayList<UserPO> listPO = null;
@@ -91,8 +133,11 @@ public class User {
 		ResultMessage message=null;
 		//验证information
 		String validresult=isValid(vo);
-		if(!validresult.equals("success"))
+		if(!validresult.equals("success")){
+			System.out.println(validresult);
 			return new ResultMessage(Result.FAIL,validresult);
+		}
+			
 		//创建PO并保存
 		UserPO po=changeVoToPo(vo);
 		try {
@@ -160,11 +205,13 @@ public class User {
 			return false;
 		return true;
 	}
+	
 	private boolean isName(String name) {
 		if(name.length()>8)
 			return false;
 		return true;
 	}
+	
 	private boolean isId(String id, Status pow) {
 		if(id.length()<4)
 			return false;
@@ -246,4 +293,5 @@ public class User {
 		UserPO po=new UserPO(id, name, password, status);
 		return po;
 	}
+	
 }
