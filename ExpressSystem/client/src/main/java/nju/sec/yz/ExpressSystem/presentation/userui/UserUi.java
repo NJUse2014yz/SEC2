@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 
 import nju.sec.yz.ExpressSystem.bl.userbl.User;
 import nju.sec.yz.ExpressSystem.bl.userbl.UserController;
+import nju.sec.yz.ExpressSystem.blservice.deliverBlService.DeliverBlService;
 import nju.sec.yz.ExpressSystem.blservice.userBlService.UserBlService;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
@@ -26,6 +27,7 @@ import nju.sec.yz.ExpressSystem.presentation.controlerui.MainSwitchPanelListener
 
 public class UserUi extends JPanel{
 	private UserBlService userBlService;
+	private DeliverBlService deliverBlService;
 	
 	private static final int B_WIDTH=490;
 	private static final int B_HEIGHT=550;
@@ -44,7 +46,7 @@ public class UserUi extends JPanel{
 	private static final int login_x=392;
 	private static final int login_y=303;
 	private static final int login_w=72;
-	private static final int warning_x=290;
+	private static final int warning_x=200;
 	private static final int warning_y=344;
 	private static final int warning_w=300;
 	private static final int height=24;
@@ -89,7 +91,7 @@ public class UserUi extends JPanel{
 		this.login.setBounds(login_x,login_y,login_w, height);
 		this.login.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				if(true)//userBlService.login(JTuserName.getText(),JTpassword.getText()).getResult()==Result.SUCCESS)
+				if(userBlService.login(JTuserName.getText(),JTpassword.getText()).getResult()==Result.SUCCESS)
 				{
 					char id=JTuserName.getText().charAt(JTuserName.getText().length()-4);
 					switch(id)
@@ -120,7 +122,7 @@ public class UserUi extends JPanel{
 				else
 				{
 					warning=new JLabel();
-					warning.setText("用户名或密码错误，请再次检查");
+					warning.setText(userBlService.login(JTuserName.getText(),JTpassword.getText()).getMessage());
 					warning.setBounds(warning_x,warning_y,warning_w,height);
 					warning.setFont(new Font("Dialog",1,12));
 					warning.setForeground(Color.red);
@@ -135,7 +137,20 @@ public class UserUi extends JPanel{
 		this.search.setBounds(search_x,search_y,search_w, height);
 		this.search.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e) {
-				//TODO 
+				if(deliverBlService.checkDeliver(JTbarId.getText())!=null)
+				{
+					new MainSwitchPanelListener(MAIN_CONTROL.DELIVERY_ENQUIRY,controler,0);
+				}
+				else
+				{
+					warning=new JLabel();
+					warning.setText("订单条形码号有误，请再次检查");
+					warning.setBounds(warning_x,warning_y,warning_w,height);
+					warning.setFont(new Font("Dialog",1,12));
+					warning.setForeground(Color.red);
+					add(warning);
+					repaint();
+				}
 			}
 		});
 		this.add(search);

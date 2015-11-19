@@ -6,6 +6,7 @@ import nju.sec.yz.ExpressSystem.presentation.accountui.AccountMainUiTest;
 import nju.sec.yz.ExpressSystem.presentation.deliverui.DeliverMainUi;
 import nju.sec.yz.ExpressSystem.presentation.deliverui.DeliverMainUiTest;
 import nju.sec.yz.ExpressSystem.presentation.deliverui.DeliverOrderInUi;
+import nju.sec.yz.ExpressSystem.presentation.deliverui.DeliverOrderSearchUi;
 import nju.sec.yz.ExpressSystem.presentation.inventoryui.InventoryMainUiTest;
 import nju.sec.yz.ExpressSystem.presentation.managerui.ManagerMainUiTest;
 import nju.sec.yz.ExpressSystem.presentation.positionui.PositionMainUiTest;
@@ -51,8 +52,9 @@ public class ClientControler{
 		case LOGIN:
 			mainFrame.nextPanel(userMainPanel);
 			break;
-//		case DELIVERY_ENQUIRY:
-//			break;
+		case DELIVERY_ENQUIRY:
+			mainFrame.nextPanel(new DeliverOrderSearchUi(this));
+			break;
 		case DELIVER:
 			mainFrame.nextPanel(deliverMainPanel);
 			break;
