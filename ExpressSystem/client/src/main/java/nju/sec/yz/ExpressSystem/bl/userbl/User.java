@@ -52,7 +52,7 @@ public class User implements UserInfo{
 			result.setMessage("该账号不存在请重新输入");
 			return result;
 		}
-		if(userPo.getPassword()!=password){
+		if(!userPo.getPassword().equals(password)){
 			result.setResult(Result.FAIL);
 			result.setMessage("密码不对哟，看看大小写输对了没");
 			return result;

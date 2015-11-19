@@ -10,6 +10,8 @@ import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptID;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptSaveService;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
+import nju.sec.yz.ExpressSystem.bl.userbl.User;
+import nju.sec.yz.ExpressSystem.bl.userbl.UserInfo;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
 import nju.sec.yz.ExpressSystem.common.DeliveryType;
 import nju.sec.yz.ExpressSystem.common.GoodInformation;
@@ -75,7 +77,7 @@ public class DeliverReceipt implements ReceiptService{
 
 		SendInformation info=copyInfo(information);
 		//拿到deliverID
-		receipt.setId(createID("hh"));
+		receipt.setId(createID());
 		System.out.println(receipt.getId());
 		receipt.setType(ReceiptType.DELIVER_RECEIPT);
 		receipt.setSendInformation(info);
@@ -90,12 +92,23 @@ public class DeliverReceipt implements ReceiptService{
 	 * 生成寄件单id
 	 * @param deliverID
 	 */
-	private String createID(String deliverID) {
+	private String createID() {
+		String deliverID=this.getDeliverID();
 		ReceiptID idMaker=new ReceiptID();
 		String id=idMaker.getID(deliverID, ReceiptType.DELIVER_RECEIPT);
 		return id;
 	}
-
+	
+	/**
+	 * 得到填单人的id
+	 */
+	private String getDeliverID(){
+		UserInfo user=new User();
+		String id=user.getCurrentID();
+		return id;
+	}
+	
+	
 	/**
 	 * 从数据层获得订单信息
 	 */

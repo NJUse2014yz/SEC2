@@ -39,7 +39,7 @@ public class ClientControler{
 	JPanel transitMainPanel=new TransitMainUiTest(this);
 	JPanel adminstraterMainPanel=new AdminstraterMainUiTest(this);
 	
-	public MainUi mainFrame=new MainUi(deliverMainPanel);
+	public MainUi mainFrame=new MainUi(userMainPanel);
 
 	public void showFrame()
 	{
@@ -50,7 +50,7 @@ public class ClientControler{
 		switch(n)
 		{
 		case LOGIN:
-			mainFrame.nextPanel(userMainPanel);
+			mainFrame.nextPanel(deliverMainPanel);
 			break;
 		case DELIVERY_ENQUIRY:
 			mainFrame.nextPanel(new DeliverOrderSearchUi(this));
