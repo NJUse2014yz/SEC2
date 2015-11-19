@@ -260,9 +260,10 @@ public class DeliverOrderInUi extends JPanel {
 		add(deliveryType);
 	}
 
-	public static PackType getpackType(JComboBox packType) {
+	public static PackType getpackType(JComboBox packType){
 		String type = packType.getSelectedItem().toString();
-		System.out.println(type);
+		
+
 		if (type.equals("纸箱"))
 			return PackType.PAPER;
 		else if (type.equals("木箱"))

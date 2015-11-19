@@ -8,7 +8,6 @@ import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptID;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptSaveService;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
-import nju.sec.yz.ExpressSystem.bl.tool.ObjectDeepCopy;
 import nju.sec.yz.ExpressSystem.common.DeliveryType;
 import nju.sec.yz.ExpressSystem.common.GoodInformation;
 import nju.sec.yz.ExpressSystem.common.PackType;
@@ -52,12 +51,14 @@ public class DeliverReceipt implements ReceiptService{
 		double allCost=calculateCost(distance,weight,type)+information.getCostForPack();
 		int time=calculateTime(fromCity,toCity);
 		information.setCostForAll(allCost);
+		System.out.println(allCost);
 		information.setPredictTime(time);
 		
 		//创建PO交给receipt
 		SendSheetPO receipt=new SendSheetPO();
 
 		SendInformation info=copyInfo(information);
+		//拿到deliverID
 		receipt.setId(createID("hh"));
 		System.out.println(receipt.getId());
 		receipt.setType(ReceiptType.DELIVER_RECEIPT);
@@ -141,6 +142,8 @@ public class DeliverReceipt implements ReceiptService{
 	
 	@Override
 	public ReceiptVO show(ReceiptPO po) {
+		SendSheetPO receipt=(SendSheetPO)po;
+		SendInformation info=receipt.getSendInformation();
 		return null;
 	}
 	

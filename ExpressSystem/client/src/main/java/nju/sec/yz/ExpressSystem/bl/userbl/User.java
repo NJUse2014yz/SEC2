@@ -75,21 +75,19 @@ public class User {
 
 	
 	public UserVO getSingle(String id) {
-		UserPO po=null;
-		UserVO vo;
+		UserVO vo=null;
 		try {
-			po=data.find(id);
+			UserPO	po=data.find(id);
+			vo=changePoToVo(po);
 		} catch (RemoteException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}
-		vo=changePoToVo(po);
 		return vo;
 	}
 
 	
 	public ResultMessage add(UserVO vo) {
-		// TODO Auto-generated method stub
 		//验证information
 		String validresult=isValid(vo);
 		if(!validresult.equals("success"))
@@ -107,12 +105,30 @@ public class User {
 
 	public ResultMessage modify(UserVO vo) {
 		// TODO Auto-generated method stub
+		ResultMessage message=null;
+		//验证改过之后的vo
+		String validresult=isValid(vo);
+		if(!validresult.equals("success"))
+			return new ResultMessage(Result.FAIL,validresult);
+		//vo转po,数据库更新po
+		UserPO po=changeVoToPo(vo);
+		try {
+			message=data.update(po);
+		} catch (RemoteException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+			return new ResultMessage(Result.FAIL,"系统错误");
+		}
 		//管理员修改?
 		//用户修改密码?
 		//要不要输入原密码?
-		return null;
+		return message;
 	}
 	
+	private UserPO changeVoToPo(UserVO vo) {
+		// TODO 自动生成的方法存根
+		return null;
+	}
 	private String isValid(UserVO vo) {
 		// TODO 自动生成的方法存根
 		String id=vo.getId();
