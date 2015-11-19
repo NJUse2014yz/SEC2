@@ -3,6 +3,8 @@ package nju.sec.yz.ExpressSystem.data.datafactory;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
+import nju.sec.yz.ExpressSystem.data.carAndDriverdata.CarDataImpl;
+import nju.sec.yz.ExpressSystem.data.carAndDriverdata.DriverDataImpl;
 import nju.sec.yz.ExpressSystem.data.deliverdata.DeliverDataImpl;
 import nju.sec.yz.ExpressSystem.data.receiptdata.ReceiptCounterDataImpl;
 import nju.sec.yz.ExpressSystem.data.receiptdata.ReceiptDataImpl;
@@ -68,14 +70,14 @@ public class DataFactorySerializableImpl extends UnicastRemoteObject implements 
 
 	@Override
 	public CarDataService getCarDataService() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return new CarDataImpl();
 	}
 
 	@Override
 	public DriverDataService getDriverDataService() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+
+		return new DriverDataImpl();
 	}
 
 	@Override
@@ -120,7 +122,6 @@ public class DataFactorySerializableImpl extends UnicastRemoteObject implements 
 
 	@Override
 	public UserDataService getUserDataService() throws RemoteException {
-		
 		return new UserDataImpl();
 	}
 
