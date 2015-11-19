@@ -4,12 +4,11 @@ import nju.sec.yz.ExpressSystem.bl.managerbl.CityConst;
 import nju.sec.yz.ExpressSystem.bl.managerbl.CityDistanceService;
 import nju.sec.yz.ExpressSystem.bl.managerbl.Price;
 import nju.sec.yz.ExpressSystem.bl.managerbl.PriceService;
-import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptCounter;
+import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptID;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptSaveService;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
 import nju.sec.yz.ExpressSystem.bl.tool.ObjectDeepCopy;
-import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.common.DeliveryType;
 import nju.sec.yz.ExpressSystem.common.GoodInformation;
 import nju.sec.yz.ExpressSystem.common.PackType;
@@ -61,11 +60,9 @@ public class DeliverReceipt implements ReceiptService{
 		//创建PO交给receipt
 		SendSheetPO receipt=new SendSheetPO();
 
-		sendReceipt.setId(null);
-		sendReceipt.setSendInformation(information);
-
-		SendInformation info=copyImfo(information);
+		SendInformation info=copyInfo(information);
 		receipt.setId(createID("hh"));
+		System.out.println("receiptID"+receipt.getId());
 		receipt.setType(ReceiptType.DELIVER_RECEIPT);
 		receipt.setSendInformation(info);
 
@@ -80,32 +77,9 @@ public class DeliverReceipt implements ReceiptService{
 	 * @param deliverID
 	 */
 	private String createID(String deliverID) {
-		String receiptID=deliverID;
-		String date=TimeTool.getDate();
-		receiptID=receiptID+"j"+date;
-		
-		ReceiptCounter counter=new ReceiptCounter();
-		ReceiptCountPO po=counter.get(deliverID, ReceiptType.DELIVER_RECEIPT);
-		
-		//找不到或日期不是今天 
-		if(po==null){
-			counter.add(new ReceiptCountPO(deliverID, date, ReceiptType.DELIVER_RECEIPT));
-			return receiptID+"00001";
-		}else if(!po.getDate().equals(date)){
-			counter.update(new ReceiptCountPO(deliverID, date, ReceiptType.DELIVER_RECEIPT));
-			return receiptID+"00001";
-		}
-		
-		//
-		String count=po.getCount()+"";
-		while(count.length()!=5){
-			count="0"+count;
-		}
-		po.addCount();
-		counter.update(po);
-		receiptID=receiptID+count;
-		
-		return receiptID;
+		ReceiptID idMaker=new ReceiptID();
+		String id=idMaker.getID(deliverID, ReceiptType.DELIVER_RECEIPT);
+		return id;
 	}
 
 	
@@ -113,7 +87,7 @@ public class DeliverReceipt implements ReceiptService{
 	/**
 	 * 复制info的所有数据
 	 */
-	private SendInformation copyImfo(SendInformation info){
+	private SendInformation copyInfo(SendInformation info){
 		ToAndFromInformation to=info.getToPerson();
 		ToAndFromInformation from=info.getFromPerson();
 		GoodInformation good=info.getGood();
