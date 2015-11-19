@@ -49,10 +49,8 @@ public class UserDataImpl extends UnicastRemoteObject implements UserDataService
 		List<UserPO> userPOs = findAll();
 		
 		for (UserPO po : userPOs) {
-			String userID = po.getId();
-			
+			String userID = po.getId();	
 			if (id.equals(userID)){
-				System.out.println(po.getPassword());
 				return po;
 			}
 				

@@ -65,7 +65,6 @@ public class DeliverReceipt implements ReceiptService{
 
 		PackType packType=information.getPackType();
 		information.setCostForPack(packType.getPrice());
-		
 		double allCost=calculateCost(distance,weight,type)+information.getCostForPack();
 		int time=calculateTime(fromCity,toCity);
 		information.setCostForAll(allCost);
@@ -76,7 +75,6 @@ public class DeliverReceipt implements ReceiptService{
 		SendSheetPO receipt=new SendSheetPO();
 
 		SendInformation info=copyInfo(information);
-		//拿到deliverID
 		receipt.setId(createID());
 		System.out.println(receipt.getId());
 		receipt.setType(ReceiptType.DELIVER_RECEIPT);
@@ -209,7 +207,11 @@ public class DeliverReceipt implements ReceiptService{
 	public ReceiptVO show(ReceiptPO po) {
 		SendSheetPO receipt=(SendSheetPO)po;
 		SendInformation info=receipt.getSendInformation();
-		return null;
+		SendSheetVO vo=new SendSheetVO();
+		vo.setSendInformation(info);
+		vo.setId(po.getId());
+		vo.setType(ReceiptType.DELIVER_RECEIPT);
+		return vo;
 	}
 	
 	private String isValid(SendInformation sif){
