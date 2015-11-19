@@ -52,6 +52,7 @@ public class DeliverReceipt implements ReceiptService{
 		double allCost=calculateCost(distance,weight,type)+information.getCostForPack();
 		int time=calculateTime(fromCity,toCity);
 		information.setCostForAll(allCost);
+		System.out.println(allCost);
 		information.setPredictTime(time);
 		
 		//创建PO交给receipt
@@ -141,6 +142,8 @@ public class DeliverReceipt implements ReceiptService{
 	
 	@Override
 	public ReceiptVO show(ReceiptPO po) {
+		SendSheetPO receipt=(SendSheetPO)po;
+		SendInformation info=receipt.getSendInformation();
 		return null;
 	}
 	
