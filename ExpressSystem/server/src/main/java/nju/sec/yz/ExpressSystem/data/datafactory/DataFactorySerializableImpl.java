@@ -3,9 +3,18 @@ package nju.sec.yz.ExpressSystem.data.datafactory;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
+import nju.sec.yz.ExpressSystem.data.accountdata.AccountBookDataImpl;
+import nju.sec.yz.ExpressSystem.data.accountdata.AccountDataImpl;
+import nju.sec.yz.ExpressSystem.data.accountdata.InDataImpl;
+import nju.sec.yz.ExpressSystem.data.accountdata.OutDataImpl;
 import nju.sec.yz.ExpressSystem.data.carAndDriverdata.CarDataImpl;
 import nju.sec.yz.ExpressSystem.data.carAndDriverdata.DriverDataImpl;
 import nju.sec.yz.ExpressSystem.data.deliverdata.DeliverDataImpl;
+import nju.sec.yz.ExpressSystem.data.inventorydata.InventoryDataImpl;
+import nju.sec.yz.ExpressSystem.data.logdata.LogDataImpl;
+import nju.sec.yz.ExpressSystem.data.managedata.AgencyDataImpl;
+import nju.sec.yz.ExpressSystem.data.managedata.SalaryDataImpl;
+import nju.sec.yz.ExpressSystem.data.managedata.StaffDataImpl;
 import nju.sec.yz.ExpressSystem.data.receiptdata.ReceiptCounterDataImpl;
 import nju.sec.yz.ExpressSystem.data.receiptdata.ReceiptDataImpl;
 import nju.sec.yz.ExpressSystem.data.stub.ConstDataStub;
@@ -46,26 +55,26 @@ public class DataFactorySerializableImpl extends UnicastRemoteObject implements 
 
 	@Override
 	public AccountBookDataService getAccountBookDataService() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return new AccountBookDataImpl();
 	}
 
 	@Override
 	public AccountDataService getAccountDataService() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return new AccountDataImpl();
 	}
 
 	@Override
 	public InDataService getInDataService() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return new InDataImpl();
 	}
 
 	@Override
 	public OutDataService getOutDataService() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return new OutDataImpl();
 	}
 
 	@Override
@@ -82,20 +91,20 @@ public class DataFactorySerializableImpl extends UnicastRemoteObject implements 
 
 	@Override
 	public InventoryDataService getInventoryDataService() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return new InventoryDataImpl();
 	}
 
 	@Override
 	public LogDataService getLogDataService() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return new LogDataImpl();
 	}
 
 	@Override
 	public AgencyDataService getAgencyDataService() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return new AgencyDataImpl();
 	}
 
 	@Override
@@ -105,14 +114,14 @@ public class DataFactorySerializableImpl extends UnicastRemoteObject implements 
 
 	@Override
 	public SalaryDataService getSalaryDataService() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return new SalaryDataImpl();
 	}
 
 	@Override
 	public StaffDataService getStaffDataService() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return new StaffDataImpl();
 	}
 
 	@Override
