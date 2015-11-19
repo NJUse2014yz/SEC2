@@ -17,7 +17,7 @@ public class SalaryDataStub implements SalaryDataService{
 	@Override
 	public ResultMessage update(SalaryPO sp) throws RemoteException {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 }

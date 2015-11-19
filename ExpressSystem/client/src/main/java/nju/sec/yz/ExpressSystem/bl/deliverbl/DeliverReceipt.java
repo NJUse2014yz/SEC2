@@ -1,20 +1,25 @@
 package nju.sec.yz.ExpressSystem.bl.deliverbl;
 
+import java.rmi.RemoteException;
+
 import nju.sec.yz.ExpressSystem.bl.managerbl.CityConst;
 import nju.sec.yz.ExpressSystem.bl.managerbl.CityDistanceService;
 import nju.sec.yz.ExpressSystem.bl.managerbl.Price;
 import nju.sec.yz.ExpressSystem.bl.managerbl.PriceService;
+import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptID;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptSaveService;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
-import nju.sec.yz.ExpressSystem.bl.tool.ObjectDeepCopy;
+import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
 import nju.sec.yz.ExpressSystem.common.DeliveryType;
-
+import nju.sec.yz.ExpressSystem.common.GoodInformation;
 import nju.sec.yz.ExpressSystem.common.PackType;
+import nju.sec.yz.ExpressSystem.common.ReceiptType;
 import nju.sec.yz.ExpressSystem.common.Result;
-
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.SendInformation;
+import nju.sec.yz.ExpressSystem.common.ToAndFromInformation;
+import nju.sec.yz.ExpressSystem.dataservice.deliverDataSevice.OrderDataService;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.po.SendSheetPO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
@@ -24,6 +29,18 @@ import nju.sec.yz.ExpressSystem.vo.SendSheetVO;
  * @author 周聪
  */
 public class DeliverReceipt implements ReceiptService{
+	
+	private OrderDataService orderData;
+	
+	public DeliverReceipt() {
+		try {
+			orderData=DatafactoryProxy.getOrderDataService();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	@Override
 	/**
 	 * 检验输入信息
@@ -35,31 +52,115 @@ public class DeliverReceipt implements ReceiptService{
 		
 		//验证information
 		String validresult=isValid(information);
-		//暂时是控制台输出，后期会变成界面显示
-		//System.out.println(validresult);
 		if(!validresult.equals("success"))
 			return new ResultMessage(Result.FAIL,validresult);
 		//自动计算运费和到达时间
-		String fromAddress=information.getFromPerson().getAddress();
-		String toAddress=information.getToPerson().getAddress();
-		double distance=calculataDistance(fromAddress, toAddress);
+		String fromCity=information.getFromPerson().getCity();
+		String toCity=information.getToPerson().getCity();
+		double distance=calculataDistance(fromCity, toCity);
 		String weight=information.getGood().getWeight();
 		DeliveryType type = information.getDeliveryType();
+
+		PackType packType=information.getPackType();
+		information.setCostForPack(packType.getPrice());
 		
 		double allCost=calculateCost(distance,weight,type)+information.getCostForPack();
-		int time=calculateTime(fromAddress,toAddress);
+		int time=calculateTime(fromCity,toCity);
 		information.setCostForAll(allCost);
+		System.out.println(allCost);
 		information.setPredictTime(time);
 		
 		//创建PO交给receipt
 		SendSheetPO receipt=new SendSheetPO();
-		sendReceipt.setId(null);
-		sendReceipt.setSendInformation(information);
+
+		SendInformation info=copyInfo(information);
+		//拿到deliverID
+		receipt.setId(createID("hh"));
+		System.out.println(receipt.getId());
+		receipt.setType(ReceiptType.DELIVER_RECEIPT);
+		receipt.setSendInformation(info);
+
 		ReceiptSaveService receiptList=new ReceiptList();
 		receiptList.saveReceipt(receipt);
-		return new ResultMessage(Result.SUCCESS);
+		return new ResultMessage(Result.SUCCESS,allCost+" "+time);
 	}
 
+
+	/**
+	 * 生成寄件单id
+	 * @param deliverID
+	 */
+	private String createID(String deliverID) {
+		ReceiptID idMaker=new ReceiptID();
+		String id=idMaker.getID(deliverID, ReceiptType.DELIVER_RECEIPT);
+		return id;
+	}
+
+	/**
+	 * 从数据层获得订单信息
+	 */
+	public SendSheetVO getOrder(String barID){
+		SendSheetPO po=null;
+		
+		try {
+			po=orderData.get(barID);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		
+		if(po==null)
+			return null;
+		
+		SendSheetVO vo=new SendSheetVO();
+		SendInformation info=copyInfo(po.getSendInformation());
+		vo.setSendInformation(info);
+		vo.setId(po.getId());
+		vo.setType(po.getType());
+		
+		return vo;
+	}
+	
+	private ResultMessage saveOrder(SendSheetPO po){
+		ResultMessage message=null;
+		try {
+			message=orderData.add(po);
+		} catch (RemoteException e) {
+			
+			e.printStackTrace();
+			return new ResultMessage(Result.FAIL, "网络异常");
+		}
+		return message;
+	}
+	
+	/**
+	 * 复制info的所有数据
+	 */
+	private SendInformation copyInfo(SendInformation info){
+		ToAndFromInformation to = info.getToPerson();
+		ToAndFromInformation from = info.getFromPerson();
+		GoodInformation good = info.getGood();
+
+		ToAndFromInformation toPerson = new ToAndFromInformation(to.getName(), to.getCity(), to.getAddress(),
+				to.getOrg(), to.getTelephone(), to.getCellphone());
+
+		ToAndFromInformation fromPerson = new ToAndFromInformation(from.getName(), from.getCity(), from.getAddress(),
+				from.getOrg(), from.getTelephone(), from.getCellphone());
+		GoodInformation goodInfo = new GoodInformation(good.getTotal(), good.getWeight(), good.getVloume(),
+				good.getName(), good.getSize());
+
+		SendInformation information = new SendInformation(info.getBarId(), toPerson, fromPerson, goodInfo,
+				info.getDeliveryType(), info.getPackType());
+
+		information.setCostForAll(info.getCostForAll());
+		information.setCostForPack(info.getCostForPack());
+		information.setPredictTime(info.getPredictTime());
+
+		return information;
+	}
+	
+	
 
 	@Override
 	/**
@@ -71,7 +172,7 @@ public class DeliverReceipt implements ReceiptService{
 		SendInformation information=receipt.getSendInformation();
 		SendSheetPO po=new SendSheetPO();
 		//
-		SendInformation saveInformation = (SendInformation) ObjectDeepCopy.deepCopy(information);
+		SendInformation saveInformation =this.copyInfo(information) ;
 		po.setSendInformation(saveInformation);
 		ResultMessage resultMessage=deliver.updateDeliverReceipt(po);
 		System.out.println("Approving...");
@@ -80,12 +181,21 @@ public class DeliverReceipt implements ReceiptService{
 
 	@Override
 	public ReceiptPO modify(ReceiptVO vo) {
-		return null;
+		SendSheetVO receipt=(SendSheetVO)vo;
+		SendInformation information=receipt.getSendInformation();
+		SendSheetPO po=new SendSheetPO();
+		//
+		SendInformation saveInformation =this.copyInfo(information) ;
+		po.setSendInformation(saveInformation);
+		return po;
 	}
 
+	
+	
 	@Override
 	public ReceiptVO show(ReceiptPO po) {
-		// TODO Auto-generated method stub
+		SendSheetPO receipt=(SendSheetPO)po;
+		SendInformation info=receipt.getSendInformation();
 		return null;
 	}
 	
@@ -98,23 +208,23 @@ public class DeliverReceipt implements ReceiptService{
 		String weight=sif.getGood().getWeight();
 		String vloume=sif.getGood().getVloume();
 		String size=sif.getGood().getSize();
-		String str="success";
-		if(!isBarId(barId))
-		//TODO 具体对应界面的显示方法				
-			str="亲，咱们的订单号是十位数字哟~";
-		if(!isCellphone(toCellphone))
-			str="亲，不要告诉我寄件人手机号不是11位数字~";
+		
+	
 		if(!isCellphone(fromCellphone))
-			str="亲，不要告诉我收件人手机号不是11位数字~";
+			return "亲，不要告诉我寄件人手机号不是11位数字~";
+		if(!isCellphone(toCellphone))
+			return "亲，不要告诉我收件人手机号不是11位数字~";
 		if(!isTotal(total))
-			str="亲，件数x是要满足0<x<65536的数字哟";
+			return "亲，件数x是要满足0<x<65536的数字哟";
 		if(!isTotal(weight))
-			str="亲，重量x是要满足0<x<65536的数字哟";
+			return "亲，重量x是要满足0<x<65536的数字哟";
+		if(!isBarId(barId))			
+			 return "亲，咱们的订单号是十位数字哟~";
 		if(!isTotal(vloume))
-			str="亲，体积x是要满足0<x<65536的数字哟";
+			return "亲，体积是要满足0<x<65536的数字哟";
 		if(!isSize(size))
-			str="亲，size可是要满足“数*数*数”的格式哟";
-		return str;
+			return "亲，尺寸可是要满足“数*数*数”的格式哟";
+		return "success";
 	}
 
 	
@@ -150,7 +260,6 @@ public class DeliverReceipt implements ReceiptService{
 			return false;
 		if(!isNumber(str))
 			return false;
-		System.out.println(str);
 		int n= Integer.parseInt(str);
 		if(n<0||n>65536)
 			return false;

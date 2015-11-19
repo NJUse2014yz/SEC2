@@ -43,6 +43,7 @@ public class DeliverDataImpl extends UnicastRemoteObject implements DeliverDataS
 
 	@Override
 	public synchronized ResultMessage update(DeliverPO dpo) throws RemoteException {
+		System.out.println("updating a DeliverPO...");
 		if(dpo==null){
 			System.out.println("更新的DeliverPO为空！！！");
 			return new ResultMessage(Result.FAIL, "系统错误");
@@ -69,7 +70,11 @@ public class DeliverDataImpl extends UnicastRemoteObject implements DeliverDataS
 
 	@Override
 	public DeliverPO find(String barID) throws RemoteException {
-		
+		System.out.println("finding a DeliverPO...");
+		if(barID==null){
+			System.out.println("id为null！！！");
+			return null;
+		}
 		List<DeliverPO> deliverPOs = findAll();
 		for (DeliverPO po : deliverPOs) {
 			String id = po.getId();

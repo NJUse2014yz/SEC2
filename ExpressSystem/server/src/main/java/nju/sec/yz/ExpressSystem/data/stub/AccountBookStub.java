@@ -41,19 +41,19 @@ public class AccountBookStub implements AccountBookDataService{
 	@Override
 	public ResultMessage update(AccountBookPO abp) throws RemoteException {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override
 	public ResultMessage delete(AccountBookPO abp) throws RemoteException {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override
 	public ResultMessage insert(AccountBookPO abp) throws RemoteException {
 		// TODO 自动生成的方法存根
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override

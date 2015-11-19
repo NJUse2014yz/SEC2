@@ -10,12 +10,14 @@ import nju.sec.yz.ExpressSystem.dataservice.carAndDriverDataSevice.CarDataServic
 import nju.sec.yz.ExpressSystem.dataservice.carAndDriverDataSevice.DriverDataService;
 import nju.sec.yz.ExpressSystem.dataservice.datafactory.DatafactoryService;
 import nju.sec.yz.ExpressSystem.dataservice.deliverDataSevice.DeliverDataService;
+import nju.sec.yz.ExpressSystem.dataservice.deliverDataSevice.OrderDataService;
 import nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice.InventoryDataService;
 import nju.sec.yz.ExpressSystem.dataservice.logDataSevice.LogDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.AgencyDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.ConstDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.SalaryDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.StaffDataService;
+import nju.sec.yz.ExpressSystem.dataservice.receiptDataSevice.ReceiptCounterDataService;
 import nju.sec.yz.ExpressSystem.dataservice.receiptDataSevice.ReceiptDataService;
 import nju.sec.yz.ExpressSystem.dataservice.userDataSevice.UserDataService;
 /**
@@ -27,6 +29,10 @@ public class DatafactoryProxy {
 
 	private static DatafactoryService datafactory;
 	
+	
+	static public ReceiptCounterDataService getCounterDataService() throws RemoteException {
+		return datafactory.getCounterDataService();
+	}
 	
 	static public DeliverDataService getDeliverDataService() throws RemoteException{
 		return datafactory.getDeliverDataService();
@@ -104,6 +110,11 @@ public class DatafactoryProxy {
 
 	public static void setDatafactory(DatafactoryService datafactory) {
 		DatafactoryProxy.datafactory = datafactory;
+	}
+
+	public static OrderDataService getOrderDataService() throws RemoteException{
+		
+		return datafactory.getOrderDataService();
 	}
 
 }

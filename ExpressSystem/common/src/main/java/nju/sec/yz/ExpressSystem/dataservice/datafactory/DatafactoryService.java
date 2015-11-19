@@ -10,12 +10,14 @@ import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.OutDataService;
 import nju.sec.yz.ExpressSystem.dataservice.carAndDriverDataSevice.CarDataService;
 import nju.sec.yz.ExpressSystem.dataservice.carAndDriverDataSevice.DriverDataService;
 import nju.sec.yz.ExpressSystem.dataservice.deliverDataSevice.DeliverDataService;
+import nju.sec.yz.ExpressSystem.dataservice.deliverDataSevice.OrderDataService;
 import nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice.InventoryDataService;
 import nju.sec.yz.ExpressSystem.dataservice.logDataSevice.LogDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.AgencyDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.ConstDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.SalaryDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.StaffDataService;
+import nju.sec.yz.ExpressSystem.dataservice.receiptDataSevice.ReceiptCounterDataService;
 import nju.sec.yz.ExpressSystem.dataservice.receiptDataSevice.ReceiptDataService;
 import nju.sec.yz.ExpressSystem.dataservice.userDataSevice.UserDataService;
 /**
@@ -25,6 +27,10 @@ import nju.sec.yz.ExpressSystem.dataservice.userDataSevice.UserDataService;
  */
 public interface DatafactoryService extends Remote{
 
+	public OrderDataService getOrderDataService() throws RemoteException;
+	
+	public ReceiptCounterDataService getCounterDataService() throws RemoteException;
+	
 	public DeliverDataService getDeliverDataService() throws RemoteException;
 	
 	public AccountBookDataService getAccountBookDataService() throws RemoteException;

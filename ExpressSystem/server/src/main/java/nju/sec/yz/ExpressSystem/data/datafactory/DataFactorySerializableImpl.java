@@ -3,10 +3,24 @@ package nju.sec.yz.ExpressSystem.data.datafactory;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
+import nju.sec.yz.ExpressSystem.data.accountdata.AccountBookDataImpl;
+import nju.sec.yz.ExpressSystem.data.accountdata.AccountDataImpl;
+import nju.sec.yz.ExpressSystem.data.accountdata.InDataImpl;
+import nju.sec.yz.ExpressSystem.data.accountdata.OutDataImpl;
+import nju.sec.yz.ExpressSystem.data.carAndDriverdata.CarDataImpl;
+import nju.sec.yz.ExpressSystem.data.carAndDriverdata.DriverDataImpl;
 import nju.sec.yz.ExpressSystem.data.deliverdata.DeliverDataImpl;
+import nju.sec.yz.ExpressSystem.data.deliverdata.OrderDataImpl;
+import nju.sec.yz.ExpressSystem.data.inventorydata.InventoryDataImpl;
+import nju.sec.yz.ExpressSystem.data.logdata.LogDataImpl;
+import nju.sec.yz.ExpressSystem.data.managedata.AgencyDataImpl;
+import nju.sec.yz.ExpressSystem.data.managedata.SalaryDataImpl;
+import nju.sec.yz.ExpressSystem.data.managedata.StaffDataImpl;
+import nju.sec.yz.ExpressSystem.data.receiptdata.ReceiptCounterDataImpl;
 import nju.sec.yz.ExpressSystem.data.receiptdata.ReceiptDataImpl;
 import nju.sec.yz.ExpressSystem.data.stub.ConstDataStub;
 import nju.sec.yz.ExpressSystem.data.stub.UserDataStub;
+import nju.sec.yz.ExpressSystem.data.userdata.UserDataImpl;
 import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.AccountBookDataService;
 import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.AccountDataService;
 import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.InDataService;
@@ -15,12 +29,14 @@ import nju.sec.yz.ExpressSystem.dataservice.carAndDriverDataSevice.CarDataServic
 import nju.sec.yz.ExpressSystem.dataservice.carAndDriverDataSevice.DriverDataService;
 import nju.sec.yz.ExpressSystem.dataservice.datafactory.DatafactoryService;
 import nju.sec.yz.ExpressSystem.dataservice.deliverDataSevice.DeliverDataService;
+import nju.sec.yz.ExpressSystem.dataservice.deliverDataSevice.OrderDataService;
 import nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice.InventoryDataService;
 import nju.sec.yz.ExpressSystem.dataservice.logDataSevice.LogDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.AgencyDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.ConstDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.SalaryDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.StaffDataService;
+import nju.sec.yz.ExpressSystem.dataservice.receiptDataSevice.ReceiptCounterDataService;
 import nju.sec.yz.ExpressSystem.dataservice.receiptDataSevice.ReceiptDataService;
 import nju.sec.yz.ExpressSystem.dataservice.userDataSevice.UserDataService;
 /**
@@ -41,56 +57,56 @@ public class DataFactorySerializableImpl extends UnicastRemoteObject implements 
 
 	@Override
 	public AccountBookDataService getAccountBookDataService() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return new AccountBookDataImpl();
 	}
 
 	@Override
 	public AccountDataService getAccountDataService() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return new AccountDataImpl();
 	}
 
 	@Override
 	public InDataService getInDataService() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return new InDataImpl();
 	}
 
 	@Override
 	public OutDataService getOutDataService() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return new OutDataImpl();
 	}
 
 	@Override
 	public CarDataService getCarDataService() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return new CarDataImpl();
 	}
 
 	@Override
 	public DriverDataService getDriverDataService() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+
+		return new DriverDataImpl();
 	}
 
 	@Override
 	public InventoryDataService getInventoryDataService() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return new InventoryDataImpl();
 	}
 
 	@Override
 	public LogDataService getLogDataService() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return new LogDataImpl();
 	}
 
 	@Override
 	public AgencyDataService getAgencyDataService() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return new AgencyDataImpl();
 	}
 
 	@Override
@@ -100,14 +116,14 @@ public class DataFactorySerializableImpl extends UnicastRemoteObject implements 
 
 	@Override
 	public SalaryDataService getSalaryDataService() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return new SalaryDataImpl();
 	}
 
 	@Override
 	public StaffDataService getStaffDataService() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return new StaffDataImpl();
 	}
 
 	@Override
@@ -117,8 +133,18 @@ public class DataFactorySerializableImpl extends UnicastRemoteObject implements 
 
 	@Override
 	public UserDataService getUserDataService() throws RemoteException {
-		// TODO Auto-generated method stub
-		return new UserDataStub();
+		return new UserDataImpl();
+	}
+
+	@Override
+	public ReceiptCounterDataService getCounterDataService() throws RemoteException {
+		return new ReceiptCounterDataImpl();
+	}
+
+	@Override
+	public OrderDataService getOrderDataService() throws RemoteException {
+		
+		return new OrderDataImpl();
 	}
 
 }

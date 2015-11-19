@@ -36,6 +36,13 @@ public class SendInformation  implements Serializable{
 		this.good = good;
 		this.deliveryType = deliveryType;
 		this.packType = packType;
+		switch(packType){
+		case BAG:costForPack=1.0;break;
+		case PAPER:costForPack=5.0;break;
+		case WOOD:costForPack=10.0;break;
+		default:
+			break;
+		}
 	}
 	public SendInformation() {
 		// TODO Auto-generated constructor stub

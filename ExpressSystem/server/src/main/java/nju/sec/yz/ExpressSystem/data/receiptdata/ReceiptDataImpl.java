@@ -41,7 +41,11 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataS
 
 	@Override
 	public ReceiptPO find(String id) throws RemoteException {
-		
+		System.out.println("finding a ReceiptPO...");
+		if(id==null){
+			System.out.println("id为null！！！");
+			return null;
+		}
 		List<ReceiptPO> receiptPOs = findAll();
 		for (ReceiptPO po : receiptPOs) {
 			String receiptID = po.getId();
@@ -55,6 +59,7 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataS
 
 	@Override
 	public ResultMessage update(ReceiptPO rpo) throws RemoteException {
+		System.out.println("updating a ReceiptPO...");
 		if(rpo==null){
 			System.out.println("更新的ReceiptPO是空的！！！");
 			return new ResultMessage(Result.FAIL, "系统错误");
@@ -94,6 +99,11 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataS
 
 	@Override
 	public ResultMessage delete(String id) throws RemoteException {
+		System.out.println("deleting a ReceiptPO...");
+		if(id==null){
+			System.out.println("id为null！！！");
+			return new ResultMessage(Result.FAIL, "系统错误");
+		}
 		List<ReceiptPO> receiptPOs = findAll();
 		for (int i=0;i<receiptPOs.size();i++) {
 			String receiptID = receiptPOs.get(i).getId();
@@ -104,7 +114,7 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataS
 			}
 				
 		}
-		return ResultMessage.FAIL;
+		return new ResultMessage(Result.FAIL, "找不到要删除的内容");
 	}
 
 	/**
@@ -117,10 +127,10 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataS
 				os.writeObject(receiptPOs);
 			}
 			System.out.println("success");
-			return ResultMessage.SUCCESS;
+			return new ResultMessage(Result.SUCCESS);
 		} catch (IOException e) {
 			e.printStackTrace();
-			return ResultMessage.FAIL;
+			return new ResultMessage(Result.FAIL, "文件读写错误");
 		}
 	}
 	

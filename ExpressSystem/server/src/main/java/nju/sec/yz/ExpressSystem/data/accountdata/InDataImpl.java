@@ -1,52 +1,54 @@
-package nju.sec.yz.ExpressSystem.data.stub;
+package nju.sec.yz.ExpressSystem.data.accountdata;
 
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-import nju.sec.yz.ExpressSystem.common.Status;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.InDataService;
 import nju.sec.yz.ExpressSystem.po.InPO;
-import nju.sec.yz.ExpressSystem.po.UserPO;
 
-/**
- * 
- * @author zhangqi
- *
- */
-public class InDataStub implements InDataService{
+public class InDataImpl extends UnicastRemoteObject implements InDataService{
+
+	public InDataImpl() throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public ResultMessage insert(InPO inpo) throws RemoteException {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public InPO find(String id) throws RemoteException {
-		return new InPO("20151023",12,"025001D001");
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public ResultMessage delete(String id) throws RemoteException {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public ResultMessage update(InPO inpo) throws RemoteException {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public ResultMessage init() throws RemoteException {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public ArrayList<InPO> findAll() throws RemoteException {
-		ArrayList<InPO> array=new ArrayList<InPO>();
-		array.add(new InPO("20151023",12,"025001D001"));
-		array.add(new InPO("20151024",30,"025002D004"));
-		return array;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

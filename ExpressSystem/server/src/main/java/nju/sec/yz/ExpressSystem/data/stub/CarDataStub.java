@@ -15,7 +15,7 @@ import nju.sec.yz.ExpressSystem.po.CarPO;
 public class CarDataStub implements CarDataService{
 	@Override
 	public ResultMessage insert(CarPO cpo) throws RemoteException{
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override
@@ -25,17 +25,17 @@ public class CarDataStub implements CarDataService{
 
 	@Override
 	public ResultMessage delete(String id) throws RemoteException{
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override
 	public ResultMessage update(CarPO cpo) throws RemoteException{
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
 	@Override
 	public ResultMessage init() throws RemoteException{
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 	
 	@Override

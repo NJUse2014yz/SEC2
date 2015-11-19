@@ -2,6 +2,7 @@ package nju.sec.yz.ExpressSystem.presentation.controlerui;
 
 import nju.sec.yz.ExpressSystem.presentation.deliverui.DeliverOrderInUi;
 import nju.sec.yz.ExpressSystem.presentation.deliverui.DeliverOrderSearchUi;
+import nju.sec.yz.ExpressSystem.presentation.deliverui.DeliverReceiveInUi;
 import nju.sec.yz.ExpressSystem.presentation.userui.UserUiTest;
 
 /*
@@ -30,6 +31,7 @@ public class DeliverControler {
 			mainControler.mainFrame.nextPanel(new DeliverOrderSearchUi(mainControler));
 			break;
 		case RECEIVE_IN:
+			mainControler.mainFrame.nextPanel(new DeliverReceiveInUi(mainControler));
 			break;
 		case RECEIVE_IN_SUCCESS:
 			break;

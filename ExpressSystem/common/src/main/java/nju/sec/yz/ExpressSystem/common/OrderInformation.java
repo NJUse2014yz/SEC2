@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class OrderInformation  implements Serializable{
 	private SendInformation sendInformation;
 	private DeliveryState deliveryState;
-	private ArrayList<String> trail;
+	private ArrayList<String> trail=null;
 	
 	public SendInformation getSendInformation() {
 		return sendInformation;

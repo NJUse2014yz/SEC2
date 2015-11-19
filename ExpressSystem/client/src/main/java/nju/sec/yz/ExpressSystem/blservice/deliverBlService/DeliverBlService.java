@@ -21,6 +21,12 @@ public interface DeliverBlService {
 	public OrderVO  checkDeliver(String id);
 	//寄件单
 	public ResultMessage deliverReceipt (SendSheetVO vo);
+	/**
+	 * @author cong
+	 * 快递员查询订单(寄件单)信息
+	 */
+	public SendSheetVO checkDeliverReceipt(String barID);
+	
 	//收件单
 	public ResultMessage  recieveReceipt(ReceiveVO vo);
 	//营业厅装车单

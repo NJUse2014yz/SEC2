@@ -1,9 +1,12 @@
 package nju.sec.yz.ExpressSystem.common;
+
+import java.io.Serializable;
+
 /**
  * 返回信息
  * @author 周聪
  */
-public class ResultMessage {
+public class ResultMessage implements Serializable{
 
 	private Result result;
 	
