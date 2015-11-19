@@ -10,6 +10,7 @@ import nju.sec.yz.ExpressSystem.po.ReceiptCountPO;
 
 /**
  * 记录相关人员填写的单据的数量
+ * 根据数量生成id
  * @author 周聪
  *
  */

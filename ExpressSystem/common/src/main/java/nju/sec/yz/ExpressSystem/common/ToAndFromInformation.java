@@ -13,9 +13,13 @@ import java.io.Serializable;
  */
 public class ToAndFromInformation  implements Serializable{
 
-	public ToAndFromInformation(String name, String address, String org, String telephone, String cellphone,String city) {
+
+
+	public ToAndFromInformation(String name,String city, String address, String org, String telephone, String cellphone) {
+
 		super();
 		this.name = name;
+		this.setCity(city);
 		this.address = address;
 		this.setOrg(org);
 		this.telephone = telephone;
@@ -24,10 +28,10 @@ public class ToAndFromInformation  implements Serializable{
 	}
 	private String org;
 	private String name;
+	private String city;
 	private String address;
 	private String telephone;
 	private String cellphone;
-	private String city;
 	
 	
 	public String getName() {
