@@ -137,7 +137,7 @@ public class DeliverReceipt implements ReceiptService{
 	}
 	
 	
->>>>>>> origin/master
+
 	@Override
 	/**
 	 * 审批完成后更新信息
