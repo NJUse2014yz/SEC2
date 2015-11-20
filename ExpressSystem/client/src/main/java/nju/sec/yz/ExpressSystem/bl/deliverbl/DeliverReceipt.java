@@ -53,9 +53,9 @@ public class DeliverReceipt implements ReceiptService{
 		SendInformation information=sendReceipt.getSendInformation();
 		
 		//验证information
-		String validresult=isValid(information);
-		if(!validresult.equals("success"))
-			return new ResultMessage(Result.FAIL,validresult);
+		ResultMessage validresult=isValid(sendReceipt);
+		if(!(validresult.getResult()==Result.FAIL))
+			return validresult;
 		//自动计算运费和到达时间
 		String fromCity=information.getFromPerson().getCity();
 		String toCity=information.getToPerson().getCity();
@@ -76,7 +76,6 @@ public class DeliverReceipt implements ReceiptService{
 
 		SendInformation info=copyInfo(information);
 		receipt.setId(createID());
-		System.out.println(receipt.getId());
 		receipt.setType(ReceiptType.DELIVER_RECEIPT);
 		receipt.setSendInformation(info);
 
@@ -191,13 +190,14 @@ public class DeliverReceipt implements ReceiptService{
 	}
 
 	@Override
-	public ReceiptPO modify(ReceiptVO vo) {
+	public ReceiptPO convertToPO(ReceiptVO vo) {
 		SendSheetVO receipt=(SendSheetVO)vo;
 		SendInformation information=receipt.getSendInformation();
 		SendSheetPO po=new SendSheetPO();
-		//
-		SendInformation saveInformation =this.copyInfo(information) ;
+		SendInformation saveInformation =this.copyInfo(information);
 		po.setSendInformation(saveInformation);
+		po.setId(receipt.getId());
+		po.setType(ReceiptType.DELIVER_RECEIPT);
 		return po;
 	}
 
@@ -214,7 +214,9 @@ public class DeliverReceipt implements ReceiptService{
 		return vo;
 	}
 	
-	private String isValid(SendInformation sif){
+	@Override
+	public ResultMessage isValid(ReceiptVO vo){
+		SendInformation sif=((SendSheetVO)vo).getSendInformation();
 		//验证information
 		String barId=sif.getBarId();
 		String toCellphone=sif.getToPerson().getCellphone();
@@ -224,22 +226,25 @@ public class DeliverReceipt implements ReceiptService{
 		String vloume=sif.getGood().getVloume();
 		String size=sif.getGood().getSize();
 		
-	
+		ResultMessage message=new ResultMessage(Result.FAIL);
+		
 		if(!ValidHelper.isCellphone(fromCellphone))
-			return "亲，不要告诉我寄件人手机号不是11位数字~";
+			message.setMessage("亲，不要告诉我寄件人手机号不是11位数字~");
 		if(!ValidHelper.isCellphone(toCellphone))
-			return "亲，不要告诉我收件人手机号不是11位数字~";
+			message.setMessage("亲，不要告诉我收件人手机号不是11位数字~");
 		if(!ValidHelper.isTotal(total))
-			return "亲，件数x是要满足0<x<65536的数字哟";
+			message.setMessage("亲，件数x是要满足0<x<65536的数字哟");
 		if(!ValidHelper.isTotal(weight))
-			return "亲，重量x是要满足0<x<65536的数字哟";
+			message.setMessage("亲，重量x是要满足0<x<65536的数字哟");
 		if(!ValidHelper.isBarId(barId))			
-			 return "亲，咱们的订单号是十位数字哟~";
+			message.setMessage("亲，咱们的订单号是十位数字哟~");
 		if(!ValidHelper.isTotal(vloume))
-			return "亲，体积是要满足0<x<65536的数字哟";
+			message.setMessage("亲，体积是要满足0<x<65536的数字哟");
 		if(!isSize(size))
-			return "亲，尺寸可是要满足“数*数*数”的格式哟";
-		return "success";
+			message.setMessage("亲，尺寸可是要满足“数*数*数”的格式哟");
+		else
+			message.setResult(Result.SUCCESS);
+		return message;
 	}
 
 	private boolean isSize(String str){

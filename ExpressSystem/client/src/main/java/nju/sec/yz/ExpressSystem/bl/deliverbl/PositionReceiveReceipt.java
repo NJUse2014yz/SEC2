@@ -25,14 +25,21 @@ public class PositionReceiveReceipt implements ReceiptService{
 		return null;
 	}
 
+
 	@Override
-	public ReceiptPO modify(ReceiptVO vo) {
+	public ReceiptVO show(ReceiptPO po) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ReceiptVO show(ReceiptPO po) {
+	public ReceiptPO convertToPO(ReceiptVO vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultMessage isValid(ReceiptVO vo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
