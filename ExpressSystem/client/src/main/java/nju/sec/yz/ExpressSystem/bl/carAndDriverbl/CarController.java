@@ -15,14 +15,15 @@ public class CarController implements CarBlService{
 
 	@Override
 	public ArrayList<CarVO> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		Car car=new Car();
+		ArrayList<CarVO> list=car.getAll();
+		return list;
 	}
 
 	@Override
 	public CarVO getSingle(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		Car car=new Car();
+		return car.getSingle(id);
 	}
 
 	@Override
