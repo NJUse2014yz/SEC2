@@ -30,13 +30,12 @@ public class ClientControler{
 	public TransitControler transitControler=new TransitControler(this);
 	public PositionControler positionControler=new PositionControler(this);
 	
-	
 	JPanel userMainPanel=new UserUiTest(this);
 	JPanel deliverMainPanel=new DeliverMainUi(this);
 	JPanel inventoryMainPanel=new InventoryMainUiTest(this);
 	JPanel accountMainPanel=new AccountMainUiTest(this);
 	JPanel managerMainPanel=new ManagerMainUiTest(this);
-	JPanel positionMainPanel=new PositionMainUi(this);
+	JPanel positionMainPanel=new PositionMainUi(this,positionControler.bc);
 	JPanel transitMainPanel=new TransitMainUiTest(this);
 	JPanel adminstraterMainPanel=new AdminstraterMainUiTest(this);
 	

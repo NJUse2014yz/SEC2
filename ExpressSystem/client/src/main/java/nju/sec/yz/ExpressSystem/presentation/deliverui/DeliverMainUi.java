@@ -23,7 +23,7 @@ public class DeliverMainUi extends JPanel {
 	public DeliverMainUi(ClientControler mainControler){
 		super();
 		this.mainControler=mainControler;
-		controler=mainControler.positionControler;
+		controler=mainControler.deliverControler;
 		
 		initDeliverMainUi();
 		ButtonComponents bc=new ButtonComponents(mainControler, this);

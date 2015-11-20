@@ -51,17 +51,17 @@ public class ButtonComponents{
 
 			OrderInButton.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
-					maincontroler.positionControler.deliverChangePanel(DELIVER_CONTROL.ORDER_IN);
+					maincontroler.deliverControler.deliverChangePanel(DELIVER_CONTROL.ORDER_IN);
 				}
 			});
 			OrderSearchButton.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
-					maincontroler.positionControler.deliverChangePanel(DELIVER_CONTROL.DELIVERY_INQUIRY);
+					maincontroler.deliverControler.deliverChangePanel(DELIVER_CONTROL.DELIVERY_INQUIRY);
 				}
 			});
 			ReceiveInButton.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
-					maincontroler.positionControler.deliverChangePanel(DELIVER_CONTROL.RECEIVE_IN);
+					maincontroler.deliverControler.deliverChangePanel(DELIVER_CONTROL.RECEIVE_IN);
 				}
 			});
 			
