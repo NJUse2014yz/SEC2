@@ -28,20 +28,23 @@ public class CarController implements CarBlService{
 
 	@Override
 	public ResultMessage add(CarVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		Car car=new Car();
+		ResultMessage resultMessage=car.add(vo);
+		return resultMessage;
 	}
 
 	@Override
 	public ResultMessage del(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		Car car=new Car();
+		ResultMessage resultMessage=car.del(id);
+		return resultMessage;
 	}
 
 	@Override
 	public ResultMessage modify(CarVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		Car car=new Car();
+		ResultMessage resultMessage=car.modify(vo);
+		return resultMessage;
 	}
 
 }
