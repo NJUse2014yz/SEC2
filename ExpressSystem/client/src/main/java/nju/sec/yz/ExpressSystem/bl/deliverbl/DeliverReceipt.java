@@ -10,6 +10,7 @@ import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptID;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptSaveService;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
+import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.bl.userbl.User;
 import nju.sec.yz.ExpressSystem.bl.userbl.UserInfo;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
@@ -71,12 +72,14 @@ public class DeliverReceipt implements ReceiptService{
 		System.out.println(allCost);
 		information.setPredictTime(time);
 		
-		//创建PO交给receipt
+		//创建PO交给receiptList
 		SendSheetPO receipt=new SendSheetPO();
 
 		SendInformation info=copyInfo(information);
 		receipt.setId(createID());
 		receipt.setType(ReceiptType.DELIVER_RECEIPT);
+		receipt.setMakePerson(this.getDeliverID());
+		receipt.setMakeTime(TimeTool.getDate());
 		receipt.setSendInformation(info);
 
 		ReceiptSaveService receiptList=new ReceiptList();
@@ -198,6 +201,8 @@ public class DeliverReceipt implements ReceiptService{
 		po.setSendInformation(saveInformation);
 		po.setId(receipt.getId());
 		po.setType(ReceiptType.DELIVER_RECEIPT);
+		po.setMakePerson(vo.getMakePerson());
+		po.setMakeTime(vo.getMakeTime());
 		return po;
 	}
 
@@ -211,6 +216,8 @@ public class DeliverReceipt implements ReceiptService{
 		vo.setSendInformation(info);
 		vo.setId(po.getId());
 		vo.setType(ReceiptType.DELIVER_RECEIPT);
+		vo.setMakePerson(po.getMakePerson());
+		vo.setMakeTime(po.getMakeTime());
 		return vo;
 	}
 	
