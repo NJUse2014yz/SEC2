@@ -32,8 +32,6 @@ public class PositionArriveUi extends JPanel{
 		
 		
 		setVisible(true);
-		
-		
 	}
 
 	
