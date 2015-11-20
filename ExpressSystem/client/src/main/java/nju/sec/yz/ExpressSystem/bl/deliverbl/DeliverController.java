@@ -24,8 +24,8 @@ public class DeliverController implements DeliverBlService{
 	 * 快递员查询订单信息
 	 */
 	public SendSheetVO checkDeliverReceipt(String barID) {
-		// TODO Auto-generated method stub
-		return null;
+		DeliverReceipt receipt=new DeliverReceipt();
+		return receipt.getOrder(barID);
 	}
 	
 	@Override
@@ -43,8 +43,9 @@ public class DeliverController implements DeliverBlService{
 
 	@Override
 	public ResultMessage recieveReceipt(ReceiveVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		RecieveReceipt receipt=new RecieveReceipt();
+		ResultMessage message=receipt.make(vo);
+		return message;
 	}
 
 	@Override

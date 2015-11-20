@@ -47,10 +47,13 @@ public class UserDataImpl extends UnicastRemoteObject implements UserDataService
 			return null;
 		}
 		List<UserPO> userPOs = findAll();
+		
 		for (UserPO po : userPOs) {
-			String userID = po.getId();
-			if (id.equals(userID))
+			String userID = po.getId();	
+			if (id.equals(userID)){
 				return po;
+			}
+				
 		}
 		
 		return null;

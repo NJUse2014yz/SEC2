@@ -14,10 +14,10 @@ import java.util.ArrayList;
  */
 import nju.sec.yz.ExpressSystem.common.LoadInformation;
 
-public class OfficeLoadSheetVO {
+public class OfficeLoadSheetVO extends ReceiptVO{
 	private LoadInformation officeLoadInformation;
 	private ArrayList<String> barIds;
-	private double fare;
+	
 	
 	public LoadInformation getOfficeLoadInformation() {
 		return officeLoadInformation;
@@ -30,11 +30,5 @@ public class OfficeLoadSheetVO {
 	}
 	public void setBarIds(ArrayList<String> barIds) {
 		this.barIds = barIds;
-	}
-	public double getFare() {
-		return fare;
-	}
-	public void setFare(double fare) {
-		this.fare = fare;
 	}
 }

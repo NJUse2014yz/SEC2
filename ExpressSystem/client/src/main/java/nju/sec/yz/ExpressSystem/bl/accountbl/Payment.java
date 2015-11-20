@@ -25,10 +25,6 @@ public class Payment implements ReceiptService{
 		return null;
 	}
 
-	@Override
-	public ReceiptPO modify(ReceiptVO vo) {
-		return null;
-	}
 
 	@Override
 	public ReceiptVO show(ReceiptPO po) {
@@ -39,6 +35,18 @@ public class Payment implements ReceiptService{
 	 * 保存付款单信息
 	 */
 	public ResultMessage addPayment(OutPO po){
+		return null;
+	}
+
+	@Override
+	public ReceiptPO convertToPO(ReceiptVO vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultMessage isValid(ReceiptVO vo) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 }

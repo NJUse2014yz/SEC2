@@ -26,13 +26,19 @@ public class TransitReceiveReceipt implements ReceiptService{
 	}
 
 	@Override
-	public ReceiptPO modify(ReceiptVO vo) {
+	public ReceiptVO show(ReceiptPO po) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ReceiptVO show(ReceiptPO po) {
+	public ReceiptPO convertToPO(ReceiptVO vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultMessage isValid(ReceiptVO vo) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -27,13 +27,6 @@ public class DeliverReceiptMockObject implements ReceiptService{
 		return null;
 	}
 
-	@Override
-	public ReceiptPO modify(ReceiptVO vo) {
-		System.out.println("modifying a deliver receipt...");
-		SendSheetPO po=new SendSheetPO();
-		po.setId(vo.getId());
-		return po;
-	}
 
 	@Override
 	public ReceiptVO show(ReceiptPO po) {
@@ -42,6 +35,18 @@ public class DeliverReceiptMockObject implements ReceiptService{
 		SendSheetVO vo=new SendSheetVO();
 		vo.setId(po.getId());
 		return vo;
+	}
+
+	@Override
+	public ReceiptPO convertToPO(ReceiptVO vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultMessage isValid(ReceiptVO vo) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

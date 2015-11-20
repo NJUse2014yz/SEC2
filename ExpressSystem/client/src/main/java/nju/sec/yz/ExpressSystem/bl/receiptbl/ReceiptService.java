@@ -20,9 +20,14 @@ public interface ReceiptService {
 	public ResultMessage make(ReceiptVO vo);
 	
 	/**
-	 * 修改单据,返回修改后的单据信息
+	 * 将VO转换成PO
 	 */
-	public ReceiptPO modify(ReceiptVO vo);
+	public ReceiptPO convertToPO(ReceiptVO vo);
+	
+	/**
+	 * 验证单据信息
+	 */
+	public ResultMessage isValid(ReceiptVO vo);
 	
 	/**
 	 * 将PO转换成VO
