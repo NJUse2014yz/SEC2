@@ -16,7 +16,6 @@ public class CarVO {
 	// TODO 服役时间(年)
 	private int time;
 
-	// TODO 车辆图片待定
 
 	public CarVO(String id, String number, int time) {
 		super();
