@@ -3,7 +3,6 @@ package nju.sec.yz.ExpressSystem.bl.deliverbl;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
-import nju.sec.yz.ExpressSystem.vo.OfficeArriveSheetVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 
 /**

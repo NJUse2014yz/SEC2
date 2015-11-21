@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * 营业厅装车单 、中转中心装车单
+ * 营业厅与中转中心之间运输
  * @author YU Fan
  */
 public class LoadInformation  implements Serializable{
