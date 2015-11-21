@@ -24,6 +24,11 @@ public class CityConst implements CityDistanceService{
 
 	
 	public ResultMessage addCity(CityVO cp) throws RemoteException {
+		//保存城市常量
+		
+		
+		//保存城市
+		
 		return null;
 	}
 

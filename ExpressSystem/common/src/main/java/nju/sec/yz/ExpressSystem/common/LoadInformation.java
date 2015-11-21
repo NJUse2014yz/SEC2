@@ -5,7 +5,6 @@ import java.io.Serializable;
 /**
  * 营业厅装车单 、中转中心装车单
  * @author YU Fan
- *
  */
 public class LoadInformation  implements Serializable{
 	private String time;//装车日期

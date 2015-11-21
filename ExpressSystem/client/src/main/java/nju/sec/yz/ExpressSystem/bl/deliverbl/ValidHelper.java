@@ -1,27 +1,28 @@
 package nju.sec.yz.ExpressSystem.bl.deliverbl;
 
+import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
+
 public class ValidHelper {
 	
 	/**
 	 * 是否符合日期的格式
 	 */
-	public static boolean isDate(String date){
+	public static boolean isValidDate(String date){
 		if(!isNumber(date))
 			return false;
 		if(date.length()!=8)
 			return false;
 		
-		int year=Integer.parseInt(date.substring(0, 4));
-		int month=Integer.parseInt(date.substring(4, 6));
-		int day=Integer.parseInt(date.substring(6,8));
+		int dateToInt=Integer.parseInt(date);
 		
-		//TODO
-		if(year<2014||year>2100)
+		String now=TimeTool.getDate();
+		
+		int nowToInt=Integer.parseInt(now);
+		
+		//超过今天
+		if(dateToInt>nowToInt)
 			return false;
-		if(month<1||month>12)
-			return false;
-		if(day<0||day>31)
-			return false;
+		
 		
 		return true;
 	}
