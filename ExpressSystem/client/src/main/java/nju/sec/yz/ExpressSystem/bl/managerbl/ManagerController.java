@@ -2,6 +2,8 @@ package nju.sec.yz.ExpressSystem.bl.managerbl;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
+
 import nju.sec.yz.ExpressSystem.blservice.managerBlService.AgencyBlService;
 import nju.sec.yz.ExpressSystem.blservice.managerBlService.ConstBlService;
 import nju.sec.yz.ExpressSystem.blservice.managerBlService.SalaryBlService;
@@ -15,7 +17,6 @@ import nju.sec.yz.ExpressSystem.vo.StaffVO;
 /**
  * 负责实现人员机构等管理业务所需要的服务
  * @author 周聪
- *
  */
 public class ManagerController implements AgencyBlService,ConstBlService,SalaryBlService,StaffBlService{
 
@@ -62,37 +63,37 @@ public class ManagerController implements AgencyBlService,ConstBlService,SalaryB
 	}
 
 	@Override
-	public ResultMessage modifyCity(CityVO cv) throws RemoteException {
+	public ResultMessage modifyCity(CityVO cv){
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public CityVO observeCity(String beginPlace, String endPlace) throws RemoteException {
+	public CityVO observeCity(String beginPlace, String endPlace) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ResultMessage addCity(CityVO cp) throws RemoteException {
+	public ResultMessage addCity(CityVO cp) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ResultMessage deleteCity(String beginPlace, String endPlace) throws RemoteException {
+	public ResultMessage deleteCity(String beginPlace, String endPlace) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ResultMessage modifyPrice(PriceVO pp) throws RemoteException {
+	public ResultMessage modifyPrice(PriceVO pp){
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public PriceVO observePrize() throws RemoteException {
+	public PriceVO observePrize(){
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -124,6 +125,12 @@ public class ManagerController implements AgencyBlService,ConstBlService,SalaryB
 	@Override
 	public ArrayList<AgencyVO> observeAllAgency() {
 		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<String> getCities() {
+		
 		return null;
 	}
 

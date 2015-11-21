@@ -12,9 +12,6 @@ public class CityVO {
 
 	private CityInformation cityInformation;
 	
-	
-	
-	
 	public CityVO(CityInformation cityInformation) {
 		super();
 		this.cityInformation = cityInformation;

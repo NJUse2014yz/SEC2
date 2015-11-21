@@ -17,7 +17,7 @@ public class ConstBlDriver {
 
 	public void drive(ConstBlService constBl){
 		
-		try {
+		
 			//
 			ResultMessage addCityResult=constBl.addCity(null);
 			
@@ -47,10 +47,7 @@ public class ConstBlDriver {
 			System.out.println("PriceforCar : "+prize.getPriceInformation().getPriceForCar());
 			
 			
-		} catch (RemoteException e) {
-			System.out.println("System demage");
-			e.printStackTrace();
-		}
+		
 		
 		
 		

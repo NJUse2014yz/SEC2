@@ -49,7 +49,7 @@ public class ConstDataStub implements ConstDataService{
 
 	@Override
 	public CityPO find(String beginPlace, String endPlace) throws RemoteException {
-		return new CityPO(new CityInformation("北京","南京",1000));
+		return new CityPO(new CityInformation("北京","010","南京","025",1000));
 	}
 
 }

@@ -29,12 +29,8 @@ public class RecieveReceipt {
 		String date=vo.getReceiveInformation().getTime();
 		if(!ValidHelper.isBarId(barID))
 			return "亲，咱们的订单号是十位数字哟~";
-<<<<<<< HEAD
-		
-=======
 		if(!ValidHelper.isValidDate(date))
-			return "时间格式错误";
->>>>>>> origin/master
+			return "日期是不是输错了~";
 		return "success";
 	}
 
