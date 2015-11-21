@@ -26,6 +26,16 @@ public class PositionLoadingReceipt implements ReceiptService{
 		return null;
 	}
 	
+	private String creatReceiptID(){
+		
+		return null;
+	}
+	
+	private String getCurrentPositionID(){
+		
+		return null;
+	}
+	
 	@Override
 	public ResultMessage isValid(ReceiptVO vo) {
 		ResultMessage validResult=new ResultMessage(Result.FAIL);

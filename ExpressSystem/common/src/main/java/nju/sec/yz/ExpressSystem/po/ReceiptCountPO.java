@@ -7,6 +7,7 @@ import java.io.Serializable;
  *
  */
 
+import nju.sec.yz.ExpressSystem.common.IdType;
 import nju.sec.yz.ExpressSystem.common.ReceiptType;
 public class ReceiptCountPO implements Serializable{
 
@@ -17,17 +18,20 @@ public class ReceiptCountPO implements Serializable{
 	//日期
 	private String date;
 	
-	//表单类型
-	private ReceiptType receiptType;
+	//id类型
+	private IdType idType;
 	
 	//数量
 	private int count;
 
-	public ReceiptCountPO(String id, String date, ReceiptType receiptType) {
+
+	
+
+	public ReceiptCountPO(String id, String date, IdType idType) {
 		super();
 		this.id = id;
 		this.date = date;
-		this.receiptType = receiptType;
+		this.idType = idType;
 		count=1;
 	}
 	public String getId() {
@@ -46,12 +50,12 @@ public class ReceiptCountPO implements Serializable{
 		this.date = date;
 	}
 
-	public ReceiptType getReceiptType() {
-		return receiptType;
+	public IdType getReceiptType() {
+		return idType;
 	}
 
-	public void setReceiptType(ReceiptType receiptType) {
-		this.receiptType = receiptType;
+	public void setReceiptType(IdType idType) {
+		this.idType = idType;
 	}
 
 	public void addCount(){
