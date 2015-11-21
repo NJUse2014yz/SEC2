@@ -105,6 +105,7 @@ public class PositionLoadUi extends JPanel{
 		this.mainControler=mainControler;
 		controler=mainControler.positionControler;
 		deliverBl=new DeliverController();
+		//constBl=new 
 		this.bc=bc;
 		date=new DateChooser(this,207,170);
 		initDeliverMainUi();
