@@ -85,6 +85,7 @@ import javax.swing.Popup;
          initPanel();
          initLabel();
          panel.add(showDate);
+         
      }
      public void setEnabled(boolean b){
          super.setEnabled(b);

@@ -40,7 +40,7 @@ public class DeliverReceiveInUi extends JPanel{
 	public DeliverReceiveInUi(ClientControler controler) {
 		iniDeliverReceiveIn();
 		ButtonComponents bc=new ButtonComponents(controler, this);
-		DateChooser date=new DateChooser(this,215,85);
+		this.date=new DateChooser(this,215,85);
 		
 	}
 
@@ -85,6 +85,7 @@ public class DeliverReceiveInUi extends JPanel{
 				add(warning);
 				repaint();
 			}else{
+				System.out.println(date.getTime()=="20151121");
 				ReceiveInformation reInfor=new ReceiveInformation(id.getText(), receiver.getText(), date.getTime());
 				ReceiveVO reVO=new ReceiveVO();
 				reVO.setReceiveInformation(reInfor);

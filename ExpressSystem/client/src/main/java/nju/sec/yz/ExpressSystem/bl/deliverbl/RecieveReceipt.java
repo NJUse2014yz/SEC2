@@ -25,12 +25,11 @@ public class RecieveReceipt {
 	}
 	
 	private String isValid(ReceiveVO vo){
-		String barID=vo.getReceiveInformation().getBarID();
+		String barID=vo.getReceiveInformation().getId();
 		String date=vo.getReceiveInformation().getTime();
 		if(!ValidHelper.isBarId(barID))
 			return "亲，咱们的订单号是十位数字哟~";
-		if(!ValidHelper.isDate(date))
-			return "时间格式错误";
+		
 		return "success";
 	}
 
