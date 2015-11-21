@@ -17,6 +17,18 @@ public class LoadInformation  implements Serializable{
 	private String driverId;//
 	private double fare;//运费
 	
+	public LoadInformation(String time, String agencyId, String transportId, String destinationId, String carId,
+			String officerId, String driverId, double fare) {
+		super();
+		this.time = time;
+		this.agencyId = agencyId;
+		this.transportId = transportId;
+		this.destinationId = destinationId;
+		this.carId = carId;
+		this.officerId = officerId;
+		this.driverId = driverId;
+		this.fare = fare;
+	}
 	public String getTime() {
 		return time;
 	}
@@ -34,12 +46,6 @@ public class LoadInformation  implements Serializable{
 	}
 	public void setTransportId(String transportId) {
 		this.transportId = transportId;
-	}
-	public String getDestination() {
-		return destinationId;
-	}
-	public void setDestination(String destinationId) {
-		this.destinationId = destinationId;
 	}
 	public String getCarId() {
 		return carId;

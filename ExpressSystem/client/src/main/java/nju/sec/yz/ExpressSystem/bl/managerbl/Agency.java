@@ -10,6 +10,7 @@ import nju.sec.yz.ExpressSystem.vo.AgencyVO;
 
 /**
  * 机构的领域模型对象
+ * TODO 营业厅和中转中心分开
  * @author 周聪
  *
  */

@@ -9,6 +9,9 @@ import nju.sec.yz.ExpressSystem.vo.CityVO;
  * @author 周聪
  */
 public class CityConst implements CityDistanceService {
+	//营业厅间的距离为30km
+	public static final double DISTANCE_OF_POSITION=30;
+	
 	public ResultMessage modifyCity(CityVO cv) {
 		// TODO Auto-generated method stub
 		return null;

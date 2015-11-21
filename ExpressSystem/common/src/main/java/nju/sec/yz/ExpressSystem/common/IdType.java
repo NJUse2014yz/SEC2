@@ -38,7 +38,7 @@ public enum IdType {
 	},
 	INVENTORY_OUT("c",5){
 		
-	},Transport("",5){
+	},TRANSPORT("",5){
 		//汽运编号
 	};
 	

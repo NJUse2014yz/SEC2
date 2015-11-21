@@ -16,16 +16,36 @@ public class Price implements PriceService{
 		return null;
 	}
 
-	public PriceVO observePrize() throws RemoteException {
+	public PriceVO observePrice() throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public double getPrice() {
-		
+	public double getDeliverPrice() {
+		//todo
 		return 23;
 	}
+
+	@Override
+	public double getCarPrice() {
+		// TODO Auto-generated method stub
+		return 2;
+	}
+
+	@Override
+	public double getTrainPrice() {
+		// TODO Auto-generated method stub
+		return 0.2;
+	}
+
+	@Override
+	public double getPlanePrice() {
+		// TODO Auto-generated method stub
+		return 20;
+	}
+	
+	
 	
 	
 }
