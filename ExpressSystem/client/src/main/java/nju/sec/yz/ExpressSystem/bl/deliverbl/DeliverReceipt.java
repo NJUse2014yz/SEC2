@@ -288,7 +288,7 @@ public class DeliverReceipt implements ReceiptService{
 			break;
 		}
 		PriceService price=new Price();
-		double baseprice=price.getPrice();
+		double baseprice=price.getDeliverPrice();
 		cost=distance/1000*rate*weight1*baseprice;
 		return cost;
 	}

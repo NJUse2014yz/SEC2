@@ -34,6 +34,11 @@ public class CarDataImpl extends UnicastRemoteObject implements CarDataService{
 		}
 		
 		List<CarPO> carPOs = findAll();
+		for(CarPO po:carPOs){
+			if(po.getId().equals(cpo.getId()))
+				return new ResultMessage(Result.FAIL,"车辆信息已存在");
+		}
+		
 		carPOs.add(cpo);
 
 		ResultMessage message = saveData(carPOs);

@@ -17,6 +17,5 @@ public interface InventoryDataService extends Remote{
 	public ResultMessage update(InventoryPO ipo) throws RemoteException;
 	public ResultMessage init( ) throws RemoteException;
 	public ArrayList<InventoryPO> findByTime(String timeIn,String timeOut)throws RemoteException;
-	public ArrayList<InventoryPO> findByPosition(String position) throws RemoteException;
 	public ArrayList<InventoryPO> findAll( ) throws RemoteException;
 }

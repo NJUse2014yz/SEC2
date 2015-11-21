@@ -163,7 +163,7 @@ public class PositionLoadUi extends JPanel{
 				li.setDriverId(JTdriverId.getText());
 				li.setTransportId(JTtransportId.getText());
 				li.setOfficerId(JTsuperviserId.getText());
-				li.setDestination((String)JCdestination.getSelectedItem());
+				li.setDestinationId((String)JCdestination.getSelectedItem());
 				sheet.setOfficeLoadInformation(li);
 				sheet.setType(ReceiptType.POSITION_LOADING_RECEIPT);
 				

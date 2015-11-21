@@ -7,7 +7,7 @@ import java.io.Serializable;
  * @author 周聪
  * 收款单信息：收款日期、收款金额、收款快递员
  */
-public class InPO implements Serializable{
+public class InPO extends ReceiptPO implements Serializable{
 
 	//收款日期
 	private String date;
