@@ -50,7 +50,7 @@ public class ClientControler{
 		switch(n)
 		{
 		case LOGIN:
-			mainFrame.nextPanel(deliverMainPanel);
+			mainFrame.nextPanel(userMainPanel);
 			break;
 		case DELIVERY_ENQUIRY:
 			mainFrame.nextPanel(new DeliverOrderSearchUi(this));

@@ -4,16 +4,28 @@ import java.awt.Graphics;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 
+import nju.sec.yz.ExpressSystem.bl.managerbl.CityConst;
+import nju.sec.yz.ExpressSystem.blservice.managerBlService.ConstBlService;
+import nju.sec.yz.ExpressSystem.blservice.receiptBlService.ReceiptBlService;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.PositionControler;
 
 public class PositionArriveUi extends JPanel{
-	ClientControler mainControler;
-	PositionControler controler;
-	ButtonComponents bc;
+	private ReceiptBlService receiptBl;
+	private ClientControler mainControler;
+	private PositionControler controler;
+	private ButtonComponents bc;
+	
 
+	
 	public PositionArriveUi(ClientControler mainControler,ButtonComponents bc){
 		super();
 		this.mainControler=mainControler;
@@ -28,7 +40,7 @@ public class PositionArriveUi extends JPanel{
 		setLayout(null);
 		setSize(490, 550);
 		
-		
+
 		
 		
 		setVisible(true);
