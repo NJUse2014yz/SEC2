@@ -35,7 +35,7 @@ public class CityConst implements CityDistanceService {
 	public void saveCity(){
 		City city=new City();
 		//TODO
-		city.addCity();
+		city.addCity("南京","025");
 	}
 	
 	public ResultMessage deleteCity(String beginPlace, String endPlace)  {

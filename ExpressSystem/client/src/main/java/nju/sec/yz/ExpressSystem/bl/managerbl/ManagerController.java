@@ -130,8 +130,8 @@ public class ManagerController implements AgencyBlService,ConstBlService,SalaryB
 
 	@Override
 	public List<String> getCities() {
-		
-		return null;
+		City city=new City();
+		return city.getCities();
 	}
 
 }

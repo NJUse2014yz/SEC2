@@ -44,7 +44,7 @@ public class PositionLoadingReceipt implements ReceiptService{
 		//验证info
 		LoadInformation info=receipt.getOfficeLoadInformation();
 		if(!ValidHelper.isValidDate(info.getTime()))
-			validResult.setMessage("时间格式不正确");
+			validResult.setMessage("看看时间是不是输错了~");
 		
 		return validResult;
 	}
