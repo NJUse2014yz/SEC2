@@ -16,8 +16,13 @@ import javax.swing.JTextField;
 import nju.sec.yz.ExpressSystem.bl.deliverbl.DeliverController;
 import nju.sec.yz.ExpressSystem.blservice.deliverBlService.DeliverBlService;
 import nju.sec.yz.ExpressSystem.common.OrderInformation;
+import nju.sec.yz.ExpressSystem.common.ReceiveInformation;
+import nju.sec.yz.ExpressSystem.common.Result;
+import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.presentation.DateChooser;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.OrderVO;
+import nju.sec.yz.ExpressSystem.vo.ReceiveVO;
 
 public class DeliverReceiveInUi extends JPanel{
 
@@ -25,13 +30,17 @@ public class DeliverReceiveInUi extends JPanel{
 	
 	private JTextField id;
 	private JTextField receiver;
+	private DateChooser date;
 	
 	// 确定选项
 	private JButton confirmButton;
 	
+	private JLabel warning=new JLabel();
+	
 	public DeliverReceiveInUi(ClientControler controler) {
 		iniDeliverReceiveIn();
 		ButtonComponents bc=new ButtonComponents(controler, this);
+		DateChooser date=new DateChooser(this,215,85);
 		
 	}
 
@@ -64,11 +73,45 @@ public class DeliverReceiveInUi extends JPanel{
 
 		confirmButton.addMouseListener(new MouseAdapter() {
 			
-				
-				
-				
+			public void mouseClicked(MouseEvent e) {
+			//判断必填项是否填写完成
 			
-			});
+			if((id.getText().equals(""))||(receiver.getText().equals(""))){
+				warning.setText("尚未完成对带*必填项的填写");
+				warning.setBounds(198, 490, 463 - 198, 30);
+				warning.setFont(new Font("Dialog", 1, 15));
+				warning.setForeground(Color.red);
+				warning.setVisible(true);
+				add(warning);
+				repaint();
+			}else{
+				ReceiveInformation reInfor=new ReceiveInformation(id.getText(), receiver.getText(), date.getTime());
+				ReceiveVO reVO=new ReceiveVO();
+				reVO.setReceiveInformation(reInfor);
+				ResultMessage result=deliverservice.recieveReceipt(reVO);
+				// 失败
+				if (result.getResult() == Result.FAIL) {
+					warning.setText(result.getMessage());
+					warning.setBounds(138, 490, 463 - 138, 30);
+					warning.setFont(new Font("Dialog", 1, 15));
+					warning.setForeground(Color.red);
+					add(warning);
+					repaint();
+				} else {
+					// 提交成功
+					warning.setText("提交成功");
+					warning.setBounds(270, 490, 70, 30);
+					warning.setFont(new Font("Dialog", 1, 15));
+					warning.setForeground(Color.red);
+					warning.setVisible(true);
+					add(warning);
+					}
+				
+				}	
+			
+			}
+			
+		});
 		
 		
 	}

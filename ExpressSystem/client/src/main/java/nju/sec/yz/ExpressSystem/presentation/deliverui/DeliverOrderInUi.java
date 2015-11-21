@@ -101,7 +101,7 @@ public class DeliverOrderInUi extends JPanel {
 						|| (vloumeGood.getText().equals("")) || (sizeGood.getText().equals(""))
 						|| (barId.getText().equals(""))) {
 					warning.setText("尚未完成对带*必填项的填写");
-					warning.setBounds(138, 490, 463 - 138, 30);
+					warning.setBounds(198, 490, 463 - 198, 30);
 					warning.setFont(new Font("Dialog", 1, 15));
 					warning.setForeground(Color.red);
 					warning.setVisible(true);
@@ -126,7 +126,7 @@ public class DeliverOrderInUi extends JPanel {
 					// 失败
 					if (result.getResult() == Result.FAIL) {
 
-						warning.setText(deliverBlService.deliverReceipt(sendsheet).getMessage());
+						warning.setText(result.getMessage());
 						warning.setBounds(138, 490, 463 - 138, 30);
 						warning.setFont(new Font("Dialog", 1, 15));
 						warning.setForeground(Color.red);
@@ -244,18 +244,13 @@ public class DeliverOrderInUi extends JPanel {
 		barId.setBounds(252, 354, 140, 15);
 		add(barId);
 
-		packType = new JComboBox();
-		packType.addItem("纸箱");
-		packType.addItem("木箱");
-		packType.addItem("快递袋");
-		packType.addItem("其它");
+		String[] pack={"纸箱","木箱","快递袋","其它"};
+		packType = new JComboBox(pack);
 		packType.setBounds(198, 378, 85, 20);
 		add(packType);
 
-		deliveryType = new JComboBox();
-		deliveryType.addItem("经济快递");
-		deliveryType.addItem("标准快递");
-		deliveryType.addItem("特快");
+		String[] delivery={"经济快递","标准快递","特快"};
+		deliveryType = new JComboBox(delivery);
 		deliveryType.setBounds(225, 407, 85, 20);
 		add(deliveryType);
 	}

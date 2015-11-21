@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -22,7 +23,10 @@ import javax.swing.table.TableColumn;
 import nju.sec.yz.ExpressSystem.bl.deliverbl.Deliver;
 import nju.sec.yz.ExpressSystem.bl.deliverbl.DeliverController;
 import nju.sec.yz.ExpressSystem.blservice.deliverBlService.DeliverBlService;
+import nju.sec.yz.ExpressSystem.common.GoodInformation;
 import nju.sec.yz.ExpressSystem.common.OrderInformation;
+import nju.sec.yz.ExpressSystem.common.SendInformation;
+import nju.sec.yz.ExpressSystem.common.ToAndFromInformation;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.OrderVO;
 
@@ -76,20 +80,48 @@ public class DeliverOrderSearchUi extends JPanel {
 						repaint();
 					}else{
 						OrderInformation orderInformation=ordervo.getOrderInformation();
-						JScrollPane scp=new JScrollPane();
-						scp.setBounds(144,105,315,177);
-						add(scp);
-						ArrayList<String> temp=orderInformation.getTrail();
-						int count=21+temp.size();
-						Object[][] info=new Object[count][2];
-						count=0;
-						
-						
-						String[] title={"寄件人姓名","住址","单位","电话","手机"};
-						JTable tab=new JTable(info,null);
-						JTableHeader jth=tab.getTableHeader();
-						scp.getViewport().add(tab);
-						//依次输出快递信息
+						SendInformation sendIn=orderInformation.getSendInformation();
+						ToAndFromInformation fromPerson=sendIn.getFromPerson();
+						ToAndFromInformation toPerson=sendIn.getToPerson();
+						GoodInformation good=sendIn.getGood();
+						JTable table;  
+						   Object[][] tableData =   
+						    {  {sendIn.getBarId()},
+						    		{fromPerson.getName()},
+						    		{fromPerson.getAddress()},
+						    		{fromPerson.getCity()},
+						    		{fromPerson.getOrg()},
+						    		{fromPerson.getTelephone()},
+						    		{fromPerson.getCellphone()},
+						    		{toPerson.getName()},
+						    		{toPerson.getAddress()},
+						    		{toPerson.getCity()},
+						    		{toPerson.getOrg()},
+						    		{toPerson.getTelephone()},
+						    		{toPerson.getCellphone()},
+						    		{good.getTotal()},
+						    		{good.getWeight()},
+						    		{good.getVloume()},
+						    		{good.getName()},
+						    		{good.getSize()}	
+						       
+						   };  
+					    Object[] columnTitle = {"订单条形码号",
+					    		"寄件人姓名" , "寄件地址" , "寄件城市",
+					    		"寄件单位","寄件人电话","寄件人手机号",
+					    		"收件人姓名","收件地址","收件城市",
+					    		"收件单位","收件人电话","收件人手机号",
+					    		"件数","重量","体积",
+					    		"品名","尺寸"
+					    		};  
+						      //以二维数组和一维数组来创建一个JTable对象  
+						      table = new JTable(tableData , columnTitle);  
+						      //将JTable对象放在JScrollPane中，并将该JScrollPane放在窗口中显示出来  
+						      JScrollPane jsc=new JScrollPane(table);  
+						      jsc.setVisible(true);
+						      jsc.setBounds(144,105,315,177);
+						      add(jsc);
+						      repaint();
 						
 					}
 					
@@ -120,34 +152,8 @@ public class DeliverOrderSearchUi extends JPanel {
 			
 			
 			
-//			JScrollPane scp=new JScrollPane();
-//			scp.setBounds(144,105,315,177);
-//			add(scp);
-//			Object[][] info={{"张三","阿萨德","到达单","11111111","11111111111","杭州"}};
-//			
-//			
-//			String[] title={"寄件人姓名","住址","单位","电话","手机","城市"};
-//			JTable tab=new JTable(info,title);
-//			 tab.setPreferredScrollableViewportSize(new Dimension(200,30));
-//			 tab.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
-//			 tab.setVisible(true);
-//			JTableHeader jth=tab.getTableHeader();
-//			scp.getViewport().add(tab);
 			
-			Object[][] p={
-				      {"阿呆",new Integer(66),new Integer(32),new Integer(98),new Boolean(false),new Boolean(false)},
-				      {"阿呆",new Integer(82),new Integer(69),new Integer(128),new Boolean(true),new Boolean(false)},
-				    };
-				    String[] n={"姓名","语文","数学","总分","及格","作弊"};
-				    TableColumn column=null;
-				    JTable table=new JTable(p,n);
-				    table.setPreferredScrollableViewportSize(new Dimension(200,30));
-				    table.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
-				    table.setVisible(true);
-				    add(table);
-				   
-//				      JScrollPane scrollPane=new JScrollPane(table);
-//				      add(scrollPane);
+			
 		}
 
 

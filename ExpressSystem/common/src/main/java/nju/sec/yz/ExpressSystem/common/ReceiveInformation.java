@@ -12,6 +12,15 @@ public class ReceiveInformation  implements Serializable{
 	private String receiver;
 	private String time;
 	
+	
+	public ReceiveInformation(String id, String receiver, String time) {
+		super();
+		this.id = id;
+		this.receiver = receiver;
+		this.time = time;
+	}
+	
+	
 	public String getId() {
 		return id;
 	}
