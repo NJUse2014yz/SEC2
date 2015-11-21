@@ -5,5 +5,5 @@ import java.util.List;
 import nju.sec.yz.ExpressSystem.vo.CityIdVO;
 
 public interface CityListService {
-	public List<CityIdVO> getCities();
+	public List<CityIdVO> getCityList();
 }
