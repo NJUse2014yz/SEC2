@@ -14,6 +14,7 @@ import nju.sec.yz.ExpressSystem.dataservice.deliverDataSevice.OrderDataService;
 import nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice.InventoryDataService;
 import nju.sec.yz.ExpressSystem.dataservice.logDataSevice.LogDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.AgencyDataService;
+import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.CityIdDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.ConstDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.SalaryDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.StaffDataService;
@@ -27,6 +28,8 @@ import nju.sec.yz.ExpressSystem.dataservice.userDataSevice.UserDataService;
  */
 public interface DatafactoryService extends Remote{
 
+	public CityIdDataService getCityIdDataService() throws RemoteException;
+	
 	public OrderDataService getOrderDataService() throws RemoteException;
 	
 	public ReceiptCounterDataService getCounterDataService() throws RemoteException;

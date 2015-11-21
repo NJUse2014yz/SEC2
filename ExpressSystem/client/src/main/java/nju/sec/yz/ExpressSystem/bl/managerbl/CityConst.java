@@ -7,7 +7,6 @@ import nju.sec.yz.ExpressSystem.vo.CityVO;
 /**
  * 城市距离常量信息的领域模型对象
  * @author 周聪
- *
  */
 public class CityConst implements CityDistanceService {
 	public ResultMessage modifyCity(CityVO cv) {

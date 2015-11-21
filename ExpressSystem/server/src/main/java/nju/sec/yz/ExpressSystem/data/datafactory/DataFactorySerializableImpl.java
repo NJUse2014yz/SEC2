@@ -14,6 +14,7 @@ import nju.sec.yz.ExpressSystem.data.deliverdata.OrderDataImpl;
 import nju.sec.yz.ExpressSystem.data.inventorydata.InventoryDataImpl;
 import nju.sec.yz.ExpressSystem.data.logdata.LogDataImpl;
 import nju.sec.yz.ExpressSystem.data.managedata.AgencyDataImpl;
+import nju.sec.yz.ExpressSystem.data.managedata.CityIdDataImpl;
 import nju.sec.yz.ExpressSystem.data.managedata.SalaryDataImpl;
 import nju.sec.yz.ExpressSystem.data.managedata.StaffDataImpl;
 import nju.sec.yz.ExpressSystem.data.receiptdata.ReceiptCounterDataImpl;
@@ -33,6 +34,7 @@ import nju.sec.yz.ExpressSystem.dataservice.deliverDataSevice.OrderDataService;
 import nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice.InventoryDataService;
 import nju.sec.yz.ExpressSystem.dataservice.logDataSevice.LogDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.AgencyDataService;
+import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.CityIdDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.ConstDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.SalaryDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.StaffDataService;
@@ -143,8 +145,13 @@ public class DataFactorySerializableImpl extends UnicastRemoteObject implements 
 
 	@Override
 	public OrderDataService getOrderDataService() throws RemoteException {
-		
 		return new OrderDataImpl();
+	}
+
+	@Override
+	public CityIdDataService getCityIdDataService() throws RemoteException {
+		
+		return new CityIdDataImpl();
 	}
 
 }

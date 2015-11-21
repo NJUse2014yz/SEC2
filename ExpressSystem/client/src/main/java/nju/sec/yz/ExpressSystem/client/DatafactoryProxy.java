@@ -1,7 +1,6 @@
 package nju.sec.yz.ExpressSystem.client;
 
 import java.rmi.RemoteException;
-
 import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.AccountBookDataService;
 import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.AccountDataService;
 import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.InDataService;
@@ -14,6 +13,7 @@ import nju.sec.yz.ExpressSystem.dataservice.deliverDataSevice.OrderDataService;
 import nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice.InventoryDataService;
 import nju.sec.yz.ExpressSystem.dataservice.logDataSevice.LogDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.AgencyDataService;
+import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.CityIdDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.ConstDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.SalaryDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.StaffDataService;
@@ -29,6 +29,10 @@ public class DatafactoryProxy {
 
 	private static DatafactoryService datafactory;
 	
+	public static CityIdDataService getCityIdDataService() throws RemoteException {
+
+		return datafactory.getCityIdDataService();
+	}
 	
 	static public ReceiptCounterDataService getCounterDataService() throws RemoteException {
 		return datafactory.getCounterDataService();
