@@ -85,7 +85,6 @@ public class DeliverReceiveInUi extends JPanel{
 				add(warning);
 				repaint();
 			}else{
-				System.out.println(date.getTime()=="20151121");
 				ReceiveInformation reInfor=new ReceiveInformation(id.getText(), receiver.getText(), date.getTime());
 				ReceiveVO reVO=new ReceiveVO();
 				reVO.setReceiveInformation(reInfor);
