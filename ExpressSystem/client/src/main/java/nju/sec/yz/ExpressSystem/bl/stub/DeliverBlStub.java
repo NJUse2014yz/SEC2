@@ -54,5 +54,10 @@ public class DeliverBlStub implements DeliverBlService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public SendSheetVO checkDeliverReceipt(String barID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

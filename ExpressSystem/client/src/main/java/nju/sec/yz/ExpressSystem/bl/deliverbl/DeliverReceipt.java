@@ -1,5 +1,7 @@
 package nju.sec.yz.ExpressSystem.bl.deliverbl;
 
+import java.rmi.RemoteException;
+
 import nju.sec.yz.ExpressSystem.bl.managerbl.CityConst;
 import nju.sec.yz.ExpressSystem.bl.managerbl.CityDistanceService;
 import nju.sec.yz.ExpressSystem.bl.managerbl.Price;
@@ -8,6 +10,10 @@ import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptID;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptSaveService;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
+import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
+import nju.sec.yz.ExpressSystem.bl.userbl.User;
+import nju.sec.yz.ExpressSystem.bl.userbl.UserInfo;
+import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
 import nju.sec.yz.ExpressSystem.common.DeliveryType;
 import nju.sec.yz.ExpressSystem.common.GoodInformation;
 import nju.sec.yz.ExpressSystem.common.PackType;
@@ -16,6 +22,7 @@ import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.SendInformation;
 import nju.sec.yz.ExpressSystem.common.ToAndFromInformation;
+import nju.sec.yz.ExpressSystem.dataservice.deliverDataSevice.OrderDataService;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.po.SendSheetPO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
@@ -25,6 +32,18 @@ import nju.sec.yz.ExpressSystem.vo.SendSheetVO;
  * @author 周聪
  */
 public class DeliverReceipt implements ReceiptService{
+	
+	private OrderDataService orderData;
+	
+	public DeliverReceipt() {
+		try {
+			orderData=DatafactoryProxy.getOrderDataService();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	@Override
 	/**
 	 * 检验输入信息
@@ -35,9 +54,9 @@ public class DeliverReceipt implements ReceiptService{
 		SendInformation information=sendReceipt.getSendInformation();
 		
 		//验证information
-		String validresult=isValid(information);
-		if(!validresult.equals("success"))
-			return new ResultMessage(Result.FAIL,validresult);
+		ResultMessage validresult=isValid(sendReceipt);
+		if(!(validresult.getResult()==Result.FAIL))
+			return validresult;
 		//自动计算运费和到达时间
 		String fromCity=information.getFromPerson().getCity();
 		String toCity=information.getToPerson().getCity();
@@ -47,21 +66,20 @@ public class DeliverReceipt implements ReceiptService{
 
 		PackType packType=information.getPackType();
 		information.setCostForPack(packType.getPrice());
-		
 		double allCost=calculateCost(distance,weight,type)+information.getCostForPack();
 		int time=calculateTime(fromCity,toCity);
 		information.setCostForAll(allCost);
 		System.out.println(allCost);
 		information.setPredictTime(time);
 		
-		//创建PO交给receipt
+		//创建PO交给receiptList
 		SendSheetPO receipt=new SendSheetPO();
 
 		SendInformation info=copyInfo(information);
-		//拿到deliverID
-		receipt.setId(createID("hh"));
-		System.out.println(receipt.getId());
+		receipt.setId(createID());
 		receipt.setType(ReceiptType.DELIVER_RECEIPT);
+		receipt.setMakePerson(this.getDeliverID());
+		receipt.setMakeTime(TimeTool.getDate());
 		receipt.setSendInformation(info);
 
 		ReceiptSaveService receiptList=new ReceiptList();
@@ -74,14 +92,61 @@ public class DeliverReceipt implements ReceiptService{
 	 * 生成寄件单id
 	 * @param deliverID
 	 */
-	private String createID(String deliverID) {
+	private String createID() {
+		String deliverID=this.getDeliverID();
 		ReceiptID idMaker=new ReceiptID();
 		String id=idMaker.getID(deliverID, ReceiptType.DELIVER_RECEIPT);
 		return id;
 	}
-
 	
-
+	/**
+	 * 得到填单人的id
+	 */
+	private String getDeliverID(){
+		UserInfo user=new User();
+		String id=user.getCurrentID();
+		return id;
+	}
+	
+	
+	/**
+	 * 从数据层获得订单信息
+	 */
+	public SendSheetVO getOrder(String barID){
+		SendSheetPO po=null;
+		
+		try {
+			po=orderData.get(barID);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		
+		if(po==null)
+			return null;
+		
+		SendSheetVO vo=new SendSheetVO();
+		SendInformation info=copyInfo(po.getSendInformation());
+		vo.setSendInformation(info);
+		vo.setId(po.getId());
+		vo.setType(po.getType());
+		
+		return vo;
+	}
+	
+	private ResultMessage saveOrder(SendSheetPO po){
+		ResultMessage message=null;
+		try {
+			message=orderData.add(po);
+		} catch (RemoteException e) {
+			
+			e.printStackTrace();
+			return new ResultMessage(Result.FAIL, "网络异常");
+		}
+		return message;
+	}
+	
 	/**
 	 * 复制info的所有数据
 	 */
@@ -128,13 +193,16 @@ public class DeliverReceipt implements ReceiptService{
 	}
 
 	@Override
-	public ReceiptPO modify(ReceiptVO vo) {
+	public ReceiptPO convertToPO(ReceiptVO vo) {
 		SendSheetVO receipt=(SendSheetVO)vo;
 		SendInformation information=receipt.getSendInformation();
 		SendSheetPO po=new SendSheetPO();
-		//
-		SendInformation saveInformation =this.copyInfo(information) ;
+		SendInformation saveInformation =this.copyInfo(information);
 		po.setSendInformation(saveInformation);
+		po.setId(receipt.getId());
+		po.setType(ReceiptType.DELIVER_RECEIPT);
+		po.setMakePerson(vo.getMakePerson());
+		po.setMakeTime(vo.getMakeTime());
 		return po;
 	}
 
@@ -144,10 +212,18 @@ public class DeliverReceipt implements ReceiptService{
 	public ReceiptVO show(ReceiptPO po) {
 		SendSheetPO receipt=(SendSheetPO)po;
 		SendInformation info=receipt.getSendInformation();
-		return null;
+		SendSheetVO vo=new SendSheetVO();
+		vo.setSendInformation(info);
+		vo.setId(po.getId());
+		vo.setType(ReceiptType.DELIVER_RECEIPT);
+		vo.setMakePerson(po.getMakePerson());
+		vo.setMakeTime(po.getMakeTime());
+		return vo;
 	}
 	
-	private String isValid(SendInformation sif){
+	@Override
+	public ResultMessage isValid(ReceiptVO vo){
+		SendInformation sif=((SendSheetVO)vo).getSendInformation();
 		//验证information
 		String barId=sif.getBarId();
 		String toCellphone=sif.getToPerson().getCellphone();
@@ -156,62 +232,28 @@ public class DeliverReceipt implements ReceiptService{
 		String weight=sif.getGood().getWeight();
 		String vloume=sif.getGood().getVloume();
 		String size=sif.getGood().getSize();
-		if(!isCellphone(fromCellphone))
-			return "亲，不要告诉我寄件人手机号不是11位数字~";
-		if(!isCellphone(toCellphone))
-			return "亲，不要告诉我收件人手机号不是11位数字~";
-		if(!isTotal(total))
-			return "亲，件数x是要满足0<x<65536的数字哟";
-		if(!isTotal(weight))
-			return "亲，重量x是要满足0<x<65536的数字哟";
-		if(!isBarId(barId))			
-			 return "亲，咱们的订单号是十位数字哟~";
-		if(!isTotal(vloume))
-			return "亲，体积是要满足0<x<65536的数字哟";
+		
+		ResultMessage message=new ResultMessage(Result.FAIL);
+		
+		if(!ValidHelper.isCellphone(fromCellphone))
+			message.setMessage("亲，不要告诉我寄件人手机号不是11位数字~");
+		if(!ValidHelper.isCellphone(toCellphone))
+			message.setMessage("亲，不要告诉我收件人手机号不是11位数字~");
+		if(!ValidHelper.isTotal(total))
+			message.setMessage("亲，件数x是要满足0<x<65536的数字哟");
+		if(!ValidHelper.isTotal(weight))
+			message.setMessage("亲，重量x是要满足0<x<65536的数字哟");
+		if(!ValidHelper.isBarId(barId))			
+			message.setMessage("亲，咱们的订单号是十位数字哟~");
+		if(!ValidHelper.isTotal(vloume))
+			message.setMessage("亲，体积是要满足0<x<65536的数字哟");
 		if(!isSize(size))
-			return "亲，尺寸可是要满足“数*数*数”的格式哟";
-		return "success";
+			message.setMessage("亲，尺寸可是要满足“数*数*数”的格式哟");
+		else
+			message.setResult(Result.SUCCESS);
+		return message;
 	}
 
-	
-
-	private boolean isNumber(String str){
-		if(str==null||str.length()==0)
-			return false;
-		char[] numbers=str.toCharArray();
-		for(int i=0;i<numbers.length;i++)
-			if('0'>numbers[i]||numbers[i]>'9')
-				return false;
-		return true;
-	}
-	
-	private boolean isBarId(String str){
-		if(str==null||str.length()==0)
-			return false;
-		if(str.length()!=10)
-			return false;
-		return isNumber(str);
-	}
-	
-	private boolean isCellphone(String str){
-		if(str==null||str.length()==0)
-			return false;
-		if(str.length()!=11)
-			return false;
-		return isNumber(str);
-	}
-	
-	private boolean isTotal(String str){
-		if(str==null||str.length()==0)
-			return false;
-		if(!isNumber(str))
-			return false;
-		int n= Integer.parseInt(str);
-		if(n<0||n>65536)
-			return false;
-		return true;
-	}
-	
 	private boolean isSize(String str){
 		if(str==null||str.length()==0)
 			return false;
@@ -219,7 +261,7 @@ public class DeliverReceipt implements ReceiptService{
 			return false;
 		}
 		int one=str.indexOf("*");
-		if(!isNumber(str.substring(0, one))){
+		if(!ValidHelper.isNumber(str.substring(0, one))){
 			return false;
 		}
 		str=str.substring(one+1);
@@ -227,7 +269,7 @@ public class DeliverReceipt implements ReceiptService{
 			return false;
 		}
 		int two=str.indexOf("*");
-		if(!isNumber(str.substring(0, two))||!isNumber(str.substring(two+1))){
+		if(!ValidHelper.isNumber(str.substring(0, two))||!ValidHelper.isNumber(str.substring(two+1))){
 			return false;
 		}
 		return true;

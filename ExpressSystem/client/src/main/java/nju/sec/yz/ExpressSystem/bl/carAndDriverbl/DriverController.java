@@ -14,32 +14,36 @@ public class DriverController implements DriverBlService{
 
 	@Override
 	public ArrayList<DriverVO> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		Driver driver=new Driver();
+		ArrayList<DriverVO> list=driver.getAll();
+		return list;
 	}
 
 	@Override
 	public DriverVO getSingle(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		Driver driver=new Driver();
+		return driver.getSingle(id);
 	}
 
 	@Override
 	public ResultMessage add(DriverVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		Driver driver=new Driver();
+		ResultMessage resultMessage=driver.add(vo);
+		return resultMessage;
 	}
 
 	@Override
 	public ResultMessage del(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		Driver driver=new Driver();
+		ResultMessage resultMessage=driver.del(id);
+		return resultMessage;
 	}
 
 	@Override
 	public ResultMessage modify(DriverVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		Driver driver=new Driver();
+		ResultMessage resultMessage=driver.modify(vo);
+		return resultMessage;
 	}
 
 }

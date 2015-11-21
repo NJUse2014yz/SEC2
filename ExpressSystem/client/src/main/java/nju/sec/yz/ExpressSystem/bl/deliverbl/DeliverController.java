@@ -18,6 +18,16 @@ import nju.sec.yz.ExpressSystem.vo.TransitSheetVO;
  */
 public class DeliverController implements DeliverBlService{
 
+	
+	@Override
+	/**
+	 * 快递员查询订单信息
+	 */
+	public SendSheetVO checkDeliverReceipt(String barID) {
+		DeliverReceipt receipt=new DeliverReceipt();
+		return receipt.getOrder(barID);
+	}
+	
 	@Override
 	public OrderVO checkDeliver(String id) {
 		
@@ -33,8 +43,9 @@ public class DeliverController implements DeliverBlService{
 
 	@Override
 	public ResultMessage recieveReceipt(ReceiveVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		RecieveReceipt receipt=new RecieveReceipt();
+		ResultMessage message=receipt.make(vo);
+		return message;
 	}
 
 	@Override

@@ -51,11 +51,6 @@ public class InventoryInSheet implements ReceiptService {
 		return new ResultMessage(Result.FAIL);
 	}
 
-	@Override
-	public ReceiptPO modify(ReceiptVO vo) {
-		// TODO 自动生成的方法存根
-		return null;
-	}
 	
 	
 	public ResultMessage isValid(InventoryInInformation ii){
@@ -69,6 +64,18 @@ public class InventoryInSheet implements ReceiptService {
 
 	@Override
 	public ReceiptVO show(ReceiptPO po) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ReceiptPO convertToPO(ReceiptVO vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultMessage isValid(ReceiptVO vo) {
 		// TODO Auto-generated method stub
 		return null;
 	}

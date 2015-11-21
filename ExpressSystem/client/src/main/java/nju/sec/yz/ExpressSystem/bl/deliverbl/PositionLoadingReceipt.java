@@ -1,6 +1,10 @@
 package nju.sec.yz.ExpressSystem.bl.deliverbl;
 
+import java.util.List;
+
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
+import nju.sec.yz.ExpressSystem.common.LoadInformation;
+import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.vo.OfficeLoadSheetVO;
@@ -14,19 +18,37 @@ import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 public class PositionLoadingReceipt implements ReceiptService{
 
 	@Override
-	public ResultMessage approve(ReceiptVO vo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public ResultMessage make(ReceiptVO vo) {
-		// TODO Auto-generated method stub
+		OfficeLoadSheetVO receipt=(OfficeLoadSheetVO)vo;
+		LoadInformation info=receipt.getOfficeLoadInformation();
+		ResultMessage validResult=isValid(receipt);
+		
 		return null;
 	}
-
+	
 	@Override
-	public ReceiptPO modify(ReceiptVO vo) {
+	public ResultMessage isValid(ReceiptVO vo) {
+		ResultMessage validResult=new ResultMessage(Result.FAIL);
+		
+		OfficeLoadSheetVO receipt=(OfficeLoadSheetVO)vo;
+		
+		//验证barid
+		List<String> barIDs=receipt.getBarIds();
+		for(String barID:barIDs){
+			if(!ValidHelper.isBarId(barID)){
+				validResult.setMessage("亲，咱们的订单号是十位数字哟~");
+				return validResult;
+			}
+		}
+		
+		//验证info
+		LoadInformation info=receipt.getOfficeLoadInformation();
+		
+		return validResult;
+	}
+	
+	@Override
+	public ResultMessage approve(ReceiptVO vo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -36,5 +58,12 @@ public class PositionLoadingReceipt implements ReceiptService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public ReceiptPO convertToPO(ReceiptVO vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

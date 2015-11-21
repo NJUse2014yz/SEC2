@@ -8,7 +8,7 @@ import java.io.Serializable;
  *
  */
 public class ReceiveInformation  implements Serializable{
-	private String id;
+	private String id;//订单条形码号
 	private String receiver;
 	private String time;
 	
@@ -39,4 +39,5 @@ public class ReceiveInformation  implements Serializable{
 	public void setTime(String time) {
 		this.time = time;
 	}
+
 }
