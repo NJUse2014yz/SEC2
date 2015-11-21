@@ -8,10 +8,16 @@ import java.io.Serializable;
  *
  */
 public class ArriveInformation implements Serializable{
-	private String time;
-	private String transitSheetId;
-	private String departure;
-	private ArriveState state;
+	
+	private String time;//到达日期
+	private String transitSheetId;//中转单编号
+	private String departure;//出发地
+	private ArriveState state;//货物到达状态（损坏、完整、丢失）
+	
+	
+	public ArriveInformation() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	public String getTime() {
 		return time;

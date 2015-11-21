@@ -3,7 +3,7 @@ package nju.sec.yz.ExpressSystem.common;
 import java.io.Serializable;
 
 /**
- * 
+ * 派件单
  * @author YU Fan
  *
  */

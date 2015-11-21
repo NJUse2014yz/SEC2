@@ -12,15 +12,20 @@ import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
  *
  */
 public class PositionSendReceipt implements ReceiptService{
-
 	@Override
-	public ResultMessage approve(ReceiptVO vo) {
+	public ResultMessage make(ReceiptVO vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public ResultMessage isValid(ReceiptVO vo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ResultMessage make(ReceiptVO vo) {
+	public ResultMessage approve(ReceiptVO vo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -38,11 +43,6 @@ public class PositionSendReceipt implements ReceiptService{
 		return null;
 	}
 
-	@Override
-	public ResultMessage isValid(ReceiptVO vo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	
 }

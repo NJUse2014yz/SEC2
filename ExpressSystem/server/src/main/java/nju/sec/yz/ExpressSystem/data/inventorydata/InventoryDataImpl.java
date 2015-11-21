@@ -39,11 +39,7 @@ public class InventoryDataImpl extends UnicastRemoteObject implements InventoryD
 		return null;
 	}
 
-	@Override
-	public ArrayList<InventoryPO> findByPosition(String position) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	@Override
 	public ArrayList<InventoryPO> findAll() throws RemoteException {
