@@ -14,15 +14,14 @@ public class DriverVO {
 		//出生日期(日期格式规则：8位数字，如20151007)
 		private String birthDate;
 		
-		//身份证号
+		//身份证号(18位)
 		private String personID;
 		
 		//手机
 		private String phoneNumber;
 		
-		//性别
+		//性别(下拉框选择)
 		private Sex sex;
-		
 
 		//行驶证期限(日期)
 		private String licenseDeadLine;
