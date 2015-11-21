@@ -29,6 +29,9 @@ public class LoadInformation  implements Serializable{
 		this.driverId = driverId;
 		this.fare = fare;
 	}
+	public LoadInformation() {
+		// TODO Auto-generated constructor stub
+	}
 	public String getTime() {
 		return time;
 	}

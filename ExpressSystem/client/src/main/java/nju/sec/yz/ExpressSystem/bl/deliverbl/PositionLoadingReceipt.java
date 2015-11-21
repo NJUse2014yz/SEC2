@@ -71,7 +71,6 @@ public class PositionLoadingReceipt implements ReceiptService{
 	
 	/**
 	 * 生成receiptId
-	 * @return
 	 */
 	private String creatReceiptID(String positionID){
 		ReceiptID id=new ReceiptID();

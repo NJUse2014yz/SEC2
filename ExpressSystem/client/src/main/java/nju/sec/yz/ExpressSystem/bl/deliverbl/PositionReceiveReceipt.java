@@ -13,17 +13,22 @@ import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 public class PositionReceiveReceipt implements ReceiptService{
 
 	@Override
+	public ResultMessage make(ReceiptVO vo) {
+		
+		return null;
+	}
+	
+	@Override
+	public ResultMessage isValid(ReceiptVO vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
 	public ResultMessage approve(ReceiptVO vo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	public ResultMessage make(ReceiptVO vo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 
 	@Override
 	public ReceiptVO show(ReceiptPO po) {
@@ -37,9 +42,4 @@ public class PositionReceiveReceipt implements ReceiptService{
 		return null;
 	}
 
-	@Override
-	public ResultMessage isValid(ReceiptVO vo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
