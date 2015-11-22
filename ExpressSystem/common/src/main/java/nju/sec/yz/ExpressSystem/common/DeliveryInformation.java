@@ -10,6 +10,7 @@ import java.io.Serializable;
 public class DeliveryInformation  implements Serializable{
 	private String time;
 	private String outDeliverId;
+	private String deliverId;
 	
 	public String getTime() {
 		return time;
@@ -23,4 +24,11 @@ public class DeliveryInformation  implements Serializable{
 	public void setDeliverId(String deliverId) {
 		this.outDeliverId = deliverId;
 	}
+	public String getOutDeliverId() {
+		return outDeliverId;
+	}
+	public void setOutDeliverId(String outDeliverId) {
+		this.outDeliverId = outDeliverId;
+	}
+	
 }

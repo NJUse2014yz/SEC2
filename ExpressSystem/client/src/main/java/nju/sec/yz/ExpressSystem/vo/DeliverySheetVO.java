@@ -16,7 +16,7 @@ import nju.sec.yz.ExpressSystem.common.DeliveryInformation;
 
 public class DeliverySheetVO extends ReceiptVO{
 	private DeliveryInformation deliveryInformation;
-	private ArrayList<String> barIds;
+//	private ArrayList<String> barIds;
 	
 	public DeliveryInformation getDeliveryInformation() {
 		return deliveryInformation;
@@ -24,10 +24,10 @@ public class DeliverySheetVO extends ReceiptVO{
 	public void setDeliveryInformation(DeliveryInformation deliveryInformation) {
 		this.deliveryInformation = deliveryInformation;
 	}
-	public ArrayList<String> getBarIds() {
-		return barIds;
-	}
-	public void setBarIds(ArrayList<String> barIds) {
-		this.barIds = barIds;
-	}
+//	public ArrayList<String> getBarIds() {
+//		return barIds;
+//	}
+//	public void setBarIds(ArrayList<String> barIds) {
+//		this.barIds = barIds;
+//	}
 }

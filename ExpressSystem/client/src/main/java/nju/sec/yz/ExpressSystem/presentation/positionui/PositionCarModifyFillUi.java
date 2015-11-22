@@ -6,12 +6,14 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import nju.sec.yz.ExpressSystem.blservice.carAndDriverBlService.CarBlService;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.PositionControler;
 
 public class PositionCarModifyFillUi extends JPanel{
 	ClientControler mainControler;
 	PositionControler controler;
+	private CarBlService carBl;
 	ButtonComponents bc;
 
 	public PositionCarModifyFillUi(ClientControler mainControler,ButtonComponents bc){

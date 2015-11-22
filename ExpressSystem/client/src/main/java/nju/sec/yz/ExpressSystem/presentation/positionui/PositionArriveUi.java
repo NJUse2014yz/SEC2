@@ -140,8 +140,10 @@ public class PositionArriveUi extends JPanel{
 				}
 				ai.setDeparture((String)JCdeparture.getSelectedItem());
 				ai.setState(arriveState);
+				ai.setTime(date.getTime());
+				ai.setTransitSheetId(JTtranferId.getText());
 				sheet.setOfficeArrive(ai);
-				sheet.setType(ReceiptType.POSITION_LOADING_RECEIPT);
+				sheet.setType(ReceiptType.POSITION_SEND_RECEIPT);
 				
 				if(JTtranferId.getText().equals(""))
 				{

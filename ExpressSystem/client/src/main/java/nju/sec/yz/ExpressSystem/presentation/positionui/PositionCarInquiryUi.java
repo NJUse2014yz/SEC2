@@ -6,13 +6,17 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import nju.sec.yz.ExpressSystem.blservice.carAndDriverBlService.CarBlService;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.PositionControler;
 
 public class PositionCarInquiryUi extends JPanel{
-	ClientControler mainControler;
-	PositionControler controler;
-	ButtonComponents bc;
+	private ClientControler mainControler;
+	private PositionControler controler;
+	private CarBlService carBl;
+	private ButtonComponents bc;
+	
+	private 
 
 	public PositionCarInquiryUi(ClientControler mainControler,ButtonComponents bc){
 		super();
