@@ -1,6 +1,5 @@
 package nju.sec.yz.ExpressSystem.bl.managerbl;
 
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +8,6 @@ import nju.sec.yz.ExpressSystem.blservice.managerBlService.ConstBlService;
 import nju.sec.yz.ExpressSystem.blservice.managerBlService.SalaryBlService;
 import nju.sec.yz.ExpressSystem.blservice.managerBlService.StaffBlService;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
-import nju.sec.yz.ExpressSystem.vo.AgencyVO;
 import nju.sec.yz.ExpressSystem.vo.CityVO;
 import nju.sec.yz.ExpressSystem.vo.PositionVO;
 import nju.sec.yz.ExpressSystem.vo.PriceVO;
@@ -24,32 +22,37 @@ public class ManagerController implements AgencyBlService,ConstBlService,SalaryB
 
 	@Override
 	public ResultMessage addStaff(StaffVO sv) {
-		// TODO Auto-generated method stub
-		return null;
+		Staff staff=new Staff();
+		ResultMessage message=staff.addStaff(sv);
+		return message;
 	}
 
 	@Override
 	public ResultMessage deleteStaff(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		Staff staff=new Staff();
+		ResultMessage message=staff.deleteStaff(id);
+		return message;
 	}
 
 	@Override
 	public ResultMessage modifyStaff(StaffVO sv) {
-		// TODO Auto-generated method stub
-		return null;
+		Staff staff=new Staff();
+		ResultMessage message=staff.modifyStaff(sv);
+		return message;
 	}
 
 	@Override
 	public StaffVO observeStaff(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		Staff staff=new Staff();
+		return staff.observeStaff(id);
 	}
 
 	@Override
 	public ArrayList<StaffVO> observeStaff() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Staff staff=new Staff();
+		ArrayList<StaffVO> list=staff.observeStaff();
+		return list;
 	}
 
 	@Override
