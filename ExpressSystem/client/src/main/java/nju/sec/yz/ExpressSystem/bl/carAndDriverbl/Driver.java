@@ -80,21 +80,6 @@ public class Driver {
 		}
 		return message;
 	}
-
-	
-	public ResultMessage del(String id) {
-		ResultMessage result=null;
-		//调用data层方法,验证id是否存在
-		try {
-			result=data.delete(id);
-		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-			return new ResultMessage(Result.FAIL,"系统错误");
-		}
-		return result;
-	}
-
 	
 	public ResultMessage modify(DriverVO vo) {
 		ResultMessage message=null;
@@ -123,13 +108,13 @@ public class Driver {
 		String licenseDeadLine=vo.getLicenseDeadLine();
 		if(!isId(id))
 			return "看看ID输对了没";
-		if(!isDate(birthDate))
+		if(!isBeforeDate(birthDate))
 			return "出生日期不符合日期格式啊";
 		if(!isPersonId(personID))
 			return "身份证输错了哦";
 		if(!isPhoneNumber(phoneNumber))
 			return "手机号码不是11位数字吗，你这";
-		if(isDate(licenseDeadLine))
+		if(isLaterDate(licenseDeadLine))
 			return "行驶证期限不符合日期格式哦";
 		return "success";
 	}
@@ -156,7 +141,7 @@ public class Driver {
 		return true;
 	}
 
-	private boolean isDate(String date) {
+	private boolean isBeforeDate(String date) {
 		if(date.length()!=8)
 			return false;
 		char array[]=date.toCharArray();
@@ -164,30 +149,62 @@ public class Driver {
 			if(a<'0'||a>'9')
 				return false;
 		int dateToInt=Integer.parseInt(date);
-		
 		String now=TimeTool.getDate();
-		
 		int nowToInt=Integer.parseInt(now);
-		
 		//超过今天
 		if(dateToInt>nowToInt)
 			return false;
 		return true;
 	}
-
-	private boolean isId(String id) {
-		// TODO 自动生成的方法存根
-		return false;
+	private boolean isLaterDate(String date) {
+		if(date.length()!=8)
+			return false;
+		char array[]=date.toCharArray();
+		for(char a:array)
+			if(a<'0'||a>'9')
+				return false;
+		int dateToInt=Integer.parseInt(date);
+		String now=TimeTool.getDate();
+		int nowToInt=Integer.parseInt(now);
+		//超过今天
+		if(dateToInt<nowToInt)
+			return false;
+		return true;
 	}
 
-	private DriverVO changePoToVo(DriverPO driverPO) {
-		// TODO 自动生成的方法存根
-		return null;
+	private boolean isId(String id) {
+		if(id.length()!=9||id.length()!=10)
+			return false;
+		char numbers[]=id.toCharArray();
+		for(char a:numbers)
+			if(a<'0'||a>'9')
+				return false;
+		
+		return true;
+	}
+
+	private DriverVO changePoToVo(DriverPO po) {
+		String id=po.getId();
+		String name=po.getName();
+		String birthDate=po.getBirthDate();
+		String personID=po.getPersonID();
+		String phoneNumber=po.getPhoneNumber();
+		Sex sex=po.getSex();
+		String licenseDeadLine=po.getLicenseDeadLine();
+		DriverVO vo=new DriverVO(id, name, birthDate, personID, phoneNumber, sex, licenseDeadLine);
+		return vo;
 	}
 
 	private DriverPO changeVoToPo(DriverVO vo) {
-		// TODO 自动生成的方法存根
-		return null;
+		String id=vo.getId();
+		String name=vo.getName();
+		String birthDate=vo.getBirthDate();
+		String personID=vo.getPersonID();
+		String phoneNumber=vo.getPhoneNumber();
+		Sex sex=vo.getSex();
+		String licenseDeadLine=vo.getLicenseDeadLine();
+		DriverPO po=new DriverPO(id, name, birthDate, personID, phoneNumber, sex, licenseDeadLine);
+		return po;
 	}
 	
 }
