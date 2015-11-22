@@ -15,16 +15,7 @@ import nju.sec.yz.ExpressSystem.vo.AgencyVO;
  *
  */
 public class Agency {
-	private AgencyDataService agencyData;
 	
-	public Agency() {
-		try {
-			agencyData=DatafactoryProxy.getAgencyDataService();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 	
 	public ResultMessage addAgency(AgencyVO av) {
 		// TODO Auto-generated method stub
