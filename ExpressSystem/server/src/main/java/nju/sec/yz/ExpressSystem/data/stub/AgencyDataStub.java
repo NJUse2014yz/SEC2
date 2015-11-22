@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.AgencyDataService;
-import nju.sec.yz.ExpressSystem.po.AgencyPO;
+import nju.sec.yz.ExpressSystem.po.TransitPO;
 import nju.sec.yz.ExpressSystem.po.CarPO;
 
 /**
@@ -16,15 +16,15 @@ import nju.sec.yz.ExpressSystem.po.CarPO;
 public class AgencyDataStub implements AgencyDataService{
 
 	@Override
-	public ResultMessage insert(AgencyPO agpo) throws RemoteException {
+	public ResultMessage insert(TransitPO agpo) throws RemoteException {
 		// TODO 自动生成的方法存根
 		return null;
 	}
 
 	@Override
-	public AgencyPO find(String id) throws RemoteException {
+	public TransitPO find(String id) throws RemoteException {
 		// TODO 自动生成的方法存根
-		return new AgencyPO("南京","001","南京中转中心");
+		return new TransitPO("南京","001",null, "南京中转中心");
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class AgencyDataStub implements AgencyDataService{
 	}
 
 	@Override
-	public ResultMessage update(AgencyPO agpo) throws RemoteException {
+	public ResultMessage update(TransitPO agpo) throws RemoteException {
 		// TODO 自动生成的方法存根
 		return null;
 	}
@@ -46,10 +46,10 @@ public class AgencyDataStub implements AgencyDataService{
 	}
 
 	@Override
-	public ArrayList<AgencyPO> findAll() throws RemoteException {
+	public ArrayList<TransitPO> findAll() throws RemoteException {
 		// TODO 自动生成的方法存根
-		ArrayList<AgencyPO> array=new ArrayList<AgencyPO>();
-		array.add(new AgencyPO("南京","001","南京中转中心"));
+		ArrayList<TransitPO> array=new ArrayList<TransitPO>();
+		array.add(new TransitPO("南京","001",null, "南京中转中心"));
 		return array;
 	}
 

@@ -26,7 +26,7 @@ public class OrderDataImpl extends UnicastRemoteObject implements OrderDataServi
 	}
 
 	@Override
-	public ResultMessage add(SendSheetPO po) throws RemoteException {
+	public synchronized ResultMessage add(SendSheetPO po) throws RemoteException {
 		System.out.println("inserting a OrderPO...");
 		if(po==null){
 			System.out.println("插入了一个空的orderPO！！！");

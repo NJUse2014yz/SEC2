@@ -43,7 +43,7 @@ public class CityIdDataImpl extends UnicastRemoteObject implements CityIdDataSer
 	}
 	
 	@Override
-	public void addCity(CityIdPO cipo) throws RemoteException {
+	public synchronized void addCity(CityIdPO cipo) throws RemoteException {
 		System.out.println("inserting a CityIdPO...");
 		if(cipo==null){
 			System.out.println("插入了一个空的CityIdPO！！！");

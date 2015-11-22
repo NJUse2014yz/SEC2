@@ -43,7 +43,7 @@ public class InventoryDataImpl extends UnicastRemoteObject implements InventoryD
 	}
 	
 	@Override
-	public ResultMessage insert(InventoryPO ipo) throws RemoteException {
+	public synchronized ResultMessage insert(InventoryPO ipo) throws RemoteException {
 		System.out.println("inserting a InventoryPO...");
 		if(ipo==null){
 			System.out.println("插入了一个空的InventoryPO！！！");
@@ -63,7 +63,7 @@ public class InventoryDataImpl extends UnicastRemoteObject implements InventoryD
 	}
 
 	@Override
-	public ResultMessage update(InventoryPO ipo) throws RemoteException {
+	public synchronized ResultMessage update(InventoryPO ipo) throws RemoteException {
 		System.out.println("updating a InventoryPO...");
 		if(ipo==null){
 			System.out.println("更新的InventoryPO是空的！！！");

@@ -43,7 +43,7 @@ public class OutDataImpl extends UnicastRemoteObject implements OutDataService{
 	}
 	
 	@Override
-	public ResultMessage insert(OutPO outpo) throws RemoteException {
+	public synchronized ResultMessage insert(OutPO outpo) throws RemoteException {
 		System.out.println("inserting a OutPO...");
 		if(outpo==null){
 			System.out.println("插入了一个空的OutPO！！！");
@@ -81,7 +81,7 @@ public class OutDataImpl extends UnicastRemoteObject implements OutDataService{
 	}
 
 	@Override
-	public ResultMessage delete(String id) throws RemoteException {
+	public synchronized ResultMessage delete(String id) throws RemoteException {
 		System.out.println("deleting a OutPO...");
 		if(id==null){
 			System.out.println("id为null！！！");
@@ -101,7 +101,7 @@ public class OutDataImpl extends UnicastRemoteObject implements OutDataService{
 	}
 
 	@Override
-	public ResultMessage update(OutPO outpo) throws RemoteException {
+	public synchronized ResultMessage update(OutPO outpo) throws RemoteException {
 		System.out.println("updating a OutPO...");
 		if(outpo==null){
 			System.out.println("更新的OutPO是空的！！！");

@@ -20,6 +20,9 @@ public class StaffPO implements Serializable{
 	//职位，权限
 	private Status power;
 	
+	//所属机构
+	private AgencyPO agency;
+	
 	public String getName() {
 		return name;
 	}
@@ -52,8 +55,7 @@ public class StaffPO implements Serializable{
 		this.agency = agency;
 	}
 
-	//所属机构
-	private AgencyPO agency;
+	
 
 	public StaffPO(String name, String id, Status power, AgencyPO agency) {
 		super();

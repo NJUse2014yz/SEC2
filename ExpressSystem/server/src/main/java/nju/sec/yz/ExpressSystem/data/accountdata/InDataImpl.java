@@ -25,7 +25,7 @@ public class InDataImpl extends UnicastRemoteObject implements InDataService{
 	}
 
 	@Override
-	public ResultMessage insert(InPO inpo) throws RemoteException {
+	public synchronized ResultMessage insert(InPO inpo) throws RemoteException {
 		System.out.println("inserting a InPO...");
 		if(inpo==null){
 			System.out.println("插入了一个空的carPO！！！");
@@ -60,7 +60,7 @@ public class InDataImpl extends UnicastRemoteObject implements InDataService{
 	}
 
 	@Override
-	public ResultMessage delete(String id) throws RemoteException {
+	public synchronized ResultMessage delete(String id) throws RemoteException {
 		System.out.println("deleting a inPO...");
 		if(id==null){
 			System.out.println("id为null！！！");
@@ -80,7 +80,7 @@ public class InDataImpl extends UnicastRemoteObject implements InDataService{
 	}
 
 	@Override
-	public ResultMessage update(InPO inpo) throws RemoteException {
+	public synchronized ResultMessage update(InPO inpo) throws RemoteException {
 		System.out.println("updating a InPO...");
 		if(inpo==null){
 			System.out.println("更新的InPO是空的！！！");

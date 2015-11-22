@@ -42,7 +42,7 @@ public class ConstDataStub implements ConstDataService{
 	}
 
 	@Override
-	public ArrayList<PricePO> findAllPrice() throws RemoteException {
+	public PricePO findAllPrice() throws RemoteException {
 		// TODO 自动生成的方法存根
 		return null;
 	}

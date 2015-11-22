@@ -43,7 +43,7 @@ public class AccountDataImpl extends UnicastRemoteObject implements AccountDataS
 	}
 	
 	@Override
-	public ResultMessage insert(AccountPO apo) throws RemoteException {
+	public synchronized ResultMessage insert(AccountPO apo) throws RemoteException {
 		System.out.println("inserting a AccountPO...");
 		if(apo==null){
 			System.out.println("插入了一个空的PO！！！");
@@ -81,7 +81,7 @@ public class AccountDataImpl extends UnicastRemoteObject implements AccountDataS
 	}
 
 	@Override
-	public ResultMessage delete(String name) throws RemoteException {
+	public synchronized ResultMessage delete(String name) throws RemoteException {
 		System.out.println("deleting a accountPO...");
 		if(name==null){
 			System.out.println("name为null！！！");
@@ -101,7 +101,7 @@ public class AccountDataImpl extends UnicastRemoteObject implements AccountDataS
 	}
 
 	@Override
-	public ResultMessage update(AccountPO apo) throws RemoteException {
+	public synchronized ResultMessage update(AccountPO apo) throws RemoteException {
 		System.out.println("updating a CarPO...");
 		if(apo==null){
 			System.out.println("更新的AccountPO是空的！！！");

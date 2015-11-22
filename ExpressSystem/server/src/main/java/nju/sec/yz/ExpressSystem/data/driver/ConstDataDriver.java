@@ -18,7 +18,6 @@ public class ConstDataDriver {
 			System.out.println("#const data update city SUCCESS");
 		
 			System.out.println("#const data update price SUCCESS");
-		if(!cds.findAllPrice().isEmpty())
-			System.out.println("#const data find all price SUCCESS");
+		
 	}
 }

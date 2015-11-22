@@ -11,6 +11,8 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.plaf.synth.SynthSpinnerUI;
+
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.data.fileUtility.SerializableFileHelper;
@@ -45,7 +47,7 @@ public class AccountBookDataImpl extends UnicastRemoteObject implements AccountB
 	}
 
 	@Override
-	public ResultMessage update(AccountBookPO abp) throws RemoteException {
+	public synchronized ResultMessage update(AccountBookPO abp) throws RemoteException {
 		System.out.println("updating a abp...");
 		if(abp==null){
 			System.out.println("更新的PO是空的！！！");
@@ -72,7 +74,7 @@ public class AccountBookDataImpl extends UnicastRemoteObject implements AccountB
 	}
 
 	@Override
-	public ResultMessage delete(String id) throws RemoteException {
+	public synchronized ResultMessage delete(String id) throws RemoteException {
 		System.out.println("deleting a abp...");
 		if(id==null){
 			System.out.println("id为null！！！");
@@ -92,7 +94,7 @@ public class AccountBookDataImpl extends UnicastRemoteObject implements AccountB
 	}
 
 	@Override
-	public ResultMessage insert(AccountBookPO abp) throws RemoteException {
+	public synchronized ResultMessage insert(AccountBookPO abp) throws RemoteException {
 		System.out.println("inserting a AccountBookPO...");
 		if(abp==null){
 			System.out.println("插入了一个空的PO！！！");
