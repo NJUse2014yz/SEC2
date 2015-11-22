@@ -6,6 +6,8 @@ import java.util.List;
  * @author 周聪 初期建账
  */
 public class InitialVO {
+	
+	private String id;
 
 	// 机构
 	private AgencyVO agency;
@@ -70,6 +72,14 @@ public class InitialVO {
 
 	public void setInventories(List<InventoryVO> inventories) {
 		this.inventories = inventories;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 }
