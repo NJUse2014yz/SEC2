@@ -81,6 +81,19 @@ public class Driver {
 		return message;
 	}
 	
+	public ResultMessage del(String id) {
+		ResultMessage result=null;
+		//调用data层方法,验证id是否存在
+		try {
+			result=data.delete(id);
+		} catch (RemoteException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+			return new ResultMessage(Result.FAIL,"系统错误");
+		}
+		return result;
+	}
+	
 	public ResultMessage modify(DriverVO vo) {
 		ResultMessage message=null;
 		//验证改过之后的vo
