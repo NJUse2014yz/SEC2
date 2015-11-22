@@ -1,8 +1,8 @@
 package nju.sec.yz.ExpressSystem.bl.deliverbl;
 
-import org.omg.CosNaming.IstringHelper;
-
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptID;
+import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;
+import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptSaveService;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
 import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.bl.userbl.User;
@@ -31,16 +31,22 @@ public class PositionSendReceipt implements ReceiptService{
 		DeliverySheetVO receipt=(DeliverySheetVO)vo;
 		DeliveryInformation info=receipt.getDeliveryInformation();
 		
+		//验证
 		ResultMessage validResult=this.isValid(receipt);
 		if(validResult.getResult()==Result.FAIL)
 			return validResult;
 		
+		//创建po
 		DeliverySheetPO po=new DeliverySheetPO();
 		DeliveryInformation imInformation=this.copyInfo(info);
 		po.setDeliveryInformation(imInformation);
 		po.setId(this.createId());
 		po.setMakeTime(TimeTool.getDate());
 		po.setType(ReceiptType.POSITION_SEND_RECEIPT);
+		
+		//提交给总经理
+		ReceiptSaveService receiptList=new ReceiptList();
+		receiptList.saveReceipt(po);
 		
 		return new ResultMessage(Result.SUCCESS);
 	}
