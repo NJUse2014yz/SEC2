@@ -11,9 +11,11 @@ import nju.sec.yz.ExpressSystem.blservice.managerBlService.StaffBlService;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.AgencyVO;
 import nju.sec.yz.ExpressSystem.vo.CityVO;
+import nju.sec.yz.ExpressSystem.vo.PositionVO;
 import nju.sec.yz.ExpressSystem.vo.PriceVO;
 import nju.sec.yz.ExpressSystem.vo.SalaryVO;
 import nju.sec.yz.ExpressSystem.vo.StaffVO;
+import nju.sec.yz.ExpressSystem.vo.TransitVO;
 /**
  * 负责实现人员机构等管理业务所需要的服务
  * @author 周聪
@@ -98,40 +100,58 @@ public class ManagerController implements AgencyBlService,ConstBlService,SalaryB
 		return null;
 	}
 
-	@Override
-	public ResultMessage addAgency(AgencyVO av) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ResultMessage deleteAgency(String id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ResultMessage modifyAgency(AgencyVO av) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public AgencyVO observeAgency(String id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<AgencyVO> observeAllAgency() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public List<String> getCities() {
 		City city=new City();
 		return city.getCities();
+	}
+
+	@Override
+	public ResultMessage addTransit(TransitVO av) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultMessage deleteTransit(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultMessage modifyTransit(TransitVO av) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	/**
+	 * 通过id获得中转中心信息
+	 */
+	public TransitVO observeTransit(String id) {
+		Agency agency=new Agency();
+		TransitVO vo=agency.observeTransit(id);
+		return vo;
+	}
+
+	@Override
+	public ArrayList<TransitVO> observeAllTransit() {
+		Agency agency=new Agency();
+		ArrayList<TransitVO> vos=agency.observeAllTransit();
+		return vos;
+	}
+
+	@Override
+	public ResultMessage addPosition(PositionVO av) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultMessage deletePosition(String id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

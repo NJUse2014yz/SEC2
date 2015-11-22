@@ -1,5 +1,6 @@
 package nju.sec.yz.ExpressSystem.vo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import nju.sec.yz.ExpressSystem.po.PositionPO;
@@ -22,6 +23,16 @@ public class TransitVO {
 	
 	//所在地
 	private String location;
+	
+	
+
+	public TransitVO(String name, String id, List<PositionVO> positions, String location) {
+		super();
+		this.name = name;
+		this.id = id;
+		this.positions = positions;
+		this.location = location;
+	}
 
 	public TransitVO(String name, String id,  String location) {
 		
@@ -55,6 +66,8 @@ public class TransitVO {
 	}
 	
 	public void addPositions(PositionVO vo){
+		if(positions==null)
+			positions=new ArrayList<>();
 		positions.add(vo);
 	}
 

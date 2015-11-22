@@ -3,7 +3,8 @@ package nju.sec.yz.ExpressSystem.blservice.managerBlService;
 import java.util.ArrayList;
 
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
-import nju.sec.yz.ExpressSystem.vo.AgencyVO;
+import nju.sec.yz.ExpressSystem.vo.PositionVO;
+import nju.sec.yz.ExpressSystem.vo.TransitVO;
 
 /**
  * 
@@ -11,13 +12,17 @@ import nju.sec.yz.ExpressSystem.vo.AgencyVO;
  * 机构管理-增删改查
  */
 public interface AgencyBlService {
-	public ResultMessage addAgency (AgencyVO av);
+	public ResultMessage addTransit (TransitVO av);
 	
-	public ResultMessage deleteAgency (String id);
+	public ResultMessage deleteTransit (String id);
 	
-	public ResultMessage modifyAgency (AgencyVO av);
+	public ResultMessage modifyTransit (TransitVO av);
 	
-	public AgencyVO observeAgency (String id);
+	public TransitVO observeTransit (String id);
 	
-	public ArrayList<AgencyVO> observeAllAgency ();
+	public ArrayList<TransitVO> observeAllTransit ();
+	
+	public ResultMessage addPosition(PositionVO av);
+	
+	public ResultMessage deletePosition(String id);
 }
