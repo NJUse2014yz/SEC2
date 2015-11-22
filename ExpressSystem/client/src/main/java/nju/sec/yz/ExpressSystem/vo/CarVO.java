@@ -67,5 +67,29 @@ public class CarVO {
 	public void setTime(int time) {
 		this.time = time;
 	}
+	public String getBuytime() {
+		return buytime;
+	}
+	public void setBuytime(String buytime) {
+		this.buytime = buytime;
+	}
+	public String getMechine() {
+		return mechine;
+	}
+	public void setMechine(String mechine) {
+		this.mechine = mechine;
+	}
+	public String getDipan() {
+		return dipan;
+	}
+	public void setDipan(String dipan) {
+		this.dipan = dipan;
+	}
+	public String getWorktime() {
+		return worktime;
+	}
+	public void setWorktime(String worktime) {
+		this.worktime = worktime;
+	}
 
 }

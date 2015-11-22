@@ -23,6 +23,9 @@ public class DriverVO {
 		//性别(下拉框选择)
 		private Sex sex;
 
+		//车辆单位
+		private String agency;
+		
 		//行驶证期限(日期)
 		private String licenseDeadLine;
 
@@ -34,6 +37,19 @@ public class DriverVO {
 			this.birthDate = birthDate;
 			this.personID = personID;
 			this.phoneNumber = phoneNumber;
+			this.sex = sex;
+			this.licenseDeadLine = licenseDeadLine;
+		}
+		//新增
+		public DriverVO(String id, String name, String birthDate, String personID, String phoneNumber, Sex sex,
+				String agency,String licenseDeadLine) {
+			super();
+			this.id = id;
+			this.name = name;
+			this.birthDate = birthDate;
+			this.personID = personID;
+			this.phoneNumber = phoneNumber;
+			this.agency=agency;
 			this.sex = sex;
 			this.licenseDeadLine = licenseDeadLine;
 		}
@@ -92,6 +108,12 @@ public class DriverVO {
 
 		public void setLicenseDeadLine(String licenseDeadLine) {
 			this.licenseDeadLine = licenseDeadLine;
+		}
+		public String getAgency() {
+			return agency;
+		}
+		public void setAgency(String agency) {
+			this.agency = agency;
 		}
 		
 }

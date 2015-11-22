@@ -21,10 +21,10 @@ import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.PositionControler;
 
 public class PositionCarModifyUi extends JPanel{
-	ClientControler mainControler;
-	PositionControler controler;
+	private ClientControler mainControler;
+	private PositionControler controler;
 	private CarBlService carBl;
-	ButtonComponents bc;
+	private ButtonComponents bc;
 	
 	private JTextField search;
 	private JButton searchButton;
