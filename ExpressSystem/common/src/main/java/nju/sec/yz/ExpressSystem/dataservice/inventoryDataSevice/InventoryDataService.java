@@ -16,6 +16,17 @@ public interface InventoryDataService extends Remote{
 	public ResultMessage insert(InventoryPO ipo) throws RemoteException;
 	public ResultMessage update(InventoryPO ipo) throws RemoteException;
 	public ResultMessage init( ) throws RemoteException;
-	public ArrayList<InventoryPO> findByTime(String timeIn,String timeOut)throws RemoteException;
 	public ArrayList<InventoryPO> findAll( ) throws RemoteException;
+	
+	/**
+	 * 查看某时间段内的出入库信息
+	 * @param timeIn
+	 * @param timeOut
+	 */
+	public ArrayList<InventoryPO> findByTime(String timeIn,String timeOut)throws RemoteException;
+	/**
+	 * 查看当天库存
+	 * @param date 今天的日期
+	 */
+	public ArrayList<InventoryPO> findByTime(String date)throws RemoteException;
 }
