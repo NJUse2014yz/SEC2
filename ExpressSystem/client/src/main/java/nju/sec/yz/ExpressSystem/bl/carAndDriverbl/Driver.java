@@ -127,7 +127,7 @@ public class Driver {
 			return "身份证输错了哦";
 		if(!isPhoneNumber(phoneNumber))
 			return "手机号码不是11位数字吗，你这";
-		if(isLaterDate(licenseDeadLine))
+		if(!isLaterDate(licenseDeadLine))
 			return "行驶证期限不符合日期格式哦";
 		return "success";
 	}
@@ -179,19 +179,25 @@ public class Driver {
 		int dateToInt=Integer.parseInt(date);
 		String now=TimeTool.getDate();
 		int nowToInt=Integer.parseInt(now);
+		
+		
 		//超过今天
-		if(dateToInt<nowToInt)
+		if(dateToInt<nowToInt){
 			return false;
+		}
+			
 		return true;
 	}
 
 	private boolean isId(String id) {
-		if(id.length()!=9||id.length()!=10)
+		if(id.length()!=9&&id.length()!=10)
 			return false;
 		char numbers[]=id.toCharArray();
-		for(char a:numbers)
+		for(char a:numbers){
 			if(a<'0'||a>'9')
 				return false;
+		}
+			
 		
 		return true;
 	}
@@ -218,6 +224,12 @@ public class Driver {
 		String licenseDeadLine=vo.getLicenseDeadLine();
 		DriverPO po=new DriverPO(id, name, birthDate, personID, phoneNumber, sex, licenseDeadLine);
 		return po;
+	}
+	
+	public void test(){
+		this.add(new DriverVO("0251234565", "mike", "19020123", "450333190201232345", "13456789023", Sex.MALE, "20161223"));
+		DriverVO vo=this.getSingle("0251234565");
+		System.out.println(vo.getName());
 	}
 	
 }

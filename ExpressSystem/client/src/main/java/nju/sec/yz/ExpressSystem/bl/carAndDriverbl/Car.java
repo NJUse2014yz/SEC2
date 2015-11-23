@@ -182,9 +182,9 @@ public class Car {
 		return po;
 	}
 	
-	public void test(){
+	/*public void test(){
 		this.add(new CarVO("025001001", "苏A23466", "20131212","hh" , "hh", "20121212"));
 		CarVO vo=this.getSingle("025001001");
 		System.out.println(vo.getNumber());
-	}
+	}*/
 }
