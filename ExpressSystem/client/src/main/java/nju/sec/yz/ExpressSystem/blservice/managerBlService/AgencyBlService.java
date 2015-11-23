@@ -24,5 +24,11 @@ public interface AgencyBlService {
 	
 	public ResultMessage addPosition(PositionVO av);
 	
-	public ResultMessage deletePosition(String id);
+	/**
+	 * 删除营业厅
+	 * @param transitId  所属中转中心id
+	 * @param id
+	 * @return
+	 */
+	public ResultMessage deletePosition(String transitId,String id);
 }

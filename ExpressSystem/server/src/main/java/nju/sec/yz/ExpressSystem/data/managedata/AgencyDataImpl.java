@@ -142,7 +142,7 @@ public class AgencyDataImpl extends UnicastRemoteObject implements AgencyDataSer
 		pos.add(po1);
 		pos.add(po2);
 		pos.add(po3);
-//		pos.add(po4);
+		pos.add(po4);
 		return pos;
 	}
 

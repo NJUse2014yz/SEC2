@@ -116,20 +116,23 @@ public class ManagerController implements AgencyBlService,ConstBlService,SalaryB
 
 	@Override
 	public ResultMessage addTransit(TransitVO av) {
-		// TODO Auto-generated method stub
-		return null;
+		Agency agency=new Agency();
+		ResultMessage message=agency.addTransit(av);
+		return message;
 	}
 
 	@Override
 	public ResultMessage deleteTransit(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		Agency agency=new Agency();
+		ResultMessage message=agency.deleteTransit(id);
+		return message;
 	}
 
 	@Override
 	public ResultMessage modifyTransit(TransitVO av) {
-		// TODO Auto-generated method stub
-		return null;
+		Agency agency=new Agency();
+		ResultMessage message=agency.updateTransit(av);
+		return message;
 	}
 
 	@Override
@@ -151,14 +154,16 @@ public class ManagerController implements AgencyBlService,ConstBlService,SalaryB
 
 	@Override
 	public ResultMessage addPosition(PositionVO av) {
-		// TODO Auto-generated method stub
-		return null;
+		Agency agency=new Agency();
+		ResultMessage message=agency.addPosition(av);
+		return message;
 	}
 
 	@Override
-	public ResultMessage deletePosition(String id) {
-		// TODO Auto-generated method stub
-		return null;
+	public ResultMessage deletePosition(String transitId,String id) {
+		Agency agency=new Agency();
+		ResultMessage message=agency.deletePosition(transitId,id);
+		return message;
 	}
 
 }
