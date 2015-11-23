@@ -1,6 +1,13 @@
 package nju.sec.yz.ExpressSystem.bl.managerbl;
 
+import java.rmi.RemoteException;
+
+import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
+import nju.sec.yz.ExpressSystem.common.CityInformation;
+import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.ConstDataService;
+import nju.sec.yz.ExpressSystem.po.CityPO;
 import nju.sec.yz.ExpressSystem.vo.CityVO;
 
 
@@ -12,44 +19,106 @@ public class CityConst implements CityDistanceService {
 	//营业厅间的距离为30km
 	public static final double DISTANCE_OF_POSITION=30;
 	
+	private ConstDataService data;
+	
+	public CityConst() {
+		try {
+			data=DatafactoryProxy.getConstDataService();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public ResultMessage modifyCity(CityVO cv) {
-		// TODO Auto-generated method stub
-		return null;
+		CityInformation info=cv.getCityInformation();
+		CityInformation infoCopy=this.copyInfo(info);
+		
+		CityPO po=new CityPO(infoCopy);
+		
+		ResultMessage message=new ResultMessage(Result.FAIL);
+		
+		try {
+			message=data.updateCity(po);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return message;
 	}
 
 	public CityVO observeCity(String beginPlace, String endPlace) {
+		CityVO vo=null; 
+		try {
+			CityPO po=data.find(beginPlace, endPlace);
+			CityInformation info=po.getCityInformation();
+			CityInformation infoCopy=this.copyInfo(info);
+			vo=new CityVO(infoCopy);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		return null;
+		return vo;
 	}
 
 	
 	public ResultMessage addCity(CityVO cp) {
-		//保存城市常量
+		ResultMessage message=new ResultMessage(Result.FAIL);
 		
+		//保存城市常量,往返两个方向都保存
+		CityInformation info=cp.getCityInformation();
+		CityInformation infoCopy=this.copyInfo(info);
+		CityInformation infoCopy2=new CityInformation(info.getToCity(), info.getToID(), 
+								info.getFromCity(), info.getToID(), info.getDistance());
+		CityPO po=new CityPO(infoCopy);
+		CityPO po2=new CityPO(infoCopy2);
+		try {
+			message=data.insert(po);
+			if(message.getResult()==Result.FAIL)
+				return message;
+			message=data.insert(po2);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		//保存城市
-		
-		return null;
-	}
-
-	/**
-	 * 保存城市
-	 */
-	public void saveCity(){
 		City city=new City();
-		//TODO
-		city.addCity("南京","025");
+		city.addCity(info.getFromCity(),info.getFromID());
+		city.addCity(info.getToCity(), info.getToID());
+		
+		return message;
 	}
 	
+	private CityInformation copyInfo(CityInformation info){
+		CityInformation infoCopy=new CityInformation(info.getFromCity(), info.getFromID(), 
+				info.getToCity(), info.getToID(), info.getDistance());
+		return infoCopy;
+	}
+
+	
 	public ResultMessage deleteCity(String beginPlace, String endPlace)  {
-		// TODO Auto-generated method stub
-		return null;
+		ResultMessage message=new ResultMessage(Result.FAIL);
+		try {
+			message=data.delete(beginPlace, endPlace);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return message;
 	}
 
 	@Override
 	public double getDistance(String beginPlace, String endPlace) {
-		// TODO Auto-generated method stub
-		return 1000;
+		CityVO vo=this.observeCity(beginPlace, endPlace);
+		
+		double distanse=vo.getCityInformation().getDistance();
+		
+		return distanse;
 	}
+	
+	
 
 }

@@ -15,6 +15,7 @@ import nju.sec.yz.ExpressSystem.data.inventorydata.InventoryDataImpl;
 import nju.sec.yz.ExpressSystem.data.logdata.LogDataImpl;
 import nju.sec.yz.ExpressSystem.data.managedata.AgencyDataImpl;
 import nju.sec.yz.ExpressSystem.data.managedata.CityIdDataImpl;
+import nju.sec.yz.ExpressSystem.data.managedata.ConstDataImpl;
 import nju.sec.yz.ExpressSystem.data.managedata.SalaryDataImpl;
 import nju.sec.yz.ExpressSystem.data.managedata.StaffDataImpl;
 import nju.sec.yz.ExpressSystem.data.receiptdata.ReceiptCounterDataImpl;
@@ -113,7 +114,7 @@ public class DataFactorySerializableImpl extends UnicastRemoteObject implements 
 
 	@Override
 	public ConstDataService getConstDataService() throws RemoteException {
-		return new ConstDataStub();
+		return new ConstDataImpl();
 	}
 
 	@Override

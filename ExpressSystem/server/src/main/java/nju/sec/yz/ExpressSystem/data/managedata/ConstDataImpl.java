@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,9 +22,15 @@ import nju.sec.yz.ExpressSystem.po.CarPO;
 import nju.sec.yz.ExpressSystem.po.CityPO;
 import nju.sec.yz.ExpressSystem.po.PricePO;
 
-public class ConstDataImpl implements ConstDataService{
+public class ConstDataImpl extends UnicastRemoteObject implements ConstDataService{
 
 	
+	public ConstDataImpl() throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
 	/**
 	 * 保存数据到文件
 	 */
@@ -54,6 +61,7 @@ public class ConstDataImpl implements ConstDataService{
             return new ConstDao();
         }
 	}
+	
 	
 	@Override
 	public synchronized ResultMessage updateCity(CityPO cp) throws RemoteException {

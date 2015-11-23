@@ -1,6 +1,8 @@
 package nju.sec.yz.ExpressSystem.po;
 
-public class CityIdPO {
+import java.io.Serializable;
+
+public class CityIdPO implements Serializable{
 
 	private String name;
 	private String id;

@@ -1,7 +1,14 @@
 package nju.sec.yz.ExpressSystem.client;
 
+import java.util.List;
+
 import javax.swing.JOptionPane;
+
+import nju.sec.yz.ExpressSystem.bl.managerbl.City;
+import nju.sec.yz.ExpressSystem.bl.managerbl.CityConst;
+import nju.sec.yz.ExpressSystem.common.CityInformation;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
+import nju.sec.yz.ExpressSystem.vo.CityVO;
 
 
 public class Client {
@@ -9,7 +16,7 @@ public class Client {
     public static void main(String[] args) {
         try {
             RMIHelper.init();
-//            new ClientFrame();
+            
             ClientControler control=new ClientControler();
     		control.showFrame();
         } catch (ClientInitException e) {

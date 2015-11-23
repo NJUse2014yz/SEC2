@@ -62,18 +62,33 @@ public class CityIdDataImpl extends UnicastRemoteObject implements CityIdDataSer
 		
 		
 	}
+	
+	
+	/**
+	 * 初始化
+	 * 添加现有的城市
+	 */
+	private List<CityIdPO> init(){
+		List<CityIdPO> pos=new ArrayList<>();
+		pos.add(new CityIdPO("南京", "025"));
+		pos.add(new CityIdPO("北京", "010"));
+//		pos.add(new CityIdPO("广州", "020"));
+		pos.add(new CityIdPO("上海", "021"));
+		
+		return pos;
+	}
 
 	@Override
 	public List<CityIdPO> getAll() throws RemoteException {
 		File file = new File(SerializableFileHelper.CITYID_FILE_NAME);
         if (!file.exists()) {
-            return new ArrayList<>();
+            return this.init();
         }
         try (ObjectInputStream is = new ObjectInputStream(new FileInputStream(file))) {
             //noinspection unchecked
             return (ArrayList<CityIdPO>) is.readObject();
         } catch (Exception e) {
-            return new ArrayList<>();
+            return this.init();
         }
 	}
 

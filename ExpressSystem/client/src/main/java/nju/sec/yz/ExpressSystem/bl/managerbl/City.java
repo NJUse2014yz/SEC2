@@ -6,7 +6,9 @@ import java.util.List;
 
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.CityIdDataService;
+import nju.sec.yz.ExpressSystem.po.CityIdPO;
 import nju.sec.yz.ExpressSystem.vo.CityIdVO;
+import nju.sec.yz.ExpressSystem.vo.CityVO;
 
 /**
  * 维护所有城市名称和编号
@@ -28,22 +30,53 @@ public class City implements CityListService{
 
 	@Override
 	public List<CityIdVO> getCityList() {
+		List<CityIdPO> pos=null;
+		List<CityIdVO> vos=new ArrayList<>();
+		try {
+			pos=data.getAll();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		return null;
+		
+		for(CityIdPO po:pos){
+			CityIdVO vo=new CityIdVO(po.getName(), po.getName());
+			vos.add(vo);
+		}
+		
+		return vos;
 	}
 	
 	public List<String> getCities(){
-		//stub
+		
+		List<CityIdPO> pos=null;
 		List<String> cities=new ArrayList<>();
-		cities.add("南京");
-		cities.add("北京");
-		cities.add("上海");
-		cities.add("广州");
+		try {
+			pos=data.getAll();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		for(CityIdPO po:pos){
+			
+			cities.add(po.getName());
+		}
+		
 		return cities;
 	}
 	
 	public void addCity(String name,String id){
 		
+		CityIdPO po=new CityIdPO(name, id);
+		try {
+			data.addCity(po);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	
