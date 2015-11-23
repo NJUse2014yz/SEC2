@@ -22,6 +22,9 @@ public class Price implements PriceService{
 	}
 
 	@Override
+	/**
+	 * 快递费
+	 */
 	public double getDeliverPrice() {
 		//todo
 		return 23;

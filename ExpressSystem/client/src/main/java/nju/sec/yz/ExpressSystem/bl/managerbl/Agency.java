@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
+import nju.sec.yz.ExpressSystem.bl.deliverbl.ValidHelper;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
@@ -34,6 +35,10 @@ public class Agency {
 	}
 	
 	public ResultMessage addTransit(TransitVO av) {
+		
+		if(!isValidTransit(av.getId()))
+			return new ResultMessage(Result.FAIL,"亲，咱们的中转中心编号是四位数字哟~");
+		
 		TransitPO po=new TransitPO(av.getName(), av.getId(), av.getLocation());
 		ResultMessage message=new ResultMessage(Result.FAIL);
 		
@@ -142,7 +147,15 @@ public class Agency {
 		return vo;
 	}
 	
+	/**
+	 * 向所属中转中心中添加营业厅
+	 */
 	public ResultMessage addPosition(PositionVO av) {
+		
+		if(!isValidPosition(av.getId()))
+			return new ResultMessage(Result.FAIL,"亲，咱们的营业厅编号是六位数字哟~");
+		
+		
 		PositionPO po=new PositionPO(av.getName(), av.getId(), av.getTransitId(), av.getLocation());
 		
 		List<TransitPO> pos=null;
@@ -222,6 +235,24 @@ public class Agency {
 		}
 		
 		return message;
+	}
+	
+	private boolean isValidPosition(String id){
+		if(!ValidHelper.isNumber(id))
+			return false;
+		if(id.length()!=6)
+			return false;
+		
+		return true;
+	}
+	
+	private boolean isValidTransit(String id){
+		if(!ValidHelper.isNumber(id))
+			return false;
+		if(id.length()!=4)
+			return false;
+		
+		return true;
 	}
 	
 	/*public void test(){

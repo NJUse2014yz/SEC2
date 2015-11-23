@@ -138,16 +138,19 @@ public class Car {
 			return false;
 		char a=number.charAt(0);
 		char b=number.charAt(1);
-		if(a!='京'||a!='津'||a!='冀'||a!='晋'||a!='蒙'||a!='辽'||a!='吉'||a!='琼'||
-				a!='黑'||a!='沪'||a!='苏'||a!='浙'||a!='皖'||a!='闽'||a!='赣'||a!='新'||
-				a!='鲁'||a!='豫'||a!='鄂'||a!='湘'||a!='粤'||a!='桂'||a!='渝'||a!='青'||
-				a!='川'||a!='黔'||a!='云'||a!='藏'||a!='陕'||a!='甘'||a!='宁')
+		if(a!='京'&&a!='津'&&a!='冀'&&a!='晋'&&a!='蒙'&&a!='辽'&&a!='吉'&&a!='琼'&&
+				a!='黑'&&a!='沪'&&a!='苏'&&a!='浙'&&a!='皖'&&a!='闽'&&a!='赣'&&a!='新'&&
+				a!='鲁'&&a!='豫'&&a!='鄂'&&a!='湘'&&a!='粤'&&a!='桂'&&a!='渝'&&a!='青'&&
+				a!='川'&&a!='黔'&&a!='云'&&a!='藏'&&a!='陕'&&a!='甘'&&a!='宁'){
 			return false;
+		}
+			
+		
 		if(b<'A'||b>'Z')
 			return false;
 		for(int i=2;i<number.length();i++){
 			char temp=number.charAt(i);
-			if((temp<'A'||temp>'Z')&&(temp<'0'||temp>'9'))
+			if((!(temp>='A'&&temp<='Z'))&&(!(temp>='0'&&temp<='9')))
 				return false;
 		}
 		return true;
@@ -177,5 +180,11 @@ public class Car {
 		int time=vo.getTime();
 		CarPO po=new CarPO(id, number, time);
 		return po;
+	}
+	
+	public void test(){
+		this.add(new CarVO("025001001", "苏A23466", "20131212","hh" , "hh", "20121212"));
+		CarVO vo=this.getSingle("025001001");
+		System.out.println(vo.getNumber());
 	}
 }
