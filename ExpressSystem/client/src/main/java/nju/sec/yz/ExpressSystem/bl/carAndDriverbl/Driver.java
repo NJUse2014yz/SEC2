@@ -226,10 +226,10 @@ public class Driver {
 		return po;
 	}
 	
-	public void test(){
+	/*public void test(){
 		this.add(new DriverVO("0251234565", "mike", "19020123", "450333190201232345", "13456789023", Sex.MALE, "20161223"));
 		DriverVO vo=this.getSingle("0251234565");
 		System.out.println(vo.getName());
-	}
+	}*/
 	
 }
