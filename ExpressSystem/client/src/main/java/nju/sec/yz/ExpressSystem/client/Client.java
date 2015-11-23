@@ -15,9 +15,9 @@ public class Client {
     public static void main(String[] args) {
         try {
             RMIHelper.init();
-            new Driver().test();
-//            ClientControler control=new ClientControler();
-//    		control.showFrame();
+           
+            ClientControler control=new ClientControler();
+    		control.showFrame();
         } catch (ClientInitException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(
