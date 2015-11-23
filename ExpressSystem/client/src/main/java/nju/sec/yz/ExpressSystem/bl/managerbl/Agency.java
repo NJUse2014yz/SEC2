@@ -2,10 +2,14 @@ package nju.sec.yz.ExpressSystem.bl.managerbl;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
 
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
+import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.AgencyDataService;
+import nju.sec.yz.ExpressSystem.po.PositionPO;
+import nju.sec.yz.ExpressSystem.po.TransitPO;
 import nju.sec.yz.ExpressSystem.vo.AgencyVO;
 import nju.sec.yz.ExpressSystem.vo.PositionVO;
 import nju.sec.yz.ExpressSystem.vo.TransitVO;
@@ -30,49 +34,205 @@ public class Agency {
 	}
 	
 	public ResultMessage addTransit(TransitVO av) {
-		// TODO Auto-generated method stub
-		return null;
+		TransitPO po=new TransitPO(av.getName(), av.getId(), av.getLocation());
+		ResultMessage message=new ResultMessage(Result.FAIL);
+		
+		try {
+			message=data.insert(po);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return message;
 	}
 
 	
 	public ResultMessage deleteTransit(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		ResultMessage message=new ResultMessage(Result.FAIL);
+		
+		try {
+			message=data.delete(id);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return message;
 	}
 
 	
 	public ResultMessage updateTransit(TransitVO av) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		ResultMessage message=new ResultMessage(Result.FAIL);
+		
+		List<PositionVO> vos=av.getPositions();
+		List<PositionPO> positions=new ArrayList<>();
+		
+		//复制营业厅
+		for(PositionVO vo:vos){
+			PositionPO po=new PositionPO(vo.getName(), vo.getId(), vo.getTransitId(), vo.getLocation());
+			positions.add(po);
+		}
+		
+		TransitPO po=new TransitPO(av.getName(), av.getId(), positions, av.getLocation());
+		
+		try {
+			message=data.insert(po);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return message;
 	}
 	
 	
 	
 	public TransitVO observeTransit(String id) {
-		//stub
-		TransitVO vo=new TransitVO("南京中转中心", "0251", "南京");
-		vo.addPositions(new PositionVO("南京亚东仙林营业厅", "025001", "0251", "南京"));
-		return vo;
+		
+		TransitPO po=null;
+		try {
+			po = data.find(id);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if(po==null)
+			return null;
+		
+		TransitVO transitVO=this.poToVO(po);
+		
+		
+		return transitVO;
 	}
 
 	
 	public ArrayList<TransitVO> observeAllTransit() {
-		//stub
-		TransitVO vo=new TransitVO("南京中转中心", "0251", "南京");
-		vo.addPositions(new PositionVO("南京亚东仙林营业厅", "025001", "0251", "南京"));
+		List<TransitPO> pos=null;
+		try {
+			pos=data.findAll();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		ArrayList<TransitVO> vos=new ArrayList<>();
-		vos.add(vo);
+		
+		for(TransitPO po:pos){
+			TransitVO vo=this.poToVO(po);
+			vos.add(vo);
+		}
+		
 		return vos;
 	}
 	
+	private TransitVO poToVO(TransitPO po){
+		List<PositionPO> pos=po.getPositions();
+		List<PositionVO> positions=new ArrayList<>();
+		
+		for(PositionPO p:pos){
+			PositionVO vo=new PositionVO(p.getName(), p.getId(), p.getTransitId(), p.getLocation());
+			positions.add(vo);
+		}
+		
+		TransitVO vo=new TransitVO(po.getName(), po.getName(), positions, po.getLocation());
+		
+		return vo;
+	}
+	
 	public ResultMessage addPosition(PositionVO av) {
-		// TODO Auto-generated method stub
-		return null;
+		PositionPO po=new PositionPO(av.getName(), av.getId(), av.getTransitId(), av.getLocation());
+		
+		List<TransitPO> pos=null;
+		TransitPO transitPO=null;
+		try {
+			pos=data.findAll();
+			for(TransitPO tpo:pos){
+				if(tpo.getId().equals(av.getTransitId())){
+					transitPO=tpo;
+					break;
+				}
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if(transitPO==null)
+			return new ResultMessage(Result.FAIL,"找不到所属的中转中心~");
+		
+		List<PositionPO> positions=transitPO.getPositions();
+		for(PositionPO position:positions){
+			if(position.getId().equals(po.getId()))
+				return new ResultMessage(Result.FAIL, "营业厅已存在~");
+		}
+		
+		//更新中转中心
+		transitPO.addPositions(po);
+		
+		ResultMessage message=new ResultMessage(Result.FAIL);
+		try {
+			message=data.update(transitPO);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return message;
 	}
 	
 	
-	public ResultMessage deletePosition(String id) {
-		// TODO Auto-generated method stub
-		return null;
+	public ResultMessage deletePosition(String transitId,String id) {
+		List<TransitPO> pos=null;
+		TransitPO transitPO=null;
+		try {
+			pos=data.findAll();
+			for(TransitPO tpo:pos){
+				if(tpo.getId().equals(transitId)){
+					transitPO=tpo;
+					break;
+				}
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if(transitPO==null)
+			return new ResultMessage(Result.FAIL,"找不到所属的中转中心~");
+		
+		List<PositionPO> positions=transitPO.getPositions();
+		for(int i=0;i<positions.size();i++){
+			PositionPO position=positions.get(i);
+			if(position.getId().equals(id)){
+				positions.remove(i);
+				break;
+			}
+		}
+		
+		
+		ResultMessage message=new ResultMessage(Result.FAIL);
+		try {
+			message=data.update(transitPO);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return message;
 	}
+	
+	/*public void test(){
+		this.addTransit(new TransitVO("广州中转中心", "0201","广州" ));
+		this.addPosition(new PositionVO("北京朝阳营业厅", "010001", "0101", "北京"));
+		TransitVO vo=this.observeTransit("0101");
+		System.out.println(vo.getName());
+		System.out.println(vo.getPositions().get(0).getName());
+		List<TransitVO> vos=this.observeAllTransit();
+		for(TransitVO transitVO:vos){
+			System.out.println(transitVO.getName());
+		}
+	}*/
 }

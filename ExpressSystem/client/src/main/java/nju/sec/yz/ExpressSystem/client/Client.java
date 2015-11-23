@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import nju.sec.yz.ExpressSystem.bl.managerbl.Agency;
 import nju.sec.yz.ExpressSystem.bl.managerbl.City;
 import nju.sec.yz.ExpressSystem.bl.managerbl.CityConst;
 import nju.sec.yz.ExpressSystem.common.CityInformation;
@@ -16,7 +17,6 @@ public class Client {
     public static void main(String[] args) {
         try {
             RMIHelper.init();
-            
             ClientControler control=new ClientControler();
     		control.showFrame();
         } catch (ClientInitException e) {

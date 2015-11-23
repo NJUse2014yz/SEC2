@@ -1,6 +1,7 @@
 package nju.sec.yz.ExpressSystem.po;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,6 +28,14 @@ public class TransitPO implements Serializable{
 		this.name = name;
 		this.id = id;
 		this.positions = positions;
+		this.location = location;
+	}
+	
+	public TransitPO(String name, String id, String location) {
+		super();
+		this.name = name;
+		this.id = id;
+		this.positions = new ArrayList<>();
 		this.location = location;
 	}
 

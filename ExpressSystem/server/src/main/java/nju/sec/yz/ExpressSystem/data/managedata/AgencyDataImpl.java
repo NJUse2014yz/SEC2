@@ -15,7 +15,9 @@ import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.data.fileUtility.SerializableFileHelper;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.AgencyDataService;
+import nju.sec.yz.ExpressSystem.po.PositionPO;
 import nju.sec.yz.ExpressSystem.po.TransitPO;
+
 
 
 public class AgencyDataImpl extends UnicastRemoteObject implements AgencyDataService{
@@ -125,6 +127,24 @@ public class AgencyDataImpl extends UnicastRemoteObject implements AgencyDataSer
 		//未找到
 		return new ResultMessage(Result.FAIL, "找不到要更新的内容");
 	}
+	
+	private ArrayList<TransitPO> initial(){
+		ArrayList<TransitPO> pos=new ArrayList<>();
+		
+		TransitPO po1=new TransitPO("南京中转中心", "0251", "南京");
+		PositionPO position=new PositionPO("南京亚东仙林营业厅", "025001", "0251", "南京");
+		po1.addPositions(position);
+		
+		TransitPO po2=new TransitPO("北京中转中心", "0101", "北京");
+		TransitPO po3=new TransitPO("上海中转中心", "0211", "上海");
+		TransitPO po4=new TransitPO("广州中转中心", "0201", "广州");
+		
+		pos.add(po1);
+		pos.add(po2);
+		pos.add(po3);
+//		pos.add(po4);
+		return pos;
+	}
 
 	@Override
 	public ResultMessage init() throws RemoteException {
@@ -136,13 +156,13 @@ public class AgencyDataImpl extends UnicastRemoteObject implements AgencyDataSer
 	public ArrayList<TransitPO> findAll() throws RemoteException {
 		File file = new File(SerializableFileHelper.AGENCY_FILE_NAME);
         if (!file.exists()) {
-            return new ArrayList<>();
+            return this.initial();
         }
         try (ObjectInputStream is = new ObjectInputStream(new FileInputStream(file))) {
             //noinspection unchecked
             return (ArrayList<TransitPO>) is.readObject();
         } catch (Exception e) {
-            return new ArrayList<>();
+            return this.initial();
         }
 	}
 

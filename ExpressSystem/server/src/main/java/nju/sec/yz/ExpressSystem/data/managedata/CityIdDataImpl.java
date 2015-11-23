@@ -72,7 +72,7 @@ public class CityIdDataImpl extends UnicastRemoteObject implements CityIdDataSer
 		List<CityIdPO> pos=new ArrayList<>();
 		pos.add(new CityIdPO("南京", "025"));
 		pos.add(new CityIdPO("北京", "010"));
-//		pos.add(new CityIdPO("广州", "020"));
+		pos.add(new CityIdPO("广州", "020"));
 		pos.add(new CityIdPO("上海", "021"));
 		
 		return pos;

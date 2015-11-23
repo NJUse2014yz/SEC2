@@ -69,26 +69,30 @@ public class ManagerController implements AgencyBlService,ConstBlService,SalaryB
 
 	@Override
 	public ResultMessage modifyCity(CityVO cv){
-		// TODO Auto-generated method stub
-		return null;
+		CityConst city=new CityConst();
+		ResultMessage message=city.modifyCity(cv);
+		return message;
 	}
 
 	@Override
 	public CityVO observeCity(String beginPlace, String endPlace) {
-		// TODO Auto-generated method stub
-		return null;
+		CityConst city=new CityConst();
+		CityVO vo=city.observeCity(beginPlace, endPlace);
+		return vo;
 	}
 
 	@Override
 	public ResultMessage addCity(CityVO cp) {
-		// TODO Auto-generated method stub
-		return null;
+		CityConst city=new CityConst();
+		ResultMessage message=city.addCity(cp);
+		return message;
 	}
 
 	@Override
 	public ResultMessage deleteCity(String beginPlace, String endPlace) {
-		// TODO Auto-generated method stub
-		return null;
+		CityConst city=new CityConst();
+		ResultMessage message=city.deleteCity(beginPlace, endPlace);
+		return message;
 	}
 
 	@Override
