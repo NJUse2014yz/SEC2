@@ -103,9 +103,9 @@ public class PositionDeliveUi extends JPanel{
 			{
 				DeliverySheetVO sheet=new DeliverySheetVO();
 				DeliveryInformation di=new DeliveryInformation();
-				di.setDeliverId(deliver.getText());
+				di.setOutDeliverId(deliver.getText());
 				di.setTime(date.getTime());
-				di.setOutDeliverId(barId.getText());
+				di.setBarId(barId.getText());
 				
 				sheet.setDeliveryInformation(di);
 				sheet.setType(ReceiptType.POSITION_SEND_RECEIPT);
