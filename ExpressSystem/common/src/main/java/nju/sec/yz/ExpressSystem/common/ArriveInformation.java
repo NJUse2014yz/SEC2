@@ -14,16 +14,7 @@ public class ArriveInformation implements Serializable{
 	private String departure;//出发地
 	private ArriveState state;//货物到达状态（损坏、完整、丢失）
 	
-	private String transitId;
-
-	public String getTransitId() {
-		return transitId;
-	}
-
-	public void setTransitId(String transitId) {
-		this.transitId = transitId;
-	}
-
+	
 	public String getTime() {
 		return time;
 	}

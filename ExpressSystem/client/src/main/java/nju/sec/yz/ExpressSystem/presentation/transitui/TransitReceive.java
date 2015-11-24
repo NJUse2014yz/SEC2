@@ -89,10 +89,11 @@ public class TransitReceive extends JPanel{
 					arrive.setDeparture(departure.getText());
 					arrive.setTime(date.getTime());
 					arrive.setState(getState(state));
-					arrive.setTransitId(transitId.getText());
+//					arrive.setTransitId(transitId.getText());
 					
 					TransitArriveSheetVO vo=new TransitArriveSheetVO();
 					vo.setTransitArriveInformation(arrive);
+					vo.setTransitId(transitId.getText());
 					ResultMessage result=deliverBlService.transitReceiveReceipt(vo);
 					if(result.getResult()==Result.SUCCESS){
 						warning.setText("提交成功");
