@@ -10,7 +10,6 @@ import nju.sec.yz.ExpressSystem.presentation.deliverui.DeliverOrderSearchUi;
 import nju.sec.yz.ExpressSystem.presentation.inventoryui.InventoryMainUiTest;
 import nju.sec.yz.ExpressSystem.presentation.managerui.ManagerMainUiTest;
 import nju.sec.yz.ExpressSystem.presentation.positionui.PositionMainUi;
-import nju.sec.yz.ExpressSystem.presentation.positionui.PositionMainUiTest;
 import nju.sec.yz.ExpressSystem.presentation.transitui.TransitMainUiTest;
 import nju.sec.yz.ExpressSystem.presentation.userui.AdminstraterMainUiTest;
 import nju.sec.yz.ExpressSystem.presentation.userui.UserUi;

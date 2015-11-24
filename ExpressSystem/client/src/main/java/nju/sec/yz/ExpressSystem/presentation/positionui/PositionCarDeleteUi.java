@@ -53,6 +53,10 @@ public class PositionCarDeleteUi extends JPanel{
 	private static final int warning_y=490;
 	private static final int warning_w=275;
 	private static final int warning_h=30;
+	private static final int scroll_x=148;
+	private static final int scroll_y=100;
+	private static final int scroll_w=319;
+	private static final int scroll_h=208;
 	
 	
 	private ImageIcon searchIcon=new ImageIcon("graphic/position/button/search_button.png");
