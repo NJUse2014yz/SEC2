@@ -95,4 +95,14 @@ public class DeliverController implements DeliverBlService{
 		return records;
 	}
 
+	@Override
+	/**
+	 * 输入中转单编号获得条形码号列表
+	 */
+	public List<String> getBarIdList(String transitSheetId) {
+		BarIdList list=new BarIdList();
+		List<String> barIds=list.getBarIds(transitSheetId);
+		return barIds;
+	}
+
 }

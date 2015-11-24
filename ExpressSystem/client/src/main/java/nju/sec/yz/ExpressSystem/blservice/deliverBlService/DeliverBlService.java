@@ -22,6 +22,12 @@ import nju.sec.yz.ExpressSystem.vo.TransitSheetVO;
 public interface DeliverBlService {
 	//物流历史轨迹
 	public OrderVO  checkDeliver(String id);
+	
+	/**
+	 * 到达单输入中转单编号获得条形码号列表
+	 */
+	public List<String> getBarIdList(String transitSheetId);
+	
 	//寄件单
 	public ResultMessage deliverReceipt (SendSheetVO vo);
 	/**

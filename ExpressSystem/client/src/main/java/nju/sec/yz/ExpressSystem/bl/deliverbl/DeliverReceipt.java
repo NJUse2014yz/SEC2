@@ -90,7 +90,7 @@ public class DeliverReceipt implements ReceiptService{
 		
 		//保存收款记录(暂定审批前保存)
 		String deliverId=receipt.getMakePerson();
-		String positionId=deliverId.substring(0, 6);
+		String positionId=deliverId.split("D")[0];
 		CollectionRecordPO po=new CollectionRecordPO(info.getBarId(), receipt.getMakeTime(),
 												allCost,deliverId, positionId);
 		CollectionRecord record=new CollectionRecord();

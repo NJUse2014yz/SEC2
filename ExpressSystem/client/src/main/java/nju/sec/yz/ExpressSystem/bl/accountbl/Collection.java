@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nju.sec.yz.ExpressSystem.bl.deliverbl.ValidHelper;
+import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptID;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptSaveService;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
@@ -12,6 +13,7 @@ import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.bl.userbl.User;
 import nju.sec.yz.ExpressSystem.bl.userbl.UserInfo;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
+import nju.sec.yz.ExpressSystem.common.IdType;
 import nju.sec.yz.ExpressSystem.common.PaymentInformation;
 import nju.sec.yz.ExpressSystem.common.ReceiptType;
 import nju.sec.yz.ExpressSystem.common.Result;
@@ -46,7 +48,7 @@ public class Collection implements ReceiptService{
 		
 		PaymentSheetVO receipt=(PaymentSheetVO)vo;
 		PaymentInformation info=receipt.getPaymentInformation();
-		List<String> barIds=receipt.getBarIds();//TODO
+		
 		
 		//验证
 		ResultMessage validResult=this.isValid(receipt);
@@ -57,11 +59,12 @@ public class Collection implements ReceiptService{
 		PaymentSheetPO po=new PaymentSheetPO();
 		PaymentInformation information=this.copyInfo(info);
 		po.setPaymentInformation(information);
-		ArrayList<String> ids=new ArrayList<>();
-		ids.addAll(barIds);
-		po.setBarIds(ids);
+		
+		
+		po.setBarIds(receipt.getBarIds());
 		po.setMakeTime(TimeTool.getDate());
-		po.setId(this.createId());
+		po.setMakePerson(accountancyId());
+		po.setId(this.createId(info.getInDeliverId()));
 		po.setType(ReceiptType.COLLECTION);
 		
 		//提交
@@ -71,8 +74,18 @@ public class Collection implements ReceiptService{
 		return message;
 	}
 	
-	private String createId(){
-		return null;
+	/**
+	 * 收款单单号规则：快递员编号+k+日期+000三位数字
+	 */
+	private String createId(String deliverId){
+		ReceiptID counter=new ReceiptID();
+		String id=counter.getID(deliverId, IdType.COLLECTION);
+		return id;
+	}
+	
+	private String accountancyId(){
+		UserInfo user=new User();
+		return user.getCurrentID();
 	}
 	
 	private PaymentInformation copyInfo(PaymentInformation info){
@@ -93,11 +106,8 @@ public class Collection implements ReceiptService{
 		PaymentSheetVO receipt=(PaymentSheetVO)vo;
 		ResultMessage validResult=new ResultMessage(Result.FAIL);
 		
-		List<String> barIds=receipt.getBarIds();
+		
 		PaymentInformation info=receipt.getPaymentInformation();
-		
-		//barIds
-		
 		
 		//info
 		UserInfo user=new User();

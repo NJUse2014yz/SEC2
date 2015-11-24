@@ -67,5 +67,10 @@ public class DeliverBlStub implements DeliverBlService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public List<String> getBarIdList(String transitSheetId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

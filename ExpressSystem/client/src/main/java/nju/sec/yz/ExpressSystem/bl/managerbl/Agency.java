@@ -37,7 +37,7 @@ public class Agency {
 	public ResultMessage addTransit(TransitVO av) {
 		
 		if(!isValidTransit(av.getId()))
-			return new ResultMessage(Result.FAIL,"亲，咱们的中转中心编号是四位数字哟~");
+			return new ResultMessage(Result.FAIL,"亲，咱们的中转中心编号是城市编码加一位数字哟~");
 		
 		TransitPO po=new TransitPO(av.getName(), av.getId(), av.getLocation());
 		ResultMessage message=new ResultMessage(Result.FAIL);
@@ -153,7 +153,7 @@ public class Agency {
 	public ResultMessage addPosition(PositionVO av) {
 		
 		if(!isValidPosition(av.getId()))
-			return new ResultMessage(Result.FAIL,"亲，咱们的营业厅编号是六位数字哟~");
+			return new ResultMessage(Result.FAIL,"亲，咱们的营业厅编号是城市编码加三位数字哟~");
 		
 		
 		PositionPO po=new PositionPO(av.getName(), av.getId(), av.getTransitId(), av.getLocation());
@@ -240,7 +240,7 @@ public class Agency {
 	private boolean isValidPosition(String id){
 		if(!ValidHelper.isNumber(id))
 			return false;
-		if(id.length()!=6)
+		if(id.length()!=6&&id.length()!=7)
 			return false;
 		
 		return true;
@@ -249,7 +249,7 @@ public class Agency {
 	private boolean isValidTransit(String id){
 		if(!ValidHelper.isNumber(id))
 			return false;
-		if(id.length()!=4)
+		if(id.length()!=4&&id.length()!=5)
 			return false;
 		
 		return true;
