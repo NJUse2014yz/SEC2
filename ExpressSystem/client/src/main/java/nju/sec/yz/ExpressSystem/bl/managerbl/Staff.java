@@ -115,16 +115,28 @@ public class Staff {
 		String name=po.getName();
 		String id=po.getId();
 		Status power=po.getPower();
-		String agency=po.getAgency().getName();
+		String agency=po.getAgency();
 		StaffVO vo=new StaffVO(name, id, power, agency);
 		return vo;
 	}
 	private StaffPO changeVoToPo(StaffVO sv) {
-		// TODO 自动生成的方法存根
-		return null;
+		String name=sv.getName();
+		String id=sv.getId();
+		Status power=sv.getPower();
+		String agency=sv.getAgency();
+		StaffPO po=new StaffPO(name, id, power, agency);
+		return po;
 	}
 	private String isValid(StaffVO sv) {
+		String id=sv.getId();
+		String agency=sv.getAgency();
+		
+		if(!isId(id))
+			return "看看ID输对没";
+		return "success";
+	}
+	private boolean isId(String id) {
 		// TODO 自动生成的方法存根
-		return null;
+		return false;
 	}
 }
