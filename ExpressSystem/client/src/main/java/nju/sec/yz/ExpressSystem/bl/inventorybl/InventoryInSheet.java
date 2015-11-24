@@ -1,22 +1,20 @@
 package nju.sec.yz.ExpressSystem.bl.inventorybl;
 
-import java.rmi.RemoteException;
-
+import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptID;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
 import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
-import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
+import nju.sec.yz.ExpressSystem.bl.userbl.User;
+import nju.sec.yz.ExpressSystem.bl.userbl.UserInfo;
+import nju.sec.yz.ExpressSystem.common.IdType;
 import nju.sec.yz.ExpressSystem.common.InventoryInInformation;
 import nju.sec.yz.ExpressSystem.common.ReceiptType;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
-import nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice.InventoryDataService;
 import nju.sec.yz.ExpressSystem.po.InventoryInSheetPO;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
-import nju.sec.yz.ExpressSystem.presentation.controlerui.InventoryControler;
 import nju.sec.yz.ExpressSystem.vo.InventoryInSheetVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
-import nju.sec.yz.ExpressSystem.vo.SendSheetVO;
 
 /**
  * 入库单的领域模型对象
@@ -24,26 +22,12 @@ import nju.sec.yz.ExpressSystem.vo.SendSheetVO;
  *
  */
 public class InventoryInSheet implements ReceiptService {
-	private InventoryDataService data;
-	
-	public InventoryInSheet(){
-		try {
-			data=DatafactoryProxy.getInventoryDataService();
-		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		}
-	}
 	
 	//通过入库单的审批
 	@Override
 	public ResultMessage approve(ReceiptVO vo) {
-		InventoryInSheetVO inSheet=(InventoryInSheetVO)vo;
 		Inventory inventory=new Inventory();
-		InventoryInInformation ii=inSheet.getInventoryInInformation();
-		InventoryInSheetPO inPO = new InventoryInSheetPO(new InventoryInInformation(
-				ii.getTime(),ii.getDestination(), ii.getBlock(), ii.getRow(), 
-				ii.getShelf(), ii.getPositon()),inSheet.getBarId());
+		InventoryInSheetPO inPO = (InventoryInSheetPO) convertToPO(vo);
 		ResultMessage resultMessage=inventory.updateInReceipt(inPO);
 		System.out.println("Approving...");
 		return resultMessage;
@@ -51,9 +35,9 @@ public class InventoryInSheet implements ReceiptService {
 
 	@Override
 	public ResultMessage make(ReceiptVO vo) {
-		
+		InventoryInSheetVO inSheet=(InventoryInSheetVO)vo;
 		//验证information
-		ResultMessage message=isValid(vo);
+		ResultMessage message=isValid(inSheet);
 		if(message.getResult()==Result.FAIL)
 			return message;
 		
@@ -70,22 +54,27 @@ public class InventoryInSheet implements ReceiptService {
 		return new ResultMessage(Result.SUCCESS);
 	}
 
-	
-	private String getInVentorID() {
-		// TODO 自动生成的方法存根
-		return null;
-	}
-
 	/**
 	 * 生成入库单ID
 	 * @return
 	 */
 	private String createID() {
-		// TODO 自动生成的方法存根
-		return null;
+		String inventorId=this.getInVentorID();
+		ReceiptID idMaker=new ReceiptID();
+		String id=idMaker.getID(inventorId, IdType.INVENTORY_IN);
+		return id;
 	}
-
-	public ResultMessage isValid(InventoryInInformation ii){
+	/**
+	 * 获得填单人ID
+	 * @return
+	 */
+	private String getInVentorID() {
+		UserInfo user=new User();
+		String id=user.getCurrentID();
+		return id;
+	}
+	
+	private ResultMessage isValid(InventoryInInformation ii){
 		//假定柜子刚好99个
 		if(ii.getBlock()==0){
 			return new ResultMessage(Result.FAIL, "hhh");
@@ -96,8 +85,17 @@ public class InventoryInSheet implements ReceiptService {
 
 	@Override
 	public ReceiptVO show(ReceiptPO po) {
-		// TODO Auto-generated method stub
-		return null;
+		InventoryInSheetPO inSheet=(InventoryInSheetPO)po;
+		InventoryInInformation ii=inSheet.getInventoryInInformation();
+		InventoryInSheetVO inVO = new InventoryInSheetVO(new InventoryInInformation(
+				ii.getTime(),ii.getDestination(), ii.getBlock(), ii.getRow(), 
+				ii.getShelf(), ii.getPositon()),inSheet.getBarId());
+		
+		inVO.setId(inSheet.getId());
+		inVO.setType(ReceiptType.INVENTORY_IN);
+		inVO.setMakePerson(inSheet.getMakePerson());
+		inVO.setMakeTime(inSheet.getMakeTime());
+		return inVO;
 	}
 
 	@Override
@@ -107,6 +105,11 @@ public class InventoryInSheet implements ReceiptService {
 		InventoryInSheetPO inPO = new InventoryInSheetPO(new InventoryInInformation(
 				ii.getTime(),ii.getDestination(), ii.getBlock(), ii.getRow(), 
 				ii.getShelf(), ii.getPositon()),inSheet.getBarId());
+		
+		inPO.setId(inSheet.getId());
+		inPO.setType(ReceiptType.DELIVER_RECEIPT);
+		inPO.setMakePerson(inSheet.getMakePerson());
+		inPO.setMakeTime(inSheet.getMakeTime());
 		return inPO;
 	}
 

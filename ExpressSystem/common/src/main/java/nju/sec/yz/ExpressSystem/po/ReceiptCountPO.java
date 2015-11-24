@@ -8,7 +8,6 @@ import java.io.Serializable;
  */
 
 import nju.sec.yz.ExpressSystem.common.IdType;
-import nju.sec.yz.ExpressSystem.common.ReceiptType;
 public class ReceiptCountPO implements Serializable{
 
 	//相关人员的id
