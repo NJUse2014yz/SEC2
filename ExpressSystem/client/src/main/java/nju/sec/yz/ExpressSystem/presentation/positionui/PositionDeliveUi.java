@@ -103,11 +103,8 @@ public class PositionDeliveUi extends JPanel{
 			{
 				DeliverySheetVO sheet=new DeliverySheetVO();
 				DeliveryInformation di=new DeliveryInformation();
-<<<<<<< HEAD
-				di.setBarId(deliver.getText());
-=======
+
 				di.setOutDeliverId(deliver.getText());
->>>>>>> 0caad299b5523ab2a082b6c7bf4a4bfb31c214e0
 				di.setTime(date.getTime());
 				di.setBarId(barId.getText());
 				
