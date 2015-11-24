@@ -3,6 +3,7 @@ package nju.sec.yz.ExpressSystem.bl.carAndDriverbl;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import nju.sec.yz.ExpressSystem.bl.deliverbl.ValidHelper;
 import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
 import nju.sec.yz.ExpressSystem.common.Result;
@@ -155,50 +156,31 @@ public class Driver {
 	}
 
 	private boolean isBeforeDate(String date) {
-		if(date.length()!=8)
-			return false;
-		char array[]=date.toCharArray();
-		for(char a:array)
-			if(a<'0'||a>'9')
-				return false;
-		int dateToInt=Integer.parseInt(date);
-		String now=TimeTool.getDate();
-		int nowToInt=Integer.parseInt(now);
-		//超过今天
-		if(dateToInt>nowToInt)
+		if(ValidHelper.isBeforeDate(date))
 			return false;
 		return true;
 	}
+	
 	private boolean isLaterDate(String date) {
-		if(date.length()!=8)
+		if(!ValidHelper.isLaterDate(date))
 			return false;
-		char array[]=date.toCharArray();
-		for(char a:array)
-			if(a<'0'||a>'9')
-				return false;
-		int dateToInt=Integer.parseInt(date);
-		String now=TimeTool.getDate();
-		int nowToInt=Integer.parseInt(now);
-		
-		
-		//超过今天
-		if(dateToInt<nowToInt){
-			return false;
-		}
-			
 		return true;
 	}
 
 	private boolean isId(String id) {
-		if(id.length()!=9&&id.length()!=10)
+		if(!id.contains("A"))
 			return false;
-		char numbers[]=id.toCharArray();
-		for(char a:numbers){
-			if(a<'0'||a>'9')
-				return false;
-		}
-			
-		
+		String strs[]=id.split("A");
+		if(strs.length!=2)
+			return false;
+		if(!ValidHelper.isNumber(strs[0]))
+			return false;
+		if(strs[0].length()!=3&&strs[0].length()!=4)
+			return false;
+		if(!ValidHelper.isNumber(strs[1]))
+			return false;
+		if(strs[1].length()!=3)
+			return false;
 		return true;
 	}
 

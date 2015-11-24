@@ -158,12 +158,19 @@ public class Car {
 	}
 
 	private boolean isId(String id) {
-		if(!(id.length()==9||id.length()==10))
+		if(!id.contains("B"))
 			return false;
-		char numbers[]=id.toCharArray();
-		for(char a:numbers)
-			if(a<'0'||a>'9')
-				return false;
+		String strs[]=id.split("B");
+		if(strs.length!=2)
+			return false;
+		if(!ValidHelper.isNumber(strs[0]))
+			return false;
+		if(strs[0].length()!=3&&strs[0].length()!=4)
+			return false;
+		if(!ValidHelper.isNumber(strs[1]))
+			return false;
+		if(strs[1].length()!=3)
+			return false;
 		return true;
 	}
 
