@@ -35,6 +35,10 @@ public class DriverDataImpl extends UnicastRemoteObject implements DriverDataSer
 		}
 		
 		List<DriverPO> driverPOs = findAll();
+		for(DriverPO po:driverPOs){
+			if(po.getId().equals(dpo.getId()))
+				return new ResultMessage(Result.FAIL,"司机信息已存在");
+		}
 		driverPOs.add(dpo);
 
 		ResultMessage message = saveData(driverPOs);

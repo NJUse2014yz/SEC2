@@ -9,11 +9,14 @@ import nju.sec.yz.ExpressSystem.data.accountdata.InDataImpl;
 import nju.sec.yz.ExpressSystem.data.accountdata.OutDataImpl;
 import nju.sec.yz.ExpressSystem.data.carAndDriverdata.CarDataImpl;
 import nju.sec.yz.ExpressSystem.data.carAndDriverdata.DriverDataImpl;
+import nju.sec.yz.ExpressSystem.data.deliverdata.CollectionRecordDataImpl;
 import nju.sec.yz.ExpressSystem.data.deliverdata.DeliverDataImpl;
 import nju.sec.yz.ExpressSystem.data.deliverdata.OrderDataImpl;
 import nju.sec.yz.ExpressSystem.data.inventorydata.InventoryDataImpl;
 import nju.sec.yz.ExpressSystem.data.logdata.LogDataImpl;
 import nju.sec.yz.ExpressSystem.data.managedata.AgencyDataImpl;
+import nju.sec.yz.ExpressSystem.data.managedata.CityIdDataImpl;
+import nju.sec.yz.ExpressSystem.data.managedata.ConstDataImpl;
 import nju.sec.yz.ExpressSystem.data.managedata.SalaryDataImpl;
 import nju.sec.yz.ExpressSystem.data.managedata.StaffDataImpl;
 import nju.sec.yz.ExpressSystem.data.receiptdata.ReceiptCounterDataImpl;
@@ -28,11 +31,13 @@ import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.OutDataService;
 import nju.sec.yz.ExpressSystem.dataservice.carAndDriverDataSevice.CarDataService;
 import nju.sec.yz.ExpressSystem.dataservice.carAndDriverDataSevice.DriverDataService;
 import nju.sec.yz.ExpressSystem.dataservice.datafactory.DatafactoryService;
+import nju.sec.yz.ExpressSystem.dataservice.deliverDataSevice.CollectionRecordDataService;
 import nju.sec.yz.ExpressSystem.dataservice.deliverDataSevice.DeliverDataService;
 import nju.sec.yz.ExpressSystem.dataservice.deliverDataSevice.OrderDataService;
 import nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice.InventoryDataService;
 import nju.sec.yz.ExpressSystem.dataservice.logDataSevice.LogDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.AgencyDataService;
+import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.CityIdDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.ConstDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.SalaryDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.StaffDataService;
@@ -111,7 +116,7 @@ public class DataFactorySerializableImpl extends UnicastRemoteObject implements 
 
 	@Override
 	public ConstDataService getConstDataService() throws RemoteException {
-		return new ConstDataStub();
+		return new ConstDataImpl();
 	}
 
 	@Override
@@ -143,8 +148,19 @@ public class DataFactorySerializableImpl extends UnicastRemoteObject implements 
 
 	@Override
 	public OrderDataService getOrderDataService() throws RemoteException {
-		
 		return new OrderDataImpl();
+	}
+
+	@Override
+	public CityIdDataService getCityIdDataService() throws RemoteException {
+		
+		return new CityIdDataImpl();
+	}
+
+	@Override
+	public CollectionRecordDataService getCollectionRecordDataService() throws RemoteException {
+		
+		return new CollectionRecordDataImpl();
 	}
 
 }

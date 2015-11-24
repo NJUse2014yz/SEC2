@@ -85,7 +85,12 @@ public class TransitReceive extends JPanel{
 					add(warning);
 					repaint();
 				}else{
-					ArriveInformation arrive=new ArriveInformation(departure.getText(),date.getTime(),getState(state),transitId.getText());
+					ArriveInformation arrive=new ArriveInformation();
+					arrive.setDeparture(departure.getText());
+					arrive.setTime(date.getTime());
+					arrive.setState(getState(state));
+					arrive.setTransitId(transitId.getText());
+					
 					TransitArriveSheetVO vo=new TransitArriveSheetVO();
 					vo.setTransitArriveInformation(arrive);
 					ResultMessage result=deliverBlService.transitReceiveReceipt(vo);

@@ -11,6 +11,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import nju.sec.yz.ExpressSystem.common.IdType;
 import nju.sec.yz.ExpressSystem.common.ReceiptType;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
@@ -46,7 +47,7 @@ public class ReceiptCounterDataImpl extends UnicastRemoteObject implements Recei
 		}
 			
 		String id=po.getId();
-		ReceiptType type=po.getReceiptType();
+		IdType type=po.getReceiptType();
 
 		List<ReceiptCountPO> POs = findAll();
 		for (int i = 0; i < POs.size(); i++) {
@@ -63,7 +64,7 @@ public class ReceiptCounterDataImpl extends UnicastRemoteObject implements Recei
 	}
 
 	@Override
-	public ReceiptCountPO get(String id, ReceiptType type) throws RemoteException {
+	public ReceiptCountPO get(String id, IdType type) throws RemoteException {
 		System.out.println("finding a CounterPO...");
 		if(id==null){
 			System.out.println("id为null！！！");

@@ -2,6 +2,7 @@ package nju.sec.yz.ExpressSystem.data.stub;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
 
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.dataservice.logDataSevice.LogDataService;
@@ -21,8 +22,8 @@ public class LogDataStub implements LogDataService {
 	}
 
 	@Override
-	public LogPO find(String time) throws RemoteException {
-		return new LogPO("20151024", "init the information of drivers", "001C002");
+	public List<LogPO> find(String time) throws RemoteException {
+		return null;
 	}
 
 	@Override

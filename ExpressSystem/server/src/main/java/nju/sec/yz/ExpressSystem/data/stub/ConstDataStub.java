@@ -42,14 +42,14 @@ public class ConstDataStub implements ConstDataService{
 	}
 
 	@Override
-	public ArrayList<PricePO> findAllPrice() throws RemoteException {
+	public PricePO findAllPrice() throws RemoteException {
 		// TODO 自动生成的方法存根
 		return null;
 	}
 
 	@Override
 	public CityPO find(String beginPlace, String endPlace) throws RemoteException {
-		return new CityPO(new CityInformation("北京","南京",1000));
+		return new CityPO(new CityInformation("北京","010","南京","025",1000));
 	}
 
 }

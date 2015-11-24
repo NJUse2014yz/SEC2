@@ -16,6 +16,7 @@ import nju.sec.yz.ExpressSystem.bl.userbl.UserInfo;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
 import nju.sec.yz.ExpressSystem.common.DeliveryType;
 import nju.sec.yz.ExpressSystem.common.GoodInformation;
+import nju.sec.yz.ExpressSystem.common.IdType;
 import nju.sec.yz.ExpressSystem.common.PackType;
 import nju.sec.yz.ExpressSystem.common.ReceiptType;
 import nju.sec.yz.ExpressSystem.common.Result;
@@ -95,7 +96,7 @@ public class DeliverReceipt implements ReceiptService{
 	private String createID() {
 		String deliverID=this.getDeliverID();
 		ReceiptID idMaker=new ReceiptID();
-		String id=idMaker.getID(deliverID, ReceiptType.DELIVER_RECEIPT);
+		String id=idMaker.getID(deliverID, IdType.DELIVER_RECEIPT);
 		return id;
 	}
 	
@@ -118,7 +119,6 @@ public class DeliverReceipt implements ReceiptService{
 		try {
 			po=orderData.get(barID);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
@@ -287,7 +287,7 @@ public class DeliverReceipt implements ReceiptService{
 			break;
 		}
 		PriceService price=new Price();
-		double baseprice=price.getPrice();
+		double baseprice=price.getDeliverPrice();
 		cost=distance/1000*rate*weight1*baseprice;
 		return cost;
 	}

@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 
 import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
+import nju.sec.yz.ExpressSystem.common.IdType;
 import nju.sec.yz.ExpressSystem.common.ReceiptType;
 import nju.sec.yz.ExpressSystem.dataservice.receiptDataSevice.ReceiptCounterDataService;
 import nju.sec.yz.ExpressSystem.po.ReceiptCountPO;
@@ -36,7 +37,7 @@ public class ReceiptID {
 		}
 	}
 	
-	private ReceiptCountPO get(String id,ReceiptType type){
+	private ReceiptCountPO get(String id,IdType type){
 		ReceiptCountPO po=null;
 		try {
 			po=counterData.get(id, type);
@@ -62,7 +63,7 @@ public class ReceiptID {
 	 * @param type 表单类型
 	 * @return
 	 */
-	public String getID(String id,ReceiptType type){
+	public String getID(String id,IdType type){
 		String receiptID=id;
 		String date=TimeTool.getDate();
 		receiptID=receiptID+type.getIdStr()+date;

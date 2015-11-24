@@ -16,6 +16,7 @@ import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.data.fileUtility.SerializableFileHelper;
 import nju.sec.yz.ExpressSystem.dataservice.userDataSevice.UserDataService;
 import nju.sec.yz.ExpressSystem.po.DeliverPO;
+import nju.sec.yz.ExpressSystem.po.DriverPO;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.po.UserPO;
 
@@ -34,6 +35,10 @@ public class UserDataImpl extends UnicastRemoteObject implements UserDataService
 			return new ResultMessage(Result.FAIL, "系统错误");
 		}
 		List<UserPO> userPOs = findAll();
+		for(UserPO po:userPOs){
+			if(po.getId().equals(upo.getId()))
+				return new ResultMessage(Result.FAIL,"用户已存在");
+		}
 		userPOs.add(upo);
 		ResultMessage message=saveData(userPOs);
 		return message;

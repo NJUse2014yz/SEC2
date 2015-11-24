@@ -13,16 +13,35 @@ public class CarVO {
 	// 车牌号（苏A 00000）
 	private String number;
 
-	// TODO 服役时间(年)
+//	 TODO 服役时间(年)
 	private int time;
 
-	// TODO 车辆图片待定
+	private String buytime;
+	
+//	private String card;
+	
+	private String mechine;
+	
+	private String dipan;
+	
+	private String worktime;
 
-	public CarVO(String id, String number, int time) {
+	public CarVO(String id, String number, String buytime,String mechine,String dipan,String worktime) {
 		super();
 		this.id = id;
 		this.number = number;
-		this.time = time;
+		this.worktime = worktime;
+		this.mechine=mechine;
+		this.dipan=dipan;
+		this.buytime=buytime;
+//		this.card=card;
+	}
+	public CarVO(String id,String number,int time)
+	{
+		super();
+		this.id = id;
+		this.number = number;
+		this.time=time;
 	}
 
 	public String getId() {
@@ -47,6 +66,30 @@ public class CarVO {
 
 	public void setTime(int time) {
 		this.time = time;
+	}
+	public String getBuytime() {
+		return buytime;
+	}
+	public void setBuytime(String buytime) {
+		this.buytime = buytime;
+	}
+	public String getMechine() {
+		return mechine;
+	}
+	public void setMechine(String mechine) {
+		this.mechine = mechine;
+	}
+	public String getDipan() {
+		return dipan;
+	}
+	public void setDipan(String dipan) {
+		this.dipan = dipan;
+	}
+	public String getWorktime() {
+		return worktime;
+	}
+	public void setWorktime(String worktime) {
+		this.worktime = worktime;
 	}
 
 }

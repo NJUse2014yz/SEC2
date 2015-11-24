@@ -26,7 +26,7 @@ public class AccountBookStub implements AccountBookDataService{
 		// TODO 自动生成的方法存根
 		ArrayList<AccountBookPO> array=new ArrayList<AccountBookPO>();
 		array.add(new AccountBookPO(new AgencyPO("000", "000", "总公司"), new ArrayList<StaffPO>(), new ArrayList<CarPO>(),
-				new ArrayList<AccountPO>(), new ArrayList<InventoryPO>()));
+				new ArrayList<AccountPO>(), new ArrayList<InventoryPO>(),"f"));
 		return array;
 
 	}
@@ -35,7 +35,7 @@ public class AccountBookStub implements AccountBookDataService{
 	public AccountBookPO init() throws RemoteException {
 		// TODO 自动生成的方法存根
 		return new AccountBookPO(new AgencyPO("000", "000", "总公司"), new ArrayList<StaffPO>(), new ArrayList<CarPO>(),
-				new ArrayList<AccountPO>(), new ArrayList<InventoryPO>());
+				new ArrayList<AccountPO>(), new ArrayList<InventoryPO>(),"f");
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class AccountBookStub implements AccountBookDataService{
 	}
 
 	@Override
-	public ResultMessage delete(AccountBookPO abp) throws RemoteException {
+	public ResultMessage delete(String id) throws RemoteException {
 		// TODO 自动生成的方法存根
 		return null;
 	}
@@ -59,7 +59,7 @@ public class AccountBookStub implements AccountBookDataService{
 	@Override
 	public AccountBookPO find(String id) throws RemoteException {
 		return new AccountBookPO(new AgencyPO("000", "000", "总公司"), new ArrayList<StaffPO>(), new ArrayList<CarPO>(),
-				new ArrayList<AccountPO>(), new ArrayList<InventoryPO>());
+				new ArrayList<AccountPO>(), new ArrayList<InventoryPO>(),"f");
 	}
 	
 

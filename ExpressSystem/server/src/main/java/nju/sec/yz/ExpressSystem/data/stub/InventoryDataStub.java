@@ -35,13 +35,15 @@ public class InventoryDataStub implements InventoryDataService{
 		return new ArrayList<InventoryPO>();
 	}
 
-	@Override
-	public ArrayList<InventoryPO> findByPosition(String position) throws RemoteException{
-		return new ArrayList<InventoryPO>();
-	}
 
 	@Override
 	public ArrayList<InventoryPO> findAll( ) throws RemoteException{
 		return new ArrayList<InventoryPO>();
+	}
+
+	@Override
+	public ArrayList<InventoryPO> findByTime(String date) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

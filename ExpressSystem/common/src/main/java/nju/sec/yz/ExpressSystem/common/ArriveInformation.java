@@ -8,21 +8,22 @@ import java.io.Serializable;
  *
  */
 public class ArriveInformation implements Serializable{
-	public ArriveInformation(String departure,String time,  ArriveState state, String transitId) {
-		super();
-		this.time = time;
-		this.departure = departure;
-		this.state = state;
+
+	private String time;//到达日期
+	private String transitSheetId;//中转单编号
+	private String departure;//出发地
+	private ArriveState state;//货物到达状态（损坏、完整、丢失）
+	
+	private String transitId;
+
+	public String getTransitId() {
+		return transitId;
+	}
+
+	public void setTransitId(String transitId) {
 		this.transitId = transitId;
 	}
-	private String time;
-	private String transitSheetId;
-	private String departure;
-	private ArriveState state;
-	private String transitId;
-	
-	
-	
+
 	public String getTime() {
 		return time;
 	}

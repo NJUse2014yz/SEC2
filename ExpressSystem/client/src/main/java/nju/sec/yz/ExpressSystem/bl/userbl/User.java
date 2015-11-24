@@ -295,5 +295,15 @@ public class User implements UserInfo{
 		UserPO po=new UserPO(id, name, password, status);
 		return po;
 	}
+	@Override
+	/**
+	 * 判断是否为系统用户
+	 */
+	public boolean isUser(String id) {
+		UserVO vo=this.getSingle(id);
+		if(vo==null)
+			return false;
+		return true;
+	}
 	
 }

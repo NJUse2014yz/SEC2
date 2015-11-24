@@ -33,8 +33,7 @@ public class InventoryDataDriver {
 		ArrayList<InventoryPO> array1=ids.findByTime(null, null);
 		System.out.println(array1.size());
 		
-		ArrayList<InventoryPO> array2=ids.findByPosition(null);
-		System.out.println(array2.size());
+		
 		
 		ArrayList<InventoryPO> array3=ids.findAll();
 		System.out.println(array3.size());

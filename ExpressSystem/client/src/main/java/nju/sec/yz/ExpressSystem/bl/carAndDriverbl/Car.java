@@ -46,11 +46,6 @@ public class Car {
 		return listVO;
 	}
 
-	private CarVO changePoToVo(CarPO carPO) {
-		// TODO 自动生成的方法存根
-		return null;
-	}
-
 	public CarVO getSingle(String id) {
 		CarVO vo=null;
 		try {
@@ -119,12 +114,77 @@ public class Car {
 	}
 
 	private String isValid(CarVO vo) {
-		// TODO 自动生成的方法存根
-		return null;
+		String id=vo.getId();
+		String number=vo.getNumber();
+		int time=vo.getTime();
+		
+		if(!isId(id))
+			return "看看车辆ID输对了没哦";
+		if(!isNumber(number))
+			return "看看车牌号输对了没哦";
+		if(!isTime(time))
+			return "服役时间不合理哦";
+		return "success";
+	}
+	
+	private boolean isTime(int time) {
+		if(time<0||time>100)
+			return false;
+		return true;
 	}
 
-	private CarPO changeVoToPo(CarVO vo) {
-		// TODO 自动生成的方法存根
-		return null;
+	private boolean isNumber(String number) {
+		if(number.length()!=7)
+			return false;
+		char a=number.charAt(0);
+		char b=number.charAt(1);
+		if(a!='京'&&a!='津'&&a!='冀'&&a!='晋'&&a!='蒙'&&a!='辽'&&a!='吉'&&a!='琼'&&
+				a!='黑'&&a!='沪'&&a!='苏'&&a!='浙'&&a!='皖'&&a!='闽'&&a!='赣'&&a!='新'&&
+				a!='鲁'&&a!='豫'&&a!='鄂'&&a!='湘'&&a!='粤'&&a!='桂'&&a!='渝'&&a!='青'&&
+				a!='川'&&a!='黔'&&a!='云'&&a!='藏'&&a!='陕'&&a!='甘'&&a!='宁'){
+			return false;
+		}
+			
+		
+		if(b<'A'||b>'Z')
+			return false;
+		for(int i=2;i<number.length();i++){
+			char temp=number.charAt(i);
+			if((!(temp>='A'&&temp<='Z'))&&(!(temp>='0'&&temp<='9')))
+				return false;
+		}
+		return true;
 	}
+
+	private boolean isId(String id) {
+		if(!(id.length()==9||id.length()==10))
+			return false;
+		char numbers[]=id.toCharArray();
+		for(char a:numbers)
+			if(a<'0'||a>'9')
+				return false;
+		return true;
+	}
+
+	private CarVO changePoToVo(CarPO po) {
+		String id=po.getId();
+		String number=po.getNumber();
+		int time=po.getTime();
+		CarVO vo=new CarVO(id, number, time);
+		return vo;
+	}
+	
+	private CarPO changeVoToPo(CarVO vo) {
+		String id=vo.getId();
+		String number=vo.getNumber();
+		int time=vo.getTime();
+		CarPO po=new CarPO(id, number, time);
+		return po;
+	}
+	
+	/*public void test(){
+		this.add(new CarVO("025001001", "苏A23466", "20131212","hh" , "hh", "20121212"));
+		CarVO vo=this.getSingle("025001001");
+		System.out.println(vo.getNumber());
+	}*/
 }

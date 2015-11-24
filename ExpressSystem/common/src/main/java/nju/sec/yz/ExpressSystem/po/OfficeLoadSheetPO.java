@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 import nju.sec.yz.ExpressSystem.common.LoadInformation;
 
-public class OfficeLoadSheetPO {
+public class OfficeLoadSheetPO extends ReceiptPO{
 	private LoadInformation officeLoadInformation;
 	private ArrayList<String> barIds;
 	private double fare;

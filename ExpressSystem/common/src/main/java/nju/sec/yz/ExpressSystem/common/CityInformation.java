@@ -4,10 +4,12 @@ import java.io.Serializable;
 
 public class CityInformation  implements Serializable{
 	private String fromCity;
+	private String fromID;//城市编号
 	private String toCity;
+	private String toID;
 	private double distance;
 	
-	public CityInformation(String from,String to,double distance) {
+	public CityInformation(String from,String fromID,String to,String toID,double distance) {
 		this.fromCity=from;
 		this.toCity=to;
 		this.distance=distance;
@@ -30,6 +32,22 @@ public class CityInformation  implements Serializable{
 	}
 	public void setDistance(double distance) {
 		this.distance = distance;
+	}
+
+	public String getFromID() {
+		return fromID;
+	}
+
+	public void setFromID(String fromID) {
+		this.fromID = fromID;
+	}
+
+	public String getToID() {
+		return toID;
+	}
+
+	public void setToID(String toID) {
+		this.toID = toID;
 	}
 	
 }

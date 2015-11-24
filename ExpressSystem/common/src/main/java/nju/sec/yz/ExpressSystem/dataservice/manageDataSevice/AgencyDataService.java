@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.po.AgencyPO;
+import nju.sec.yz.ExpressSystem.po.TransitPO;
 
 /**
  * 
@@ -13,10 +14,10 @@ import nju.sec.yz.ExpressSystem.po.AgencyPO;
  *
  */
 public interface AgencyDataService extends Remote{
-	public ResultMessage insert(AgencyPO agpo) throws RemoteException;
-	public AgencyPO find(String id) throws RemoteException;
+	public ResultMessage insert(TransitPO agpo) throws RemoteException;
+	public TransitPO find(String id) throws RemoteException;
 	public ResultMessage delete(String id) throws RemoteException;
-	public ResultMessage update(AgencyPO agpo) throws RemoteException;
-	public ResultMessage init( ) throws RemoteException;
-	public ArrayList<AgencyPO> findAll( ) throws RemoteException;
+	public ResultMessage update(TransitPO agpo) throws RemoteException;
+	public ResultMessage init() throws RemoteException;
+	public ArrayList<TransitPO> findAll() throws RemoteException;
 }

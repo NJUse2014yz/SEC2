@@ -6,6 +6,7 @@ import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 /**
  * 中转单
+ * 中转中心到中转中心
  * @author 周聪
  *
  */

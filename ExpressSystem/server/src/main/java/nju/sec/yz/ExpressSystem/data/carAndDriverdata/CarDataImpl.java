@@ -25,6 +25,41 @@ public class CarDataImpl extends UnicastRemoteObject implements CarDataService{
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * 保存数据到文件
+	 */
+	private synchronized ResultMessage saveData(List<CarPO> carPOs){
+		try {
+			File file = SerializableFileHelper.getCarFile();
+			try (ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(file))) {
+				os.writeObject(carPOs);
+			}
+			System.out.println("success");
+			return new ResultMessage(Result.SUCCESS);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return new ResultMessage(Result.FAIL, "文件读写错误");
+		}
+	}
+	
+	
+	@Override
+	public ArrayList<CarPO> findAll() throws RemoteException {
+		File file = new File(SerializableFileHelper.CAR_FILE_NAME);
+        if (!file.exists()) {
+            return new ArrayList<>();
+        }
+        try (ObjectInputStream is = new ObjectInputStream(new FileInputStream(file))) {
+            //noinspection unchecked
+            return (ArrayList<CarPO>) is.readObject();
+        } catch (Exception e) {
+            return new ArrayList<>();
+        }
+	}
+	
+	
+	
+	
 	@Override
 	public ResultMessage insert(CarPO cpo) throws RemoteException {
 		System.out.println("inserting a CarPO...");
@@ -34,6 +69,11 @@ public class CarDataImpl extends UnicastRemoteObject implements CarDataService{
 		}
 		
 		List<CarPO> carPOs = findAll();
+		for(CarPO po:carPOs){
+			if(po.getId().equals(cpo.getId()))
+				return new ResultMessage(Result.FAIL,"车辆信息已存在");
+		}
+		
 		carPOs.add(cpo);
 
 		ResultMessage message = saveData(carPOs);
@@ -111,35 +151,7 @@ public class CarDataImpl extends UnicastRemoteObject implements CarDataService{
 		return null;
 	}
 
-	@Override
-	public ArrayList<CarPO> findAll() throws RemoteException {
-		File file = new File(SerializableFileHelper.CAR_FILE_NAME);
-        if (!file.exists()) {
-            return new ArrayList<>();
-        }
-        try (ObjectInputStream is = new ObjectInputStream(new FileInputStream(file))) {
-            //noinspection unchecked
-            return (ArrayList<CarPO>) is.readObject();
-        } catch (Exception e) {
-            return new ArrayList<>();
-        }
-	}
+
 	
-	/**
-	 * 保存数据到文件
-	 */
-	private synchronized ResultMessage saveData(List<CarPO> carPOs){
-		try {
-			File file = SerializableFileHelper.getCarFile();
-			try (ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(file))) {
-				os.writeObject(carPOs);
-			}
-			System.out.println("success");
-			return new ResultMessage(Result.SUCCESS);
-		} catch (IOException e) {
-			e.printStackTrace();
-			return new ResultMessage(Result.FAIL, "文件读写错误");
-		}
-	}
 
 }

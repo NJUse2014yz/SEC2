@@ -14,8 +14,8 @@ import nju.sec.yz.ExpressSystem.po.AccountPO;
  */
 public interface AccountDataService extends Remote{
 	public ResultMessage insert(AccountPO apo) throws RemoteException;
-	public AccountPO find(String id) throws RemoteException;
-	public ResultMessage delete(String id) throws RemoteException;
+	public AccountPO find(String name) throws RemoteException;
+	public ResultMessage delete(String name) throws RemoteException;
 	public ResultMessage update(AccountPO apo) throws RemoteException;
 	public ResultMessage init( ) throws RemoteException;
 	public ArrayList<AccountPO> findAll( ) throws RemoteException;

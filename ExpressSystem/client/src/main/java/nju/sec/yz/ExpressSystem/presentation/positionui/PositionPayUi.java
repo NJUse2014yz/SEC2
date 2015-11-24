@@ -5,6 +5,8 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.PositionControler;
@@ -12,8 +14,15 @@ import nju.sec.yz.ExpressSystem.presentation.controlerui.PositionControler;
 public class PositionPayUi extends JPanel{
 	ClientControler mainControler;
 	PositionControler controler;
+	
 	ButtonComponents bc;
 
+	JTable payTable;
+	JScrollPane scroll;
+	
+	String[] columnName={"收款日期","收款金额","收款快递员","快递单条形码号"};
+	String[][] data;
+	
 	public PositionPayUi(ClientControler mainControler,ButtonComponents bc){
 		super();
 		this.mainControler=mainControler;
@@ -28,6 +37,9 @@ public class PositionPayUi extends JPanel{
 		bc.change();
 		setLayout(null);
 		setSize(490, 550);
+	
+		
+		
 		setVisible(true);
 
 		
