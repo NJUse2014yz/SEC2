@@ -1,6 +1,5 @@
 package nju.sec.yz.ExpressSystem.bl.inventorybl;
 
-import nju.sec.yz.ExpressSystem.bl.deliverbl.DeliverReceipt;
 import nju.sec.yz.ExpressSystem.blservice.inventoryBlService.InventoryBlService;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.InventoryInSheetVO;
@@ -14,14 +13,16 @@ public class InventoryController implements InventoryBlService{
 
 	@Override
 	public InventoryVO observeStock(String begin, String end) {
-		// TODO Auto-generated method stub
-		return null;
+		Inventory inven=new Inventory();
+		InventoryVO vo=inven.observeStock(begin, end);
+		return vo;
 	}
 
 	@Override
 	public InventoryVO checkStock() {
-		// TODO Auto-generated method stub
-		return null;
+		Inventory inven=new Inventory();
+		InventoryVO vo=inven.checkStock();
+		return vo;
 	}
 
 	@Override
@@ -39,14 +40,16 @@ public class InventoryController implements InventoryBlService{
 
 	@Override
 	public ResultMessage out(InventoryOutSheetVO iosvo) {
-		// TODO Auto-generated method stub
-		return null;
+		InventoryOutSheet receipt=new InventoryOutSheet();
+		ResultMessage resultMessage=receipt.make(iosvo);
+		return resultMessage;
 	}
 
 	@Override
 	public ResultMessage setAlertRate(double rate) {
-		// TODO Auto-generated method stub
-		return null;
+		Inventory inven=new Inventory();
+		ResultMessage message=inven.setAlertRate(rate);
+		return message;
 	}
 
 }

@@ -15,8 +15,6 @@ import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.data.fileUtility.SerializableFileHelper;
 import nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice.InventoryDataService;
-import nju.sec.yz.ExpressSystem.po.CarPO;
-import nju.sec.yz.ExpressSystem.po.InventoryPO;
 import nju.sec.yz.ExpressSystem.po.InventoryPO;
 
 public class InventoryDataImpl extends UnicastRemoteObject implements InventoryDataService{

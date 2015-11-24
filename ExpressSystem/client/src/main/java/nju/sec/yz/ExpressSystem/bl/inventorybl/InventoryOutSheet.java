@@ -1,7 +1,11 @@
 package nju.sec.yz.ExpressSystem.bl.inventorybl;
 
+import java.rmi.RemoteException;
+
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
+import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice.InventoryDataService;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.vo.InventoryOutSheetVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
@@ -12,7 +16,16 @@ import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
  *
  */
 public class InventoryOutSheet implements ReceiptService{
-
+	private InventoryDataService data;
+	
+	public InventoryOutSheet() {
+		try {
+			data=DatafactoryProxy.getInventoryDataService();
+		} catch (RemoteException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+	}
 	@Override
 	public ResultMessage approve(ReceiptVO vo) {
 		// TODO 自动生成的方法存根
