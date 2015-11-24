@@ -61,6 +61,7 @@ public class PositionLoadingReceipt implements ReceiptService{
 		po.setFare(fare);
 		po.setType(ReceiptType.POSITION_LOADING_RECEIPT);
 		po.setMakeTime(TimeTool.getDate());
+		po.setMakePerson(this.getMakePersonId());
 		
 		ReceiptSaveService receiptList=new ReceiptList();
 		ResultMessage message=receiptList.saveReceipt(po);
@@ -96,6 +97,12 @@ public class PositionLoadingReceipt implements ReceiptService{
 		String positionerID=user.getCurrentID();
 		String positionID=positionerID.split("C")[0];
 		return positionID;
+	}
+	
+	private String getMakePersonId(){
+		User user=new User();
+		String id=user.getCurrentID();
+		return id;
 	}
 	/**
 	 * 假设100个包裹为1吨

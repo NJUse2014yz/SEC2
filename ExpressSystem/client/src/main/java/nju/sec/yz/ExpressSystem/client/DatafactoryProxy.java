@@ -8,6 +8,7 @@ import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.OutDataService;
 import nju.sec.yz.ExpressSystem.dataservice.carAndDriverDataSevice.CarDataService;
 import nju.sec.yz.ExpressSystem.dataservice.carAndDriverDataSevice.DriverDataService;
 import nju.sec.yz.ExpressSystem.dataservice.datafactory.DatafactoryService;
+import nju.sec.yz.ExpressSystem.dataservice.deliverDataSevice.CollectionRecordDataService;
 import nju.sec.yz.ExpressSystem.dataservice.deliverDataSevice.DeliverDataService;
 import nju.sec.yz.ExpressSystem.dataservice.deliverDataSevice.OrderDataService;
 import nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice.InventoryDataService;
@@ -29,8 +30,11 @@ public class DatafactoryProxy {
 
 	private static DatafactoryService datafactory;
 	
+	public static void setDatafactory(DatafactoryService datafactory) {
+		DatafactoryProxy.datafactory = datafactory;
+	}
+	
 	public static CityIdDataService getCityIdDataService() throws RemoteException {
-
 		return datafactory.getCityIdDataService();
 	}
 	
@@ -112,13 +116,15 @@ public class DatafactoryProxy {
 	}
 
 
-	public static void setDatafactory(DatafactoryService datafactory) {
-		DatafactoryProxy.datafactory = datafactory;
-	}
 
 	public static OrderDataService getOrderDataService() throws RemoteException{
-		
 		return datafactory.getOrderDataService();
 	}
+	
+	public static CollectionRecordDataService getCollectionRecordDataService() throws RemoteException {
+		return datafactory.getCollectionRecordDataService();
+	}
+	
+	
 
 }
