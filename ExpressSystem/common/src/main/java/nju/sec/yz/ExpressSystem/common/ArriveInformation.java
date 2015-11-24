@@ -1,6 +1,7 @@
 package nju.sec.yz.ExpressSystem.common;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * 
@@ -12,7 +13,7 @@ public class ArriveInformation implements Serializable{
 	private String time;//到达日期
 	private String transitSheetId;//中转单编号
 	private String departure;//出发地
-	private ArriveState state;//货物到达状态（损坏、完整、丢失）
+	private ArrayList<ArriveState> state;//货物到达状态（损坏、完整、丢失）
 	
 	
 	public String getTime() {
@@ -33,10 +34,10 @@ public class ArriveInformation implements Serializable{
 	public void setDeparture(String departure) {
 		this.departure = departure;
 	}
-	public ArriveState getState() {
+	public ArrayList<ArriveState> getState() {
 		return state;
 	}
-	public void setState(ArriveState state) {
+	public void setState(ArrayList<ArriveState> state) {
 		this.state = state;
 	}
 	

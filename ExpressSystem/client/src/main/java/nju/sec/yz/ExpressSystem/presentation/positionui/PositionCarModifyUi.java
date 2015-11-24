@@ -97,7 +97,7 @@ public class PositionCarModifyUi extends JPanel{
 			{
 				if(carBl.getSingle(search.getText())!=null){
 					CarVO carvo=carBl.getSingle(search.getText());
-					data=new String[][]{{carvo.getId(),carvo.getNumber(),carvo.getMechine(),carvo.getBuytime(),carvo.getWorktime()}};
+					data=new String[][]{{carvo.getId(),carvo.getNumber(),carvo.getMechine(),carvo.getBuytime(),Integer.toString(carvo.getWorktime())}};
 //					table=new JTable(data,name);
 					repaint();
 				}

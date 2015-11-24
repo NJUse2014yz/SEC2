@@ -123,7 +123,7 @@ public class PositionCarAddUi extends JPanel{
 				}
 				else
 				{
-					CarVO carvo=new CarVO(JTcarId.getText(),JTcarCard.getText(),buyTime.getTime(),JTmechine.getText(),JTdipan.getText(),workTime.getTime());
+					CarVO carvo=new CarVO(JTcarId.getText(),JTcarCard.getText(),buyTime.getTime(),JTmechine.getText(),JTdipan.getText());
 					ResultMessage result=carBl.add(carvo);
 					if(result.getResult()==Result.SUCCESS)
 					{

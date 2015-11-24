@@ -6,6 +6,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.TableCellRenderer;
 
 import nju.sec.yz.ExpressSystem.bl.deliverbl.DeliverController;
 import nju.sec.yz.ExpressSystem.bl.managerbl.CityConst;
@@ -50,11 +53,15 @@ public class PositionArriveUi extends JPanel{
 	private ClientControler mainControler;
 	private PositionControler controler;
 	private ButtonComponents bc;
+	private String[] name={"条形码号","货物到达状态"};
+	private String[][] data;
 	
 	private JComboBox JCdeparture;
 	private JTextField JTtranferId;
 	private DateChooser date;
-	private JComboBox state;
+//	private JComboBox state;
+	private JTable table;
+	private JScrollPane scroll;
 	private JButton confirm;
 	private JLabel warning;
 	
@@ -67,11 +74,12 @@ public class PositionArriveUi extends JPanel{
 	public static final int tranferId_w=182;
 	public static final int date_x=207;
 	public static final int date_y=115;
-	public static final int state_x=261;
-	public static final int state_y=140;
-	public static final int state_w=165;
+	public static final int scroll_x=138;
+	public static final int scroll_y=175;
+	public static final int scroll_w=315;
+	public static final int scroll_h=244;
 	public static final int confirm_x=355;
-	public static final int confirm_y=178;
+	public static final int confirm_y=443;
 	public static final int confirm_w=72;
 	public static final int confirm_h=24;
 	private static final int warning_x=198;
@@ -92,6 +100,7 @@ public class PositionArriveUi extends JPanel{
 		manageControler=new ManagerController();
 		List<String> citys=manageControler.getCities();
 		city=new String[citys.size()];
+		data=new String[][]{};
 		for(int i=0;i<citys.size();i++)
 		{
 			city[i]=citys.get(i);
@@ -115,9 +124,41 @@ public class PositionArriveUi extends JPanel{
 		
 		date=new DateChooser(this,date_x,date_y);
 		
-		state=new JComboBox(new String[]{"完整","丢失","损坏"});
-		state.setBounds(state_x, state_y, state_w, h);
-		add(state);
+		table=new JTable(data,name);
+		table.setRowHeight(20);
+//		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		
+		scroll=new JScrollPane(table);
+		scroll.setBounds(scroll_x,scroll_y,scroll_w,scroll_h);
+		scroll.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e) {
+				List<String> bars=deliverBl.getBarIdList(JTtranferId.getText());
+				System.out.println("here");
+				if(true)//bars!=null)
+				{
+//					data=new String[bars.size()][];
+//					for(int i=0;i<bars.size();i++)
+//					{
+//						data[i][0]=bars.get(i);
+//						data[i][1]="";
+//					}
+					data=new String[][]{{"1",""},{"2",""},{"3",""}};
+					table=new JTable(data,name);
+					table.getColumnModel().getColumn(1).setCellRenderer((TableCellRenderer) new JComboBox(new String[]{"完整","丢失","损坏"}));
+					repaint();
+				}
+				else{
+					warning.setText("中转单编号不存在，请检查");
+					warning.setVisible(true);
+					repaint();
+				}
+			}
+		});
+		add(scroll);
+		
+//		state=new JComboBox(new String[]{"完整","丢失","损坏"});
+//		state.setBounds(state_x, state_y, state_w, h);
+//		add(state);
 		
 		warning=new JLabel();
 		warning.setBounds(warning_x, warning_y, warning_w, warning_h);
@@ -135,20 +176,20 @@ public class PositionArriveUi extends JPanel{
 				 
 				OfficeArriveSheetVO sheet=new OfficeArriveSheetVO();
 				ArriveInformation ai=new ArriveInformation();
-				switch((String)state.getSelectedItem())
-				{
-				case "损坏":
-					arriveState=ArriveState.Broken;
-					break;
-				case "丢失":
-					arriveState=ArriveState.LOST;
-					break;
-				case "完整":
-					arriveState=ArriveState.PERFECT;
-					break;
-				}
+//				switch((String)state.getSelectedItem())
+//				{
+//				case "损坏":
+//					arriveState=ArriveState.Broken;
+//					break;
+//				case "丢失":
+//					arriveState=ArriveState.LOST;
+//					break;
+//				case "完整":
+//					arriveState=ArriveState.PERFECT;
+//					break;
+//				}
 				ai.setDeparture((String)JCdeparture.getSelectedItem());
-				ai.setState(arriveState);
+//				ai.setState(arriveState);
 				ai.setTime(date.getTime());
 				ai.setTransitSheetId(JTtranferId.getText());
 				sheet.setOfficeArrive(ai);

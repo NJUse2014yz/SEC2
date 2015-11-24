@@ -102,7 +102,7 @@ public class PositionCarDeleteUi extends JPanel{
 			{
 				if(carBl.getSingle(search.getText())!=null){
 					CarVO carvo=carBl.getSingle(search.getText());
-					data=new String[][]{{carvo.getId(),carvo.getNumber(),carvo.getMechine(),carvo.getBuytime(),carvo.getWorktime()}};
+					data=new String[][]{{carvo.getId(),carvo.getNumber(),carvo.getMechine(),carvo.getBuytime(),Integer.toString(carvo.getWorktime())}};
 					repaint();
 				}
 				else{
@@ -130,7 +130,7 @@ public class PositionCarDeleteUi extends JPanel{
 					data[i][2]=cars.get(i).getMechine();
 					data[i][3]=cars.get(i).getDipan();
 					data[i][4]=cars.get(i).getBuytime();
-					data[i][5]=cars.get(i).getWorktime();
+					data[i][5]=Integer.toString(cars.get(i).getWorktime());
 				}
 //				table=new JTable(data,name);
 				search.setText("");

@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -34,8 +35,7 @@ public class PositionCarModifyFillUi extends JPanel{
 	private JTextField JTmechine;
 	private JTextField JTdipan;
 	private DateChooser buyTime;
-//	private DateChooser workTime;
-	private JTextField workTime;
+	private JLabel workTime;
 	private JButton confirm;
 	private JLabel warning;
 	
@@ -106,10 +106,11 @@ public class PositionCarModifyFillUi extends JPanel{
 		add(JTdipan);
 		
 		//时间设定
-		buyTime=new DateChooser(this, buyTime_x, buyTime_y);
-		//时间设定
-		//workTime=new DateChooser(this,workTime_x,workTime_y);
-		workTime=new JTextField();
+		buyTime=new DateChooser(new Date(Integer.parseInt(carvo.getBuytime().substring(0, 4)),Integer.parseInt(carvo.getBuytime().substring(4,6)),Integer.parseInt(carvo.getBuytime().substring(6,8))),this, buyTime_x, buyTime_y);
+		
+		workTime=new JLabel();
+		workTime.setFont(new Font("Dialog",1,15));
+		workTime.setForeground(Color.WHITE);
 		workTime.setBounds(workTime_x, workTime_y, warning_w, warning_h);
 		add(workTime);
 		
@@ -134,12 +135,13 @@ public class PositionCarModifyFillUi extends JPanel{
 				}
 				else
 				{
-					CarVO carvo=new CarVO(JTcarId.getText(),JTcarCard.getText(),buyTime.getTime(),JTmechine.getText(),JTdipan.getText(),workTime.getText());
-					ResultMessage result=carBl.add(carvo);
+					CarVO carvo=new CarVO(JTcarId.getText(),JTcarCard.getText(),buyTime.getTime(),JTmechine.getText(),JTdipan.getText());
+					ResultMessage result=carBl.modify(carvo);
 					if(result.getResult()==Result.SUCCESS)
 					{
 						warning.setText("提交成功");
 						warning.setVisible(true);
+						workTime.setText(Integer.toString(carBl.getSingle(carvo.getId()).getWorktime()));
 						repaint();
 					}
 					else{
