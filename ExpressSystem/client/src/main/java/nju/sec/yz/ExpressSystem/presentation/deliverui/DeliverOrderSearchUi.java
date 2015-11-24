@@ -47,7 +47,7 @@ public class DeliverOrderSearchUi extends JPanel {
 		
 		public DeliverOrderSearchUi(ClientControler controler) {
 			initDeliverOrderSearch();
-			ButtonComponents bc=new ButtonComponents(controler,this);
+			DeliverButtonComponents bc=new DeliverButtonComponents(controler,this);
 		}
 
 

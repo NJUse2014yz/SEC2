@@ -39,7 +39,7 @@ public class DeliverReceiveInUi extends JPanel{
 	
 	public DeliverReceiveInUi(ClientControler controler) {
 		iniDeliverReceiveIn();
-		ButtonComponents bc=new ButtonComponents(controler, this);
+		DeliverButtonComponents bc=new DeliverButtonComponents(controler, this);
 		this.date=new DateChooser(this,215,85);
 		
 	}

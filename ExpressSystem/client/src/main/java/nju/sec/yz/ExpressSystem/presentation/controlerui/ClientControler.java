@@ -11,6 +11,7 @@ import nju.sec.yz.ExpressSystem.presentation.inventoryui.InventoryMainUiTest;
 import nju.sec.yz.ExpressSystem.presentation.managerui.ManagerMainUiTest;
 import nju.sec.yz.ExpressSystem.presentation.positionui.PositionMainUi;
 import nju.sec.yz.ExpressSystem.presentation.positionui.PositionMainUiTest;
+import nju.sec.yz.ExpressSystem.presentation.transitui.TransitMainUi;
 import nju.sec.yz.ExpressSystem.presentation.transitui.TransitMainUiTest;
 import nju.sec.yz.ExpressSystem.presentation.userui.AdminstraterMainUiTest;
 import nju.sec.yz.ExpressSystem.presentation.userui.UserUi;
@@ -36,10 +37,10 @@ public class ClientControler{
 	JPanel accountMainPanel=new AccountMainUiTest(this);
 	JPanel managerMainPanel=new ManagerMainUiTest(this);
 	JPanel positionMainPanel=new PositionMainUi(this,positionControler.bc);
-	JPanel transitMainPanel=new TransitMainUiTest(this);
+	JPanel transitMainPanel=new TransitMainUi(this,transitControler.tbc);
 	JPanel adminstraterMainPanel=new AdminstraterMainUiTest(this);
 	
-	public MainUi mainFrame=new MainUi(deliverMainPanel);
+	public MainUi mainFrame=new MainUi(transitMainPanel);
 
 	public void showFrame()
 	{

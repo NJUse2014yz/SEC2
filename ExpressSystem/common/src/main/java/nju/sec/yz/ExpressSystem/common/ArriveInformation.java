@@ -8,10 +8,20 @@ import java.io.Serializable;
  *
  */
 public class ArriveInformation implements Serializable{
+	public ArriveInformation(String departure,String time,  ArriveState state, String transitId) {
+		super();
+		this.time = time;
+		this.departure = departure;
+		this.state = state;
+		this.transitId = transitId;
+	}
 	private String time;
 	private String transitSheetId;
 	private String departure;
 	private ArriveState state;
+	private String transitId;
+	
+	
 	
 	public String getTime() {
 		return time;

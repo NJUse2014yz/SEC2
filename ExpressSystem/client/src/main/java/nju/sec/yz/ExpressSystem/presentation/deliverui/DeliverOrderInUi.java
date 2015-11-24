@@ -73,7 +73,7 @@ public class DeliverOrderInUi extends JPanel {
 
 		initDeliverOrderIn();
 		// 侧边栏功能选择项、退出系统、退出当前帐户
-		ButtonComponents bc = new ButtonComponents(controler, this);
+		DeliverButtonComponents bc = new DeliverButtonComponents(controler, this);
 
 	}
 
