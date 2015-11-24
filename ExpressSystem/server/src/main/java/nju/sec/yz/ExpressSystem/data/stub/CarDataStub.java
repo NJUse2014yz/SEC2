@@ -20,7 +20,7 @@ public class CarDataStub implements CarDataService{
 
 	@Override
 	public CarPO find(String id) throws RemoteException{
-		return new CarPO("025000B000","苏A203HJ",5);
+		return null;
 	}
 
 	@Override
@@ -41,8 +41,6 @@ public class CarDataStub implements CarDataService{
 	@Override
 	public ArrayList<CarPO> findAll() throws RemoteException{
 		ArrayList<CarPO> array=new ArrayList<CarPO>();
-		array.add(new CarPO("025000B000","苏A203HJ",5));
-		array.add(new CarPO("025000B000","苏A20F8K",6));
 		return array;
 	}
 }

@@ -1,7 +1,6 @@
 package nju.sec.yz.ExpressSystem.bl.deliverbl;
 
 import java.rmi.RemoteException;
-
 import nju.sec.yz.ExpressSystem.bl.managerbl.CityConst;
 import nju.sec.yz.ExpressSystem.bl.managerbl.CityDistanceService;
 import nju.sec.yz.ExpressSystem.bl.managerbl.Price;
