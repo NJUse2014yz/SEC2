@@ -1,8 +1,11 @@
 package nju.sec.yz.ExpressSystem.bl.stub;
 
+import java.util.List;
+
 import nju.sec.yz.ExpressSystem.blservice.deliverBlService.DeliverBlService;
 import nju.sec.yz.ExpressSystem.common.OrderInformation;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.vo.CollectionRecordVO;
 import nju.sec.yz.ExpressSystem.vo.DeliverySheetVO;
 import nju.sec.yz.ExpressSystem.vo.OfficeArriveSheetVO;
 import nju.sec.yz.ExpressSystem.vo.OfficeLoadSheetVO;
@@ -56,6 +59,11 @@ public class DeliverBlStub implements DeliverBlService{
 	}
 	@Override
 	public SendSheetVO checkDeliverReceipt(String barID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public List<CollectionRecordVO> getCollectionRecords() {
 		// TODO Auto-generated method stub
 		return null;
 	}

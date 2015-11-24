@@ -1,7 +1,10 @@
 package nju.sec.yz.ExpressSystem.bl.deliverbl;
 
+import java.util.List;
+
 import nju.sec.yz.ExpressSystem.blservice.deliverBlService.DeliverBlService;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.vo.CollectionRecordVO;
 import nju.sec.yz.ExpressSystem.vo.DeliverySheetVO;
 import nju.sec.yz.ExpressSystem.vo.OfficeArriveSheetVO;
 import nju.sec.yz.ExpressSystem.vo.OfficeLoadSheetVO;
@@ -83,6 +86,13 @@ public class DeliverController implements DeliverBlService{
 	public ResultMessage transitReceipt(TransitSheetVO vo) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<CollectionRecordVO> getCollectionRecords() {
+		CollectionRecord record=new CollectionRecord();
+		List<CollectionRecordVO> records=record.getRecords();
+		return records;
 	}
 
 }

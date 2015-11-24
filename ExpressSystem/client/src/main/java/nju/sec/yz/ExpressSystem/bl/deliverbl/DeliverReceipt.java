@@ -24,6 +24,7 @@ import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.SendInformation;
 import nju.sec.yz.ExpressSystem.common.ToAndFromInformation;
 import nju.sec.yz.ExpressSystem.dataservice.deliverDataSevice.OrderDataService;
+import nju.sec.yz.ExpressSystem.po.CollectionRecordPO;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.po.SendSheetPO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
@@ -73,6 +74,7 @@ public class DeliverReceipt implements ReceiptService{
 		System.out.println(allCost);
 		information.setPredictTime(time);
 		
+		
 		//创建PO交给receiptList
 		SendSheetPO receipt=new SendSheetPO();
 
@@ -85,6 +87,16 @@ public class DeliverReceipt implements ReceiptService{
 
 		ReceiptSaveService receiptList=new ReceiptList();
 		receiptList.saveReceipt(receipt);
+		
+		//保存收款记录(暂定审批前保存)
+		String deliverId=receipt.getMakePerson();
+		String positionId=deliverId.substring(0, 6);
+		CollectionRecordPO po=new CollectionRecordPO(info.getBarId(), receipt.getMakeTime(),
+												allCost,deliverId, positionId);
+		CollectionRecord record=new CollectionRecord();
+		record.addRecord(po);
+		
+				
 		return new ResultMessage(Result.SUCCESS,allCost+" "+time);
 	}
 

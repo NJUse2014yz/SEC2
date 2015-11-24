@@ -110,10 +110,10 @@ public class UserDataImpl extends UnicastRemoteObject implements UserDataService
 		//未找到
 		return new ResultMessage(Result.FAIL, "找不到要更新的内容");
 	}
-
+	
 	@Override
 	public synchronized ResultMessage init() throws RemoteException {
-		// TODO init
+		
 		return null;
 	}
 

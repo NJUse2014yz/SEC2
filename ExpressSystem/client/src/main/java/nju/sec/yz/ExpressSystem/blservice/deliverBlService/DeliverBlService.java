@@ -1,6 +1,9 @@
 package nju.sec.yz.ExpressSystem.blservice.deliverBlService;
 
+import java.util.List;
+
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.vo.CollectionRecordVO;
 import nju.sec.yz.ExpressSystem.vo.DeliverySheetVO;
 import nju.sec.yz.ExpressSystem.vo.OfficeArriveSheetVO;
 import nju.sec.yz.ExpressSystem.vo.OfficeLoadSheetVO;
@@ -41,5 +44,7 @@ public interface DeliverBlService {
 	public ResultMessage transitLoadingReceipt (TransitLoadSheetVO vo);
 	//中转单
 	public ResultMessage transitReceipt (TransitSheetVO vo);
+	//获得营业该厅的收款记录
+	public List<CollectionRecordVO> getCollectionRecords();
 }
 

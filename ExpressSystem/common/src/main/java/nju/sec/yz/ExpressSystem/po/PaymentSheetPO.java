@@ -18,7 +18,7 @@ import nju.sec.yz.ExpressSystem.common.PaymentInformation;
 
 public class PaymentSheetPO extends ReceiptPO{
 	private PaymentInformation paymentInformation;
-	private ArrayList<String> barIds;
+	private String barIds;
 	
 	public PaymentInformation getPaymentInformation() {
 		return paymentInformation;
@@ -26,10 +26,10 @@ public class PaymentSheetPO extends ReceiptPO{
 	public void setPaymentInformation(PaymentInformation paymentInformation) {
 		this.paymentInformation = paymentInformation;
 	}
-	public ArrayList<String> getBarIds() {
+	public String getBarIds() {
 		return barIds;
 	}
-	public void setBarIds(ArrayList<String> barIds) {
+	public void setBarIds(String barIds) {
 		this.barIds = barIds;
 	}
 }
