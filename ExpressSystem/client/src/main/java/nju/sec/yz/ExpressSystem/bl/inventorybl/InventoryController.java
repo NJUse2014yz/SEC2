@@ -12,9 +12,9 @@ import nju.sec.yz.ExpressSystem.vo.InventoryVO;
 public class InventoryController implements InventoryBlService{
 
 	@Override
-	public InventoryVO observeStock(String begin, String end) {
+	public InventoryVO observeStock(String transit,String begin, String end) {
 		Inventory inven=new Inventory();
-		InventoryVO vo=inven.observeStock(begin, end);
+		InventoryVO vo=inven.observeStock(transit,begin, end);
 		return vo;
 	}
 

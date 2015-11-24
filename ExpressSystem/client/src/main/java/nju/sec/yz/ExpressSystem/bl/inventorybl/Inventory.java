@@ -34,7 +34,7 @@ public class Inventory {
 	 * 设定一个时间段，查看此时间段内的出/入库数量/金额/存储位置
 	 * 库存数量要有合计
 	 */
-	public InventoryVO observeStock(String begin, String end) {
+	public InventoryVO observeStock(String transit,String begin, String end) {
 		// TODO Auto-generated method stub
 		return null;
 	}

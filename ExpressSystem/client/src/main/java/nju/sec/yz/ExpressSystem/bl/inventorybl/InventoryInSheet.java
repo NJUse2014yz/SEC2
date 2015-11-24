@@ -4,8 +4,10 @@ import java.rmi.RemoteException;
 
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
+import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
 import nju.sec.yz.ExpressSystem.common.InventoryInInformation;
+import nju.sec.yz.ExpressSystem.common.ReceiptType;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice.InventoryDataService;
@@ -14,6 +16,7 @@ import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.InventoryControler;
 import nju.sec.yz.ExpressSystem.vo.InventoryInSheetVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
+import nju.sec.yz.ExpressSystem.vo.SendSheetVO;
 
 /**
  * 入库单的领域模型对象
@@ -50,17 +53,38 @@ public class InventoryInSheet implements ReceiptService {
 	public ResultMessage make(ReceiptVO vo) {
 		
 		//验证information
+		ResultMessage message=isValid(vo);
+		if(message.getResult()==Result.FAIL)
+			return message;
 		
-		
-		//创建PO交给receipt
+		//创建PO交给receiptList
 		InventoryInSheetPO inPO =(InventoryInSheetPO) convertToPO(vo);
+		inPO.setId(createID());
+		inPO.setType(ReceiptType.INVENTORY_IN);
+		inPO.setMakePerson(this.getInVentorID());
+		inPO.setMakeTime(TimeTool.getDate());
+		
 		ReceiptList receiptList = new ReceiptList();
 		receiptList.saveReceipt(inPO);
-		return new ResultMessage(Result.FAIL);
+		
+		return new ResultMessage(Result.SUCCESS);
 	}
 
 	
-	
+	private String getInVentorID() {
+		// TODO 自动生成的方法存根
+		return null;
+	}
+
+	/**
+	 * 生成入库单ID
+	 * @return
+	 */
+	private String createID() {
+		// TODO 自动生成的方法存根
+		return null;
+	}
+
 	public ResultMessage isValid(InventoryInInformation ii){
 		//假定柜子刚好99个
 		if(ii.getBlock()==0){

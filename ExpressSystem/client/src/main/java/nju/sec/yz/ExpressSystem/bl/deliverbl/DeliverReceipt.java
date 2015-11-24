@@ -57,7 +57,7 @@ public class DeliverReceipt implements ReceiptService{
 		
 		//验证information
 		ResultMessage validresult=isValid(sendReceipt);
-		if(!(validresult.getResult()==Result.FAIL))
+		if(validresult.getResult()==Result.FAIL)
 			return validresult;
 		//自动计算运费和到达时间
 		String fromCity=information.getFromPerson().getCity();

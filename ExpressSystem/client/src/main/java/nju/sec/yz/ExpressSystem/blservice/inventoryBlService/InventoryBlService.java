@@ -11,7 +11,7 @@ import nju.sec.yz.ExpressSystem.vo.InventoryVO;
  */
 public interface InventoryBlService {
 	//库存查看
-	public InventoryVO observeStock(String begin,String end);
+	public InventoryVO observeStock(String transit,String begin,String end);
 	//库存盘点
 	public InventoryVO checkStock();
 	//导出excel
