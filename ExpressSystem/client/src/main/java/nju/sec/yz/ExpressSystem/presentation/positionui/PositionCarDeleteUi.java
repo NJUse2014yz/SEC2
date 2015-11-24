@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,8 +18,11 @@ import javax.swing.JTextField;
 
 import nju.sec.yz.ExpressSystem.bl.carAndDriverbl.CarController;
 import nju.sec.yz.ExpressSystem.blservice.carAndDriverBlService.CarBlService;
+import nju.sec.yz.ExpressSystem.common.Result;
+import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.PositionControler;
+import nju.sec.yz.ExpressSystem.vo.CarVO;
 
 public class PositionCarDeleteUi extends JPanel{
 	private ClientControler mainControler;
@@ -30,8 +34,11 @@ public class PositionCarDeleteUi extends JPanel{
 	private JButton back;
 	private JButton confirm;
 	private JLabel warning;
-	private JTable tabel;
+	private JTable table;
 	private JScrollPane scroll;
+	private String[][] data={{"a","f","d","e","f","g","h"},{"a","f","d","e","g","h"},{"a","f","d","e","g","h"},{"a","f","d","e","g","h"},{"a","f","d","e","g","h"},{"a","f","d","e","g","h"}};
+	private String[] name={"车辆代号","车牌号","发动机号","底盘号","购买时间","服役时间"};
+	private ArrayList<CarVO> cars;
 	
 	private static final int search_x=227;
 	private static final int search_y=66;
@@ -68,7 +75,7 @@ public class PositionCarDeleteUi extends JPanel{
 		controler=mainControler.positionControler;
 		this.bc=bc;
 		carBl=new CarController();
-		
+		cars=carBl.getAll();
 		initDeliverMainUi();
 	}
 
@@ -79,12 +86,29 @@ public class PositionCarDeleteUi extends JPanel{
 		setLayout(null);
 		setSize(490, 550);
 		
+//		data=new String[][]{};
+		table=new JTable(data, name);
+		table.setRowHeight(20);
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+//		table.set
+		scroll=new JScrollPane(table);
+		scroll.setBounds(scroll_x,scroll_y,scroll_w,scroll_h);
+		add(scroll);
+		
 		searchButton=new JButton(searchIcon);
 		searchButton.setBounds(search_button_x,search_button_y,search_button_w,search_button_h);
 		searchButton.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
 			{
-				
+				if(carBl.getSingle(search.getText())!=null){
+					CarVO carvo=carBl.getSingle(search.getText());
+					data=new String[][]{{carvo.getId(),carvo.getNumber(),carvo.getMechine(),carvo.getBuytime(),carvo.getWorktime()}};
+					repaint();
+				}
+				else{
+					warning.setText("编号输入有误，请重新输入");
+					warning.setVisible(true);
+				}
 			}
 		});
 		add(searchButton);
@@ -98,7 +122,20 @@ public class PositionCarDeleteUi extends JPanel{
 		back.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
 			{
-				
+				data=new String[cars.size()][6];
+				for(int i=0;i<cars.size();i++)
+				{
+					data[i][0]=cars.get(i).getId();
+					data[i][1]=cars.get(i).getNumber();
+					data[i][2]=cars.get(i).getMechine();
+					data[i][3]=cars.get(i).getDipan();
+					data[i][4]=cars.get(i).getBuytime();
+					data[i][5]=cars.get(i).getWorktime();
+				}
+//				table=new JTable(data,name);
+				search.setText("");
+				warning.setVisible(false);
+				repaint();
 			}
 		});
 		add(back);
@@ -108,7 +145,14 @@ public class PositionCarDeleteUi extends JPanel{
 		confirm.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
 			{
-				
+				ResultMessage result=carBl.del(data[table.getSelectedRow()][0]);
+				if(result.getResult()==Result.SUCCESS){
+					warning.setText("删除成功");
+				}
+				else
+				{
+					warning.setText(result.getMessage());
+				}
 			}
 		});
 		add(confirm);

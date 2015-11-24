@@ -63,8 +63,6 @@ public class PositionControler {
 		case DRIVER_ADD:
 			mainControler.mainFrame.nextPanel(new PositionDriverAddUi(this.mainControler,bc));
 			break;
-		case DRIVER_ADD_SUCCESS:
-			break;
 		case DRIVER_DELETE:
 			mainControler.mainFrame.nextPanel(new PositionDriverDeleteUi(this.mainControler,bc));
 			break;

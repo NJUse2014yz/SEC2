@@ -34,7 +34,8 @@ public class PositionCarModifyFillUi extends JPanel{
 	private JTextField JTmechine;
 	private JTextField JTdipan;
 	private DateChooser buyTime;
-	private DateChooser workTime;
+//	private DateChooser workTime;
+	private JTextField workTime;
 	private JButton confirm;
 	private JLabel warning;
 	
@@ -107,8 +108,11 @@ public class PositionCarModifyFillUi extends JPanel{
 		//时间设定
 		buyTime=new DateChooser(this, buyTime_x, buyTime_y);
 		//时间设定
-		workTime=new DateChooser(this,workTime_x,workTime_y);
-
+		//workTime=new DateChooser(this,workTime_x,workTime_y);
+		workTime=new JTextField();
+		workTime.setBounds(workTime_x, workTime_y, warning_w, warning_h);
+		add(workTime);
+		
 		warning=new JLabel();
 		warning.setBounds(warning_x, warning_y, warning_w, warning_h);
 		warning.setFont(new Font("Dialog", 1, 15));
@@ -130,7 +134,7 @@ public class PositionCarModifyFillUi extends JPanel{
 				}
 				else
 				{
-					CarVO carvo=new CarVO(JTcarId.getText(),JTcarCard.getText(),buyTime.getTime(),JTmechine.getText(),JTdipan.getText(),workTime.getTime());
+					CarVO carvo=new CarVO(JTcarId.getText(),JTcarCard.getText(),buyTime.getTime(),JTmechine.getText(),JTdipan.getText(),workTime.getText());
 					ResultMessage result=carBl.add(carvo);
 					if(result.getResult()==Result.SUCCESS)
 					{

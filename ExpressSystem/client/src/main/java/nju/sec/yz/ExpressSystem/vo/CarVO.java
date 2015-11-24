@@ -18,23 +18,19 @@ public class CarVO {
 
 	private String buytime;
 	
-//	private String card;
-	
 	private String mechine;
 	
 	private String dipan;
 	
 	private String worktime;
 
-	public CarVO(String id, String number, String buytime,String mechine,String dipan,String worktime) {
+	public CarVO(String id, String number, String buytime,String mechine,String dipan) {
 		super();
 		this.id = id;
 		this.number = number;
-		this.worktime = worktime;
 		this.mechine=mechine;
 		this.dipan=dipan;
 		this.buytime=buytime;
-//		this.card=card;
 	}
 	public CarVO(String id,String number,int time)
 	{

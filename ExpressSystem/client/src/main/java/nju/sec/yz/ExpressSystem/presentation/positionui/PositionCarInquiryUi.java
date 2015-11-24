@@ -35,7 +35,7 @@ public class PositionCarInquiryUi extends JPanel{
 	private JButton back;
 	private JScrollPane scroll;
 	private String[][] data={{"a","f","d","e","f","g","h"},{"a","f","d","e","g","h"},{"a","f","d","e","g","h"},{"a","f","d","e","g","h"},{"a","f","d","e","g","h"},{"a","f","d","e","g","h"}};
-	private String[] name={"车辆代号","车牌号","发动机号","底盘号","购买时间","服役时间"};//
+	private String[] name={"车辆代号","车牌号","发动机号","底盘号","购买时间","服役时间"};
 	private ArrayList<CarVO> cars;
 	
 	private static final int search_x=227;
@@ -128,6 +128,7 @@ public class PositionCarInquiryUi extends JPanel{
 					data[i][5]=cars.get(i).getWorktime();
 				}
 				search.setText("");
+//				table=new JTable(data,name);
 				warning.setVisible(false);
 				repaint();
 			}
@@ -142,8 +143,6 @@ public class PositionCarInquiryUi extends JPanel{
 		warning.setVisible(false);
 		
 		setVisible(true);
-
-		
 	}
 
 	

@@ -6,6 +6,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -18,6 +20,7 @@ import javax.swing.JTextField;
 
 import nju.sec.yz.ExpressSystem.bl.deliverbl.DeliverController;
 import nju.sec.yz.ExpressSystem.bl.managerbl.CityConst;
+import nju.sec.yz.ExpressSystem.bl.managerbl.ManagerController;
 import nju.sec.yz.ExpressSystem.blservice.deliverBlService.DeliverBlService;
 import nju.sec.yz.ExpressSystem.blservice.managerBlService.ConstBlService;
 import nju.sec.yz.ExpressSystem.blservice.receiptBlService.ReceiptBlService;
@@ -43,6 +46,7 @@ import nju.sec.yz.ExpressSystem.vo.TransitSheetVO;
 public class PositionArriveUi extends JPanel{
 	private DeliverBlService deliverBl;
 	private ConstBlService constBl;
+	private ManagerController manageControler;
 	private ClientControler mainControler;
 	private PositionControler controler;
 	private ButtonComponents bc;
@@ -85,7 +89,13 @@ public class PositionArriveUi extends JPanel{
 		controler=mainControler.positionControler;
 		this.bc=bc;
 		deliverBl=new DeliverController();
-		//constBl=new ConstBl
+		manageControler=new ManagerController();
+		List<String> citys=manageControler.getCities();
+		city=new String[citys.size()];
+		for(int i=0;i<citys.size();i++)
+		{
+			city[i]=citys.get(i);
+		}
 		initDeliverMainUi();
 	}
 
@@ -95,7 +105,6 @@ public class PositionArriveUi extends JPanel{
 		setLayout(null);
 		setSize(490, 550);
 		
-		city=new String[]{"南京","北京","上海"};//(String[])constBl.getCities().toArray();
 		JCdeparture=new JComboBox(city);
 		JCdeparture.setBounds(departure_x, departure_y, departure_w, h);
 		add(JCdeparture);

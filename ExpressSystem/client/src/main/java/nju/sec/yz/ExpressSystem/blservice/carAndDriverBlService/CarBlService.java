@@ -10,6 +10,7 @@ import nju.sec.yz.ExpressSystem.vo.CarVO;
  * @change YU Fan
  *	车辆信息管理
  */
+
 public interface CarBlService {
 	public ArrayList<CarVO> getAll();
 	
