@@ -3,6 +3,7 @@ package nju.sec.yz.ExpressSystem.bl.managerbl;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import nju.sec.yz.ExpressSystem.bl.deliverbl.ValidHelper;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
@@ -129,14 +130,28 @@ public class Staff {
 	}
 	private String isValid(StaffVO sv) {
 		String id=sv.getId();
-		String agency=sv.getAgency();
 		
 		if(!isId(id))
 			return "看看ID输对没";
 		return "success";
 	}
 	private boolean isId(String id) {
-		// TODO 自动生成的方法存根
-		return false;
+		if(!ValidHelper.isNumber(id))
+			return false;
+		int len=id.length();
+		if(len!=4&&len!=8&&len!=10)
+			return false;
+		return true;
 	}
+	
+//	public void test(){
+//		this.addStaff(new StaffVO("小周","D101",Status.DELIVER,"Position"));
+//		StaffVO vo=this.observeStaff("D101");
+//		System.out.println(vo.getId());
+//	}
+//	public static void main(String[] args) {
+//		Staff staff=new Staff();
+//		staff.test();
+//	}
+
 }
