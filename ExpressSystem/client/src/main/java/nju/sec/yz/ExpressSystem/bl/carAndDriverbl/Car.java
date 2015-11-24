@@ -3,6 +3,8 @@ package nju.sec.yz.ExpressSystem.bl.carAndDriverbl;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import nju.sec.yz.ExpressSystem.bl.deliverbl.ValidHelper;
+import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
@@ -116,21 +118,20 @@ public class Car {
 	private String isValid(CarVO vo) {
 		String id=vo.getId();
 		String number=vo.getNumber();
-		int time=vo.getTime();
-		
+		String time=vo.getBuytime();
+		String dipan=vo.getDipan();
+		String machine=vo.getMechine();
 		if(!isId(id))
 			return "看看车辆ID输对了没哦";
 		if(!isNumber(number))
 			return "看看车牌号输对了没哦";
-		if(!isTime(time))
-			return "服役时间不合理哦";
+		if(!ValidHelper.isBeforeDate(time))
+			return "购买时间是我们过去的日子哦";
+		if(!ValidHelper.isNumber(dipan))
+			return "底盘号输入错误哦";
+		if(!ValidHelper.isNumber(machine))
+			return "发动机号输入错误哦";
 		return "success";
-	}
-	
-	private boolean isTime(int time) {
-		if(time<0||time>100)
-			return false;
-		return true;
 	}
 
 	private boolean isNumber(String number) {
@@ -169,16 +170,31 @@ public class Car {
 	private CarVO changePoToVo(CarPO po) {
 		String id=po.getId();
 		String number=po.getNumber();
-		int time=po.getTime();
-		CarVO vo=new CarVO(id, number, time);
+		String buytime=po.getBuytime();
+		String mechine=po.getMechine();
+		String dipan=po.getDipan();
+		CarVO vo=new CarVO(id, number, buytime, mechine, dipan);
+		int workTime=calculateTime(buytime);
+		vo.setWorktime(workTime);
 		return vo;
 	}
 	
+	private int calculateTime(String buytime) {
+		int dateToInt=Integer.parseInt(buytime.substring(0, 4));
+		String now=TimeTool.getDate();
+		int nowToInt=Integer.parseInt(now.substring(0, 4));
+		return nowToInt-dateToInt;
+	}
+
 	private CarPO changeVoToPo(CarVO vo) {
 		String id=vo.getId();
 		String number=vo.getNumber();
-		int time=vo.getTime();
-		CarPO po=new CarPO(id, number, time);
+		String time=vo.getBuytime();
+		String mechine=vo.getMechine();
+		String dipan=vo.getDipan();
+		CarPO po=new CarPO(id, number, time, mechine, dipan);
+		int workTime=calculateTime(time);
+		po.setWorktime(workTime);
 		return po;
 	}
 	

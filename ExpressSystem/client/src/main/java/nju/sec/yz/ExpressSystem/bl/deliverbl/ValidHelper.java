@@ -12,21 +12,36 @@ public class ValidHelper {
 			return false;
 		if(date.length()!=8)
 			return false;
-		
+		return true;
+	}
+	
+	public static boolean isBeforeDate(String date){
+		//判断当前日期是否为之前日期
+		if(!isValidDate(date))
+			return false;
 		int dateToInt=Integer.parseInt(date);
-		
 		String now=TimeTool.getDate();
-		
-		int nowToInt=Integer.parseInt(now);
+		int nowToInt=Integer.parseInt(now);		
 		
 		//超过今天
 		if(dateToInt>nowToInt)
 			return false;
-		
-		
 		return true;
 	}
 	
+	public static boolean isLaterDate(String date){
+		//判断当前日期是否为未来日期
+		if(!isValidDate(date))
+			return false;
+		int dateToInt=Integer.parseInt(date);
+		String now=TimeTool.getDate();
+		int nowToInt=Integer.parseInt(now);
+		
+		//未超过今天
+		if(dateToInt<nowToInt)
+			return false;
+		return true;
+	}
 	
 	/**
 	 * 是否为数字
