@@ -1,6 +1,7 @@
 package nju.sec.yz.ExpressSystem.common;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * 
@@ -8,9 +9,17 @@ import java.io.Serializable;
  *
  */
 public class TransitFlightInformation extends TransitInformation implements Serializable{
+	
 	private String flightTransitId;
 	private String flightId;
 	private String shelfId;
+	
+	
+	public TransitFlightInformation(String time, String departure, String destination, String transiterId,
+			ArrayList<String> barIds) {
+		super(time, departure, destination, transiterId, barIds);
+	}
+	
 	public String getFlightTransitId() {
 		return flightTransitId;
 	}

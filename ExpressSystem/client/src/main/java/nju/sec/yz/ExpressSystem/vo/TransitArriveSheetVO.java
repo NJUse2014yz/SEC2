@@ -8,7 +8,18 @@ import nju.sec.yz.ExpressSystem.common.ArriveInformation;
 
 public class TransitArriveSheetVO extends ReceiptVO{
 	private ArriveInformation transitArriveInformation;
+	private String transitId;
 
+	public String getTransitId() {
+		return transitId;
+	}
+
+	public void setTransitId(String transitId) {
+		this.transitId = transitId;
+	}
+
+	
+	
 	public ArriveInformation getTransitArriveInformation() {
 		return transitArriveInformation;
 	}

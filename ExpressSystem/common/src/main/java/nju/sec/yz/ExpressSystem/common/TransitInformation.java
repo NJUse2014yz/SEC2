@@ -9,6 +9,15 @@ import java.util.ArrayList;
  *
  */
 public class TransitInformation  implements Serializable{
+	protected TransitInformation(String time, String departure, String destination, String transiterId,
+			ArrayList<String> barIds) {
+		super();
+		this.time = time;
+		this.departure = departure;
+		this.destination = destination;
+		this.transiterId = transiterId;
+		this.barIds = barIds;
+	}
 	protected String time;
 	protected String departure;
 	protected String destination;

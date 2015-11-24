@@ -12,7 +12,7 @@ import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.DELIVER_CONTROL;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.MAIN_CONTROL;
 
-public class ButtonComponents{
+public class DeliverButtonComponents{
 
 	
 		private ClientControler maincontroler;
@@ -26,7 +26,7 @@ public class ButtonComponents{
 		//退出当前帐户
 		private JLabel leaveButton;
 	
-		public ButtonComponents(ClientControler maincontroler,JPanel panel){
+		public DeliverButtonComponents(ClientControler maincontroler,JPanel panel){
 			this.maincontroler=maincontroler;
 			/*
 			 * button OrderInButton,OrderSearchButton,ReceiveInButton

@@ -31,5 +31,6 @@ public class DeliveryInformation  implements Serializable{
 	public void setBarId(String barId) {
 		this.barId = barId;
 	}
+
 	
 }

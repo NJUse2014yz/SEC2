@@ -8,6 +8,16 @@ import java.io.Serializable;
  * @author YU Fan
  */
 public class LoadInformation  implements Serializable{
+	public LoadInformation(String time, String agencyId, String destinationId, String carId, String officerId,
+			String driverId) {
+		super();
+		this.time = time;
+		this.agencyId = agencyId;
+		this.destinationId = destinationId;
+		this.carId = carId;
+		this.officerId = officerId;
+		this.driverId = driverId;
+	}
 	private String time;//装车日期
 	private String agencyId;//营业厅编号 （025（城市编码）+000三位数字）
 	private String transportId;//汽运编号 （营业厅编号+日期+00000五位数字）
