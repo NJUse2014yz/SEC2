@@ -65,7 +65,6 @@ public class PositionArriveUi extends JPanel{
 	private JComboBox JCdeparture;
 	private JTextField JTtranferId;
 	private DateChooser date;
-//	private JComboBox state;
 	private JTable table;
 	private JScrollPane scroll;
 	private JButton confirm;
@@ -113,16 +112,16 @@ public class PositionArriveUi extends JPanel{
 		}
 		initDeliverMainUi();
 	}
-	public PositionArriveUi()
+/*	public PositionArriveUi()
 	{
 		city=new String[]{"南京","北京","上海"};
 		data=new String[][]{{"",""}};
 		initDeliverMainUi();
-	}
+	}*/
 
 	private void initDeliverMainUi() {
-		/*bc.changePanel(this);
-		bc.change();*/
+		bc.changePanel(this);
+		bc.change();
 		setLayout(null);
 		setSize(490, 550);
 		
@@ -140,13 +139,13 @@ public class PositionArriveUi extends JPanel{
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
-				/*List<String> bars=deliverBl.getBarIdList(JTtranferId.getText());*/
-				ArrayList<String> bars=new ArrayList<String>();
-				bars.add("12345");
-				bars.add("12345");
-				bars.add("12345");
+				List<String> bars=deliverBl.getBarIdList(JTtranferId.getText());
+//				ArrayList<String> bars=new ArrayList<String>();
+//				bars.add("12345");
+//				bars.add("12345");
+//				bars.add("12345");
 				System.out.println("here");
-				if(true)/*bars!=null)*/
+				if(bars!=null)
 				{	n=bars.size();
 					data=new String[bars.size()][2];
 					for(int i=0;i<n;i++)
@@ -242,7 +241,7 @@ public class PositionArriveUi extends JPanel{
 		g.drawImage(img01, 0, 0, 490, 550, null);
 
 	}
-	public static void main(String[] args)
+/*	public static void main(String[] args)
 	{
 		JFrame frame=new JFrame();
 		frame.setSize(490, 550);
@@ -251,6 +250,6 @@ public class PositionArriveUi extends JPanel{
 		frame.add(new PositionArriveUi());
 		frame.setVisible(true);
 		frame.show();
-	}
+	}*/
 
 }
