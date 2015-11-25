@@ -157,7 +157,11 @@ public class Car {
 		return true;
 	}
 
-	private boolean isId(String id) {
+	/**
+	 * 验证车辆id
+	 * 中转单要用到
+	 */
+	public boolean isId(String id) {
 		if(!id.contains("B"))
 			return false;
 		String strs[]=id.split("B");
@@ -165,7 +169,7 @@ public class Car {
 			return false;
 		if(!ValidHelper.isNumber(strs[0]))
 			return false;
-		if(strs[0].length()!=3&&strs[0].length()!=4)
+		if(strs[0].length()!=6&&strs[0].length()!=7)
 			return false;
 		if(!ValidHelper.isNumber(strs[1]))
 			return false;

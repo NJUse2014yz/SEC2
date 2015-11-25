@@ -53,8 +53,9 @@ public class DeliverController implements DeliverBlService{
 
 	@Override
 	public ResultMessage positionLoadingReceipt(OfficeLoadSheetVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		PositionLoadingReceipt receipt=new PositionLoadingReceipt();
+		ResultMessage message=receipt.make(vo);
+		return message;
 	}
 
 	@Override
@@ -89,6 +90,9 @@ public class DeliverController implements DeliverBlService{
 	}
 
 	@Override
+	/**
+	 * 获得快递员收款记录
+	 */
 	public List<CollectionRecordVO> getCollectionRecords() {
 		CollectionRecord record=new CollectionRecord();
 		List<CollectionRecordVO> records=record.getRecords();

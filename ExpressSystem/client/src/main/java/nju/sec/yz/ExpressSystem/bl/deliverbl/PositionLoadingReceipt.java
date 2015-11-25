@@ -3,6 +3,7 @@ package nju.sec.yz.ExpressSystem.bl.deliverbl;
 import java.util.ArrayList;
 import java.util.List;
 
+import nju.sec.yz.ExpressSystem.bl.carAndDriverbl.Car;
 import nju.sec.yz.ExpressSystem.bl.managerbl.CityConst;
 import nju.sec.yz.ExpressSystem.bl.managerbl.Price;
 import nju.sec.yz.ExpressSystem.bl.managerbl.PriceService;
@@ -17,6 +18,7 @@ import nju.sec.yz.ExpressSystem.common.LoadInformation;
 import nju.sec.yz.ExpressSystem.common.ReceiptType;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.po.BarIdsPO;
 import nju.sec.yz.ExpressSystem.po.OfficeLoadSheetPO;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.vo.OfficeLoadSheetVO;
@@ -49,7 +51,7 @@ public class PositionLoadingReceipt implements ReceiptService{
 		double fare=this.cost(barIDs.size());
 		info.setFare(fare);
 		
-		//创建po
+		//创建po提交给receiptlist
 		OfficeLoadSheetPO po=new OfficeLoadSheetPO();
 		LoadInformation information=this.copyInfo(info);
 		po.setOfficeLoadInformation(information);
@@ -65,6 +67,13 @@ public class PositionLoadingReceipt implements ReceiptService{
 		
 		ReceiptSaveService receiptList=new ReceiptList();
 		ResultMessage message=receiptList.saveReceipt(po);
+		
+		//保存条形码号供到达单使用
+		BarIdList barIds=new BarIdList();
+		ArrayList<String> ids2=new ArrayList<>();
+		ids.addAll(barIDs);
+		BarIdsPO list=new BarIdsPO(ids2, receiptID);
+		barIds.addBarIds(list);
 		
 		return message;
 	}
@@ -150,6 +159,9 @@ public class PositionLoadingReceipt implements ReceiptService{
 		LoadInformation info=receipt.getOfficeLoadInformation();
 		if(!ValidHelper.isValidDate(info.getTime()))
 			validResult.setMessage("看看时间是不是输错了~");
+		Car car=new Car();
+		if(!car.isId(info.getCarId()))
+			validResult.setMessage("看看车辆ID输对了没哦");
 		
 		return validResult;
 	}

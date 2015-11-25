@@ -12,16 +12,16 @@ public class CarBlStub implements CarBlService{
 	@Override
 	public ArrayList<CarVO> getAll() {
 		// TODO 自动生成的方法存根
-		CarVO cvo=new CarVO("025000A000","苏A 43295",3);
+		
 		ArrayList<CarVO> list=new ArrayList<CarVO>();
-		list.add(cvo);
+		
 		return list;
 	}
 
 	@Override
 	public CarVO getSingle(String id) {
 		// TODO 自动生成的方法存根
-		return new CarVO("025000A000","苏A 43295",3);
+		return null;
 	}
 
 	@Override

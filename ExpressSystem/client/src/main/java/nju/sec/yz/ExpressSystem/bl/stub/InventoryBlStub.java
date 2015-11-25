@@ -14,11 +14,6 @@ public class InventoryBlStub implements InventoryBlService {
 	}
 
 	@Override
-	public InventoryVO observeStock(String begin, String end) {
-		return new InventoryVO();
-	}
-
-	@Override
 	public InventoryVO checkStock() {
 		// TODO 自动生成的方法存根
 		return new InventoryVO();
@@ -38,6 +33,14 @@ public class InventoryBlStub implements InventoryBlService {
 
 	@Override
 	public ResultMessage setAlertRate(double rate) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public InventoryVO observeStock(String transit, String begin, String end) {
 		// TODO Auto-generated method stub
 		return null;
 	}

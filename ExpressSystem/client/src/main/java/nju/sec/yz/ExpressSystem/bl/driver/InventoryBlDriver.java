@@ -19,10 +19,10 @@ public class InventoryBlDriver {
 		InventoryVO ivo1 = inventoryBlService.checkStock();
 		System.out.println(ivo1.getInventoryInInformation() + "[没有信息吗]" + ivo1.getInventoryOutInformation());
 		// 3库存查看
-		InventoryVO ivo2 = inventoryBlService.observeStock("20151001", "20151020");
-		System.out.println(ivo2.getInventoryInInformation() + "[没有信息吗]" + ivo2.getInventoryOutInformation());
+		
+		
 		// 4入库
-		ResultMessage message1 = inventoryBlService.in(new InventoryInSheetVO());
+	
 
 		System.out.println("不好意思，操作失败哟");
 		// 5出库

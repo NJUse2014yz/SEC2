@@ -102,7 +102,6 @@ public class DeliverReceipt implements ReceiptService{
 
 	/**
 	 * 生成寄件单id
-	 * @param deliverID
 	 */
 	private String createID() {
 		String deliverID=this.getDeliverID();
@@ -332,6 +331,7 @@ public class DeliverReceipt implements ReceiptService{
 	private double calculataDistance(String from, String to){
 		CityDistanceService cities=new CityConst();
 		double distance=cities.getDistance(from, to);
+		System.out.println("distance="+distance);
 		return distance;
 	}
 
