@@ -41,6 +41,7 @@ public class PositionSendReceipt implements ReceiptService{
 		DeliveryInformation imInformation=this.copyInfo(info);
 		po.setDeliveryInformation(imInformation);
 		po.setId(this.createId());
+		po.setMakePerson(getDeliverId());
 		po.setMakeTime(TimeTool.getDate());
 		po.setType(ReceiptType.POSITION_SEND_RECEIPT);
 		

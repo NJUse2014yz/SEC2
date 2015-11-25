@@ -85,7 +85,9 @@ public class DeliverReceipt implements ReceiptService{
 		receipt.setSendInformation(info);
 
 		ReceiptSaveService receiptList=new ReceiptList();
-		receiptList.saveReceipt(receipt);
+		ResultMessage saveResult=receiptList.saveReceipt(receipt);
+		if(saveResult.getResult()==Result.FAIL)
+			return saveResult;
 		
 		//保存收款记录(暂定审批前保存)
 		String deliverId=receipt.getMakePerson();
