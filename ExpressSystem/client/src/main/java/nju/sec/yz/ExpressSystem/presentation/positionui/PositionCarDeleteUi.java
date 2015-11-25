@@ -86,11 +86,9 @@ public class PositionCarDeleteUi extends JPanel{
 		setLayout(null);
 		setSize(490, 550);
 		
-//		data=new String[][]{};
 		table=new JTable(data, name);
 		table.setRowHeight(20);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-//		table.set
 		scroll=new JScrollPane(table);
 		scroll.setBounds(scroll_x,scroll_y,scroll_w,scroll_h);
 		add(scroll);

@@ -85,7 +85,6 @@ public class PositionCarModifyUi extends JPanel{
 				mainControler.mainFrame.nextPanel(new PositionCarModifyFillUi(mainControler,bc,data[table.getSelectedRow()][0]));
 			}
 		});
-//		table.set
 		scroll=new JScrollPane(table);
 		scroll.setBounds(scroll_x,scroll_y,scroll_w,scroll_h);
 		add(scroll);

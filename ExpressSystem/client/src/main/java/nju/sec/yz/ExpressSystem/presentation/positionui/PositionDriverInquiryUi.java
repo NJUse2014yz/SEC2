@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,8 +18,10 @@ import javax.swing.JTextField;
 
 import nju.sec.yz.ExpressSystem.bl.carAndDriverbl.DriverController;
 import nju.sec.yz.ExpressSystem.blservice.carAndDriverBlService.DriverBlService;
+import nju.sec.yz.ExpressSystem.common.Sex;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.PositionControler;
+import nju.sec.yz.ExpressSystem.vo.DriverVO;
 
 public class PositionDriverInquiryUi extends JPanel{
 	private ClientControler mainControler;
@@ -29,9 +32,12 @@ public class PositionDriverInquiryUi extends JPanel{
 	private JTextField search;
 	private JButton searchButton;
 	private JLabel warning;
-	private JTable tabel;
+	private JTable table;
 	private JButton back;
 	private JScrollPane scroll;
+	private String[][] data={{"12345","张三","男","19680403","123456789","123456","芜湖营业厅","20250908"},{"12345","张三","男","19680403","123456789","123456","芜湖营业厅","20250908"}};
+	private String[] name={"司机编号","姓名","性别","出生日期","身份证号","手机","车辆单位","行驶证期限"};
+	private ArrayList<DriverVO> drivers;
 	
 	private static final int search_x=226;
 	private static final int search_y=66;
@@ -50,6 +56,10 @@ public class PositionDriverInquiryUi extends JPanel{
 	private static final int warning_y=490;
 	private static final int warning_w=275;
 	private static final int warning_h=30;
+	private static final int scroll_x=148;
+	private static final int scroll_y=100;
+	private static final int scroll_w=319;
+	private static final int scroll_h=208;
 	
 	private ImageIcon searchIcon=new ImageIcon("graphic/position/button/search_button.png");
 	private ImageIcon backIcon=new ImageIcon("graphic/position/button/button_back.png");
@@ -60,6 +70,7 @@ public class PositionDriverInquiryUi extends JPanel{
 		controler=mainControler.positionControler;
 		this.bc=bc;
 		driverBl=new DriverController();
+		drivers=driverBl.getAll();
 		initDeliverMainUi();
 	}
 
@@ -68,13 +79,34 @@ public class PositionDriverInquiryUi extends JPanel{
 		bc.changePanel(this);
 		bc.change();
 		setLayout(null);
+		setSize(490, 550);
+		
+		table=new JTable(data,name);
+		table.setRowHeight(20);
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		scroll=new JScrollPane(table);
+		scroll.setBounds(scroll_x,scroll_y,scroll_w,scroll_h);
+		add(scroll);
 		
 		searchButton=new JButton(searchIcon);
 		searchButton.setBounds(search_button_x,search_button_y,search_button_w,search_button_h);
 		searchButton.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
 			{
-				
+				if(driverBl.getSingle(search.getText())!=null){
+					DriverVO drivervo=driverBl.getSingle(search.getText());
+					String SeX="";
+					if(drivervo.getSex().equals(Sex.MALE))
+						SeX="男";
+					else
+						SeX="女";
+					data=new String[][]{{drivervo.getId(),drivervo.getName(),SeX,drivervo.getBirthDate(),drivervo.getPersonID(),drivervo.getPhoneNumber(),drivervo.getAgency(),drivervo.getLicenseDeadLine()}};
+					repaint();
+				}
+				else{
+					warning.setText("编号输入有误，请重新输入");
+					warning.setVisible(true);
+				}
 			}
 		});
 		add(searchButton);
@@ -88,7 +120,27 @@ public class PositionDriverInquiryUi extends JPanel{
 		back.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
 			{
-				
+				data=new String[drivers.size()][6];
+				for(int i=0;i<drivers.size();i++)
+				{
+					data[i][0]=drivers.get(i).getId();
+					data[i][1]=drivers.get(i).getName();
+					String SeX="";
+					if(drivers.get(i).getSex().equals(Sex.MALE))
+						SeX="男";
+					else
+						SeX="女";
+					data[i][2]=SeX;
+					data[i][3]=drivers.get(i).getBirthDate();
+					data[i][4]=drivers.get(i).getPersonID();
+					data[i][5]=drivers.get(i).getPhoneNumber();
+					data[i][6]=drivers.get(i).getAgency();
+					data[i][7]=drivers.get(i).getLicenseDeadLine();
+				}
+//				table=new JTable(data,name);
+				search.setText("");
+				warning.setVisible(false);
+				repaint();
 			}
 		});
 		add(back);
@@ -98,10 +150,7 @@ public class PositionDriverInquiryUi extends JPanel{
 		warning.setFont(new Font("Dialog", 1, 15));
 		warning.setForeground(Color.red);
 		add(warning);
-		warning.setVisible(false);
-
-		setSize(490, 550);
-		
+		warning.setVisible(false);		
 		
 		
 		setVisible(true);
