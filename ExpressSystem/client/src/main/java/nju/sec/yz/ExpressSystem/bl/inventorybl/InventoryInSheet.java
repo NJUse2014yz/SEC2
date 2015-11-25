@@ -107,7 +107,7 @@ public class InventoryInSheet implements ReceiptService {
 				ii.getShelf(), ii.getPositon()),inSheet.getBarId());
 		
 		inPO.setId(inSheet.getId());
-		inPO.setType(ReceiptType.DELIVER_RECEIPT);
+		inPO.setType(ReceiptType.INVENTORY_IN);
 		inPO.setMakePerson(inSheet.getMakePerson());
 		inPO.setMakeTime(inSheet.getMakeTime());
 		return inPO;
