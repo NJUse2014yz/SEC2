@@ -40,6 +40,10 @@ public class ArriveInformation implements Serializable{
 	public void setState(ArrayList<ArriveState> state) {
 		this.state = state;
 	}
+	public void addState(ArriveState state)
+	{
+		this.state.add(state);
+	}
 	
 	
 } 

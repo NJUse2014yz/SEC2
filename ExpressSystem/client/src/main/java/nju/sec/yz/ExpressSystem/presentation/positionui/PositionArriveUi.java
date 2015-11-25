@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -11,14 +13,17 @@ import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
 import nju.sec.yz.ExpressSystem.bl.deliverbl.DeliverController;
@@ -54,7 +59,8 @@ public class PositionArriveUi extends JPanel{
 	private PositionControler controler;
 	private ButtonComponents bc;
 	private String[] name={"条形码号","货物到达状态"};
-	private String[][] data;
+	private Object[][] data;
+	private int n=0;
 	
 	private JComboBox JCdeparture;
 	private JTextField JTtranferId;
@@ -107,10 +113,16 @@ public class PositionArriveUi extends JPanel{
 		}
 		initDeliverMainUi();
 	}
+	public PositionArriveUi()
+	{
+		city=new String[]{"南京","北京","上海"};
+		data=new String[][]{{"",""}};
+		initDeliverMainUi();
+	}
 
 	private void initDeliverMainUi() {
-		bc.changePanel(this);
-		bc.change();
+		/*bc.changePanel(this);
+		bc.change();*/
 		setLayout(null);
 		setSize(490, 550);
 		
@@ -120,31 +132,35 @@ public class PositionArriveUi extends JPanel{
 		
 		JTtranferId=new JTextField();
 		JTtranferId.setBounds(tranferId_x,tranferId_y,tranferId_w,h);
-		add(JTtranferId);
-		
-		date=new DateChooser(this,date_x,date_y);
-		
-		table=new JTable(data,name);
-		table.setRowHeight(20);
-//		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		
-		scroll=new JScrollPane(table);
-		scroll.setBounds(scroll_x,scroll_y,scroll_w,scroll_h);
-		scroll.addMouseListener(new MouseAdapter(){
-			public void mouseClicked(MouseEvent e) {
-				List<String> bars=deliverBl.getBarIdList(JTtranferId.getText());
+		JTtranferId.addFocusListener(new FocusListener(){
+			@Override
+			public void focusGained(FocusEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				/*List<String> bars=deliverBl.getBarIdList(JTtranferId.getText());*/
+				ArrayList<String> bars=new ArrayList<String>();
+				bars.add("12345");
+				bars.add("12345");
+				bars.add("12345");
 				System.out.println("here");
-				if(true)//bars!=null)
-				{
-//					data=new String[bars.size()][];
-//					for(int i=0;i<bars.size();i++)
-//					{
-//						data[i][0]=bars.get(i);
-//						data[i][1]="";
-//					}
-					data=new String[][]{{"1",""},{"2",""},{"3",""}};
+				if(true)/*bars!=null)*/
+				{	n=bars.size();
+					data=new String[bars.size()][2];
+					for(int i=0;i<n;i++)
+					{
+						data[i][0]=bars.get(i);
+						data[i][1]="";
+					}
 					table=new JTable(data,name);
-					table.getColumnModel().getColumn(1).setCellRenderer((TableCellRenderer) new JComboBox(new String[]{"完整","丢失","损坏"}));
+					table.getColumnModel().getColumn(1).setCellEditor(new DefaultCellEditor(new JComboBox(new String[]{"完整","丢失","损坏"})));
+					table.setRowHeight(20);
+					scroll=new JScrollPane(table);
+					scroll.setBounds(scroll_x,scroll_y,scroll_w,scroll_h);
+					add(scroll);
+//					table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 					repaint();
 				}
 				else{
@@ -154,11 +170,9 @@ public class PositionArriveUi extends JPanel{
 				}
 			}
 		});
-		add(scroll);
+		add(JTtranferId);
 		
-//		state=new JComboBox(new String[]{"完整","丢失","损坏"});
-//		state.setBounds(state_x, state_y, state_w, h);
-//		add(state);
+		date=new DateChooser(this,date_x,date_y);
 		
 		warning=new JLabel();
 		warning.setBounds(warning_x, warning_y, warning_w, warning_h);
@@ -176,20 +190,17 @@ public class PositionArriveUi extends JPanel{
 				 
 				OfficeArriveSheetVO sheet=new OfficeArriveSheetVO();
 				ArriveInformation ai=new ArriveInformation();
-//				switch((String)state.getSelectedItem())
-//				{
-//				case "损坏":
-//					arriveState=ArriveState.Broken;
-//					break;
-//				case "丢失":
-//					arriveState=ArriveState.LOST;
-//					break;
-//				case "完整":
-//					arriveState=ArriveState.PERFECT;
-//					break;
-//				}
+				for(int i=0;i<n;i++)
+				{
+					if(table.getCellEditor(i, 1).getCellEditorValue().equals("完整"))
+						arriveState=ArriveState.PERFECT;
+					else if(table.getCellEditor(i, 1).getCellEditorValue().equals("损坏"))
+						arriveState=ArriveState.Broken;
+					else if(table.getCellEditor(i, 1).getCellEditorValue().equals("丢失"))
+						arriveState=ArriveState.LOST;
+					ai.addState(arriveState);
+				}
 				ai.setDeparture((String)JCdeparture.getSelectedItem());
-//				ai.setState(arriveState);
 				ai.setTime(date.getTime());
 				ai.setTransitSheetId(JTtranferId.getText());
 				sheet.setOfficeArrive(ai);
@@ -230,6 +241,16 @@ public class PositionArriveUi extends JPanel{
 
 		g.drawImage(img01, 0, 0, 490, 550, null);
 
+	}
+	public static void main(String[] args)
+	{
+		JFrame frame=new JFrame();
+		frame.setSize(490, 550);
+		frame.setLocation(300, 300);
+		frame.setLayout(null);
+		frame.add(new PositionArriveUi());
+		frame.setVisible(true);
+		frame.show();
 	}
 
 }
