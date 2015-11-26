@@ -112,6 +112,12 @@ public class CityConst implements CityDistanceService {
 
 	@Override
 	public double getDistance(String beginPlace, String endPlace) {
+		//假设相同城市各营业厅与中转中心距离为30km
+		if(beginPlace.equals(endPlace))
+			return DISTANCE_OF_POSITION;
+		
+		if(beginPlace==null||endPlace==null)
+			return 0;
 		CityVO vo=this.observeCity(beginPlace, endPlace);
 		
 		double distanse=vo.getCityInformation().getDistance();

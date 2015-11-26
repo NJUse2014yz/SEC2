@@ -66,8 +66,9 @@ public class DeliverController implements DeliverBlService{
 
 	@Override
 	public ResultMessage positionSendReceipt(DeliverySheetVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		PositionSendReceipt send=new PositionSendReceipt();
+		ResultMessage message=send.make(vo);
+		return message;
 	}
 
 	@Override

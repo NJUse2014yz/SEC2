@@ -126,7 +126,7 @@ public class InventoryInSheet implements ReceiptService {
 			message.setMessage("入库日期不符合规范啊");
 		if(!ValidHelper.isBarId(id))
 			message.setMessage("订单条形码不对啊");
-		if(!ValidHelper.isValidInt(block))
+		if(!ValidHelper.isBlock(block))
 			message.setMessage("区号不对哟");
 		if(!ValidHelper.isValidInt(row))
 			message.setMessage("行号不对哟");
