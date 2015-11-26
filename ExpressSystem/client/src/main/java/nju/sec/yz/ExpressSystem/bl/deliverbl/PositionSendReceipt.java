@@ -25,8 +25,6 @@ import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 public class PositionSendReceipt implements ReceiptService{
 	@Override
 	public ResultMessage make(ReceiptVO vo) {
-		//TODO 派送员id
-		
 		
 		DeliverySheetVO receipt=(DeliverySheetVO)vo;
 		DeliveryInformation info=receipt.getDeliveryInformation();
@@ -37,7 +35,6 @@ public class PositionSendReceipt implements ReceiptService{
 			return validResult;
 		
 		//创建po
-		info.setOutDeliverId(getDeliverId());
 		DeliverySheetPO po=new DeliverySheetPO();
 		DeliveryInformation imInformation=this.copyInfo(info);
 		po.setDeliveryInformation(imInformation);
@@ -65,7 +62,7 @@ public class PositionSendReceipt implements ReceiptService{
 	}
 	
 	/**
-	 * 获得快递员id
+	 * 获得业务员id
 	 * @return
 	 */
 	private String getDeliverId(){
