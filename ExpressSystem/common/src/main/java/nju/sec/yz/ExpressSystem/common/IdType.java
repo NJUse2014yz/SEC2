@@ -40,8 +40,12 @@ public enum IdType {
 		
 	},POSITION_TRANSPORT("",5){
 		//营业厅汽运编号
-	},TRANSIT_TRANSPORT("",7){
+	},TRANSIT_CAR_TRANSPORT("",7){
 		//中转中心汽运编号
+	},TRANSIT_TRAIN_TRANSPORT("",7){
+		//中转中心货运编号
+	},TRANSIT_FLIGHT_TRANSPORT("",7){
+		//中转中心航运编号
 	};
 	
 	private IdType(String idStr,int length){

@@ -3,12 +3,17 @@ package nju.sec.yz.ExpressSystem.common;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+
 /**
  * 
  * @author YU Fan
  *
  */
 public class TransitInformation  implements Serializable{
+	public TransitInformation() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	protected TransitInformation(String time, String departure, String destination, String transiterId,
 			ArrayList<String> barIds) {
 		super();
@@ -24,6 +29,15 @@ public class TransitInformation  implements Serializable{
 	protected String transiterId;//押运员
 	protected ArrayList<String> barIds;//
 	protected double fare;//运费
+	
+	
+	public void copyInfo(TransitInformation info){
+		this.time=info.getTime();
+		this.departure=info.getDeparture();
+		this.barIds=info.getBarIds();
+		this.destination=info.getDestination();
+		this.transiterId=info.getTransiterId();
+	}
 	
 	public String getTime() {
 		return time;

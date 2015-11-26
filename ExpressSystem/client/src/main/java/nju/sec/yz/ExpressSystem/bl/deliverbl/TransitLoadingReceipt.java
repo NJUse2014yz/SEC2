@@ -120,7 +120,7 @@ public class TransitLoadingReceipt implements ReceiptService {
 	 */
 	private String getTransportId(String transitId) {
 		ReceiptID id = new ReceiptID();
-		String transportID = id.getID(transitId, IdType.TRANSIT_TRANSPORT);
+		String transportID = id.getID(transitId, IdType.TRANSIT_CAR_TRANSPORT);
 		return transportID;
 	}
 

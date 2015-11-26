@@ -4,9 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * 
  * @author YU Fan
- *
  */
 public class TransitFlightInformation extends TransitInformation implements Serializable{
 	
@@ -14,10 +12,20 @@ public class TransitFlightInformation extends TransitInformation implements Seri
 	private String flightId;
 	private String shelfId;
 	
+	public TransitFlightInformation() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	public TransitFlightInformation(String time, String departure, String destination, String transiterId,
 			ArrayList<String> barIds) {
 		super(time, departure, destination, transiterId, barIds);
+	}
+	
+	public void copyInfo(TransitFlightInformation info){
+		super.copyInfo(info);
+		this.flightId=info.getFlightId();
+		this.flightTransitId=info.getTransiterId();
+		this.shelfId=info.getShelfId();
 	}
 	
 	public String getFlightTransitId() {
