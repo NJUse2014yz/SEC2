@@ -35,15 +35,9 @@ public class ClientControler{
 	
 	JPanel userMainPanel=new UserUiTest(this);
 	JPanel deliverMainPanel=new DeliverMainUi(this);
-<<<<<<< HEAD
 	JPanel inventoryMainPanel=new InventoryMainUiTest(this);
 	JPanel accountMainPanel=new AccountMainUi(this,accountControler.bc);
 	JPanel managerMainPanel=new ManagerMainUiTest(this);
-=======
-	JPanel inventoryMainPanel=new InventoryMainUi(this);
-	JPanel accountMainPanel=new AccountMainUiTest(this);
-	JPanel managerMainPanel=new ManagerMainUi(this);
->>>>>>> 7f5e88438af44d7f5c518b119c09b3ce140beefe
 	JPanel positionMainPanel=new PositionMainUi(this,positionControler.bc);
 	JPanel transitMainPanel=new TransitMainUi(this,transitControler.tbc);
 	JPanel adminstraterMainPanel=new AdminstraterMainUiTest(this);
