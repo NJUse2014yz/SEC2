@@ -1,5 +1,6 @@
 package nju.sec.yz.ExpressSystem.bl.inventorybl;
 
+import nju.sec.yz.ExpressSystem.bl.deliverbl.ValidHelper;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptID;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
@@ -105,8 +106,23 @@ public class InventoryOutSheet implements ReceiptService{
 
 	@Override
 	public ResultMessage isValid(ReceiptVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		InventoryOutSheetVO ovo=(InventoryOutSheetVO)vo;
+		InventoryOutInformation information=ovo.getInventoryOutInformation();
+		
+		String id=ovo.getBarId();
+		String time=information.getTime();
+		//destination和transportType 不用判断
+		String transitId=information.getTransitId();
+		
+		ResultMessage message=new ResultMessage(Result.FAIL);
+		
+		if(!ValidHelper.isBarId(id))
+			message.setMessage("订单条形码号不对哦");
+		if(!ValidHelper.isBeforeDate(time))
+			message.setMessage("出库时间不对哦");
+		if(!ValidHelper.isTransitID(transitId))
+			message.setMessage("中转中心编号不对哦");
+		return message;
 	}
 	
 }

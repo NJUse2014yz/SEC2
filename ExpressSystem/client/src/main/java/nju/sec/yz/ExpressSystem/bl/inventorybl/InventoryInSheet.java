@@ -1,5 +1,8 @@
 package nju.sec.yz.ExpressSystem.bl.inventorybl;
 
+import javax.management.InstanceNotFoundException;
+
+import nju.sec.yz.ExpressSystem.bl.deliverbl.ValidHelper;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptID;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
@@ -73,15 +76,6 @@ public class InventoryInSheet implements ReceiptService {
 		String id=user.getCurrentID();
 		return id;
 	}
-	
-	private ResultMessage isValid(InventoryInInformation ii){
-		//假定柜子刚好99个
-		if(ii.getBlock()==0){
-			return new ResultMessage(Result.FAIL, "hhh");
-			//增加ResultMessage，返回fail的具体原因
-		}
-		return new ResultMessage(Result.SUCCESS);
-	}
 
 	@Override
 	public ReceiptVO show(ReceiptPO po) {
@@ -115,7 +109,31 @@ public class InventoryInSheet implements ReceiptService {
 
 	@Override
 	public ResultMessage isValid(ReceiptVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		InventoryInSheetVO ivo=(InventoryInSheetVO)vo;
+		InventoryInInformation information=ivo.getInventoryInInformation();
+		
+		String time=information.getTime();
+		//String destination=information.getDestination();不判断
+		int block=information.getBlock();
+		int row=information.getRow();
+		int shelf=information.getShelf();
+		int positon=information.getPositon();
+		String id=ivo.getBarId();
+		
+		ResultMessage message=new ResultMessage(Result.FAIL);
+		
+		if(!ValidHelper.isBeforeDate(time))
+			message.setMessage("入库日期不符合规范啊");
+		if(!ValidHelper.isBarId(id))
+			message.setMessage("订单条形码不对啊");
+		if(!ValidHelper.isValidInt(block))
+			message.setMessage("区号不对哟");
+		if(!ValidHelper.isValidInt(row))
+			message.setMessage("行号不对哟");
+		if(!ValidHelper.isValidInt(shelf))
+			message.setMessage("架号不对哟");
+		if(!ValidHelper.isValidInt(positon))
+			message.setMessage("位号不对哟");
+		return message;
 	}
 }
