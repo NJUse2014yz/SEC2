@@ -12,10 +12,12 @@ import nju.sec.yz.ExpressSystem.bl.deliverbl.DeliverReceipt;
 import nju.sec.yz.ExpressSystem.bl.deliverbl.PositionLoadingReceipt;
 import nju.sec.yz.ExpressSystem.bl.deliverbl.PositionReceiveReceipt;
 import nju.sec.yz.ExpressSystem.bl.deliverbl.PositionSendReceipt;
+import nju.sec.yz.ExpressSystem.bl.deliverbl.TransitCarReceipt;
 import nju.sec.yz.ExpressSystem.bl.deliverbl.TransitFlightReceipt;
 import nju.sec.yz.ExpressSystem.bl.deliverbl.TransitLoadingReceipt;
 import nju.sec.yz.ExpressSystem.bl.deliverbl.TransitReceipt;
 import nju.sec.yz.ExpressSystem.bl.deliverbl.TransitReceiveReceipt;
+import nju.sec.yz.ExpressSystem.bl.deliverbl.TransitTrainReceipt;
 import nju.sec.yz.ExpressSystem.bl.inventorybl.InventoryInSheet;
 import nju.sec.yz.ExpressSystem.bl.inventorybl.InventoryOutSheet;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
@@ -52,6 +54,9 @@ public class ReceiptList implements ReceiptSaveService{
 		RECEIPT_MAP.put(ReceiptType.TRANSIT_LOADING_RECEIPT,TransitLoadingReceipt.class);
 		RECEIPT_MAP.put(ReceiptType.TRANSIT_FLIGHT_RECEIPT,TransitFlightReceipt.class);
 		RECEIPT_MAP.put(ReceiptType.TRANSIT_RECEIVE_RECEIPT,TransitReceiveReceipt.class);
+		RECEIPT_MAP.put(ReceiptType.TRANSIT_TRAIN_RECEIPT,TransitTrainReceipt.class);
+		RECEIPT_MAP.put(ReceiptType.TRANSIT_CAR_RECEIPT,TransitCarReceipt.class);
+	
 	}
 	
 	

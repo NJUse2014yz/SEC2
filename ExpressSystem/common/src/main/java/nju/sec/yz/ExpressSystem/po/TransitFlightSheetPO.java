@@ -11,7 +11,7 @@ import nju.sec.yz.ExpressSystem.common.TransitInformation;
 public class TransitFlightSheetPO extends ReceiptPO{
 	private TransitFlightInformation transitFlightInformation;
 
-	public TransitInformation getTransitInformation() {
+	public TransitFlightInformation getTransitInformation() {
 		return transitFlightInformation;
 	}
 	public void setTransitInformation(TransitFlightInformation transitFlightInformation) {

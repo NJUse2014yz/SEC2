@@ -10,14 +10,14 @@ import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
  */
 public interface ReceiptService {
 	/**
-	 * 单据审批之后通过此方法更新信息到相应数据库
-	 */
-	public ResultMessage approve(ReceiptVO vo);
-	
-	/**
 	 * 制定单据
 	 */
 	public ResultMessage make(ReceiptVO vo);
+	
+	/**
+	 * 单据审批之后通过此方法更新信息到相应数据库
+	 */
+	public ResultMessage approve(ReceiptVO vo);
 	
 	/**
 	 * 将VO转换成PO

@@ -21,6 +21,14 @@ public class ReceiptPO implements Serializable {
 	protected String makePerson;
 	
 	
+	public ReceiptPO(String id, ReceiptType type, String makeTime, String makePerson) {
+		super();
+		this.id = id;
+		this.type = type;
+		this.makeTime = makeTime;
+		this.makePerson = makePerson;
+	}
+
 	public ReceiptPO() {
 		// TODO Auto-generated constructor stub
 	}

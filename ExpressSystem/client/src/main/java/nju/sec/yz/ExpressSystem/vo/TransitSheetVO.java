@@ -18,6 +18,12 @@ public class TransitSheetVO extends ReceiptVO{
 	private TransitInformation transitInformation;
 	private TransportType type;//运输方式，汽车火车飞机
 	
+	public TransitSheetVO() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	
 	public TransitInformation getTransitInformation() {
 		return transitInformation;
 	}

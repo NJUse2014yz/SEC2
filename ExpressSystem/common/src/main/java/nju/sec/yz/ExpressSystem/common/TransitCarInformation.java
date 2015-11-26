@@ -14,12 +14,22 @@ public class TransitCarInformation extends TransitInformation implements Seriali
 	private String carId;
 	private String driverId;
 	
-	protected TransitCarInformation(String time, String departure, String destination, String transiterId,
+	public TransitCarInformation(String time, String departure, String destination, String transiterId,
 			ArrayList<String> barIds) {
 		super(time, departure, destination, transiterId, barIds);
 	}
 	
 	
+	
+	public TransitCarInformation(TransitCarInformation info) {
+		super(info);
+		this.carTransitId = info.getCarTransitId();
+		this.carId = info.getCarId();
+		this.driverId = info.getDriverId();
+	}
+
+
+
 	public String getCarTransitId() {
 		return carTransitId;
 	}

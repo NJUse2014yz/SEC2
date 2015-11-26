@@ -14,11 +14,17 @@ public class TransitTrainInformation extends TransitInformation implements Seria
 	private String trainId;
 	private String carriageId;
 	
-	protected TransitTrainInformation(String time, String departure, String destination, String transiterId,
+	public TransitTrainInformation(String time, String departure, String destination, String transiterId,
 			ArrayList<String> barIds) {
 		super(time, departure, destination, transiterId, barIds);
 	}
 	
+	public TransitTrainInformation(TransitTrainInformation info){
+		super(info);
+		this.trainId=info.getTrainId();
+		this.carriageId=info.getCarriageId();
+		this.trainTransitId=info.getTrainTransitId();
+	}
 	
 	public String getTrainTransitId() {
 		return trainTransitId;

@@ -2,7 +2,6 @@ package nju.sec.yz.ExpressSystem.bl.deliverbl;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import nju.sec.yz.ExpressSystem.bl.managerbl.Agency;
 import nju.sec.yz.ExpressSystem.bl.managerbl.AgencyInfo;
 import nju.sec.yz.ExpressSystem.bl.managerbl.CityConst;
