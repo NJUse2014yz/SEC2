@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,6 +16,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.DefaultTableModel;
 
 import nju.sec.yz.ExpressSystem.bl.deliverbl.DeliverController;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptSaveService;
@@ -37,6 +41,7 @@ public class PositionLoadUi extends JPanel{
 	private DeliverBlService deliverBl;
 	private ButtonComponents bc;
 	private DateChooser date;
+	private ArrayList<String> bars;
 
 	private JComboBox JCdestination;
 	private JTextField JTtransportId;
@@ -50,6 +55,9 @@ public class PositionLoadUi extends JPanel{
 	private JTable barIds;
 	private JButton confirm;
 	private JLabel warning;
+	private String[] name={"订单条形码号"};
+	private String[][] data={{""}};
+	private DefaultTableModel model;
 
 	private static final int destination_x=193;
 	private static final int destination_y=63;
@@ -95,6 +103,10 @@ public class PositionLoadUi extends JPanel{
 	private static final int warning_y=490;
 	private static final int warning_w=275;
 	private static final int warning_h=30;
+	private static final int scroll_x=136;
+	private static final int scroll_y=249;
+	private static final int scroll_w=330;
+	private static final int scroll_h=134;
 	
 	
 	ImageIcon confirmIcon=new ImageIcon("graphic/position/button/button_confirm.png");
@@ -107,6 +119,7 @@ public class PositionLoadUi extends JPanel{
 		deliverBl=new DeliverController();
 		//constBl=new 
 		this.bc=bc;
+		bars=new ArrayList<String>();
 		date=new DateChooser(this,207,170);
 		initDeliverMainUi();
 	}
@@ -144,6 +157,25 @@ public class PositionLoadUi extends JPanel{
 		JTsuperviserId.setBounds(superviserId_x,superviserId_y,superviserId_w,superviserId_h);
 		add(JTsuperviserId);
 		
+		model=new DefaultTableModel(data,name);
+		barIds=new JTable(model);
+		model.addTableModelListener(new TableModelListener(){
+			@Override
+			public void tableChanged(TableModelEvent e) {
+				// TODO Auto-generated method stub
+				int num=model.getRowCount();
+				String temp=(String) model.getValueAt(num-1, 0);
+				if(temp!=""){
+					String[] conponent={""};
+					((DefaultTableModel) model).addRow(conponent); 
+				}
+				repaint();
+			}
+		});
+		scroller=new JScrollPane(barIds);
+		scroller.setBounds(scroll_x,scroll_y,scroll_w,scroll_h);
+		add(scroller);
+		
 		warning=new JLabel();
 		warning.setBounds(warning_x, warning_y, warning_w, warning_h);
 		warning.setFont(new Font("Dialog", 1, 15));
@@ -165,6 +197,11 @@ public class PositionLoadUi extends JPanel{
 				li.setOfficerId(JTsuperviserId.getText());
 				li.setDestinationId((String)JCdestination.getSelectedItem());
 				sheet.setOfficeLoadInformation(li);
+				for(int i=0;i<model.getRowCount();i++)
+				{
+					bars.add((String) model.getValueAt(i, 0));
+				}
+				sheet.setBarIds(bars);
 				sheet.setType(ReceiptType.POSITION_LOADING_RECEIPT);
 				
 				if(JTPositionId.getText().equals("")||JTCarId.getText().equals("")||JTdriverId.getText().equals("")||JTPositionId.getText().equals("")||JTsuperviserId.getText().equals("")||JTtransportId.getText().equals(""))

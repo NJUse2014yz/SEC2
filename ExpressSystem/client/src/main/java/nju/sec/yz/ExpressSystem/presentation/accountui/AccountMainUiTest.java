@@ -10,9 +10,9 @@ import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.MainSwitchPanelListener;
 
 public class AccountMainUiTest extends JPanel{
-	ClientControler mainControler;
-	AccountControler controler;
-	JButton test;
+	private ClientControler mainControler;
+	private AccountControler controler;
+	private JButton test;
 	public AccountMainUiTest(ClientControler mainControler)
 	{
 		super();

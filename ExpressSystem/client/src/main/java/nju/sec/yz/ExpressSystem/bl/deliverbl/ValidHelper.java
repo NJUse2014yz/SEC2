@@ -15,8 +15,10 @@ public class ValidHelper {
 		return true;
 	}
 	
+	/**
+	 * 判断当前日期是否为之前日期
+	 */
 	public static boolean isBeforeDate(String date){
-		//判断当前日期是否为之前日期
 		if(!isValidDate(date))
 			return false;
 		int dateToInt=Integer.parseInt(date);
@@ -28,7 +30,10 @@ public class ValidHelper {
 			return false;
 		return true;
 	}
-	
+
+	/**
+	 * 判断当前日期是否为未来日期
+	 */
 	public static boolean isLaterDate(String date){
 		//判断当前日期是否为未来日期
 		if(!isValidDate(date))
@@ -78,7 +83,7 @@ public class ValidHelper {
 	/**
 	 * 是否为合理的数字
 	 */
-	public static boolean isTotal(String str){
+	public static boolean isValidNumber(String str){
 		if(str==null||str.length()==0)
 			return false;
 		if(!isNumber(str))
@@ -87,5 +92,33 @@ public class ValidHelper {
 		if(n<0||n>65536)
 			return false;
 		return true;
+	}
+	
+	/**
+	 * 是否为合理的int大小
+	 */
+	public static boolean isValidInt(int i){
+		if(i>0&&i<65536)
+			return true;
+		return false;
+	}
+	
+	/**
+	 * 是否为中转中心ID
+	 */
+	public static boolean isTransitID(String id){
+		if(!isNumber(id))
+			return false;
+		if(id.length()!=4)
+			return false;
+		return true;
+	}
+	/**
+	 * 判断仓库区号是否正确
+	 */
+	public static boolean isBlock(int block){
+		if(block>0&&block<5)
+			return true;
+		return false;
 	}
 }
