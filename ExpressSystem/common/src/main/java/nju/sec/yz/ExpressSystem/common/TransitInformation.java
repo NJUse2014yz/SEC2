@@ -18,12 +18,12 @@ public class TransitInformation  implements Serializable{
 		this.transiterId = transiterId;
 		this.barIds = barIds;
 	}
-	protected String time;
-	protected String departure;
-	protected String destination;
-	protected String transiterId;
-	protected ArrayList<String> barIds;
-	protected double fare;
+	protected String time;//日期
+	protected String departure;//出发地
+	protected String destination;//到达单
+	protected String transiterId;//押运员
+	protected ArrayList<String> barIds;//
+	protected double fare;//运费
 	
 	public String getTime() {
 		return time;

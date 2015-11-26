@@ -26,7 +26,7 @@ public class PositionSendReceipt implements ReceiptService{
 	@Override
 	public ResultMessage make(ReceiptVO vo) {
 		//TODO 派送员id
-		//TODO barId
+		
 		
 		DeliverySheetVO receipt=(DeliverySheetVO)vo;
 		DeliveryInformation info=receipt.getDeliveryInformation();
@@ -37,6 +37,7 @@ public class PositionSendReceipt implements ReceiptService{
 			return validResult;
 		
 		//创建po
+		info.setOutDeliverId(getDeliverId());
 		DeliverySheetPO po=new DeliverySheetPO();
 		DeliveryInformation imInformation=this.copyInfo(info);
 		po.setDeliveryInformation(imInformation);
