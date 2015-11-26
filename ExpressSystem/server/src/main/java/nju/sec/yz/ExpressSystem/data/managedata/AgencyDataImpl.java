@@ -166,4 +166,22 @@ public class AgencyDataImpl extends UnicastRemoteObject implements AgencyDataSer
         }
 	}
 
+	@Override
+	public TransitPO findByName(String name) throws RemoteException {
+		System.out.println("finding a TransitPO...");
+		if(name==null){
+			System.out.println("name为null！！！");
+			return null;
+		}
+		List<TransitPO> TransitPOs = findAll();
+		for (TransitPO po : TransitPOs) {
+			String name2 = po.getName();
+			if (name.equals(name2))
+				return po;
+		}
+		
+		
+		return null;
+	}
+
 }

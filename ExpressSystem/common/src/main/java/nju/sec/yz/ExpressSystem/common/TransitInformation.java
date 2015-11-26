@@ -10,8 +10,15 @@ import java.util.ArrayList;
  *
  */
 public class TransitInformation  implements Serializable{
+	protected String time;//日期
+	protected String departure;//出发地
+	protected String destination;//到达单
+	protected String transiterId;//押运员
+	protected ArrayList<String> barIds;//
+	protected double fare;//运费
+	
 	public TransitInformation() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	protected TransitInformation(String time, String departure, String destination, String transiterId,
@@ -23,15 +30,9 @@ public class TransitInformation  implements Serializable{
 		this.transiterId = transiterId;
 		this.barIds = barIds;
 	}
-	protected String time;//日期
-	protected String departure;//出发地
-	protected String destination;//到达单
-	protected String transiterId;//押运员
-	protected ArrayList<String> barIds;//
-	protected double fare;//运费
 	
 	
-	public void copyInfo(TransitInformation info){
+	public TransitInformation(TransitInformation info){
 		this.time=info.getTime();
 		this.departure=info.getDeparture();
 		this.barIds=info.getBarIds();

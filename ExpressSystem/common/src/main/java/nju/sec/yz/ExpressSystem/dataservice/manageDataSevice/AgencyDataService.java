@@ -16,6 +16,7 @@ import nju.sec.yz.ExpressSystem.po.TransitPO;
 public interface AgencyDataService extends Remote{
 	public ResultMessage insert(TransitPO agpo) throws RemoteException;
 	public TransitPO find(String id) throws RemoteException;
+	public TransitPO findByName(String name) throws RemoteException;
 	public ResultMessage delete(String id) throws RemoteException;
 	public ResultMessage update(TransitPO agpo) throws RemoteException;
 	public ResultMessage init() throws RemoteException;

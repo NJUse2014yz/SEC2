@@ -53,4 +53,10 @@ public class AgencyDataStub implements AgencyDataService{
 		return array;
 	}
 
+	@Override
+	public TransitPO findByName(String name) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

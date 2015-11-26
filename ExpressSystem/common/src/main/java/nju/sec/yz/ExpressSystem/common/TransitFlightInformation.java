@@ -21,8 +21,8 @@ public class TransitFlightInformation extends TransitInformation implements Seri
 		super(time, departure, destination, transiterId, barIds);
 	}
 	
-	public void copyInfo(TransitFlightInformation info){
-		super.copyInfo(info);
+	public TransitFlightInformation(TransitFlightInformation info){
+		super(info);
 		this.flightId=info.getFlightId();
 		this.flightTransitId=info.getTransiterId();
 		this.shelfId=info.getShelfId();

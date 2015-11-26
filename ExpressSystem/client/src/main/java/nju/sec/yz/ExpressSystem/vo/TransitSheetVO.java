@@ -16,8 +16,6 @@ import nju.sec.yz.ExpressSystem.common.TransportType;
 
 public class TransitSheetVO extends ReceiptVO{
 	private TransitInformation transitInformation;
-	private ArrayList<String> barIds;
-	private double fare;
 	private TransportType type;//运输方式，汽车火车飞机
 	
 	public TransitInformation getTransitInformation() {
@@ -25,18 +23,6 @@ public class TransitSheetVO extends ReceiptVO{
 	}
 	public void setTransitInformation(TransitInformation transitInformation) {
 		this.transitInformation = transitInformation;
-	}
-	public ArrayList<String> getBarIds() {
-		return barIds;
-	}
-	public void setBarIds(ArrayList<String> barIds) {
-		this.barIds = barIds;
-	}
-	public double getFare() {
-		return fare;
-	}
-	public void setFare(double fare) {
-		this.fare = fare;
 	}
 	public TransportType getTransportType() {
 		return type;

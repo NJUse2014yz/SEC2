@@ -80,7 +80,7 @@ public class PositionLoadingReceipt implements ReceiptService{
 		BarIdsPO list=new BarIdsPO(ids2, receiptID);
 		barIds.addBarIds(list);
 		
-		return new ResultMessage(Result.SUCCESS,fare+"");
+		return new ResultMessage(Result.SUCCESS,fare+" "+transportID);
 	}
 	
 	
