@@ -15,7 +15,7 @@ import nju.sec.yz.ExpressSystem.bl.deliverbl.PositionSendReceipt;
 import nju.sec.yz.ExpressSystem.bl.deliverbl.TransitCarReceipt;
 import nju.sec.yz.ExpressSystem.bl.deliverbl.TransitFlightReceipt;
 import nju.sec.yz.ExpressSystem.bl.deliverbl.TransitLoadingReceipt;
-import nju.sec.yz.ExpressSystem.bl.deliverbl.TransitReceipt;
+import nju.sec.yz.ExpressSystem.bl.deliverbl.TransitReceiptHelper;
 import nju.sec.yz.ExpressSystem.bl.deliverbl.TransitReceiveReceipt;
 import nju.sec.yz.ExpressSystem.bl.deliverbl.TransitTrainReceipt;
 import nju.sec.yz.ExpressSystem.bl.inventorybl.InventoryInSheet;

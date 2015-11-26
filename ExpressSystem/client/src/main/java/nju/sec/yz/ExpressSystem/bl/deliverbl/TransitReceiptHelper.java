@@ -22,7 +22,7 @@ import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
  * @author 周聪
  *
  */
-public class TransitReceipt {
+public class TransitReceiptHelper {
 
 	/**
 	 * 保存条形码号供到达单使用

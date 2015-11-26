@@ -60,8 +60,9 @@ public class DeliverController implements DeliverBlService{
 
 	@Override
 	public ResultMessage positionReceiveReceipt(OfficeArriveSheetVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		PositionReceiveReceipt receipt=new PositionReceiveReceipt();
+		ResultMessage message=receipt.make(vo);
+		return message;
 	}
 
 	@Override
@@ -73,22 +74,19 @@ public class DeliverController implements DeliverBlService{
 
 	@Override
 	public ResultMessage transitReceiveReceipt(TransitArriveSheetVO vo) {
-		// TODO Auto-generated method stub
+		//TODO 和营业厅到达单重复
 		return null;
 	}
 
 	@Override
 	public ResultMessage transitLoadingReceipt(TransitLoadSheetVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		TransitLoadingReceipt receipt=new TransitLoadingReceipt();
+		ResultMessage message=receipt.make(vo);
+		return message;
 	}
 
 
-	@Override
-	public ResultMessage transitReceipt(TransitSheetVO vo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	@Override
 	/**
@@ -108,6 +106,27 @@ public class DeliverController implements DeliverBlService{
 		BarIdList list=new BarIdList();
 		List<String> barIds=list.getBarIds(transitSheetId);
 		return barIds;
+	}
+
+	@Override
+	public ResultMessage transitFlightReceipt(TransitSheetVO vo) {
+		TransitFlightReceipt receipt=new TransitFlightReceipt();
+		ResultMessage message=receipt.make(vo);
+		return message;
+	}
+
+	@Override
+	public ResultMessage transitTrainReceipt(TransitSheetVO vo) {
+		TransitTrainReceipt receipt=new TransitTrainReceipt();
+		ResultMessage message=receipt.make(vo);
+		return message;
+	}
+
+	@Override
+	public ResultMessage transitCarReceipt(TransitSheetVO vo) {
+		TransitCarReceipt receipt=new TransitCarReceipt();
+		ResultMessage message=receipt.make(vo);
+		return message;
 	}
 
 }

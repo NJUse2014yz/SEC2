@@ -1,6 +1,6 @@
 package nju.sec.yz.ExpressSystem.presentation.controlerui;
 
-import nju.sec.yz.ExpressSystem.bl.deliverbl.TransitReceipt;
+import nju.sec.yz.ExpressSystem.bl.deliverbl.TransitReceiptHelper;
 import nju.sec.yz.ExpressSystem.presentation.positionui.ButtonComponents;
 import nju.sec.yz.ExpressSystem.presentation.positionui.PositionArriveUi;
 import nju.sec.yz.ExpressSystem.presentation.transitui.TransitButtonComponents;

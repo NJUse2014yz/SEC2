@@ -48,8 +48,16 @@ public interface DeliverBlService {
 	public ResultMessage transitReceiveReceipt(TransitArriveSheetVO vo);
 	//中转中心装车单
 	public ResultMessage transitLoadingReceipt (TransitLoadSheetVO vo);
-	//中转单
-	public ResultMessage transitReceipt (TransitSheetVO vo);
+	
+	/**
+	 * 三种中转单
+	 */
+	public ResultMessage transitFlightReceipt(TransitSheetVO vo);
+	
+	public ResultMessage transitTrainReceipt(TransitSheetVO vo);
+	
+	public ResultMessage transitCarReceipt(TransitSheetVO vo);
+	
 	//获得营业该厅的收款记录
 	public List<CollectionRecordVO> getCollectionRecords();
 }

@@ -15,6 +15,17 @@ public class ArriveInformation implements Serializable{
 	private String departure;//出发地
 	private ArrayList<ArriveState> state;//货物到达状态（损坏、完整、丢失）
 	
+	public ArriveInformation() {
+		
+	}
+	
+	public ArriveInformation(ArriveInformation info){
+		this.departure=info.getDeparture();
+		state=new ArrayList<>();
+		state.addAll(info.getState());
+		this.time=info.getTime();
+		this.transitSheetId=info.getTransitSheetId();
+	}
 	
 	public String getTime() {
 		return time;

@@ -29,7 +29,7 @@ public class TransitCarReceipt implements ReceiptService {
 		TransitSheetVO receipt = (TransitSheetVO) vo;
 		TransitCarInformation info = (TransitCarInformation) receipt.getTransitInformation();
 		List<String> barIds = info.getBarIds();
-		TransitReceipt helper = new TransitReceipt();
+		TransitReceiptHelper helper = new TransitReceiptHelper();
 
 		// 验证
 		ResultMessage validResult = isValid(receipt);
@@ -113,7 +113,7 @@ public class TransitCarReceipt implements ReceiptService {
 	@Override
 	public ResultMessage isValid(ReceiptVO vo) {
 		TransitSheetVO receipt = (TransitSheetVO) vo;
-		TransitReceipt helper = new TransitReceipt();
+		TransitReceiptHelper helper = new TransitReceiptHelper();
 		ResultMessage validResult = helper.isValid(receipt.getTransitInformation());
 		if (validResult.getResult() == Result.FAIL)
 			return validResult;
