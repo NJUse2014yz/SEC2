@@ -35,7 +35,7 @@ public class ClientControler{
 	
 	JPanel userMainPanel=new UserUiTest(this);
 	JPanel deliverMainPanel=new DeliverMainUi(this);
-	JPanel inventoryMainPanel=new InventoryMainUiTest(this);
+	JPanel inventoryMainPanel=new InventoryMainUi(this);
 	JPanel accountMainPanel=new AccountMainUi(this,accountControler.bc);
 	JPanel managerMainPanel=new ManagerMainUiTest(this);
 	JPanel positionMainPanel=new PositionMainUi(this,positionControler.bc);
