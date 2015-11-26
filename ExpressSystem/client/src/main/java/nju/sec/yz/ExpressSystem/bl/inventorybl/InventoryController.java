@@ -1,5 +1,7 @@
 package nju.sec.yz.ExpressSystem.bl.inventorybl;
 
+import java.util.ArrayList;
+
 import nju.sec.yz.ExpressSystem.blservice.inventoryBlService.InventoryBlService;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.InventoryInSheetVO;
@@ -12,23 +14,27 @@ import nju.sec.yz.ExpressSystem.vo.InventoryVO;
 public class InventoryController implements InventoryBlService{
 
 	@Override
-	public InventoryVO observeStock(String transit,String begin, String end) {
+	public ArrayList<InventoryVO> observeStock(String transit,String begin, String end) {
+		ArrayList<InventoryVO> list=new ArrayList<InventoryVO>();
 		Inventory inven=new Inventory();
 		InventoryVO vo=inven.observeStock(transit,begin, end);
-		return vo;
+		list.add(vo);
+		return list;
 	}
 
 	@Override
-	public InventoryVO checkStock() {
+	public ArrayList<InventoryVO> checkStock() {
+		ArrayList<InventoryVO> list=new ArrayList<InventoryVO>();
 		Inventory inven=new Inventory();
 		InventoryVO vo=inven.checkStock();
-		return vo;
+		list.add(vo);
+		return list;
 	}
 
 	@Override
-	public void exportToExcel() {
+	public ResultMessage exportToExcel() {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 	@Override
