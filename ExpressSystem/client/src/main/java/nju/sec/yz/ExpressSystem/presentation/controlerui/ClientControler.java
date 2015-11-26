@@ -7,7 +7,9 @@ import nju.sec.yz.ExpressSystem.presentation.deliverui.DeliverMainUi;
 import nju.sec.yz.ExpressSystem.presentation.deliverui.DeliverMainUiTest;
 import nju.sec.yz.ExpressSystem.presentation.deliverui.DeliverOrderInUi;
 import nju.sec.yz.ExpressSystem.presentation.deliverui.DeliverOrderSearchUi;
+import nju.sec.yz.ExpressSystem.presentation.inventoryui.InventoryMainUi;
 import nju.sec.yz.ExpressSystem.presentation.inventoryui.InventoryMainUiTest;
+import nju.sec.yz.ExpressSystem.presentation.managerui.ManagerMainUi;
 import nju.sec.yz.ExpressSystem.presentation.managerui.ManagerMainUiTest;
 import nju.sec.yz.ExpressSystem.presentation.positionui.PositionMainUi;
 import nju.sec.yz.ExpressSystem.presentation.transitui.TransitMainUi;
@@ -32,9 +34,9 @@ public class ClientControler{
 	
 	JPanel userMainPanel=new UserUiTest(this);
 	JPanel deliverMainPanel=new DeliverMainUi(this);
-	JPanel inventoryMainPanel=new InventoryMainUiTest(this);
+	JPanel inventoryMainPanel=new InventoryMainUi(this);
 	JPanel accountMainPanel=new AccountMainUiTest(this);
-	JPanel managerMainPanel=new ManagerMainUiTest(this);
+	JPanel managerMainPanel=new ManagerMainUi(this);
 	JPanel positionMainPanel=new PositionMainUi(this,positionControler.bc);
 	JPanel transitMainPanel=new TransitMainUi(this,transitControler.tbc);
 	JPanel adminstraterMainPanel=new AdminstraterMainUiTest(this);
