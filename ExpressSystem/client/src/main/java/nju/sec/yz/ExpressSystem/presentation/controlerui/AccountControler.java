@@ -1,12 +1,17 @@
 package nju.sec.yz.ExpressSystem.presentation.controlerui;
 
+import nju.sec.yz.ExpressSystem.presentation.accountui.ButtonComponents;
+
+
 public class AccountControler {
 	private ClientControler mainControler;
+	public ButtonComponents bc;
 	AccountControler(ClientControler mainControler)
 	{
 		this.mainControler=mainControler;
+		this.bc=new ButtonComponents(mainControler);
 	}
-	void accountChangePanel(ACCOUNT_CONTROL n)
+	public void accountChangePanel(ACCOUNT_CONTROL n)
 	{
 		switch(n)
 		{	

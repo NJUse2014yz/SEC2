@@ -1,40 +1,33 @@
-package nju.sec.yz.ExpressSystem.presentation.positionui;
+package nju.sec.yz.ExpressSystem.presentation.accountui;
 
 import java.awt.Graphics;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import nju.sec.yz.ExpressSystem.presentation.controlerui.AccountControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
-import nju.sec.yz.ExpressSystem.presentation.controlerui.PositionControler;
 
-public class PositionMainUi extends JPanel{
-	ClientControler mainControler;
-	PositionControler controler;
-	ButtonComponents bc;
-
-	public PositionMainUi(ClientControler mainControler,ButtonComponents bc){
+public class AccountMainUi extends JPanel{
+	private ButtonComponents bc;
+	private ClientControler mainControler;
+	private AccountControler controler;
+	
+	public AccountMainUi(ClientControler mainControler,ButtonComponents bc){
 		super();
 		this.mainControler=mainControler;
-		controler=mainControler.positionControler;
+		controler=mainControler.accountControler;
 		this.bc=bc;
-		initPositionMainUi();
+		initAccountUi();
 	}
-
-	private void initPositionMainUi() {
+	private void initAccountUi() {
 		bc.changePanel(this);
 		bc.init();
 		setLayout(null);
 		setSize(490, 550);
 		setVisible(true);
-
-		
 	}
-
-	
-	
 	@Override
 	public void paintComponent(Graphics g) {
 
@@ -45,5 +38,3 @@ public class PositionMainUi extends JPanel{
 	}
 
 }
-
-
