@@ -113,4 +113,12 @@ public class ValidHelper {
 			return false;
 		return true;
 	}
+	/**
+	 * 判断仓库区号是否正确
+	 */
+	public static boolean isBlock(int block){
+		if(block>0&&block<5)
+			return true;
+		return false;
+	}
 }
