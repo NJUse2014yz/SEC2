@@ -27,6 +27,7 @@ import nju.sec.yz.ExpressSystem.common.LoadInformation;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.TransitFlightInformation;
+import nju.sec.yz.ExpressSystem.common.TransportType;
 import nju.sec.yz.ExpressSystem.presentation.DateChooser;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.TransitSheetVO;
@@ -156,6 +157,7 @@ public class TransitReceiptFlight extends JPanel{
 					flightInf.setFlightId(flightId.getText());
 					flightInf.setShelfId(shelfId.getText());
 				vo.setTransitInformation(flightInf);
+				vo.setTransportType(TransportType.PLANE);
 				ResultMessage result=deliverblservice.transitReceipt(vo);
 				//成功
 				if(result.getResult()==Result.SUCCESS){

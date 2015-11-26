@@ -26,6 +26,7 @@ import nju.sec.yz.ExpressSystem.blservice.deliverBlService.DeliverBlService;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.TransitFlightInformation;
+import nju.sec.yz.ExpressSystem.common.TransportType;
 import nju.sec.yz.ExpressSystem.presentation.DateChooser;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.TransitSheetVO;
@@ -143,7 +144,6 @@ DateChooser date=new DateChooser(this, 212, 81);
 					for(int i=0;i<barId.getRowCount()-1;i++){
 						BarIdArray.add((String) barId.getValueAt(i, 1));
 					}
-					System.out.println(BarIdArray.get(3));
 				TransitSheetVO vo=new TransitSheetVO();
 					//destinationId项不存在，用null写入
 					TransitFlightInformation flightInf = new TransitFlightInformation(date.getTime(),
@@ -151,6 +151,7 @@ DateChooser date=new DateChooser(this, 212, 81);
 							transiterId.getText().toString(), BarIdArray);
 					flightInf.setFlightId(trainId.getText());
 					flightInf.setShelfId(carriageId.getText());
+			    vo.setTransportType(TransportType.TRAIN);
 				vo.setTransitInformation(flightInf);
 				ResultMessage result=deliverblservice.transitReceipt(vo);
 				//成功
