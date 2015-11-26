@@ -3,6 +3,10 @@ package nju.sec.yz.ExpressSystem.bl.tool;
 import java.awt.Label;
 import java.io.File;
 
+import jxl.Workbook;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
+
 /**
  * 导出excel的工具类
  * @author 周聪
@@ -14,9 +18,9 @@ public class ExcelTool {
 		try{
 			file.createNewFile();
 			//创建工作簿
-			WritableWorkbook workbook=Workbook.creatWorkbook(file);
+			WritableWorkbook workbook=Workbook.createWorkbook(file);
 			//创建sheet
-			WritableSheet sheet=workbook.creatSheet("sheet1",0);
+			WritableSheet sheet=workbook.createSheet("sheet1",0);
 			//4,创建表头单元格
 			//表头数组
 			String[] title={"id","name","sex"};
