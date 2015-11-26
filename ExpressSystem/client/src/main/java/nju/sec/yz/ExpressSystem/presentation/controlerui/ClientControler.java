@@ -41,7 +41,7 @@ public class ClientControler{
 	JPanel transitMainPanel=new TransitMainUi(this,transitControler.tbc);
 	JPanel adminstraterMainPanel=new AdminstraterMainUiTest(this);
 	
-	public MainUi mainFrame=new MainUi(transitMainPanel);
+	public MainUi mainFrame=new MainUi(inventoryMainPanel);
 
 	public void showFrame()
 	{
