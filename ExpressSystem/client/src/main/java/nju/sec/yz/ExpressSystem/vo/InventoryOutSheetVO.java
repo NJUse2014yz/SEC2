@@ -9,6 +9,14 @@ import nju.sec.yz.ExpressSystem.common.InventoryOutInformation;
 public class InventoryOutSheetVO extends ReceiptVO{
 	private InventoryOutInformation inventoryOutInformation;
 	private String barId;
+	
+	
+	public InventoryOutSheetVO(InventoryOutInformation inventoryOutInformation,
+			String barId) {
+		super();
+		this.inventoryOutInformation = inventoryOutInformation;
+		this.barId = barId;
+	}
 	public InventoryOutInformation getInventoryOutInformation() {
 		return inventoryOutInformation;
 	}

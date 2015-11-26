@@ -85,7 +85,9 @@ public class DeliverReceipt implements ReceiptService{
 		receipt.setSendInformation(info);
 
 		ReceiptSaveService receiptList=new ReceiptList();
-		receiptList.saveReceipt(receipt);
+		ResultMessage saveResult=receiptList.saveReceipt(receipt);
+		if(saveResult.getResult()==Result.FAIL)
+			return saveResult;
 		
 		//保存收款记录(暂定审批前保存)
 		String deliverId=receipt.getMakePerson();
@@ -249,13 +251,13 @@ public class DeliverReceipt implements ReceiptService{
 			message.setMessage("亲，不要告诉我寄件人手机号不是11位数字~");
 		if(!ValidHelper.isCellphone(toCellphone))
 			message.setMessage("亲，不要告诉我收件人手机号不是11位数字~");
-		if(!ValidHelper.isTotal(total))
+		if(!ValidHelper.isValidNumber(total))
 			message.setMessage("亲，件数x是要满足0<x<65536的数字哟");
-		if(!ValidHelper.isTotal(weight))
+		if(!ValidHelper.isValidNumber(weight))
 			message.setMessage("亲，重量x是要满足0<x<65536的数字哟");
 		if(!ValidHelper.isBarId(barId))			
 			message.setMessage("亲，咱们的订单号是十位数字哟~");
-		if(!ValidHelper.isTotal(vloume))
+		if(!ValidHelper.isValidNumber(vloume))
 			message.setMessage("亲，体积是要满足0<x<65536的数字哟");
 		if(!isSize(size))
 			message.setMessage("亲，尺寸可是要满足“数*数*数”的格式哟");

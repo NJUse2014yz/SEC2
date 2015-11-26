@@ -13,6 +13,14 @@ public class InventoryOutInformation  implements Serializable{
 	private TransportType transportType;
 	private String transitId;
 	
+	public InventoryOutInformation(String time, String destination,
+			TransportType transportType, String transitId) {
+		super();
+		this.time = time;
+		this.destination = destination;
+		this.transportType = transportType;
+		this.transitId = transitId;
+	}
 	public String getTime() {
 		return time;
 	}

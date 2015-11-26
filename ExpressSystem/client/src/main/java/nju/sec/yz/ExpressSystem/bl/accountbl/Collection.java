@@ -14,6 +14,7 @@ import nju.sec.yz.ExpressSystem.bl.userbl.User;
 import nju.sec.yz.ExpressSystem.bl.userbl.UserInfo;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
 import nju.sec.yz.ExpressSystem.common.IdType;
+import nju.sec.yz.ExpressSystem.common.LoadInformation;
 import nju.sec.yz.ExpressSystem.common.PaymentInformation;
 import nju.sec.yz.ExpressSystem.common.ReceiptType;
 import nju.sec.yz.ExpressSystem.common.Result;
@@ -22,8 +23,10 @@ import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.InDataService;
 import nju.sec.yz.ExpressSystem.po.OutPO;
 import nju.sec.yz.ExpressSystem.po.PaymentSheetPO;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
+import nju.sec.yz.ExpressSystem.po.TransitLoadSheetPO;
 import nju.sec.yz.ExpressSystem.vo.PaymentSheetVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
+import nju.sec.yz.ExpressSystem.vo.TransitLoadSheetVO;
 /**
  * 收款单的领域模型对象
  * @author 周聪
@@ -59,8 +62,6 @@ public class Collection implements ReceiptService{
 		PaymentSheetPO po=new PaymentSheetPO();
 		PaymentInformation information=this.copyInfo(info);
 		po.setPaymentInformation(information);
-		
-		
 		po.setBarIds(receipt.getBarIds());
 		po.setMakeTime(TimeTool.getDate());
 		po.setMakePerson(accountancyId());
@@ -129,8 +130,18 @@ public class Collection implements ReceiptService{
 
 	@Override
 	public ReceiptVO show(ReceiptPO po) {
-		// TODO Auto-generated method stub
-		return null;
+		PaymentSheetPO receipt=(PaymentSheetPO)po;
+		
+		PaymentSheetVO vo=new PaymentSheetVO();
+		PaymentInformation info=this.copyInfo(receipt.getPaymentInformation());
+		vo.setPaymentInformation(info);
+		vo.setBarIds(receipt.getBarIds());
+		vo.setId(receipt.getId());
+		vo.setMakePerson(po.getMakePerson());
+		vo.setMakeTime(po.getMakeTime());
+		vo.setType(po.getType());
+		
+		return vo;
 	}
 	/**
 	 * 保存收款单信息
@@ -142,8 +153,16 @@ public class Collection implements ReceiptService{
 
 	@Override
 	public ReceiptPO convertToPO(ReceiptVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		PaymentSheetVO receipt=(PaymentSheetVO)vo;
+		PaymentInformation info=this.copyInfo(receipt.getPaymentInformation());
+		PaymentSheetPO po=new PaymentSheetPO();
+		po.setPaymentInformation(info);
+		po.setBarIds(receipt.getBarIds());
+		po.setId(vo.getId());
+		po.setMakePerson(vo.getMakePerson());
+		po.setMakeTime(vo.getMakeTime());
+		po.setType(vo.getType());
+		return po;
 	}
 
 

@@ -7,14 +7,14 @@ package nju.sec.yz.ExpressSystem.common;
  */
 public enum IdType {
 	COLLECTION("k",3){
-		
-	},//收款单
+		//收款单
+	},
 	PAYMENT("f",3){
-		
-	},//付款单
+		//付款单
+	},
 	DELIVER_RECEIPT("j",5){
-		
-	},//寄件单
+		//寄件单
+	},
 	POSITION_LOADING_RECEIPT("yz",3){
 		
 	},
@@ -38,8 +38,10 @@ public enum IdType {
 	},
 	INVENTORY_OUT("c",5){
 		
-	},TRANSPORT("",5){
-		//汽运编号
+	},POSITION_TRANSPORT("",5){
+		//营业厅汽运编号
+	},TRANSIT_TRANSPORT("",7){
+		//中转中心汽运编号
 	};
 	
 	private IdType(String idStr,int length){

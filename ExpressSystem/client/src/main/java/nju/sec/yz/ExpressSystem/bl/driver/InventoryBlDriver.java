@@ -24,9 +24,8 @@ public class InventoryBlDriver {
 		// 4入库
 	
 
-		System.out.println("不好意思，操作失败哟");
-		// 5出库
-		ResultMessage message2 = inventoryBlService.out(new InventoryOutSheetVO());
+		System.out.println("不好意思，操作失败哟");// 5出库
+		
 
 		System.out.println("不好意思，操作失败哟");
 	}

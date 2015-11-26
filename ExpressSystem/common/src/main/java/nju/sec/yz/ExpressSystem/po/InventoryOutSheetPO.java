@@ -9,6 +9,15 @@ import nju.sec.yz.ExpressSystem.common.InventoryOutInformation;
 public class InventoryOutSheetPO extends ReceiptPO{
 	private InventoryOutInformation inventoryOutInformation;
 	private String barId;
+	
+	
+	public InventoryOutSheetPO(InventoryOutInformation inventoryOutInformation,
+			String barId) {
+		super();
+		this.inventoryOutInformation = inventoryOutInformation;
+		this.barId = barId;
+	}
+	
 	public InventoryOutInformation getInventoryOutInformation() {
 		return inventoryOutInformation;
 	}

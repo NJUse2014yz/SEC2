@@ -13,17 +13,16 @@ import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 public class TransitReceipt implements ReceiptService{
 
 	@Override
-	public ResultMessage approve(ReceiptVO vo) {
-		
-		return null;
-	}
-
-	@Override
 	public ResultMessage make(ReceiptVO vo) {
 		
 		return null;
 	}
-
+	
+	@Override
+	public ResultMessage approve(ReceiptVO vo) {
+		
+		return null;
+	}
 
 	@Override
 	public ReceiptVO show(ReceiptPO po) {

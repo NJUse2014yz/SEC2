@@ -21,8 +21,10 @@ import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.po.BarIdsPO;
 import nju.sec.yz.ExpressSystem.po.OfficeLoadSheetPO;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
+import nju.sec.yz.ExpressSystem.po.TransitLoadSheetPO;
 import nju.sec.yz.ExpressSystem.vo.OfficeLoadSheetVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
+import nju.sec.yz.ExpressSystem.vo.TransitLoadSheetVO;
 
 /**
  * 营业厅装车单的领域模型
@@ -48,6 +50,7 @@ public class PositionLoadingReceipt implements ReceiptService{
 		info.setAgencyId(positionID);
 		info.setTransportId(transportID);
 		
+		//计算运费
 		double fare=this.cost(barIDs.size());
 		info.setFare(fare);
 		
@@ -66,16 +69,18 @@ public class PositionLoadingReceipt implements ReceiptService{
 		po.setMakePerson(this.getMakePersonId());
 		
 		ReceiptSaveService receiptList=new ReceiptList();
-		ResultMessage message=receiptList.saveReceipt(po);
+		ResultMessage saveResult=receiptList.saveReceipt(po);
+		if(saveResult.getResult()==Result.FAIL)
+			return saveResult;
 		
 		//保存条形码号供到达单使用
 		BarIdList barIds=new BarIdList();
 		ArrayList<String> ids2=new ArrayList<>();
-		ids.addAll(barIDs);
+		ids2.addAll(barIDs);
 		BarIdsPO list=new BarIdsPO(ids2, receiptID);
 		barIds.addBarIds(list);
 		
-		return message;
+		return new ResultMessage(Result.SUCCESS,fare+"");
 	}
 	
 	
@@ -93,7 +98,7 @@ public class PositionLoadingReceipt implements ReceiptService{
 	 */
 	private String createTransportID(String positionID){
 		ReceiptID id=new ReceiptID();
-		String transportID=id.getID(positionID, IdType.TRANSPORT);
+		String transportID=id.getID(positionID, IdType.POSITION_TRANSPORT);
 		return transportID;
 	}
 	
@@ -120,7 +125,7 @@ public class PositionLoadingReceipt implements ReceiptService{
 		double weight=num/100.0;
 		double distance=CityConst.DISTANCE_OF_POSITION;
 		PriceService priceService=new Price();
-		double price=priceService.getTrainPrice();
+		double price=priceService.getCarPrice();
 		double cost=weight*distance*price;
 		return cost;
 	}
@@ -175,14 +180,34 @@ public class PositionLoadingReceipt implements ReceiptService{
 
 	@Override
 	public ReceiptVO show(ReceiptPO po) {
-		// TODO Auto-generated method stub
-		return null;
+		OfficeLoadSheetPO receipt=(OfficeLoadSheetPO)po;
+		LoadInformation info=this.copyInfo(receipt.getOfficeLoadInformation());
+		OfficeLoadSheetVO vo=new OfficeLoadSheetVO();
+		vo.setOfficeLoadInformation(info);
+		ArrayList<String>  barIds=new ArrayList<>();
+		barIds.addAll(receipt.getBarIds());
+		vo.setBarIds(barIds);
+		vo.setId(po.getId());
+		vo.setMakePerson(po.getMakePerson());
+		vo.setMakeTime(po.getMakeTime());
+		vo.setType(po.getType());
+		return vo;
 	}
 
 	@Override
 	public ReceiptPO convertToPO(ReceiptVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		OfficeLoadSheetVO receipt=(OfficeLoadSheetVO)vo;
+		LoadInformation info=this.copyInfo(receipt.getOfficeLoadInformation());
+		OfficeLoadSheetPO po=new OfficeLoadSheetPO();
+		po.setOfficeLoadInformation(info);
+		ArrayList<String>  barIds=new ArrayList<>();
+		barIds.addAll(receipt.getBarIds());
+		po.setBarIds(barIds);
+		po.setId(vo.getId());
+		po.setMakePerson(vo.getMakePerson());
+		po.setMakeTime(vo.getMakeTime());
+		po.setType(vo.getType());
+		return po;
 	}
 
 

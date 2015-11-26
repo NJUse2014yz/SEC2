@@ -34,7 +34,7 @@ public class TransitReceive extends JPanel{
 	private JButton confirm;
 	private JTextField departure;
 	private JComboBox state;
-	private JLabel transitSheetId;
+	private JTextField transitSheetId;
 	private JTextField transitId;
 	
 	private JLabel warning=new JLabel();
@@ -68,6 +68,11 @@ public class TransitReceive extends JPanel{
 		transitId.setBounds(252, 136, 93, 15);
 		add(transitId);
 		
+		transitSheetId=new JTextField();
+		transitSheetId.setBounds(224, 162, 122, 15);
+		add(transitSheetId);
+		
+		
 		ImageIcon cinfirmIcon = new ImageIcon("graphic/deliver/button/confirm.png");
 		confirm = new JButton(cinfirmIcon);
 		confirm.setBounds(391, 210, 76, 27);
@@ -94,6 +99,7 @@ public class TransitReceive extends JPanel{
 					TransitArriveSheetVO vo=new TransitArriveSheetVO();
 					vo.setTransitArriveInformation(arrive);
 					vo.setTransitId(transitId.getText());
+					vo.setTransitSheetId(transitSheetId.getText());
 					ResultMessage result=deliverBlService.transitReceiveReceipt(vo);
 					if(result.getResult()==Result.SUCCESS){
 						warning.setText("提交成功");
@@ -103,13 +109,6 @@ public class TransitReceive extends JPanel{
 						warning.setVisible(true);
 						add(warning);
 
-
-						transitSheetId.setText(result.getMessage()) ;
-						transitSheetId.setBounds(221, 162, 70, 30);
-						transitSheetId.setForeground(Color.GRAY);
-						transitSheetId.setFont(new Font("Dialog", 0, 18));
-						transitSheetId.setVisible(true);
-						add(transitSheetId);
 						repaint();
 					}else{
 						//失败的情况
