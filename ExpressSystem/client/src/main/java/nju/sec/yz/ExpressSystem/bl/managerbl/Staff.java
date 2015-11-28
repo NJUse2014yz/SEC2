@@ -86,6 +86,8 @@ public class Staff {
 		StaffVO vo=null;
 		try {
 			StaffPO	po = data.find(id);
+			if(po==null)
+				return null;
 			vo=changePoToVo(po);
 		} catch (RemoteException e) {
 			// TODO 自动生成的 catch 块
@@ -101,6 +103,8 @@ public class Staff {
 		//获取数据库中的userpo列表
 		try {
 			listPO=data.findAll();
+			if(listPO==null)
+				return null;
 		} catch (RemoteException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();

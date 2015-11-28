@@ -41,6 +41,8 @@ public class Inventory {
 		ArrayList<InventoryVO> list=new ArrayList<InventoryVO>();
 		try {
 			ArrayList<InventoryPO> poList=data.findByTime(transit, begin, end);
+			if(poList==null)
+				return null;
 			for(InventoryPO po:poList){
 				InventoryVO vo=changePoToVo(po);
 				list.add(vo);
@@ -71,6 +73,8 @@ public class Inventory {
 		ArrayList<InventoryVO> list=new ArrayList<InventoryVO>();
 		try {
 			ArrayList<InventoryPO> poList=data.findAll();
+			if(poList==null)
+				return null;
 			for(InventoryPO po:poList){
 				InventoryVO vo=changePoToVo(po);
 				list.add(vo);
@@ -96,7 +100,7 @@ public class Inventory {
 	 * 导出excel
 	 * @return
 	 */
-	public ResultMessage exportToExcel() {
+	public ResultMessage exportToExcel(){
 		
 //		String filename = null;
 //		String txt = null;

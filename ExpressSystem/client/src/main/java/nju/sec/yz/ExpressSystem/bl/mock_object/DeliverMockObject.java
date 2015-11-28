@@ -2,7 +2,6 @@ package nju.sec.yz.ExpressSystem.bl.mock_object;
 
 import nju.sec.yz.ExpressSystem.common.OrderInformation;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
-import nju.sec.yz.ExpressSystem.po.DeliverPO;
 import nju.sec.yz.ExpressSystem.po.SendSheetPO;
 
 public class DeliverMockObject {

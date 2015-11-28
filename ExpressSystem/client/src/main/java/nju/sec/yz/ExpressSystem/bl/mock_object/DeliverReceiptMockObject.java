@@ -2,7 +2,6 @@ package nju.sec.yz.ExpressSystem.bl.mock_object;
 
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
-import nju.sec.yz.ExpressSystem.po.DeliverySheetPO;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.po.SendSheetPO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
