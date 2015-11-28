@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.InventoryInSheetVO;
 import nju.sec.yz.ExpressSystem.vo.InventoryOutSheetVO;
-import nju.sec.yz.ExpressSystem.vo.InventoryVO;
+import nju.sec.yz.ExpressSystem.vo.InventoryListVO;
 
 /**
  * @author xiaosaisai
@@ -13,9 +13,9 @@ import nju.sec.yz.ExpressSystem.vo.InventoryVO;
  */
 public interface InventoryBlService {
 	//库存查看
-	public ArrayList<InventoryVO> observeStock(String begin,String end);
+	public ArrayList<InventoryListVO> observeStock(String begin,String end);
 	//库存盘点
-	public ArrayList<InventoryVO> checkStock();
+	public ArrayList<InventoryListVO> checkStock();
 	//导出excel
 	public ResultMessage exportToExcel();
 	//入库

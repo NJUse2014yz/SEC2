@@ -20,7 +20,7 @@ import nju.sec.yz.ExpressSystem.bl.inventorybl.InventoryController;
 import nju.sec.yz.ExpressSystem.blservice.inventoryBlService.InventoryBlService;
 import nju.sec.yz.ExpressSystem.presentation.DateChooser;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
-import nju.sec.yz.ExpressSystem.vo.InventoryVO;
+import nju.sec.yz.ExpressSystem.vo.InventoryListVO;
 
 public class InventoryObserve extends JPanel{
 
@@ -81,7 +81,7 @@ private InventoryBlService inventoryservice=new InventoryController();
 				repaint();
 				
 				//成功
-				InventoryVO vo=inventoryservice.observeStock(null,date1.getTime(),date2.getTime());
+				InventoryListVO vo=inventoryservice.observeStock(null,date1.getTime(),date2.getTime());
 				TableModel model=table.getModel();
 				Object[][] newTableData={};
 				model=new DefaultTableModel(newTableData,columnTitle);

@@ -6,7 +6,7 @@ import nju.sec.yz.ExpressSystem.blservice.inventoryBlService.InventoryBlService;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.InventoryInSheetVO;
 import nju.sec.yz.ExpressSystem.vo.InventoryOutSheetVO;
-import nju.sec.yz.ExpressSystem.vo.InventoryVO;
+import nju.sec.yz.ExpressSystem.vo.InventoryListVO;
 /**
  * 负责实现库存管理界面所需要的服务
  * @author 周聪
@@ -14,16 +14,16 @@ import nju.sec.yz.ExpressSystem.vo.InventoryVO;
 public class InventoryController implements InventoryBlService{
 
 	@Override
-	public ArrayList<InventoryVO> observeStock(String begin, String end) {
+	public ArrayList<InventoryListVO> observeStock(String begin, String end) {
 		Inventory inven=new Inventory();
-		ArrayList<InventoryVO> voList=inven.observeStock(begin, end);
+		ArrayList<InventoryListVO> voList=inven.observeStock(begin, end);
 		return voList;
 	}
 
 	@Override
-	public ArrayList<InventoryVO> checkStock() {
+	public ArrayList<InventoryListVO> checkStock() {
 		Inventory inven=new Inventory();
-		ArrayList<InventoryVO> voList=inven.checkStock();
+		ArrayList<InventoryListVO> voList=inven.checkStock();
 		return voList;
 	}
 

@@ -13,7 +13,6 @@ import nju.sec.yz.ExpressSystem.bl.tool.ExcelTool;
 import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.bl.userbl.User;
 import nju.sec.yz.ExpressSystem.bl.userbl.UserInfo;
-import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
 import nju.sec.yz.ExpressSystem.common.InventoryInInformation;
 import nju.sec.yz.ExpressSystem.common.InventoryOutInformation;
 import nju.sec.yz.ExpressSystem.common.Result;
@@ -22,8 +21,7 @@ import nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice.InventoryDataSer
 import nju.sec.yz.ExpressSystem.po.InventoryInSheetPO;
 import nju.sec.yz.ExpressSystem.po.InventoryOutSheetPO;
 import nju.sec.yz.ExpressSystem.po.InventoryPO;
-import nju.sec.yz.ExpressSystem.po.UserPO;
-import nju.sec.yz.ExpressSystem.vo.InventoryVO;
+import nju.sec.yz.ExpressSystem.vo.InventoryListVO;
 
 /**
  * 库存的领域模型对象
@@ -50,18 +48,15 @@ public class Inventory {
 	 * 设定一个时间段，查看此时间段内的出/入库数量/金额/存储位置
 	 * 库存数量要有合计
 	 */
-	public ArrayList<InventoryVO> observeStock(String begin, String end) {
-		ArrayList<InventoryVO> list=new ArrayList<InventoryVO>();
-		UserInfo user=new User();
-		String userid=user.getCurrentID();
-		String strs[]=userid.split("A");
-		String transit=strs[1];
+	public ArrayList<InventoryListVO> observeStock(String begin, String end) {
+		ArrayList<InventoryListVO> list=new ArrayList<InventoryListVO>();
+		String transit=getTransit();
 		try {
 			ArrayList<InventoryPO> poList=data.findByTime(transit, begin, end);
 			if(poList==null)
 				return null;
 			for(InventoryPO po:poList){
-				InventoryVO vo=changePoToVo(po);
+				InventoryListVO vo=changePoToVo(po);
 				list.add(vo);
 			}
 		} catch (RemoteException e) {
@@ -71,11 +66,11 @@ public class Inventory {
 		return list;
 	}
 
-	private InventoryVO changePoToVo(InventoryPO po) {
+	private InventoryListVO changePoToVo(InventoryPO po) {
 		InventoryInInformation inventoryInInformation=po.getInventoryInformation();
 		InventoryOutInformation inventoryOutInformation=po.getInventoryOutInformation();
 		String barId=po.getBarId();
-		InventoryVO vo=new InventoryVO();
+		InventoryListVO vo=new InventoryListVO();
 		vo.setInventoryInInformation(inventoryInInformation);
 		vo.setInventoryOutInformation(inventoryOutInformation);
 		vo.setBarId(barId);
@@ -86,20 +81,29 @@ public class Inventory {
 	/**
 	 * 库存盘点
 	 */
-	public ArrayList<InventoryVO> checkStock() {
-		ArrayList<InventoryVO> list=new ArrayList<InventoryVO>();
+	public ArrayList<InventoryListVO> checkStock() {
+		ArrayList<InventoryListVO> list=new ArrayList<InventoryListVO>();
 		try {
-			ArrayList<InventoryPO> poList=data.findAll();
+			String transit=getTransit();
+			ArrayList<InventoryPO> poList=data.findByTime(transit, TimeTool.getDate());
 			if(poList==null)
 				return null;
 			for(InventoryPO po:poList){
-				InventoryVO vo=changePoToVo(po);
+				InventoryListVO vo=changePoToVo(po);
 				list.add(vo);
 			}
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
 		return list;
+	}
+	
+	private String getTransit(){
+		UserInfo user=new User();
+		String userid=user.getCurrentID();
+		String strs[]=userid.split("A");
+		String transit=strs[1];
+		return transit;
 	}
 	
 	/**

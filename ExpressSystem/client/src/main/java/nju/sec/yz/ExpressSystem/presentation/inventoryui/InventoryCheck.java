@@ -15,7 +15,7 @@ import javax.swing.JTable;
 import nju.sec.yz.ExpressSystem.bl.inventorybl.InventoryController;
 import nju.sec.yz.ExpressSystem.blservice.inventoryBlService.InventoryBlService;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
-import nju.sec.yz.ExpressSystem.vo.InventoryVO;
+import nju.sec.yz.ExpressSystem.vo.InventoryListVO;
 
 public class InventoryCheck extends JPanel{
 
@@ -40,7 +40,7 @@ public class InventoryCheck extends JPanel{
 		
 		InventoryButtonComponents ibc=new InventoryButtonComponents(maincontroler,this);
 		
-		InventoryVO vo=inventoryservice.checkStock();
+		InventoryListVO vo=inventoryservice.checkStock();
 		
 		Object[][] tableData = {};
 		String[] columnTitle = { "快递编号", "入库日期", "目的地", "区号", "排号", "架号", "位号" };
