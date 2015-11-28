@@ -42,21 +42,23 @@ public class InDataImpl extends UnicastRemoteObject implements InDataService{
 	}
 
 	@Override
-	public InPO find(String id) throws RemoteException {
+	public List<InPO> findByPosition(String date,String positionId) throws RemoteException {
 		System.out.println("finding a inPO...");
-		if(id==null){
+		if(positionId==null||date==null){
 			System.out.println("id为null！！！");
 			return null;
 		}
 		List<InPO> inPOs = findAll();
+		List<InPO> results=new ArrayList<>();
 		for (InPO po : inPOs) {
-			String inID = po.getId();
-			if (id.equals(inID))
-				return po;
+			String position = po.getPosition();
+			String inDate=po.getDate();
+			if (positionId.equals(position)&&date.equals(inDate))
+				results.add(po);
 		}
 		
 		
-		return null;
+		return results;
 	}
 
 	@Override
@@ -141,6 +143,28 @@ public class InDataImpl extends UnicastRemoteObject implements InDataService{
 			e.printStackTrace();
 			return new ResultMessage(Result.FAIL, "文件读写错误");
 		}
+	}
+
+	@Override
+	public List<InPO> findByTime(String begin, String end) throws RemoteException {
+		System.out.println("finding a inPO...");
+		if(begin==null||end==null){
+			System.out.println("id为null！！！");
+			return null;
+		}
+		List<InPO> inPOs = findAll();
+		List<InPO> results=new ArrayList<>();
+		
+		int min=Integer.parseInt(begin);
+		int max=Integer.parseInt(end);
+		for (InPO po : inPOs) {
+			int date=Integer.parseInt(po.getDate());
+			if (date>=min&&date<=max)
+				results.add(po);
+		}
+		
+		
+		return results;
 	}
 
 }

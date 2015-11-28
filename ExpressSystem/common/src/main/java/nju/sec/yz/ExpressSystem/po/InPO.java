@@ -17,12 +17,16 @@ public class InPO extends ReceiptPO implements Serializable{
 	
 	//收款快递员，用id标识
 	private String deliver;
+	
+	//营业厅
+	private String position;
 
-	public InPO(String date, int num, String deliver) {
+	public InPO(String date, int num, String deliver,String position) {
 		super();
 		this.date = date;
 		this.num = num;
 		this.deliver = deliver;
+		this.position=position;
 	}
 
 	public String getDate() {
@@ -47,6 +51,14 @@ public class InPO extends ReceiptPO implements Serializable{
 
 	public void setDeliver(String deliver) {
 		this.deliver = deliver;
+	}
+
+	public String getPosition() {
+		return position;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
 	}
 	
 	

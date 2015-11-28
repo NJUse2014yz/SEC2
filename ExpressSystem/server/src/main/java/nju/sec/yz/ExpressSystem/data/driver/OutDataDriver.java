@@ -9,8 +9,7 @@ import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.OutDataService;
 public class OutDataDriver {
 	public void drive(OutDataService ods) throws RemoteException
 	{
-		if(ods.find("")!=null)
-			System.out.println("#out data find SUCCESS");
+		
 		if(!ods.findAll().isEmpty())
 			System.out.println("#out data find all SUCCESS");
 		

@@ -22,7 +22,7 @@ public class Finance {
 	 * @param positionId
 	 * @return
 	 */
-	public List<PaymentSheetVO> checkReceipt(String day, int positionId) {
+	public List<PaymentSheetVO> checkReceipt(String day, String positionId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

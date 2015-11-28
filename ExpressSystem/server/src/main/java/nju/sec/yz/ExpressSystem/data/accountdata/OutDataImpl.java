@@ -63,21 +63,27 @@ public class OutDataImpl extends UnicastRemoteObject implements OutDataService{
 	}
 
 	@Override
-	public OutPO find(String id) throws RemoteException {
+	public List<OutPO> findByTime(String begin,String end) throws RemoteException {
 		System.out.println("finding a OutPO...");
-		if(id==null){
+		if(begin==null||end==null){
 			System.out.println("id为null！！！");
 			return null;
 		}
+		
 		List<OutPO> OutPOs = findAll();
+		List<OutPO> results=new ArrayList<>();
+		
+		int min=Integer.parseInt(begin);
+		int max=Integer.parseInt(end);
+		
 		for (OutPO po : OutPOs) {
-			String carID = po.getId();
-			if (id.equals(carID))
-				return po;
+			int date=Integer.parseInt(po.getOutInformation().getDate());
+			if (date>=min&&date<=max)
+				results.add(po);
 		}
 		
 		
-		return null;
+		return results;
 	}
 
 	@Override
