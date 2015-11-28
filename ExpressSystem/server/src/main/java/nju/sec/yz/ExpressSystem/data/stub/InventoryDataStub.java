@@ -42,7 +42,7 @@ public class InventoryDataStub implements InventoryDataService{
 	}
 
 	@Override
-	public ArrayList<InventoryPO> findByTime(String date) throws RemoteException {
+	public ArrayList<InventoryPO> findByTime(String transit,String date) throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}

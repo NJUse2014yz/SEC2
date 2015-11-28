@@ -11,6 +11,7 @@ import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.AgencyDataService;
 import nju.sec.yz.ExpressSystem.po.PositionPO;
 import nju.sec.yz.ExpressSystem.po.TransitPO;
+import nju.sec.yz.ExpressSystem.vo.AgencyListVO;
 import nju.sec.yz.ExpressSystem.vo.AgencyVO;
 import nju.sec.yz.ExpressSystem.vo.PositionVO;
 import nju.sec.yz.ExpressSystem.vo.TransitVO;
@@ -105,6 +106,14 @@ public class Agency implements AgencyInfo {
 		TransitVO transitVO = this.poToVO(po);
 
 		return transitVO;
+	}
+	
+	/**
+	 * 按名字查找机构
+	 */
+	public AgencyListVO observeTransitByName(String name) {
+		
+		return null;
 	}
 
 	public ArrayList<TransitVO> observeAllTransit() {
@@ -260,7 +269,7 @@ public class Agency implements AgencyInfo {
 		return location;
 	}
 
-	private TransitPO fineTransit(String name) {
+	private TransitPO findTransit(String name) {
 
 		TransitPO po = null;
 		try {

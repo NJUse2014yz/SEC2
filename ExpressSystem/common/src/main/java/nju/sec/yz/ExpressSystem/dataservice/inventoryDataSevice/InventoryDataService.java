@@ -29,5 +29,5 @@ public interface InventoryDataService extends Remote{
 	 * 查看当天库存
 	 * @param date 今天的日期
 	 */
-	public ArrayList<InventoryPO> findByTime(String date)throws RemoteException;
+	public ArrayList<InventoryPO> findByTime(String transit,String date)throws RemoteException;
 }

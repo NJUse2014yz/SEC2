@@ -3,6 +3,7 @@ package nju.sec.yz.ExpressSystem.blservice.managerBlService;
 import java.util.ArrayList;
 
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.vo.AgencyListVO;
 import nju.sec.yz.ExpressSystem.vo.PositionVO;
 import nju.sec.yz.ExpressSystem.vo.TransitVO;
 
@@ -19,6 +20,8 @@ public interface AgencyBlService {
 	public ResultMessage modifyTransit (TransitVO av);
 	
 	public TransitVO observeTransit (String id);
+	
+	public AgencyListVO observeTransitByName (String name);
 	
 	public ArrayList<TransitVO> observeAllTransit ();
 	

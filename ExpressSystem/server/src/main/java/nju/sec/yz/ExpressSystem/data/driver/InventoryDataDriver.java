@@ -29,9 +29,7 @@ public class InventoryDataDriver {
 		
 			System.out.println("init!");
 		
-		
-		ArrayList<InventoryPO> array1=ids.findByTime(null, null);
-		System.out.println(array1.size());
+	
 		
 		
 		

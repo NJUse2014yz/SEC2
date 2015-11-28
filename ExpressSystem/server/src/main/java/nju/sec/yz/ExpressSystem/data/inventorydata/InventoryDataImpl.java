@@ -105,6 +105,7 @@ public class InventoryDataImpl extends UnicastRemoteObject implements InventoryD
 		List<InventoryPO> iPOs = findAll();
 		ArrayList<InventoryPO> result=new ArrayList<>();
 		for (InventoryPO po : iPOs) {
+//			if(transit.equals(po.getInventoryInformation().getPositon()))
 			int in=Integer.parseInt(po.getInventoryInformation().getTime());
 			int out=Integer.parseInt(po.getInventoryOutInformation().getTime());
 			if((in>=begin&&in<=end)||(out>=begin&&out<=end))
@@ -113,9 +114,8 @@ public class InventoryDataImpl extends UnicastRemoteObject implements InventoryD
 		return result;
 	}
 
-	
 	@Override
-	public ArrayList<InventoryPO> findByTime(String date) throws RemoteException {
+	public ArrayList<InventoryPO> findByTime(String transitId,String date) throws RemoteException {
 		System.out.println("finding inventoryPO...");
 		if(date==null){
 			System.out.println("时间为null！！！");
