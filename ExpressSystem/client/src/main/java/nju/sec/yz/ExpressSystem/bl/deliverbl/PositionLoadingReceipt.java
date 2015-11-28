@@ -154,6 +154,7 @@ public class PositionLoadingReceipt implements ReceiptService{
 		//验证barid
 		List<String> barIDs=receipt.getBarIds();
 		for(String barID:barIDs){
+			System.out.println(barIDs.size());
 			if(!ValidHelper.isBarId(barID)){
 				validResult.setMessage("亲，咱们的订单号是十位数字哟~");
 				return validResult;

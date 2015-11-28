@@ -53,6 +53,8 @@ public class Driver {
 		DriverVO vo=null;
 		try {
 			DriverPO	po=data.find(id);
+			if(po==null)
+				return null;
 			vo=changePoToVo(po);
 		} catch (RemoteException e) {
 			// TODO 自动生成的 catch 块
