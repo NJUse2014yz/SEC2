@@ -94,7 +94,7 @@ public class InventoryDataImpl extends UnicastRemoteObject implements InventoryD
 	}
 
 	@Override
-	public ArrayList<InventoryPO> findByTime(String timeIn, String timeOut) throws RemoteException {
+	public ArrayList<InventoryPO> findByTime(String transit,String timeIn, String timeOut) throws RemoteException {
 		System.out.println("finding inventoryPO...");
 		if(timeIn==null||timeOut==null){
 			System.out.println("时间为null！！！");

@@ -5,6 +5,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.common.TransitCarInformation;
 import nju.sec.yz.ExpressSystem.po.InventoryPO;
 /**
  * 
@@ -23,7 +24,7 @@ public interface InventoryDataService extends Remote{
 	 * @param timeIn
 	 * @param timeOut
 	 */
-	public ArrayList<InventoryPO> findByTime(String timeIn,String timeOut)throws RemoteException;
+	public ArrayList<InventoryPO> findByTime(String transit,String timeIn,String timeOut)throws RemoteException;
 	/**
 	 * 查看当天库存
 	 * @param date 今天的日期

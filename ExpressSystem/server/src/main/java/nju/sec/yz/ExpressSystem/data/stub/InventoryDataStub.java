@@ -31,7 +31,7 @@ public class InventoryDataStub implements InventoryDataService{
 	}
 
 	@Override
-	public ArrayList<InventoryPO> findByTime(String timeIn,String timeOut)throws RemoteException{
+	public ArrayList<InventoryPO> findByTime(String transit,String timeIn,String timeOut)throws RemoteException{
 		return new ArrayList<InventoryPO>();
 	}
 
