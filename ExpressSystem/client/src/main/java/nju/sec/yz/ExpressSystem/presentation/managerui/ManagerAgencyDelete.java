@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -89,6 +90,9 @@ public class ManagerAgencyDelete extends JPanel{
 					repaint();
 				}else{
 					
+					
+					
+					table.repaint();
 				}
 		
 		}
@@ -107,7 +111,7 @@ public class ManagerAgencyDelete extends JPanel{
 	private void original(){
 //		ArrayList<TransitVO> alltransits=manager.observeAllTransit();
 		ArrayList<PositionVO> inf=new ArrayList<PositionVO>();
-		String[][] TableData = null;
+		String[][] TableData = {{"111","222","333"},{"111","222","333"},{"111","222","333"}};
 		String[] columnTitle={"所在地","编号","名称"};
 //		for(int i=0;i<alltransits.size();i++){
 //			TransitVO temp=alltransits.get(i);
@@ -124,6 +128,7 @@ public class ManagerAgencyDelete extends JPanel{
 //		}
 		model=new DefaultTableModel(TableData,columnTitle);
 		table=new JTable(model);
+		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		jsc=new JScrollPane(table);
 		jsc.setVisible(true);
 	    jsc.setBounds(137,94,318,181);
