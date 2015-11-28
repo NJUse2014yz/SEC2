@@ -112,8 +112,24 @@ public class Agency implements AgencyInfo {
 	 * 按名字查找机构
 	 */
 	public AgencyListVO observeTransitByName(String name) {
+		List<TransitVO> transits=this.observeAllTransit();
 		
-		return null;
+		AgencyListVO list=new AgencyListVO();
+		for(TransitVO transit:transits){
+			//匹配中转中心
+			if(transit.getName().contains(name))
+				list.transits.add(transit);
+			//查找中转中心中的营业厅
+			for(PositionVO position:transit.getPositions()){
+				//匹配营业厅
+				if(position.getName().contains(name))
+					list.positions.add(position);
+			}
+			
+		}
+		
+		
+		return list;
 	}
 
 	public ArrayList<TransitVO> observeAllTransit() {
@@ -269,6 +285,11 @@ public class Agency implements AgencyInfo {
 		return location;
 	}
 
+	/**
+	 * 按名字精确查找
+	 * @param name
+	 * @return
+	 */
 	private TransitPO findTransit(String name) {
 
 		TransitPO po = null;

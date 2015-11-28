@@ -1,5 +1,6 @@
 package nju.sec.yz.ExpressSystem.vo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,5 +14,10 @@ public class AgencyListVO {
 	
 	//营业厅列表
 	public List<PositionVO> positions;
+	
+	public AgencyListVO() {
+		transits=new ArrayList<>();
+		positions=new ArrayList<>();
+	}
 	
 }
