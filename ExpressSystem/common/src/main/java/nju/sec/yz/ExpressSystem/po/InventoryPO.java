@@ -17,17 +17,16 @@ public class InventoryPO implements Serializable{
 	private InventoryInInformation inventoryInformation;
 	private InventoryOutInformation inventoryOutInformation;
 	private String barId;
-
+	private String transitId;//中转中心编号
 	
 
 	public InventoryPO(InventoryInInformation inventoryInformation,
-			InventoryOutInformation inventoryOutInformation, String barId) {
+			InventoryOutInformation inventoryOutInformation, String barId,String transitId) {
 		super();
 		this.inventoryInformation = inventoryInformation;
 		this.inventoryOutInformation = inventoryOutInformation;
 		this.barId = barId;
 	}
-
 	public InventoryPO() {
 	}
 
@@ -54,6 +53,14 @@ public class InventoryPO implements Serializable{
 
 	public void setBarId(String barId) {
 		this.barId = barId;
+	}
+
+	public String getTransitId() {
+		return transitId;
+	}
+
+	public void setTransitId(String transitId) {
+		this.transitId = transitId;
 	}
 	
 }

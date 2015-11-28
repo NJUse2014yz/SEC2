@@ -105,7 +105,8 @@ public class InventoryDataImpl extends UnicastRemoteObject implements InventoryD
 		List<InventoryPO> iPOs = findAll();
 		ArrayList<InventoryPO> result=new ArrayList<>();
 		for (InventoryPO po : iPOs) {
-//			if(transit.equals(po.getInventoryInformation().getPositon()))
+			if(!transit.equals(po.getTransitId()))
+				continue;
 			int in=Integer.parseInt(po.getInventoryInformation().getTime());
 			int out=Integer.parseInt(po.getInventoryOutInformation().getTime());
 			if((in>=begin&&in<=end)||(out>=begin&&out<=end))
@@ -125,6 +126,8 @@ public class InventoryDataImpl extends UnicastRemoteObject implements InventoryD
 		List<InventoryPO> iPOs = findAll();
 		ArrayList<InventoryPO> result=new ArrayList<>();
 		for (InventoryPO po : iPOs) {
+			if(!transitId.equals(po.getTransitId()))
+				continue;
 			int in=Integer.parseInt(po.getInventoryInformation().getTime());
 			int out=Integer.parseInt(po.getInventoryOutInformation().getTime());
 			if((in==today)||(out==today))
