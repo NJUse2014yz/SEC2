@@ -1,13 +1,16 @@
 package nju.sec.yz.ExpressSystem.bl.inventorybl;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
-import nju.sec.yz.ExpressSystem.client.RMIHelper;
+import nju.sec.yz.ExpressSystem.common.InventoryInInformation;
+import nju.sec.yz.ExpressSystem.common.InventoryOutInformation;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice.InventoryDataService;
 import nju.sec.yz.ExpressSystem.po.InventoryInSheetPO;
 import nju.sec.yz.ExpressSystem.po.InventoryOutSheetPO;
+import nju.sec.yz.ExpressSystem.po.InventoryPO;
 import nju.sec.yz.ExpressSystem.vo.InventoryVO;
 
 /**
@@ -34,15 +37,15 @@ public class Inventory {
 	 * 设定一个时间段，查看此时间段内的出/入库数量/金额/存储位置
 	 * 库存数量要有合计
 	 */
-	public InventoryVO observeStock(String transit,String begin, String end) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<InventoryVO> observeStock(String transit,String begin, String end) {
+		ArrayList<InventoryVO> list=new ArrayList<InventoryVO>();
+		return list;
 	}
 
 	/**
 	 * 
 	 */
-	public InventoryVO checkStock() {
+	public ArrayList<InventoryVO> checkStock() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -57,17 +60,38 @@ public class Inventory {
 		return null;
 	}
 	
-	public void exportToExcel() {
-		// TODO Auto-generated method stub
+	public ResultMessage exportToExcel() {
+		
+		return null;
+		
 		
 	}
 
 	public ResultMessage updateInReceipt(InventoryInSheetPO inPO) {
-		// TODO Auto-generated method stub
-		return null;
+		InventoryInInformation imfo = inPO.getInventoryInInformation();
+		ResultMessage message=null;
+		InventoryPO inventoryPO=new InventoryPO(imfo, null, inPO.getBarId() );
+		
+		try {
+			message=data.insert(inventoryPO);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return message;
 	}
+	
 	public ResultMessage updateOutReceipt(InventoryOutSheetPO outPO) {
-		// TODO 自动生成的方法存根
-		return null;
+		InventoryOutInformation info = outPO.getInventoryOutInformation();
+		ResultMessage message=null;
+		InventoryPO inventoryPO=new InventoryPO( null,info, outPO.getBarId() );
+		
+		try {
+			message=data.insert(inventoryPO);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return message;
 	}	
 }

@@ -1,7 +1,5 @@
 package nju.sec.yz.ExpressSystem.bl.inventorybl;
 
-import javax.management.InstanceNotFoundException;
-
 import nju.sec.yz.ExpressSystem.bl.deliverbl.ValidHelper;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptID;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;

@@ -20,6 +20,14 @@ public class InventoryPO implements Serializable{
 
 	
 
+	public InventoryPO(InventoryInInformation inventoryInformation,
+			InventoryOutInformation inventoryOutInformation, String barId) {
+		super();
+		this.inventoryInformation = inventoryInformation;
+		this.inventoryOutInformation = inventoryOutInformation;
+		this.barId = barId;
+	}
+
 	public InventoryInInformation getInventoryInformation() {
 		return inventoryInformation;
 	}

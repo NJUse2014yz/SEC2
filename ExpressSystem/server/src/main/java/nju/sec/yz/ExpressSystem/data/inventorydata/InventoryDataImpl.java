@@ -51,7 +51,7 @@ public class InventoryDataImpl extends UnicastRemoteObject implements InventoryD
 		List<InventoryPO> InventoryPOs = findAll();
 		for(InventoryPO po:InventoryPOs){
 			if(po.getBarId().equals(ipo.getBarId()))
-				return new ResultMessage(Result.FAIL,"车辆信息已存在");
+				return new ResultMessage(Result.FAIL,"库存信息已存在");
 		}
 		
 		InventoryPOs.add(ipo);

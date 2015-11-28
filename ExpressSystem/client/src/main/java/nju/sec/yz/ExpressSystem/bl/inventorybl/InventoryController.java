@@ -15,26 +15,23 @@ public class InventoryController implements InventoryBlService{
 
 	@Override
 	public ArrayList<InventoryVO> observeStock(String transit,String begin, String end) {
-		ArrayList<InventoryVO> list=new ArrayList<InventoryVO>();
 		Inventory inven=new Inventory();
-		InventoryVO vo=inven.observeStock(transit,begin, end);
-		list.add(vo);
-		return list;
+		ArrayList<InventoryVO> voList=inven.observeStock(transit,begin, end);
+		return voList;
 	}
 
 	@Override
 	public ArrayList<InventoryVO> checkStock() {
-		ArrayList<InventoryVO> list=new ArrayList<InventoryVO>();
 		Inventory inven=new Inventory();
-		InventoryVO vo=inven.checkStock();
-		list.add(vo);
-		return list;
+		ArrayList<InventoryVO> voList=inven.checkStock();
+		return voList;
 	}
 
 	@Override
 	public ResultMessage exportToExcel() {
-		// TODO Auto-generated method stub
-		return null;
+		Inventory inven=new Inventory();
+		ResultMessage  message=inven.exportToExcel();
+		return message;
 	}
 
 	@Override
