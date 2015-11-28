@@ -4,7 +4,6 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
-import nju.sec.yz.ExpressSystem.data.stub.InventoryDataStub;
 import nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice.InventoryDataService;
 import nju.sec.yz.ExpressSystem.po.InventoryPO;
 
@@ -30,7 +29,7 @@ public class InventoryDataDriver {
 			System.out.println("init!");
 		
 		
-		ArrayList<InventoryPO> array1=ids.findByTime(null, null);
+		ArrayList<InventoryPO> array1=ids.findByTime(null,null, null);
 		System.out.println(array1.size());
 		
 		

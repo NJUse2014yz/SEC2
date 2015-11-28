@@ -39,15 +39,46 @@ public class Inventory {
 	 */
 	public ArrayList<InventoryVO> observeStock(String transit,String begin, String end) {
 		ArrayList<InventoryVO> list=new ArrayList<InventoryVO>();
+		try {
+			ArrayList<InventoryPO> poList=data.findByTime(transit, begin, end);
+			for(InventoryPO po:poList){
+				InventoryVO vo=changePoToVo(po);
+				list.add(vo);
+			}
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		
 		return list;
 	}
 
+	private InventoryVO changePoToVo(InventoryPO po) {
+		InventoryInInformation inventoryInInformation=po.getInventoryInformation();
+		InventoryOutInformation inventoryOutInformation=po.getInventoryOutInformation();
+		String barId=po.getBarId();
+		InventoryVO vo=new InventoryVO();
+		vo.setInventoryInInformation(inventoryInInformation);
+		vo.setInventoryOutInformation(inventoryOutInformation);
+		vo.setBarId(barId);
+		return vo;
+	}
+
+
 	/**
-	 * 
+	 * 库存盘点
 	 */
 	public ArrayList<InventoryVO> checkStock() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<InventoryVO> list=new ArrayList<InventoryVO>();
+		try {
+			ArrayList<InventoryPO> poList=data.findAll();
+			for(InventoryPO po:poList){
+				InventoryVO vo=changePoToVo(po);
+				list.add(vo);
+			}
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 	
 	/**
@@ -60,8 +91,16 @@ public class Inventory {
 		return null;
 	}
 	
+	/**
+	 * @author sai
+	 * 导出excel
+	 * @return
+	 */
 	public ResultMessage exportToExcel() {
 		
+//		String filename = null;
+//		String txt = null;
+//		ExcelTool.exportExcel(filename, txt);
 		return null;
 		
 		
