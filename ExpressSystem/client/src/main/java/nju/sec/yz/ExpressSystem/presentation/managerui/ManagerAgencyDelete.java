@@ -22,7 +22,9 @@ import javax.swing.table.TableModel;
 import nju.sec.yz.ExpressSystem.bl.managerbl.ManagerController;
 import nju.sec.yz.ExpressSystem.blservice.managerBlService.AgencyBlService;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
+import nju.sec.yz.ExpressSystem.vo.AgencyListVO;
 import nju.sec.yz.ExpressSystem.vo.PositionVO;
+import nju.sec.yz.ExpressSystem.vo.TransitVO;
 
 public class ManagerAgencyDelete extends JPanel{
 	private AgencyBlService manager=new ManagerController();
@@ -89,8 +91,31 @@ public class ManagerAgencyDelete extends JPanel{
 					add(warning);
 					repaint();
 				}else{
+					AgencyListVO agency=manager.observeTransitByName(searchnum.getText());
+					ArrayList<TransitVO> transits=(ArrayList<TransitVO>) agency.transits;
+					ArrayList<PositionVO> positions=(ArrayList<PositionVO>) agency.positions;
 					
-					
+					String[][] TableData = null;
+					String[] columnTitle={"所在地","编号","名称"};
+					for(int i=0;i<transits.size();i++){
+						TransitVO temp=transits.get(i);
+						TableData[i][0]=temp.getLocation();
+						TableData[i][1]=temp.getId();
+						TableData[i][2]=temp.getName();
+						}
+					for(int i=0;i<positions.size();i++){
+						PositionVO temp=positions.get(i);
+						TableData[i+transits.size()][0]=temp.getLocation();
+						TableData[i+transits.size()][1]=temp.getId();
+						TableData[i+transits.size()][2]=temp.getName();
+					}
+					model=new DefaultTableModel(TableData,columnTitle);
+					table=new JTable(model);
+					table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+					jsc=new JScrollPane(table);
+					jsc.setVisible(true);
+				    jsc.setBounds(137,94,318,181);
+				    add(jsc);
 					
 					table.repaint();
 				}
