@@ -35,11 +35,11 @@ import nju.sec.yz.ExpressSystem.vo.TransitLoadSheetVO;
  */
 public class Collection implements ReceiptService{
 
-	private InDataService inDaata;
+	private InDataService inData;
 	
 	public Collection() {
 		try {
-			inDaata=DatafactoryProxy.getInDataService();
+			inData=DatafactoryProxy.getInDataService();
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -135,8 +135,13 @@ public class Collection implements ReceiptService{
 	
 	@Override
 	public ResultMessage approve(ReceiptVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		PaymentSheetVO receipt=(PaymentSheetVO)vo;
+		PaymentInformation info=receipt.getPaymentInformation();
+		Account account=new Account();
+//	TODO	account.updateCollection(info.get, info.getAmount());
+		PaymentSheetPO po=(PaymentSheetPO)this.convertToPO(receipt);
+		ResultMessage message=this.addCollection(po);
+		return message;
 	}
 
 	@Override
@@ -154,16 +159,6 @@ public class Collection implements ReceiptService{
 		
 		return vo;
 	}
-	/**
-	 * 保存收款单信息
-	 */
-	private ResultMessage addCollection(PaymentSheetPO po){
-		ResultMessage message=null;
-		
-		message=inDaata.insert(po);
-		
-		return null;
-	}
 
 
 	@Override
@@ -178,6 +173,80 @@ public class Collection implements ReceiptService{
 		po.setMakeTime(vo.getMakeTime());
 		po.setType(vo.getType());
 		return po;
+	}
+	
+	private PaymentSheetVO changeVOToPO(PaymentSheetPO po){
+		PaymentSheetVO vo=(PaymentSheetVO) this.show(po);
+		return vo;
+	}
+	
+	/**
+	 * 保存收款单信息
+	 */
+	private ResultMessage addCollection(PaymentSheetPO po){
+		ResultMessage message=null;
+		
+		try {
+			message=inData.insert(po);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		
+		return message;
+	}
+	/**
+	 * 获得总收入
+	 * @return
+	 */
+	public double getAll(){
+		List<PaymentSheetPO> pos=new ArrayList<>();
+		double in=0.0;
+		try {
+			pos=inData.findAll();
+			for(PaymentSheetPO po:pos){
+				in=in+po.getPaymentInformation().getAmount();
+			}
+		} catch (RemoteException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return in;
+		
+	}
+	
+	public List<PaymentSheetVO> getByTime(String begin,String end){
+		List<PaymentSheetPO> pos=new ArrayList<>();
+		List<PaymentSheetVO> vos=new ArrayList<>();
+		try {
+			pos=inData.findByTime(begin, end);
+			for(PaymentSheetPO po:pos){
+				PaymentSheetVO vo=this.changeVOToPO(po);
+				vos.add(vo);
+			}
+		} catch (RemoteException e) {
+			
+			e.printStackTrace();
+		}
+		return vos;
+		
+	}
+	
+	public List<PaymentSheetVO> getByPosition(String date,String positionId){
+		List<PaymentSheetPO> pos=new ArrayList<>();
+		List<PaymentSheetVO> vos=new ArrayList<>();
+		try {
+			pos=inData.findByPosition(date, positionId);
+			for(PaymentSheetPO po:pos){
+				PaymentSheetVO vo=this.changeVOToPO(po);
+				vos.add(vo);
+			}
+		} catch (RemoteException e) {
+			
+			e.printStackTrace();
+		}
+		return vos;
+		
 	}
 
 
