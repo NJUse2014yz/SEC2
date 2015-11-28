@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -81,7 +82,11 @@ private InventoryBlService inventoryservice=new InventoryController();
 				repaint();
 				
 				//成功
+<<<<<<< HEAD
 				InventoryListVO vo=inventoryservice.observeStock(null,date1.getTime(),date2.getTime());
+=======
+				ArrayList<InventoryVO> vo=(ArrayList<InventoryVO>) inventoryservice.observeStock(null,date1.getTime(),date2.getTime());
+>>>>>>> origin/master
 				TableModel model=table.getModel();
 				Object[][] newTableData={};
 				model=new DefaultTableModel(newTableData,columnTitle);
