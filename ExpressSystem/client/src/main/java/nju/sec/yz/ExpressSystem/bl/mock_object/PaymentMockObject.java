@@ -1,10 +1,8 @@
 package nju.sec.yz.ExpressSystem.bl.mock_object;
 
-import nju.sec.yz.ExpressSystem.bl.accountbl.Account;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.po.OutPO;
 import nju.sec.yz.ExpressSystem.vo.OutVO;
-import nju.sec.yz.ExpressSystem.vo.PaymentSheetVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 
 public class PaymentMockObject {

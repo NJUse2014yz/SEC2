@@ -30,6 +30,9 @@ public class InventoryVO {
 		return barId;
 	}
 	
+	public void setBarId(String barId) {
+		this.barId = barId;
+	}
 	public InventoryOutInformation getInventoryOutInformation() {
 		return inventoryOutInformation;
 	}

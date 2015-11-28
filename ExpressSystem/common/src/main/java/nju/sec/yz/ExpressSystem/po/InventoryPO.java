@@ -28,6 +28,9 @@ public class InventoryPO implements Serializable{
 		this.barId = barId;
 	}
 
+	public InventoryPO() {
+	}
+
 	public InventoryInInformation getInventoryInformation() {
 		return inventoryInformation;
 	}

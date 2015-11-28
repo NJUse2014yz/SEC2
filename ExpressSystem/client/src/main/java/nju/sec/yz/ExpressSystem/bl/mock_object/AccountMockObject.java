@@ -2,8 +2,6 @@ package nju.sec.yz.ExpressSystem.bl.mock_object;
 
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.po.AccountPO;
-import nju.sec.yz.ExpressSystem.vo.AccountVO;
-import nju.sec.yz.ExpressSystem.vo.OutVO;
 
 public class AccountMockObject {
 	public ResultMessage modifyAccount(AccountPO av) {
