@@ -25,15 +25,19 @@ public class FinanceController implements FinanceBlSevice{
 	}
 
 	@Override
-	public List<PaymentSheetVO> checkReceipt(String day, int positionId) {
+	public List<PaymentSheetVO> checkReceipt(String day, String positionId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
+	/**
+	 * 制定收款单
+	 */
 	public ResultMessage makeReceipt(PaymentSheetVO psv) {
-		// TODO Auto-generated method stub
-		return null;
+		Collection collection=new Collection();
+		ResultMessage message=collection.make(psv);
+		return message;
 	}
 
 	@Override

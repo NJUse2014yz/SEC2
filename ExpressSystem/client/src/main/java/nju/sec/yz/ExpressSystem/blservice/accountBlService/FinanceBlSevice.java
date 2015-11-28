@@ -20,7 +20,7 @@ public interface FinanceBlSevice {
 	 * 返回值改为List
 	 * @author cong
 	 */
-	public List<PaymentSheetVO> checkReceipt (String day,int positionId);
+	public List<PaymentSheetVO> checkReceipt (String day,String positionId);
 	
 	
 	/**

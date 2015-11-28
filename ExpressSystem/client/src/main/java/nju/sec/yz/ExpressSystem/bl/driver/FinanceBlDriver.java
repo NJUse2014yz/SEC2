@@ -20,7 +20,7 @@ public class FinanceBlDriver {
 		BussinessVO bussinessVO = financeBl_stub.checkBusinessCircumstance(null, null);
 		System.out.println("收款单：" + bussinessVO.getIn().get(0));
 		// TODO
-		financeBl_stub.checkReceipt(null, 0);
+		financeBl_stub.checkReceipt(null, "9");
 
 		// 导出excel
 		financeBl_stub.exportCostToExcel(null);
