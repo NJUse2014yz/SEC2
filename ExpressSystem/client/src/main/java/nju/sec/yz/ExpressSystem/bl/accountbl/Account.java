@@ -57,10 +57,10 @@ public class Account {
 	/**
 	 * 有付款单通过审批时，通过此方法更新账户
 	 */
-	public ResultMessage updatePayment(String account, int num) {
+	public ResultMessage updatePayment(String account, double d) {
 		AccountVO vo = this.observeAccount(account);
 
-		vo.setBalance(vo.getBalance() - num);
+		vo.setBalance(vo.getBalance() - d);
 
 		ResultMessage message = this.modifyAccount(vo);
 
@@ -70,7 +70,7 @@ public class Account {
 	/**
 	 * 有收款单通过审批时，通过此方法更新账户
 	 */
-	public ResultMessage updateCollection(String account, int num) {
+	public ResultMessage updateCollection(String account, double num) {
 		AccountVO vo = this.observeAccount(account);
 
 		vo.setBalance(vo.getBalance() + num);

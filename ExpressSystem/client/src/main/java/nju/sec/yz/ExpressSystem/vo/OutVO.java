@@ -20,9 +20,18 @@ public class OutVO extends ReceiptVO{
 		outInformation.setPerson(person);
 		outInformation.setReason(reason);
 	}
+	
+	public OutVO() {
+		// TODO Auto-generated constructor stub
+	}
 
 	public OutInformation getOutInformation() {
 		return outInformation;
+	}
+
+	public void setOutInformation(OutInformation info) {
+		this.outInformation=info;
+		
 	}
 	
 	

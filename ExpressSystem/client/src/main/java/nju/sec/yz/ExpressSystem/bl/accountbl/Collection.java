@@ -198,7 +198,7 @@ public class Collection implements ReceiptService{
 	 * 获得总收入
 	 * @return
 	 */
-	public double getAll(){
+	public double getAllCollection(){
 		List<PaymentSheetPO> pos=new ArrayList<>();
 		double in=0.0;
 		try {
