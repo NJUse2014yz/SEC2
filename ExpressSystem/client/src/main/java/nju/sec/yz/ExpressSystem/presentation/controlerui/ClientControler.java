@@ -37,12 +37,12 @@ public class ClientControler{
 	JPanel deliverMainPanel=new DeliverMainUi(this);
 	JPanel inventoryMainPanel=new InventoryMainUi(this);
 	JPanel accountMainPanel=new AccountMainUi(this,accountControler.bc);
-	JPanel managerMainPanel=new ManagerMainUiTest(this);
+	JPanel managerMainPanel=new ManagerMainUi(this,managerControler.mbc);
 	JPanel positionMainPanel=new PositionMainUi(this,positionControler.bc);
 	JPanel transitMainPanel=new TransitMainUi(this,transitControler.tbc);
 	JPanel adminstraterMainPanel=new AdminstraterMainUiTest(this);
 	
-	public MainUi mainFrame=new MainUi(inventoryMainPanel);
+	public MainUi mainFrame=new MainUi(managerMainPanel);
 
 	public void showFrame()
 	{
