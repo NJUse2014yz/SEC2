@@ -22,6 +22,7 @@ import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.InDataService;
 import nju.sec.yz.ExpressSystem.po.OutPO;
 import nju.sec.yz.ExpressSystem.po.PaymentSheetPO;
+import nju.sec.yz.ExpressSystem.po.PositionPO;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.po.TransitLoadSheetPO;
 import nju.sec.yz.ExpressSystem.vo.PaymentSheetVO;
@@ -58,6 +59,9 @@ public class Collection implements ReceiptService{
 		if(validResult.getResult()==Result.FAIL)
 			return validResult;
 		
+		//营业厅id
+		info.setPositionId(this.getPositionId(info.getPositionId()));
+		
 		//创建po
 		PaymentSheetPO po=new PaymentSheetPO();
 		PaymentInformation information=this.copyInfo(info);
@@ -84,6 +88,11 @@ public class Collection implements ReceiptService{
 		return id;
 	}
 	
+	private String getPositionId(String deliverId){
+		String positionId=deliverId.split("D")[0];
+		return positionId;
+	}
+	
 	private String accountancyId(){
 		UserInfo user=new User();
 		return user.getCurrentID();
@@ -93,11 +102,13 @@ public class Collection implements ReceiptService{
 		double amount=info.getAmount();
 		String id=info.getInDeliverId();
 		String time=info.getTime();
+		String positionId=info.getPositionId();
 		
 		PaymentInformation information=new PaymentInformation();
 		information.setAmount(amount);
 		information.setInDeliverId(id);
 		information.setTime(time);
+		information.setPositionId(positionId);
 		
 		return information;
 	}
@@ -147,6 +158,10 @@ public class Collection implements ReceiptService{
 	 * 保存收款单信息
 	 */
 	private ResultMessage addCollection(PaymentSheetPO po){
+		ResultMessage message=null;
+		
+		message=inDaata.insert(po);
+		
 		return null;
 	}
 
