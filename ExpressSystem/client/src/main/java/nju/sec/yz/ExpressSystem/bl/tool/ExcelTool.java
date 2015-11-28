@@ -16,13 +16,13 @@ import jxl.write.Label;
  */
 public class ExcelTool {
 	public static ResultMessage exportExcel(String filename,String txt){
-		ResultMessage message=new ResultMessage(Result.FAIL);
-		if(filename.equals("")||filename.isEmpty()){
-			message.setMessage("亲，你得取一个文件名哈");
+		ResultMessage message=new ResultMessage(Result.FAIL,"fail");
+		if(txt.equals("")||txt.isEmpty()){
+			message.setMessage("呜呜，导出失败");
 			return message;
 		}
 			
-		File file=new File("xsl/"+filename+".xls");
+		File file=new File(filename);
 		try{
 			file.createNewFile();
 			//创建工作簿
@@ -54,7 +54,8 @@ public class ExcelTool {
 		}catch(Exception  e){
 			e.printStackTrace();
 		}
-		return null;
+		message.setResult(Result.SUCCESS);
+		return message;
 	}
 //	public static void main(String[] args) {
 //		ExcelTool.exportExcel("xsl/"+".xls");

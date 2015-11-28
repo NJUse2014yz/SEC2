@@ -65,13 +65,14 @@ public class InventoryOutSheet implements ReceiptService{
 	}
 	
 	/**
-	 * 获得填单人ID
+	 * 获得中转中心ID
 	 * @return
 	 */
 	private String getInVentorID() {
 		UserInfo user=new User();
-		String id=user.getCurrentID();
-		return id;
+		String userid=user.getCurrentID();
+		String[] strs=userid.split("A");
+		return strs[0];
 	}
 	
 	@Override

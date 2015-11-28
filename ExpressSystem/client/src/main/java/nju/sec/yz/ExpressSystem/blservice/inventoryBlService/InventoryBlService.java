@@ -13,7 +13,7 @@ import nju.sec.yz.ExpressSystem.vo.InventoryVO;
  */
 public interface InventoryBlService {
 	//库存查看
-	public ArrayList<InventoryVO> observeStock(String transit,String begin,String end);
+	public ArrayList<InventoryVO> observeStock(String begin,String end);
 	//库存盘点
 	public ArrayList<InventoryVO> checkStock();
 	//导出excel

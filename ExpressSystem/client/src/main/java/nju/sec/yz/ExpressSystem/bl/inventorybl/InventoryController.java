@@ -14,9 +14,9 @@ import nju.sec.yz.ExpressSystem.vo.InventoryVO;
 public class InventoryController implements InventoryBlService{
 
 	@Override
-	public ArrayList<InventoryVO> observeStock(String transit,String begin, String end) {
+	public ArrayList<InventoryVO> observeStock(String begin, String end) {
 		Inventory inven=new Inventory();
-		ArrayList<InventoryVO> voList=inven.observeStock(transit,begin, end);
+		ArrayList<InventoryVO> voList=inven.observeStock(begin, end);
 		return voList;
 	}
 
