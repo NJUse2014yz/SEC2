@@ -8,6 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
 
 import nju.sec.yz.ExpressSystem.bl.tool.ExcelTool;
 import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
@@ -49,11 +50,11 @@ public class Inventory {
 	 * 设定一个时间段，查看此时间段内的出/入库数量/金额/存储位置
 	 * 库存数量要有合计
 	 */
-	public ArrayList<InventoryListVO> observeStock(String begin, String end) {
-		ArrayList<InventoryListVO> list=new ArrayList<InventoryListVO>();
+	public InventoryListVO observeStock(String begin, String end) {
+		InventoryListVO list=new InventoryListVO();
 		String transit=getTransit();
 		try {
-			ArrayList<InventoryInSheetPO> poList=data.findAll(transit);
+			List<InventoryInSheetPO> poList=data.findAll(transit);
 			if(poList==null)
 				return null;
 			for(InventoryInSheetPO po:poList){
@@ -80,7 +81,7 @@ public class Inventory {
 		ArrayList<InventoryListVO> list=new ArrayList<InventoryListVO>();
 		try {
 			String transit=getTransit();
-			ArrayList<InventoryInSheetPO> poList=data.findAll(transit);
+			List<InventoryInSheetPO> poList=data.findAll(transit);
 			if(poList==null)
 				return null;
 			for(InventoryInSheetPO po:poList){
