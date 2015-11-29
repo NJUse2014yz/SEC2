@@ -53,7 +53,7 @@ public class ExcelTool {
 			}
 			String contentline=null;
 			//循环添加数据,(注意数据下标)
-			int k=0;
+			int k=1;
 			while((contentline=reader.readLine())!=null){
 				String[] content=contentline.split(" ");
 				for(int j=0;j<content.length;j++){
@@ -75,7 +75,7 @@ public class ExcelTool {
 		message.setResult(Result.SUCCESS);
 		return message;
 	}
-//	public static void main(String[] args) {
-//		ExcelTool.exportExcel("xsl/"+".xls");
-//	}
+	public static void main(String[] args) {
+		ExcelTool.exportExcel("xsl/"+"1.xls", "File/test.txt");
+	}
 }
