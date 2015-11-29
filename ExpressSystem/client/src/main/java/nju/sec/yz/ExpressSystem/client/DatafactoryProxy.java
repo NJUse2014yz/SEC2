@@ -41,7 +41,7 @@ public class DatafactoryProxy {
 		DatafactoryProxy.datafactory = datafactory;
 	}
 
-	public InventoryInDataService getInventoryInDataService() throws RemoteException {
+	public static InventoryInDataService getInventoryInDataService() throws RemoteException {
 		return datafactory.getInventoryInDataService();
 	}
 

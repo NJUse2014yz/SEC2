@@ -68,11 +68,8 @@ public class Inventory {
 	}
 
 	private InventoryListVO changePoToVo(InventoryListPO po) {
-		InventoryInInformation inventoryInInformation=po.getInventoryInformation();
-		InventoryOutInformation inventoryOutInformation=po.getInventoryOutInformation();
-		String barId=po.getBarId();
-		InventoryListVO vo=new InventoryListVO();
-		return vo;
+		
+		return null;
 	}
 
 
@@ -121,10 +118,10 @@ public class Inventory {
 	 * 导出excel
 	 * @return
 	 */
-	public ResultMessage exportToExcel(){
+	public ResultMessage exportToExcel(InventoryListPO po){
 		ResultMessage message = new ResultMessage(Result.SUCCESS);
 		String filename =getFileName();
-		String txt = "22";
+		String txt ="22";
 		ExcelTool.exportExcel(filename, txt);
 		return message;
 		
@@ -133,45 +130,51 @@ public class Inventory {
 
 	private String getFileName() {
 		String result="";
-		int count=getCurrentCounter()+1;
-		saveCounter(count);
-		result="xsl/"+TimeTool.getDate()+"库存盘点信息"+count+".xlsx";
+		int count=Integer.parseInt(getCurrentCounter())+1;
+		System.out.println(count);
+		saveCounter(TimeTool.getDate()+count);
+		result="xsl/"+TimeTool.getDate()+"库存盘点信息"+count+".xls";
 		return result;
 	}
 	/**
-	 * 保存当天文件计数的次数
+	 * 保存当天文件日期和计数的次数
 	 */
-	public void saveCounter(int count){
+	private void saveCounter(String str){
 		File file=new File("File/count_excel");
 		try {
 			ObjectOutputStream out=new ObjectOutputStream(new FileOutputStream(file));
-			out.writeObject(count);
+			out.writeObject(str);
 			out.close();
-		} catch (IOException e) {
+		} catch (IOException e){
 			e.printStackTrace();
 		}
 	}
 	/**
-	 * 获得当天文件计数的次数
+	 * 获得文件计数的次数
 	 */
-	private int getCurrentCounter(){
+	private String getCurrentCounter(){
 		File file=new File("File/count_excel");
-		int count=0;
+		String str="";
 		try {
 			ObjectInputStream in=new ObjectInputStream(new FileInputStream(file));
-			count=(int) in.readObject();
+			str=(String) in.readObject();
 			in.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		return count;
+		if(str.length()<9){
+			System.out.println("---");
+			return 0+"";
+		}
+		if(!str.substring(0, 8).equals(TimeTool.getDate())){
+			//saveCounter(TimeTool.getDate()+0);
+			return 0+"";
+		}	
+		return str.charAt(8)+"";	
 	}
-	
-	
-	
-	
+		
 	public static void main(String[] args) {
 		Inventory i=new Inventory();
 		i.exportToExcel();
