@@ -77,7 +77,7 @@ public class Inventory {
 	/**
 	 * 库存盘点
 	 */
-	public ArrayList<InventoryListVO> checkStock() {
+	public InventoryListVO checkStock() {
 		ArrayList<InventoryListVO> list=new ArrayList<InventoryListVO>();
 		try {
 			String transit=getTransit();
