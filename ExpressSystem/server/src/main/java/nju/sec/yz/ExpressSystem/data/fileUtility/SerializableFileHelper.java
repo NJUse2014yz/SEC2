@@ -18,6 +18,8 @@ public class SerializableFileHelper {
     public static final String CAR_FILE_NAME = "car_data";
     public static final String DRIVER_FILE_NAME = "driver_data";
     public static final String INVENTORY_FILE_NAME = "inventory_data";
+    public static final String INVENTORY_IN_FILE_NAME = "inventory_in_data";
+    public static final String INVENTORY_OUT_FILE_NAME = "inventory_out_data";
     public static final String LOG_FILE_NAME = "log_data";
     public static final String AGENCY_FILE_NAME = "agency_data";
     public static final String CONST_FILE_NAME = "const_data";
@@ -110,6 +112,18 @@ public class SerializableFileHelper {
    
     public static File getInventoryFile() throws IOException {
         File file = new File(INVENTORY_FILE_NAME);
+        createFileIfNotExists(file);
+        return file;
+    }
+    
+    public static File getInventoryInFile() throws IOException {
+        File file = new File(INVENTORY_IN_FILE_NAME);
+        createFileIfNotExists(file);
+        return file;
+    }
+    
+    public static File getInventoryOutFile() throws IOException {
+        File file = new File(INVENTORY_OUT_FILE_NAME);
         createFileIfNotExists(file);
         return file;
     }

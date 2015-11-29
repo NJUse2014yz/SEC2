@@ -3,6 +3,7 @@ package nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
 
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.TransitCarInformation;
@@ -34,5 +35,5 @@ public interface InventoryDataService extends Remote{
 	 * 查看当天仓库中还未出库的库存
 	 * @param date 今天的日期
 	 */
-	public ArrayList<InventoryInSheetPO> findAll(String transit)throws RemoteException;
+	public List<InventoryInSheetPO> findAll(String transit)throws RemoteException;
 }
