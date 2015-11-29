@@ -75,7 +75,7 @@ public class ExcelTool {
 		message.setResult(Result.SUCCESS);
 		return message;
 	}
-	public static void main(String[] args) {
-		ExcelTool.exportExcel("xsl/"+"1.xls", "File/test.txt");
-	}
+//	public static void main(String[] args) {
+//		ExcelTool.exportExcel("xsl/"+"1.xls", "File/test.txt");
+//	}
 }
