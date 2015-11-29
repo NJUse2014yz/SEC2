@@ -53,10 +53,10 @@ public class Inventory {
 		ArrayList<InventoryListVO> list=new ArrayList<InventoryListVO>();
 		String transit=getTransit();
 		try {
-			ArrayList<InventoryListPO> poList=data.findByTime(transit, begin, end);
+			ArrayList<InventoryInSheetPO> poList=data.findAll(transit);
 			if(poList==null)
 				return null;
-			for(InventoryListPO po:poList){
+			for(InventoryInSheetPO po:poList){
 				InventoryListVO vo=changePoToVo(po);
 				list.add(vo);
 			}
@@ -67,7 +67,7 @@ public class Inventory {
 		return list;
 	}
 
-	private InventoryListVO changePoToVo(InventoryListPO po) {
+	private InventoryListVO changePoToVo(InventoryInSheetPO po) {
 		
 		return null;
 	}
@@ -80,10 +80,10 @@ public class Inventory {
 		ArrayList<InventoryListVO> list=new ArrayList<InventoryListVO>();
 		try {
 			String transit=getTransit();
-			ArrayList<InventoryListPO> poList=data.findByTime(transit, TimeTool.getDate());
+			ArrayList<InventoryInSheetPO> poList=data.findAll(transit);
 			if(poList==null)
 				return null;
-			for(InventoryListPO po:poList){
+			for(InventoryInSheetPO po:poList){
 				InventoryListVO vo=changePoToVo(po);
 				list.add(vo);
 			}
