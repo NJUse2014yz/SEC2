@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice.InventoryDataService;
-import nju.sec.yz.ExpressSystem.po.InventoryPO;
+import nju.sec.yz.ExpressSystem.po.InventoryListPO;
 
 /**
  * 
@@ -32,7 +32,7 @@ public class InventoryDataDriver {
 		
 		
 		
-		ArrayList<InventoryPO> array3=ids.findAll();
+		ArrayList<InventoryListPO> array3=ids.findAll();
 		System.out.println(array3.size());
 		
 		

@@ -41,11 +41,9 @@ public class InventoryCheck extends JPanel{
 		
 		InventoryButtonComponents ibc=new InventoryButtonComponents(maincontroler,this);
 		
-<<<<<<< HEAD
 		InventoryListVO vo=inventoryservice.checkStock();
-=======
+
 		ArrayList<InventoryVO> vo=(ArrayList<InventoryVO>) inventoryservice.checkStock();
->>>>>>> origin/master
 		
 		Object[][] tableData = {};
 		String[] columnTitle = { "快递编号", "入库日期", "目的地", "区号", "排号", "架号", "位号" };

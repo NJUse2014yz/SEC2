@@ -13,6 +13,7 @@ import nju.sec.yz.ExpressSystem.bl.tool.ExcelTool;
 import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.bl.userbl.User;
 import nju.sec.yz.ExpressSystem.bl.userbl.UserInfo;
+import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
 import nju.sec.yz.ExpressSystem.common.InventoryInInformation;
 import nju.sec.yz.ExpressSystem.common.InventoryOutInformation;
 import nju.sec.yz.ExpressSystem.common.Result;
@@ -20,7 +21,7 @@ import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice.InventoryDataService;
 import nju.sec.yz.ExpressSystem.po.InventoryInSheetPO;
 import nju.sec.yz.ExpressSystem.po.InventoryOutSheetPO;
-import nju.sec.yz.ExpressSystem.po.InventoryPO;
+import nju.sec.yz.ExpressSystem.po.InventoryListPO;
 import nju.sec.yz.ExpressSystem.vo.InventoryListVO;
 
 /**
@@ -33,14 +34,14 @@ public class Inventory {
 	private InventoryDataService data;
 	private double rate;
 
-//	public Inventory() {
-//		try {
-//			data=DatafactoryProxy.getInventoryDataService();
-//		} catch (RemoteException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
+	public Inventory() {
+		try {
+			data=DatafactoryProxy.getInventoryDataService();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	
 	/**
@@ -52,10 +53,10 @@ public class Inventory {
 		ArrayList<InventoryListVO> list=new ArrayList<InventoryListVO>();
 		String transit=getTransit();
 		try {
-			ArrayList<InventoryPO> poList=data.findByTime(transit, begin, end);
+			ArrayList<InventoryListPO> poList=data.findByTime(transit, begin, end);
 			if(poList==null)
 				return null;
-			for(InventoryPO po:poList){
+			for(InventoryListPO po:poList){
 				InventoryListVO vo=changePoToVo(po);
 				list.add(vo);
 			}
@@ -66,14 +67,11 @@ public class Inventory {
 		return list;
 	}
 
-	private InventoryListVO changePoToVo(InventoryPO po) {
+	private InventoryListVO changePoToVo(InventoryListPO po) {
 		InventoryInInformation inventoryInInformation=po.getInventoryInformation();
 		InventoryOutInformation inventoryOutInformation=po.getInventoryOutInformation();
 		String barId=po.getBarId();
 		InventoryListVO vo=new InventoryListVO();
-		vo.setInventoryInInformation(inventoryInInformation);
-		vo.setInventoryOutInformation(inventoryOutInformation);
-		vo.setBarId(barId);
 		return vo;
 	}
 
@@ -85,10 +83,10 @@ public class Inventory {
 		ArrayList<InventoryListVO> list=new ArrayList<InventoryListVO>();
 		try {
 			String transit=getTransit();
-			ArrayList<InventoryPO> poList=data.findByTime(transit, TimeTool.getDate());
+			ArrayList<InventoryListPO> poList=data.findByTime(transit, TimeTool.getDate());
 			if(poList==null)
 				return null;
-			for(InventoryPO po:poList){
+			for(InventoryListPO po:poList){
 				InventoryListVO vo=changePoToVo(po);
 				list.add(vo);
 			}
@@ -171,33 +169,9 @@ public class Inventory {
 		return count;
 	}
 	
-	public ResultMessage updateInReceipt(InventoryInSheetPO inPO) {
-		InventoryInInformation imfo = inPO.getInventoryInInformation();
-		ResultMessage message=null;
-		InventoryPO inventoryPO=new InventoryPO(imfo, null, inPO.getBarId() );
-		
-		try {
-			message=data.insert(inventoryPO);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return message;
-	}
 	
-	public ResultMessage updateOutReceipt(InventoryOutSheetPO outPO) {
-		InventoryOutInformation info = outPO.getInventoryOutInformation();
-		ResultMessage message=null;
-		InventoryPO inventoryPO=new InventoryPO( null,info, outPO.getBarId() );
-		
-		try {
-			message=data.insert(inventoryPO);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return message;
-	}	
+	
+	
 	public static void main(String[] args) {
 		Inventory i=new Inventory();
 		i.exportToExcel();

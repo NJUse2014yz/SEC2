@@ -7,7 +7,7 @@ import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.TransportType;
 import nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice.InventoryDataService;
 import nju.sec.yz.ExpressSystem.po.CarPO;
-import nju.sec.yz.ExpressSystem.po.InventoryPO;
+import nju.sec.yz.ExpressSystem.po.InventoryListPO;
 /**
  * 
  * @author zhangqi
@@ -16,12 +16,12 @@ import nju.sec.yz.ExpressSystem.po.InventoryPO;
 public class InventoryDataStub implements InventoryDataService{
 	
 	@Override
-	public ResultMessage insert(InventoryPO ipo) throws RemoteException{
+	public ResultMessage insert(InventoryListPO ipo) throws RemoteException{
 		return null;
 	}
 
 	@Override
-	public ResultMessage update(InventoryPO ipo) throws RemoteException{
+	public ResultMessage update(InventoryListPO ipo) throws RemoteException{
 		return null;
 	}
 
@@ -31,18 +31,18 @@ public class InventoryDataStub implements InventoryDataService{
 	}
 
 	@Override
-	public ArrayList<InventoryPO> findByTime(String transit,String timeIn,String timeOut)throws RemoteException{
-		return new ArrayList<InventoryPO>();
+	public ArrayList<InventoryListPO> findByTime(String transit,String timeIn,String timeOut)throws RemoteException{
+		return new ArrayList<InventoryListPO>();
 	}
 
 
 	@Override
-	public ArrayList<InventoryPO> findAll( ) throws RemoteException{
-		return new ArrayList<InventoryPO>();
+	public ArrayList<InventoryListPO> findAll( ) throws RemoteException{
+		return new ArrayList<InventoryListPO>();
 	}
 
 	@Override
-	public ArrayList<InventoryPO> findByTime(String transit,String date) throws RemoteException {
+	public ArrayList<InventoryListPO> findByTime(String transit,String date) throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}

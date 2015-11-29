@@ -15,7 +15,7 @@ import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.data.fileUtility.SerializableFileHelper;
 import nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice.InventoryDataService;
-import nju.sec.yz.ExpressSystem.po.InventoryPO;
+import nju.sec.yz.ExpressSystem.po.InventoryListPO;
 
 public class InventoryDataImpl extends UnicastRemoteObject implements InventoryDataService{
 
@@ -26,7 +26,7 @@ public class InventoryDataImpl extends UnicastRemoteObject implements InventoryD
 	/**
 	 * 保存数据到文件
 	 */
-	private synchronized ResultMessage saveData(List<InventoryPO> InventoryPOs){
+	private synchronized ResultMessage saveData(List<InventoryListPO> InventoryPOs){
 		try {
 			File file = SerializableFileHelper.getInventoryFile();
 			try (ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(file))) {
@@ -41,15 +41,15 @@ public class InventoryDataImpl extends UnicastRemoteObject implements InventoryD
 	}
 	
 	@Override
-	public synchronized ResultMessage insert(InventoryPO ipo) throws RemoteException {
+	public synchronized ResultMessage insert(InventoryListPO ipo) throws RemoteException {
 		System.out.println("inserting a InventoryPO...");
 		if(ipo==null){
 			System.out.println("插入了一个空的InventoryPO！！！");
 			return new ResultMessage(Result.FAIL, "系统错误");
 		}
 		
-		List<InventoryPO> InventoryPOs = findAll();
-		for(InventoryPO po:InventoryPOs){
+		List<InventoryListPO> InventoryPOs = findAll();
+		for(InventoryListPO po:InventoryPOs){
 			if(po.getBarId().equals(ipo.getBarId()))
 				return new ResultMessage(Result.FAIL,"库存信息已存在");
 		}
@@ -61,7 +61,7 @@ public class InventoryDataImpl extends UnicastRemoteObject implements InventoryD
 	}
 
 	@Override
-	public synchronized ResultMessage update(InventoryPO ipo) throws RemoteException {
+	public synchronized ResultMessage update(InventoryListPO ipo) throws RemoteException {
 		System.out.println("updating a InventoryPO...");
 		if(ipo==null){
 			System.out.println("更新的InventoryPO是空的！！！");
@@ -70,9 +70,9 @@ public class InventoryDataImpl extends UnicastRemoteObject implements InventoryD
 			
 		String id=ipo.getBarId();
 
-		List<InventoryPO> InventoryPOs = findAll();
+		List<InventoryListPO> InventoryPOs = findAll();
 		for (int i = 0; i < InventoryPOs.size(); i++) {
-			InventoryPO po = InventoryPOs.get(i);
+			InventoryListPO po = InventoryPOs.get(i);
 			String carID = po.getBarId();
 			if (id.equals(carID)) {
 				InventoryPOs.remove(i);
@@ -94,7 +94,7 @@ public class InventoryDataImpl extends UnicastRemoteObject implements InventoryD
 	}
 
 	@Override
-	public ArrayList<InventoryPO> findByTime(String transit,String timeIn, String timeOut) throws RemoteException {
+	public ArrayList<InventoryListPO> findByTime(String transit,String timeIn, String timeOut) throws RemoteException {
 		System.out.println("finding inventoryPO...");
 		if(timeIn==null||timeOut==null){
 			System.out.println("时间为null！！！");
@@ -102,9 +102,9 @@ public class InventoryDataImpl extends UnicastRemoteObject implements InventoryD
 		}
 		int begin=Integer.parseInt(timeIn);
 		int end=Integer.parseInt(timeOut);
-		List<InventoryPO> iPOs = findAll();
-		ArrayList<InventoryPO> result=new ArrayList<>();
-		for (InventoryPO po : iPOs) {
+		List<InventoryListPO> iPOs = findAll();
+		ArrayList<InventoryListPO> result=new ArrayList<>();
+		for (InventoryListPO po : iPOs) {
 			if(!transit.equals(po.getTransitId()))
 				continue;
 			int in=Integer.parseInt(po.getInventoryInformation().getTime());
@@ -116,16 +116,16 @@ public class InventoryDataImpl extends UnicastRemoteObject implements InventoryD
 	}
 
 	@Override
-	public ArrayList<InventoryPO> findByTime(String transitId,String date) throws RemoteException {
+	public ArrayList<InventoryListPO> findByTime(String transitId,String date) throws RemoteException {
 		System.out.println("finding inventoryPO...");
 		if(date==null){
 			System.out.println("时间为null！！！");
 			return null;
 		}
 		int today=Integer.parseInt(date);
-		List<InventoryPO> iPOs = findAll();
-		ArrayList<InventoryPO> result=new ArrayList<>();
-		for (InventoryPO po : iPOs) {
+		List<InventoryListPO> iPOs = findAll();
+		ArrayList<InventoryListPO> result=new ArrayList<>();
+		for (InventoryListPO po : iPOs) {
 			if(!transitId.equals(po.getTransitId()))
 				continue;
 			int in=Integer.parseInt(po.getInventoryInformation().getTime());
@@ -137,14 +137,14 @@ public class InventoryDataImpl extends UnicastRemoteObject implements InventoryD
 	}
 
 	@Override
-	public ArrayList<InventoryPO> findAll() throws RemoteException {
+	public ArrayList<InventoryListPO> findAll() throws RemoteException {
 		File file = new File(SerializableFileHelper.INVENTORY_FILE_NAME);
         if (!file.exists()) {
             return new ArrayList<>();
         }
         try (ObjectInputStream is = new ObjectInputStream(new FileInputStream(file))) {
             //noinspection unchecked
-            return (ArrayList<InventoryPO>) is.readObject();
+            return (ArrayList<InventoryListPO>) is.readObject();
         } catch (Exception e) {
             return new ArrayList<>();
         }

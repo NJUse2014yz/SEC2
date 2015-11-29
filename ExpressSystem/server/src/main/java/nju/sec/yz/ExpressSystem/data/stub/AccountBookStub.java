@@ -10,7 +10,7 @@ import nju.sec.yz.ExpressSystem.po.AccountBookPO;
 import nju.sec.yz.ExpressSystem.po.AccountPO;
 import nju.sec.yz.ExpressSystem.po.AgencyPO;
 import nju.sec.yz.ExpressSystem.po.CarPO;
-import nju.sec.yz.ExpressSystem.po.InventoryPO;
+import nju.sec.yz.ExpressSystem.po.InventoryListPO;
 import nju.sec.yz.ExpressSystem.po.StaffPO;
 import nju.sec.yz.ExpressSystem.po.UserPO;
 
@@ -26,7 +26,7 @@ public class AccountBookStub implements AccountBookDataService{
 		// TODO 自动生成的方法存根
 		ArrayList<AccountBookPO> array=new ArrayList<AccountBookPO>();
 		array.add(new AccountBookPO(new AgencyPO("000", "000", "总公司"), new ArrayList<StaffPO>(), new ArrayList<CarPO>(),
-				new ArrayList<AccountPO>(), new ArrayList<InventoryPO>(),"f"));
+				new ArrayList<AccountPO>(), new ArrayList<InventoryListPO>(),"f"));
 		return array;
 
 	}
@@ -35,7 +35,7 @@ public class AccountBookStub implements AccountBookDataService{
 	public AccountBookPO init() throws RemoteException {
 		// TODO 自动生成的方法存根
 		return new AccountBookPO(new AgencyPO("000", "000", "总公司"), new ArrayList<StaffPO>(), new ArrayList<CarPO>(),
-				new ArrayList<AccountPO>(), new ArrayList<InventoryPO>(),"f");
+				new ArrayList<AccountPO>(), new ArrayList<InventoryListPO>(),"f");
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class AccountBookStub implements AccountBookDataService{
 	@Override
 	public AccountBookPO find(String id) throws RemoteException {
 		return new AccountBookPO(new AgencyPO("000", "000", "总公司"), new ArrayList<StaffPO>(), new ArrayList<CarPO>(),
-				new ArrayList<AccountPO>(), new ArrayList<InventoryPO>(),"f");
+				new ArrayList<AccountPO>(), new ArrayList<InventoryListPO>(),"f");
 	}
 	
 

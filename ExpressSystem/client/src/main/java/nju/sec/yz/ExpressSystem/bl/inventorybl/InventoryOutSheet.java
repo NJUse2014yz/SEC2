@@ -1,5 +1,7 @@
 package nju.sec.yz.ExpressSystem.bl.inventorybl;
 
+import java.rmi.RemoteException;
+
 import nju.sec.yz.ExpressSystem.bl.deliverbl.ValidHelper;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptID;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;
@@ -7,11 +9,14 @@ import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
 import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.bl.userbl.User;
 import nju.sec.yz.ExpressSystem.bl.userbl.UserInfo;
+import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
 import nju.sec.yz.ExpressSystem.common.IdType;
 import nju.sec.yz.ExpressSystem.common.InventoryOutInformation;
 import nju.sec.yz.ExpressSystem.common.ReceiptType;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice.InventoryDataService;
+import nju.sec.yz.ExpressSystem.po.InventoryListPO;
 import nju.sec.yz.ExpressSystem.po.InventoryOutSheetPO;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.vo.InventoryOutSheetVO;
@@ -20,19 +25,34 @@ import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 /**
  * 出库单的领域模型对象
  * @author 周聪
- *
+ * @changer sai
  */
 public class InventoryOutSheet implements ReceiptService{
+	private InventoryOutDataService data;
 	
+	public InventoryOutSheet() {
+		try {
+			data=DatafactoryProxy.getInventoryOutDataService();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 通过出库单的审批
+	 */
 	@Override
 	public ResultMessage approve(ReceiptVO vo) {
-		Inventory inventory=new Inventory();
 		InventoryOutSheetPO outPO = (InventoryOutSheetPO) convertToPO(vo);
-		ResultMessage resultMessage=inventory.updateOutReceipt(outPO);
+		ResultMessage resultMessage=updateOutReceipt(outPO);
 		System.out.println("Approving...");
 		return resultMessage;
 	}
 
+	/**
+	 * 生成出库单
+	 */
 	@Override
 	public ResultMessage make(ReceiptVO vo) {
 		InventoryOutSheetVO outSheet=(InventoryOutSheetVO)vo;
@@ -45,7 +65,7 @@ public class InventoryOutSheet implements ReceiptService{
 		InventoryOutSheetPO outPO =(InventoryOutSheetPO) convertToPO(vo);
 		outPO.setId(createID());
 		outPO.setType(ReceiptType.INVENTORY_OUT);
-		outPO.setMakePerson(this.getInVentorID());
+		outPO.setMakePerson(this.getUserID());
 		outPO.setMakeTime(TimeTool.getDate());
 		
 		ReceiptList receiptList = new ReceiptList();
@@ -58,7 +78,7 @@ public class InventoryOutSheet implements ReceiptService{
 	 * 生成入库单ID
 	 */
 	private String createID() {
-		String inventorId=this.getInVentorID();
+		String inventorId=this.getTransitID();
 		ReceiptID idMaker=new ReceiptID();
 		String id=idMaker.getID(inventorId, IdType.INVENTORY_OUT);
 		return id;
@@ -68,11 +88,20 @@ public class InventoryOutSheet implements ReceiptService{
 	 * 获得中转中心ID
 	 * @return
 	 */
-	private String getInVentorID() {
-		UserInfo user=new User();
-		String userid=user.getCurrentID();
+	private String getTransitID() {
+		String userid=getUserID();
 		String[] strs=userid.split("A");
 		return strs[0];
+	}
+	
+
+	/**
+	 * 获得用户ID
+	 */
+	private String getUserID() {
+		UserInfo user=new User();
+		String userid=user.getCurrentID();
+		return userid;
 	}
 	
 	@Override
@@ -126,4 +155,16 @@ public class InventoryOutSheet implements ReceiptService{
 		return message;
 	}
 	
+	public ResultMessage updateOutReceipt(InventoryOutSheetPO outPO) {
+		ResultMessage message=null;
+		InventoryListPO inventoryPO=new InventoryListPO( );
+		
+		try {
+			message=data.insert(outPO);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return message;
+	}	
 }
