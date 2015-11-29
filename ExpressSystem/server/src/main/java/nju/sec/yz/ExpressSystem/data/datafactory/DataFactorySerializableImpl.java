@@ -14,6 +14,8 @@ import nju.sec.yz.ExpressSystem.data.deliverdata.CollectionRecordDataImpl;
 import nju.sec.yz.ExpressSystem.data.deliverdata.DeliverDataImpl;
 import nju.sec.yz.ExpressSystem.data.deliverdata.OrderDataImpl;
 import nju.sec.yz.ExpressSystem.data.inventorydata.InventoryDataImpl;
+import nju.sec.yz.ExpressSystem.data.inventorydata.InventoryInDataImpl;
+import nju.sec.yz.ExpressSystem.data.inventorydata.InventoryOutDataImpl;
 import nju.sec.yz.ExpressSystem.data.logdata.LogDataImpl;
 import nju.sec.yz.ExpressSystem.data.managedata.AgencyDataImpl;
 import nju.sec.yz.ExpressSystem.data.managedata.CityIdDataImpl;
@@ -37,6 +39,8 @@ import nju.sec.yz.ExpressSystem.dataservice.deliverDataSevice.CollectionRecordDa
 import nju.sec.yz.ExpressSystem.dataservice.deliverDataSevice.DeliverDataService;
 import nju.sec.yz.ExpressSystem.dataservice.deliverDataSevice.OrderDataService;
 import nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice.InventoryDataService;
+import nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice.InventoryInDataService;
+import nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice.InventoryOutDataService;
 import nju.sec.yz.ExpressSystem.dataservice.logDataSevice.LogDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.AgencyDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.CityIdDataService;
@@ -168,6 +172,18 @@ public class DataFactorySerializableImpl extends UnicastRemoteObject implements 
 	@Override
 	public BarIdsDataService getBarIdsDataService() throws RemoteException {
 		return new BarIdsDataImpl();
+	}
+
+	@Override
+	public InventoryInDataService getInventoryInDataService() throws RemoteException {
+		
+		return new InventoryInDataImpl();
+	}
+
+	@Override
+	public InventoryOutDataService getInventoryOutDataService() throws RemoteException {
+		
+		return new InventoryOutDataImpl();
 	}
 
 }

@@ -1,6 +1,8 @@
 package nju.sec.yz.ExpressSystem.client;
 
 import java.rmi.RemoteException;
+
+
 import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.AccountBookDataService;
 import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.AccountDataService;
 import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.InDataService;
@@ -13,6 +15,8 @@ import nju.sec.yz.ExpressSystem.dataservice.deliverDataSevice.CollectionRecordDa
 import nju.sec.yz.ExpressSystem.dataservice.deliverDataSevice.DeliverDataService;
 import nju.sec.yz.ExpressSystem.dataservice.deliverDataSevice.OrderDataService;
 import nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice.InventoryDataService;
+import nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice.InventoryInDataService;
+import nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice.InventoryOutDataService;
 import nju.sec.yz.ExpressSystem.dataservice.logDataSevice.LogDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.AgencyDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.CityIdDataService;
@@ -22,114 +26,107 @@ import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.StaffDataService;
 import nju.sec.yz.ExpressSystem.dataservice.receiptDataSevice.ReceiptCounterDataService;
 import nju.sec.yz.ExpressSystem.dataservice.receiptDataSevice.ReceiptDataService;
 import nju.sec.yz.ExpressSystem.dataservice.userDataSevice.UserDataService;
+
 /**
  * datafactory在客户端的代理
+ * 
  * @author 周聪
  *
  */
 public class DatafactoryProxy {
 
 	private static DatafactoryService datafactory;
-	
+
 	public static void setDatafactory(DatafactoryService datafactory) {
 		DatafactoryProxy.datafactory = datafactory;
 	}
-	
+
+	public InventoryInDataService getInventoryInDataService() throws RemoteException {
+		return datafactory.getInventoryInDataService();
+	}
+
+	public InventoryOutDataService getInventoryOutDataService() throws RemoteException {
+		return datafactory.getInventoryOutDataService();
+	}
+
 	public BarIdsDataService getBarIdsDataService() throws RemoteException {
 		return datafactory.getBarIdsDataService();
 	}
-	
+
 	public static CityIdDataService getCityIdDataService() throws RemoteException {
 		return datafactory.getCityIdDataService();
 	}
-	
+
 	static public ReceiptCounterDataService getCounterDataService() throws RemoteException {
 		return datafactory.getCounterDataService();
 	}
-	
-	static public DeliverDataService getDeliverDataService() throws RemoteException{
+
+	static public DeliverDataService getDeliverDataService() throws RemoteException {
 		return datafactory.getDeliverDataService();
 	}
 
-	
-	static public AccountBookDataService getAccountBookDataService()  throws RemoteException{
+	static public AccountBookDataService getAccountBookDataService() throws RemoteException {
 		return datafactory.getAccountBookDataService();
 	}
 
-	public static AccountDataService getAccountDataService()  throws RemoteException{
+	public static AccountDataService getAccountDataService() throws RemoteException {
 		return datafactory.getAccountDataService();
 	}
 
-	
-	static public InDataService getInDataService()  throws RemoteException{
+	static public InDataService getInDataService() throws RemoteException {
 		return datafactory.getInDataService();
 	}
 
-	
-	static public OutDataService getOutDataService()  throws RemoteException{
+	static public OutDataService getOutDataService() throws RemoteException {
 		return datafactory.getOutDataService();
 	}
 
-	
-	static public CarDataService getCarDataService()  throws RemoteException{
+	static public CarDataService getCarDataService() throws RemoteException {
 		return datafactory.getCarDataService();
 	}
 
-	
-	static public DriverDataService getDriverDataService()  throws RemoteException{
+	static public DriverDataService getDriverDataService() throws RemoteException {
 		return datafactory.getDriverDataService();
 	}
 
-	
-	static public InventoryDataService getInventoryDataService()  throws RemoteException{
+	static public InventoryDataService getInventoryDataService() throws RemoteException {
 		return datafactory.getInventoryDataService();
 	}
 
-	
-	static public LogDataService getLogDataService()  throws RemoteException{
+	static public LogDataService getLogDataService() throws RemoteException {
 		return datafactory.getLogDataService();
 	}
 
-	
-	static public AgencyDataService getAgencyDataService()  throws RemoteException{
+	static public AgencyDataService getAgencyDataService() throws RemoteException {
 		return datafactory.getAgencyDataService();
 	}
 
-	
-	static public ConstDataService getConstDataService()  throws RemoteException{
+	static public ConstDataService getConstDataService() throws RemoteException {
 		return datafactory.getConstDataService();
 	}
 
-	
-	static public SalaryDataService getSalaryDataService()  throws RemoteException{
+	static public SalaryDataService getSalaryDataService() throws RemoteException {
 		return datafactory.getSalaryDataService();
 	}
 
-	
-	static public StaffDataService getStaffDataService()  throws RemoteException{
+	static public StaffDataService getStaffDataService() throws RemoteException {
 		return datafactory.getStaffDataService();
 	}
 
-	
-	static public ReceiptDataService getReceiptDataService()  throws RemoteException{
+	static public ReceiptDataService getReceiptDataService() throws RemoteException {
 		return datafactory.getReceiptDataService();
 	}
 
-	
-	static public UserDataService getUserDataService()  throws RemoteException{
+	static public UserDataService getUserDataService() throws RemoteException {
 		return datafactory.getUserDataService();
 	}
 
-
-
-	public static OrderDataService getOrderDataService() throws RemoteException{
+	public static OrderDataService getOrderDataService() throws RemoteException {
 		return datafactory.getOrderDataService();
 	}
-	
+
 	public static CollectionRecordDataService getCollectionRecordDataService() throws RemoteException {
 		return datafactory.getCollectionRecordDataService();
 	}
-	
-	
 
 }

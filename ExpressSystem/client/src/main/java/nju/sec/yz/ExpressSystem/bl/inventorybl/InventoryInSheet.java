@@ -15,6 +15,7 @@ import nju.sec.yz.ExpressSystem.common.InventoryInInformation;
 import nju.sec.yz.ExpressSystem.common.ReceiptType;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice.InventoryInDataService;
 import nju.sec.yz.ExpressSystem.po.InventoryInSheetPO;
 import nju.sec.yz.ExpressSystem.po.InventoryListPO;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
