@@ -8,6 +8,7 @@ import java.io.Serializable;
  *
  */
 public class InventoryInInformation  implements Serializable{
+	private String transit;//中转中心编号，没有时设为null
 	private String time;
 	private String destination;
 	private int block;
@@ -16,7 +17,7 @@ public class InventoryInInformation  implements Serializable{
 	private int positon;
 	
 	public InventoryInInformation(String time, String destination, int block,
-			int row, int shelf, int positon) {
+			int row, int shelf, int positon,String transit) {
 		super();
 		this.time = time;
 		this.destination = destination;
@@ -24,6 +25,7 @@ public class InventoryInInformation  implements Serializable{
 		this.row = row;
 		this.shelf = shelf;
 		this.positon = positon;
+		this.transit=transit;
 	}
 	public String getTime() {
 		return time;
@@ -60,6 +62,12 @@ public class InventoryInInformation  implements Serializable{
 	}
 	public void setPositon(int positon) {
 		this.positon = positon;
+	}
+	public String getTransit() {
+		return transit;
+	}
+	public void setTransit(String transit) {
+		this.transit = transit;
 	}
 	
 	
