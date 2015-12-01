@@ -336,25 +336,25 @@ public class ManagerButtonComponent {
 	
 	public void setOriginal(){
 		buttons[0] = new JButton(agencyIcon1);
-		buttons[0].setBounds(14, 50, width, height1);
+		buttons[0].setBounds(13, 50, width, height1);
 		
 		buttons[1] = new JButton(staffIcon1);
-		buttons[1].setBounds(14, 50+height1*1, width, height1);
+		buttons[1].setBounds(13, 50+height1*1, width, height1);
 		
 		buttons[2] = new JButton(salaryIcon1);
-		buttons[2].setBounds(14, 50+height1*2, width, height1);
+		buttons[2].setBounds(13, 50+height1*2, width, height1);
 		
 		buttons[3] = new JButton(constIcon1);
-		buttons[3].setBounds(14, 50+height1*3, width, height1);
+		buttons[3].setBounds(13, 50+height1*3, width, height1);
 		
 		buttons[4] = new JButton(receiptIcon);
-		buttons[4].setBounds(14, 50+height1*4, width, height1);
+		buttons[4].setBounds(13, 50+height1*4, width, height1);
 		
 		buttons[5] = new JButton(accountIcon);
-		buttons[5].setBounds(14, 50+height1*5, width, height1);
+		buttons[5].setBounds(13, 50+height1*5, width, height1);
 		
 		buttons[6] = new JButton(logIcon);
-		buttons[6].setBounds(14, 50+height1*6, width, height1);
+		buttons[6].setBounds(13, 50+height1*6, width, height1);
 		
 		add = new JButton(addIcon);
 		add.setSize(width, height2);
@@ -385,16 +385,16 @@ public class ManagerButtonComponent {
 			buttons[count-1].setIcon(imgs[2*count-2]);
 		}
 		
-		add.setLocation(14,50+height1*i);
+		add.setLocation(13,50+height1*i);
 		add.setVisible(true);
 		
-		delete.setLocation(14,50+height1*i+height2*1);
+		delete.setLocation(13,50+height1*i+height2*1);
 		delete.setVisible(true);
 		
-		modify.setLocation(14,50+height1*i+height2*2);
+		modify.setLocation(13,50+height1*i+height2*2);
 		modify.setVisible(true);
 		
-		observe.setLocation(14,50+height1*i+height2*3);
+		observe.setLocation(13,50+height1*i+height2*3);
 		observe.setVisible(true);
 		
 		

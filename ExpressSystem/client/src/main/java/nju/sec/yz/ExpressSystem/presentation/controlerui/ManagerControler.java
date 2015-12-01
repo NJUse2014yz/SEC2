@@ -48,15 +48,15 @@ public ManagerButtonComponent mbc;
 			mainControler.mainFrame.nextPanel(new ManagerAgencyDelete(mainControler,mbc));
 			break;
 		case AGENCY_MODIFY:
-			mainControler.mainFrame.nextPanel(new ManagerAgencyModify(mainControler,mbc));
+//			mainControler.mainFrame.nextPanel(new ManagerAgencyModify(mainControler,mbc));
 			break;
 		case AGENCY_LIST:
-			mainControler.mainFrame.nextPanel(new ManagerAgencyList(mainControler,mbc));
+			mainControler.mainFrame.nextPanel(new ManagerAgencyList(mainControler,mbc,"modify"));
 			break;
 		case AGENCY_MODIFY_SUCCESS:
 			break;
 		case AGENCY_INQUIRY:
-			mainControler.mainFrame.nextPanel(new ManagerAgencyObserve(mainControler,mbc));
+			mainControler.mainFrame.nextPanel(new ManagerAgencyList(mainControler,mbc,"observe"));
 			break;
 		case STAFF_ADD:
 			mainControler.mainFrame.nextPanel(new ManagerStaffAdd(mainControler,mbc));

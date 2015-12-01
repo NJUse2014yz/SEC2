@@ -73,6 +73,10 @@ private InventoryBlService inventoryservice=new InventoryController();
 
 		confirm.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
+				int daystart=Integer.parseInt(date1.getTime());
+				int dayend=Integer.parseInt(date2.getTime());
+				
+				if(daystart>dayend){
 				//失败
 				warning.setText("数据有问题");
 				warning.setBounds(138, 490, 463 - 138, 30);
@@ -80,9 +84,9 @@ private InventoryBlService inventoryservice=new InventoryController();
 				warning.setForeground(Color.red);
 				add(warning);
 				repaint();
-				
+				}else{
 				//成功
-				ArrayList<InventoryVO> vo=(ArrayList<InventoryVO>) inventoryservice.observeStock(null,date1.getTime(),date2.getTime());
+				ArrayList<InventoryVO> vo=(ArrayList<InventoryVO>) inventoryservice.observeStock(date1.getTime(),date2.getTime());
 				TableModel model=table.getModel();
 				Object[][] newTableData={};
 				model=new DefaultTableModel(newTableData,columnTitle);
@@ -95,6 +99,7 @@ private InventoryBlService inventoryservice=new InventoryController();
 				total.setVisible(true);
 				add(total);
 				repaint();
+				}
 			}
 		});
 		

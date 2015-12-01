@@ -1,10 +1,14 @@
 package nju.sec.yz.ExpressSystem.presentation.inventoryui;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -27,6 +31,8 @@ public class InventoryCheck extends JPanel{
 	private JButton toExcel;
 //	private JLabel warning=new JLabel();
 	private JTable table;
+	
+	private JLabel time=new JLabel();
 	
 	public InventoryCheck(ClientControler maincontroler){
 		this.maincontroler=maincontroler;
@@ -51,6 +57,16 @@ public class InventoryCheck extends JPanel{
 		jsc.setVisible(true);
 		jsc.setBounds(136,62,325, 208);
 		add(jsc);
+		
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+		String temp=df.format(new Date());// new Date()为获取当前系统时间
+		time.setText("当前时间： "+temp);
+		time.setBounds(198, 490, 463 - 198, 30);
+		time.setFont(new Font("Dialog", 1, 15));
+		time.setForeground(Color.LIGHT_GRAY);
+		time.setVisible(true);
+		add(time);
+		
 		
 		ImageIcon excel = new ImageIcon("graphic/inventory/button/excel.png");
 		toExcel = new JButton(excel);

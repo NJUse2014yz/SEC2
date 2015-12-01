@@ -8,6 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import javax.swing.DefaultListSelectionModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -42,6 +43,9 @@ public class ManagerAgencyDelete extends JPanel{
 	private JButton back;
 	private JButton confirm;
 	
+	private ArrayList<TransitVO> transits;
+	private ArrayList<PositionVO> positions;
+	
 	public ManagerAgencyDelete(ClientControler maincontroler,ManagerButtonComponent mbc) {
 		this.maincontroler=maincontroler;
 		this.mbc=mbc;
@@ -55,6 +59,15 @@ public class ManagerAgencyDelete extends JPanel{
 		setSize(490, 550);
 		setVisible(true);
 		
+		table=new JTable(null);
+		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		table.setColumnSelectionAllowed(false);
+		table.setRowSelectionAllowed(true);
+
+		jsc=new JScrollPane(table);
+		jsc.setVisible(true);
+	    jsc.setBounds(137,94,318,181);
+	    add(jsc);
 
 		original();
 	    
@@ -92,10 +105,16 @@ public class ManagerAgencyDelete extends JPanel{
 					repaint();
 				}else{
 					AgencyListVO agency=manager.observeTransitByName(searchnum.getText());
-					ArrayList<TransitVO> transits=(ArrayList<TransitVO>) agency.transits;
-					ArrayList<PositionVO> positions=(ArrayList<PositionVO>) agency.positions;
+					transits=(ArrayList<TransitVO>) agency.transits;
+					positions=(ArrayList<PositionVO>) agency.positions;
 					
-					String[][] TableData = null;
+					
+					int total=0;
+					total+=transits.size();
+					for(int i=0;i<transits.size();i++){
+						total+=transits.get(i).getPositions().size();
+					}
+					String[][] TableData = new String[total][3];
 					String[] columnTitle={"所在地","编号","名称"};
 					for(int i=0;i<transits.size();i++){
 						TransitVO temp=transits.get(i);
@@ -110,13 +129,7 @@ public class ManagerAgencyDelete extends JPanel{
 						TableData[i+transits.size()][2]=temp.getName();
 					}
 					model=new DefaultTableModel(TableData,columnTitle);
-					table=new JTable(model);
-					table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-					jsc=new JScrollPane(table);
-					jsc.setVisible(true);
-				    jsc.setBounds(137,94,318,181);
-				    add(jsc);
-					
+					table.setModel(model);
 					table.repaint();
 				}
 		
@@ -124,40 +137,55 @@ public class ManagerAgencyDelete extends JPanel{
 	});
 		
 		
-		search.addMouseListener(new MouseAdapter() {
+		back.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				original();
 				repaint();
+			}
+		});	
+		
+		confirm.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				int[] deletelines=table.getSelectedRows();
+				for(int i=0;i<deletelines.length;i++){
+					if(deletelines[i]<transits.size()){
+						manager.deleteTransit((String)table.getValueAt(deletelines[i], 1));
+					}else{
+						String transitBelong=positions.get(deletelines[i]-transits.size()).getTransitId();
+						manager.deletePosition(transitBelong, (String)table.getValueAt(deletelines[i], 1));
+					}
+				}
 			}
 		});	
 }
 	
 	
 	private void original(){
-//		ArrayList<TransitVO> alltransits=manager.observeAllTransit();
+		ArrayList<TransitVO> alltransits=manager.observeAllTransit();
 		ArrayList<PositionVO> inf=new ArrayList<PositionVO>();
-		String[][] TableData = {{"111","222","333"},{"111","222","333"},{"111","222","333"}};
+		
+		int total=0;
+		total=total+alltransits.size();
+		for(int i=0;i<alltransits.size();i++){
+			total=total+alltransits.get(i).getPositions().size();
+		}
+		String[][] TableData = new String[total][3];
 		String[] columnTitle={"所在地","编号","名称"};
-//		for(int i=0;i<alltransits.size();i++){
-//			TransitVO temp=alltransits.get(i);
-//			TableData[i][0]=temp.getLocation();
-//			TableData[i][1]=temp.getId();
-//			TableData[i][2]=temp.getName();
-//			inf.addAll(temp.getPositions());
-//			}
-//		for(int i=0;i<inf.size();i++){
-//			PositionVO temp=inf.get(i);
-//			TableData[i+alltransits.size()][0]=temp.getLocation();
-//			TableData[i+alltransits.size()][1]=temp.getId();
-//			TableData[i+alltransits.size()][2]=temp.getName();
-//		}
+		for(int i=0;i<alltransits.size();i++){
+			TransitVO temp=alltransits.get(i);
+			TableData[i][0]=temp.getLocation();
+			TableData[i][1]=temp.getId();
+			TableData[i][2]=temp.getName();
+			inf.addAll(temp.getPositions());
+			}
+		for(int i=0;i<inf.size();i++){
+			PositionVO temp=inf.get(i);
+			TableData[i+alltransits.size()][0]=temp.getLocation();
+			TableData[i+alltransits.size()][1]=temp.getId();
+			TableData[i+alltransits.size()][2]=temp.getName();
+		}
 		model=new DefaultTableModel(TableData,columnTitle);
-		table=new JTable(model);
-		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		jsc=new JScrollPane(table);
-		jsc.setVisible(true);
-	    jsc.setBounds(137,94,318,181);
-	    add(jsc);
+		table.setModel(model);
 	}
 		
 	@Override
