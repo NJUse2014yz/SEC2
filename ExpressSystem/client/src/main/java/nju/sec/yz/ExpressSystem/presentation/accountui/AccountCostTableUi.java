@@ -79,9 +79,9 @@ public class AccountCostTableUi extends JPanel{
 		
 		ProfitVO pvo=financeBl.makeCostReceipt();
 		if(pvo!=null){
-			in.setText(Double.toString(pvo.getIn()));
-			out.setText(Double.toString(pvo.getOut()));
-			get.setText(Double.toString(pvo.getProfit()));
+			in.setText(Double.toString(pvo.in));
+			out.setText(Double.toString(pvo.out));
+			get.setText(Double.toString(pvo.profit));
 			excle.addMouseListener(new MouseAdapter(){
 				public void mouseClicked(MouseEvent e)
 				{
