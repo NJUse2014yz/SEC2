@@ -10,5 +10,5 @@ public enum Status  implements Serializable{
 	INVENTORY,
 	POSITION,
 	DELIVER,
-	ADMINISTRATOR
+	ADMINISTRATOR;
 }
