@@ -107,7 +107,7 @@ private void iniTransit(TransitVO vo) {
 	name.setText(vo.getName());
 	Id.setText(vo.getId());
 
-	String[][] TableData = {};
+	String[][] TableData = new String[vo.getPositions().size()][3];
 	String[] columnTitle={"所在地","编号","名称"};
 	for(int i=0;i<vo.getPositions().size();i++){
 		PositionVO temp=vo.getPositions().get(i);
@@ -117,9 +117,6 @@ private void iniTransit(TransitVO vo) {
 	}
 	TableModel model=new DefaultTableModel(TableData,columnTitle);
 	JTable table=new JTable(model);
-	table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-	table.setColumnSelectionAllowed(false);
-	table.setRowSelectionAllowed(true);
 
 	JScrollPane jsc=new JScrollPane(table);
 	jsc.setVisible(true);
