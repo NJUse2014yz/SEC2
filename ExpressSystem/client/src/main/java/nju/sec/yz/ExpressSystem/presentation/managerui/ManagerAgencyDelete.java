@@ -147,6 +147,7 @@ public class ManagerAgencyDelete extends JPanel{
 		confirm.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				int[] deletelines=table.getSelectedRows();
+				System.out.println(transits.size());
 				for(int i=0;i<deletelines.length;i++){
 					if(deletelines[i]<transits.size()){
 						manager.deleteTransit((String)table.getValueAt(deletelines[i], 1));
@@ -161,18 +162,18 @@ public class ManagerAgencyDelete extends JPanel{
 	
 	
 	private void original(){
-		ArrayList<TransitVO> alltransits=manager.observeAllTransit();
+		transits=manager.observeAllTransit();
 		ArrayList<PositionVO> inf=new ArrayList<PositionVO>();
 		
 		int total=0;
-		total=total+alltransits.size();
-		for(int i=0;i<alltransits.size();i++){
-			total=total+alltransits.get(i).getPositions().size();
+		total=total+transits.size();
+		for(int i=0;i<transits.size();i++){
+			total=total+transits.get(i).getPositions().size();
 		}
 		String[][] TableData = new String[total][3];
 		String[] columnTitle={"所在地","编号","名称"};
-		for(int i=0;i<alltransits.size();i++){
-			TransitVO temp=alltransits.get(i);
+		for(int i=0;i<transits.size();i++){
+			TransitVO temp=transits.get(i);
 			TableData[i][0]=temp.getLocation();
 			TableData[i][1]=temp.getId();
 			TableData[i][2]=temp.getName();
@@ -180,9 +181,9 @@ public class ManagerAgencyDelete extends JPanel{
 			}
 		for(int i=0;i<inf.size();i++){
 			PositionVO temp=inf.get(i);
-			TableData[i+alltransits.size()][0]=temp.getLocation();
-			TableData[i+alltransits.size()][1]=temp.getId();
-			TableData[i+alltransits.size()][2]=temp.getName();
+			TableData[i+transits.size()][0]=temp.getLocation();
+			TableData[i+transits.size()][1]=temp.getId();
+			TableData[i+transits.size()][2]=temp.getName();
 		}
 		model=new DefaultTableModel(TableData,columnTitle);
 		table.setModel(model);
