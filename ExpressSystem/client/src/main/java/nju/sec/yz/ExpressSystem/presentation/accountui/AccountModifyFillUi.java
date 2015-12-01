@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import nju.sec.yz.ExpressSystem.bl.accountbl.AccountController;
@@ -21,22 +22,26 @@ import nju.sec.yz.ExpressSystem.presentation.controlerui.AccountControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.AccountVO;
 
-public class AccountAddUi extends JPanel{
+public class AccountModifyFillUi extends JPanel{
 	private ButtonComponents bc;
 	private ClientControler mainControler;
 	private AccountControler controler;
 	private AccountBlService accountBl;
+	private AccountVO avo;
 	
 	private JTextField name;
-	private JTextField amount;
+	private JLabel amount;
 	private JButton confirm;
 	private JLabel warning;
 	
-	private static final int x=198;
-	private static final int name_y=75;
-	private static final int amount_y=104;
-	private static final int w=152;
-	private static final int h=18;
+	private static final int name_x=193;
+	private static final int name_y=73;
+	private static final int name_w=152;
+	private static final int name_h=17;
+	private static final int amount_x=193;
+	private static final int amount_y=102;
+	private static final int amount_w=70;
+	private static final int amount_h=20;
 	private static final int confirm_x=331;
 	private static final int confirm_y=148;
 	private static final int confirm_w=72;
@@ -48,12 +53,13 @@ public class AccountAddUi extends JPanel{
 	
 	private ImageIcon confirmIcon=new ImageIcon("graphic/account/button/confirm_button.jpg");
 	
-	public AccountAddUi(ClientControler mainControler,ButtonComponents bc){
+	public AccountModifyFillUi(ClientControler mainControler,ButtonComponents bc,String name){
 		super();
 		this.mainControler=mainControler;
 		controler=mainControler.accountControler;
 		this.bc=bc;
 		accountBl=new AccountController();
+		avo=accountBl.observeAccount(name);
 		initAccountUi();
 	}
 	private void initAccountUi() {
@@ -63,11 +69,14 @@ public class AccountAddUi extends JPanel{
 		setSize(490, 550);
 		
 		name=new JTextField();
-		name.setBounds(x, name_y, w, h);
+		name.setBounds(name_x, name_y, name_w, name_h);
 		add(name);
 		
-		amount=new JTextField();
-		amount.setBounds(x, amount_y, w, h);
+		amount=new JLabel();
+		amount.setBounds(amount_x, amount_y, amount_w, amount_h);
+		amount.setFont(new Font("Dialog", 1, 15));
+		amount.setForeground(Color.white);
+		amount.setText(Double.toString(avo.getBalance()));
 		add(amount);
 		
 		warning=new JLabel();
@@ -82,8 +91,8 @@ public class AccountAddUi extends JPanel{
 		confirm.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
 			{
-				AccountVO avo=new AccountVO(name.getText(),Integer.parseInt((amount.getText())));
-				ResultMessage result=accountBl.addAccount(avo);
+				avo.setName(name.getText());
+				ResultMessage result=accountBl.modifyAccount(avo);
 				if(result.getResult()==Result.SUCCESS)
 				{
 					warning.setText("提交成功");
@@ -98,13 +107,12 @@ public class AccountAddUi extends JPanel{
 		});
 		add(confirm);
 		
-		
 		setVisible(true);
 	}
 	@Override
 	public void paintComponent(Graphics g) {
 
-		Image img01 = new ImageIcon("graphic/account/background/add_background.jpg").getImage();
+		Image img01 = new ImageIcon("graphic/account/background/modify_background2.jpg").getImage();
 
 		g.drawImage(img01, 0, 0, 490, 550, null);
 

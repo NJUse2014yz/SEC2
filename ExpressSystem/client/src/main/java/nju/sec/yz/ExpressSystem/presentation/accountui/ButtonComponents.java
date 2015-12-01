@@ -203,6 +203,9 @@ public class ButtonComponents{
 					deleteButton.setVisible(false);
 					inquiryButton.setVisible(false);
 					tableButton.setIcon(tableIcon2);
+					accountButton.setIcon(accountIcon1);
+					accountButton.setLocation(Button_x, account_y3);
+					logButton.setLocation(Button_x,log_y3);
 					operateButton.setLocation(Button_x, account_y1);
 					operateButton.setVisible(true);
 					operateButton.addMouseListener(new MouseAdapter(){
@@ -219,10 +222,6 @@ public class ButtonComponents{
 							maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.TABLE_COST);
 						}
 					});
-					
-					accountButton.setIcon(accountIcon1);
-					accountButton.setLocation(Button_x, account_y3);
-					logButton.setLocation(Button_x,log_y3);
 					panel.repaint();
 				}
 			});
@@ -233,6 +232,8 @@ public class ButtonComponents{
 					operateButton.setVisible(false);
 					tableButton.setIcon(tableIcon1);
 					accountButton.setIcon(accountIcon2);
+					accountButton.setLocation(Button_x, account_y1);
+					logButton.setLocation(Button_x,log_y2);
 					addButton.setLocation(Button_x,log_y1);
 					addButton.setVisible(true);
 					addButton.addMouseListener(new MouseAdapter(){
@@ -265,8 +266,6 @@ public class ButtonComponents{
 							maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.ENQUIRY_ACCOUNT);
 						}
 					});
-					accountButton.setLocation(Button_x, account_y1);
-					logButton.setLocation(Button_x,log_y2);
 					panel.repaint();
 				}
 			});

@@ -36,5 +36,4 @@ public class AccountMainUi extends JPanel{
 		g.drawImage(img01, 0, 0, 490, 550, null);
 
 	}
-
 }
