@@ -47,6 +47,7 @@ public class ManagerAgencyObserve extends JPanel{
 	public ManagerAgencyObserve(ClientControler maincontroler,ManagerButtonComponent mbc,ArrayList<String> num) {
 		this.maincontroler=maincontroler;
 		this.mbc=mbc;
+		this.num=num;
 		mbc.changePanel(this);
 		mbc.change();
 		iniManagerAgencyObserve();
