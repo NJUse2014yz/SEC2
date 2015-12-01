@@ -53,7 +53,7 @@ public class AgencyDataImpl extends UnicastRemoteObject implements AgencyDataSer
 		
 		List<TransitPO> TransitPOs = findAll();
 		for(TransitPO po:TransitPOs){
-			if(po.getId().equals(agpo.getId()))
+			if(po.getName().equals(agpo.getName()))
 				return new ResultMessage(Result.FAIL,"机构信息已存在");
 		}
 		
@@ -71,6 +71,7 @@ public class AgencyDataImpl extends UnicastRemoteObject implements AgencyDataSer
 			return null;
 		}
 		List<TransitPO> TransitPOs = findAll();
+		
 		for (TransitPO po : TransitPOs) {
 			String carID = po.getId();
 			if (id.equals(carID))
@@ -81,6 +82,8 @@ public class AgencyDataImpl extends UnicastRemoteObject implements AgencyDataSer
 		return null;
 	}
 
+	
+	
 	@Override
 	public ResultMessage delete(String id) throws RemoteException {
 		System.out.println("deleting a TransitPO...");

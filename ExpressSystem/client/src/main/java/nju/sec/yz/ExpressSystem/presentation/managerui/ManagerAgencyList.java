@@ -192,6 +192,7 @@ public class ManagerAgencyList extends JPanel{
 			TransitVO temp=transits.get(i);
 			TableData[i][0]=temp.getLocation();
 			TableData[i][1]=temp.getId();
+			
 			TableData[i][2]=temp.getName();
 			positions.addAll(temp.getPositions());
 			}

@@ -92,7 +92,7 @@ public class TransitTrainReceipt implements ReceiptService {
 
 	@Override
 	public ResultMessage approve(ReceiptVO vo) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 

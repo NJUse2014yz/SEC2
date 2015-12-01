@@ -160,7 +160,7 @@ public class Agency implements AgencyInfo {
 			positions.add(vo);
 		}
 
-		TransitVO vo = new TransitVO(po.getName(), po.getName(), positions, po.getLocation());
+		TransitVO vo = new TransitVO(po.getName(), po.getId(), positions, po.getLocation());
 
 		return vo;
 	}
