@@ -31,7 +31,6 @@ public class Initial {
 		return null;
 	}
 
-	
 	/**
 	 * 期初建账
 	 * 包括：机构、人员、车辆、库存、 银行账户信息（名称，余额）

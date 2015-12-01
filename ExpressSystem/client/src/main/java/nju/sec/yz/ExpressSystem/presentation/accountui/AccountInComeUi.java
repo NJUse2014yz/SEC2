@@ -63,6 +63,7 @@ public class AccountInComeUi extends JPanel{
 		this.mainControler=mainControler;
 		controler=mainControler.accountControler;
 		finance=new FinanceController();
+		managerController=new ManagerController();
 		this.bc=bc;
 		ArrayList<PositionVO> positionlist=new ArrayList<PositionVO>();
 		ArrayList<TransitVO> transitvo=managerController.observeAllTransit();

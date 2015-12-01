@@ -40,17 +40,9 @@ public class MessagePO implements Serializable{
 		this.messageId = messageId;
 	}
 
-
-
-
-
 	public String getToPersonId() {
 		return toPersonId;
 	}
-
-
-
-
 
 	public void setToPersonId(String toPersonId) {
 		this.toPersonId = toPersonId;
