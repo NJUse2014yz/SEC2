@@ -1,4 +1,7 @@
 package nju.sec.yz.ExpressSystem.bl.userbl;
+
+import nju.sec.yz.ExpressSystem.vo.MessageVO;
+
 /**
  * 发送消息接口
  * @author 周聪
@@ -6,6 +9,6 @@ package nju.sec.yz.ExpressSystem.bl.userbl;
  */
 public interface MessageSendService {
 
-	public void send();
+	public void send(MessageVO vo);
 	
 }

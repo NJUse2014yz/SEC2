@@ -24,6 +24,7 @@ import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.SalaryDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.StaffDataService;
 import nju.sec.yz.ExpressSystem.dataservice.receiptDataSevice.ReceiptCounterDataService;
 import nju.sec.yz.ExpressSystem.dataservice.receiptDataSevice.ReceiptDataService;
+import nju.sec.yz.ExpressSystem.dataservice.userDataSevice.MessageDataService;
 import nju.sec.yz.ExpressSystem.dataservice.userDataSevice.UserDataService;
 /**
  * 获得data引用
@@ -31,6 +32,8 @@ import nju.sec.yz.ExpressSystem.dataservice.userDataSevice.UserDataService;
  *
  */
 public interface DatafactoryService extends Remote{
+	
+	public MessageDataService getMessageDataService() throws RemoteException;
 	
 	public BarIdsDataService getBarIdsDataService() throws RemoteException;
 	

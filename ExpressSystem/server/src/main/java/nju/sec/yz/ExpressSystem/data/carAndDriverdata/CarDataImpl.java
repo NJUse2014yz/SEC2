@@ -22,7 +22,7 @@ public class CarDataImpl extends UnicastRemoteObject implements CarDataService{
 
 	public CarDataImpl() throws RemoteException {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	/**

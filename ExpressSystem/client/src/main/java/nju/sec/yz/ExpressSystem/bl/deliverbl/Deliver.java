@@ -60,7 +60,7 @@ public class Deliver {
 	}
 
 	/**
-	 * 收件单通过审批后通过此方法更新寄件单信息
+	 * 收件单通过审批后通过此方法更新信息
 	 */
 	public ResultMessage updateReceiveReceipt() {
 		// TODO Auto-generated method stub

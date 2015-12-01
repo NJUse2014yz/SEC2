@@ -13,6 +13,7 @@ import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.bl.userbl.User;
 import nju.sec.yz.ExpressSystem.bl.userbl.UserInfo;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
+import nju.sec.yz.ExpressSystem.client.RMIExceptionHandler;
 import nju.sec.yz.ExpressSystem.common.IdType;
 import nju.sec.yz.ExpressSystem.common.LoadInformation;
 import nju.sec.yz.ExpressSystem.common.PaymentInformation;
@@ -41,7 +42,7 @@ public class Collection implements ReceiptService{
 		try {
 			inData=DatafactoryProxy.getInDataService();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 	}

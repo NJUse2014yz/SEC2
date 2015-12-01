@@ -25,6 +25,7 @@ import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.SalaryDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.StaffDataService;
 import nju.sec.yz.ExpressSystem.dataservice.receiptDataSevice.ReceiptCounterDataService;
 import nju.sec.yz.ExpressSystem.dataservice.receiptDataSevice.ReceiptDataService;
+import nju.sec.yz.ExpressSystem.dataservice.userDataSevice.MessageDataService;
 import nju.sec.yz.ExpressSystem.dataservice.userDataSevice.UserDataService;
 
 /**
@@ -39,6 +40,10 @@ public class DatafactoryProxy {
 
 	public static void setDatafactory(DatafactoryService datafactory) {
 		DatafactoryProxy.datafactory = datafactory;
+	}
+	
+	public static MessageDataService getMessageDataService() throws RemoteException{
+		return datafactory.getMessageDataService();
 	}
 
 	public static InventoryInDataService getInventoryInDataService() throws RemoteException {
