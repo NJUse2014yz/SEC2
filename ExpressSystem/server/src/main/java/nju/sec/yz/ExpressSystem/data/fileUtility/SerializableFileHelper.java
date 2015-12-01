@@ -31,6 +31,14 @@ public class SerializableFileHelper {
     public static final String CITYID_FILE_NAME = "cityid_data";
     public static final String COLLECTION_RECORD_FILE_NAME="collection_record_data";
     public static final String BAR_IDS_FILE_NAME="bar_ids_data";
+    public static final String MESSAGE_FILE_NAME="message_data";
+    
+    
+    public static File getMessageFile() throws IOException {
+        File file = new File(MESSAGE_FILE_NAME);
+        createFileIfNotExists(file);
+        return file;
+    }
     
     public static File getBarIdsFile() throws IOException {
         File file = new File(BAR_IDS_FILE_NAME);

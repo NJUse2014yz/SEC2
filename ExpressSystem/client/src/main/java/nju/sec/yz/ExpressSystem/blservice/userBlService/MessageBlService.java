@@ -13,11 +13,11 @@ public interface MessageBlService {
 	/**
 	 * 获得当前用户接收的信息
 	 */
-	public List<MessageVO> getMessages();
+	public List<MessageVO> getNewMessages();
 	
 	/**
 	 * 标记已读消息
 	 */
-	public void hasReadMessage(String messageId);
+	public void hasRead(String messageId);
 	
 }

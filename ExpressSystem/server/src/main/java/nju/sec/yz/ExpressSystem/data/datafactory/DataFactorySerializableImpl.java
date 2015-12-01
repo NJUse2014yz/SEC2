@@ -26,6 +26,7 @@ import nju.sec.yz.ExpressSystem.data.receiptdata.ReceiptCounterDataImpl;
 import nju.sec.yz.ExpressSystem.data.receiptdata.ReceiptDataImpl;
 import nju.sec.yz.ExpressSystem.data.stub.ConstDataStub;
 import nju.sec.yz.ExpressSystem.data.stub.UserDataStub;
+import nju.sec.yz.ExpressSystem.data.userdata.MessageDataImpl;
 import nju.sec.yz.ExpressSystem.data.userdata.UserDataImpl;
 import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.AccountBookDataService;
 import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.AccountDataService;
@@ -49,6 +50,7 @@ import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.SalaryDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.StaffDataService;
 import nju.sec.yz.ExpressSystem.dataservice.receiptDataSevice.ReceiptCounterDataService;
 import nju.sec.yz.ExpressSystem.dataservice.receiptDataSevice.ReceiptDataService;
+import nju.sec.yz.ExpressSystem.dataservice.userDataSevice.MessageDataService;
 import nju.sec.yz.ExpressSystem.dataservice.userDataSevice.UserDataService;
 /**
  * 
@@ -184,6 +186,12 @@ public class DataFactorySerializableImpl extends UnicastRemoteObject implements 
 	public InventoryOutDataService getInventoryOutDataService() throws RemoteException {
 		
 		return new InventoryOutDataImpl();
+	}
+
+	@Override
+	public MessageDataService getMessageDataService() throws RemoteException {
+		
+		return new MessageDataImpl();
 	}
 
 }
