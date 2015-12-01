@@ -20,14 +20,16 @@ public class FinanceController implements FinanceBlSevice{
 
 	@Override
 	public BussinessVO checkBusinessCircumstance(String begin, String end) {
-		// TODO Auto-generated method stub
-		return null;
+		Finance finance=new Finance();
+		BussinessVO vo=finance.checkBusinessCircumstance(begin, end);
+		return vo;
 	}
 
 	@Override
 	public List<PaymentSheetVO> checkReceipt(String day, String positionId) {
-		// TODO Auto-generated method stub
-		return null;
+		Collection in=new Collection();
+		List<PaymentSheetVO> list=in.getByPosition(day, positionId);
+		return list;
 	}
 
 	@Override
@@ -42,14 +44,16 @@ public class FinanceController implements FinanceBlSevice{
 
 	@Override
 	public ResultMessage makePayment(OutVO pro) {
-		// TODO Auto-generated method stub
-		return null;
+		Payment receipt=new Payment();
+		ResultMessage messsge=receipt.make(pro);
+		return messsge;
 	}
 
 	@Override
 	public ProfitVO makeCostReceipt() {
-		// TODO Auto-generated method stub
-		return null;
+		Finance finance=new Finance();
+		ProfitVO vo=finance.makeCostReceipt();
+		return vo;
 	}
 
 	@Override

@@ -8,6 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
 
 import nju.sec.yz.ExpressSystem.bl.tool.ExcelTool;
 import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
@@ -21,9 +22,8 @@ import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice.InventoryDataService;
 import nju.sec.yz.ExpressSystem.po.InventoryInSheetPO;
 import nju.sec.yz.ExpressSystem.po.InventoryOutSheetPO;
-import nju.sec.yz.ExpressSystem.po.InventoryPO;
-import nju.sec.yz.ExpressSystem.po.UserPO;
-import nju.sec.yz.ExpressSystem.vo.InventoryVO;
+import nju.sec.yz.ExpressSystem.po.InventoryListPO;
+import nju.sec.yz.ExpressSystem.vo.InventoryListVO;
 
 /**
  * 库存的领域模型对象
@@ -35,14 +35,14 @@ public class Inventory {
 	private InventoryDataService data;
 	private double rate;
 
-//	public Inventory() {
-//		try {
-//			data=DatafactoryProxy.getInventoryDataService();
-//		} catch (RemoteException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
+	public Inventory() {
+		try {
+			data=DatafactoryProxy.getInventoryDataService();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	
 	/**
@@ -50,18 +50,15 @@ public class Inventory {
 	 * 设定一个时间段，查看此时间段内的出/入库数量/金额/存储位置
 	 * 库存数量要有合计
 	 */
-	public ArrayList<InventoryVO> observeStock(String begin, String end) {
-		ArrayList<InventoryVO> list=new ArrayList<InventoryVO>();
-		UserInfo user=new User();
-		String userid=user.getCurrentID();
-		String strs[]=userid.split("A");
-		String transit=strs[1];
+	public InventoryListVO observeStock(String begin, String end) {
+		InventoryListVO list=new InventoryListVO();
+		String transit=getTransit();
 		try {
-			ArrayList<InventoryPO> poList=data.findByTime(transit, begin, end);
+			List<InventoryInSheetPO> poList=data.findAll(transit);
 			if(poList==null)
 				return null;
-			for(InventoryPO po:poList){
-				InventoryVO vo=changePoToVo(po);
+			for(InventoryInSheetPO po:poList){
+				InventoryListVO vo=changePoToVo(po);
 				list.add(vo);
 			}
 		} catch (RemoteException e) {
@@ -71,35 +68,38 @@ public class Inventory {
 		return list;
 	}
 
-	private InventoryVO changePoToVo(InventoryPO po) {
-		InventoryInInformation inventoryInInformation=po.getInventoryInformation();
-		InventoryOutInformation inventoryOutInformation=po.getInventoryOutInformation();
-		String barId=po.getBarId();
-		InventoryVO vo=new InventoryVO();
-		vo.setInventoryInInformation(inventoryInInformation);
-		vo.setInventoryOutInformation(inventoryOutInformation);
-		vo.setBarId(barId);
-		return vo;
+	private InventoryListVO changePoToVo(InventoryInSheetPO po) {
+		
+		return null;
 	}
 
 
 	/**
 	 * 库存盘点
 	 */
-	public ArrayList<InventoryVO> checkStock() {
-		ArrayList<InventoryVO> list=new ArrayList<InventoryVO>();
+	public InventoryListVO checkStock() {
+		ArrayList<InventoryListVO> list=new ArrayList<InventoryListVO>();
 		try {
-			ArrayList<InventoryPO> poList=data.findAll();
+			String transit=getTransit();
+			List<InventoryInSheetPO> poList=data.findAll(transit);
 			if(poList==null)
 				return null;
-			for(InventoryPO po:poList){
-				InventoryVO vo=changePoToVo(po);
+			for(InventoryInSheetPO po:poList){
+				InventoryListVO vo=changePoToVo(po);
 				list.add(vo);
 			}
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
 		return list;
+	}
+	
+	private String getTransit(){
+		UserInfo user=new User();
+		String userid=user.getCurrentID();
+		String strs[]=userid.split("A");
+		String transit=strs[1];
+		return transit;
 	}
 	
 	/**
@@ -119,10 +119,10 @@ public class Inventory {
 	 * 导出excel
 	 * @return
 	 */
-	public ResultMessage exportToExcel(){
+	public ResultMessage exportToExcel(InventoryListPO po){
 		ResultMessage message = new ResultMessage(Result.SUCCESS);
 		String filename =getFileName();
-		String txt = "22";
+		String txt ="22";
 		ExcelTool.exportExcel(filename, txt);
 		return message;
 		
@@ -131,69 +131,51 @@ public class Inventory {
 
 	private String getFileName() {
 		String result="";
-		int count=getCurrentCounter()+1;
-		saveCounter(count);
-		result="xsl/"+TimeTool.getDate()+"库存盘点信息"+count+".xlsx";
+		int count=Integer.parseInt(getCurrentCounter())+1;
+		System.out.println(count);
+		saveCounter(TimeTool.getDate()+count);
+		result="xsl/"+TimeTool.getDate()+"库存盘点信息"+count+".xls";
 		return result;
 	}
 	/**
-	 * 保存当天文件计数的次数
+	 * 保存当天文件日期和计数的次数
 	 */
-	public void saveCounter(int count){
+	private void saveCounter(String str){
 		File file=new File("File/count_excel");
 		try {
 			ObjectOutputStream out=new ObjectOutputStream(new FileOutputStream(file));
-			out.writeObject(count);
+			out.writeObject(str);
 			out.close();
-		} catch (IOException e) {
+		} catch (IOException e){
 			e.printStackTrace();
 		}
 	}
 	/**
-	 * 获得当天文件计数的次数
+	 * 获得文件计数的次数
 	 */
-	private int getCurrentCounter(){
+	private String getCurrentCounter(){
 		File file=new File("File/count_excel");
-		int count=0;
+		String str="";
 		try {
 			ObjectInputStream in=new ObjectInputStream(new FileInputStream(file));
-			count=(int) in.readObject();
+			str=(String) in.readObject();
 			in.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		return count;
-	}
-	
-	public ResultMessage updateInReceipt(InventoryInSheetPO inPO) {
-		InventoryInInformation imfo = inPO.getInventoryInInformation();
-		ResultMessage message=null;
-		InventoryPO inventoryPO=new InventoryPO(imfo, null, inPO.getBarId() );
-		
-		try {
-			message=data.insert(inventoryPO);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(str.length()<9){
+			System.out.println("---");
+			return 0+"";
 		}
-		return message;
+		if(!str.substring(0, 8).equals(TimeTool.getDate())){
+			//saveCounter(TimeTool.getDate()+0);
+			return 0+"";
+		}	
+		return str.charAt(8)+"";	
 	}
-	
-	public ResultMessage updateOutReceipt(InventoryOutSheetPO outPO) {
-		InventoryOutInformation info = outPO.getInventoryOutInformation();
-		ResultMessage message=null;
-		InventoryPO inventoryPO=new InventoryPO( null,info, outPO.getBarId() );
 		
-		try {
-			message=data.insert(inventoryPO);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return message;
-	}	
 	public static void main(String[] args) {
 		Inventory i=new Inventory();
 		i.exportToExcel();

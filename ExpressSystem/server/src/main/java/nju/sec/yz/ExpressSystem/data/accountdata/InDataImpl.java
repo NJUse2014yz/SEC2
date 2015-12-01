@@ -16,7 +16,7 @@ import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.data.fileUtility.SerializableFileHelper;
 import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.InDataService;
 import nju.sec.yz.ExpressSystem.po.CarPO;
-import nju.sec.yz.ExpressSystem.po.InPO;
+import nju.sec.yz.ExpressSystem.po.PaymentSheetPO;
 
 public class InDataImpl extends UnicastRemoteObject implements InDataService{
 
@@ -25,14 +25,14 @@ public class InDataImpl extends UnicastRemoteObject implements InDataService{
 	}
 
 	@Override
-	public synchronized ResultMessage insert(InPO inpo) throws RemoteException {
-		System.out.println("inserting a InPO...");
+	public synchronized ResultMessage insert(PaymentSheetPO inpo) throws RemoteException {
+		System.out.println("inserting a PaymentSheetPO...");
 		if(inpo==null){
 			System.out.println("插入了一个空的carPO！！！");
 			return new ResultMessage(Result.FAIL, "系统错误");
 		}
 		
-		List<InPO> inPOs = findAll();
+		List<PaymentSheetPO> inPOs = findAll();
 		
 		
 		inPOs.add(inpo);
@@ -42,31 +42,33 @@ public class InDataImpl extends UnicastRemoteObject implements InDataService{
 	}
 
 	@Override
-	public InPO find(String id) throws RemoteException {
-		System.out.println("finding a inPO...");
-		if(id==null){
+	public List<PaymentSheetPO> findByPosition(String date,String positionId) throws RemoteException {
+		System.out.println("finding a PaymentSheetPO...");
+		if(positionId==null||date==null){
 			System.out.println("id为null！！！");
 			return null;
 		}
-		List<InPO> inPOs = findAll();
-		for (InPO po : inPOs) {
-			String inID = po.getId();
-			if (id.equals(inID))
-				return po;
+		List<PaymentSheetPO> inPOs= findAll();
+		List<PaymentSheetPO> results=new ArrayList<>();
+		for (PaymentSheetPO po : inPOs) {
+			String position = po.getPaymentInformation().getPositionId();
+			String inDate=po.getPaymentInformation().getTime();
+			if (positionId.equals(position)&&date.equals(inDate))
+				results.add(po);
 		}
 		
 		
-		return null;
+		return results;
 	}
 
 	@Override
 	public synchronized ResultMessage delete(String id) throws RemoteException {
-		System.out.println("deleting a inPO...");
+		System.out.println("deleting a PaymentSheetPO...");
 		if(id==null){
 			System.out.println("id为null！！！");
 			return new ResultMessage(Result.FAIL, "系统错误");
 		}
-		List<InPO> inPOs = findAll();
+		List<PaymentSheetPO> inPOs = findAll();
 		for (int i=0;i<inPOs.size();i++) {
 			String inID = inPOs.get(i).getId();
 			if (id.equals(inID)){
@@ -80,18 +82,18 @@ public class InDataImpl extends UnicastRemoteObject implements InDataService{
 	}
 
 	@Override
-	public synchronized ResultMessage update(InPO inpo) throws RemoteException {
-		System.out.println("updating a InPO...");
+	public synchronized ResultMessage update(PaymentSheetPO inpo) throws RemoteException {
+		System.out.println("updating a PaymentSheetPO...");
 		if(inpo==null){
-			System.out.println("更新的InPO是空的！！！");
+			System.out.println("更新的PaymentSheetPO是空的！！！");
 			return new ResultMessage(Result.FAIL, "系统错误");
 		}
 			
 		String id=inpo.getId();
 
-		List<InPO> inPOs = findAll();
+		List<PaymentSheetPO> inPOs = findAll();
 		for (int i = 0; i < inPOs.size(); i++) {
-			InPO po = inPOs.get(i);
+			PaymentSheetPO po = inPOs.get(i);
 			String inID = po.getId();
 			if (id.equals(inID)) {
 				inPOs.remove(i);
@@ -113,14 +115,14 @@ public class InDataImpl extends UnicastRemoteObject implements InDataService{
 	}
 
 	@Override
-	public ArrayList<InPO> findAll() throws RemoteException {
+	public ArrayList<PaymentSheetPO> findAll() throws RemoteException {
 		File file = new File(SerializableFileHelper.IN_FILE_NAME);
         if (!file.exists()) {
             return new ArrayList<>();
         }
         try (ObjectInputStream is = new ObjectInputStream(new FileInputStream(file))) {
             //noinspection unchecked
-            return (ArrayList<InPO>) is.readObject();
+            return (ArrayList<PaymentSheetPO>) is.readObject();
         } catch (Exception e) {
             return new ArrayList<>();
         }
@@ -129,7 +131,7 @@ public class InDataImpl extends UnicastRemoteObject implements InDataService{
 	/**
 	 * 保存数据到文件
 	 */
-	private synchronized ResultMessage saveData(List<InPO> inPOs){
+	private synchronized ResultMessage saveData(List<PaymentSheetPO> inPOs){
 		try {
 			File file = SerializableFileHelper.getInFile();
 			try (ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(file))) {
@@ -141,6 +143,28 @@ public class InDataImpl extends UnicastRemoteObject implements InDataService{
 			e.printStackTrace();
 			return new ResultMessage(Result.FAIL, "文件读写错误");
 		}
+	}
+
+	@Override
+	public List<PaymentSheetPO> findByTime(String begin, String end) throws RemoteException {
+		System.out.println("finding a PaymentSheetPO...");
+		if(begin==null||end==null){
+			System.out.println("id为null！！！");
+			return null;
+		}
+		List<PaymentSheetPO> inPOs = findAll();
+		List<PaymentSheetPO> results=new ArrayList<>();
+		
+		int min=Integer.parseInt(begin);
+		int max=Integer.parseInt(end);
+		for (PaymentSheetPO po : inPOs) {
+			int date=Integer.parseInt(po.getPaymentInformation().getTime());
+			if (date>=min&&date<=max)
+				results.add(po);
+		}
+		
+		
+		return results;
 	}
 
 }

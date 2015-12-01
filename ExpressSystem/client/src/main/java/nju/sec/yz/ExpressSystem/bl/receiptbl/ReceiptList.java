@@ -151,7 +151,14 @@ public class ReceiptList implements ReceiptSaveService{
 		ResultMessage message=null;
 		try {
 			ReceiptService receipt=RECEIPT_MAP.get(vo.getType()).newInstance();
-			//TODO 修改信息有误
+			//修改信息有误
+			ResultMessage validResult=receipt.isValid(vo);
+			if(validResult.getResult()==Result.FAIL)
+				return validResult;
+			
+			//将vo持久化
+			ReceiptPO po=receipt.convertToPO(vo);
+			message=this.update(po);
 			
 			
 		} catch (InstantiationException | IllegalAccessException e) {

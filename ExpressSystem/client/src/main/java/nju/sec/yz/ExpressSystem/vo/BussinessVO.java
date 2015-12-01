@@ -1,5 +1,6 @@
 package nju.sec.yz.ExpressSystem.vo;
 import java.util.ArrayList;
+import java.util.List;
 
 
 
@@ -10,31 +11,15 @@ import java.util.ArrayList;
  */
 public class BussinessVO {
 
-	private ArrayList<PaymentSheetVO> in;
-	private ArrayList<OutVO> out;
-	
-	
-	
+	public List<PaymentSheetVO> in;
+	public List<OutVO> out;
 	
 	public BussinessVO() {
 		super();
 		this.in = new ArrayList<>();
 		this.out =new ArrayList<>();
 	}
-	public ArrayList<PaymentSheetVO> getIn() {
-		return in;
-	}
-	public ArrayList<OutVO> getOut() {
-		return out;
-	}
 	
-	public void addInVO(PaymentSheetVO inVO){
-		in.add(inVO);
-	}
-	
-	public void addOutVO(OutVO outVO){
-		out.add(outVO);
-	}
 	
 	
 }

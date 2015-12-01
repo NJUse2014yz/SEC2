@@ -116,7 +116,7 @@ public class InventoryIn extends JPanel{
 							getBlock(block.getSelectedItem().toString()),
 							Integer.parseInt(row.getText()),
 							Integer.parseInt(shelf.getText()),
-							Integer.parseInt(position.getText())
+							Integer.parseInt(position.getText()),null
 							);
 					
 					InventoryInSheetVO vo = new InventoryInSheetVO(invenInInf,barId.getText());

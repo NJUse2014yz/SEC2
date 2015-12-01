@@ -15,7 +15,7 @@ import nju.sec.yz.ExpressSystem.common.OutInformation;
 public class OutPO extends ReceiptPO implements Serializable{
 	private OutInformation outInformation;
 
-	public OutPO(String date, int num, String person, String account, String reason, String comments) {
+	public OutPO(String date, double num, String person, String account, String reason, String comments) {
 		super();
 		outInformation=new OutInformation();
 		outInformation.setDate(date);
@@ -24,6 +24,10 @@ public class OutPO extends ReceiptPO implements Serializable{
 		outInformation.setAccount(account);
 		outInformation.setReason(reason);
 		outInformation.setComments(comments);
+	}
+	
+	public OutPO() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public OutInformation getOutInformation() {

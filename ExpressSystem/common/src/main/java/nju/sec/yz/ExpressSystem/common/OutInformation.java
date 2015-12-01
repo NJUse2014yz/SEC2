@@ -7,7 +7,7 @@ public class OutInformation  implements Serializable{
 		private String date;
 		
 		//付款金额
-		private int num;
+		private double num;
 		
 		//付款人
 		private String person;
@@ -21,6 +21,24 @@ public class OutInformation  implements Serializable{
 		//备注（租金年份、运单号、标注工资月份）
 		private String comments;
 		
+		public OutInformation() {
+			// TODO Auto-generated constructor stub
+		}
+		
+		
+		
+		public OutInformation(OutInformation info) {
+			super();
+			this.date = info.getDate();
+			this.num = info.getNum();
+			this.person = info.getPerson();
+			this.account = info.getAccount();
+			this.reason = info.getReason();
+			this.comments = info.getComments();
+		}
+
+
+
 		public String getDate() {
 			return date;
 		}
@@ -29,11 +47,11 @@ public class OutInformation  implements Serializable{
 			this.date = date;
 		}
 
-		public int getNum() {
+		public double getNum() {
 			return num;
 		}
 
-		public void setNum(int num) {
+		public void setNum(double num) {
 			this.num = num;
 		}
 

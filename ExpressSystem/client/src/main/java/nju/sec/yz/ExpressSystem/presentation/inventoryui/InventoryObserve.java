@@ -21,7 +21,7 @@ import nju.sec.yz.ExpressSystem.bl.inventorybl.InventoryController;
 import nju.sec.yz.ExpressSystem.blservice.inventoryBlService.InventoryBlService;
 import nju.sec.yz.ExpressSystem.presentation.DateChooser;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
-import nju.sec.yz.ExpressSystem.vo.InventoryVO;
+import nju.sec.yz.ExpressSystem.vo.InventoryListVO;
 
 public class InventoryObserve extends JPanel{
 
@@ -86,13 +86,22 @@ private InventoryBlService inventoryservice=new InventoryController();
 				repaint();
 				}else{
 				//成功
-				ArrayList<InventoryVO> vo=(ArrayList<InventoryVO>) inventoryservice.observeStock(date1.getTime(),date2.getTime());
+
+				ArrayList<InventoryListVO> vo=inventoryservice.observeStock(date1.getTime(),date2.getTime());
+
+
+//				InventoryListVO vo=inventoryservice.observeStock(null,date1.getTime(),date2.getTime());
+
+//				ArrayList<InventoryVO> vo=(ArrayList<InventoryVO>) inventoryservice.observeStock(null,date1.getTime(),date2.getTime());
+				
+
 				TableModel model=table.getModel();
-				Object[][] newTableData={};
+				Object[][] newTableData=new Object[vo.size()][7];
+				
 				model=new DefaultTableModel(newTableData,columnTitle);
-				table=new JTable(model);
+				table.setModel(model);
 //需要得到一个当前数目的值				
-//				total.setText();
+				total.setText(Integer.toString(vo.size()));
 				total.setBounds(229, 334, 62, 23);
 				total.setForeground(Color.GRAY);
 				total.setFont(new Font("Dialog", 0, 18));

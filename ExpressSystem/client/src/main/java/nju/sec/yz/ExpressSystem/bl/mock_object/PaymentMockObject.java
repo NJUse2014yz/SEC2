@@ -11,8 +11,7 @@ public class PaymentMockObject {
 		System.out.println("handling an approved payment...");
 		OutVO payment=(OutVO)vo;
 		AccountMockObject account=new AccountMockObject();
-		account.updatePayment(payment.getOutInformation().getAccount(),payment.getOutInformation().getNum());
-		System.out.println("paid "+payment.getOutInformation().getNum()+" dollars");
+		
 		OutPO po=new OutPO(null, 0, null, null, null, null);
 		save(po);
 		return null;

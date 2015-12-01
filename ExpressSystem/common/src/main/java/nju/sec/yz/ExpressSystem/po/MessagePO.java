@@ -2,6 +2,7 @@ package nju.sec.yz.ExpressSystem.po;
 
 import java.io.Serializable;
 
+import nju.sec.yz.ExpressSystem.common.Content;
 import nju.sec.yz.ExpressSystem.common.ReceiptOperation;
 import nju.sec.yz.ExpressSystem.common.ReceiptType;
 
@@ -22,7 +23,7 @@ public class MessagePO implements Serializable{
 	
 	private String makeTime;//提交时间
 	
-	private String other;//其他附加信息
+	private Content other;//其他附加信息
 	
 	public MessagePO() {
 		
@@ -43,7 +44,7 @@ public class MessagePO implements Serializable{
 
 	//有附加信息
 	public MessagePO(String toPersonId, String receiptId, ReceiptType type, ReceiptOperation operation, String makeTime,
-			String other) {
+			Content other) {
 		super();
 		this.toPersonId = toPersonId;
 		this.receiptId = receiptId;
@@ -95,11 +96,11 @@ public class MessagePO implements Serializable{
 		this.toPersonId = toPersonId;
 	}
 
-	public String getOther() {
+	public Content getOther() {
 		return other;
 	}
 
-	public void setOther(String other) {
+	public void setOther(Content other) {
 		this.other = other;
 	}
 	

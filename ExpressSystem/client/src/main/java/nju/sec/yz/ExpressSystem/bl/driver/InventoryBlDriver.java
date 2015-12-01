@@ -7,7 +7,7 @@ import nju.sec.yz.ExpressSystem.blservice.inventoryBlService.InventoryBlService;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.InventoryInSheetVO;
 import nju.sec.yz.ExpressSystem.vo.InventoryOutSheetVO;
-import nju.sec.yz.ExpressSystem.vo.InventoryVO;
+import nju.sec.yz.ExpressSystem.vo.InventoryListVO;
 
 /**
  * @author xiaosaisai InventoryBlService的驱动
@@ -18,7 +18,7 @@ public class InventoryBlDriver {
 		inventoryBlService.exportToExcel();
 		System.out.println("单据导出成功");
 		// 2库存盘点
-		ArrayList<InventoryVO> ivo1 = inventoryBlService.checkStock();
+		ArrayList<InventoryListVO> ivo1 = inventoryBlService.checkStock();
 		System.out.println(ivo1.get(0).getInventoryInInformation() + "[没有信息吗]" + ivo1.get(0).getInventoryOutInformation());
 		// 3库存查看
 		

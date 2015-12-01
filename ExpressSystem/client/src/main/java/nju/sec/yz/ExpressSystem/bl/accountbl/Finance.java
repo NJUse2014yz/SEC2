@@ -16,20 +16,6 @@ public class Finance {
 	
 	
 	/**
-	 * 按天、按营业厅查看收款单记录
-	 * 包括合计功能
-	 * @param day
-	 * @param positionId
-	 * @return
-	 */
-	public List<PaymentSheetVO> checkReceipt(String day, int positionId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	
-	
-	/**
 	 * 经营情况表
 	 * 可以选择开始日期和结束日期
 	 * 显示期间内所有的入款单和收款单信息
@@ -38,7 +24,15 @@ public class Finance {
 	 * @return
 	 */
 	public BussinessVO checkBusinessCircumstance(String begin, String end) {
-		return null;
+		BussinessVO vo=new BussinessVO();
+		
+		Collection in=new Collection();
+		vo.in=in.getByTime(begin, end);
+		
+		Payment out=new Payment();
+		vo.out=out.getByTime(begin, end);
+		
+		return vo;
 	}
 	
 	
@@ -48,8 +42,16 @@ public class Finance {
 	 * @return
 	 */
 	public ProfitVO makeCostReceipt() {
-		// TODO Auto-generated method stub
-		return null;
+		Collection in=new Collection();
+		double colletion=in.getAllCollection();
+		
+		Payment out=new Payment();
+		double cost=out.getAllPayment();
+		
+		ProfitVO vo=new ProfitVO(colletion, cost, colletion-cost);
+		
+		
+		return vo;
 	}
 	
 	/**

@@ -6,34 +6,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
-import nju.sec.yz.ExpressSystem.common.TransitCarInformation;
 import nju.sec.yz.ExpressSystem.po.InventoryInSheetPO;
 import nju.sec.yz.ExpressSystem.po.InventoryListPO;
+
 /**
- * 
- * @author zhangqi
+ * 入库单数据
+ * @author 周聪
  *
  */
-public interface InventoryDataService extends Remote{
-
-	/**
-	 * 入库时添加
-	 */
+public interface InventoryInDataService extends Remote{
 	public ResultMessage insert(InventoryInSheetPO ipo) throws RemoteException;
-	
-	
-	/**
-	 * 出库后删除
-	 */
-	public ResultMessage delete(String id) throws RemoteException;
-	
-	
+	public ResultMessage update(InventoryInSheetPO ipo) throws RemoteException;
 	public ResultMessage init( ) throws RemoteException;
 	
-	
 	/**
-	 * 查看当天仓库中还未出库的库存
-	 * @param date 今天的日期
+	 * 查看某时间段内的入库信息
+	 * @param timeIn
+	 * @param timeOut
 	 */
-	public List<InventoryInSheetPO> findAll(String transit)throws RemoteException;
+	public List<InventoryInSheetPO> findByTime(String transit,String timeIn,String timeOut)throws RemoteException;
+
 }

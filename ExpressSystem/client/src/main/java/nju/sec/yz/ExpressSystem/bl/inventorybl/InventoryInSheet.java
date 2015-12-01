@@ -1,5 +1,7 @@
 package nju.sec.yz.ExpressSystem.bl.inventorybl;
 
+import java.rmi.RemoteException;
+
 import nju.sec.yz.ExpressSystem.bl.deliverbl.ValidHelper;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptID;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;
@@ -7,12 +9,15 @@ import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
 import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.bl.userbl.User;
 import nju.sec.yz.ExpressSystem.bl.userbl.UserInfo;
+import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
 import nju.sec.yz.ExpressSystem.common.IdType;
 import nju.sec.yz.ExpressSystem.common.InventoryInInformation;
 import nju.sec.yz.ExpressSystem.common.ReceiptType;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice.InventoryInDataService;
 import nju.sec.yz.ExpressSystem.po.InventoryInSheetPO;
+import nju.sec.yz.ExpressSystem.po.InventoryListPO;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.vo.InventoryInSheetVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
@@ -20,20 +25,33 @@ import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 /**
  * 入库单的领域模型对象
  * @author 周聪
- *
+ * @changer sai
  */
 public class InventoryInSheet implements ReceiptService {
+	private InventoryInDataService data;
 	
-	//通过入库单的审批
+	public InventoryInSheet() {
+		try {
+			data=DatafactoryProxy.getInventoryInDataService();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	/**
+	 * 通过入库单的审批
+	 */
 	@Override
 	public ResultMessage approve(ReceiptVO vo) {
-		Inventory inventory=new Inventory();
-		InventoryInSheetPO inPO = (InventoryInSheetPO) convertToPO(vo);
-		ResultMessage resultMessage=inventory.updateInReceipt(inPO);
+		InventoryInSheetPO inPO = (InventoryInSheetPO)convertToPO(vo);
+		ResultMessage resultMessage=updateInReceipt(inPO);
 		System.out.println("Approving...");
 		return resultMessage;
 	}
-
+	
+	/**
+	 * 生成入库单
+	 */
 	@Override
 	public ResultMessage make(ReceiptVO vo) {
 		InventoryInSheetVO inSheet=(InventoryInSheetVO)vo;
@@ -46,7 +64,7 @@ public class InventoryInSheet implements ReceiptService {
 		InventoryInSheetPO inPO =(InventoryInSheetPO) convertToPO(vo);
 		inPO.setId(createID());
 		inPO.setType(ReceiptType.INVENTORY_IN);
-		inPO.setMakePerson(this.getInVentorID());
+		inPO.setMakePerson(this.getUserID());
 		inPO.setMakeTime(TimeTool.getDate());
 		
 		ReceiptList receiptList = new ReceiptList();
@@ -54,28 +72,43 @@ public class InventoryInSheet implements ReceiptService {
 		
 		return new ResultMessage(Result.SUCCESS);
 	}
-
+	
 	/**
 	 * 生成入库单ID
-	 * @return
 	 */
 	private String createID() {
-		String inventorId=this.getInVentorID();
+		String inventorId=this.getTransitID();
 		ReceiptID idMaker=new ReceiptID();
 		String id=idMaker.getID(inventorId, IdType.INVENTORY_IN);
 		return id;
 	}
 	/**
 	 * 获得中转中心ID
-	 * @return
 	 */
-	private String getInVentorID() {
-		UserInfo user=new User();
-		String userid=user.getCurrentID();
+	private String getTransitID() {
+		String userid=getUserID();
 		String[] strs=userid.split("A");
 		return strs[0];
 	}
-
+	private String getUserID() {
+		UserInfo user=new User();
+		String userid=user.getCurrentID();
+		return userid;
+	}
+	
+	public ResultMessage updateInReceipt(InventoryInSheetPO inPO) {
+		ResultMessage message=null;
+		InventoryListPO inventoryPO=new InventoryListPO( );
+		
+		try {
+			message=data.insert(inPO);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return message;
+	}
+	
 	@Override
 	public ReceiptVO show(ReceiptPO po) {
 		InventoryInSheetPO inSheet=(InventoryInSheetPO)po;

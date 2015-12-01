@@ -20,7 +20,7 @@ import javax.swing.JTable;
 import nju.sec.yz.ExpressSystem.bl.inventorybl.InventoryController;
 import nju.sec.yz.ExpressSystem.blservice.inventoryBlService.InventoryBlService;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
-import nju.sec.yz.ExpressSystem.vo.InventoryVO;
+import nju.sec.yz.ExpressSystem.vo.InventoryListVO;
 
 public class InventoryCheck extends JPanel{
 
@@ -47,6 +47,8 @@ public class InventoryCheck extends JPanel{
 		
 		InventoryButtonComponents ibc=new InventoryButtonComponents(maincontroler,this);
 		
+		InventoryListVO vo=inventoryservice.checkStock();
+
 		ArrayList<InventoryVO> vo=(ArrayList<InventoryVO>) inventoryservice.checkStock();
 		
 		Object[][] tableData = {};

@@ -159,7 +159,6 @@ public class ManagerStaffDelete extends JPanel {
 	
 	private void original(){
 		ArrayList<StaffVO> allstaff=manager.observeStaff();
-		System.out.println(allstaff.size());
 		
 		String[][] TableData = new String[allstaff.size()][4];
 		String[] columnTitle={"人员编号","姓名","职务","所属机构"};
