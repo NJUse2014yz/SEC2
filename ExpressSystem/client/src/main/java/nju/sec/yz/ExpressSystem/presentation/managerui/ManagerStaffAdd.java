@@ -107,7 +107,7 @@ public class ManagerStaffAdd extends JPanel{
 		 */
 		ImageIcon cinfirmIcon = new ImageIcon("graphic/deliver/button/confirm.png");
 		confirmButton = new JButton(cinfirmIcon);
-		confirmButton.setBounds(378, 456, 76, 27);
+		confirmButton.setBounds(378, 256, 76, 27);
 		add(confirmButton);
 		setVisible(true);
 

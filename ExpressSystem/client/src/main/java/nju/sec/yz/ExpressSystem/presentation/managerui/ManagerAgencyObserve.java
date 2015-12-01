@@ -132,7 +132,7 @@ private void iniPosition(TransitVO vo, String Pid) {
 
 	ArrayList<PositionVO> listVO = (ArrayList<PositionVO>) vo.getPositions();
 	
-	for (; listVO.get(count).getId() != Pid; count++) {}
+	for (;!( listVO.get(count).getId() .equals(Pid)); count++) {}
 	
 	location.setText(listVO.get(count).getLocation());
 	name.setText(listVO.get(count).getName());
