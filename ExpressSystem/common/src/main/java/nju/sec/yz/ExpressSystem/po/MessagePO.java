@@ -12,6 +12,8 @@ import nju.sec.yz.ExpressSystem.common.ReceiptType;
  *
  */
 public class MessagePO implements Serializable{
+	
+	private String messageId;//标识消息的id
 
 	private String toPersonId;//收信息的人
 	
@@ -32,25 +34,27 @@ public class MessagePO implements Serializable{
 	
 	//无附加信息
 	public MessagePO(String toPersonId, String receiptId, ReceiptType type, ReceiptOperation operation,
-			String makeTime) {
+			String makeTime,String messageId) {
 		super();
 		this.toPersonId = toPersonId;
 		this.receiptId = receiptId;
 		this.type = type;
 		this.operation = operation;
 		this.makeTime = makeTime;
+		this.messageId=messageId;
 	}
 
 
 	//有附加信息
 	public MessagePO(String toPersonId, String receiptId, ReceiptType type, ReceiptOperation operation, String makeTime,
-			Content other) {
+			Content other,String messageId) {
 		super();
 		this.toPersonId = toPersonId;
 		this.receiptId = receiptId;
 		this.type = type;
 		this.operation = operation;
 		this.makeTime = makeTime;
+		this.messageId=messageId;
 		this.other = other;
 	}
 
@@ -102,6 +106,16 @@ public class MessagePO implements Serializable{
 
 	public void setOther(Content other) {
 		this.other = other;
+	}
+
+
+	public String getMessageId() {
+		return messageId;
+	}
+
+
+	public void setMessageId(String messageId) {
+		this.messageId = messageId;
 	}
 	
 	
