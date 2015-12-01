@@ -164,7 +164,7 @@ public class ManagerAgencyList extends JPanel{
 			
 			ImageIcon backIcon = new ImageIcon("graphic/manager/button/back.png");
 			back = new JButton(backIcon);
-			back.setBounds(290, 286, 81, 20);
+			back.setBounds(370, 286, 81, 20);
 			add(back);
 			
 			back.addMouseListener(new MouseAdapter() {
