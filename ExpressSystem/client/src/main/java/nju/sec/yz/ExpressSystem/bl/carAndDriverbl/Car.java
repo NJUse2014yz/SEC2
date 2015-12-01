@@ -52,6 +52,8 @@ public class Car {
 		CarVO vo=null;
 		try {
 			CarPO	po=carData.find(id);
+			if(po==null)
+				return null;
 			vo=changePoToVo(po);
 		} catch (RemoteException e) {
 			// TODO 自动生成的 catch 块

@@ -154,7 +154,7 @@ DeliverBlService deliverblservice=new DeliverController();
 					flightInf.setFlightId(carId.getText());
 					flightInf.setShelfId(driverId.getText());
 				vo.setTransitInformation(flightInf);
-				ResultMessage result=deliverblservice.transitReceipt(vo);
+				ResultMessage result=deliverblservice.transitCarReceipt(vo);
 				//成功
 				if(result.getResult()==Result.SUCCESS){
 					

@@ -20,12 +20,7 @@ public class Client {
     		control.showFrame();
         } catch (ClientInitException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(
-                    null,
-                    "Client boots fail!\nCause: " + e.getMessage(),
-                    "Fatal Error",
-                    JOptionPane.ERROR_MESSAGE
-            );
+            RMIExceptionHandler.handleRMIException();
         }
 
     }

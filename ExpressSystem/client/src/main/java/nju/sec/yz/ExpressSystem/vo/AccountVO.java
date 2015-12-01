@@ -11,9 +11,9 @@ public class AccountVO {
 	private String name;
 
 	// 余额
-	private int balance;
+	private double balance;
 
-	public AccountVO(String name, int balance) {
+	public AccountVO(String name, double balance) {
 		super();
 		this.name = name;
 		this.balance = balance;
@@ -27,12 +27,12 @@ public class AccountVO {
 		this.name = name;
 	}
 
-	public int getBalance() {
+	public double getBalance() {
 		return balance;
 	}
 
-	public void setBalance(int balance) {
-		this.balance = balance;
+	public void setBalance(double d) {
+		this.balance = d;
 	}
 
 }

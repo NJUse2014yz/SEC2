@@ -29,10 +29,10 @@ public class AccountBookPO implements Serializable{
 	private List<AccountPO> accounts;
 	
 	//TODO 库存
-	private List<InventoryPO> inventories;
+	private List<InventoryListPO> inventories;
 
 	public AccountBookPO(AgencyPO agency, List<StaffPO> staffs, List<CarPO> cars, List<AccountPO> accounts,
-			List<InventoryPO> inventories,String id) {
+			List<InventoryListPO> inventories,String id) {
 		super();
 		this.agency = agency;
 		this.staffs = staffs;
@@ -74,11 +74,11 @@ public class AccountBookPO implements Serializable{
 		this.accounts = accounts;
 	}
 
-	public List<InventoryPO> getInventories() {
+	public List<InventoryListPO> getInventories() {
 		return inventories;
 	}
 
-	public void setInventories(List<InventoryPO> inventories) {
+	public void setInventories(List<InventoryListPO> inventories) {
 		this.inventories = inventories;
 	}
 

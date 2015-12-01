@@ -74,8 +74,9 @@ public class DeliverController implements DeliverBlService{
 
 	@Override
 	public ResultMessage transitReceiveReceipt(TransitArriveSheetVO vo) {
-		//TODO 和营业厅到达单重复
-		return null;
+		TransitReceiveReceipt receipt=new TransitReceiveReceipt();
+		ResultMessage message=receipt.make(vo);
+		return message;
 	}
 
 	@Override

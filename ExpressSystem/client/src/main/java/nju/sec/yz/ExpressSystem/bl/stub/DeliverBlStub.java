@@ -52,11 +52,7 @@ public class DeliverBlStub implements DeliverBlService{
 	public ResultMessage transitLoadingReceipt (TransitLoadSheetVO vo){
 		return null;
 	}
-	@Override
-	public ResultMessage transitReceipt(TransitSheetVO vo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 	@Override
 	public SendSheetVO checkDeliverReceipt(String barID) {
 		// TODO Auto-generated method stub
@@ -69,6 +65,21 @@ public class DeliverBlStub implements DeliverBlService{
 	}
 	@Override
 	public List<String> getBarIdList(String transitSheetId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public ResultMessage transitFlightReceipt(TransitSheetVO vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public ResultMessage transitTrainReceipt(TransitSheetVO vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public ResultMessage transitCarReceipt(TransitSheetVO vo) {
 		// TODO Auto-generated method stub
 		return null;
 	}

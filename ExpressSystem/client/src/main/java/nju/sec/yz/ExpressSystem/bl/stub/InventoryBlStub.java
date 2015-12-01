@@ -6,7 +6,7 @@ import nju.sec.yz.ExpressSystem.blservice.inventoryBlService.InventoryBlService;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.InventoryInSheetVO;
 import nju.sec.yz.ExpressSystem.vo.InventoryOutSheetVO;
-import nju.sec.yz.ExpressSystem.vo.InventoryVO;
+import nju.sec.yz.ExpressSystem.vo.InventoryListVO;
 
 public class InventoryBlStub implements InventoryBlService {
 
@@ -17,7 +17,7 @@ public class InventoryBlStub implements InventoryBlService {
 	}
 
 	@Override
-	public ArrayList<InventoryVO> checkStock() {
+	public ArrayList<InventoryListVO> checkStock() {
 		// TODO 自动生成的方法存根
 		return null;
 	}
@@ -43,7 +43,7 @@ public class InventoryBlStub implements InventoryBlService {
 
 
 	@Override
-	public ArrayList<InventoryVO> observeStock(String transit, String begin, String end) {
+	public ArrayList<InventoryListVO> observeStock(String transit, String begin, String end) {
 		// TODO Auto-generated method stub
 		return null;
 	}

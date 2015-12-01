@@ -1,7 +1,10 @@
 package nju.sec.yz.ExpressSystem.bl.deliverbl;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 import nju.sec.yz.ExpressSystem.bl.managerbl.Agency;
 import nju.sec.yz.ExpressSystem.bl.managerbl.AgencyInfo;
 import nju.sec.yz.ExpressSystem.bl.managerbl.CityConst;
@@ -72,7 +75,12 @@ public class TransitReceiptHelper {
 	public ResultMessage isValid(TransitInformation info) {
 		if (!ValidHelper.isBeforeDate(info.getTime()))
 			return new ResultMessage(Result.FAIL, "看看时间输错了没~");
+		
 		List<String> ids = info.getBarIds();
+		Set<String> idCopy=new HashSet<>(ids);
+		if(idCopy.size()<ids.size())
+			return new ResultMessage(Result.FAIL,"有条形码号重复了~");
+		
 		for (String barId : ids) {
 			if (!ValidHelper.isBarId(barId))
 				return new ResultMessage(Result.FAIL, "亲，咱们的订单号是十位数字哟~");

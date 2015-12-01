@@ -3,11 +3,8 @@ package nju.sec.yz.ExpressSystem.bl.mock_object;
 import java.util.ArrayList;
 
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptSaveService;
-import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
 import nju.sec.yz.ExpressSystem.common.ReceiptType;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
-import nju.sec.yz.ExpressSystem.dataservice.receiptDataSevice.ReceiptDataService;
-import nju.sec.yz.ExpressSystem.po.DeliverPO;
 import nju.sec.yz.ExpressSystem.po.DeliverySheetPO;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;

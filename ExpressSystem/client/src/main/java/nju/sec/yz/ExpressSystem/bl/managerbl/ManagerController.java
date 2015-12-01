@@ -8,6 +8,7 @@ import nju.sec.yz.ExpressSystem.blservice.managerBlService.ConstBlService;
 import nju.sec.yz.ExpressSystem.blservice.managerBlService.SalaryBlService;
 import nju.sec.yz.ExpressSystem.blservice.managerBlService.StaffBlService;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.vo.AgencyListVO;
 import nju.sec.yz.ExpressSystem.vo.CityVO;
 import nju.sec.yz.ExpressSystem.vo.PositionVO;
 import nju.sec.yz.ExpressSystem.vo.PriceVO;
@@ -164,6 +165,16 @@ public class ManagerController implements AgencyBlService,ConstBlService,SalaryB
 		Agency agency=new Agency();
 		ResultMessage message=agency.deletePosition(transitId,id);
 		return message;
+	}
+
+	@Override
+	/**
+	 * 关键字查找机构
+	 */
+	public AgencyListVO observeTransitByName(String name) {
+		Agency agency=new Agency();
+		AgencyListVO vo=agency.observeTransitByName(name);
+		return vo;
 	}
 
 }

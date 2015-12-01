@@ -6,7 +6,6 @@ import nju.sec.yz.ExpressSystem.data.stub.AccountBookStub;
 import nju.sec.yz.ExpressSystem.data.stub.AccountDataStub;
 import nju.sec.yz.ExpressSystem.data.stub.AgencyDataStub;
 import nju.sec.yz.ExpressSystem.data.stub.ConstDataStub;
-import nju.sec.yz.ExpressSystem.data.stub.InDataStub;
 import nju.sec.yz.ExpressSystem.data.stub.LogDataStub;
 import nju.sec.yz.ExpressSystem.data.stub.OutDataStub;
 import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.AccountBookDataService;
@@ -29,9 +28,7 @@ public class Driver {
 		ConstDataDriver cdd=new ConstDataDriver();
 		ConstDataService cds=new ConstDataStub();
 		cdd.drive(cds);
-		InDataDriver idd=new InDataDriver();
-		InDataService ids=new InDataStub();
-		idd.drive(ids);
+		
 		OutDataDriver odd=new OutDataDriver();
 		OutDataService ods=new OutDataStub();
 		odd.drive(ods);		

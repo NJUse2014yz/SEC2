@@ -153,7 +153,7 @@ DateChooser date=new DateChooser(this, 212, 81);
 					flightInf.setShelfId(carriageId.getText());
 			    vo.setTransportType(TransportType.TRAIN);
 				vo.setTransitInformation(flightInf);
-				ResultMessage result=deliverblservice.transitReceipt(vo);
+				ResultMessage result=deliverblservice.transitTrainReceipt(vo);
 				//成功
 				if(result.getResult()==Result.SUCCESS){
 					

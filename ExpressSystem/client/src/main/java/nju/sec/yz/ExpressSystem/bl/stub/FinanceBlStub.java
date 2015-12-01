@@ -24,11 +24,7 @@ public class FinanceBlStub implements FinanceBlSevice {
 		return bussinessVO;
 	}
 
-	@Override
-	public List<PaymentSheetVO> checkReceipt (String day,int positionId){
-		// TODO 自动生成的方法存根
-		return new ArrayList<>();
-	}
+	
 
 	@Override
 	public ResultMessage makePayment(OutVO pro) {
@@ -63,6 +59,12 @@ public class FinanceBlStub implements FinanceBlSevice {
 
 	@Override
 	public ResultMessage makeReceipt(PaymentSheetVO psv) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PaymentSheetVO> checkReceipt(String day, String positionId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -14,6 +14,8 @@ import nju.sec.yz.ExpressSystem.dataservice.deliverDataSevice.CollectionRecordDa
 import nju.sec.yz.ExpressSystem.dataservice.deliverDataSevice.DeliverDataService;
 import nju.sec.yz.ExpressSystem.dataservice.deliverDataSevice.OrderDataService;
 import nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice.InventoryDataService;
+import nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice.InventoryInDataService;
+import nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice.InventoryOutDataService;
 import nju.sec.yz.ExpressSystem.dataservice.logDataSevice.LogDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.AgencyDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.CityIdDataService;
@@ -22,6 +24,7 @@ import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.SalaryDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.StaffDataService;
 import nju.sec.yz.ExpressSystem.dataservice.receiptDataSevice.ReceiptCounterDataService;
 import nju.sec.yz.ExpressSystem.dataservice.receiptDataSevice.ReceiptDataService;
+import nju.sec.yz.ExpressSystem.dataservice.userDataSevice.MessageDataService;
 import nju.sec.yz.ExpressSystem.dataservice.userDataSevice.UserDataService;
 /**
  * 获得data引用
@@ -29,6 +32,8 @@ import nju.sec.yz.ExpressSystem.dataservice.userDataSevice.UserDataService;
  *
  */
 public interface DatafactoryService extends Remote{
+	
+	public MessageDataService getMessageDataService() throws RemoteException;
 	
 	public BarIdsDataService getBarIdsDataService() throws RemoteException;
 	
@@ -55,6 +60,10 @@ public interface DatafactoryService extends Remote{
 	public DriverDataService getDriverDataService() throws RemoteException;
 	
 	public InventoryDataService getInventoryDataService() throws RemoteException;
+	
+	public InventoryInDataService getInventoryInDataService() throws RemoteException;
+	
+	public InventoryOutDataService getInventoryOutDataService() throws RemoteException;
 	
 	public LogDataService getLogDataService() throws RemoteException;
 	

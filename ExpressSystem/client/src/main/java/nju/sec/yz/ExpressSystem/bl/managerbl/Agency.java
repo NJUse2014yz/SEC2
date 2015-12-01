@@ -11,6 +11,7 @@ import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.AgencyDataService;
 import nju.sec.yz.ExpressSystem.po.PositionPO;
 import nju.sec.yz.ExpressSystem.po.TransitPO;
+import nju.sec.yz.ExpressSystem.vo.AgencyListVO;
 import nju.sec.yz.ExpressSystem.vo.AgencyVO;
 import nju.sec.yz.ExpressSystem.vo.PositionVO;
 import nju.sec.yz.ExpressSystem.vo.TransitVO;
@@ -106,6 +107,30 @@ public class Agency implements AgencyInfo {
 
 		return transitVO;
 	}
+	
+	/**
+	 * 按名字查找机构
+	 */
+	public AgencyListVO observeTransitByName(String name) {
+		List<TransitVO> transits=this.observeAllTransit();
+		
+		AgencyListVO list=new AgencyListVO();
+		for(TransitVO transit:transits){
+			//匹配中转中心
+			if(transit.getName().contains(name))
+				list.transits.add(transit);
+			//查找中转中心中的营业厅
+			for(PositionVO position:transit.getPositions()){
+				//匹配营业厅
+				if(position.getName().contains(name))
+					list.positions.add(position);
+			}
+			
+		}
+		
+		
+		return list;
+	}
 
 	public ArrayList<TransitVO> observeAllTransit() {
 		List<TransitPO> pos = null;
@@ -135,7 +160,7 @@ public class Agency implements AgencyInfo {
 			positions.add(vo);
 		}
 
-		TransitVO vo = new TransitVO(po.getName(), po.getName(), positions, po.getLocation());
+		TransitVO vo = new TransitVO(po.getName(), po.getId(), positions, po.getLocation());
 
 		return vo;
 	}
@@ -260,7 +285,12 @@ public class Agency implements AgencyInfo {
 		return location;
 	}
 
-	private TransitPO fineTransit(String name) {
+	/**
+	 * 按名字精确查找
+	 * @param name
+	 * @return
+	 */
+	private TransitPO findTransit(String name) {
 
 		TransitPO po = null;
 		try {

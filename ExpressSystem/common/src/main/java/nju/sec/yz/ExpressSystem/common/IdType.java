@@ -1,7 +1,6 @@
 package nju.sec.yz.ExpressSystem.common;
 /**
  * 各种编号
- * 
  * @author 周聪
  *
  */
@@ -46,6 +45,8 @@ public enum IdType {
 		//中转中心货运编号
 	},TRANSIT_FLIGHT_TRANSPORT("",7){
 		//中转中心航运编号
+	},MESSAGE("m",5){
+		//消息id
 	};
 	
 	private IdType(String idStr,int length){

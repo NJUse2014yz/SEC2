@@ -3,9 +3,12 @@ package nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
 
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
-import nju.sec.yz.ExpressSystem.po.InventoryPO;
+import nju.sec.yz.ExpressSystem.common.TransitCarInformation;
+import nju.sec.yz.ExpressSystem.po.InventoryInSheetPO;
+import nju.sec.yz.ExpressSystem.po.InventoryListPO;
 /**
  * 
  * @author zhangqi
@@ -13,20 +16,24 @@ import nju.sec.yz.ExpressSystem.po.InventoryPO;
  */
 public interface InventoryDataService extends Remote{
 
-	public ResultMessage insert(InventoryPO ipo) throws RemoteException;
-	public ResultMessage update(InventoryPO ipo) throws RemoteException;
-	public ResultMessage init( ) throws RemoteException;
-	public ArrayList<InventoryPO> findAll( ) throws RemoteException;
+	/**
+	 * 入库时添加
+	 */
+	public ResultMessage insert(InventoryInSheetPO ipo) throws RemoteException;
+	
 	
 	/**
-	 * 查看某时间段内的出入库信息
-	 * @param timeIn
-	 * @param timeOut
+	 * 出库后删除
 	 */
-	public ArrayList<InventoryPO> findByTime(String timeIn,String timeOut)throws RemoteException;
+	public ResultMessage delete(String id) throws RemoteException;
+	
+	
+	public ResultMessage init( ) throws RemoteException;
+	
+	
 	/**
-	 * 查看当天库存
+	 * 查看当天仓库中还未出库的库存
 	 * @param date 今天的日期
 	 */
-	public ArrayList<InventoryPO> findByTime(String date)throws RemoteException;
+	public List<InventoryInSheetPO> findAll(String transit)throws RemoteException;
 }

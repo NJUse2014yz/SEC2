@@ -22,10 +22,10 @@ public class InitialVO {
 	private List<AccountVO> accounts;
 
 	// TODO 库存
-	private List<InventoryVO> inventories;
+	private List<InventoryListVO> inventories;
 
 	public InitialVO(AgencyVO agency, List<StaffVO> staffs, List<CarVO> cars, List<AccountVO> accounts,
-				List<InventoryVO> inventories) {
+				List<InventoryListVO> inventories) {
 			
 			this.agency = agency;
 			this.staffs = staffs;
@@ -66,11 +66,11 @@ public class InitialVO {
 		this.accounts = accounts;
 	}
 
-	public List<InventoryVO> getInventories() {
+	public List<InventoryListVO> getInventories() {
 		return inventories;
 	}
 
-	public void setInventories(List<InventoryVO> inventories) {
+	public void setInventories(List<InventoryListVO> inventories) {
 		this.inventories = inventories;
 	}
 
