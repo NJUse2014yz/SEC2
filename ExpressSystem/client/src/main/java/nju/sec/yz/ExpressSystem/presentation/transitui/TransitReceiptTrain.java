@@ -22,7 +22,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import nju.sec.yz.ExpressSystem.bl.deliverbl.DeliverController;
+import nju.sec.yz.ExpressSystem.bl.managerbl.ManagerController;
 import nju.sec.yz.ExpressSystem.blservice.deliverBlService.DeliverBlService;
+import nju.sec.yz.ExpressSystem.blservice.managerBlService.AgencyBlService;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.TransitFlightInformation;
@@ -30,60 +32,67 @@ import nju.sec.yz.ExpressSystem.common.TransportType;
 import nju.sec.yz.ExpressSystem.presentation.DateChooser;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.TransitSheetVO;
+import nju.sec.yz.ExpressSystem.vo.TransitVO;
 
-public class TransitReceiptTrain extends JPanel{
-DeliverBlService deliverblservice=new DeliverController();
+public class TransitReceiptTrain extends JPanel {
+	DeliverBlService deliverblservice = new DeliverController();
+	private AgencyBlService manager = new ManagerController();
 	
 	ClientControler maincontrol;
 	TransitButtonComponents tbc;
-	
-	
+
 	private JTextField trainId;
 	private JTextField carriageId;
 	private JTextField transiterId;
-	
+
 	private JComboBox departure;
 	private JComboBox destination;
 	private JTable barId;
 	private TableModel model;
-	
+
 	private JButton confirm;
-	
+
 	private JLabel trainTransitId;
 	private JLabel fare;
-	private JLabel warning=new JLabel();
-	public TransitReceiptTrain(ClientControler maincontrol,TransitButtonComponents tbc) {
-		this.maincontrol=maincontrol;
-		this.tbc=tbc;
+	private JLabel warning = new JLabel();
+
+	public TransitReceiptTrain(ClientControler maincontrol, TransitButtonComponents tbc) {
+		this.maincontrol = maincontrol;
+		this.tbc = tbc;
 		tbc.setNextPanel(this);
 		tbc.change();
 		iniTransReceiptTrain();
-		
+
 	}
+
 	private void iniTransReceiptTrain() {
 		setLayout(null);
 		setSize(490, 550);
-		setVisible(true);	
-DateChooser date=new DateChooser(this, 212, 81);
-		
-		String[] transitAgency={};
-		
-		departure=new JComboBox(transitAgency);
-		departure.setBounds(202,58,70,20);
+		setVisible(true);
+		DateChooser date = new DateChooser(this, 212, 81);
+
+		ArrayList<TransitVO> trans = manager.observeAllTransit();
+		String[] transitAgency = new String[trans.size()];
+		for (int i = 0; i < trans.size(); i++) {
+			transitAgency[i] = trans.get(i).getName();
+		}
+
+		departure = new JComboBox(transitAgency);
+		departure.setBounds(198, 56, 80, 20);
 		add(departure);
-		
-		destination=new JComboBox(transitAgency);
-		destination.setBounds(350,58,70,20);
+
+		destination = new JComboBox(transitAgency);
+		destination.setBounds(346, 56, 80, 20);
 		add(destination);
-		
-		trainId=new JTextField();
+
+		trainId = new JTextField();
 		trainId.setBounds(192, 110, 184, 18);
 		add(trainId);
-		
-		carriageId=new JTextField();
+
+		carriageId = new JTextField();
 		carriageId.setBounds(192, 138, 141, 18);
 		add(carriageId);
-		
+
 		transiterId = new JTextField();
 		transiterId.setBounds(405, 138, 50, 18);
 		add(transiterId);
@@ -99,8 +108,7 @@ DateChooser date=new DateChooser(this, 212, 81);
 		jsc.setVisible(true);
 		jsc.setBounds(137, 218, 329, 191);
 		add(jsc);
-			
-			
+
 		// 使得表格大小随订单信息的填入而改变
 		model.addTableModelListener(new TableModelListener() {
 			@Override
@@ -115,8 +123,6 @@ DateChooser date=new DateChooser(this, 212, 81);
 				repaint();
 			}
 		});
-		
-		
 
 		/*
 		 * 确定
@@ -131,7 +137,7 @@ DateChooser date=new DateChooser(this, 212, 81);
 			public void mouseClicked(MouseEvent e) {
 				// 判断必填项是否填写完成
 				if ((trainId.getText().equals("")) || (carriageId.getText().equals(""))
-						|| (transiterId.getText().equals("")) ) {
+						|| (transiterId.getText().equals(""))) {
 					warning.setText("尚未完成对必填项的填写");
 					warning.setBounds(198, 490, 463 - 198, 30);
 					warning.setFont(new Font("Dialog", 1, 15));
@@ -140,63 +146,62 @@ DateChooser date=new DateChooser(this, 212, 81);
 					add(warning);
 					repaint();
 				} else {
-					ArrayList<String> BarIdArray=new ArrayList<String>();
-					for(int i=0;i<barId.getRowCount()-1;i++){
+					ArrayList<String> BarIdArray = new ArrayList<String>();
+					for (int i = 0; i < barId.getRowCount() - 1; i++) {
 						BarIdArray.add((String) barId.getValueAt(i, 1));
 					}
-				TransitSheetVO vo=new TransitSheetVO();
-					//destinationId项不存在，用null写入
+					TransitSheetVO vo = new TransitSheetVO();
+					// destinationId项不存在，用null写入
 					TransitFlightInformation flightInf = new TransitFlightInformation(date.getTime(),
 							departure.getSelectedItem().toString(), destination.getSelectedItem().toString(),
 							transiterId.getText().toString(), BarIdArray);
 					flightInf.setFlightId(trainId.getText());
 					flightInf.setShelfId(carriageId.getText());
-			    vo.setTransportType(TransportType.TRAIN);
-				vo.setTransitInformation(flightInf);
-				ResultMessage result=deliverblservice.transitTrainReceipt(vo);
-				//成功
-				if(result.getResult()==Result.SUCCESS){
-					
-					warning.setText("提交成功");
-					warning.setBounds(270, 490, 70, 30);
-					warning.setFont(new Font("Dialog", 1, 15));
-					warning.setForeground(Color.red);
-					warning.setVisible(true);
-					add(warning);
-					
-					fare = new JLabel();
-					fare.setText(Double.toString(flightInf.getFare()) + "元");
-					fare.setBounds(180, 192, 70, 30);
-					fare.setForeground(Color.GRAY);
-					fare.setFont(new Font("Dialog", 0, 18));
-					fare.setVisible(true);
-					add(fare);
-					
-					trainTransitId = new JLabel();
-					trainTransitId.setText(flightInf.getFlightTransitId());
-					trainTransitId.setBounds(290, 165, 140, 30);
-					trainTransitId.setForeground(Color.GRAY);
-					trainTransitId.setFont(new Font("Dialog", 0, 18));
-					trainTransitId.setVisible(true);
-					add(trainTransitId);
-					
-					
-					repaint();
-				}else{
-					//失败
-					warning.setText(result.getMessage());
-					warning.setBounds(138, 490, 463 - 138, 30);
-					warning.setFont(new Font("Dialog", 1, 15));
-					warning.setForeground(Color.red);
-					add(warning);
-					repaint();
-				}
+					vo.setTransportType(TransportType.TRAIN);
+					vo.setTransitInformation(flightInf);
+					ResultMessage result = deliverblservice.transitTrainReceipt(vo);
+					// 成功
+					if (result.getResult() == Result.SUCCESS) {
+
+						warning.setText("提交成功");
+						warning.setBounds(270, 490, 70, 30);
+						warning.setFont(new Font("Dialog", 1, 15));
+						warning.setForeground(Color.red);
+						warning.setVisible(true);
+						add(warning);
+
+						fare = new JLabel();
+						fare.setText(Double.toString(flightInf.getFare()) + "元");
+						fare.setBounds(180, 192, 70, 30);
+						fare.setForeground(Color.GRAY);
+						fare.setFont(new Font("Dialog", 0, 18));
+						fare.setVisible(true);
+						add(fare);
+
+						trainTransitId = new JLabel();
+						trainTransitId.setText(flightInf.getFlightTransitId());
+						trainTransitId.setBounds(290, 165, 140, 30);
+						trainTransitId.setForeground(Color.GRAY);
+						trainTransitId.setFont(new Font("Dialog", 0, 18));
+						trainTransitId.setVisible(true);
+						add(trainTransitId);
+
+						repaint();
+					} else {
+						// 失败
+						warning.setText(result.getMessage());
+						warning.setBounds(138, 490, 463 - 138, 30);
+						warning.setFont(new Font("Dialog", 1, 15));
+						warning.setForeground(Color.red);
+						add(warning);
+						repaint();
+					}
 				}
 			}
-		});	
+		});
 
 	}
-	
+
 	@Override
 	public void paintComponent(Graphics g) {
 

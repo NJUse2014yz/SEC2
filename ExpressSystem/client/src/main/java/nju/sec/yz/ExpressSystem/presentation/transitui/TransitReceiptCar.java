@@ -22,7 +22,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import nju.sec.yz.ExpressSystem.bl.deliverbl.DeliverController;
+import nju.sec.yz.ExpressSystem.bl.managerbl.ManagerController;
 import nju.sec.yz.ExpressSystem.blservice.deliverBlService.DeliverBlService;
+import nju.sec.yz.ExpressSystem.blservice.managerBlService.AgencyBlService;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.TransitFlightInformation;
@@ -30,6 +32,7 @@ import nju.sec.yz.ExpressSystem.common.TransportType;
 import nju.sec.yz.ExpressSystem.presentation.DateChooser;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.TransitSheetVO;
+import nju.sec.yz.ExpressSystem.vo.TransitVO;
 
 public class TransitReceiptCar extends JPanel{
 	
@@ -37,7 +40,7 @@ DeliverBlService deliverblservice=new DeliverController();
 	
 	ClientControler maincontrol;
 	TransitButtonComponents tbc;
-	
+	private AgencyBlService manager = new ManagerController();
 	
 	private JTextField carId;
 	private JTextField driverId;
@@ -67,14 +70,18 @@ DeliverBlService deliverblservice=new DeliverController();
 		setSize(490, 550);
 		setVisible(true);	DateChooser date=new DateChooser(this, 212, 81);
 		
-		String[] transitAgency={};
+		ArrayList<TransitVO> trans=manager.observeAllTransit();
+		String[] transitAgency=new String[trans.size()];
+		for(int i=0;i<trans.size();i++){
+			transitAgency[i]=trans.get(i).getName();
+			}
 		
 		departure=new JComboBox(transitAgency);
-		departure.setBounds(202,56,70,20);
+		departure.setBounds(198,56,80,20);
 		add(departure);
 		
 		destination=new JComboBox(transitAgency);
-		destination.setBounds(350,56,70,20);
+		destination.setBounds(346,56,80,20);
 		add(destination);
 		
 		carId=new JTextField();
