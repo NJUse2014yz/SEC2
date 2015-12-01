@@ -142,7 +142,8 @@ public class ManagerAgencyList extends JPanel{
 						 int num=table.getSelectedRow();
 						 System.out.println(num);
 						 if(num<transits.size()){
-							 reference=null;
+							 reference=new ArrayList<String>();
+							 System.out.println(transits.get(num).getId());
 							 reference.add(transits.get(num).getId());
 						 }else{
 							 reference=null;

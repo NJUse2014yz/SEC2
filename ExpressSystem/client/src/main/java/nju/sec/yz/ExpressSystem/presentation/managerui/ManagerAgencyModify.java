@@ -95,6 +95,7 @@ public class ManagerAgencyModify extends JPanel {
 	}
 
 	private void iniTransit(TransitVO vo) {
+		System.out.println(vo.getLocation());
 		location.setText(vo.getLocation());
 		name.setText(vo.getName());
 		Id.setText(vo.getId());
