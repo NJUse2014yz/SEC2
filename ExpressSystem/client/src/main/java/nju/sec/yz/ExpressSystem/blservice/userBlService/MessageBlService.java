@@ -1,7 +1,6 @@
 package nju.sec.yz.ExpressSystem.blservice.userBlService;
 
 import java.util.List;
-
 import nju.sec.yz.ExpressSystem.vo.MessageVO;
 
 /**
