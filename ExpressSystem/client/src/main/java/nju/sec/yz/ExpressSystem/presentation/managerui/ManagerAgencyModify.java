@@ -131,7 +131,7 @@ public class ManagerAgencyModify extends JPanel {
 		
 		ImageIcon filltransit = new ImageIcon("graphic/manager/button/transit.png");
 		transit = new JLabel(filltransit);
-		confirm.setBounds(147, 182, 89, 21);
+		transit.setBounds(147, 182, 89, 21);
 		add(transit);
 
 		String transit = listVO.get(count).getTransitId();

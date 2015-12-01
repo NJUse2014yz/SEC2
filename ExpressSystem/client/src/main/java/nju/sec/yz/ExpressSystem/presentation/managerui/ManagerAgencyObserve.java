@@ -72,14 +72,14 @@ public class ManagerAgencyObserve extends JPanel{
 		Id.setForeground(Color.white);
 
 		name = new JLabel();
-		name.setBounds(190, 147, 140, 18);
+		name.setBounds(190, 147, 180, 18);
 		add(name);
 		name.setFont(new Font("Dialog", 1, 15));
 		name.setForeground(Color.white);
 
 		ImageIcon backIcon = new ImageIcon("graphic/manager/button/back.png");
 		back = new JButton(backIcon);
-		back.setBounds(290, 240, 81, 20);
+		back.setBounds(370, 360, 81, 20);
 		add(back);
 
 		back.addMouseListener(new MouseAdapter() {
@@ -120,7 +120,7 @@ private void iniTransit(TransitVO vo) {
 
 	JScrollPane jsc=new JScrollPane(table);
 	jsc.setVisible(true);
-    jsc.setBounds(137,94,318,181);
+    jsc.setBounds(137,175,318,181);
     add(jsc);
 	
 }
@@ -137,7 +137,7 @@ private void iniPosition(TransitVO vo, String Pid) {
 	
 	ImageIcon filltransit = new ImageIcon("graphic/manager/button/transit.png");
 	transit = new JLabel(filltransit);
-	transit.setBounds(147, 182, 89, 21);
+	transit.setBounds(147, 179, 89, 21);
 	add(transit);
 
 	String transit = listVO.get(count).getTransitId();
