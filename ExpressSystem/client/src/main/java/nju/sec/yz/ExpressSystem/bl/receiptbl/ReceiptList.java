@@ -21,11 +21,13 @@ import nju.sec.yz.ExpressSystem.bl.deliverbl.TransitTrainReceipt;
 import nju.sec.yz.ExpressSystem.bl.inventorybl.InventoryInSheet;
 import nju.sec.yz.ExpressSystem.bl.inventorybl.InventoryOutSheet;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
+import nju.sec.yz.ExpressSystem.common.ReceiptOperation;
 import nju.sec.yz.ExpressSystem.common.ReceiptType;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.dataservice.receiptDataSevice.ReceiptDataService;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
+import nju.sec.yz.ExpressSystem.vo.MessageVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 
 /**
@@ -114,7 +116,7 @@ public class ReceiptList implements ReceiptSaveService{
 		return vo;
 	}
 
-	private ReceiptVO show(ReceiptPO po){
+	ReceiptVO show(ReceiptPO po){
 		ReceiptVO vo=null;
 		try {
 			ReceiptService receipt=RECEIPT_MAP.get(po.getType()).newInstance();
@@ -123,6 +125,17 @@ public class ReceiptList implements ReceiptSaveService{
 			e.printStackTrace();
 		}
 		return vo;
+	}
+	
+	ReceiptPO convertToPO(ReceiptVO vo){
+		ReceiptPO po=null;
+		try {
+			ReceiptService receipt=RECEIPT_MAP.get(vo.getType()).newInstance();
+			po=receipt.convertToPO(vo);
+		} catch (InstantiationException | IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		return po;
 	}
 	
 	public ResultMessage approve(ReceiptVO vo) {
@@ -134,6 +147,10 @@ public class ReceiptList implements ReceiptSaveService{
 			
 			//单据删除
 			this.delete(vo.getId());
+			
+			//消息发送
+			Message sender=new Message();
+			sender.send(new MessageVO(vo.getMakePerson(), ReceiptOperation.APPROVE, vo));
 			
 		} catch (InstantiationException | IllegalAccessException e) {
 			e.printStackTrace();
@@ -160,6 +177,9 @@ public class ReceiptList implements ReceiptSaveService{
 			ReceiptPO po=receipt.convertToPO(vo);
 			message=this.update(po);
 			
+			//消息发送
+			Message sender=new Message();
+			sender.send(new MessageVO(vo.getMakePerson(), ReceiptOperation.MODIFY, vo));
 			
 		} catch (InstantiationException | IllegalAccessException e) {
 			e.printStackTrace();

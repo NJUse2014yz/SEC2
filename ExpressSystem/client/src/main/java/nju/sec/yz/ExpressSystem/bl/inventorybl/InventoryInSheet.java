@@ -17,7 +17,6 @@ import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice.InventoryInDataService;
 import nju.sec.yz.ExpressSystem.po.InventoryInSheetPO;
-import nju.sec.yz.ExpressSystem.po.InventoryListPO;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.vo.InventoryInSheetVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
@@ -28,7 +27,7 @@ import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
  * @changer sai
  */
 public class InventoryInSheet implements ReceiptService {
-	private InventoryInDataService data;
+	protected InventoryInDataService data;
 	
 	public InventoryInSheet() {
 		try {
@@ -98,8 +97,6 @@ public class InventoryInSheet implements ReceiptService {
 	
 	public ResultMessage updateInReceipt(InventoryInSheetPO inPO) {
 		ResultMessage message=null;
-		InventoryListPO inventoryPO=new InventoryListPO( );
-		
 		try {
 			message=data.insert(inPO);
 		} catch (RemoteException e) {
@@ -115,7 +112,7 @@ public class InventoryInSheet implements ReceiptService {
 		InventoryInInformation ii=inSheet.getInventoryInInformation();
 		InventoryInSheetVO inVO = new InventoryInSheetVO(new InventoryInInformation(
 				ii.getTime(),ii.getDestination(), ii.getBlock(), ii.getRow(), 
-				ii.getShelf(), ii.getPositon()),inSheet.getBarId());
+				ii.getShelf(), ii.getPositon(), ii.getTransit()),inSheet.getBarId());
 		
 		inVO.setId(inSheet.getId());
 		inVO.setType(ReceiptType.INVENTORY_IN);
@@ -130,7 +127,7 @@ public class InventoryInSheet implements ReceiptService {
 		InventoryInInformation ii=inSheet.getInventoryInInformation();
 		InventoryInSheetPO inPO = new InventoryInSheetPO(new InventoryInInformation(
 				ii.getTime(),ii.getDestination(), ii.getBlock(), ii.getRow(), 
-				ii.getShelf(), ii.getPositon()),inSheet.getBarId());
+				ii.getShelf(), ii.getPositon(),ii.getTransit()),inSheet.getBarId());
 		
 		inPO.setId(inSheet.getId());
 		inPO.setType(ReceiptType.INVENTORY_IN);

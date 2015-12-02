@@ -22,17 +22,22 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import nju.sec.yz.ExpressSystem.bl.deliverbl.DeliverController;
+import nju.sec.yz.ExpressSystem.bl.managerbl.ManagerController;
 import nju.sec.yz.ExpressSystem.blservice.deliverBlService.DeliverBlService;
+import nju.sec.yz.ExpressSystem.blservice.managerBlService.AgencyBlService;
 import nju.sec.yz.ExpressSystem.common.LoadInformation;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.presentation.DateChooser;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
+import nju.sec.yz.ExpressSystem.vo.PositionVO;
 import nju.sec.yz.ExpressSystem.vo.TransitLoadSheetVO;
+import nju.sec.yz.ExpressSystem.vo.TransitVO;
 
 public class TransitLoading extends JPanel{
 	
 	DeliverBlService deliverblservice=new DeliverController();
+	private AgencyBlService manager=new ManagerController();
 	
 	private ClientControler maincontrol;
 	private TransitButtonComponents tbc;
@@ -67,7 +72,21 @@ public class TransitLoading extends JPanel{
 		
 		DateChooser date=new DateChooser(this, 220, 81);
 		
-		String[] agency={};
+		int count=0;
+		ArrayList<TransitVO> trans=manager.observeAllTransit();
+		for(int i=0;i<trans.size();i++){
+			count+=trans.get(i).getPositions().size();
+		}
+		String[] agency=new String[count];
+		count=0;
+		for(int i=0;i<trans.size();i++){
+			ArrayList<PositionVO> temp=(ArrayList<PositionVO>) trans.get(i).getPositions();
+			for(int k=0;k<temp.size();k++){
+				agency[count]=temp.get(k).getName();
+				count++;
+			}
+			
+		}
 		agencyId=new JComboBox(agency);
 		agencyId.setBounds(202,56,125,20);
 		add(agencyId);

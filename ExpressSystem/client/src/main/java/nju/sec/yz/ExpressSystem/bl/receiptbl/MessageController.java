@@ -1,8 +1,8 @@
-package nju.sec.yz.ExpressSystem.bl.userbl;
+package nju.sec.yz.ExpressSystem.bl.receiptbl;
 
 import java.util.List;
 
-import nju.sec.yz.ExpressSystem.blservice.userBlService.MessageBlService;
+import nju.sec.yz.ExpressSystem.blservice.receiptBlService.MessageBlService;
 import nju.sec.yz.ExpressSystem.vo.MessageVO;
 /**
  * 界面获取消息

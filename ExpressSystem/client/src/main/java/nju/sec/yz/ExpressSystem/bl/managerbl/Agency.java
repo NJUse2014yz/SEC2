@@ -212,6 +212,19 @@ public class Agency implements AgencyInfo {
 
 		return message;
 	}
+	
+	public PositionVO findPosition(String id){
+		List<TransitVO> transits=this.observeAllTransit();
+		
+		for(TransitVO transit:transits){
+			for(PositionVO position:transit.getPositions()){
+				if(position.getId().equals(id))
+					return position;
+			}
+		}
+		
+		return null;
+	}
 
 	public ResultMessage deletePosition(String transitId, String id) {
 		List<TransitPO> pos = null;

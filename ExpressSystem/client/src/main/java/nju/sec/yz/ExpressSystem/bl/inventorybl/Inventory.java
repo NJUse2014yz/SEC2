@@ -15,15 +15,15 @@ import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.bl.userbl.User;
 import nju.sec.yz.ExpressSystem.bl.userbl.UserInfo;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
-import nju.sec.yz.ExpressSystem.common.InventoryInInformation;
-import nju.sec.yz.ExpressSystem.common.InventoryOutInformation;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice.InventoryDataService;
 import nju.sec.yz.ExpressSystem.po.InventoryInSheetPO;
-import nju.sec.yz.ExpressSystem.po.InventoryOutSheetPO;
 import nju.sec.yz.ExpressSystem.po.InventoryListPO;
+import nju.sec.yz.ExpressSystem.po.InventoryOutSheetPO;
+import nju.sec.yz.ExpressSystem.vo.InventoryInSheetVO;
 import nju.sec.yz.ExpressSystem.vo.InventoryListVO;
+import nju.sec.yz.ExpressSystem.vo.InventoryOutSheetVO;
 
 /**
  * 库存的领域模型对象
@@ -51,26 +51,45 @@ public class Inventory {
 	 * 库存数量要有合计
 	 */
 	public InventoryListVO observeStock(String begin, String end) {
-		InventoryListVO list=new InventoryListVO();
+		InventoryListVO voList=new InventoryListVO();
 		String transit=getTransit();
+		InventoryInSheet insheet=new InventoryInSheet();
+		InventoryOutSheet outsheet=new InventoryOutSheet();
 		try {
-			List<InventoryInSheetPO> poList=data.findAll(transit);
-			if(poList==null)
+			List<InventoryInSheetPO> poInList=insheet.data.findByTime(transit, begin, end);
+			List<InventoryOutSheetPO> poOutList=outsheet.data.findByTime(transit, begin, end);
+			if(poInList==null&&poOutList==null)
 				return null;
-			for(InventoryInSheetPO po:poList){
-				InventoryListVO vo=changePoToVo(po);
-				list.add(vo);
+			List<InventoryInSheetVO> voInList=new ArrayList<InventoryInSheetVO>();
+			List<InventoryOutSheetVO> voOutList=new ArrayList<InventoryOutSheetVO>();
+			for(InventoryInSheetPO po:poInList){
+				InventoryInSheetVO vo=changeInPotoVo(po);
+				voInList.add(vo);
 			}
+			for(InventoryOutSheetPO po:poOutList){
+				InventoryOutSheetVO vo=changeOutPotoVo(po);
+				voOutList.add(vo);
+			}
+			voList.inList=voInList;
+			voList.outList=voOutList;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		
-		return list;
+	
+		return voList;
 	}
 
-	private InventoryListVO changePoToVo(InventoryInSheetPO po) {
-		
-		return null;
+	private InventoryOutSheetVO changeOutPotoVo(InventoryOutSheetPO po) {
+		InventoryOutSheet outsheet=new InventoryOutSheet();
+		InventoryOutSheetVO vo=(InventoryOutSheetVO)outsheet.show(po);
+		return vo;
+	}
+
+
+	private InventoryInSheetVO changeInPotoVo(InventoryInSheetPO inpo) {
+		InventoryInSheet insheet=new InventoryInSheet();
+		InventoryInSheetVO vo=(InventoryInSheetVO) insheet.show(inpo);
+		return vo;
 	}
 
 
@@ -78,28 +97,23 @@ public class Inventory {
 	 * 库存盘点
 	 */
 	public InventoryListVO checkStock() {
-		ArrayList<InventoryListVO> list=new ArrayList<InventoryListVO>();
+		InventoryListVO voList=new InventoryListVO();
+		String transit=getTransit();
 		try {
-			String transit=getTransit();
-			List<InventoryInSheetPO> poList=data.findAll(transit);
-			if(poList==null)
+			List<InventoryInSheetPO> poInList=data.findAll(transit);
+			if(poInList==null)
 				return null;
-			for(InventoryInSheetPO po:poList){
-				InventoryListVO vo=changePoToVo(po);
-				list.add(vo);
+			List<InventoryInSheetVO> voInList=new ArrayList<InventoryInSheetVO>();
+			for(InventoryInSheetPO po:poInList){
+				InventoryInSheetVO vo=changeInPotoVo(po);
+				voInList.add(vo);
 			}
+			voList.inList=voInList;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		return list;
-	}
 	
-	private String getTransit(){
-		UserInfo user=new User();
-		String userid=user.getCurrentID();
-		String strs[]=userid.split("A");
-		String transit=strs[1];
-		return transit;
+		return voList;
 	}
 	
 	/**
@@ -128,7 +142,19 @@ public class Inventory {
 		
 		
 	}
-
+	
+	/**
+	 * 获得中转中心编号
+	 * @return
+	 */
+	private String getTransit(){
+		UserInfo user=new User();
+		String userid=user.getCurrentID();
+		String strs[]=userid.split("A");
+		String transit=strs[1];
+		return transit;
+	}
+	
 	private String getFileName() {
 		String result="";
 		int count=Integer.parseInt(getCurrentCounter())+1;
@@ -160,7 +186,7 @@ public class Inventory {
 			ObjectInputStream in=new ObjectInputStream(new FileInputStream(file));
 			str=(String) in.readObject();
 			in.close();
-		} catch (IOException e) {
+		}catch(IOException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -175,10 +201,10 @@ public class Inventory {
 		}	
 		return str.charAt(8)+"";	
 	}
-		
-	public static void main(String[] args) {
-		Inventory i=new Inventory();
-		i.exportToExcel();
-		
-	} 
+//		
+//	public static void main(String[] args) {
+//		Inventory i=new Inventory();
+//		i.exportToExcel();
+//		
+//	} 
 }

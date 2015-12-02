@@ -23,9 +23,9 @@ import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.CityIdDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.ConstDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.SalaryDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.StaffDataService;
+import nju.sec.yz.ExpressSystem.dataservice.receiptDataSevice.MessageDataService;
 import nju.sec.yz.ExpressSystem.dataservice.receiptDataSevice.ReceiptCounterDataService;
 import nju.sec.yz.ExpressSystem.dataservice.receiptDataSevice.ReceiptDataService;
-import nju.sec.yz.ExpressSystem.dataservice.userDataSevice.MessageDataService;
 import nju.sec.yz.ExpressSystem.dataservice.userDataSevice.UserDataService;
 
 /**
@@ -38,6 +38,7 @@ public class DatafactoryProxy {
 
 	private static DatafactoryService datafactory;
 
+	
 	public static void setDatafactory(DatafactoryService datafactory) {
 		DatafactoryProxy.datafactory = datafactory;
 	}
@@ -50,11 +51,11 @@ public class DatafactoryProxy {
 		return datafactory.getInventoryInDataService();
 	}
 
-	public InventoryOutDataService getInventoryOutDataService() throws RemoteException {
+	public static InventoryOutDataService getInventoryOutDataService() throws RemoteException {
 		return datafactory.getInventoryOutDataService();
 	}
 
-	public BarIdsDataService getBarIdsDataService() throws RemoteException {
+	public static BarIdsDataService getBarIdsDataService() throws RemoteException {
 		return datafactory.getBarIdsDataService();
 	}
 

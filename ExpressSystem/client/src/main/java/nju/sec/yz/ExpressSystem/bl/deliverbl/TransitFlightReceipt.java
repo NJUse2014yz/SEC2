@@ -46,12 +46,13 @@ public class TransitFlightReceipt implements ReceiptService {
 		// 生成各种id
 		String transitID = helper.getCurrentTransitID();
 		String transportID = this.createTransportID(transitID);
-		String receiptId=helper.creatReceiptID(transportID);
+		String receiptId=helper.creatReceiptID(transitID);
 		info.setFlightTransitId(transportID);
 
 		// 计算运费
 		double distance=helper.distance(info.getDeparture(), info.getDestination());
 		double fare = this.cost(barIds.size(),distance);
+		System.out.println("size"+barIds.size());
 		info.setFare(fare);
 		
 		//生成po
@@ -69,6 +70,8 @@ public class TransitFlightReceipt implements ReceiptService {
 		if(saveResult.getResult()==Result.FAIL)
 			return saveResult;
 
+		System.out.println(receiptId);
+		
 		//保存条形码号供到达单使用
 		helper.saveBarIds(barIds, receiptId);
 		

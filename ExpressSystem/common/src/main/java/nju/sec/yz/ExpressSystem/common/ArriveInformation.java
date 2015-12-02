@@ -16,7 +16,7 @@ public class ArriveInformation implements Serializable{
 	private ArrayList<ArriveState> state;//货物到达状态（损坏、完整、丢失）
 	
 	public ArriveInformation() {
-		
+		state=new ArrayList<>();
 	}
 	
 	public ArriveInformation(ArriveInformation info){

@@ -9,6 +9,7 @@ import java.io.ObjectOutputStream;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import nju.sec.yz.ExpressSystem.bl.managerbl.Agency;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
@@ -215,36 +216,61 @@ public class User implements UserInfo{
 	}
 	
 	private boolean isId(String id, Status pow) {
+		
+		if(id.equals("admin")&&pow==Status.ADMINISTRATOR)
+			return true;
+		
 		if(id.length()<4)
 			return false;
 		char letter=id.charAt(id.length()-4);
+		Agency agaency=new Agency();
 		switch(letter){
 		case 'A':
 			if(pow!=Status.INVENTORY)
 				return false;
-			String number=id.substring(id.length()-3);
-			if(!is3Number(number))
+			String[] numbers=id.split("A");
+			if(numbers.length!=2)
+				return false;
+			//中转中心不存在
+			if(agaency.observeTransit(numbers[0])==null)
+				return false;
+			if(!is3Number(numbers[1]))
 				return false;
 			break;
 		case 'B':
 			if(pow!=Status.TRANSIT)
 				return false;
-			String number1=id.substring(id.length()-3);
-			if(!is3Number(number1))
+			String[] numbers2=id.split("A");
+			if(numbers2.length!=2)
+				return false;
+			//中转中心不存在
+			if(agaency.observeTransit(numbers2[0])==null)
+				return false;
+			if(!is3Number(numbers2[1]))
 				return false;
 			break;
 		case 'C':
 			if(pow!=Status.POSITION)
 				return false;
-			String number2=id.substring(id.length()-3);
-			if(!is3Number(number2))
+			String[] numbers3=id.split("C");
+			if(numbers3.length!=2)
+				return false;
+			//营业厅不存在
+			if(agaency.findPosition(numbers3[0])==null)
+				return false;
+			if(!is3Number(numbers3[1]))
 				return false;
 			break;
 		case 'D':
 			if(pow!=Status.DELIVER)
 				return false;
-			String number3=id.substring(id.length()-3);
-			if(!is3Number(number3))
+			String[] numbers4=id.split("D");
+			if(numbers4.length!=2)
+				return false;
+			//营业厅不存在
+			if(agaency.findPosition(numbers4[0])==null)
+				return false;
+			if(!is3Number(numbers4[1]))
 				return false;
 			break;
 		case 'E':

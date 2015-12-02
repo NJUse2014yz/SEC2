@@ -1,4 +1,4 @@
-package nju.sec.yz.ExpressSystem.blservice.userBlService;
+package nju.sec.yz.ExpressSystem.blservice.receiptBlService;
 
 import java.util.List;
 import nju.sec.yz.ExpressSystem.vo.MessageVO;

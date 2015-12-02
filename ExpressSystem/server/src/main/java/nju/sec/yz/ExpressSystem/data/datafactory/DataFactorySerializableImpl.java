@@ -22,11 +22,11 @@ import nju.sec.yz.ExpressSystem.data.managedata.CityIdDataImpl;
 import nju.sec.yz.ExpressSystem.data.managedata.ConstDataImpl;
 import nju.sec.yz.ExpressSystem.data.managedata.SalaryDataImpl;
 import nju.sec.yz.ExpressSystem.data.managedata.StaffDataImpl;
+import nju.sec.yz.ExpressSystem.data.receiptdata.MessageDataImpl;
 import nju.sec.yz.ExpressSystem.data.receiptdata.ReceiptCounterDataImpl;
 import nju.sec.yz.ExpressSystem.data.receiptdata.ReceiptDataImpl;
 import nju.sec.yz.ExpressSystem.data.stub.ConstDataStub;
 import nju.sec.yz.ExpressSystem.data.stub.UserDataStub;
-import nju.sec.yz.ExpressSystem.data.userdata.MessageDataImpl;
 import nju.sec.yz.ExpressSystem.data.userdata.UserDataImpl;
 import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.AccountBookDataService;
 import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.AccountDataService;
@@ -48,9 +48,9 @@ import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.CityIdDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.ConstDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.SalaryDataService;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.StaffDataService;
+import nju.sec.yz.ExpressSystem.dataservice.receiptDataSevice.MessageDataService;
 import nju.sec.yz.ExpressSystem.dataservice.receiptDataSevice.ReceiptCounterDataService;
 import nju.sec.yz.ExpressSystem.dataservice.receiptDataSevice.ReceiptDataService;
-import nju.sec.yz.ExpressSystem.dataservice.userDataSevice.MessageDataService;
 import nju.sec.yz.ExpressSystem.dataservice.userDataSevice.UserDataService;
 /**
  * 
