@@ -15,8 +15,7 @@ import nju.sec.yz.ExpressSystem.common.InventoryOutInformation;
 import nju.sec.yz.ExpressSystem.common.ReceiptType;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
-import nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice.InventoryDataService;
-import nju.sec.yz.ExpressSystem.po.InventoryListPO;
+import nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice.InventoryOutDataService;
 import nju.sec.yz.ExpressSystem.po.InventoryOutSheetPO;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.vo.InventoryOutSheetVO;
@@ -28,7 +27,7 @@ import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
  * @changer sai
  */
 public class InventoryOutSheet implements ReceiptService{
-	private InventoryOutDataService data;
+	protected InventoryOutDataService data;
 	
 	public InventoryOutSheet() {
 		try {
@@ -157,7 +156,6 @@ public class InventoryOutSheet implements ReceiptService{
 	
 	public ResultMessage updateOutReceipt(InventoryOutSheetPO outPO) {
 		ResultMessage message=null;
-		InventoryListPO inventoryPO=new InventoryListPO( );
 		
 		try {
 			message=data.insert(outPO);

@@ -104,6 +104,15 @@ public class ValidHelper {
 	}
 	
 	/**
+	 * 是否为合理的double数
+	 */
+	public static boolean isValidDouble(double i){
+		if(i>0.0&&i<65536.0)
+			return true;
+		return false;
+	}
+	
+	/**
 	 * 是否为中转中心ID
 	 */
 	public static boolean isTransitID(String id){

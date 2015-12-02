@@ -5,7 +5,6 @@ import java.rmi.Remote;
  * 注意初始化四个城市
  */
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 import java.util.List;
 
 import nju.sec.yz.ExpressSystem.common.ResultMessage;

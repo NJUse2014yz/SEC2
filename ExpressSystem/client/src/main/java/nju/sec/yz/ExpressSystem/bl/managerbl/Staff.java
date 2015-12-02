@@ -15,7 +15,7 @@ import nju.sec.yz.ExpressSystem.vo.StaffVO;
 /**
  * 人员的领域模型对象
  * @author 周聪
- *
+ * @update sai
  */
 public class Staff {
 	private StaffDataService data;
@@ -73,7 +73,7 @@ public class Staff {
 		StaffPO po=changeVoToPo(sv);
 		try {
 			message=data.update(po);
-		} catch (RemoteException e) {
+		} catch (RemoteException e){
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 			return new ResultMessage(Result.FAIL,"系统错误");
