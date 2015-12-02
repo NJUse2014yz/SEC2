@@ -33,7 +33,6 @@ public class Staff {
 		//验证information
 		String validresult=isValid(sv);
 		if(!validresult.equals("success")){
-			System.out.println(validresult);
 			return new ResultMessage(Result.FAIL,validresult);
 		}
 		//创建PO并保存

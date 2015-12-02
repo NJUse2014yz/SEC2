@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
 import nju.sec.yz.ExpressSystem.client.RMIExceptionHandler;
+import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.AccountDataService;
 import nju.sec.yz.ExpressSystem.po.AccountPO;
@@ -31,7 +32,31 @@ public class Account {
 	}
 
 	public ResultMessage addAccount(AccountVO av) {
-		// TODO Auto-generated method stub
+		ResultMessage message=null;
+		//验证information
+		String validresult=isValid(av);
+		if(!validresult.equals("success")){
+			return new ResultMessage(Result.FAIL,validresult);
+		}
+		//创建PO并保存
+		AccountPO po=changePoToVo();
+		try {
+			message=accountData.insert(po);
+		} catch (RemoteException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+			return new ResultMessage(Result.FAIL,"系统错误");
+		}
+		return message;
+	}
+
+	private AccountPO changePoToVo() {
+		// TODO 自动生成的方法存根
+		return null;
+	}
+
+	private String isValid(AccountVO av) {
+		// TODO 自动生成的方法存根
 		return null;
 	}
 

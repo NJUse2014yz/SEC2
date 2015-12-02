@@ -21,7 +21,7 @@ import nju.sec.yz.ExpressSystem.vo.UserVO;
 /**
  * 负责管理用户
  * @author 周聪
- *
+ * 
  */
 public class User implements UserInfo{
 	private UserDataService data;
