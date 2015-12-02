@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -116,8 +117,8 @@ public class AccountOperateTableUi extends JPanel{
 					remove(outScroll);
 					
 					
-					ArrayList<PaymentSheetVO> invo=bussinessvo.getIn();
-					ArrayList<OutVO> outvo=bussinessvo.getOut();
+					List<PaymentSheetVO> invo=bussinessvo.in;
+					List<OutVO> outvo=bussinessvo.out;
 					int sizeIn=invo.size();
 					int sizeOut=outvo.size();
 					dataIn=new String[sizeIn][4];
