@@ -63,20 +63,5 @@ public class FinanceController implements FinanceBlSevice{
 	}
 
 	
-	@Override
-	public InitialVO observeIni() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
-	/**
-	 * 期初建账
-	 */
-	@Override
-	public ResultMessage initial(AccountVO av) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

@@ -1,11 +1,7 @@
 package nju.sec.yz.ExpressSystem.bl.accountbl;
 
-import java.rmi.RemoteException;
-import java.util.List;
-
-import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
+import nju.sec.yz.ExpressSystem.blservice.accountBlService.InitialBlService;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
-import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.AccountBookDataService;
 import nju.sec.yz.ExpressSystem.vo.AccountVO;
 import nju.sec.yz.ExpressSystem.vo.CarVO;
 import nju.sec.yz.ExpressSystem.vo.InitialVO;
@@ -15,76 +11,54 @@ import nju.sec.yz.ExpressSystem.vo.StaffVO;
 import nju.sec.yz.ExpressSystem.vo.TransitVO;
 
 /**
- * 期初建账的具体实现
- * 
+ * 处理界面期初建帐操作
  * @author 周聪
- *
  */
-public class Initial {
-	
-	private boolean isFinished=false;
+public class InitialController implements InitialBlService{
 
-	//机构
-	private List<TransitVO> agency;
-
-	//人员
-	private List<StaffVO> staffs;
-
-	//车辆
-	private List<CarVO> cars;
-
-	//银行账户
-	private List<AccountVO> accounts;
-
-	//库存
-	public List<InventoryInSheetVO> inventories;
-
-	private AccountBookDataService accountBookData;
-
-	public Initial() {
-		try {
-			accountBookData = DatafactoryProxy.getAccountBookDataService();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
+	@Override
 	public ResultMessage addStaff(StaffVO vo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
 	public ResultMessage addTransit(TransitVO vo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
 	public ResultMessage addPosition(PositionVO vo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
 	public ResultMessage addCar(CarVO vo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
 	public ResultMessage addAccount(AccountVO vo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
 	public ResultMessage addStock(InventoryInSheetVO vo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
 	public ResultMessage finish() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
 	public InitialVO observeInitial() {
 		// TODO Auto-generated method stub
 		return null;

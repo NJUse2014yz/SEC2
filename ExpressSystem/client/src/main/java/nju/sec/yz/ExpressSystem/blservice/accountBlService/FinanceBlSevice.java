@@ -36,8 +36,5 @@ public interface FinanceBlSevice {
 	public ProfitVO makeCostReceipt ();
 	//导出相应表单的excel文件
 	public void exportCostToExcel(ReceiptVO rv);
-	//查看初期建帐
-	public InitialVO observeIni();
-	//初期建账
-	public ResultMessage initial(AccountVO av);
+	
 }

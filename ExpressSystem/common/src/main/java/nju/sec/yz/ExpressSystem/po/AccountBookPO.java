@@ -17,7 +17,7 @@ public class AccountBookPO implements Serializable{
 	private String id;
 	
 	//机构
-	private AgencyPO agency;
+	private TransitPO agency;
 	
 	//人员
 	private List<StaffPO> staffs;
@@ -31,7 +31,7 @@ public class AccountBookPO implements Serializable{
 	//TODO 库存
 	private List<InventoryListPO> inventories;
 
-	public AccountBookPO(AgencyPO agency, List<StaffPO> staffs, List<CarPO> cars, List<AccountPO> accounts,
+	public AccountBookPO(TransitPO agency, List<StaffPO> staffs, List<CarPO> cars, List<AccountPO> accounts,
 			List<InventoryListPO> inventories,String id) {
 		super();
 		this.agency = agency;
@@ -42,11 +42,11 @@ public class AccountBookPO implements Serializable{
 		this.id=id;
 	}
 
-	public AgencyPO getAgency() {
+	public TransitPO getAgency() {
 		return agency;
 	}
 
-	public void setAgency(AgencyPO agency) {
+	public void setAgency(TransitPO agency) {
 		this.agency = agency;
 	}
 
