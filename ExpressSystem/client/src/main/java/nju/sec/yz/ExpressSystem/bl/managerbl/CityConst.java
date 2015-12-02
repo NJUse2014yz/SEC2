@@ -1,8 +1,11 @@
 package nju.sec.yz.ExpressSystem.bl.managerbl;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.List;
 
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
+import nju.sec.yz.ExpressSystem.client.RMIExceptionHandler;
 import nju.sec.yz.ExpressSystem.common.CityInformation;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
@@ -61,6 +64,24 @@ public class CityConst implements CityDistanceService {
 		}
 		
 		return vo;
+	}
+	
+	public List<CityVO> getAllCity() {
+		List<CityVO> cities=new ArrayList<>();
+		
+		try {
+			List<CityPO> pos=data.findAllCity();
+			for(CityPO po:pos){
+				CityInformation info=this.copyInfo(po.getCityInformation());
+				CityVO city=new CityVO(info);
+				cities.add(city);
+			}
+		} catch (RemoteException e) {
+			RMIExceptionHandler.handleRMIException();
+			e.printStackTrace();
+		}
+		
+		return cities;
 	}
 
 	
@@ -124,6 +145,8 @@ public class CityConst implements CityDistanceService {
 		
 		return distanse;
 	}
+
+	
 	
 	
 

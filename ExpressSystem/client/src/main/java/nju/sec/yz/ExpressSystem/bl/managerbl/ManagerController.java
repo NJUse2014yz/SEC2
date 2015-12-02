@@ -81,6 +81,13 @@ public class ManagerController implements AgencyBlService,ConstBlService,SalaryB
 		CityVO vo=city.observeCity(beginPlace, endPlace);
 		return vo;
 	}
+	
+	@Override
+	public List<CityVO> observeAllCity() {
+		CityConst city=new CityConst();
+		List<CityVO> list=city.getAllCity();
+		return list;
+	}
 
 	@Override
 	public ResultMessage addCity(CityVO cp) {
@@ -176,5 +183,7 @@ public class ManagerController implements AgencyBlService,ConstBlService,SalaryB
 		AgencyListVO vo=agency.observeTransitByName(name);
 		return vo;
 	}
+
+	
 
 }

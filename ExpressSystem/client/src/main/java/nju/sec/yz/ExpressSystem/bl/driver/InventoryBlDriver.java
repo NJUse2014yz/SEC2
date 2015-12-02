@@ -1,8 +1,6 @@
 package nju.sec.yz.ExpressSystem.bl.driver;
 
 import java.util.ArrayList;
-
-import nju.sec.yz.ExpressSystem.bl.stub.InventoryBlStub;
 import nju.sec.yz.ExpressSystem.blservice.inventoryBlService.InventoryBlService;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.InventoryInSheetVO;

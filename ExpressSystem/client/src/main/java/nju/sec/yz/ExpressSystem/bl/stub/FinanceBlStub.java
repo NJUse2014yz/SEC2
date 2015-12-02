@@ -20,7 +20,7 @@ public class FinanceBlStub implements FinanceBlSevice {
 		// TODO 自动生成的方法存根
 		
 		BussinessVO bussinessVO=new BussinessVO();
-		bussinessVO.addInVO(new PaymentSheetVO());
+		
 		return bussinessVO;
 	}
 

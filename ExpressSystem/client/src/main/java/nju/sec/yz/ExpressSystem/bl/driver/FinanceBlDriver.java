@@ -18,7 +18,7 @@ public class FinanceBlDriver {
 	public void drive(FinanceBlSevice financeBl_stub) {
 		// 查看经营情况表
 		BussinessVO bussinessVO = financeBl_stub.checkBusinessCircumstance(null, null);
-		System.out.println("收款单：" + bussinessVO.getIn().get(0));
+		
 		// TODO
 		financeBl_stub.checkReceipt(null, "9");
 
@@ -31,7 +31,7 @@ public class FinanceBlDriver {
 		System.out.println("初期建账成功");
 		// 成本收益表
 		ProfitVO profitVO = financeBl_stub.makeCostReceipt();
-		System.out.println("总收入:" + profitVO.getIn());
+		
 		//
 		ResultMessage paymentResult = financeBl_stub.makePayment(null);
 
