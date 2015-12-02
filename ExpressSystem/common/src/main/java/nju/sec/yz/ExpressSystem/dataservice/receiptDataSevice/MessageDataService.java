@@ -1,4 +1,4 @@
-package nju.sec.yz.ExpressSystem.dataservice.userDataSevice;
+package nju.sec.yz.ExpressSystem.dataservice.receiptDataSevice;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

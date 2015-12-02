@@ -216,6 +216,10 @@ public class User implements UserInfo{
 	}
 	
 	private boolean isId(String id, Status pow) {
+		
+		if(id.equals("admin")&&pow==Status.ADMINISTRATOR)
+			return true;
+		
 		if(id.length()<4)
 			return false;
 		char letter=id.charAt(id.length()-4);

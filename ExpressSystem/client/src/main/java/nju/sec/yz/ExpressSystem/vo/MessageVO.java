@@ -1,8 +1,9 @@
 package nju.sec.yz.ExpressSystem.vo;
 
-import nju.sec.yz.ExpressSystem.common.Content;
+
 import nju.sec.yz.ExpressSystem.common.ReceiptOperation;
-import nju.sec.yz.ExpressSystem.common.ReceiptType;
+
+import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 
 public class MessageVO {
 	
@@ -10,14 +11,20 @@ public class MessageVO {
 	
 	public String toPersonId;//收信息的人
 	
-	public String receiptId;//审批的单据的id
-	
-	public ReceiptType type;//审批的单据的类型
-	
 	public ReceiptOperation operation;//修改或通过
 	
-	public String makeTime;//单据提交时间
+	public ReceiptVO receipt;//审批通过的单据
+
+	public MessageVO(String toPersonId, ReceiptOperation operation, ReceiptVO receipt) {
+		super();
+		this.toPersonId = toPersonId;
+		this.operation = operation;
+		this.receipt = receipt;
+	}
 	
-	public Content other;//其他附加信息
+	public MessageVO(){
+		
+	}
+	
 	
 }

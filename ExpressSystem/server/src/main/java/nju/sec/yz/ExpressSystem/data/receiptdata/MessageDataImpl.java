@@ -1,4 +1,4 @@
-package nju.sec.yz.ExpressSystem.data.userdata;
+package nju.sec.yz.ExpressSystem.data.receiptdata;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,7 +14,7 @@ import java.util.List;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.data.fileUtility.SerializableFileHelper;
-import nju.sec.yz.ExpressSystem.dataservice.userDataSevice.MessageDataService;
+import nju.sec.yz.ExpressSystem.dataservice.receiptDataSevice.MessageDataService;
 import nju.sec.yz.ExpressSystem.po.BarIdsPO;
 import nju.sec.yz.ExpressSystem.po.CarPO;
 import nju.sec.yz.ExpressSystem.po.MessagePO;
