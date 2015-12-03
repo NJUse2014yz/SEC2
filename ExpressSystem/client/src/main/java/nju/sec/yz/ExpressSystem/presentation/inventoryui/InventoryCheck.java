@@ -19,7 +19,9 @@ import javax.swing.JTable;
 
 import nju.sec.yz.ExpressSystem.bl.inventorybl.InventoryController;
 import nju.sec.yz.ExpressSystem.blservice.inventoryBlService.InventoryBlService;
+import nju.sec.yz.ExpressSystem.common.InventoryInInformation;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
+import nju.sec.yz.ExpressSystem.vo.InventoryInSheetVO;
 import nju.sec.yz.ExpressSystem.vo.InventoryListVO;
 
 public class InventoryCheck extends JPanel{
@@ -49,9 +51,19 @@ public class InventoryCheck extends JPanel{
 		
 		InventoryListVO vo=inventoryservice.checkStock();
 
-		ArrayList<InventoryVO> vo=(ArrayList<InventoryVO>) inventoryservice.checkStock();
+		ArrayList<InventoryInSheetVO> involist=(ArrayList<InventoryInSheetVO>) inventoryservice.checkStock().inList;
 		
-		Object[][] tableData = {};
+		Object[][] tableData = new Object[involist.size()][7];
+		for(int i=0;i<involist.size();i++){
+			InventoryInInformation temp=involist.get(i).getInventoryInInformation();
+			tableData[i][0]=involist.get(i).getBarId();
+			tableData[i][1]=temp.getTime();
+			tableData[i][2]=temp.getDestination();
+			tableData[i][3]=temp.getBlock();
+			tableData[i][4]=temp.getPositon();
+			tableData[i][5]=involist.get(i).getBarId();
+			tableData[i][6]=involist.get(i).getBarId();
+		}
 		String[] columnTitle = { "快递编号", "入库日期", "目的地", "区号", "排号", "架号", "位号" };
 		table = new JTable(tableData, columnTitle);
 		// 将JTable对象放在JScrollPane中，并将该JScrollPane放在窗口中显示出来

@@ -107,6 +107,7 @@ public class ManagerAgencyDelete extends JPanel{
 					AgencyListVO agency=manager.observeTransitByName(searchnum.getText());
 					transits=(ArrayList<TransitVO>) agency.transits;
 					positions=(ArrayList<PositionVO>) agency.positions;
+					System.out.println(positions.size());
 					
 					
 					int total=0;
@@ -152,6 +153,7 @@ public class ManagerAgencyDelete extends JPanel{
 					if(deletelines[i]<transits.size()){
 						manager.deleteTransit((String)table.getValueAt(deletelines[i], 1));
 					}else{
+						System.out.println(positions.get(deletelines[i]-transits.size())==null);
 						String transitBelong=positions.get(deletelines[i]-transits.size()).getTransitId();
 						manager.deletePosition(transitBelong, (String)table.getValueAt(deletelines[i], 1));
 					}
@@ -163,7 +165,7 @@ public class ManagerAgencyDelete extends JPanel{
 	
 	private void original(){
 		transits=manager.observeAllTransit();
-		ArrayList<PositionVO> inf=new ArrayList<PositionVO>();
+		positions=new ArrayList<PositionVO>();
 		
 		int total=0;
 		total=total+transits.size();
@@ -177,10 +179,10 @@ public class ManagerAgencyDelete extends JPanel{
 			TableData[i][0]=temp.getLocation();
 			TableData[i][1]=temp.getId();
 			TableData[i][2]=temp.getName();
-			inf.addAll(temp.getPositions());
+			positions.addAll(temp.getPositions());
 			}
-		for(int i=0;i<inf.size();i++){
-			PositionVO temp=inf.get(i);
+		for(int i=0;i<positions.size();i++){
+			PositionVO temp=positions.get(i);
 			TableData[i+transits.size()][0]=temp.getLocation();
 			TableData[i+transits.size()][1]=temp.getId();
 			TableData[i+transits.size()][2]=temp.getName();

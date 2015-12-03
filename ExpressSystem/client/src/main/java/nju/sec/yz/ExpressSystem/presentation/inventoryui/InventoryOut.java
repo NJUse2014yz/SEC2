@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,7 +16,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import nju.sec.yz.ExpressSystem.bl.inventorybl.InventoryController;
+import nju.sec.yz.ExpressSystem.bl.managerbl.ManagerController;
 import nju.sec.yz.ExpressSystem.blservice.inventoryBlService.InventoryBlService;
+import nju.sec.yz.ExpressSystem.blservice.managerBlService.AgencyBlService;
 import nju.sec.yz.ExpressSystem.common.InventoryOutInformation;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
@@ -24,13 +27,14 @@ import nju.sec.yz.ExpressSystem.presentation.DateChooser;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.InventoryInSheetVO;
 import nju.sec.yz.ExpressSystem.vo.InventoryOutSheetVO;
+import nju.sec.yz.ExpressSystem.vo.TransitVO;
 
 public class InventoryOut extends JPanel {
 
 private InventoryBlService inventoryservice=new InventoryController();
 	
 	private ClientControler maincontroler;
-	
+	private AgencyBlService manager=new ManagerController();
 	
 	private JTextField barId;
 	private JComboBox destination;
@@ -61,7 +65,11 @@ InventoryButtonComponents ibc=new InventoryButtonComponents(maincontroler,this);
 		
 		DateChooser date =new DateChooser(this,213,82);
 		
-		String[] desti={};
+		ArrayList<TransitVO> trans=manager.observeAllTransit();
+		String[] desti=new String[trans.size()];
+		for(int i=0;i<trans.size();i++){
+			desti[i]=trans.get(i).getName();
+		}
 		destination=new JComboBox(desti);
 		destination.setBounds(202, 110, 98, 20);
 		add(destination);

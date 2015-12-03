@@ -1,4 +1,4 @@
-spackage nju.sec.yz.ExpressSystem.bl.managerbl;
+package nju.sec.yz.ExpressSystem.bl.managerbl;
 
 import java.util.ArrayList;
 import java.util.List;
