@@ -10,6 +10,7 @@ import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.bl.userbl.User;
 import nju.sec.yz.ExpressSystem.bl.userbl.UserInfo;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
+import nju.sec.yz.ExpressSystem.client.RMIExceptionHandler;
 import nju.sec.yz.ExpressSystem.common.IdType;
 import nju.sec.yz.ExpressSystem.common.InventoryOutInformation;
 import nju.sec.yz.ExpressSystem.common.ReceiptType;
@@ -33,7 +34,7 @@ public class InventoryOutSheet implements ReceiptService{
 		try {
 			data=DatafactoryProxy.getInventoryOutDataService();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 	}
@@ -156,6 +157,10 @@ public class InventoryOutSheet implements ReceiptService{
 	
 	public ResultMessage updateOutReceipt(InventoryOutSheetPO outPO) {
 		ResultMessage message=null;
+		
+		//删除库存
+		Inventory inventory=new Inventory();
+		inventory.updateOut(getTransitID(), outPO.getBarId());
 		
 		try {
 			message=data.insert(outPO);

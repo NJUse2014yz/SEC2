@@ -16,55 +16,66 @@ import nju.sec.yz.ExpressSystem.vo.TransitVO;
  */
 public class InitialController implements InitialBlService{
 
+	private Initial initial;
 	
+	public InitialController() {
+		initial=new Initial();
+	}
 	
+	@Override
+	public ResultMessage start() {
+		ResultMessage message=initial.start();
+		return message;
+	}
 	
 	@Override
 	public ResultMessage addStaff(StaffVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		ResultMessage message=initial.addStaff(vo);
+		return message;
 	}
 
 	@Override
 	public ResultMessage addTransit(TransitVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		ResultMessage message=initial.addTransit(vo);
+		return message;
 	}
 
 	@Override
 	public ResultMessage addPosition(PositionVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		ResultMessage message=initial.addPosition(vo);
+		return message;
 	}
 
 	@Override
 	public ResultMessage addCar(CarVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		ResultMessage message=initial.addCar(vo);
+		return message;
 	}
 
 	@Override
 	public ResultMessage addAccount(AccountVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		ResultMessage message=initial.addAccount(vo);
+		return message;
 	}
 
 	@Override
 	public ResultMessage addStock(InventoryInSheetVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		ResultMessage message=initial.addStock(vo);
+		return message;
 	}
 
 	@Override
 	public ResultMessage finish() {
-		// TODO Auto-generated method stub
+		ResultMessage message=initial.finish();
 		return null;
 	}
 
 	@Override
 	public InitialVO observeInitial() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
+
+	
 
 }

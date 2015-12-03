@@ -2,7 +2,6 @@ package nju.sec.yz.ExpressSystem.bl.accountbl;
 
 import java.rmi.RemoteException;
 import java.util.List;
-
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
 import nju.sec.yz.ExpressSystem.client.RMIExceptionHandler;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
@@ -17,17 +16,18 @@ import nju.sec.yz.ExpressSystem.vo.TransitVO;
 
 /**
  * 期初建账的具体实现
- * 
  * @author 周聪
- *
  */
 public class Initial {
 	
 	private boolean isFinished=false;
 
-	//机构
-	private List<TransitVO> agency;
+	//中转中心
+	private List<TransitVO> transits;
 
+	//营业厅
+	private List<PositionVO> positions;
+	
 	//人员
 	private List<StaffVO> staffs;
 
@@ -49,6 +49,12 @@ public class Initial {
 			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
+	}
+	
+	
+	public ResultMessage start() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	public ResultMessage addStaff(StaffVO vo) {
