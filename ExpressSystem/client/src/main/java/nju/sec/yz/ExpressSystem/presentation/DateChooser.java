@@ -58,7 +58,7 @@ import javax.swing.Popup;
      private JP4 jp4;
      private Font font=new Font("宋体",Font.PLAIN,12);
      private final LabelManager lm=new LabelManager();
-     private JTextField showDate;//,toSelect;
+     public JTextField showDate;//,toSelect;
      private JButton choose;
      private SimpleDateFormat sdf=new SimpleDateFormat("yyyy年MM月dd日");
      private boolean isShow=false;
