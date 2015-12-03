@@ -19,7 +19,7 @@ import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.ProfitVO;
 
 public class AccountCostTableUi extends JPanel{
-	private ButtonComponents bc;
+	private AccountButtonComponents bc;
 	private ClientControler mainControler;
 	private AccountControler controler;
 	private FinanceBlSevice financeBl;
@@ -41,7 +41,7 @@ public class AccountCostTableUi extends JPanel{
 	private static final int excle_h=24;
 	
 	private ImageIcon excleIcon=new ImageIcon("graphic/account/button/excle_button.jpg");
-	public AccountCostTableUi(ClientControler mainControler,ButtonComponents bc){
+	public AccountCostTableUi(ClientControler mainControler,AccountButtonComponents bc){
 		super();
 		this.mainControler=mainControler;
 		controler=mainControler.accountControler;

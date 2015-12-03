@@ -10,17 +10,17 @@ import nju.sec.yz.ExpressSystem.presentation.accountui.AccountInitialUi;
 import nju.sec.yz.ExpressSystem.presentation.accountui.AccountInquiryUi;
 import nju.sec.yz.ExpressSystem.presentation.accountui.AccountModifyUi;
 import nju.sec.yz.ExpressSystem.presentation.accountui.AccountOperateTableUi;
-import nju.sec.yz.ExpressSystem.presentation.accountui.ButtonComponents;
+import nju.sec.yz.ExpressSystem.presentation.accountui.AccountButtonComponents;
 import nju.sec.yz.ExpressSystem.presentation.positionui.PositionArriveUi;
 
 
 public class AccountControler {
 	private ClientControler mainControler;
-	public static ButtonComponents bc;
+	public static AccountButtonComponents bc;
 	public AccountControler(ClientControler mainControler)
 	{
 		this.mainControler=mainControler;
-		this.bc=new ButtonComponents(mainControler);
+		this.bc=new AccountButtonComponents(mainControler);
 	}
 	public void accountChangePanel(ACCOUNT_CONTROL n)
 	{

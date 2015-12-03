@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import nju.sec.yz.ExpressSystem.bl.managerbl.Agency;
+import nju.sec.yz.ExpressSystem.bl.managerbl.Transit;
 import nju.sec.yz.ExpressSystem.bl.managerbl.AgencyInfo;
 import nju.sec.yz.ExpressSystem.bl.managerbl.CityConst;
 import nju.sec.yz.ExpressSystem.bl.managerbl.CityDistanceService;
@@ -41,7 +41,7 @@ public class TransitReceiptHelper {
 	public double distance(String beginTransit, String endTransit) {
 		// 出发地和到达地都是中转中心名称
 		CityDistanceService city = new CityConst();
-		AgencyInfo agency = new Agency();
+		AgencyInfo agency = new Transit();
 		String beginPlace = agency.getTrancitLocation(beginTransit);
 		String endPlace = agency.getTrancitLocation(endTransit);
 		double distance = city.getDistance(beginPlace, endPlace);

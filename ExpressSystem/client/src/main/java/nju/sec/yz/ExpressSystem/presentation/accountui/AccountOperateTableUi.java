@@ -26,7 +26,7 @@ import nju.sec.yz.ExpressSystem.vo.OutVO;
 import nju.sec.yz.ExpressSystem.vo.PaymentSheetVO;
 
 public class AccountOperateTableUi extends JPanel{
-	private ButtonComponents bc;
+	private AccountButtonComponents bc;
 	private ClientControler mainControler;
 	private AccountControler controler;
 	private FinanceBlSevice financeBl;
@@ -71,7 +71,7 @@ public class AccountOperateTableUi extends JPanel{
 	private ImageIcon confirmIcon=new ImageIcon("graphic/account/button/confirm_button.jpg");
 	private ImageIcon excleIcon=new ImageIcon("graphic/account/button/excle_button.jpg");
 	public AccountOperateTableUi(ClientControler mainControler,
-			ButtonComponents bc) {
+			AccountButtonComponents bc) {
 		super();
 		this.mainControler=mainControler;
 		controler=mainControler.accountControler;

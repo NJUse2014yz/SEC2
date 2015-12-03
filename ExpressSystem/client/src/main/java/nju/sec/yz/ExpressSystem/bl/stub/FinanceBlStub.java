@@ -38,12 +38,6 @@ public class FinanceBlStub implements FinanceBlSevice {
 		return new ProfitVO(1000, 110, 890);
 	}
 
-	@Override
-	public void exportCostToExcel(ReceiptVO rv) {
-		// TODO 自动生成的方法存根
-		System.out.println("导出Excel文件成功");
-
-	}
 
 	
 
@@ -57,6 +51,22 @@ public class FinanceBlStub implements FinanceBlSevice {
 	public List<PaymentSheetVO> checkReceipt(String day, String positionId) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+
+	@Override
+	public void exportCostToExcel(ProfitVO vo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void exportBussinessToExcel(BussinessVO vo) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

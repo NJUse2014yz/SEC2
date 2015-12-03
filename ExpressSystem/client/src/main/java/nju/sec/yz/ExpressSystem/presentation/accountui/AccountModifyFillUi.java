@@ -23,7 +23,7 @@ import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.AccountVO;
 
 public class AccountModifyFillUi extends JPanel{
-	private ButtonComponents bc;
+	private AccountButtonComponents bc;
 	private ClientControler mainControler;
 	private AccountControler controler;
 	private AccountBlService accountBl;
@@ -53,7 +53,7 @@ public class AccountModifyFillUi extends JPanel{
 	
 	private ImageIcon confirmIcon=new ImageIcon("graphic/account/button/confirm_button.jpg");
 	
-	public AccountModifyFillUi(ClientControler mainControler,ButtonComponents bc,String name){
+	public AccountModifyFillUi(ClientControler mainControler,AccountButtonComponents bc,String name){
 		super();
 		this.mainControler=mainControler;
 		controler=mainControler.accountControler;

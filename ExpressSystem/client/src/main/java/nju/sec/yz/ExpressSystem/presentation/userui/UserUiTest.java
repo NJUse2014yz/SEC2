@@ -17,6 +17,7 @@ public class UserUiTest extends JPanel{
 	JButton testInventory;
 	JButton testManager;
 	JButton testTransit;
+	JButton testAdminstrater;
 	
 	public UserUiTest(ClientControler controler)
 	{
@@ -48,12 +49,17 @@ public class UserUiTest extends JPanel{
 		this.testTransit.setBounds(50,300,200,50);
 		this.testTransit.addMouseListener(new MainSwitchPanelListener(MAIN_CONTROL.TRANSITER,this.controler));
 		
+		this.testAdminstrater=new JButton("to adminstrater's panel");
+		this.testAdminstrater.setBounds(50, 350, 200, 50);
+		this.testAdminstrater.addMouseListener(new MainSwitchPanelListener(MAIN_CONTROL.ADMINSTRATER,this.controler));
+		
 		add(this.testDeliver);
 		add(this.testAccount);
 		add(this.testPosition);
 		add(this.testInventory);
 		add(this.testManager);
 		add(this.testTransit);
+		add(this.testAdminstrater);
 		
 		setSize(493,560);
 		setVisible(true); 

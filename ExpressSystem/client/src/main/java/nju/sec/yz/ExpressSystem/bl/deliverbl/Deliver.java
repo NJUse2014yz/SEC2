@@ -1,13 +1,16 @@
 package nju.sec.yz.ExpressSystem.bl.deliverbl;
 
 import java.rmi.RemoteException;
+
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
+import nju.sec.yz.ExpressSystem.common.ReceiveInformation;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.SendInformation;
 import nju.sec.yz.ExpressSystem.dataservice.deliverDataSevice.DeliverDataService;
 import nju.sec.yz.ExpressSystem.po.DeliverPO;
 import nju.sec.yz.ExpressSystem.po.SendSheetPO;
 import nju.sec.yz.ExpressSystem.vo.OrderVO;
+import nju.sec.yz.ExpressSystem.vo.ReceiveVO;
 
 /**
  * 物流信息的领域模型对象
@@ -60,11 +63,19 @@ public class Deliver {
 	}
 
 	/**
-	 * 收件单通过审批后通过此方法更新信息
+	 * 收件单通过此方法更新信息
 	 */
-	public ResultMessage updateReceiveReceipt() {
-		// TODO Auto-generated method stub
-		return null;
+	public ResultMessage updateReceiveReceipt(ReceiveVO vo) {
+		ReceiveInformation receiveInformation=vo.getReceiveInformation();
+		ResultMessage message=null;
+		DeliverPO deliverPO=new DeliverPO(receiveInformation.getId());
+		try {
+			message=data.insert(deliverPO);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return message;
 	}
 	
 }

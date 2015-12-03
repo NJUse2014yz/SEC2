@@ -25,7 +25,7 @@ import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.AccountVO;
 
 public class AccountModifyUi extends JPanel{
-	private ButtonComponents bc;
+	private AccountButtonComponents bc;
 	private ClientControler mainControler;
 	private AccountControler controler;
 	private AccountBlService accountBl;
@@ -58,7 +58,7 @@ public class AccountModifyUi extends JPanel{
 	
 	private ImageIcon searchIcon=new ImageIcon("graphic/account/button/search_button.jpg");
 	
-	public AccountModifyUi(ClientControler mainControler,ButtonComponents bc){
+	public AccountModifyUi(ClientControler mainControler,AccountButtonComponents bc){
 		super();
 		this.mainControler=mainControler;
 		controler=mainControler.accountControler;

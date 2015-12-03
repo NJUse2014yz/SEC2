@@ -9,7 +9,7 @@ import java.io.ObjectOutputStream;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import nju.sec.yz.ExpressSystem.bl.managerbl.Agency;
+import nju.sec.yz.ExpressSystem.bl.managerbl.Transit;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
@@ -223,7 +223,7 @@ public class User implements UserInfo{
 		if(id.length()<4)
 			return false;
 		char letter=id.charAt(id.length()-4);
-		Agency agaency=new Agency();
+		Transit agaency=new Transit();
 		switch(letter){
 		case 'A':
 			if(pow!=Status.INVENTORY)

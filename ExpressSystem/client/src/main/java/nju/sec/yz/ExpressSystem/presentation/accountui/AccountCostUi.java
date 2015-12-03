@@ -31,7 +31,7 @@ import nju.sec.yz.ExpressSystem.vo.OutVO;
 import nju.sec.yz.ExpressSystem.vo.ProfitVO;
 
 public class AccountCostUi extends JPanel{
-	private ButtonComponents bc;
+	private AccountButtonComponents bc;
 	private ClientControler mainControler;
 	private AccountControler controler;
 	private FinanceBlSevice financeBl;
@@ -73,7 +73,7 @@ public class AccountCostUi extends JPanel{
 	private static final int warning_h=30;
 	
 	private ImageIcon confirmIcon=new ImageIcon("graphic/account/button/confirm_button.jpg");
-	public AccountCostUi(ClientControler mainControler, ButtonComponents bc){
+	public AccountCostUi(ClientControler mainControler, AccountButtonComponents bc){
 		super();
 		this.mainControler=mainControler;
 		controler=mainControler.accountControler;

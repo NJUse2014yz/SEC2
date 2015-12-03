@@ -23,7 +23,7 @@ import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.AccountVO;
 
 public class AccountInquiryUi extends JPanel{
-	private ButtonComponents bc;
+	private AccountButtonComponents bc;
 	private ClientControler mainControler;
 	private AccountControler controler;
 	private AccountBlService accountBl;
@@ -62,7 +62,7 @@ public class AccountInquiryUi extends JPanel{
 	private ImageIcon searchIcon=new ImageIcon("graphic/account/button/search_button.jpg");
 	private ImageIcon backIcon=new ImageIcon("graphic/account/button/back_button.jpg");
 
-	public AccountInquiryUi(ClientControler mainControler,ButtonComponents bc){
+	public AccountInquiryUi(ClientControler mainControler,AccountButtonComponents bc){
 		super();
 		this.mainControler=mainControler;
 		controler=mainControler.accountControler;

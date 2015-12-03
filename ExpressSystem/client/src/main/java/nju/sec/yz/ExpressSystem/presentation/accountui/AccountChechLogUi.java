@@ -22,7 +22,7 @@ import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.LogVO;
 
 public class AccountChechLogUi extends JPanel{
-	private ButtonComponents bc;
+	private AccountButtonComponents bc;
 	private ClientControler mainControler;
 	private AccountControler controler;
 	private LogBlService logBl;
@@ -47,7 +47,7 @@ public class AccountChechLogUi extends JPanel{
 	
 	private ImageIcon allIcon=new ImageIcon("graphic/account/button/showall_button.jpg");
 	
-	public AccountChechLogUi(ClientControler mainControler,ButtonComponents bc){
+	public AccountChechLogUi(ClientControler mainControler,AccountButtonComponents bc){
 		super();
 		this.mainControler=mainControler;
 		controler=mainControler.accountControler;
@@ -117,7 +117,7 @@ public class AccountChechLogUi extends JPanel{
 			public void mouseClicked(MouseEvent e)
 			{
 				//需要两个DateChooser
-				ArrayList<LogVO> logs=logBl.getByTime(date.getTime(),date.getTime());
+				ArrayList<LogVO> logs=logBl.getByTime(date.getTime());
 				if(logs!=null)
 				{
 					int l=logs.size();

@@ -14,7 +14,7 @@ import nju.sec.yz.ExpressSystem.presentation.controlerui.DELIVER_CONTROL;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.MAIN_CONTROL;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.POSITION_CONTROL;
 
-public class ButtonComponents{
+public class AccountButtonComponents{
 	public int a=0;
 		private static JPanel panel;
 	
@@ -70,10 +70,10 @@ public class ButtonComponents{
 		//退出当前帐户
 		private JLabel leaveButton;
 	
-		public ButtonComponents(ClientControler maincontroler){
+		public AccountButtonComponents(ClientControler maincontroler){
 			this.maincontroler=maincontroler;
 		}
-		public ButtonComponents(ClientControler maincontroler,JPanel panel){
+		public AccountButtonComponents(ClientControler maincontroler,JPanel panel){
 			this.maincontroler=maincontroler;
 			this.panel=panel;
 			init();
