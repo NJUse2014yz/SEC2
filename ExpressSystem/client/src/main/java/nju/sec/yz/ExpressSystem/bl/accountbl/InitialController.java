@@ -1,5 +1,7 @@
 package nju.sec.yz.ExpressSystem.bl.accountbl;
 
+import java.util.List;
+
 import nju.sec.yz.ExpressSystem.blservice.accountBlService.InitialBlService;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.AccountVO;
@@ -22,44 +24,39 @@ public class InitialController implements InitialBlService{
 		initial=new Initial();
 	}
 	
-	@Override
-	public ResultMessage start() {
-		ResultMessage message=initial.start();
-		return message;
-	}
 	
 	@Override
-	public ResultMessage addStaff(StaffVO vo) {
+	public ResultMessage addStaff(List<StaffVO> vo) {
 		ResultMessage message=initial.addStaff(vo);
 		return message;
 	}
 
 	@Override
-	public ResultMessage addTransit(TransitVO vo) {
+	public ResultMessage addTransit(List<TransitVO> vo) {
 		ResultMessage message=initial.addTransit(vo);
 		return message;
 	}
 
 	@Override
-	public ResultMessage addPosition(PositionVO vo) {
+	public ResultMessage addPosition(List<PositionVO> vo) {
 		ResultMessage message=initial.addPosition(vo);
 		return message;
 	}
 
 	@Override
-	public ResultMessage addCar(CarVO vo) {
+	public ResultMessage addCar(List<CarVO> vo) {
 		ResultMessage message=initial.addCar(vo);
 		return message;
 	}
 
 	@Override
-	public ResultMessage addAccount(AccountVO vo) {
+	public ResultMessage addAccount(List<AccountVO> vo) {
 		ResultMessage message=initial.addAccount(vo);
 		return message;
 	}
 
 	@Override
-	public ResultMessage addStock(InventoryInSheetVO vo) {
+	public ResultMessage addStock(List<InventoryInSheetVO> vo) {
 		ResultMessage message=initial.addStock(vo);
 		return message;
 	}
@@ -67,7 +64,7 @@ public class InitialController implements InitialBlService{
 	@Override
 	public ResultMessage finish() {
 		ResultMessage message=initial.finish();
-		return null;
+		return message;
 	}
 
 	@Override

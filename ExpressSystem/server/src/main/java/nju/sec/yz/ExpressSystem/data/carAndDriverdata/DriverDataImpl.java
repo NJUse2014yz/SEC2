@@ -112,8 +112,9 @@ public class DriverDataImpl extends UnicastRemoteObject implements DriverDataSer
 
 	@Override
 	public ResultMessage init() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		List<DriverPO> init=new ArrayList<>();
+		ResultMessage message=this.saveData(init);
+		return message;
 	}
 
 	@Override

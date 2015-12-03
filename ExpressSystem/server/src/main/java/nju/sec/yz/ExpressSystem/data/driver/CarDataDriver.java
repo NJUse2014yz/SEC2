@@ -19,9 +19,7 @@ public class CarDataDriver {
 			System.out.println("delete");
 		
 		
-		result=cds.init();
-		
-			System.out.println("init");
+
 		
 		
 		result=cds.insert(null);

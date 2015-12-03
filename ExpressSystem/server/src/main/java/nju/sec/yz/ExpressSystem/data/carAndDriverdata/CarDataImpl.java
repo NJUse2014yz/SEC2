@@ -146,12 +146,9 @@ public class CarDataImpl extends UnicastRemoteObject implements CarDataService{
 	}
 
 	@Override
-	public ResultMessage init() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+	public ResultMessage init(List<CarPO> cars) throws RemoteException {
+		ResultMessage message=this.saveData(cars);
+		return message;
 	}
-
-
-	
 
 }

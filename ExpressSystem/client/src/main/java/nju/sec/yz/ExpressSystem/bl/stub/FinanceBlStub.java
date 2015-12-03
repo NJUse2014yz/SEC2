@@ -45,17 +45,7 @@ public class FinanceBlStub implements FinanceBlSevice {
 
 	}
 
-	@Override
-	public InitialVO observeIni() {
-		// TODO 自动生成的方法存根
-		return new InitialVO(null, null, null, null, null);
-	}
-
-	@Override
-	public ResultMessage initial(AccountVO av) {
-		// TODO 自动生成的方法存根
-		return null;
-	}
+	
 
 	@Override
 	public ResultMessage makeReceipt(PaymentSheetVO psv) {

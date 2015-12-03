@@ -2,10 +2,12 @@ package nju.sec.yz.ExpressSystem.bl.carAndDriverbl;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
 
 import nju.sec.yz.ExpressSystem.bl.deliverbl.ValidHelper;
 import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
+import nju.sec.yz.ExpressSystem.client.RMIExceptionHandler;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.dataservice.carAndDriverDataSevice.CarDataService;
@@ -17,7 +19,7 @@ import nju.sec.yz.ExpressSystem.vo.CarVO;
  * @author 周聪
  *
  */
-public class Car {
+public class Car implements CarInitialService{
 	
 	private CarDataService carData;
 	
@@ -42,7 +44,7 @@ public class Car {
 		}
 		//将userpo列表转换成uservo列表
 		for(int i=0;i<listPO.size();i++){
-			CarVO vo=changePoToVo(listPO.get(i));
+			CarVO vo=show(listPO.get(i));
 			listVO.add(vo);
 		}
 		return listVO;
@@ -54,7 +56,7 @@ public class Car {
 			CarPO	po=carData.find(id);
 			if(po==null)
 				return null;
-			vo=changePoToVo(po);
+			vo=show(po);
 		} catch (RemoteException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
@@ -62,7 +64,6 @@ public class Car {
 		return vo;
 	}
 
-	
 	public ResultMessage add(CarVO vo) {
 		ResultMessage message=null;
 		//验证information
@@ -73,7 +74,7 @@ public class Car {
 		}
 		//创建PO并保存
 		try {
-			CarPO po=changeVoToPo(vo);
+			CarPO po=changeVOToPO(vo);
 			message=carData.insert(po);
 		} catch (RemoteException e) {
 			// TODO 自动生成的 catch 块
@@ -106,7 +107,7 @@ public class Car {
 		if(!validresult.equals("success"))
 			return new ResultMessage(Result.FAIL,validresult);
 		//vo转po,数据库更新po
-		CarPO po=changeVoToPo(vo);
+		CarPO po=changeVOToPO(vo);
 		try {
 			message=carData.update(po);
 		} catch (RemoteException e) {
@@ -180,7 +181,8 @@ public class Car {
 		return true;
 	}
 
-	private CarVO changePoToVo(CarPO po) {
+	@Override
+	public CarVO show(CarPO po) {
 		String id=po.getId();
 		String number=po.getNumber();
 		String buytime=po.getBuytime();
@@ -199,7 +201,8 @@ public class Car {
 		return nowToInt-dateToInt;
 	}
 
-	private CarPO changeVoToPo(CarVO vo) {
+	@Override
+	public CarPO changeVOToPO(CarVO vo) {
 		String id=vo.getId();
 		String number=vo.getNumber();
 		String time=vo.getBuytime();
@@ -210,6 +213,34 @@ public class Car {
 		po.setWorktime(workTime);
 		return po;
 	}
+
+	@Override
+	public ResultMessage init(List<CarVO> cars) {
+		ResultMessage message=new ResultMessage(Result.FAIL);
+		
+		List<CarPO> pos=new ArrayList<>();
+		for(CarVO car:cars){
+			String validResult=isValid(car);
+			if(!validResult.equals("success"))
+				return new ResultMessage(Result.FAIL,cars.indexOf(car)+" "+validResult);
+			
+			CarPO po=this.changeVOToPO(car);
+			pos.add(po);
+		}
+		
+		try {
+			message=carData.init(pos);
+		} catch (RemoteException e) {
+			RMIExceptionHandler.handleRMIException();
+			e.printStackTrace();
+		}
+		return message;
+	}
+
+	
+	
+
+	
 	
 	/*public void test(){
 		this.add(new CarVO("025001001", "苏A23466", "20131212","hh" , "hh", "20121212"));

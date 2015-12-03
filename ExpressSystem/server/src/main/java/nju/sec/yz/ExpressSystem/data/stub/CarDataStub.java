@@ -2,6 +2,7 @@ package nju.sec.yz.ExpressSystem.data.stub;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
 
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.dataservice.carAndDriverDataSevice.CarDataService;
@@ -34,7 +35,7 @@ public class CarDataStub implements CarDataService{
 	}
 
 	@Override
-	public ResultMessage init() throws RemoteException{
+	public ResultMessage init(List<CarPO> kk) throws RemoteException{
 		return null;
 	}
 	

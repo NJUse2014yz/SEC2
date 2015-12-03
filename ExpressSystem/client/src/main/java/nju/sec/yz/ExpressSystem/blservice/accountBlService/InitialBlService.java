@@ -1,6 +1,8 @@
 package nju.sec.yz.ExpressSystem.blservice.accountBlService;
 
 
+import java.util.List;
+
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.AccountVO;
 import nju.sec.yz.ExpressSystem.vo.CarVO;
@@ -16,41 +18,36 @@ import nju.sec.yz.ExpressSystem.vo.TransitVO;
  *
  */
 public interface InitialBlService {
-	
-	/**
-	 * 开始期初建帐,清空系统原有数据
-	 */
-	public ResultMessage start();
 
 	/**
 	 * 添加初始员工
 	 */
-	public ResultMessage addStaff(StaffVO vo);
+	public ResultMessage addStaff(List<StaffVO> vo);
 	
 	/**
 	 * 添加初始中转中心
 	 */
-	public ResultMessage addTransit(TransitVO vo);
+	public ResultMessage addTransit(List<TransitVO> vo);
 	
 	/**
 	 * 添加初始营业厅
 	 */
-	public ResultMessage addPosition(PositionVO vo);
+	public ResultMessage addPosition(List<PositionVO> vo);
 	
 	/**
 	 * 添加初始车辆
 	 */
-	public ResultMessage addCar(CarVO vo);
+	public ResultMessage addCar(List<CarVO> vo);
 	
 	/**
 	 * 添加初始账户
 	 */
-	public ResultMessage addAccount(AccountVO vo);
+	public ResultMessage addAccount(List<AccountVO> vo);
 	
 	/**
 	 * 添加初始库存
 	 */
-	public ResultMessage addStock(InventoryInSheetVO vo);
+	public ResultMessage addStock(List<InventoryInSheetVO> vo);
 	
 	/**
 	 * 完成期初建帐，将期初信息作为系统初始状态

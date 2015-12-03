@@ -19,8 +19,6 @@ import nju.sec.yz.ExpressSystem.vo.TransitVO;
  * @author 周聪
  */
 public class Initial {
-	
-	private boolean isFinished=false;
 
 	//中转中心
 	private List<TransitVO> transits;
@@ -51,48 +49,41 @@ public class Initial {
 		}
 	}
 	
+
+	public ResultMessage addStaff(List<StaffVO> vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ResultMessage addTransit(List<TransitVO> vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ResultMessage addPosition(List<PositionVO> vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ResultMessage addCar(List<CarVO> vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ResultMessage addAccount(List<AccountVO> vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ResultMessage addStock(List<InventoryInSheetVO> vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
-	public ResultMessage start() {
-		// TODO Auto-generated method stub
+	public ResultMessage finish(){
 		return null;
 	}
 
-	public ResultMessage addStaff(StaffVO vo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public ResultMessage addTransit(TransitVO vo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public ResultMessage addPosition(PositionVO vo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public ResultMessage addCar(CarVO vo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public ResultMessage addAccount(AccountVO vo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public ResultMessage addStock(InventoryInSheetVO vo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public ResultMessage finish() {
-		isFinished=true;
-		
-		
-		return null;
-	}
 
 	public InitialVO observeInitial() {
 		// TODO Auto-generated method stub
