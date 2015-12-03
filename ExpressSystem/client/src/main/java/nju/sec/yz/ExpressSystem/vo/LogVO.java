@@ -16,6 +16,7 @@ public class LogVO {
 
 	// 操作人，用id标识
 	private String person;
+	
 
 	public LogVO(String time, String operation, String person) {
 			super();
@@ -47,4 +48,5 @@ public class LogVO {
 	public void setPerson(String person) {
 		this.person = person;
 	}
+	
 }

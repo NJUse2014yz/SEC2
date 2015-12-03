@@ -13,9 +13,9 @@ public class AccountPO implements Serializable{
 	private String name;
 	
 	//余额
-	private int balance;
+	private double balance;
 
-	public AccountPO(String name, int balance) {
+	public AccountPO(String name, double balance) {
 		super();
 		this.name = name;
 		this.balance = balance;
@@ -29,7 +29,7 @@ public class AccountPO implements Serializable{
 		this.name = name;
 	}
 
-	public int getBalance() {
+	public double getBalance() {
 		return balance;
 	}
 
