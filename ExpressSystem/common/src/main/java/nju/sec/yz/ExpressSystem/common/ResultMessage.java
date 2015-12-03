@@ -16,7 +16,10 @@ public class ResultMessage implements Serializable{
 	
 	public ResultMessage(Result result){
 		this.result=result;
-		message="success";
+		if(result==Result.SUCCESS){
+			message="success";
+		}
+		else message="failure";
 	}
 	
 	public ResultMessage(Result result,String message){

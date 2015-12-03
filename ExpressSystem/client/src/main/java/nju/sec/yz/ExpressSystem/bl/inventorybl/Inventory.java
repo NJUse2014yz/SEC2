@@ -39,6 +39,23 @@ public class Inventory implements Initialable<InventoryInSheetVO, InventoryInShe
 
 	private InventoryDataService data;
 	private double rate;
+	private long room=4000000l;
+
+	public double getRate() {
+		return rate;
+	}
+
+	public void setRate(double rate) {
+		this.rate = rate;
+	}
+
+	public long getRoom() {
+		return room;
+	}
+
+	public void setRoom(long room) {
+		this.room = room;
+	}
 
 	public Inventory() {
 		try {
@@ -119,13 +136,13 @@ public class Inventory implements Initialable<InventoryInSheetVO, InventoryInShe
 	/**
 	 * @author cong 设置库存警报比例
 	 * @param rate
-	 *            库存警报比例，为0-1的double值
+	 * 库存警报比例，为0-1的double值
 	 */
 	public ResultMessage setAlertRate(double rate) {
 		if (rate > 1.0 || rate < 0.0)
 			return new ResultMessage(Result.FAIL, "库存警戒值输入错误，为0-1");
-		this.rate = rate;
-		return null;
+		setRate(rate);
+		return new ResultMessage(Result.SUCCESS);
 	}
 
 	/**
@@ -134,6 +151,7 @@ public class Inventory implements Initialable<InventoryInSheetVO, InventoryInShe
 	public ResultMessage updateIn(InventoryInSheetPO po) {
 		ResultMessage message = new ResultMessage(Result.FAIL);
 		try {
+			int size=data.findAll(getTransit()).size();
 			message = data.insert(po);
 		} catch (RemoteException e) {
 			RMIExceptionHandler.handleRMIException();
@@ -269,12 +287,6 @@ public class Inventory implements Initialable<InventoryInSheetVO, InventoryInShe
 		}
 		return str.charAt(8) + "";
 	}
-	//
-	// public static void main(String[] args) {
-	// Inventory i=new Inventory();
-	// i.exportToExcel();
-	//
-	// }
 
 	@Override
 	public ResultMessage init(List<InventoryInSheetVO> vos) {
