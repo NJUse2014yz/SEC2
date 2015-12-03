@@ -10,11 +10,11 @@ import nju.sec.yz.ExpressSystem.presentation.controlerui.AccountControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 
 public class AccountMainUi extends JPanel{
-	private ButtonComponents bc;
+	private AccountButtonComponents bc;
 	private ClientControler mainControler;
 	private AccountControler controler;
 	
-	public AccountMainUi(ClientControler mainControler,ButtonComponents bc){
+	public AccountMainUi(ClientControler mainControler,AccountButtonComponents bc){
 		super();
 		this.mainControler=mainControler;
 		controler=mainControler.accountControler;

@@ -31,7 +31,7 @@ import nju.sec.yz.ExpressSystem.vo.PositionVO;
 import nju.sec.yz.ExpressSystem.vo.TransitVO;
 
 public class AccountInComeUi extends JPanel{
-	private ButtonComponents bc;
+	private AccountButtonComponents bc;
 	private ClientControler mainControler;
 	private AccountControler controler;
 	private ManagerController managerController;
@@ -73,7 +73,7 @@ public class AccountInComeUi extends JPanel{
 	private ImageIcon backIcon=new ImageIcon("graphic/account/button/back_button.jpg");
 	private ImageIcon confirmIcon=new ImageIcon("graphic/account/button/confirm_button.jpg");
 	
-	public AccountInComeUi(ClientControler mainControler,ButtonComponents bc){
+	public AccountInComeUi(ClientControler mainControler,AccountButtonComponents bc){
 		super();
 		this.mainControler=mainControler;
 		controler=mainControler.accountControler;

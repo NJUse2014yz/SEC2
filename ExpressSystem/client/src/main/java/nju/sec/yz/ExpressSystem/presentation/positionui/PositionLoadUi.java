@@ -199,7 +199,10 @@ public class PositionLoadUi extends JPanel{
 				sheet.setOfficeLoadInformation(li);
 				for(int i=0;i<model.getRowCount();i++)
 				{
-					bars.add((String) model.getValueAt(i, 0));
+					if(!((String) model.getValueAt(i, 0)).equals(""))
+					{
+						bars.add((String) model.getValueAt(i, 0));
+					}
 				}
 				sheet.setBarIds(bars);
 				sheet.setType(ReceiptType.POSITION_LOADING_RECEIPT);

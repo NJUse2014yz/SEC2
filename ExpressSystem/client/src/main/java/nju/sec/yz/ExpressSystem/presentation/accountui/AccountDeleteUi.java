@@ -25,7 +25,7 @@ import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.AccountVO;
 
 public class AccountDeleteUi extends JPanel{
-	private ButtonComponents bc;
+	private AccountButtonComponents bc;
 	private ClientControler mainControler;
 	private AccountControler controler;
 	private AccountBlService accountBl;
@@ -71,7 +71,7 @@ public class AccountDeleteUi extends JPanel{
 	private ImageIcon confirmIcon=new ImageIcon("graphic/account/button/confirm_button.jpg");
 	
 	
-	public AccountDeleteUi(ClientControler mainControler,ButtonComponents bc){
+	public AccountDeleteUi(ClientControler mainControler,AccountButtonComponents bc){
 		super();
 		this.mainControler=mainControler;
 		controler=mainControler.accountControler;

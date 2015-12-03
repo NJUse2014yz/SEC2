@@ -12,40 +12,42 @@ import java.util.List;
 import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
-import nju.sec.yz.ExpressSystem.bl.accountbl.FinanceController;
 import nju.sec.yz.ExpressSystem.bl.accountbl.InitialController;
-import nju.sec.yz.ExpressSystem.blservice.accountBlService.FinanceBlSevice;
 import nju.sec.yz.ExpressSystem.blservice.accountBlService.InitialBlService;
 import nju.sec.yz.ExpressSystem.common.InventoryInInformation;
+import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.Status;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.AccountControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.AccountVO;
-import nju.sec.yz.ExpressSystem.vo.AgencyVO;
 import nju.sec.yz.ExpressSystem.vo.CarVO;
-import nju.sec.yz.ExpressSystem.vo.InitialVO;
 import nju.sec.yz.ExpressSystem.vo.InventoryInSheetVO;
 import nju.sec.yz.ExpressSystem.vo.PositionVO;
 import nju.sec.yz.ExpressSystem.vo.StaffVO;
 import nju.sec.yz.ExpressSystem.vo.TransitVO;
 
 public class AccountInitialUi extends JPanel{
-	private ButtonComponents bc;
+	private AccountButtonComponents bc;
 	private ClientControler mainControler;
 	private AccountControler controler;
 	private InitialBlService initialBl;
+	
+	private boolean P=false;
+	private boolean T=false;
+	private boolean S=false;
+	private boolean C=false;
+	private boolean A=false;
+	private boolean I=false;
 	
 	private JButton buttonAG;
 	private JButton buttonS;
@@ -121,7 +123,7 @@ public class AccountInitialUi extends JPanel{
 	private ImageIcon ACIcon=new ImageIcon("graphic/account/button/button_AC.jpg");
 	private ImageIcon IIcon=new ImageIcon("graphic/account/button/button_I.jpg");
 	
-	public AccountInitialUi(ClientControler mainControler,ButtonComponents bc){
+	public AccountInitialUi(ClientControler mainControler,AccountButtonComponents bc){
 		super();
 		this.mainControler=mainControler;
 		controler=mainControler.accountControler;
@@ -214,7 +216,6 @@ public class AccountInitialUi extends JPanel{
 		modelT.addTableModelListener(new TableModelListener(){
 			@Override
 			public void tableChanged(TableModelEvent e) {
-				// TODO Auto-generated method stub
 				int num=modelT.getRowCount();
 				String temp=(String) modelT.getValueAt(num-1, 2);
 				if(temp!=""){
@@ -235,7 +236,6 @@ public class AccountInitialUi extends JPanel{
 		modelP.addTableModelListener(new TableModelListener(){
 			@Override
 			public void tableChanged(TableModelEvent e) {
-				// TODO Auto-generated method stub
 				int num=modelP.getRowCount();
 				String temp=(String) modelP.getValueAt(num-1, 3);
 				if(temp!=""){
@@ -256,7 +256,6 @@ public class AccountInitialUi extends JPanel{
 		modelS.addTableModelListener(new TableModelListener(){
 			@Override
 			public void tableChanged(TableModelEvent e) {
-				// TODO Auto-generated method stub
 				int num=modelS.getRowCount();
 				String temp=(String) modelS.getValueAt(num-1, 3);
 				if(temp!=""){
@@ -278,7 +277,6 @@ public class AccountInitialUi extends JPanel{
 		modelC.addTableModelListener(new TableModelListener(){
 			@Override
 			public void tableChanged(TableModelEvent e) {
-				// TODO Auto-generated method stub
 				int num=modelC.getRowCount();
 				String temp=(String) modelC.getValueAt(num-1, 5);
 				if(temp!=""){
@@ -300,7 +298,6 @@ public class AccountInitialUi extends JPanel{
 		modelA.addTableModelListener(new TableModelListener(){
 			@Override
 			public void tableChanged(TableModelEvent e) {
-				// TODO Auto-generated method stub
 				int num=modelA.getRowCount();
 				String temp=(String) modelA.getValueAt(num-1, 1);
 				if(temp!=""){
@@ -321,7 +318,6 @@ public class AccountInitialUi extends JPanel{
 		modelI.addTableModelListener(new TableModelListener(){
 			@Override
 			public void tableChanged(TableModelEvent e) {
-				// TODO Auto-generated method stub
 				int num=modelI.getRowCount();
 				String temp=(String) modelI.getValueAt(num-1, 7);
 				if(temp!=""){
@@ -351,95 +347,248 @@ public class AccountInitialUi extends JPanel{
 		confirm.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
 			{
-				initialBl.start();
+				ResultMessage result;
+				warning.setVisible(false);
 				
 				List<PositionVO> pvl=new ArrayList<PositionVO>();
 				for(int i=0;i<tableP.getRowCount();i++)
-				{
-					PositionVO pv=new PositionVO(tableP.getModel().getValueAt(i,0).toString(),tableP.getModel().getValueAt(i,1).toString(),tableP.getModel().getValueAt(i,3).toString(),tableP.getModel().getValueAt(i,2).toString());
-					pvl.add(pv);
+				{	String a=tableP.getModel().getValueAt(i,0).toString();
+					String b=tableP.getModel().getValueAt(i,1).toString();
+					String c=tableP.getModel().getValueAt(i,3).toString();
+					String d=tableP.getModel().getValueAt(i,2).toString();
+					if(!a.equals("")&&!b.equals("")&&!c.equals("")&&!d.equals(""))
+					{
+						PositionVO pv=new PositionVO(a,b,c,d);
+						pvl.add(pv);
+					}
 				}
-				List<TransitVO> tvl=new ArrayList<TransitVO>();
-				for(int i=0;i<tableT.getRowCount();i++)
+				if(!P)
 				{
-					List<PositionVO> tpvl=new ArrayList<PositionVO>();
-					for(int j=0;j<tableP.getRowCount();j++)
+					result=initialBl.addPosition(pvl);
+					if(result.getResult()==Result.SUCCESS)
 					{
-						if(tableP.getModel().getValueAt(j, 3).equals(tableT.getModel().getValueAt(i, 1)))
-						{
-							tpvl.add(pvl.get(j));
-						}
+						remove(scrollP);
+	//					scrollP.setVisible(false);
+						warning.setText("营业厅初始化成功");
+						P=true;
 					}
-					TransitVO tv=new TransitVO(tableT.getModel().getValueAt(i,0).toString(),tableT.getModel().getValueAt(i,1).toString(),tpvl,tableT.getModel().getValueAt(i,2).toString());
-					tvl.add(tv);
-				}
-				List<CarVO> cvl=new ArrayList<CarVO>();
-				for(int i=0;i<tableC.getRowCount();i++)
-				{
-					CarVO cv=new CarVO(tableC.getModel().getValueAt(i,0).toString(),tableC.getModel().getValueAt(i,1).toString(),tableC.getModel().getValueAt(i,2).toString(),tableC.getModel().getValueAt(i,3).toString(),tableC.getModel().getValueAt(i,4).toString());
-					cvl.add(cv);
-				}
-				List<StaffVO> svl=new ArrayList<StaffVO>();
-				for(int i=0;i<tableS.getRowCount();i++)
-				{
-					Status pow=Status.ADMINISTRATOR;
-					if(tableS.getCellEditor(i, 2).getCellEditorValue().equals(power[0]))
+					else
 					{
-						pow=Status.MANAGER;
+						warning.setText(result.getMessage());
 					}
-					else if(tableS.getCellEditor(i, 2).getCellEditorValue().equals(power[1]))
-					{
-						pow=Status.SENIOR_ACCOUNTANCY;
-					}
-					else if(tableS.getCellEditor(i, 2).getCellEditorValue().equals(power[2]))
-					{
-						pow=Status.JUNIOR_ACCOUNTANCY;
-					}
-					else if(tableS.getCellEditor(i, 2).getCellEditorValue().equals(power[3]))
-					{
-						pow=Status.TRANSIT;
-					}
-					else if(tableS.getCellEditor(i, 2).getCellEditorValue().equals(power[4]))
-					{
-						pow=Status.INVENTORY;
-					}
-					else if(tableS.getCellEditor(i, 2).getCellEditorValue().equals(power[5]))
-					{
-						pow=Status.POSITION;
-					}
-					else if(tableS.getCellEditor(i, 2).getCellEditorValue().equals(power[6]))
-					{
-						pow=Status.DELIVER;
-					}
-					else if(tableS.getCellEditor(i, 2).getCellEditorValue().equals(power[7]))
-					{
-						pow=Status.ADMINISTRATOR;
-					}
-					StaffVO sv=new StaffVO(tableS.getModel().getValueAt(i,0).toString(),tableS.getModel().getValueAt(i,1).toString(),pow,tableS.getModel().getValueAt(i,3).toString());
-					svl.add(sv);
-				}
-				List<AccountVO> acvl=new ArrayList<AccountVO>();
-				for(int i=0;i<tableA.getRowCount();i++)
-				{
-					AccountVO acv=new AccountVO(tableA.getModel().getValueAt(i,0).toString(),Double.parseDouble(tableA.getModel().getValueAt(i,1).toString()));
-					acvl.add(acv);
-				}
-				List<InventoryInSheetVO> iisvl=new ArrayList<InventoryInSheetVO>();
-				for(int i=0;i<tableA.getRowCount();i++)
-				{
-					InventoryInInformation iii=new InventoryInInformation(
-							tableI.getModel().getValueAt(i,2).toString(),
-							tableI.getModel().getValueAt(i,3).toString(),
-							Integer.parseInt(tableI.getModel().getValueAt(i,4).toString()),
-							Integer.parseInt(tableI.getModel().getValueAt(i,5).toString()),							
-							Integer.parseInt(tableI.getModel().getValueAt(i,6).toString()),
-							Integer.parseInt(tableI.getModel().getValueAt(i,7).toString()),
-							tableI.getModel().getValueAt(i,1).toString());
-					InventoryInSheetVO iisv=new InventoryInSheetVO(iii,tableI.getModel().getValueAt(i,0).toString());
-					iisvl.add(iisv);
+					warning.setVisible(true);
 				}
 				
-				initialBl.finish();	
+				if(P&&!T)
+				{
+					List<TransitVO> tvl=new ArrayList<TransitVO>();
+					for(int i=0;i<tableT.getRowCount();i++)
+					{
+						List<PositionVO> tpvl=new ArrayList<PositionVO>();
+						for(int j=0;j<pvl.size();j++)
+						{
+							if(pvl.get(j).getTransitId().equals(tableT.getModel().getValueAt(i, 1)))
+							{
+								tpvl.add(pvl.get(j));
+							}
+						}
+						String a=tableT.getModel().getValueAt(i,0).toString();
+						String b=tableT.getModel().getValueAt(i,1).toString();
+						String d=tableT.getModel().getValueAt(i,2).toString();
+						if(!a.equals("")&&!b.equals("")&&!d.equals(""))
+						{
+							TransitVO tv=new TransitVO(a,b,tpvl,d);
+							tvl.add(tv);
+						}
+					}
+					result=initialBl.addTransit(tvl);
+					if(result.getResult()==Result.SUCCESS)
+					{
+						remove(scrollT);
+	//					scrollP.setVisible(false);
+						buttonAG.setVisible(false);
+						warning.setText("中转中心初始化成功");
+						T=true;
+					}
+					else
+					{
+						warning.setText(result.getMessage());
+					}
+					warning.setVisible(true);
+				}
+				
+				if(!S)
+				{
+					List<StaffVO> svl=new ArrayList<StaffVO>();
+					for(int i=0;i<tableS.getRowCount();i++)
+					{
+						Status pow=Status.ADMINISTRATOR;
+						String p=(String) tableS.getCellEditor(i, 2).getCellEditorValue();
+						if(p.equals(power[0]))
+						{
+							pow=Status.MANAGER;
+						}
+						else if(p.equals(power[1]))
+						{
+							pow=Status.SENIOR_ACCOUNTANCY;
+						}
+						else if(p.equals(power[2]))
+						{
+							pow=Status.JUNIOR_ACCOUNTANCY;
+						}
+						else if(p.equals(power[3]))
+						{
+							pow=Status.TRANSIT;
+						}
+						else if(p.equals(power[4]))
+						{
+							pow=Status.INVENTORY;
+						}
+						else if(p.equals(power[5]))
+						{
+							pow=Status.POSITION;
+						}
+						else if(p.equals(power[6]))
+						{
+							pow=Status.DELIVER;
+						}
+						else if(p.equals(power[7]))
+						{
+							pow=Status.ADMINISTRATOR;
+						}
+						String a=tableS.getModel().getValueAt(i,0).toString();
+						String b=tableS.getModel().getValueAt(i,1).toString();
+						String d=tableS.getModel().getValueAt(i,3).toString();
+						if(!a.equals("")&&!b.equals("")&&!d.equals(""))
+						{
+							StaffVO sv=new StaffVO(a,b,pow,d);
+							svl.add(sv);
+						}
+					}
+					result=initialBl.addStaff(svl);
+					if(result.getResult()==Result.SUCCESS)
+					{
+						remove(scrollS);
+	//					scrollS.setVisible(false);
+						buttonS.setVisible(false);
+						warning.setText("人员初始化成功");
+						S=true;
+					}
+					else
+					{
+						warning.setText(result.getMessage());
+					}
+					warning.setVisible(true);
+				}
+				
+				if(!C)
+				{
+					List<CarVO> cvl=new ArrayList<CarVO>();
+					for(int i=0;i<tableC.getRowCount();i++)
+					{
+						String a=tableC.getModel().getValueAt(i,0).toString();
+						String b=tableC.getModel().getValueAt(i,1).toString();
+						String c=tableC.getModel().getValueAt(i,2).toString();
+						String d=tableC.getModel().getValueAt(i,3).toString();
+						String e2=tableC.getModel().getValueAt(i,4).toString();
+						if(!a.equals("")&&!b.equals("")&&!c.equals("")&&!d.equals("")&&!e2.equals(""))
+						{
+							CarVO cv=new CarVO(a,b,c,d,e2);
+							cvl.add(cv);
+						}
+					}
+					result=initialBl.addCar(cvl);
+					if(result.getResult()==Result.SUCCESS)
+					{
+						remove(scrollC);
+	//					scrollC.setVisible(false);
+						buttonC.setVisible(false);
+						warning.setText("车辆初始化成功");
+						C=true;
+					}
+					else
+					{
+						warning.setText(result.getMessage());
+					}
+					warning.setVisible(true);
+				}
+				
+				if(!I)
+				{
+					List<InventoryInSheetVO> iisvl=new ArrayList<InventoryInSheetVO>();
+					for(int i=0;i<tableA.getRowCount();i++)
+					{
+						String a=tableI.getModel().getValueAt(i,2).toString();
+						String b=tableI.getModel().getValueAt(i,3).toString();
+						String c=tableI.getModel().getValueAt(i,4).toString();
+						String d=tableI.getModel().getValueAt(i,5).toString();
+						String e1=tableI.getModel().getValueAt(i,6).toString();
+						String f=tableI.getModel().getValueAt(i,7).toString();
+						String g=tableI.getModel().getValueAt(i,1).toString();
+						String h=tableI.getModel().getValueAt(i,0).toString();
+						if(!a.equals("")&&!b.equals("")&&!c.equals("")&&!d.equals("")&&!e1.equals("")&&!f.equals("")&&!g.equals("")&&!h.equals(""))
+						{
+							InventoryInInformation iii=new InventoryInInformation(a,b,Integer.parseInt(c),Integer.parseInt(d),Integer.parseInt(e1),Integer.parseInt(f),g);
+							InventoryInSheetVO iisv=new InventoryInSheetVO(iii,h);
+							iisvl.add(iisv);
+						}
+					}
+					result=initialBl.addStock(iisvl);
+					if(result.getResult()==Result.SUCCESS)
+					{
+						remove(scrollI);
+	//					scrollI.setVisible(false);
+						buttonI.setVisible(false);
+						warning.setText("库存初始化成功");
+						I=true;
+					}
+					else
+					{
+						warning.setText(result.getMessage());
+					}
+					warning.setVisible(true);
+				}
+				if(!A)
+				{
+					List<AccountVO> acvl=new ArrayList<AccountVO>();
+					for(int i=0;i<tableA.getRowCount();i++)
+					{
+						String a=tableA.getModel().getValueAt(i,0).toString();
+						String b=tableA.getModel().getValueAt(i,1).toString();
+						if(!a.equals("")&&!b.equals(""))
+						{
+							AccountVO acv=new AccountVO(a,Double.parseDouble(b));
+							acvl.add(acv);
+						}
+					}
+					result=initialBl.addAccount(acvl);
+					if(result.getResult()==Result.SUCCESS)
+					{
+						remove(scrollA);
+	//					scrollA.setVisible(false);
+						buttonA.setVisible(false);
+						warning.setText("账户初始化成功");
+						A=true;
+					}
+					else
+					{
+						warning.setText(result.getMessage());
+					}
+					warning.setVisible(true);
+				}
+				if(P&&T&&S&&C&&A&&I)
+				{
+					result=initialBl.finish();
+					if(result.getResult()==Result.SUCCESS)
+					{
+						warning.setText("期初建账成功");
+					}
+					else
+					{
+						warning.setText(result.getMessage());
+					}
+					warning.setVisible(true);
+				}
 			}
 		});
 		add(confirm);
