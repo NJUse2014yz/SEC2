@@ -1,8 +1,9 @@
-package nju.sec.yz.ExpressSystem.bl.managerbl;
+spackage nju.sec.yz.ExpressSystem.bl.managerbl;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import nju.sec.yz.ExpressSystem.bl.tool.LogTool;
 import nju.sec.yz.ExpressSystem.blservice.managerBlService.AgencyBlService;
 import nju.sec.yz.ExpressSystem.blservice.managerBlService.ConstBlService;
 import nju.sec.yz.ExpressSystem.blservice.managerBlService.SalaryBlService;
@@ -25,6 +26,7 @@ public class ManagerController implements AgencyBlService,ConstBlService,SalaryB
 	public ResultMessage addStaff(StaffVO sv) {
 		Staff staff=new Staff();
 		ResultMessage message=staff.addStaff(sv);
+		LogTool.setLog("新增职员");
 		return message;
 	}
 
@@ -32,6 +34,7 @@ public class ManagerController implements AgencyBlService,ConstBlService,SalaryB
 	public ResultMessage deleteStaff(String id) {
 		Staff staff=new Staff();
 		ResultMessage message=staff.deleteStaff(id);
+		LogTool.setLog("删除职员");
 		return message;
 	}
 
@@ -39,6 +42,7 @@ public class ManagerController implements AgencyBlService,ConstBlService,SalaryB
 	public ResultMessage modifyStaff(StaffVO sv) {
 		Staff staff=new Staff();
 		ResultMessage message=staff.modifyStaff(sv);
+		LogTool.setLog("修改职员");
 		return message;
 	}
 
@@ -58,20 +62,24 @@ public class ManagerController implements AgencyBlService,ConstBlService,SalaryB
 
 	@Override
 	public ResultMessage modifySalary(SalaryVO sv) {
-		// TODO Auto-generated method stub
-		return null;
+		Salary salary=new Salary();
+		ResultMessage message=salary.modifySalary(sv);
+		LogTool.setLog("修改薪水策略");
+		return message;
 	}
 
 	@Override
 	public ArrayList<SalaryVO> observeSalary() {
-		// TODO Auto-generated method stub
-		return null;
+		Salary salary=new Salary();
+		ArrayList<SalaryVO> list=salary.observeSalary();
+		return list;
 	}
 
 	@Override
 	public ResultMessage modifyCity(CityVO cv){
 		CityConst city=new CityConst();
 		ResultMessage message=city.modifyCity(cv);
+		LogTool.setLog("修改城市常量");
 		return message;
 	}
 
@@ -93,6 +101,7 @@ public class ManagerController implements AgencyBlService,ConstBlService,SalaryB
 	public ResultMessage addCity(CityVO cp) {
 		CityConst city=new CityConst();
 		ResultMessage message=city.addCity(cp);
+		LogTool.setLog("新增城市常量");
 		return message;
 	}
 
@@ -100,19 +109,23 @@ public class ManagerController implements AgencyBlService,ConstBlService,SalaryB
 	public ResultMessage deleteCity(String beginPlace, String endPlace) {
 		CityConst city=new CityConst();
 		ResultMessage message=city.deleteCity(beginPlace, endPlace);
+		LogTool.setLog("删除城市常量");
 		return message;
 	}
 
 	@Override
 	public ResultMessage modifyPrice(PriceVO pp){
-		// TODO Auto-generated method stub
-		return null;
+		Price price=new Price();
+		ResultMessage message=price.modifyPrice(pp);
+		LogTool.setLog("修改价格常量");
+		return message;
 	}
 
 	@Override
 	public PriceVO observePrize(){
-		// TODO Auto-generated method stub
-		return null;
+		Price price=new Price();
+		PriceVO vo=price.observePrice();
+		return vo;
 	}
 
 
@@ -126,6 +139,7 @@ public class ManagerController implements AgencyBlService,ConstBlService,SalaryB
 	public ResultMessage addTransit(TransitVO av) {
 		Agency agency=new Agency();
 		ResultMessage message=agency.addTransit(av);
+		LogTool.setLog("增加中转中心");
 		return message;
 	}
 
@@ -133,6 +147,7 @@ public class ManagerController implements AgencyBlService,ConstBlService,SalaryB
 	public ResultMessage deleteTransit(String id) {
 		Agency agency=new Agency();
 		ResultMessage message=agency.deleteTransit(id);
+		LogTool.setLog("删除中转中心");
 		return message;
 	}
 
@@ -140,6 +155,7 @@ public class ManagerController implements AgencyBlService,ConstBlService,SalaryB
 	public ResultMessage modifyTransit(TransitVO av) {
 		Agency agency=new Agency();
 		ResultMessage message=agency.updateTransit(av);
+		LogTool.setLog("修改中转中心资料");
 		return message;
 	}
 
@@ -164,6 +180,7 @@ public class ManagerController implements AgencyBlService,ConstBlService,SalaryB
 	public ResultMessage addPosition(PositionVO av) {
 		Agency agency=new Agency();
 		ResultMessage message=agency.addPosition(av);
+		LogTool.setLog("增加营业厅");
 		return message;
 	}
 
@@ -171,6 +188,7 @@ public class ManagerController implements AgencyBlService,ConstBlService,SalaryB
 	public ResultMessage deletePosition(String transitId,String id) {
 		Agency agency=new Agency();
 		ResultMessage message=agency.deletePosition(transitId,id);
+		LogTool.setLog("删除营业厅");
 		return message;
 	}
 

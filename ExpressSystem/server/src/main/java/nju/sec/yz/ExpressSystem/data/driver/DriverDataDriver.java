@@ -20,9 +20,7 @@ public class DriverDataDriver {
 			System.out.println("delete");
 		
 		
-		result=dds.init();
 		
-			System.out.println("init");
 		
 		
 		result=dds.insert(null);

@@ -31,10 +31,10 @@ public class AccountBookPO implements Serializable{
 	private List<AccountPO> accounts;
 	
 	//TODO 库存
-	private List<InventoryListPO> inventories;
+	private List<InventoryInSheetPO> inventories;
 
 	public AccountBookPO(String id, List<TransitPO> transit, List<PositionPO> position, List<StaffPO> staffs,
-			List<CarPO> cars, List<AccountPO> accounts, List<InventoryListPO> inventories) {
+			List<CarPO> cars, List<AccountPO> accounts, List<InventoryInSheetPO> inventories) {
 		super();
 		this.id = id;
 		this.transit = transit;
@@ -43,6 +43,10 @@ public class AccountBookPO implements Serializable{
 		this.cars = cars;
 		this.accounts = accounts;
 		this.inventories = inventories;
+	}
+
+	public AccountBookPO() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public String getId() {
@@ -93,11 +97,11 @@ public class AccountBookPO implements Serializable{
 		this.accounts = accounts;
 	}
 
-	public List<InventoryListPO> getInventories() {
+	public List<InventoryInSheetPO> getInventories() {
 		return inventories;
 	}
 
-	public void setInventories(List<InventoryListPO> inventories) {
+	public void setInventories(List<InventoryInSheetPO> inventories) {
 		this.inventories = inventories;
 	}
 	

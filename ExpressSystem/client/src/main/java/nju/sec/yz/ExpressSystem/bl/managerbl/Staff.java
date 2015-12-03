@@ -2,14 +2,19 @@ package nju.sec.yz.ExpressSystem.bl.managerbl;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
 
+import nju.sec.yz.ExpressSystem.bl.accountbl.Initialable;
 import nju.sec.yz.ExpressSystem.bl.deliverbl.ValidHelper;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
+import nju.sec.yz.ExpressSystem.client.RMIExceptionHandler;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.Status;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.StaffDataService;
+import nju.sec.yz.ExpressSystem.po.DriverPO;
 import nju.sec.yz.ExpressSystem.po.StaffPO;
+import nju.sec.yz.ExpressSystem.vo.DriverVO;
 import nju.sec.yz.ExpressSystem.vo.StaffVO;
 
 /**
@@ -17,7 +22,7 @@ import nju.sec.yz.ExpressSystem.vo.StaffVO;
  * @author 周聪
  * @update sai
  */
-public class Staff {
+public class Staff implements Initialable<StaffVO, StaffPO>{
 	private StaffDataService data;
 	
 	public Staff(){
@@ -37,7 +42,7 @@ public class Staff {
 		}
 		//创建PO并保存
 		try {
-			StaffPO po=changeVoToPo(sv);
+			StaffPO po=changeVOToPO(sv);
 			message=data.insert(po);
 		} catch (RemoteException e) {
 			// TODO 自动生成的 catch 块
@@ -69,7 +74,7 @@ public class Staff {
 		if(!validresult.equals("success"))
 			return new ResultMessage(Result.FAIL,validresult);
 		//vo转po,数据库更新po
-		StaffPO po=changeVoToPo(sv);
+		StaffPO po=changeVOToPO(sv);
 		try {
 			message=data.update(po);
 		} catch (RemoteException e){
@@ -87,7 +92,7 @@ public class Staff {
 			StaffPO	po = data.find(id);
 			if(po==null)
 				return null;
-			vo=changePoToVo(po);
+			vo=show(po);
 		} catch (RemoteException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
@@ -110,12 +115,14 @@ public class Staff {
 		}
 		//将userpo列表转换成uservo列表
 		for(int i=0;i<listPO.size();i++){
-			StaffVO vo=changePoToVo(listPO.get(i));
+			StaffVO vo=show(listPO.get(i));
 			listVO.add(vo);
 		}
 		return listVO;
 	}
-	private StaffVO changePoToVo(StaffPO po) {
+	
+	@Override
+	public StaffVO show(StaffPO po) {
 		String name=po.getName();
 		String id=po.getId();
 		Status power=po.getPower();
@@ -123,7 +130,9 @@ public class Staff {
 		StaffVO vo=new StaffVO(name, id, power, agency);
 		return vo;
 	}
-	private StaffPO changeVoToPo(StaffVO sv) {
+	
+	@Override
+	public StaffPO changeVOToPO(StaffVO sv) {
 		String name=sv.getName();
 		String id=sv.getId();
 		Status power=sv.getPower();
@@ -146,6 +155,29 @@ public class Staff {
 			return false;
 		return true;
 	}
+	@Override
+	public ResultMessage init(List<StaffVO> staffs) {
+		ResultMessage message = new ResultMessage(Result.FAIL);
+
+		List<StaffPO> pos = new ArrayList<>();
+		for (StaffVO Staff : staffs) {
+			String validResult = isValid(Staff);
+			if (!validResult.equals("success"))
+				return new ResultMessage(Result.FAIL, staffs.indexOf(Staff) + " " + validResult);
+
+			StaffPO po = this.changeVOToPO(Staff);
+			pos.add(po);
+		}
+
+		try {
+			message = data.init(pos);
+		} catch (RemoteException e) {
+			RMIExceptionHandler.handleRMIException();
+			e.printStackTrace();
+		}
+		return message;
+	}
+	
 	
 //	public void test(){
 //		this.addStaff(new StaffVO("小周","D101",Status.DELIVER,"Position"));

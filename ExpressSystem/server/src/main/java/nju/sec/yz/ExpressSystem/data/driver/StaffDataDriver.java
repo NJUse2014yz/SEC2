@@ -33,7 +33,7 @@ public class StaffDataDriver {
 			System.out.println("delete!");
 		
 		
-		result=sds.init();
+		
 		
 			System.out.println("init!");
 		

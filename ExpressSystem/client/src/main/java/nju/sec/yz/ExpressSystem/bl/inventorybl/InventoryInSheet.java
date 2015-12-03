@@ -1,7 +1,6 @@
 package nju.sec.yz.ExpressSystem.bl.inventorybl;
 
 import java.rmi.RemoteException;
-
 import nju.sec.yz.ExpressSystem.bl.deliverbl.ValidHelper;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptID;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;

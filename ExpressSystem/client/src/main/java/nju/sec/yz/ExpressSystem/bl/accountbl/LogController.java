@@ -18,17 +18,11 @@ public class LogController implements LogBlService{
 		return list;
 	}
 
-	@Override
-	public LogVO getSingle(int i) {
-		Log log=new Log();
-		LogVO logVo=log.getSingle(i);
-		return logVo;
-	}
 
 	@Override
-	public ArrayList<LogVO> getByTime(String startTime, String endTime) {
+	public ArrayList<LogVO> getByTime(String time) {
 		Log log=new Log();
-		ArrayList<LogVO> list=log.getByTime(startTime, endTime);
+		ArrayList<LogVO> list=log.getByTime(time);
 		return list;
 	}
 

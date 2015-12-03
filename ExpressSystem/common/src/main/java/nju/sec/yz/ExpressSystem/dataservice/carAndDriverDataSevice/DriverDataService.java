@@ -3,6 +3,7 @@ package nju.sec.yz.ExpressSystem.dataservice.carAndDriverDataSevice;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
 
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.po.DriverPO;
@@ -21,7 +22,7 @@ public interface DriverDataService extends Remote{
 
 	public ResultMessage update(DriverPO dpo) throws RemoteException;
 
-	public ResultMessage init() throws RemoteException;
+	public ResultMessage init(List<DriverPO> drivers) throws RemoteException;
 
 	public ArrayList<DriverPO> findAll() throws RemoteException;
 }
