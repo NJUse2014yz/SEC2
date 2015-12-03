@@ -17,13 +17,7 @@ public class LogBlStub implements LogBlService {
 	}
 
 	@Override
-	public LogVO getSingle(int i) {
-		// TODO 自动生成的方法存根
-		return new LogVO("20151025", "getsingle", "李华");
-	}
-
-	@Override
-	public ArrayList<LogVO> getByTime(String startTime, String endTime) {
+	public ArrayList<LogVO> getByTime(String time) {
 		// TODO 自动生成的方法存根
 		LogVO vo1=new LogVO("20151025", "getbytime", "李华");
 		ArrayList<LogVO> list=new ArrayList<LogVO>();

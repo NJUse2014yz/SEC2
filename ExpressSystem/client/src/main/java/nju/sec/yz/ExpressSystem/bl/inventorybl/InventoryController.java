@@ -28,7 +28,7 @@ public class InventoryController implements InventoryBlService{
 	@Override
 	public ResultMessage exportToExcel() {
 		Inventory inven=new Inventory();
-		ResultMessage  message=inven.exportToExcel(null);
+		ResultMessage  message=inven.exportToExcel();
 		return message;
 	}
 

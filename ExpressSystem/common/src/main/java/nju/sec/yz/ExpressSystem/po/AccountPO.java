@@ -33,8 +33,8 @@ public class AccountPO implements Serializable{
 		return balance;
 	}
 
-	public void setBalance(int balance) {
-		this.balance = balance;
+	public void setBalance(double balance2) {
+		this.balance = balance2;
 	}
 	
 	

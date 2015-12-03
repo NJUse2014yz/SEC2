@@ -15,7 +15,7 @@ public class AccountMockObject {
 	public ResultMessage updatePayment(String account,int num){
 		AccountPO po=new AccountPO(account, 100);
 		System.out.println("The account "+po.getName()+"has "+po.getBalance()+" dollars");
-		int balance=po.getBalance()-num;
+		double balance=po.getBalance()-num;
 		po.setBalance(balance);
 		System.out.println("Now it has "+balance+" dollars");
 		return null;

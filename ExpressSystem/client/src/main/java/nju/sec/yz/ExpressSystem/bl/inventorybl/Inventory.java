@@ -3,6 +3,7 @@ package nju.sec.yz.ExpressSystem.bl.inventorybl;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -16,11 +17,11 @@ import nju.sec.yz.ExpressSystem.bl.userbl.User;
 import nju.sec.yz.ExpressSystem.bl.userbl.UserInfo;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
 import nju.sec.yz.ExpressSystem.client.RMIExceptionHandler;
+import nju.sec.yz.ExpressSystem.common.InventoryInInformation;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice.InventoryDataService;
 import nju.sec.yz.ExpressSystem.po.InventoryInSheetPO;
-import nju.sec.yz.ExpressSystem.po.InventoryListPO;
 import nju.sec.yz.ExpressSystem.po.InventoryOutSheetPO;
 import nju.sec.yz.ExpressSystem.vo.InventoryInSheetVO;
 import nju.sec.yz.ExpressSystem.vo.InventoryListVO;
@@ -164,16 +165,52 @@ public class Inventory {
 	 * 导出excel
 	 * @return
 	 */
-	public ResultMessage exportToExcel(InventoryListPO po){
+	public ResultMessage exportToExcel(){
+		InventoryListVO vo =checkStock();
 		ResultMessage message = new ResultMessage(Result.SUCCESS);
 		String filename =getFileName();
-		String txt ="22";
+		String txt =getTxtPath(vo);
 		ExcelTool.exportExcel(filename, txt);
-		return message;
-		
-		
+		return message;				
 	}
 	
+	private String getTxtPath(InventoryListVO vo){
+		List<InventoryInSheetVO> inlist=vo.inList;
+		int count=Integer.parseInt(getCurrentCounter())+1;
+		String[] title={"快递单号 ","入库日期 ","到达地 ","区号 ","排号 ","架号 ","位号 ","中转中心编号"};
+		File file=new File("File/"+TimeTool.getDate()+"InventoryList"+count);
+		try {
+			FileWriter fw=new FileWriter(file);
+			for(String str:title){
+				fw.write(str);
+			}
+			for(int i=0;i<inlist.size();i++){
+				fw.write("\n");
+				InventoryInSheetVO invo=inlist.get(i);
+				InventoryInInformation ii=invo.getInventoryInInformation();
+				fw.write(invo.getBarId()+" "+ii.getTime()+" "+ii.getDestination()+" "+ii.getBlock()+" "
+						+ii.getRow()+" "+ii.getShelf()+" "+ii.getPositon()+" "+ii.getTransit());
+			}
+			fw.close();
+		} catch (IOException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+		//System.out.println(file.getPath());
+		return file.getPath();
+	}
+	
+//	public static void main(String[] args) {
+//		Inventory in=new Inventory();
+//		InventoryListVO vo=new InventoryListVO();
+//		InventoryInInformation inventoryInInformation=new InventoryInInformation("20150202", "南京", 10, 10, 10, 10,"025");
+//		InventoryInSheetVO invo=new InventoryInSheetVO(inventoryInInformation, "123");
+//		List<InventoryInSheetVO> involist=new ArrayList<InventoryInSheetVO>();
+//		involist.add(invo);
+//		vo.inList=involist;
+//		in.getTxtPath(vo);
+//	}
+
 	/**
 	 * 获得中转中心编号
 	 * @return
@@ -189,7 +226,7 @@ public class Inventory {
 	private String getFileName() {
 		String result="";
 		int count=Integer.parseInt(getCurrentCounter())+1;
-		System.out.println(count);
+		//System.out.println(count);
 		saveCounter(TimeTool.getDate()+count);
 		result="xsl/"+TimeTool.getDate()+"库存盘点信息"+count+".xls";
 		return result;
