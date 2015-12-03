@@ -9,8 +9,11 @@ public class InitialVO {
 	
 	public String id;
 
-	// 机构
-	public List<TransitVO> agency;
+	// 中转中心
+	public List<TransitVO> transits;
+	
+	// 营业厅
+	public List<PositionVO> positions;
 
 	// 人员
 	public List<StaffVO> staffs;

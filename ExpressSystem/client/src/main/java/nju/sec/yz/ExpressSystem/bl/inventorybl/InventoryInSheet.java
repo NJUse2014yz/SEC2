@@ -6,6 +6,7 @@ import nju.sec.yz.ExpressSystem.bl.deliverbl.ValidHelper;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptID;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
+import nju.sec.yz.ExpressSystem.bl.tool.ObjectDeepCopy;
 import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.bl.userbl.User;
 import nju.sec.yz.ExpressSystem.bl.userbl.UserInfo;
@@ -97,6 +98,15 @@ public class InventoryInSheet implements ReceiptService {
 	
 	public ResultMessage updateInReceipt(InventoryInSheetPO inPO) {
 		ResultMessage message=null;
+		
+		//添加库存
+		Inventory inventory=new Inventory();
+		InventoryInSheetPO poCopy=(InventoryInSheetPO) ObjectDeepCopy.deepCopy(inPO);
+		message=inventory.updateIn(poCopy);
+		if(message.getResult()==Result.FAIL)
+			return message;
+		
+		//保存出库单
 		try {
 			message=data.insert(inPO);
 		} catch (RemoteException e) {

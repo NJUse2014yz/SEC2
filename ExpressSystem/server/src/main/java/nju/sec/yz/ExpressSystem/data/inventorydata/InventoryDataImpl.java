@@ -11,6 +11,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import nju.sec.yz.ExpressSystem.common.InventoryInInformation;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.data.fileUtility.SerializableFileHelper;
@@ -85,16 +86,16 @@ public class InventoryDataImpl extends UnicastRemoteObject implements InventoryD
 
 
 	@Override
-	public ResultMessage delete(String id) throws RemoteException {
+	public ResultMessage delete(String transit,String barId) throws RemoteException {
 		System.out.println("deleting a carPO...");
-		if(id==null){
+		if(transit==null||barId==null){
 			System.out.println("id为null！！！");
 			return new ResultMessage(Result.FAIL, "系统错误");
 		}
 		List<InventoryInSheetPO> inventoryInSheetPOs = findAll();
 		for (int i=0;i<inventoryInSheetPOs.size();i++) {
-			String carID = inventoryInSheetPOs.get(i).getId();
-			if (id.equals(carID)){
+			InventoryInInformation info = inventoryInSheetPOs.get(i).getInventoryInInformation();
+			if (transit.equals(info.getTransit())&&barId.equals(inventoryInSheetPOs.get(i).getBarId())){
 				inventoryInSheetPOs.remove(i);
 				ResultMessage message=saveData(inventoryInSheetPOs);
 				return message;

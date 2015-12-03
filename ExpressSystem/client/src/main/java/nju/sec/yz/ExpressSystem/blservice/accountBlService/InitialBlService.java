@@ -18,7 +18,7 @@ import nju.sec.yz.ExpressSystem.vo.TransitVO;
 public interface InitialBlService {
 	
 	/**
-	 * 开始期初建帐
+	 * 开始期初建帐,清空系统原有数据
 	 */
 	public ResultMessage start();
 
@@ -53,7 +53,7 @@ public interface InitialBlService {
 	public ResultMessage addStock(InventoryInSheetVO vo);
 	
 	/**
-	 * 完成期初建帐
+	 * 完成期初建帐，将期初信息作为系统初始状态
 	 */
 	public ResultMessage finish();
 	

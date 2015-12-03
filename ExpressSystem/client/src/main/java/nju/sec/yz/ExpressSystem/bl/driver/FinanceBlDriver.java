@@ -25,8 +25,7 @@ public class FinanceBlDriver {
 		// 导出excel
 		financeBl_stub.exportCostToExcel(null);
 
-		//
-		ResultMessage initialResult = financeBl_stub.initial(null);
+		
 
 		System.out.println("初期建账成功");
 		// 成本收益表
@@ -36,9 +35,7 @@ public class FinanceBlDriver {
 		ResultMessage paymentResult = financeBl_stub.makePayment(null);
 
 		System.out.println("收款单创建成功");
-		// 查看初期建账
-		InitialVO initialVO = financeBl_stub.observeIni();
-		System.out.println("机构：" + initialVO.getAgency());
+		
 
 	}
 

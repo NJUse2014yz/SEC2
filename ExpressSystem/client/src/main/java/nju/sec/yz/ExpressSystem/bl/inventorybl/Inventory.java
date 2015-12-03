@@ -15,6 +15,7 @@ import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.bl.userbl.User;
 import nju.sec.yz.ExpressSystem.bl.userbl.UserInfo;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
+import nju.sec.yz.ExpressSystem.client.RMIExceptionHandler;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice.InventoryDataService;
@@ -116,6 +117,8 @@ public class Inventory {
 		return voList;
 	}
 	
+	
+	
 	/**
 	 * @author cong
 	 * 设置库存警报比例
@@ -126,6 +129,34 @@ public class Inventory {
 			return new ResultMessage(Result.FAIL,"库存警戒值输入错误，为0-1");
 		this.rate=rate;
 		return null;
+	}
+	
+	/**
+	 * 入库时添加库存
+	 */
+	public ResultMessage updateIn(InventoryInSheetPO po){
+		ResultMessage message=new ResultMessage(Result.FAIL);
+		try {
+			message=data.insert(po);
+		} catch (RemoteException e) {
+			RMIExceptionHandler.handleRMIException();
+			e.printStackTrace();
+		}
+		return message;
+	}
+	
+	/**
+	 * 出库时删除库存
+	 */
+	public ResultMessage updateOut(String transit,String barId){
+		ResultMessage message=new ResultMessage(Result.FAIL);
+		try {
+			message=data.delete(transit, barId);
+		} catch (RemoteException e) {
+			RMIExceptionHandler.handleRMIException();
+			e.printStackTrace();
+		}
+		return message;
 	}
 	
 	/**

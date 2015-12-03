@@ -18,11 +18,11 @@ public interface InventoryDataService extends Remote{
 	 */
 	public ResultMessage insert(InventoryInSheetPO ipo) throws RemoteException;
 	
-	
 	/**
 	 * 出库后删除
+	 * 根据中转中心和条形码号确定
 	 */
-	public ResultMessage delete(String id) throws RemoteException;
+	public ResultMessage delete(String transitId,String barId) throws RemoteException;
 	
 	
 	public ResultMessage init( ) throws RemoteException;
