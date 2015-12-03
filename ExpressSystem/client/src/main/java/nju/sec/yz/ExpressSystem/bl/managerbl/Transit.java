@@ -6,6 +6,7 @@ import java.util.List;
 
 import nju.sec.yz.ExpressSystem.bl.deliverbl.ValidHelper;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
+import nju.sec.yz.ExpressSystem.client.RMIExceptionHandler;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.AgencyDataService;
@@ -22,11 +23,11 @@ import nju.sec.yz.ExpressSystem.vo.TransitVO;
  * @author 周聪
  *
  */
-public class Agency implements AgencyInfo {
+public class Transit implements AgencyInfo {
 
 	private AgencyDataService data;
 
-	public Agency() {
+	public Transit() {
 		try {
 			data = DatafactoryProxy.getAgencyDataService();
 		} catch (RemoteException e) {
@@ -82,9 +83,9 @@ public class Agency implements AgencyInfo {
 		TransitPO po = new TransitPO(av.getName(), av.getId(), positions, av.getLocation());
 
 		try {
-			message = data.insert(po);
+			message = data.update(po);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 
@@ -127,8 +128,6 @@ public class Agency implements AgencyInfo {
 			}
 			
 		}
-		
-		
 		return list;
 	}
 
@@ -137,7 +136,7 @@ public class Agency implements AgencyInfo {
 		try {
 			pos = data.findAll();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 
@@ -165,114 +164,7 @@ public class Agency implements AgencyInfo {
 		return vo;
 	}
 
-	/**
-	 * 向所属中转中心中添加营业厅
-	 */
-	public ResultMessage addPosition(PositionVO av) {
-
-		if (!isValidPosition(av.getId()))
-			return new ResultMessage(Result.FAIL, "亲，咱们的营业厅编号是城市编码加三位数字哟~");
-
-		PositionPO po = new PositionPO(av.getName(), av.getId(), av.getTransitId(), av.getLocation());
-
-		List<TransitPO> pos = null;
-		TransitPO transitPO = null;
-		try {
-			pos = data.findAll();
-			for (TransitPO tpo : pos) {
-				if (tpo.getId().equals(av.getTransitId())) {
-					transitPO = tpo;
-					break;
-				}
-			}
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		if (transitPO == null)
-			return new ResultMessage(Result.FAIL, "找不到所属的中转中心~");
-
-		List<PositionPO> positions = transitPO.getPositions();
-		for (PositionPO position : positions) {
-			if (position.getId().equals(po.getId()))
-				return new ResultMessage(Result.FAIL, "营业厅已存在~");
-		}
-
-		// 更新中转中心
-		transitPO.addPositions(po);
-
-		ResultMessage message = new ResultMessage(Result.FAIL);
-		try {
-			message = data.update(transitPO);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return message;
-	}
 	
-	public PositionVO findPosition(String id){
-		List<TransitVO> transits=this.observeAllTransit();
-		
-		for(TransitVO transit:transits){
-			for(PositionVO position:transit.getPositions()){
-				if(position.getId().equals(id))
-					return position;
-			}
-		}
-		
-		return null;
-	}
-
-	public ResultMessage deletePosition(String transitId, String id) {
-		List<TransitPO> pos = null;
-		TransitPO transitPO = null;
-		try {
-			pos = data.findAll();
-			for (TransitPO tpo : pos) {
-				if (tpo.getId().equals(transitId)) {
-					transitPO = tpo;
-					break;
-				}
-			}
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		if (transitPO == null)
-			return new ResultMessage(Result.FAIL, "找不到所属的中转中心~");
-
-		List<PositionPO> positions = transitPO.getPositions();
-		for (int i = 0; i < positions.size(); i++) {
-			PositionPO position = positions.get(i);
-			if (position.getId().equals(id)) {
-				positions.remove(i);
-				break;
-			}
-		}
-
-		ResultMessage message = new ResultMessage(Result.FAIL);
-		try {
-			message = data.update(transitPO);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return message;
-	}
-
-	private boolean isValidPosition(String id) {
-		if (!ValidHelper.isNumber(id))
-			return false;
-		if (id.length() != 6 && id.length() != 7)
-			return false;
-
-		return true;
-	}
 
 	private boolean isValidTransit(String id) {
 		if (!ValidHelper.isNumber(id))

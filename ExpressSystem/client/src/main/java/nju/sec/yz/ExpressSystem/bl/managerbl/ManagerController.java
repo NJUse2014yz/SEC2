@@ -1,4 +1,4 @@
-spackage nju.sec.yz.ExpressSystem.bl.managerbl;
+package nju.sec.yz.ExpressSystem.bl.managerbl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -137,7 +137,7 @@ public class ManagerController implements AgencyBlService,ConstBlService,SalaryB
 
 	@Override
 	public ResultMessage addTransit(TransitVO av) {
-		Agency agency=new Agency();
+		Transit agency=new Transit();
 		ResultMessage message=agency.addTransit(av);
 		LogTool.setLog("增加中转中心");
 		return message;
@@ -145,7 +145,7 @@ public class ManagerController implements AgencyBlService,ConstBlService,SalaryB
 
 	@Override
 	public ResultMessage deleteTransit(String id) {
-		Agency agency=new Agency();
+		Transit agency=new Transit();
 		ResultMessage message=agency.deleteTransit(id);
 		LogTool.setLog("删除中转中心");
 		return message;
@@ -153,7 +153,7 @@ public class ManagerController implements AgencyBlService,ConstBlService,SalaryB
 
 	@Override
 	public ResultMessage modifyTransit(TransitVO av) {
-		Agency agency=new Agency();
+		Transit agency=new Transit();
 		ResultMessage message=agency.updateTransit(av);
 		LogTool.setLog("修改中转中心资料");
 		return message;
@@ -164,21 +164,21 @@ public class ManagerController implements AgencyBlService,ConstBlService,SalaryB
 	 * 通过id获得中转中心信息
 	 */
 	public TransitVO observeTransit(String id) {
-		Agency agency=new Agency();
+		Transit agency=new Transit();
 		TransitVO vo=agency.observeTransit(id);
 		return vo;
 	}
 
 	@Override
 	public ArrayList<TransitVO> observeAllTransit() {
-		Agency agency=new Agency();
+		Transit agency=new Transit();
 		ArrayList<TransitVO> vos=agency.observeAllTransit();
 		return vos;
 	}
 
 	@Override
 	public ResultMessage addPosition(PositionVO av) {
-		Agency agency=new Agency();
+		Position agency=new Position();
 		ResultMessage message=agency.addPosition(av);
 		LogTool.setLog("增加营业厅");
 		return message;
@@ -186,7 +186,7 @@ public class ManagerController implements AgencyBlService,ConstBlService,SalaryB
 
 	@Override
 	public ResultMessage deletePosition(String transitId,String id) {
-		Agency agency=new Agency();
+		Position agency=new Position();
 		ResultMessage message=agency.deletePosition(transitId,id);
 		LogTool.setLog("删除营业厅");
 		return message;
@@ -197,7 +197,7 @@ public class ManagerController implements AgencyBlService,ConstBlService,SalaryB
 	 * 关键字查找机构
 	 */
 	public AgencyListVO observeTransitByName(String name) {
-		Agency agency=new Agency();
+		Transit agency=new Transit();
 		AgencyListVO vo=agency.observeTransitByName(name);
 		return vo;
 	}

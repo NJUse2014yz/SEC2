@@ -64,11 +64,17 @@ public class FinanceController implements FinanceBlSevice{
 	}
 
 	@Override
-	public void exportCostToExcel(ReceiptVO rv) {
+	public void exportCostToExcel(ProfitVO rv) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	@Override
+	public void exportBussinessToExcel(BussinessVO vo) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	
 
 }

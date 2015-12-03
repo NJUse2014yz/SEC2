@@ -34,7 +34,14 @@ public interface FinanceBlSevice {
 	public ResultMessage makePayment(OutVO pro);
 	//生成成本收益表
 	public ProfitVO makeCostReceipt ();
-	//导出相应表单的excel文件
-	public void exportCostToExcel(ReceiptVO rv);
 	
+	/**
+	 * 导出成本收益表的excel文件
+	 */
+	public void exportCostToExcel(ProfitVO vo);
+	
+	/**
+	 * 导出经营情况表的excel文件
+	 */
+	public void exportBussinessToExcel(BussinessVO vo);
 }

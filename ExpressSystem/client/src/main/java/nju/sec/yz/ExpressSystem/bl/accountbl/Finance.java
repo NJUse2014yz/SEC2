@@ -55,11 +55,20 @@ public class Finance {
 	}
 	
 	/**
-	 * 导出excel
+	 * 导出成本收益表excel
 	 * @param rv
 	 */
-	public void exportCostToExcel(ReceiptVO rv) {
+	public void exportCostToExcel(ProfitVO rv) {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	/**
+	 * 导出经营情况表
+	 */
+	public void exportBussinessToExcel(BussinessVO vo){
+		
+	}
+	
+	
 }

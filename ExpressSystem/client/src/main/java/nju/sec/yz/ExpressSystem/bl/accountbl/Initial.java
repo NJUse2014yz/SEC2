@@ -6,6 +6,7 @@ import java.util.List;
 import nju.sec.yz.ExpressSystem.bl.carAndDriverbl.Car;
 import nju.sec.yz.ExpressSystem.bl.inventorybl.Inventory;
 import nju.sec.yz.ExpressSystem.bl.managerbl.Staff;
+import nju.sec.yz.ExpressSystem.bl.tool.LogTool;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
 import nju.sec.yz.ExpressSystem.client.RMIExceptionHandler;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
@@ -116,6 +117,13 @@ public class Initial {
 		Initialable<InventoryInSheetVO, InventoryInSheetPO> stockService=new Inventory();
 		List<InventoryInSheetPO> stockPOs=this.changeVOToPO(stockService, inventories);
 		initialPO.setInventories(stockPOs);
+		
+		Initialable<AccountVO, AccountPO> accountService=new Account();
+		List<AccountPO> accountPOs=this.changeVOToPO(accountService, accounts);
+		initialPO.setAccounts(accountPOs);
+		
+		
+		LogTool.setLog("期初建帐");
 		
 		return null;
 	}
