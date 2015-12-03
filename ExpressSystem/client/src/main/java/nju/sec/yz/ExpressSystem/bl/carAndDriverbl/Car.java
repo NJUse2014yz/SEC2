@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
+import nju.sec.yz.ExpressSystem.bl.accountbl.Initialable;
 import nju.sec.yz.ExpressSystem.bl.deliverbl.ValidHelper;
 import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
@@ -17,9 +18,8 @@ import nju.sec.yz.ExpressSystem.vo.CarVO;
 /**
  * 汽车信息的领域模型对象
  * @author 周聪
- *
  */
-public class Car implements CarInitialService{
+public class Car implements Initialable<CarVO, CarPO>{
 	
 	private CarDataService carData;
 	

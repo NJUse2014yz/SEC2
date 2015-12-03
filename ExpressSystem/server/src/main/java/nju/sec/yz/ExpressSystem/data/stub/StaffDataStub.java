@@ -2,6 +2,7 @@ package nju.sec.yz.ExpressSystem.data.stub;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
 
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.Status;
@@ -39,11 +40,6 @@ public class StaffDataStub implements StaffDataService{
 		return null;
 	}
 
-	@Override
-	public ResultMessage init() throws RemoteException {
-		// TODO 自动生成的方法存根
-		return null;
-	}
 
 	@Override
 	public ArrayList<StaffPO> findAll() throws RemoteException {
@@ -51,6 +47,12 @@ public class StaffDataStub implements StaffDataService{
 	ArrayList<StaffPO> array=new ArrayList<StaffPO>();
 	array.add(new StaffPO("王明","E001",Status.JUNIOR_ACCOUNTANCY,"总公司"));
 	return array;
+	}
+
+	@Override
+	public ResultMessage init(List<StaffPO> staffs) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

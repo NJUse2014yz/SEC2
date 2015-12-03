@@ -25,7 +25,7 @@ public interface InventoryDataService extends Remote{
 	public ResultMessage delete(String transitId,String barId) throws RemoteException;
 	
 	
-	public ResultMessage init( ) throws RemoteException;
+	public ResultMessage init(List<InventoryInSheetPO> inventories) throws RemoteException;
 	
 	
 	/**

@@ -128,9 +128,8 @@ public class AccountDataImpl extends UnicastRemoteObject implements AccountDataS
 	}
 
 	@Override
-	public ResultMessage init() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+	public ResultMessage init(List<AccountPO> accounts) throws RemoteException {
+		return this.saveData(accounts);
 	}
 
 	@Override

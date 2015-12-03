@@ -66,9 +66,8 @@ public class InventoryDataImpl extends UnicastRemoteObject implements InventoryD
 
 
 	@Override
-	public ResultMessage init() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+	public ResultMessage init(List<InventoryInSheetPO> stocks) throws RemoteException {
+		return this.saveData(stocks);
 	}
 	
 	private List<InventoryInSheetPO> findAll() throws RemoteException {

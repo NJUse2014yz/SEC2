@@ -2,6 +2,7 @@ package nju.sec.yz.ExpressSystem.data.stub;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
 
 import nju.sec.yz.ExpressSystem.common.Status;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
@@ -40,11 +41,7 @@ public class AccountDataStub implements AccountDataService {
 		return null;
 	}
 
-	@Override
-	public ResultMessage init() throws RemoteException {
-		// TODO 自动生成的方法存根
-		return null;
-	}
+	
 
 	@Override
 	public ArrayList<AccountPO> findAll() throws RemoteException {
@@ -53,6 +50,12 @@ public class AccountDataStub implements AccountDataService {
 		array.add(new AccountPO("A01",0));
 		array.add(new AccountPO("A02",5000));
 		return array;
+	}
+
+	@Override
+	public ResultMessage init(List<AccountPO> po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

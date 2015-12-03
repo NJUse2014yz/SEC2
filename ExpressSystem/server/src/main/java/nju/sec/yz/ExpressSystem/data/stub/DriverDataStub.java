@@ -2,6 +2,7 @@ package nju.sec.yz.ExpressSystem.data.stub;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
 
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.Sex;
@@ -30,7 +31,7 @@ public class DriverDataStub implements DriverDataService{
 		return null;
 	}
 	@Override
-	public ResultMessage init() throws RemoteException{
+	public ResultMessage init(List<DriverPO> po) throws RemoteException{
 		return null;
 	}
 	@Override

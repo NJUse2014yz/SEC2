@@ -3,6 +3,7 @@ package nju.sec.yz.ExpressSystem.dataservice.manageDataSevice;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
 
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.po.StaffPO;
@@ -17,6 +18,6 @@ public interface StaffDataService extends Remote{
 	public StaffPO find(String id) throws RemoteException;
 	public ResultMessage delete(String id) throws RemoteException;
 	public ResultMessage update(StaffPO spo) throws RemoteException;
-	public ResultMessage init( ) throws RemoteException;
+	public ResultMessage init(List<StaffPO> staffs) throws RemoteException;
 	public ArrayList<StaffPO> findAll( ) throws RemoteException;
 }
