@@ -20,7 +20,7 @@ public class RecieveReceipt {
 			return new ResultMessage(Result.FAIL,validResult);
 		Deliver deliver=new Deliver();
 		//更新历史轨迹
-		ResultMessage message=deliver.updateReceiveReceipt();
+		ResultMessage message=deliver.updateReceiveReceipt(vo);
 		return message;
 	}
 	
