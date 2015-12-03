@@ -51,7 +51,12 @@ public class ManagerStaffList extends JPanel {
 	private void iniManagerStaffList() {
 		setLayout(null);
 		setSize(490, 550);
-		setVisible(true);table=new JTable(null);
+		setVisible(true);
+		
+		
+		table=new JTable(null);
+		
+		
 		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		table.setColumnSelectionAllowed(false);
 		table.setRowSelectionAllowed(true);
@@ -107,6 +112,20 @@ public class ManagerStaffList extends JPanel {
 
 			
 	});
+		
+		table.addMouseListener(new MouseAdapter() {
+//			this.setRowSelectionAllowed(true);
+
+			 @Override
+			 public void mouseClicked(MouseEvent e) {
+//				 if(e.getClickCount()==2){//鼠标双击
+					 int num=table.getSelectedRow();
+						 maincontroler.mainFrame.nextPanel(new ManagerStaffModify(maincontroler,mbc,table.getValueAt(num, 0).toString()));
+					 
+					 }
+//				 }
+			 
+		});
 	
 		back.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {

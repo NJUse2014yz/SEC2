@@ -67,7 +67,7 @@ public ManagerButtonComponent mbc;
 			mainControler.mainFrame.nextPanel(new ManagerStaffDelete(mainControler,mbc));
 			break;
 		case STAFF_MODIFY:
-			mainControler.mainFrame.nextPanel(new ManagerStaffModify(mainControler,mbc));
+//			mainControler.mainFrame.nextPanel(new ManagerStaffModify(mainControler,mbc));
 			break;
 		case STAFF_LIST:
 			mainControler.mainFrame.nextPanel(new ManagerStaffList(mainControler,mbc));

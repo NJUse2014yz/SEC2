@@ -207,7 +207,6 @@ public class ManagerAgencyList extends JPanel{
 		table.setModel(model);
 		table.repaint();
 		
-		
 	}
 		
 	@Override

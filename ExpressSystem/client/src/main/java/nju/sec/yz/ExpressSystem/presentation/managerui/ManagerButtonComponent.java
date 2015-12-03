@@ -158,18 +158,20 @@ public class ManagerButtonComponent {
 			public void mouseClicked(MouseEvent e){
 				
 				for(int count=1;count<=3;count++){
-					buttons[count-1].setLocation(14,50+height1*(count-1));
+					buttons[count-1].setLocation(13,50+height1*(count-1));
 					buttons[count-1].setIcon(imgs[2*count-2]);
 				}
 				
-				modify.setLocation(14,50+height1*3+height2*0);
+				modify.setLocation(13,50+height1*3+height2*0);
 				modify.setVisible(true);
 				
-				observe.setLocation(14,50+height1*3+height2*1);
+				delete.setVisible(false);
+				
+				observe.setLocation(13,50+height1*3+height2*1);
 				observe.setVisible(true);
 				
 				for(int count=4;count<=buttons.length;count++){
-					buttons[count-1].setLocation(14,50+height1*(count-1)+height2*2);
+					buttons[count-1].setLocation(13,50+height1*(count-1)+height2*2);
 					buttons[count-1].setIcon(imgs[2*count-2]);
 				}
 				
@@ -198,23 +200,23 @@ public class ManagerButtonComponent {
 				
 				
 				for(int count=1;count<=4;count++){
-					buttons[count-1].setLocation(14,50+height1*(count-1));
+					buttons[count-1].setLocation(13,50+height1*(count-1));
 					buttons[count-1].setIcon(imgs[2*count-2]);
 				}
-				add.setLocation(14,50+height1*4);
+				add.setLocation(13,50+height1*4);
 				add.setVisible(true);
 				
 //				delete.setLocation(14,50+height1*4+height2*1);
 //				delete.setVisible(true);
 				
-				modify.setLocation(14,50+height1*4+height2*1);
+				modify.setLocation(13,50+height1*4+height2*1);
 				modify.setVisible(true);
 				
-				observe.setLocation(14,50+height1*4+height2*2);
+				observe.setLocation(13,50+height1*4+height2*2);
 				observe.setVisible(true);
 				
 				for(int count=5;count<=buttons.length;count++){
-					buttons[count-1].setLocation(14,50+height1*(count-1)+height2*3);
+					buttons[count-1].setLocation(13,50+height1*(count-1)+height2*3);
 					buttons[count-1].setIcon(imgs[2*count-2]);
 				}
 				
@@ -376,12 +378,12 @@ public class ManagerButtonComponent {
 	
 	public void changeForButtons(int i){
 		for(int count=1;count<=i;count++){
-			buttons[count-1].setLocation(14,50+height1*(count-1));
+			buttons[count-1].setLocation(13,50+height1*(count-1));
 			buttons[count-1].setIcon(imgs[2*count-2]);
 		}
 		
 		for(int count=i+1;count<=buttons.length;count++){
-			buttons[count-1].setLocation(14,50+height1*(count-1)+height2*4);
+			buttons[count-1].setLocation(13,50+height1*(count-1)+height2*4);
 			buttons[count-1].setIcon(imgs[2*count-2]);
 		}
 		
