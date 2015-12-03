@@ -190,6 +190,7 @@ public class Collection implements ReceiptService{
 		try {
 			message=inData.insert(po);
 		} catch (RemoteException e) {
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 		
@@ -208,7 +209,7 @@ public class Collection implements ReceiptService{
 				in=in+po.getPaymentInformation().getAmount();
 			}
 		} catch (RemoteException e) {
-			
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 		
@@ -226,7 +227,7 @@ public class Collection implements ReceiptService{
 				vos.add(vo);
 			}
 		} catch (RemoteException e) {
-			
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 		return vos;
@@ -243,7 +244,7 @@ public class Collection implements ReceiptService{
 				vos.add(vo);
 			}
 		} catch (RemoteException e) {
-			
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 		return vos;

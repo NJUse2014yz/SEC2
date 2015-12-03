@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 
 import nju.sec.yz.ExpressSystem.bl.deliverbl.ValidHelper;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
+import nju.sec.yz.ExpressSystem.client.RMIExceptionHandler;
 import nju.sec.yz.ExpressSystem.common.PriceInformation;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
@@ -22,7 +23,7 @@ public class Price implements PriceService{
 		try {
 			data=DatafactoryProxy.getConstDataService();
 		} catch (RemoteException e) {
-			//TODO 远程异常
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 	}
@@ -37,6 +38,7 @@ public class Price implements PriceService{
 		try{
 			message=data.updatePrice(po);
 		}catch(RemoteException e){
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 			return new ResultMessage(Result.FAIL,"系统错误");
 		}
@@ -50,6 +52,7 @@ public class Price implements PriceService{
 			if(po==null)
 				return null;
 		}catch(RemoteException e){
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 		PriceVO vo=changePoToVo(po);

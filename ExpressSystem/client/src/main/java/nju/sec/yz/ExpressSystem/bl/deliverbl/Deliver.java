@@ -3,6 +3,7 @@ package nju.sec.yz.ExpressSystem.bl.deliverbl;
 import java.rmi.RemoteException;
 
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
+import nju.sec.yz.ExpressSystem.client.RMIExceptionHandler;
 import nju.sec.yz.ExpressSystem.common.ReceiveInformation;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.SendInformation;
@@ -25,7 +26,7 @@ public class Deliver {
 		try {
 			data=DatafactoryProxy.getDeliverDataService();
 		} catch (RemoteException e) {
-			//TODO 远程异常
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 	}
@@ -37,7 +38,7 @@ public class Deliver {
 		try {
 			DeliverPO po=data.find(id);
 		} catch (RemoteException e) {
-			//TODO 远程异常
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 		return null;
@@ -56,7 +57,7 @@ public class Deliver {
 		try {
 			message=data.insert(deliverPO);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 		return message;
@@ -72,7 +73,7 @@ public class Deliver {
 		try {
 			message=data.insert(deliverPO);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 		return message;

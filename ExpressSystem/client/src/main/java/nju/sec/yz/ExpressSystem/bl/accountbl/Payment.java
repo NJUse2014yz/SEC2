@@ -13,6 +13,7 @@ import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.bl.userbl.User;
 import nju.sec.yz.ExpressSystem.bl.userbl.UserInfo;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
+import nju.sec.yz.ExpressSystem.client.RMIExceptionHandler;
 import nju.sec.yz.ExpressSystem.common.IdType;
 import nju.sec.yz.ExpressSystem.common.OutInformation;
 import nju.sec.yz.ExpressSystem.common.ReceiptType;
@@ -38,7 +39,7 @@ public class Payment implements ReceiptService {
 		try {
 			data = DatafactoryProxy.getOutDataService();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 	}
@@ -155,6 +156,7 @@ public class Payment implements ReceiptService {
 		try {
 			message=data.insert(po);
 		} catch (RemoteException e) {
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 		
@@ -170,6 +172,7 @@ public class Payment implements ReceiptService {
 				out=out+po.getOutInformation().getNum();
 			}
 		} catch (RemoteException e) {
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 		
@@ -186,6 +189,7 @@ public class Payment implements ReceiptService {
 				results.add(vo);
 			}
 		} catch (RemoteException e) {
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 		

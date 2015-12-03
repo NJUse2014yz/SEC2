@@ -10,6 +10,7 @@ import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.bl.userbl.User;
 import nju.sec.yz.ExpressSystem.bl.userbl.UserInfo;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
+import nju.sec.yz.ExpressSystem.client.RMIExceptionHandler;
 import nju.sec.yz.ExpressSystem.common.IdType;
 import nju.sec.yz.ExpressSystem.common.InventoryInInformation;
 import nju.sec.yz.ExpressSystem.common.ReceiptType;
@@ -33,7 +34,7 @@ public class InventoryInSheet implements ReceiptService {
 		try {
 			data=DatafactoryProxy.getInventoryInDataService();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 	}
@@ -109,7 +110,7 @@ public class InventoryInSheet implements ReceiptService {
 		try {
 			message=data.insert(inPO);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 		return message;

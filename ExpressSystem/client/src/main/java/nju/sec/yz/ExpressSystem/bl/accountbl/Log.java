@@ -6,6 +6,7 @@ import java.util.List;
 
 import nju.sec.yz.ExpressSystem.bl.deliverbl.ValidHelper;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
+import nju.sec.yz.ExpressSystem.client.RMIExceptionHandler;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.dataservice.logDataSevice.LogDataService;
@@ -23,7 +24,7 @@ public class Log {
 		try {
 			data=DatafactoryProxy.getLogDataService();
 		} catch (RemoteException e) {
-			//TODO 远程异常
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 	}
@@ -36,7 +37,7 @@ public class Log {
 			if(listPO==null)
 				return null;
 		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 		//将userpo列表转换成uservo列表
@@ -56,7 +57,7 @@ public class Log {
 			if(listPO==null)
 				return null;
 		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 		//将userpo列表转换成uservo列表
@@ -79,7 +80,7 @@ public class Log {
 			LogPO po=changeVoToPo(vo);
 			message=data.insert(po);
 		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 			return new ResultMessage(Result.FAIL,"系统错误");
 		}

@@ -4,16 +4,19 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
+import nju.sec.yz.ExpressSystem.bl.accountbl.Initialable;
 import nju.sec.yz.ExpressSystem.bl.deliverbl.ValidHelper;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
 import nju.sec.yz.ExpressSystem.client.RMIExceptionHandler;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.AgencyDataService;
+import nju.sec.yz.ExpressSystem.po.CarPO;
 import nju.sec.yz.ExpressSystem.po.PositionPO;
 import nju.sec.yz.ExpressSystem.po.TransitPO;
 import nju.sec.yz.ExpressSystem.vo.AgencyListVO;
 import nju.sec.yz.ExpressSystem.vo.AgencyVO;
+import nju.sec.yz.ExpressSystem.vo.CarVO;
 import nju.sec.yz.ExpressSystem.vo.PositionVO;
 import nju.sec.yz.ExpressSystem.vo.TransitVO;
 
@@ -23,7 +26,7 @@ import nju.sec.yz.ExpressSystem.vo.TransitVO;
  * @author 周聪
  *
  */
-public class Transit implements AgencyInfo {
+public class Transit implements AgencyInfo, Initialable<TransitVO, TransitPO> {
 
 	private AgencyDataService data;
 
@@ -31,11 +34,14 @@ public class Transit implements AgencyInfo {
 		try {
 			data = DatafactoryProxy.getAgencyDataService();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 	}
 
+	/**
+	 * 新建时无营业厅
+	 */
 	public ResultMessage addTransit(TransitVO av) {
 
 		if (!isValidTransit(av.getId()))
@@ -47,7 +53,7 @@ public class Transit implements AgencyInfo {
 		try {
 			message = data.insert(po);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 
@@ -60,7 +66,7 @@ public class Transit implements AgencyInfo {
 		try {
 			message = data.delete(id);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 
@@ -104,29 +110,29 @@ public class Transit implements AgencyInfo {
 		if (po == null)
 			return null;
 
-		TransitVO transitVO = this.poToVO(po);
+		TransitVO transitVO = this.show(po);
 
 		return transitVO;
 	}
-	
+
 	/**
 	 * 按名字查找机构
 	 */
 	public AgencyListVO observeTransitByName(String name) {
-		List<TransitVO> transits=this.observeAllTransit();
-		
-		AgencyListVO list=new AgencyListVO();
-		for(TransitVO transit:transits){
-			//匹配中转中心
-			if(transit.getName().contains(name))
+		List<TransitVO> transits = this.observeAllTransit();
+
+		AgencyListVO list = new AgencyListVO();
+		for (TransitVO transit : transits) {
+			// 匹配中转中心
+			if (transit.getName().contains(name))
 				list.transits.add(transit);
-			//查找中转中心中的营业厅
-			for(PositionVO position:transit.getPositions()){
-				//匹配营业厅
-				if(position.getName().contains(name))
+			// 查找中转中心中的营业厅
+			for (PositionVO position : transit.getPositions()) {
+				// 匹配营业厅
+				if (position.getName().contains(name))
 					list.positions.add(position);
 			}
-			
+
 		}
 		return list;
 	}
@@ -143,14 +149,15 @@ public class Transit implements AgencyInfo {
 		ArrayList<TransitVO> vos = new ArrayList<>();
 
 		for (TransitPO po : pos) {
-			TransitVO vo = this.poToVO(po);
+			TransitVO vo = this.show(po);
 			vos.add(vo);
 		}
 
 		return vos;
 	}
 
-	private TransitVO poToVO(TransitPO po) {
+	@Override
+	public TransitVO show(TransitPO po) {
 		List<PositionPO> pos = po.getPositions();
 		List<PositionVO> positions = new ArrayList<>();
 
@@ -164,8 +171,6 @@ public class Transit implements AgencyInfo {
 		return vo;
 	}
 
-	
-
 	private boolean isValidTransit(String id) {
 		if (!ValidHelper.isNumber(id))
 			return false;
@@ -177,14 +182,14 @@ public class Transit implements AgencyInfo {
 
 	@Override
 	public String getTrancitLocation(String name) {
-		String location=null;
+		String location = null;
 		try {
-			TransitPO po=data.findByName(name);
-			if(po==null)
+			TransitPO po = data.findByName(name);
+			if (po == null)
 				return null;
-			location=po.getLocation();
+			location = po.getLocation();
 		} catch (RemoteException e) {
-			
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 		return location;
@@ -192,6 +197,7 @@ public class Transit implements AgencyInfo {
 
 	/**
 	 * 按名字精确查找
+	 * 
 	 * @param name
 	 * @return
 	 */
@@ -207,8 +213,38 @@ public class Transit implements AgencyInfo {
 		if (po == null)
 			return null;
 
-		
+		return po;
+	}
 
+	@Override
+	public ResultMessage init(List<TransitVO> transits) {
+		ResultMessage message = new ResultMessage(Result.FAIL);
+
+		List<TransitPO> pos = new ArrayList<>();
+		for (TransitVO Transit : transits) {
+			boolean validResult = isValidTransit(Transit.id);
+			if (validResult)
+				return new ResultMessage(Result.FAIL, transits.indexOf(Transit) + " " + "中转中心编号不符合格式");
+
+			TransitPO po = this.changeVOToPO(Transit);
+			pos.add(po);
+		}
+
+		try {
+			message = data.init(pos);
+		} catch (RemoteException e) {
+			RMIExceptionHandler.handleRMIException();
+			e.printStackTrace();
+		}
+		return message;
+	}
+
+	@Override
+	/**
+	 * 期初建帐专用
+	 */
+	public TransitPO changeVOToPO(TransitVO vo) {
+		TransitPO po = new TransitPO(vo.name, vo.id, vo.location);
 		return po;
 	}
 

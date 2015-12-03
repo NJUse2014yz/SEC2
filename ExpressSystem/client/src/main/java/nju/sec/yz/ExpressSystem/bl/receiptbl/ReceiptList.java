@@ -21,6 +21,7 @@ import nju.sec.yz.ExpressSystem.bl.deliverbl.TransitTrainReceipt;
 import nju.sec.yz.ExpressSystem.bl.inventorybl.InventoryInSheet;
 import nju.sec.yz.ExpressSystem.bl.inventorybl.InventoryOutSheet;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
+import nju.sec.yz.ExpressSystem.client.RMIExceptionHandler;
 import nju.sec.yz.ExpressSystem.common.ReceiptOperation;
 import nju.sec.yz.ExpressSystem.common.ReceiptType;
 import nju.sec.yz.ExpressSystem.common.Result;
@@ -66,6 +67,7 @@ public class ReceiptList implements ReceiptSaveService{
 		try {
 			receiptData=DatafactoryProxy.getReceiptDataService();
 		} catch (RemoteException e) {
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 	}
@@ -80,7 +82,7 @@ public class ReceiptList implements ReceiptSaveService{
 				receiptVOs.add(vo);
 			}
 		} catch (RemoteException e) {
-			//
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 		return receiptVOs;
@@ -98,7 +100,7 @@ public class ReceiptList implements ReceiptSaveService{
 				}
 			}
 		} catch (RemoteException e) {
-			//
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 		return receiptVOs;
@@ -110,7 +112,7 @@ public class ReceiptList implements ReceiptSaveService{
 			ReceiptPO po=receiptData.find(id);
 			vo=this.show(po);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 		return vo;
@@ -194,6 +196,7 @@ public class ReceiptList implements ReceiptSaveService{
 		try {
 			message=receiptData.update(po);
 		} catch (RemoteException e) {
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 			return new ResultMessage(Result.FAIL,"系统错误");
 		}
@@ -205,6 +208,7 @@ public class ReceiptList implements ReceiptSaveService{
 		try {
 			receiptData.delete(id);
 		} catch (RemoteException e) {
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 			return new ResultMessage(Result.FAIL,"系统错误");
 		}
@@ -220,7 +224,7 @@ public class ReceiptList implements ReceiptSaveService{
 		try {
 			receiptData.insert(po);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 			return new ResultMessage(Result.FAIL, "系统错误");
 		}

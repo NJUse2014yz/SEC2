@@ -61,7 +61,7 @@ public class Inventory implements Initialable<InventoryInSheetVO, InventoryInShe
 		try {
 			data = DatafactoryProxy.getInventoryDataService();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 	}

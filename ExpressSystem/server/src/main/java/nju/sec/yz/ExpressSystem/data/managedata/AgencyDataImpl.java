@@ -150,9 +150,8 @@ public class AgencyDataImpl extends UnicastRemoteObject implements AgencyDataSer
 	}
 
 	@Override
-	public ResultMessage init() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+	public ResultMessage init(List<TransitPO> transits) throws RemoteException {
+		return this.saveData(transits);
 	}
 
 	@Override

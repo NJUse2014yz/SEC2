@@ -13,16 +13,16 @@ import nju.sec.yz.ExpressSystem.po.PositionPO;
 public class TransitVO {
 
 	//
-	private String name;
+	public String name;
 	
 	//中转中心编号规则：025城市编码+0一位数字
-	private String id;
+	public String id;
 	
 	//下属的营业厅
-	private List<PositionVO> positions;
+	public List<PositionVO> positions;
 	
 	//所在地
-	private String location;
+	public String location;
 	
 	
 

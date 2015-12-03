@@ -6,6 +6,7 @@ import java.util.List;
 
 import nju.sec.yz.ExpressSystem.bl.userbl.User;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
+import nju.sec.yz.ExpressSystem.client.RMIExceptionHandler;
 import nju.sec.yz.ExpressSystem.dataservice.deliverDataSevice.CollectionRecordDataService;
 import nju.sec.yz.ExpressSystem.po.CollectionRecordPO;
 import nju.sec.yz.ExpressSystem.vo.CollectionRecordVO;
@@ -23,6 +24,7 @@ public class CollectionRecord {
 		try {
 			data=DatafactoryProxy.getCollectionRecordDataService();
 		} catch (RemoteException e) {
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 	}
@@ -31,6 +33,7 @@ public class CollectionRecord {
 		try {
 			data.addRecord(po);
 		} catch (RemoteException e) {
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 	}
@@ -40,6 +43,7 @@ public class CollectionRecord {
 		try {
 			data.deleteRecord(barId);
 		} catch (RemoteException e) {
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 	}
@@ -53,7 +57,7 @@ public class CollectionRecord {
 		try {
 			pos=data.getRecords(positionId);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 		

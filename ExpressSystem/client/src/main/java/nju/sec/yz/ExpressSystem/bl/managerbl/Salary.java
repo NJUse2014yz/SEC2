@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
+import nju.sec.yz.ExpressSystem.client.RMIExceptionHandler;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.SalaryImformation;
@@ -23,7 +24,7 @@ private SalaryDataService data;
 		try {
 			data=DatafactoryProxy.getSalaryDataService();
 		} catch (RemoteException e) {
-			//TODO 远程异常
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 	}
@@ -53,7 +54,7 @@ private SalaryDataService data;
 			if(listPO==null)
 				return null;
 		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 		//将userpo列表转换成uservo列表

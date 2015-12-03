@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
+import nju.sec.yz.ExpressSystem.client.RMIExceptionHandler;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.CityIdDataService;
 import nju.sec.yz.ExpressSystem.po.CityIdPO;
 import nju.sec.yz.ExpressSystem.vo.CityIdVO;
@@ -23,7 +24,7 @@ public class City implements CityListService{
 		try {
 			data=DatafactoryProxy.getCityIdDataService();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 	}
@@ -35,7 +36,7 @@ public class City implements CityListService{
 		try {
 			pos=data.getAll();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 		
@@ -55,7 +56,7 @@ public class City implements CityListService{
 		try {
 			pos=data.getAll();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 		
@@ -74,7 +75,7 @@ public class City implements CityListService{
 		try {
 			data.addCity(po);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 	}

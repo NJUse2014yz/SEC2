@@ -165,7 +165,7 @@ public class InventoryOutSheet implements ReceiptService{
 		try {
 			message=data.insert(outPO);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 		return message;

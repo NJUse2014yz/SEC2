@@ -9,7 +9,7 @@ public class InitialVO {
 	
 	public String id;
 
-	// 中转中心
+	// 中转中心,不包含营业厅
 	public List<TransitVO> transits;
 	
 	// 营业厅

@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
+import nju.sec.yz.ExpressSystem.client.RMIExceptionHandler;
 import nju.sec.yz.ExpressSystem.dataservice.deliverDataSevice.BarIdsDataService;
 import nju.sec.yz.ExpressSystem.po.BarIdsPO;
 
@@ -20,7 +21,7 @@ public class BarIdList {
 		try {
 			data=DatafactoryProxy.getBarIdsDataService();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 	}
@@ -29,7 +30,7 @@ public class BarIdList {
 		try {
 			data.add(po);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 	}
@@ -42,7 +43,7 @@ public class BarIdList {
 		try {
 			po=data.get(transitSheetId);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 		

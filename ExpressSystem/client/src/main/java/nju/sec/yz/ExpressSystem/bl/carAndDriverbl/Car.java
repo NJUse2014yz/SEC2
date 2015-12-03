@@ -27,7 +27,7 @@ public class Car implements Initialable<CarVO, CarPO>{
 		try {
 			carData=DatafactoryProxy.getCarDataService();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 	}
@@ -39,7 +39,7 @@ public class Car implements Initialable<CarVO, CarPO>{
 		try {
 			listPO=carData.findAll();
 		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 		//将userpo列表转换成uservo列表
@@ -58,7 +58,7 @@ public class Car implements Initialable<CarVO, CarPO>{
 				return null;
 			vo=show(po);
 		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 		return vo;
@@ -77,7 +77,7 @@ public class Car implements Initialable<CarVO, CarPO>{
 			CarPO po=changeVOToPO(vo);
 			message=carData.insert(po);
 		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 			return new ResultMessage(Result.FAIL,"系统错误");
 		}
@@ -92,7 +92,7 @@ public class Car implements Initialable<CarVO, CarPO>{
 		try {
 			result=carData.delete(id);
 		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 			return new ResultMessage(Result.FAIL,"系统错误");
 		}
@@ -111,7 +111,7 @@ public class Car implements Initialable<CarVO, CarPO>{
 		try {
 			message=carData.update(po);
 		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 			return new ResultMessage(Result.FAIL,"系统错误");
 		}

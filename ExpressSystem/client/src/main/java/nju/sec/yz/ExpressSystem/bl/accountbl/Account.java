@@ -44,7 +44,7 @@ public class Account implements Initialable<AccountVO, AccountPO> {
 		try {
 			message = accountData.insert(po);
 		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 			return new ResultMessage(Result.FAIL, "系统错误");
 		}
@@ -57,7 +57,7 @@ public class Account implements Initialable<AccountVO, AccountPO> {
 		try {
 			result = accountData.delete(name);
 		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 			return new ResultMessage(Result.FAIL, "系统错误");
 		}
@@ -75,7 +75,7 @@ public class Account implements Initialable<AccountVO, AccountPO> {
 		try {
 			message = accountData.update(po);
 		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 			return new ResultMessage(Result.FAIL, "系统错误");
 		}
@@ -90,7 +90,7 @@ public class Account implements Initialable<AccountVO, AccountPO> {
 				return null;
 			vo = show(po);
 		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 		return vo;
@@ -105,7 +105,7 @@ public class Account implements Initialable<AccountVO, AccountPO> {
 			if (listPO == null)
 				return null;
 		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 		// 将userpo列表转换成uservo列表

@@ -27,7 +27,7 @@ public class Staff implements Initialable<StaffVO, StaffPO>{
 		try {
 			data=DatafactoryProxy.getStaffDataService();
 		} catch (RemoteException e) {
-			//TODO 远程异常
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 	}
@@ -43,7 +43,7 @@ public class Staff implements Initialable<StaffVO, StaffPO>{
 			StaffPO po=changeVOToPO(sv);
 			message=data.insert(po);
 		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 			return new ResultMessage(Result.FAIL,"系统错误");
 		}
@@ -57,7 +57,7 @@ public class Staff implements Initialable<StaffVO, StaffPO>{
 		try {
 			result=data.delete(id);
 		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 			return new ResultMessage(Result.FAIL,"系统错误");
 		}
@@ -76,7 +76,7 @@ public class Staff implements Initialable<StaffVO, StaffPO>{
 		try {
 			message=data.update(po);
 		} catch (RemoteException e){
-			// TODO 自动生成的 catch 块
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 			return new ResultMessage(Result.FAIL,"系统错误");
 		}
@@ -92,7 +92,7 @@ public class Staff implements Initialable<StaffVO, StaffPO>{
 				return null;
 			vo=show(po);
 		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 		return vo;
@@ -108,7 +108,7 @@ public class Staff implements Initialable<StaffVO, StaffPO>{
 			if(listPO==null)
 				return null;
 		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 		//将userpo列表转换成uservo列表

@@ -31,7 +31,7 @@ public class Driver implements DriverInitialService {
 		try {
 			data = DatafactoryProxy.getDriverDataService();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 	}
@@ -43,7 +43,7 @@ public class Driver implements DriverInitialService {
 		try {
 			listPO = data.findAll();
 		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 		// 将userpo列表转换成uservo列表
@@ -62,7 +62,7 @@ public class Driver implements DriverInitialService {
 				return null;
 			vo = show(po);
 		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 		return vo;
@@ -81,7 +81,7 @@ public class Driver implements DriverInitialService {
 			DriverPO po = changeVOToPO(vo);
 			message = data.insert(po);
 		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 			return new ResultMessage(Result.FAIL, "系统错误");
 		}
@@ -94,7 +94,7 @@ public class Driver implements DriverInitialService {
 		try {
 			result = data.delete(id);
 		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 			return new ResultMessage(Result.FAIL, "系统错误");
 		}
@@ -112,7 +112,7 @@ public class Driver implements DriverInitialService {
 		try {
 			message = data.update(po);
 		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 			return new ResultMessage(Result.FAIL, "系统错误");
 		}

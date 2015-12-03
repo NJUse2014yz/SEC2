@@ -9,8 +9,10 @@ import java.io.ObjectOutputStream;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import nju.sec.yz.ExpressSystem.bl.managerbl.Position;
 import nju.sec.yz.ExpressSystem.bl.managerbl.Transit;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
+import nju.sec.yz.ExpressSystem.client.RMIExceptionHandler;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.Status;
@@ -30,7 +32,7 @@ public class User implements UserInfo{
 		try {
 			data=DatafactoryProxy.getUserDataService();
 		} catch (RemoteException e) {
-			//TODO 远程异常
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 	}
@@ -44,7 +46,7 @@ public class User implements UserInfo{
 		try {
 			userPo = data.find(id);
 		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 		
@@ -123,7 +125,7 @@ public class User implements UserInfo{
 			UserPO	po=data.find(id);
 			vo=changePoToVo(po);
 		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 		return vo;
@@ -146,7 +148,7 @@ public class User implements UserInfo{
 		try {
 			message=data.insert(po);
 		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 			return new ResultMessage(Result.FAIL,"系统错误");
 		}
@@ -159,7 +161,7 @@ public class User implements UserInfo{
 		try {
 			result=data.delete(id);
 		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 			return new ResultMessage(Result.FAIL,"系统错误");
 		}
@@ -178,7 +180,7 @@ public class User implements UserInfo{
 		try {
 			message=data.update(po);
 		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 			return new ResultMessage(Result.FAIL,"系统错误");
 		}
@@ -224,6 +226,7 @@ public class User implements UserInfo{
 			return false;
 		char letter=id.charAt(id.length()-4);
 		Transit agaency=new Transit();
+		Position position=new Position();
 		switch(letter){
 		case 'A':
 			if(pow!=Status.INVENTORY)
@@ -256,7 +259,7 @@ public class User implements UserInfo{
 			if(numbers3.length!=2)
 				return false;
 			//营业厅不存在
-			if(agaency.findPosition(numbers3[0])==null)
+			if(position.findPosition(numbers3[0])==null)
 				return false;
 			if(!is3Number(numbers3[1]))
 				return false;
@@ -268,7 +271,7 @@ public class User implements UserInfo{
 			if(numbers4.length!=2)
 				return false;
 			//营业厅不存在
-			if(agaency.findPosition(numbers4[0])==null)
+			if(position.findPosition(numbers4[0])==null)
 				return false;
 			if(!is3Number(numbers4[1]))
 				return false;
