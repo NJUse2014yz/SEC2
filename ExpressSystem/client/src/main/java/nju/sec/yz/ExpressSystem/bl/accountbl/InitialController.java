@@ -16,6 +16,9 @@ import nju.sec.yz.ExpressSystem.vo.TransitVO;
  */
 public class InitialController implements InitialBlService{
 
+	
+	
+	
 	@Override
 	public ResultMessage addStaff(StaffVO vo) {
 		// TODO Auto-generated method stub

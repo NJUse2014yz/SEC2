@@ -16,6 +16,11 @@ import nju.sec.yz.ExpressSystem.vo.TransitVO;
  *
  */
 public interface InitialBlService {
+	
+	/**
+	 * 开始期初建帐
+	 */
+	public ResultMessage start();
 
 	/**
 	 * 添加初始员工

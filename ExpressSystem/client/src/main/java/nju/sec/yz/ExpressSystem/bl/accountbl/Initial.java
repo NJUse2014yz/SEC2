@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
+import nju.sec.yz.ExpressSystem.client.RMIExceptionHandler;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.AccountBookDataService;
 import nju.sec.yz.ExpressSystem.vo.AccountVO;
@@ -37,7 +38,7 @@ public class Initial {
 	private List<AccountVO> accounts;
 
 	//库存
-	public List<InventoryInSheetVO> inventories;
+	private List<InventoryInSheetVO> inventories;
 
 	private AccountBookDataService accountBookData;
 
@@ -45,7 +46,7 @@ public class Initial {
 		try {
 			accountBookData = DatafactoryProxy.getAccountBookDataService();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 	}
@@ -81,7 +82,9 @@ public class Initial {
 	}
 
 	public ResultMessage finish() {
-		// TODO Auto-generated method stub
+		isFinished=true;
+		
+		
 		return null;
 	}
 
