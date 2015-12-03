@@ -152,6 +152,8 @@ public class Inventory implements Initialable<InventoryInSheetVO, InventoryInShe
 		ResultMessage message = new ResultMessage(Result.FAIL);
 		try {
 			int size=data.findAll(getTransit()).size();
+			if(size+1>rate*room)
+				message.setMessage("这是一条库存报警的提示，请手动调整分区");
 			message = data.insert(po);
 		} catch (RemoteException e) {
 			RMIExceptionHandler.handleRMIException();
