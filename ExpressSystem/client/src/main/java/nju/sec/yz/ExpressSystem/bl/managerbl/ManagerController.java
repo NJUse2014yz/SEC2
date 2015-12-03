@@ -1,5 +1,6 @@
-spackage nju.sec.yz.ExpressSystem.bl.managerbl;
+package nju.sec.yz.ExpressSystem.bl.managerbl;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import nju.sec.yz.ExpressSystem.blservice.managerBlService.AgencyBlService;
 import nju.sec.yz.ExpressSystem.blservice.managerBlService.ConstBlService;
 import nju.sec.yz.ExpressSystem.blservice.managerBlService.SalaryBlService;
 import nju.sec.yz.ExpressSystem.blservice.managerBlService.StaffBlService;
+import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.AgencyListVO;
 import nju.sec.yz.ExpressSystem.vo.CityVO;
@@ -116,7 +118,13 @@ public class ManagerController implements AgencyBlService,ConstBlService,SalaryB
 	@Override
 	public ResultMessage modifyPrice(PriceVO pp){
 		Price price=new Price();
-		ResultMessage message=price.modifyPrice(pp);
+		ResultMessage message =new ResultMessage(Result.SUCCESS);
+		try {
+			message = price.modifyPrice(pp);
+		} catch (RemoteException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
 		LogTool.setLog("修改价格常量");
 		return message;
 	}
