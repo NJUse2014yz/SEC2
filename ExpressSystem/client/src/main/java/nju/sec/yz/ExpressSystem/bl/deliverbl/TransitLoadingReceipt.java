@@ -1,7 +1,10 @@
 package nju.sec.yz.ExpressSystem.bl.deliverbl;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 import nju.sec.yz.ExpressSystem.bl.carAndDriverbl.Car;
 import nju.sec.yz.ExpressSystem.bl.managerbl.CityConst;
 import nju.sec.yz.ExpressSystem.bl.managerbl.Price;
@@ -78,8 +81,8 @@ public class TransitLoadingReceipt implements ReceiptService {
 		barIdsCopy2.addAll(barIDs);
 		BarIdsPO list = new BarIdsPO(barIdsCopy2, receiptId);
 		barIds.addBarIds(list);
-		
-		return new ResultMessage(Result.SUCCESS,fare+"");
+
+		return new ResultMessage(Result.SUCCESS, fare + "");
 	}
 
 	private LoadInformation copyInfo(LoadInformation info) {
@@ -145,15 +148,29 @@ public class TransitLoadingReceipt implements ReceiptService {
 
 	@Override
 	public ResultMessage isValid(ReceiptVO vo) {
+		Deliver deliver = new Deliver();
+
 		ResultMessage validResult = new ResultMessage(Result.FAIL);
 
 		TransitLoadSheetVO receipt = (TransitLoadSheetVO) vo;
 
-		// 验证barid
+		//验证barid
 		List<String> barIDs = receipt.getBarIds();
+
+		//验证是否有重复
+		Set<String> idSet = new HashSet<>(barIDs);
+		if (idSet.size() > barIDs.size())
+			return new ResultMessage(Result.FAIL, "有条形码号重复了~");
+
 		for (String barID : barIDs) {
 			if (!ValidHelper.isBarId(barID)) {
 				validResult.setMessage("亲，咱们的订单号是十位数字哟~");
+				return validResult;
+			}
+
+			//判断系统中是否存在该条形码号的物流信息
+			if (deliver.checkDeliver(barID) == null) {
+				validResult.setMessage("系统中还没有订单" + barID + "的信息哦~");
 				return validResult;
 			}
 		}
@@ -177,11 +194,11 @@ public class TransitLoadingReceipt implements ReceiptService {
 
 	@Override
 	public ReceiptVO show(ReceiptPO po) {
-		TransitLoadSheetPO receipt=(TransitLoadSheetPO)po;
-		LoadInformation info=this.copyInfo(receipt.getTransitLoadInformation());
-		TransitLoadSheetVO vo=new TransitLoadSheetVO();
+		TransitLoadSheetPO receipt = (TransitLoadSheetPO) po;
+		LoadInformation info = this.copyInfo(receipt.getTransitLoadInformation());
+		TransitLoadSheetVO vo = new TransitLoadSheetVO();
 		vo.setTransitLoadInformation(info);
-		ArrayList<String>  barIds=new ArrayList<>();
+		ArrayList<String> barIds = new ArrayList<>();
 		barIds.addAll(receipt.getBarIds());
 		vo.setBarIds(barIds);
 		vo.setId(po.getId());
@@ -193,11 +210,11 @@ public class TransitLoadingReceipt implements ReceiptService {
 
 	@Override
 	public ReceiptPO convertToPO(ReceiptVO vo) {
-		TransitLoadSheetVO receipt=(TransitLoadSheetVO)vo;
-		LoadInformation info=this.copyInfo(receipt.getTransitLoadInformation());
-		TransitLoadSheetPO po=new TransitLoadSheetPO();
+		TransitLoadSheetVO receipt = (TransitLoadSheetVO) vo;
+		LoadInformation info = this.copyInfo(receipt.getTransitLoadInformation());
+		TransitLoadSheetPO po = new TransitLoadSheetPO();
 		po.setTransitLoadInformation(info);
-		ArrayList<String>  barIds=new ArrayList<>();
+		ArrayList<String> barIds = new ArrayList<>();
 		barIds.addAll(receipt.getBarIds());
 		po.setBarIds(barIds);
 		po.setId(vo.getId());

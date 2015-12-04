@@ -81,9 +81,16 @@ public class TransitReceiptHelper {
 		if(idCopy.size()<ids.size())
 			return new ResultMessage(Result.FAIL,"有条形码号重复了~");
 		
+		Deliver deliver=new Deliver();
 		for (String barId : ids) {
 			if (!ValidHelper.isBarId(barId))
 				return new ResultMessage(Result.FAIL, "亲，咱们的订单号是十位数字哟~");
+			
+			
+			//判断系统中是否存在该条形码号的物流信息
+			if(deliver.checkDeliver(barId)==null){
+				return new ResultMessage(Result.FAIL,"系统中还没有订单"+barId+"的信息哦");
+			}
 		}
 		return new ResultMessage(Result.SUCCESS);
 	}

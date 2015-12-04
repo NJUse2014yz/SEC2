@@ -1,7 +1,9 @@
 package nju.sec.yz.ExpressSystem.bl.deliverbl;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import nju.sec.yz.ExpressSystem.bl.carAndDriverbl.Car;
 import nju.sec.yz.ExpressSystem.bl.managerbl.CityConst;
@@ -153,11 +155,21 @@ public class PositionLoadingReceipt implements ReceiptService{
 		
 		//验证barid
 		List<String> barIDs=receipt.getBarIds();
+		
+		//验证是否有重复
+		Set<String> idSet=new HashSet<>(barIDs);
+		if(idSet.size()>barIDs.size())
+			return new ResultMessage(Result.FAIL,"有条形码号重复了~");
+		
+		Deliver deliver=new Deliver();
 		for(String barID:barIDs){
-			System.out.println(barIDs.size());
-			System.out.println(barID);
 			if(!ValidHelper.isBarId(barID)){
 				validResult.setMessage("亲，咱们的订单号是十位数字哟~");
+				return validResult;
+			}
+			//判断系统中是否存在该条形码号的物流信息
+			if(deliver.checkDeliver(barID)==null){
+				validResult.setMessage("系统中还没有订单"+barID+"的信息哦");
 				return validResult;
 			}
 		}

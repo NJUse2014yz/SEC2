@@ -195,12 +195,13 @@ public class DeliverReceipt implements ReceiptService{
 	public ResultMessage approve(ReceiptVO vo) {
 		SendSheetVO receipt=(SendSheetVO)vo;
 		Deliver deliver=new Deliver();
-		SendInformation information=receipt.getSendInformation();
+		SendInformation info=receipt.getSendInformation();
 		SendSheetPO po=new SendSheetPO();
 		//
-		SendInformation saveInformation =this.copyInfo(information) ;
+		SendInformation saveInformation =this.copyInfo(info) ;
 		po.setSendInformation(saveInformation);
-		ResultMessage resultMessage=deliver.updateDeliverReceipt(po);
+		ResultMessage resultMessage = deliver.newDeliverInfo(info.getBarId(),
+				"快递员已揽件，预计" + info.getPredictTime() + "天送达" + " " + vo.getMakeTime());
 		System.out.println("Approving...");
 		return resultMessage;
 	}

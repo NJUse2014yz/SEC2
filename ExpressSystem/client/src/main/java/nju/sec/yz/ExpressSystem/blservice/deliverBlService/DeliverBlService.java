@@ -4,10 +4,10 @@ import java.util.List;
 
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.CollectionRecordVO;
+import nju.sec.yz.ExpressSystem.vo.DeliverVO;
 import nju.sec.yz.ExpressSystem.vo.DeliverySheetVO;
 import nju.sec.yz.ExpressSystem.vo.OfficeArriveSheetVO;
 import nju.sec.yz.ExpressSystem.vo.OfficeLoadSheetVO;
-import nju.sec.yz.ExpressSystem.vo.OrderVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiveVO;
 import nju.sec.yz.ExpressSystem.vo.SendSheetVO;
 import nju.sec.yz.ExpressSystem.vo.TransitArriveSheetVO;
@@ -20,8 +20,10 @@ import nju.sec.yz.ExpressSystem.vo.TransitSheetVO;
  * 物流接口
  */
 public interface DeliverBlService {
-	//物流历史轨迹
-	public OrderVO  checkDeliver(String id);
+	/**
+	 * 物流历史轨迹
+	 */
+	public DeliverVO  checkDeliver(String id);
 	
 	/**
 	 * 到达单输入中转单编号获得条形码号列表
@@ -58,7 +60,7 @@ public interface DeliverBlService {
 	
 	public ResultMessage transitCarReceipt(TransitSheetVO vo);
 	
-	//获得营业该厅的收款记录
+	//获得营业厅的收款记录
 	public List<CollectionRecordVO> getCollectionRecords();
 }
 

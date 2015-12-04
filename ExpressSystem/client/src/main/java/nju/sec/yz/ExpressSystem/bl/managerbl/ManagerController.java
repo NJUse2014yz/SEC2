@@ -117,14 +117,11 @@ public class ManagerController implements AgencyBlService,ConstBlService,SalaryB
 
 	@Override
 	public ResultMessage modifyPrice(PriceVO pp){
-		Price price=new Price();
-		ResultMessage message =new ResultMessage(Result.SUCCESS);
-		try {
-			message = price.modifyPrice(pp);
-		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		}
+		Price price = new Price();
+		ResultMessage message = new ResultMessage(Result.SUCCESS);
+
+		message = price.modifyPrice(pp);
+
 		LogTool.setLog("修改价格常量");
 		return message;
 	}

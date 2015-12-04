@@ -14,9 +14,7 @@ import nju.sec.yz.ExpressSystem.vo.OrderVO;
 public class DeliverBlDriver {
 
 	public void drive(DeliverBlService deliverBl_stub) {
-		//
-		OrderVO order = deliverBl_stub.checkDeliver(null);
-		System.out.println("物流状态 ： " + order.getOrderInformation().getDeliveryState());
+		
 
 		//
 		ResultMessage deliverResult = deliverBl_stub.deliverReceipt(null);

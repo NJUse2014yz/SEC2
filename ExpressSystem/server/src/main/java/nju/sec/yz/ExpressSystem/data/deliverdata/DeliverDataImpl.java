@@ -50,12 +50,12 @@ public class DeliverDataImpl extends UnicastRemoteObject implements DeliverDataS
 			return new ResultMessage(Result.FAIL, "系统错误");
 		}
 			
-		String barID=dpo.getId();
+		String barID=dpo.getBarId();
 		
 		List<DeliverPO> deliverPOs = findAll();
 		for (int i = 0; i < deliverPOs.size(); i++) {
 			DeliverPO po = deliverPOs.get(i);
-			String id = po.getId();
+			String id = po.getBarId();
 			if (id.equals(barID)) {
 				deliverPOs.remove(i);
 				deliverPOs.add(dpo);
@@ -78,12 +78,12 @@ public class DeliverDataImpl extends UnicastRemoteObject implements DeliverDataS
 		}
 		List<DeliverPO> deliverPOs = findAll();
 		for (DeliverPO po : deliverPOs) {
-			String id = po.getId();
+			String id = po.getBarId();
 			if (id.equals(barID))
 				return po;
 		}
 		
-		
+		System.out.println("fail");
 		return null;
 	}
 	

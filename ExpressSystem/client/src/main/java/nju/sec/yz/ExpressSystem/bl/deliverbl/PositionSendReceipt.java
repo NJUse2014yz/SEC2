@@ -81,6 +81,8 @@ public class PositionSendReceipt implements ReceiptService{
 	
 	@Override
 	public ResultMessage isValid(ReceiptVO vo) {
+		Deliver deliver=new Deliver();
+		
 		ResultMessage validResult=new ResultMessage(Result.FAIL);
 		DeliverySheetVO receipt=(DeliverySheetVO)vo;
 		DeliveryInformation info=receipt.getDeliveryInformation();
@@ -90,6 +92,9 @@ public class PositionSendReceipt implements ReceiptService{
 			validResult.setMessage("再看看时间是不是输错了~");
 		else if(!ValidHelper.isBarId(barId))
 			validResult.setMessage("亲，咱们的订单号是十位数字哟~");
+		else if(deliver.checkDeliver(barId)==null){
+			validResult.setMessage("亲，系统中不存在订单"+barId);
+		}
 		else
 			validResult.setResult(Result.SUCCESS);
 		return validResult;

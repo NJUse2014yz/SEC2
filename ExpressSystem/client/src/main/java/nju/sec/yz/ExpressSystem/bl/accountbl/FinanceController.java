@@ -51,6 +51,7 @@ public class FinanceController implements FinanceBlSevice{
 	public ResultMessage makePayment(OutVO pro) {
 		Payment receipt=new Payment();
 		ResultMessage messsge=receipt.make(pro);
+		LogTool.setLog("制定付款单");
 		return messsge;
 	}
 
@@ -58,7 +59,6 @@ public class FinanceController implements FinanceBlSevice{
 	public ProfitVO makeCostReceipt() {
 		Finance finance=new Finance();
 		ProfitVO vo=finance.makeCostReceipt();
-		LogTool.setLog("制定付款单");
 		return vo;
 		
 	}

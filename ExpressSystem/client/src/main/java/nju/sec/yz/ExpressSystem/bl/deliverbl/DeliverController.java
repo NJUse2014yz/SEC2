@@ -5,10 +5,10 @@ import java.util.List;
 import nju.sec.yz.ExpressSystem.blservice.deliverBlService.DeliverBlService;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.CollectionRecordVO;
+import nju.sec.yz.ExpressSystem.vo.DeliverVO;
 import nju.sec.yz.ExpressSystem.vo.DeliverySheetVO;
 import nju.sec.yz.ExpressSystem.vo.OfficeArriveSheetVO;
 import nju.sec.yz.ExpressSystem.vo.OfficeLoadSheetVO;
-import nju.sec.yz.ExpressSystem.vo.OrderVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiveVO;
 import nju.sec.yz.ExpressSystem.vo.SendSheetVO;
 import nju.sec.yz.ExpressSystem.vo.TransitArriveSheetVO;
@@ -32,7 +32,7 @@ public class DeliverController implements DeliverBlService{
 	}
 	
 	@Override
-	public OrderVO checkDeliver(String id) {
+	public DeliverVO checkDeliver(String id) {
 		
 		return null;
 	}

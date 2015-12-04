@@ -23,32 +23,47 @@ import nju.sec.yz.ExpressSystem.common.TransitInformation;
 public class DeliverPO implements Serializable{
 	private DeliveryState state;
 	
-	private String id;//标识快递的十位数字条形码号
+	private String barId;//标识快递的十位数字条形码号
 	
 	private List<String> trails;//物流轨迹
 	
 	//填写寄件单以后开始生成PO
 	public DeliverPO(String id){
-		this.id=id;
+		this.barId=id;
 		this.state=DeliveryState.GATHER;
 		this.trails=new ArrayList<>();
 	}
 	
+	public DeliverPO(DeliveryState state, String barId, List<String> trails) {
+		super();
+		this.state = state;
+		this.barId = barId;
+		this.trails.addAll(trails);
+	}
+
 	public void addTrail(String trail){
 		trails.add(trail);
 	}
 	
+	public List<String> getTrails() {
+		return trails;
+	}
+
+	public void setTrails(List<String> trails) {
+		this.trails.addAll(trails);
+	}
+
 	public DeliveryState getState() {
 		return state;
 	}
 	public void setState(DeliveryState state) {
 		this.state = state;
 	}
-	public String getId() {
-		return id;
+	public String getBarId() {
+		return barId;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setBarId(String id) {
+		this.barId = id;
 	}
 	
 }

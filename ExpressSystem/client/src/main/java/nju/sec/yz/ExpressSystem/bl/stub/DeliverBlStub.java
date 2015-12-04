@@ -6,6 +6,7 @@ import nju.sec.yz.ExpressSystem.blservice.deliverBlService.DeliverBlService;
 import nju.sec.yz.ExpressSystem.common.OrderInformation;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.CollectionRecordVO;
+import nju.sec.yz.ExpressSystem.vo.DeliverVO;
 import nju.sec.yz.ExpressSystem.vo.DeliverySheetVO;
 import nju.sec.yz.ExpressSystem.vo.OfficeArriveSheetVO;
 import nju.sec.yz.ExpressSystem.vo.OfficeLoadSheetVO;
@@ -18,11 +19,10 @@ import nju.sec.yz.ExpressSystem.vo.TransitSheetVO;
 
 public class DeliverBlStub implements DeliverBlService{
 	//物流历史轨迹
-	public OrderVO  checkDeliver(String id){
-		OrderVO order=new OrderVO();
-		order.setOrderInformation(new OrderInformation());
+	public DeliverVO  checkDeliver(String id){
 		
-		return order;
+		
+		return null;
 	}
 	//寄件单
 	public ResultMessage deliverReceipt (SendSheetVO vo){

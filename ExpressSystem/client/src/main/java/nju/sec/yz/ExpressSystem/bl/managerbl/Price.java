@@ -27,7 +27,7 @@ public class Price implements PriceService{
 			e.printStackTrace();
 		}
 	}
-	public ResultMessage modifyPrice(PriceVO pv) throws RemoteException {
+	public ResultMessage modifyPrice(PriceVO pv) {
 		ResultMessage message=null;
 		//验证改过之后的vo
 		String validresult=isValid(pv);
@@ -64,26 +64,26 @@ public class Price implements PriceService{
 	 * 快递费
 	 */
 	public double getDeliverPrice() {
-		//todo
-		return 23;
+		PriceVO vo=this.observePrice();
+		return vo.getPriceInformation().getStandard();
 	}
 
 	@Override
 	public double getCarPrice() {
-		// TODO Auto-generated method stub
-		return 2;
+		PriceVO vo=this.observePrice();
+		return vo.getPriceInformation().getPriceForCar();
 	}
 
 	@Override
 	public double getTrainPrice() {
-		// TODO Auto-generated method stub
-		return 0.2;
+		PriceVO vo=this.observePrice();
+		return vo.getPriceInformation().getPriceForTrain();
 	}
 
 	@Override
 	public double getPlanePrice() {
-		// TODO Auto-generated method stub
-		return 20;
+		PriceVO vo=this.observePrice();
+		return vo.getPriceInformation().getPriceForPlane();
 	}
 	
 	private PriceVO changePoToVo(PricePO po) {
