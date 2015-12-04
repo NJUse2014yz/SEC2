@@ -47,6 +47,8 @@ public enum IdType {
 		//中转中心航运编号
 	},MESSAGE("m",5){
 		//消息id
+	},INITIAL("i",3){
+		//期初建帐id
 	};
 	
 	private IdType(String idStr,int length){

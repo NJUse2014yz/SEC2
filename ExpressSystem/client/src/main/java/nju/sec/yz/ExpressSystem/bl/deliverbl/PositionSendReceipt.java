@@ -86,7 +86,7 @@ public class PositionSendReceipt implements ReceiptService{
 		DeliveryInformation info=receipt.getDeliveryInformation();
 		String time=info.getTime();
 		String barId=info.getBarId();
-		if(!ValidHelper.isValidDate(time))
+		if(!ValidHelper.isBeforeDate(time))
 			validResult.setMessage("再看看时间是不是输错了~");
 		else if(!ValidHelper.isBarId(barId))
 			validResult.setMessage("亲，咱们的订单号是十位数字哟~");
@@ -104,14 +104,29 @@ public class PositionSendReceipt implements ReceiptService{
 
 	@Override
 	public ReceiptVO show(ReceiptPO po) {
-		// TODO Auto-generated method stub
-		return null;
+		DeliverySheetPO receipt=(DeliverySheetPO)po;
+		
+		DeliverySheetVO vo=new DeliverySheetVO();
+		vo.setDeliveryInformation(new DeliveryInformation(receipt.getDeliveryInformation()));
+		
+		
+		vo.copy(po);
+		
+		return vo;
 	}
 
 	@Override
 	public ReceiptPO convertToPO(ReceiptVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		DeliverySheetVO receipt=(DeliverySheetVO)vo;
+		
+		DeliverySheetPO po=new DeliverySheetPO();
+		po.setDeliveryInformation(new DeliveryInformation(receipt.getDeliveryInformation()));
+		po.setId(vo.getId());
+		po.setMakePerson(vo.getMakePerson());
+		po.setMakeTime(vo.getMakeTime());
+		po.setType(vo.getType());
+		
+		return po;
 	}
 
 

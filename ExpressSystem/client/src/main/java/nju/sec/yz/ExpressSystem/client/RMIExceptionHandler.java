@@ -22,6 +22,7 @@ public class RMIExceptionHandler {
                 "Fatal Error",
                 JOptionPane.ERROR_MESSAGE
         );
+		System.exit(1);
 	}
 	
 	

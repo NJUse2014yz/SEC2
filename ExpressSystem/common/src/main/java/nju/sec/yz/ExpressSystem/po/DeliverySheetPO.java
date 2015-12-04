@@ -16,7 +16,7 @@ import nju.sec.yz.ExpressSystem.common.DeliveryInformation;
 
 public class DeliverySheetPO extends ReceiptPO{
 	private DeliveryInformation deliveryInformation;
-	private ArrayList<String> barIds;
+	
 	
 	public DeliveryInformation getDeliveryInformation() {
 		return deliveryInformation;
@@ -24,10 +24,5 @@ public class DeliverySheetPO extends ReceiptPO{
 	public void setDeliveryInformation(DeliveryInformation deliveryInformation) {
 		this.deliveryInformation = deliveryInformation;
 	}
-	public ArrayList<String> getBarIds() {
-		return barIds;
-	}
-	public void setBarIds(ArrayList<String> barIds) {
-		this.barIds = barIds;
-	}	
+		
 }

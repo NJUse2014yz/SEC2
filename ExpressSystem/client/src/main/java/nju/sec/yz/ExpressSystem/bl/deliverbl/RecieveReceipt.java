@@ -30,7 +30,7 @@ public class RecieveReceipt {
 		if(!ValidHelper.isBarId(barID))
 			return "亲，咱们的订单号是十位数字哟~";
 
-		if(!ValidHelper.isValidDate(date))
+		if(!ValidHelper.isBeforeDate(date))
 			return "日期是不是输错了~";
 
 		return "success";

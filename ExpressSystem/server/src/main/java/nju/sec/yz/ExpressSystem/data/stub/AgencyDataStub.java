@@ -2,6 +2,7 @@ package nju.sec.yz.ExpressSystem.data.stub;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
 
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.AgencyDataService;
@@ -39,11 +40,7 @@ public class AgencyDataStub implements AgencyDataService{
 		return null;
 	}
 
-	@Override
-	public ResultMessage init() throws RemoteException {
-		// TODO 自动生成的方法存根
-		return null;
-	}
+	
 
 	@Override
 	public ArrayList<TransitPO> findAll() throws RemoteException {
@@ -55,6 +52,12 @@ public class AgencyDataStub implements AgencyDataService{
 
 	@Override
 	public TransitPO findByName(String name) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultMessage init(List<TransitPO> transits) throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -3,6 +3,7 @@ package nju.sec.yz.ExpressSystem.bl.managerbl;
 import java.rmi.RemoteException;
 import java.util.List;
 
+import nju.sec.yz.ExpressSystem.bl.accountbl.Initialable;
 import nju.sec.yz.ExpressSystem.bl.deliverbl.ValidHelper;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
@@ -11,7 +12,7 @@ import nju.sec.yz.ExpressSystem.po.TransitPO;
 import nju.sec.yz.ExpressSystem.vo.PositionVO;
 import nju.sec.yz.ExpressSystem.vo.TransitVO;
 
-public class Position {
+public class Position implements Initialable<PositionVO, PositionPO>{
 
 	/**
 	 * 向所属中转中心中添加营业厅
@@ -102,6 +103,31 @@ public class Position {
 			return false;
 
 		return true;
+	}
+
+	@Override
+	public ResultMessage init(List<PositionVO> vos) {
+		ResultMessage message=new ResultMessage(Result.SUCCESS);
+		for(int i=0;i<vos.size();i++){
+			PositionVO position=vos.get(i);
+			message=this.addPosition(position);
+			if(message.getResult()==Result.FAIL)
+				return new ResultMessage(Result.FAIL,i+" "+message.getMessage());
+		}
+		
+		return message;
+	}
+
+	@Override
+	public PositionVO show(PositionPO po) {
+		PositionVO vo=new PositionVO(po.getName(), po.getId(), po.getTransitId(), po.getLocation());
+		return vo;
+	}
+
+	@Override
+	public PositionPO changeVOToPO(PositionVO vo) {
+		PositionPO po=new PositionPO(vo.name, vo.id, vo.transitId, vo.location);
+		return po;
 	}
 	
 	

@@ -136,7 +136,6 @@ public class AccountBookDataImpl extends UnicastRemoteObject implements AccountB
 			try (ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(file))) {
 				os.writeObject(POs);
 			}
-			System.out.println("success");
 			return new ResultMessage(Result.SUCCESS);
 		} catch (IOException e) {
 			e.printStackTrace();

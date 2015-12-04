@@ -37,7 +37,6 @@ public class User implements UserInfo{
 		}
 	}
 	public ResultMessage login(String id, String password) {
-		// TODO Auto-generated method stub
 		ResultMessage result=new ResultMessage(Result.SUCCESS);
 		if(id.equals("D110")&&password.equals("120"))
 			return result;

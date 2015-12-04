@@ -5,13 +5,13 @@ package nju.sec.yz.ExpressSystem.vo;
  *
  */
 public class PositionVO {
-	private String name;
+	public String name;
 	
-	private String id;
+	public String id;
 	
-	private String transitId;
+	public String transitId;
 	
-	private String location;
+	public String location;
 	
 	
 	public PositionVO(String name, String id, String transitId, String location) {

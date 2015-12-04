@@ -160,7 +160,7 @@ public class TransitLoadingReceipt implements ReceiptService {
 
 		// 验证info
 		LoadInformation info = receipt.getTransitLoadInformation();
-		if (!ValidHelper.isValidDate(info.getTime()))
+		if (!ValidHelper.isBeforeDate(info.getTime()))
 			validResult.setMessage("看看时间是不是输错了~");
 		Car car = new Car();
 		if (!car.isId(info.getCarId()))
