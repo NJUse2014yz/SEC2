@@ -7,7 +7,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 import nju.sec.yz.ExpressSystem.bl.tool.ExcelTool;
@@ -16,7 +15,6 @@ import nju.sec.yz.ExpressSystem.common.OutInformation;
 import nju.sec.yz.ExpressSystem.common.PaymentInformation;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
-import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.vo.BussinessVO;
 import nju.sec.yz.ExpressSystem.vo.OutVO;
 import nju.sec.yz.ExpressSystem.vo.PaymentSheetVO;
@@ -213,25 +211,25 @@ public class Finance {
 		// System.out.println(file.getPath());
 		return file.getPath();
 	}
-	public static void main(String[] args) {
-		Finance finance=new Finance();
-//		in.saveCounter("20151205", "File/cost_count_excel");
-		ProfitVO rv=new ProfitVO(100, 50, 50);
-		finance.exportCostToExcel(rv);
-//		in.saveCounter("201512051", "File/bussiness_count_excel");
-		
-		 BussinessVO bvo=new BussinessVO();
-		 List<PaymentSheetVO> in=new ArrayList<PaymentSheetVO>();
-		 PaymentSheetVO e=new PaymentSheetVO();
-		 e.setPaymentInformation(new PaymentInformation("20151202", 100, "110", "120"));
-		 e.setBarIds("12345615");
-		 in.add(e);
-		List<OutVO> out = new ArrayList<OutVO>();
-		OutVO f=new OutVO("20150214", 0, "110", "120", "几次", "备注");
-		out.add(f);
-		bvo.in=in; 
-		bvo.out=out;
-		finance.exportBussinessToExcel(bvo);
-	}
+//	public static void main(String[] args) {
+//		Finance finance=new Finance();
+////		in.saveCounter("20151205", "File/cost_count_excel");
+//		ProfitVO rv=new ProfitVO(100, 50, 50);
+//		finance.exportCostToExcel(rv);
+////		in.saveCounter("201512051", "File/bussiness_count_excel");
+//		
+//		 BussinessVO bvo=new BussinessVO();
+//		 List<PaymentSheetVO> in=new ArrayList<PaymentSheetVO>();
+//		 PaymentSheetVO e=new PaymentSheetVO();
+//		 e.setPaymentInformation(new PaymentInformation("20151202", 100, "110", "120"));
+//		 e.setBarIds("12345615");
+//		 in.add(e);
+//		List<OutVO> out = new ArrayList<OutVO>();
+//		OutVO f=new OutVO("20150214", 0, "110", "120", "几次", "备注");
+//		out.add(f);
+//		bvo.in=in; 
+//		bvo.out=out;
+//		finance.exportBussinessToExcel(bvo);
+//	}
 
 }
