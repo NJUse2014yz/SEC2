@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import nju.sec.yz.ExpressSystem.bl.tool.ExcelTool;
@@ -15,6 +16,7 @@ import nju.sec.yz.ExpressSystem.common.OutInformation;
 import nju.sec.yz.ExpressSystem.common.PaymentInformation;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.vo.BussinessVO;
 import nju.sec.yz.ExpressSystem.vo.OutVO;
 import nju.sec.yz.ExpressSystem.vo.PaymentSheetVO;
@@ -176,7 +178,7 @@ public class Finance {
 	private String getBVTxtPath(BussinessVO bv) {
 		List<PaymentSheetVO> paylist = bv.in;
 		List<OutVO> outlist=bv.out;
-		int count = Integer.parseInt(getCurrentCounter("bussiness_count_excel")) + 1;
+		int count = Integer.parseInt(getCurrentCounter("File/bussiness_count_excel")) + 1;
 		String[] title1 = {"收款日期 ","收款金额 ","收款人 ","快递条形码号 ","营业厅编号"};
 		String[] title2 = {"付款日期 ","付款金额 ","付款人 ","付款账号 ","条目 ","备注"};
 		File file = new File("File/bussinessFile/" + TimeTool.getDate() + "BussinessSheet" + count);
@@ -190,8 +192,9 @@ public class Finance {
 				PaymentSheetVO invo = paylist.get(i);
 				PaymentInformation ii = invo.getPaymentInformation();
 				fw.write(ii.getTime() + " " + ii.getAmount() + " " + ii.getInDeliverId()
-						+ " " +invo.getId()+" "+ii.getPositionId());
+						+ " " +invo.getBarIds()+" "+ii.getPositionId());
 			}
+			fw.write("\n");
 			for (String str : title2) {
 				fw.write(str);
 			}
@@ -210,4 +213,25 @@ public class Finance {
 		// System.out.println(file.getPath());
 		return file.getPath();
 	}
+	public static void main(String[] args) {
+		Finance finance=new Finance();
+//		in.saveCounter("20151205", "File/cost_count_excel");
+		ProfitVO rv=new ProfitVO(100, 50, 50);
+		finance.exportCostToExcel(rv);
+//		in.saveCounter("201512051", "File/bussiness_count_excel");
+		
+		 BussinessVO bvo=new BussinessVO();
+		 List<PaymentSheetVO> in=new ArrayList<PaymentSheetVO>();
+		 PaymentSheetVO e=new PaymentSheetVO();
+		 e.setPaymentInformation(new PaymentInformation("20151202", 100, "110", "120"));
+		 e.setBarIds("12345615");
+		 in.add(e);
+		List<OutVO> out = new ArrayList<OutVO>();
+		OutVO f=new OutVO("20150214", 0, "110", "120", "几次", "备注");
+		out.add(f);
+		bvo.in=in; 
+		bvo.out=out;
+		finance.exportBussinessToExcel(bvo);
+	}
+
 }

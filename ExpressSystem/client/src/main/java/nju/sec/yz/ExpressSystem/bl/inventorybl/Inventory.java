@@ -252,20 +252,20 @@ public class Inventory implements Initialable<InventoryInSheetVO, InventoryInShe
 		return file.getPath();
 	}
 
-	 public static void main(String[] args) {
-		 Inventory in=new Inventory();
-		 in.readRate();
-	 }
-	// InventoryListVO vo=new InventoryListVO();
-	// InventoryInInformation inventoryInInformation=new
-	// InventoryInInformation("20150202", "南京", 10, 10, 10, 10,"025");
-	// InventoryInSheetVO invo=new InventoryInSheetVO(inventoryInInformation,
-	// "123");
-	// List<InventoryInSheetVO> involist=new ArrayList<InventoryInSheetVO>();
-	// involist.add(invo);
-	// vo.inList=involist;
-	// in.getTxtPath(vo);
-	// }
+//	 public static void main(String[] args) {
+//		 Inventory in=new Inventory();
+//		 in.readRate();
+//
+//	 InventoryListVO vo=new InventoryListVO();
+//	 InventoryInInformation inventoryInInformation=new
+//	 InventoryInInformation("20150202", "南京", 10, 10, 10, 10,"025");
+//	 InventoryInSheetVO invo=new InventoryInSheetVO(inventoryInInformation,
+//	 "123");
+//	 List<InventoryInSheetVO> involist=new ArrayList<InventoryInSheetVO>();
+//	 involist.add(invo);
+//	 vo.inList=involist;
+//	 in.getTxtPath(vo);
+//	 }
 
 	/**
 	 * 获得中转中心编号

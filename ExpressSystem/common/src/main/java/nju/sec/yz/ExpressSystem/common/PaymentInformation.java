@@ -13,6 +13,15 @@ public class PaymentInformation  implements Serializable{
 	private String inDeliverId;
 	private String positionId;
 	
+	public PaymentInformation(String time, double amount, String inDeliverId,
+			String positionId) {
+		super();
+		this.time = time;
+		this.amount = amount;
+		this.inDeliverId = inDeliverId;
+		this.positionId = positionId;
+	}
+	
 	public String getTime() {
 		return time;
 	}
