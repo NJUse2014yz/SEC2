@@ -125,11 +125,11 @@ public class AccountInitialUi extends JPanel{
 	private static final int warningC_w=275;
 	private static final int warningC_h=20;
 	private static final int warningI_x=198;
-	private static final int warningI_y=490;
+	private static final int warningI_y=510;
 	private static final int warningI_w=275;
 	private static final int warningI_h=20;
 	private static final int warningA_x=198;
-	private static final int warningA_y=510;
+	private static final int warningA_y=530;
 	private static final int warningA_w=275;
 	private static final int warningA_h=20;
 	private static final int warning_x=198;
