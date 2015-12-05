@@ -210,6 +210,6 @@ public class ManagerReceiptModify extends JPanel {
 			break;
 		}
 
-		g.drawImage(img01, 0, 0, 490, 550, this);
+//		g.drawImage(img01, 0, 0, 490, 550, this);
 	}
 }
