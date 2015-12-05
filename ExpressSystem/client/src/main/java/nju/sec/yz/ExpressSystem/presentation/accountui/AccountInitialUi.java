@@ -701,6 +701,7 @@ public class AccountInitialUi extends JPanel{
 			}
 		});
 		add(confirm);
+		repaint();
 		
 		setVisible(true);
 	}
