@@ -40,7 +40,7 @@ import nju.sec.yz.ExpressSystem.vo.InventoryOutSheetVO;
  */
 public class Inventory implements Initialable<InventoryInSheetVO, InventoryInSheetPO> {
 
-	//TODO 库存调整
+	
 	
 	private InventoryDataService data;
 	private double rate;

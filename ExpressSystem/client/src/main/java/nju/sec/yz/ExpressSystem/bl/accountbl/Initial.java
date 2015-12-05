@@ -44,9 +44,6 @@ public class Initial {
 	//中转中心
 	private List<TransitVO> transits;
 
-	//营业厅
-	private List<PositionVO> positions;
-
 	//人员
 	private List<StaffVO> staffs;
 
@@ -69,7 +66,6 @@ public class Initial {
 			e.printStackTrace();
 		}
 		transits = new ArrayList<>();
-		positions = new ArrayList<>();
 		staffs = new ArrayList<>();
 		cars = new ArrayList<>();
 		accounts = new ArrayList<>();
@@ -80,6 +76,7 @@ public class Initial {
 		staffs.addAll(vo);
 		Initialable<StaffVO, StaffPO> staffService = new Staff();
 		ResultMessage message = staffService.init(vo);
+		System.out.println(message.getMessage());
 		return message;
 	}
 
@@ -87,6 +84,7 @@ public class Initial {
 		transits.addAll(vo);
 		Initialable<TransitVO, TransitPO> transitService = new Transit();
 		ResultMessage message = transitService.init(vo);
+		System.out.println(message.getMessage());
 		return message;
 	}
 
@@ -95,6 +93,7 @@ public class Initial {
 		cars.addAll(vo);
 		Initialable<CarVO, CarPO> car = new Car();
 		ResultMessage message = car.init(cars);
+		System.out.println(message.getMessage());
 		return message;
 	}
 
@@ -108,6 +107,7 @@ public class Initial {
 		inventories.addAll(vo);
 		Initialable<InventoryInSheetVO, InventoryInSheetPO> inventory = new Inventory();
 		ResultMessage message = inventory.init(vo);
+		System.out.println(message.getMessage());
 		return message;
 	}
 
