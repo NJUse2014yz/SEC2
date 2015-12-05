@@ -18,6 +18,8 @@ import javax.swing.JTable;
 
 import nju.sec.yz.ExpressSystem.bl.accountbl.FinanceController;
 import nju.sec.yz.ExpressSystem.blservice.accountBlService.FinanceBlSevice;
+import nju.sec.yz.ExpressSystem.common.Result;
+import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.presentation.DateChooser;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.AccountControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
@@ -30,6 +32,7 @@ public class AccountOperateTableUi extends JPanel{
 	private ClientControler mainControler;
 	private AccountControler controler;
 	private FinanceBlSevice financeBl;
+	private BussinessVO bussinessvo;
 	
 	private DateChooser begin;
 	private DateChooser end;
@@ -110,7 +113,7 @@ public class AccountOperateTableUi extends JPanel{
 		confirm.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
 			{
-				BussinessVO bussinessvo=financeBl.checkBusinessCircumstance(begin.getTime(), end.getTime());
+				bussinessvo=financeBl.checkBusinessCircumstance(begin.getTime(), end.getTime());
 				if(bussinessvo!=null){
 					warning.setVisible(false);
 					remove(inScroll);
@@ -168,7 +171,11 @@ public class AccountOperateTableUi extends JPanel{
 		excle.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
 			{
-//				exportCostToExcel();
+				ResultMessage result=financeBl.exportBussinessToExcel(bussinessvo);
+				if(result.getResult()==Result.SUCCESS)
+				{
+					warning.setText("导出成功");
+				}
 			}
 		});
 		add(excle);

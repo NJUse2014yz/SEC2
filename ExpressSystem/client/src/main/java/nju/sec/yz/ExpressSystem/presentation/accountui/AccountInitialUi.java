@@ -409,6 +409,11 @@ public class AccountInitialUi extends JPanel{
 			{
 				ResultMessage result;
 				warningT.setVisible(false);
+				warningS.setVisible(false);
+				warningC.setVisible(false);
+				warningI.setVisible(false);
+				warningA.setVisible(false);
+				warning.setVisible(false);
 				
 				List<PositionVO> pvl=new ArrayList<PositionVO>();
 				for(int i=0;i<tableP.getRowCount();i++)
@@ -490,6 +495,7 @@ public class AccountInitialUi extends JPanel{
 						}
 //					}
 					warningT.setVisible(true);
+					repaint();
 				}
 				
 				if(!S)
@@ -561,6 +567,7 @@ public class AccountInitialUi extends JPanel{
 						}
 //					}
 					warningS.setVisible(true);
+					repaint();
 				}
 				
 				if(!C)
@@ -600,12 +607,13 @@ public class AccountInitialUi extends JPanel{
 						}
 //					}
 					warningC.setVisible(true);
+					repaint();
 				}
 				
 				if(!I)
 				{
 					List<InventoryInSheetVO> iisvl=new ArrayList<InventoryInSheetVO>();
-					for(int i=0;i<tableA.getRowCount();i++)
+					for(int i=0;i<tableI.getRowCount();i++)
 					{
 						String a=tableI.getModel().getValueAt(i,2).toString();
 						String b=tableI.getModel().getValueAt(i,3).toString();
@@ -643,6 +651,7 @@ public class AccountInitialUi extends JPanel{
 						}
 //					}
 					warningI.setVisible(true);
+					repaint();
 				}
 				if(!A)
 				{
@@ -678,6 +687,7 @@ public class AccountInitialUi extends JPanel{
 						}
 					}
 					warningA.setVisible(true);
+					repaint();
 //				}
 //				if(P&&T&&S&&C&&A&&I)
 				if(T&&S&&C&&A&&I)
@@ -697,11 +707,12 @@ public class AccountInitialUi extends JPanel{
 						warning.setText(result.getMessage());
 					}
 					warning.setVisible(true);
+					repaint();
 				}
 			}
 		});
 		add(confirm);
-		repaint();
+
 		
 		setVisible(true);
 	}
