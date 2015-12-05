@@ -26,15 +26,15 @@ public class ManagerReceiptModify extends JPanel {
 		this.maincontroler = maincontroler;
 		this.mbc = mbc;
 		this.vo = vo;
-		this.type=type;
+		this.type = type;
 		mbc.changePanel(this);
 		mbc.change();
 		iniManagerReceiptModify();
-//		setLayout(null);
-//		setSize(490, 550);
-//		setVisible(true);
-//
-//		OrderIn orderIn=new OrderIn(this);
+		// setLayout(null);
+		// setSize(490, 550);
+		// setVisible(true);
+		//
+		// OrderIn orderIn=new OrderIn(this);
 		System.out.println("GGGGGGGGGGGGGGG");
 	}
 
@@ -42,7 +42,6 @@ public class ManagerReceiptModify extends JPanel {
 		setLayout(null);
 		setSize(490, 550);
 		setVisible(true);
-		
 
 		switch (type) {
 		case "收款单":
@@ -103,8 +102,8 @@ public class ManagerReceiptModify extends JPanel {
 	// 寄件单
 	private void iniDelReip() {
 		// TODO Auto-generated method stub
-     OrderIn orderIn=new OrderIn(this);
-     System.out.println("LLLLLLLLLLLLL");
+		OrderIn orderIn = new OrderIn(this);
+		System.out.println("LLLLLLLLLLLLL");
 	}
 
 	// 营业厅装车单
@@ -166,12 +165,51 @@ public class ManagerReceiptModify extends JPanel {
 		// TODO Auto-generated method stub
 
 	}
+
 	@Override
 	public void paintComponent(Graphics g) {
-
-		Image img01 = new ImageIcon("graphic/manager/background/background17.png").getImage();
+		switch (type) {
+		case "收款单":
+			iniCollection();
+			break;
+		case "付款单":
+			iniPayment();
+			break;
+		case "寄件单":
+			Image img01 = new ImageIcon("graphic/deliver/background/background02.png").getImage();
+			break;
+		case "营业厅装车单":
+			iniPosLoad();
+			break;
+		case "营业厅收件单":
+			iniPosReseive();
+			break;
+		case "营业厅派送单":
+			iniPosSend();
+			break;
+		case "汽车中转单":
+			iniTransCar();
+			break;
+		case "火车中转单":
+			iniTransTrain();
+			break;
+		case "飞机中转单":
+			iniTranFlight();
+			break;
+		case "中转中心接收单":
+			iniTransReceive();
+			break;
+		case "中转中心装车单":
+			iniTransLoad();
+			break;
+		case "入库单":
+			iniInvenIn();
+			break;
+		case "出库单":
+			iniInvenOut();
+			break;
+		}
 
 		g.drawImage(img01, 0, 0, 490, 550, this);
-		System.out.println("KKKKKKKKKKKKKKKKKKK");
 	}
 }
