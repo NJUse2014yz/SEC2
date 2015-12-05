@@ -1,8 +1,10 @@
 package nju.sec.yz.ExpressSystem.bl.inventorybl;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -12,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nju.sec.yz.ExpressSystem.bl.accountbl.Initialable;
+import nju.sec.yz.ExpressSystem.bl.deliverbl.ValidHelper;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
 import nju.sec.yz.ExpressSystem.bl.tool.ExcelTool;
 import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
@@ -62,6 +65,7 @@ public class Inventory implements Initialable<InventoryInSheetVO, InventoryInShe
 	public Inventory() {
 		try {
 			data = DatafactoryProxy.getInventoryDataService();
+			rate=readRate();
 		} catch (RemoteException e) {
 			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
@@ -144,7 +148,38 @@ public class Inventory implements Initialable<InventoryInSheetVO, InventoryInShe
 		if (rate > 1.0 || rate < 0.0)
 			return new ResultMessage(Result.FAIL, "库存警戒值输入错误，为0-1");
 		setRate(rate);
+		saveRate(rate);
 		return new ResultMessage(Result.SUCCESS);
+	}
+	
+	private double readRate(){
+		File file=new File("File/rate");
+		double result=0.9;
+		try {
+			BufferedReader reader=new BufferedReader(new FileReader(file));
+			String rate =reader.readLine();
+			if(ValidHelper.isDouble(rate))
+				result=Double.parseDouble(rate);
+			reader.close();
+		} catch (IOException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+		System.out.println(result);
+		return result;	
+
+	}
+	
+	private void saveRate(double rate){
+		File file=new File("File/rate");
+		try {
+			FileWriter fw = new FileWriter(file);
+			fw.write(rate+"");
+			fw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	/**
@@ -217,8 +252,10 @@ public class Inventory implements Initialable<InventoryInSheetVO, InventoryInShe
 		return file.getPath();
 	}
 
-	// public static void main(String[] args) {
-	// Inventory in=new Inventory();
+	 public static void main(String[] args) {
+		 Inventory in=new Inventory();
+		 in.readRate();
+	 }
 	// InventoryListVO vo=new InventoryListVO();
 	// InventoryInInformation inventoryInInformation=new
 	// InventoryInInformation("20150202", "南京", 10, 10, 10, 10,"025");
@@ -239,7 +276,7 @@ public class Inventory implements Initialable<InventoryInSheetVO, InventoryInShe
 		UserInfo user = new User();
 		String userid = user.getCurrentID();
 		String strs[] = userid.split("A");
-		String transit = strs[1];
+		String transit = strs[0];
 		return transit;
 	}
 
