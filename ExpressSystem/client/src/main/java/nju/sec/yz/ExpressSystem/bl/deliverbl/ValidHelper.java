@@ -130,4 +130,20 @@ public class ValidHelper {
 			return true;
 		return false;
 	}
+	
+	/**
+	 * 判断是否为小数
+	 * @param rate
+	 * @return
+	 */
+	public static boolean isDouble(String rate) {
+		if(!rate.contains("."))
+			return false;
+		String[] strs=rate.split("\\.");
+		if(!isNumber(strs[0]))
+			return false;
+		if(!isNumber(strs[1]))
+			return false;
+		return true;
+	}
 }
