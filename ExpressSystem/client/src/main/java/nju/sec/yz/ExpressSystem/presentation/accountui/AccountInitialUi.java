@@ -74,6 +74,11 @@ public class AccountInitialUi extends JPanel{
 	private JScrollPane scrollI;
 	
 	private JButton confirm;
+	private JLabel warningT;
+	private JLabel warningS;
+	private JLabel warningC;
+	private JLabel warningA;
+	private JLabel warningI;
 	private JLabel warning;
 	private String[] power=new String[]{"总经理","高级财务人员","低级财务人员","中转中心业务员","中转中心仓库管理人员","营业厅业务员","快递员","管理员"};
 	private String[] nameT=new String[]{"名称","编号","所在地"};
@@ -107,10 +112,30 @@ public class AccountInitialUi extends JPanel{
 	private static final int confirm_y=435;
 	private static final int confirm_w=72;
 	private static final int confirm_h=24;
+	private static final int warningT_x=198;
+	private static final int warningT_y=450;
+	private static final int warningT_w=275;
+	private static final int warningT_h=20;
+	private static final int warningS_x=198;
+	private static final int warningS_y=470;
+	private static final int warningS_w=275;
+	private static final int warningS_h=20;
+	private static final int warningC_x=198;
+	private static final int warningC_y=490;
+	private static final int warningC_w=275;
+	private static final int warningC_h=20;
+	private static final int warningI_x=198;
+	private static final int warningI_y=490;
+	private static final int warningI_w=275;
+	private static final int warningI_h=20;
+	private static final int warningA_x=198;
+	private static final int warningA_y=510;
+	private static final int warningA_w=275;
+	private static final int warningA_h=20;
 	private static final int warning_x=198;
 	private static final int warning_y=490;
 	private static final int warning_w=275;
-	private static final int warning_h=30;
+	private static final int warning_h=20;
 	private static final int button_x=170;
 	private static final int button_y=50;
 	private static final int button_w=45;
@@ -335,6 +360,41 @@ public class AccountInitialUi extends JPanel{
 		scrollI.setVisible(false);
 		add(scrollI);
 		
+		warningT=new JLabel();
+		warningT.setBounds(warningT_x, warningT_y, warningT_w, warningT_h);
+		warningT.setFont(new Font("Dialog", 1, 15));
+		warningT.setForeground(Color.red);
+		add(warningT);
+		warningT.setVisible(false);
+		
+		warningS=new JLabel();
+		warningS.setBounds(warningS_x, warningS_y, warningS_w, warningS_h);
+		warningS.setFont(new Font("Dialog", 1, 15));
+		warningS.setForeground(Color.red);
+		add(warningS);
+		warningS.setVisible(false);
+		
+		warningC=new JLabel();
+		warningC.setBounds(warningC_x, warningC_y, warningC_w, warningC_h);
+		warningC.setFont(new Font("Dialog", 1, 15));
+		warningC.setForeground(Color.red);
+		add(warningC);
+		warningC.setVisible(false);
+		
+		warningI=new JLabel();
+		warningI.setBounds(warningI_x, warningI_y, warningI_w, warningI_h);
+		warningI.setFont(new Font("Dialog", 1, 15));
+		warningI.setForeground(Color.red);
+		add(warningI);
+		warningI.setVisible(false);
+		
+		warningA=new JLabel();
+		warningA.setBounds(warningA_x, warningA_y, warningA_w, warningA_h);
+		warningA.setFont(new Font("Dialog", 1, 15));
+		warningA.setForeground(Color.red);
+		add(warningA);
+		warningA.setVisible(false);
+		
 		warning=new JLabel();
 		warning.setBounds(warning_x, warning_y, warning_w, warning_h);
 		warning.setFont(new Font("Dialog", 1, 15));
@@ -348,7 +408,7 @@ public class AccountInitialUi extends JPanel{
 			public void mouseClicked(MouseEvent e)
 			{
 				ResultMessage result;
-				warning.setVisible(false);
+				warningT.setVisible(false);
 				
 				List<PositionVO> pvl=new ArrayList<PositionVO>();
 				for(int i=0;i<tableP.getRowCount();i++)
@@ -362,7 +422,7 @@ public class AccountInitialUi extends JPanel{
 						pvl.add(pv);
 					}
 				}
-				if(!P)
+				/*if(!P)
 				{
 //					if(pvl.isEmpty())
 //					{
@@ -384,9 +444,10 @@ public class AccountInitialUi extends JPanel{
 						}
 //					}
 					warning.setVisible(true);
-				}
+				}*/
 				
-				if(P&&!T)
+//				if(P&&!T)
+				if(!T)
 				{
 					List<TransitVO> tvl=new ArrayList<TransitVO>();
 					for(int i=0;i<tableT.getRowCount();i++)
@@ -420,15 +481,15 @@ public class AccountInitialUi extends JPanel{
 							remove(scrollT);
 		//					scrollP.setVisible(false);
 							buttonAG.setVisible(false);
-							warning.setText("中转中心初始化成功");
+							warningT.setText("中转中心初始化成功");
 							T=true;
 						}
 						else
 						{
-							warning.setText(result.getMessage());
+							warningT.setText(result.getMessage());
 						}
 //					}
-					warning.setVisible(true);
+					warningT.setVisible(true);
 				}
 				
 				if(!S)
@@ -491,15 +552,15 @@ public class AccountInitialUi extends JPanel{
 							remove(scrollS);
 		//					scrollS.setVisible(false);
 							buttonS.setVisible(false);
-							warning.setText("人员初始化成功");
+							warningS.setText("人员初始化成功");
 							S=true;
 						}
 						else
 						{
-							warning.setText(result.getMessage());
+							warningS.setText(result.getMessage());
 						}
 //					}
-					warning.setVisible(true);
+					warningS.setVisible(true);
 				}
 				
 				if(!C)
@@ -530,15 +591,15 @@ public class AccountInitialUi extends JPanel{
 							remove(scrollC);
 		//					scrollC.setVisible(false);
 							buttonC.setVisible(false);
-							warning.setText("车辆初始化成功");
+							warningC.setText("车辆初始化成功");
 							C=true;
 						}
 						else
 						{
-							warning.setText(result.getMessage());
+							warningC.setText(result.getMessage());
 						}
 //					}
-					warning.setVisible(true);
+					warningC.setVisible(true);
 				}
 				
 				if(!I)
@@ -573,15 +634,15 @@ public class AccountInitialUi extends JPanel{
 							remove(scrollI);
 		//					scrollI.setVisible(false);
 							buttonI.setVisible(false);
-							warning.setText("库存初始化成功");
+							warningI.setText("库存初始化成功");
 							I=true;
 						}
 						else
 						{
-							warning.setText(result.getMessage());
+							warningI.setText(result.getMessage());
 						}
 //					}
-					warning.setVisible(true);
+					warningI.setVisible(true);
 				}
 				if(!A)
 				{
@@ -608,17 +669,18 @@ public class AccountInitialUi extends JPanel{
 							remove(scrollA);
 		//					scrollA.setVisible(false);
 							buttonA.setVisible(false);
-							warning.setText("账户初始化成功");
+							warningA.setText("账户初始化成功");
 							A=true;
 						}
 						else
 						{
-							warning.setText(result.getMessage());
+							warningA.setText(result.getMessage());
 						}
 					}
-					warning.setVisible(true);
+					warningA.setVisible(true);
 //				}
-				if(P&&T&&S&&C&&A&&I)
+//				if(P&&T&&S&&C&&A&&I)
+				if(T&&S&&C&&A&&I)
 				{
 					result=initialBl.finish();
 					if(result.getResult()==Result.SUCCESS)

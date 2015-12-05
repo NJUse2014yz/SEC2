@@ -8,6 +8,7 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -29,6 +30,7 @@ import nju.sec.yz.ExpressSystem.common.SendInformation;
 import nju.sec.yz.ExpressSystem.common.ToAndFromInformation;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.MAIN_CONTROL;
+import nju.sec.yz.ExpressSystem.vo.DeliverVO;
 import nju.sec.yz.ExpressSystem.vo.OrderVO;
 
 public class UserOrderSearchUi extends JPanel {
@@ -45,7 +47,7 @@ public class UserOrderSearchUi extends JPanel {
 		private JLabel leaveButton;
 		
 		private String id;
-		private OrderVO ordervo;
+		private DeliverVO ordervo;
 		
 		ImageIcon ExitIcon = new ImageIcon("graphic/common/exit.gif");
 		
@@ -70,7 +72,7 @@ public class UserOrderSearchUi extends JPanel {
 
 			confirmButton.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
-					OrderVO ordervo=deliver.checkDeliver(searchnumber.getText());
+					DeliverVO ordervo=deliver.checkDeliver(searchnumber.getText());
 					
 					
 //					快递单号填写错误的情况如何考虑
@@ -131,41 +133,47 @@ public class UserOrderSearchUi extends JPanel {
 
 		}
 		private void showtable(){
-			OrderInformation orderInformation=ordervo.getOrderInformation();
-			SendInformation sendIn=orderInformation.getSendInformation();
-			ToAndFromInformation fromPerson=sendIn.getFromPerson();
-			ToAndFromInformation toPerson=sendIn.getToPerson();
-			GoodInformation good=sendIn.getGood();
+			List<String> trails=ordervo.trails;
+//			SendInformation sendIn=orderInformation.getSendInformation();
+//			ToAndFromInformation fromPerson=sendIn.getFromPerson();
+//			ToAndFromInformation toPerson=sendIn.getToPerson();
+//			GoodInformation good=sendIn.getGood();
 			JTable table;  
-			   Object[][] tableData =   
-			    {  {sendIn.getBarId()},
-			    		{fromPerson.getName()},
-			    		{fromPerson.getAddress()},
-			    		{fromPerson.getCity()},
-			    		{fromPerson.getOrg()},
-			    		{fromPerson.getTelephone()},
-			    		{fromPerson.getCellphone()},
-			    		{toPerson.getName()},
-			    		{toPerson.getAddress()},
-			    		{toPerson.getCity()},
-			    		{toPerson.getOrg()},
-			    		{toPerson.getTelephone()},
-			    		{toPerson.getCellphone()},
-			    		{good.getTotal()},
-			    		{good.getWeight()},
-			    		{good.getVloume()},
-			    		{good.getName()},
-			    		{good.getSize()}	
+//			   Object[][] tableData =   
+//			    { 	{sendIn.getBarId()},
+//			    		{fromPerson.getName()},
+//			    		{fromPerson.getAddress()},
+//			    		{fromPerson.getCity()},
+//			    		{fromPerson.getOrg()},
+//			    		{fromPerson.getTelephone()},
+//			    		{fromPerson.getCellphone()},
+//			    		{toPerson.getName()},
+//			    		{toPerson.getAddress()},
+//			    		{toPerson.getCity()},
+//			    		{toPerson.getOrg()},
+//			    		{toPerson.getTelephone()},
+//			    		{toPerson.getCellphone()},
+//			    		{good.getTotal()},
+//			    		{good.getWeight()},
+//			    		{good.getVloume()},
+//			    		{good.getName()},
+//			    		{good.getSize()}	
 			       
-			   };  
-		    Object[] columnTitle = {"订单条形码号",
-		    		"寄件人姓名" , "寄件地址" , "寄件城市",
-		    		"寄件单位","寄件人电话","寄件人手机号",
-		    		"收件人姓名","收件地址","收件城市",
-		    		"收件单位","收件人电话","收件人手机号",
-		    		"件数","重量","体积",
-		    		"品名","尺寸"
-		    		};  
+//			   }; 
+			String[][] tableData=new String[trails.size()][1];
+			for(int i=0;i<trails.size();i++)
+			{
+				tableData[i][0]=trails.get(i);
+			}
+//		    Object[] columnTitle = {"订单条形码号",
+//		    		"寄件人姓名" , "寄件地址" , "寄件城市",
+//		    		"寄件单位","寄件人电话","寄件人手机号",
+//		    		"收件人姓名","收件地址","收件城市",
+//		    		"收件单位","收件人电话","收件人手机号",
+//		    		"件数","重量","体积",
+//		    		"品名","尺寸"
+//		    		};  
+			String[] columnTitle={"物流轨迹"};
 			      //以二维数组和一维数组来创建一个JTable对象  
 			      table = new JTable(tableData , columnTitle);  
 			      //将JTable对象放在JScrollPane中，并将该JScrollPane放在窗口中显示出来  
