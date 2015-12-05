@@ -14,6 +14,8 @@ import javax.swing.JPanel;
 
 import nju.sec.yz.ExpressSystem.bl.accountbl.FinanceController;
 import nju.sec.yz.ExpressSystem.blservice.accountBlService.FinanceBlSevice;
+import nju.sec.yz.ExpressSystem.common.Result;
+import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.AccountControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.ProfitVO;
@@ -28,6 +30,7 @@ public class AccountCostTableUi extends JPanel{
 	private JLabel out;
 	private JLabel get;
 	private JButton excle;
+	private JLabel warning;
 	
 	private static final int x=189;
 	private static final int in_y=75;
@@ -39,6 +42,10 @@ public class AccountCostTableUi extends JPanel{
 	private static final int excle_y=169;
 	private static final int excle_w=79;
 	private static final int excle_h=24;
+	private static final int warning_x=198;
+	private static final int warning_y=490;
+	private static final int warning_w=275;
+	private static final int warning_h=30;
 	
 	private ImageIcon excleIcon=new ImageIcon("graphic/account/button/excle_button.jpg");
 	public AccountCostTableUi(ClientControler mainControler,AccountButtonComponents bc){
@@ -77,6 +84,13 @@ public class AccountCostTableUi extends JPanel{
 		excle.setBounds(excle_x, excle_y, excle_w, excle_h);
 		add(excle);
 		
+		warning=new JLabel();
+		warning.setBounds(warning_x, warning_y, warning_w, warning_h);
+		warning.setFont(new Font("Dialog", 1, 15));
+		warning.setForeground(Color.red);
+		add(warning);
+		warning.setVisible(false);
+		
 		ProfitVO pvo=financeBl.makeCostReceipt();
 		if(pvo!=null){
 			in.setText(Double.toString(pvo.in));
@@ -85,7 +99,17 @@ public class AccountCostTableUi extends JPanel{
 			excle.addMouseListener(new MouseAdapter(){
 				public void mouseClicked(MouseEvent e)
 				{
-//					financeBl.exportCostToExcel();
+					ResultMessage result=financeBl.exportCostToExcel(pvo);
+					if(result.getResult()==Result.SUCCESS)
+					{
+						warning.setText("导出成功");
+					}
+					else
+					{
+						warning.setText(result.getMessage());
+					}
+					warning.setVisible(true);
+					repaint();
 				}
 			});
 		

@@ -176,6 +176,12 @@ public class AccountOperateTableUi extends JPanel{
 				{
 					warning.setText("导出成功");
 				}
+				else
+				{
+					warning.setText(result.getMessage());
+				}
+				warning.setVisible(true);
+				repaint();
 			}
 		});
 		add(excle);
