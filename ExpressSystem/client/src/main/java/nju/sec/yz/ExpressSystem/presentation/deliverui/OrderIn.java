@@ -2,8 +2,6 @@ package nju.sec.yz.ExpressSystem.presentation.deliverui;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -13,10 +11,8 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 
 import nju.sec.yz.ExpressSystem.bl.deliverbl.DeliverController;
-import nju.sec.yz.ExpressSystem.bl.deliverbl.DeliverReceipt;
 import nju.sec.yz.ExpressSystem.blservice.deliverBlService.DeliverBlService;
 import nju.sec.yz.ExpressSystem.common.DeliveryType;
 import nju.sec.yz.ExpressSystem.common.GoodInformation;
@@ -25,11 +21,9 @@ import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.SendInformation;
 import nju.sec.yz.ExpressSystem.common.ToAndFromInformation;
-import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
-import nju.sec.yz.ExpressSystem.presentation.controlerui.MAIN_CONTROL;
 import nju.sec.yz.ExpressSystem.vo.SendSheetVO;
 
-public class DeliverOrderInUi extends JPanel {
+public class OrderIn {
 
 	DeliverBlService deliverBlService = new DeliverController();
 
@@ -69,27 +63,17 @@ public class DeliverOrderInUi extends JPanel {
 	// 提示信息
 	private JLabel warning = new JLabel();
 
-	public DeliverOrderInUi(ClientControler controler) {
-
-		initDeliverOrderIn();
-		// 侧边栏功能选择项、退出系统、退出当前帐户
-		DeliverButtonComponents bc = new DeliverButtonComponents(controler, this);
-
-	}
-
-	public void initDeliverOrderIn() {
-		setLayout(null);
-		setSize(490, 550);
-		setVisible(true);
-
+	public OrderIn(JPanel panel) {
+		// TODO Auto-generated constructor stub
+		
 		/*
 		 * 确定
 		 */
 		ImageIcon cinfirmIcon = new ImageIcon("graphic/deliver/button/confirm.png");
 		confirmButton = new JButton(cinfirmIcon);
 		confirmButton.setBounds(378, 456, 76, 27);
-		add(confirmButton);
-		setVisible(true);
+		panel.add(confirmButton);
+		panel.setVisible(true);
 
 		confirmButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -105,8 +89,8 @@ public class DeliverOrderInUi extends JPanel {
 					warning.setFont(new Font("Dialog", 1, 15));
 					warning.setForeground(Color.red);
 					warning.setVisible(true);
-					add(warning);
-					repaint();
+					panel.add(warning);
+					panel.repaint();
 				} else {
 					// translate data
 					SendSheetVO sendsheet = new SendSheetVO();
@@ -130,8 +114,8 @@ public class DeliverOrderInUi extends JPanel {
 						warning.setBounds(138, 490, 463 - 138, 30);
 						warning.setFont(new Font("Dialog", 1, 15));
 						warning.setForeground(Color.red);
-						add(warning);
-						repaint();
+						panel.add(warning);
+						panel.repaint();
 					} else {
 						// 提交成功
 						warning.setText("提交成功");
@@ -139,7 +123,7 @@ public class DeliverOrderInUi extends JPanel {
 						warning.setFont(new Font("Dialog", 1, 15));
 						warning.setForeground(Color.red);
 						warning.setVisible(true);
-						add(warning);
+						panel.add(warning);
 
 						String temp = result.getMessage();
 
@@ -152,7 +136,7 @@ public class DeliverOrderInUi extends JPanel {
 						predictTime.setForeground(Color.GRAY);
 						predictTime.setFont(new Font("Dialog", 0, 18));
 						predictTime.setVisible(true);
-						add(predictTime);
+						panel.add(predictTime);
 
 						JLabel costForAll = new JLabel();
 						costForAll.setText(Double.toString(cost) + "元");
@@ -160,9 +144,9 @@ public class DeliverOrderInUi extends JPanel {
 						costForAll.setForeground(Color.GRAY);
 						costForAll.setFont(new Font("Dialog", 0, 18));
 						costForAll.setVisible(true);
-						add(costForAll);
+						panel.add(costForAll);
 
-						repaint();
+						panel.repaint();
 					}
 				}
 			}
@@ -174,85 +158,85 @@ public class DeliverOrderInUi extends JPanel {
 
 		nameSender = new JTextField();
 		nameSender.setBounds(185, 87, 58, 15);
-		add(nameSender);
+		panel.add(nameSender);
 
 		addressSender = new JTextField();
 		addressSender.setBounds(295, 87, 116, 15);
-		add(addressSender);
+		panel.add(addressSender);
 
 		organizaionSender = new JTextField();
 		organizaionSender.setBounds(185, 113, 85, 15);
-		add(organizaionSender);
+		panel.add(organizaionSender);
 
 		telephoneSender = new JTextField();
 		telephoneSender.setBounds(319, 113, 140, 15);
-		add(telephoneSender);
+		panel.add(telephoneSender);
 
 		cellphoneSender = new JTextField();
 		cellphoneSender.setBounds(185, 140, 140, 15);
-		add(cellphoneSender);
+		panel.add(cellphoneSender);
 
 		citySender = new JTextField();
 		citySender.setBounds(389, 140, 70, 15);
-		add(citySender);
+		panel.add(citySender);
 
 		nameConsignee = new JTextField();
 		nameConsignee.setBounds(185, 198, 58, 15);
-		add(nameConsignee);
+		panel.add(nameConsignee);
 
 		addressConsignee = new JTextField();
 		addressConsignee.setBounds(295, 198, 116, 15);
-		add(addressConsignee);
+		panel.add(addressConsignee);
 
 		organizaionConsignee = new JTextField();
 		organizaionConsignee.setBounds(185, 224, 85, 15);
-		add(organizaionConsignee);
+		panel.add(organizaionConsignee);
 
 		telephoneConsignee = new JTextField();
 		telephoneConsignee.setBounds(319, 224, 140, 15);
-		add(telephoneConsignee);
+		panel.add(telephoneConsignee);
 
 		cellphoneConsignee = new JTextField();
 		cellphoneConsignee.setBounds(185, 249, 140, 15);
-		add(cellphoneConsignee);
+		panel.add(cellphoneConsignee);
 
 		cityConsignee = new JTextField();
 		cityConsignee.setBounds(389, 249, 70, 15);
-		add(cityConsignee);
+		panel.add(cityConsignee);
 
 		totalGood = new JTextField();
 		totalGood.setBounds(185, 279, 58, 15);
-		add(totalGood);
+		panel.add(totalGood);
 
 		weightGood = new JTextField();
 		weightGood.setBounds(330, 279, 58, 15);
-		add(weightGood);
+		panel.add(weightGood);
 
 		vloumeGood = new JTextField();
 		vloumeGood.setBounds(185, 303, 58, 15);
-		add(vloumeGood);
+		panel.add(vloumeGood);
 
 		nameGood = new JTextField();
 		nameGood.setBounds(332, 303, 58, 15);
-		add(nameGood);
+		panel.add(nameGood);
 
 		sizeGood = new JTextField();
 		sizeGood.setBounds(185, 327, 85, 15);
-		add(sizeGood);
+		panel.add(sizeGood);
 
 		barId = new JTextField();
 		barId.setBounds(252, 354, 140, 15);
-		add(barId);
+		panel.add(barId);
 
 		String[] pack={"纸箱","木箱","快递袋","其它"};
 		packType = new JComboBox(pack);
 		packType.setBounds(198, 378, 85, 20);
-		add(packType);
+		panel.add(packType);
 
 		String[] delivery={"经济快递","标准快递","特快"};
 		deliveryType = new JComboBox(delivery);
 		deliveryType.setBounds(225, 407, 85, 20);
-		add(deliveryType);
+		panel.add(deliveryType);
 	}
 
 	public static PackType getpackType(JComboBox packType){
@@ -284,14 +268,4 @@ public class DeliverOrderInUi extends JPanel {
 
 		}
 	}
-
-	@Override
-	public void paintComponent(Graphics g) {
-
-		Image img01 = new ImageIcon("graphic/deliver/background/background02.png").getImage();
-
-		g.drawImage(img01, 0, 0, 490, 550, null);
-
-	}
-
 }
