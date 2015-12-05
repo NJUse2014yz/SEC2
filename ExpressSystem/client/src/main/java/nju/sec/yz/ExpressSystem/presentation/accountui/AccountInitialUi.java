@@ -364,12 +364,12 @@ public class AccountInitialUi extends JPanel{
 				}
 				if(!P)
 				{
-					if(pvl.isEmpty())
-					{
-						warning.setText("请先填写营业厅再提交");
-					}
-					else
-					{
+//					if(pvl.isEmpty())
+//					{
+//						warning.setText("请先填写营业厅再提交");
+//					}
+//					else
+//					{
 						result=initialBl.addPosition(pvl);
 						if(result.getResult()==Result.SUCCESS)
 						{
@@ -382,7 +382,7 @@ public class AccountInitialUi extends JPanel{
 						{
 							warning.setText(result.getMessage());
 						}
-					}
+//					}
 					warning.setVisible(true);
 				}
 				
@@ -408,12 +408,12 @@ public class AccountInitialUi extends JPanel{
 							tvl.add(tv);
 						}
 					}
-					if(pvl.isEmpty())
-					{
-						warning.setText("请先填写中转中心再提交");
-					}
-					else
-					{
+//					if(tvl.isEmpty())
+//					{
+//						warning.setText("请先填写中转中心再提交");
+//					}
+//					else
+//					{
 						result=initialBl.addTransit(tvl);
 						if(result.getResult()==Result.SUCCESS)
 						{
@@ -427,7 +427,7 @@ public class AccountInitialUi extends JPanel{
 						{
 							warning.setText(result.getMessage());
 						}
-					}
+//					}
 					warning.setVisible(true);
 				}
 				
@@ -479,12 +479,12 @@ public class AccountInitialUi extends JPanel{
 							svl.add(sv);
 						}
 					}
-					if(pvl.isEmpty())
-					{
-						warning.setText("请先填写人员再提交");
-					}
-					else
-					{
+//					if(svl.isEmpty())
+//					{
+//						warning.setText("请先填写人员再提交");
+//					}
+//					else
+//					{
 						result=initialBl.addStaff(svl);
 						if(result.getResult()==Result.SUCCESS)
 						{
@@ -498,7 +498,7 @@ public class AccountInitialUi extends JPanel{
 						{
 							warning.setText(result.getMessage());
 						}
-					}
+//					}
 					warning.setVisible(true);
 				}
 				
@@ -518,12 +518,12 @@ public class AccountInitialUi extends JPanel{
 							cvl.add(cv);
 						}
 					}
-					if(pvl.isEmpty())
-					{
-						warning.setText("请先填写营业厅再提交");
-					}
-					else
-					{
+//					if(cvl.isEmpty())
+//					{
+//						warning.setText("请先填写车辆再提交");
+//					}
+//					else
+//					{
 						result=initialBl.addCar(cvl);
 						if(result.getResult()==Result.SUCCESS)
 						{
@@ -537,7 +537,7 @@ public class AccountInitialUi extends JPanel{
 						{
 							warning.setText(result.getMessage());
 						}
-					}
+//					}
 					warning.setVisible(true);
 				}
 				
@@ -561,12 +561,12 @@ public class AccountInitialUi extends JPanel{
 							iisvl.add(iisv);
 						}
 					}
-					if(pvl.isEmpty())
-					{
-						warning.setText("请先填写营业厅再提交");
-					}
-					else
-					{
+//					if(iisvl.isEmpty())
+//					{
+//						warning.setText("请先填写库存再提交");
+//					}
+//					else
+//					{
 						result=initialBl.addStock(iisvl);
 						if(result.getResult()==Result.SUCCESS)
 						{
@@ -580,7 +580,7 @@ public class AccountInitialUi extends JPanel{
 						{
 							warning.setText(result.getMessage());
 						}
-					}
+//					}
 					warning.setVisible(true);
 				}
 				if(!A)
@@ -596,12 +596,12 @@ public class AccountInitialUi extends JPanel{
 							acvl.add(acv);
 						}
 					}
-					if(pvl.isEmpty())
-					{
-						warning.setText("请先填写营业厅再提交");
-					}
-					else
-					{
+//					if(acvl.isEmpty())
+//					{
+//						warning.setText("请先填写账户再提交");
+//					}
+//					else
+//					{
 						result=initialBl.addAccount(acvl);
 						if(result.getResult()==Result.SUCCESS)
 						{
@@ -617,7 +617,7 @@ public class AccountInitialUi extends JPanel{
 						}
 					}
 					warning.setVisible(true);
-				}
+//				}
 				if(P&&T&&S&&C&&A&&I)
 				{
 					result=initialBl.finish();
