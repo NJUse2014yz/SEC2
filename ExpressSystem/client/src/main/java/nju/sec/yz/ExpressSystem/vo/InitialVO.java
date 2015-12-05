@@ -7,13 +7,11 @@ import java.util.List;
  */
 public class InitialVO {
 	
-	public String id;
+	public String date;
 
-	// 中转中心,不包含营业厅
+	// 中转中心,包含营业厅
 	public List<TransitVO> transits;
 	
-	// 营业厅
-	public List<PositionVO> positions;
 
 	// 人员
 	public List<StaffVO> staffs;

@@ -7,6 +7,7 @@ import nju.sec.yz.ExpressSystem.common.ResultMessage;
 
 /**
  * 所有需要期初建账的类的通用接口
+ * Car,Inventory,Transit,Staff,Account
  * VO 所有vo的泛指
  * PO 所有po的泛指
  * @author 周聪

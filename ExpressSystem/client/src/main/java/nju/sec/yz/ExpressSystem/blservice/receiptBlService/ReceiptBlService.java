@@ -13,7 +13,7 @@ import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 public interface ReceiptBlService {
 	public ArrayList<ReceiptVO> getAll();
 	
-	public ReceiptVO getSingle(int i);
+	public ReceiptVO getSingle(String i);
 	
 	public ResultMessage approve(ReceiptVO vo);
 	

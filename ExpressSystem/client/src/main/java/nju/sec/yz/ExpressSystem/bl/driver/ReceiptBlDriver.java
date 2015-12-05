@@ -26,7 +26,7 @@ public class ReceiptBlDriver {
 		List<ReceiptVO> receipts2= receiptBl_stub.getByType(null);
 		System.out.println("寄件单："+receipts2);
 		//
-		ReceiptVO receiptVO=receiptBl_stub.getSingle(0);
+		ReceiptVO receiptVO=receiptBl_stub.getSingle("4");
 		System.out.println("单据id:"+receiptVO.getId());
 		//
 		ResultMessage modifyResult=receiptBl_stub.modify(null);

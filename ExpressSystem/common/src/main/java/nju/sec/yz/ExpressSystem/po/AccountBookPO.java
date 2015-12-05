@@ -13,13 +13,10 @@ import java.util.List;
 public class AccountBookPO implements Serializable{
 
 	
-	private String id;
+	private String date;
 	
 	//机构
 	private List<TransitPO> transit;
-	
-	//营业厅
-	private List<PositionPO> position;
 	
 	//人员
 	private List<StaffPO> staffs;
@@ -30,15 +27,14 @@ public class AccountBookPO implements Serializable{
 	//银行账户
 	private List<AccountPO> accounts;
 	
-	//TODO 库存
+	//库存
 	private List<InventoryInSheetPO> inventories;
 
 	public AccountBookPO(String id, List<TransitPO> transit, List<PositionPO> position, List<StaffPO> staffs,
 			List<CarPO> cars, List<AccountPO> accounts, List<InventoryInSheetPO> inventories) {
 		super();
-		this.id = id;
+		this.date = id;
 		this.transit = transit;
-		this.position = position;
 		this.staffs = staffs;
 		this.cars = cars;
 		this.accounts = accounts;
@@ -46,15 +42,15 @@ public class AccountBookPO implements Serializable{
 	}
 
 	public AccountBookPO() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
-	public String getId() {
-		return id;
+	public String getDate() {
+		return date;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setDate(String id) {
+		this.date = id;
 	}
 
 	public List<TransitPO> getTransit() {
@@ -65,13 +61,6 @@ public class AccountBookPO implements Serializable{
 		this.transit = transit;
 	}
 
-	public List<PositionPO> getPosition() {
-		return position;
-	}
-
-	public void setPosition(List<PositionPO> position) {
-		this.position = position;
-	}
 
 	public List<StaffPO> getStaffs() {
 		return staffs;

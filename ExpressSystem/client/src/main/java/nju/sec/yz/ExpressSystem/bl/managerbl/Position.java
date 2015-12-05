@@ -96,7 +96,7 @@ public class Position implements Initialable<PositionVO, PositionPO>{
 		return message;
 	}
 
-	private boolean isValidPosition(String id) {
+	boolean isValidPosition(String id) {
 		if (!ValidHelper.isNumber(id))
 			return false;
 		if (id.length() != 6 && id.length() != 7)

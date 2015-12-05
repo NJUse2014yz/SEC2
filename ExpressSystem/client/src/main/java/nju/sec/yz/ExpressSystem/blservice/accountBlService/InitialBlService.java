@@ -53,7 +53,11 @@ public interface InitialBlService {
 	/**
 	 * 查看期初建帐
 	 */
-	public InitialVO observeInitial();
+	public InitialVO observeInitial(String date);
 	
+	/**
+	 * 查看有期初建账的日期
+	 */
+	public List<String> getDates();
 	
 }

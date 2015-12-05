@@ -161,7 +161,7 @@ public class Staff implements Initialable<StaffVO, StaffPO>{
 		for (StaffVO Staff : staffs) {
 			String validResult = isValid(Staff);
 			if (!validResult.equals("success"))
-				return new ResultMessage(Result.FAIL, staffs.indexOf(Staff) + " " + validResult);
+				return new ResultMessage(Result.FAIL, "第"+(staffs.indexOf(Staff)+1) + "个职员信息的 " + validResult);
 
 			StaffPO po = this.changeVOToPO(Staff);
 			pos.add(po);

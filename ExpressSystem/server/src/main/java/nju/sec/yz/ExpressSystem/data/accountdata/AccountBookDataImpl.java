@@ -54,12 +54,12 @@ public class AccountBookDataImpl extends UnicastRemoteObject implements AccountB
 			return new ResultMessage(Result.FAIL, "系统错误");
 		}
 			
-		String id=abp.getId();
+		String id=abp.getDate();
 
 		List<AccountBookPO> abps = findAll();
 		for (int i = 0; i < abps.size(); i++) {
 			AccountBookPO po = abps.get(i);
-			String ID = po.getId();
+			String ID = po.getDate();
 			if (id.equals(ID)) {
 				abps.remove(i);
 				abps.add(abp);
@@ -82,7 +82,7 @@ public class AccountBookDataImpl extends UnicastRemoteObject implements AccountB
 		}
 		List<AccountBookPO> abps = findAll();
 		for (int i=0;i<abps.size();i++) {
-			String ID = abps.get(i).getId();
+			String ID = abps.get(i).getDate();
 			if (id.equals(ID)){
 				abps.remove(i);
 				ResultMessage message=saveData(abps);
@@ -111,16 +111,16 @@ public class AccountBookDataImpl extends UnicastRemoteObject implements AccountB
 	}
 
 	@Override
-	public AccountBookPO find(String id) throws RemoteException {
+	public AccountBookPO find(String date) throws RemoteException {
 		System.out.println("finding a abp...");
-		if(id==null){
+		if(date==null){
 			System.out.println("id为null！！！");
 			return null;
 		}
 		List<AccountBookPO> abps = findAll();
 		for (AccountBookPO po : abps) {
-			String ID = po.getId();
-			if (id.equals(ID))
+			String ID = po.getDate();
+			if (date.equals(ID))
 				return po;
 		}
 		

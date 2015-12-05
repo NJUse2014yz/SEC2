@@ -56,7 +56,8 @@ public class FinanceBlStub implements FinanceBlSevice {
 
 
 	@Override
-	public void exportCostToExcel(ProfitVO vo) {
+	public ResultMessage exportCostToExcel(ProfitVO vo) {
+		return null;
 		// TODO Auto-generated method stub
 		
 	}
@@ -64,7 +65,8 @@ public class FinanceBlStub implements FinanceBlSevice {
 
 
 	@Override
-	public void exportBussinessToExcel(BussinessVO vo) {
+	public ResultMessage exportBussinessToExcel(BussinessVO vo) {
+		return null;
 		// TODO Auto-generated method stub
 		
 	}

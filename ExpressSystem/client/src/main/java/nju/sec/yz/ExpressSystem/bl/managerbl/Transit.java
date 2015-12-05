@@ -222,14 +222,21 @@ public class Transit implements AgencyInfo, Initialable<TransitVO, TransitPO> {
 	@Override
 	public ResultMessage init(List<TransitVO> transits) {
 		ResultMessage message = new ResultMessage(Result.FAIL);
-
+		Position p=new Position();
+		
 		List<TransitPO> pos = new ArrayList<>();
-		for (TransitVO Transit : transits) {
-			boolean validResult = isValidTransit(Transit.id);
+		for (TransitVO transit : transits) {
+			boolean validResult = isValidTransit(transit.id);
 			if (!validResult)
-				return new ResultMessage(Result.FAIL, transits.indexOf(Transit) + " " + "中转中心编号不符合格式");
+				return new ResultMessage(Result.FAIL, "第"+(transits.indexOf(transit)+1) + "个中转中心的" + "中转中心编号不符合格式");
 
-			TransitPO po = this.changeVOToPO(Transit);
+			for(PositionVO position:transit.getPositions()){
+				boolean isValid=p.isValidPosition(position.id);
+				if(!isValid)
+					return new ResultMessage(Result.FAIL,"有营业厅的id不符合格式哦~");
+			}
+			
+			TransitPO po = this.changeVOToPO(transit);
 			pos.add(po);
 		}
 

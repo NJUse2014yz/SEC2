@@ -16,32 +16,32 @@ public class ReceiptController implements ReceiptBlService{
 
 	@Override
 	public ArrayList<ReceiptVO> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		ReceiptList list=new ReceiptList();
+		return list.getAll();
 	}
 
 	@Override
-	public ReceiptVO getSingle(int i) {
-		// TODO Auto-generated method stub
-		return null;
+	public ReceiptVO getSingle(String id) {
+		ReceiptList list=new ReceiptList();
+		return list.getSingle(id);
 	}
 
 	@Override
 	public ResultMessage approve(ReceiptVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		ReceiptList list=new ReceiptList();
+		return list.approve(vo);
 	}
 
 	@Override
 	public ArrayList<ReceiptVO> getByType(ReceiptType type) {
-		// TODO Auto-generated method stub
-		return null;
+		ReceiptList list=new ReceiptList();
+		return list.getByType(type);
 	}
 
 	@Override
 	public ResultMessage modify(ReceiptVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		ReceiptList list=new ReceiptList();
+		return list.modify(vo);
 	}
 
 }

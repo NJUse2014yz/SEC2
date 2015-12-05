@@ -41,19 +41,19 @@ import nju.sec.yz.ExpressSystem.vo.TransitVO;
  */
 public class Initial {
 
-	//中转中心
+	// 中转中心
 	private List<TransitVO> transits;
 
-	//人员
+	// 人员
 	private List<StaffVO> staffs;
 
-	//车辆
+	// 车辆
 	private List<CarVO> cars;
 
-	//银行账户
+	// 银行账户
 	private List<AccountVO> accounts;
 
-	//库存
+	// 库存
 	private List<InventoryInSheetVO> inventories;
 
 	private AccountBookDataService accountBookData;
@@ -76,7 +76,6 @@ public class Initial {
 		staffs.addAll(vo);
 		Initialable<StaffVO, StaffPO> staffService = new Staff();
 		ResultMessage message = staffService.init(vo);
-		System.out.println(message.getMessage());
 		return message;
 	}
 
@@ -84,16 +83,13 @@ public class Initial {
 		transits.addAll(vo);
 		Initialable<TransitVO, TransitPO> transitService = new Transit();
 		ResultMessage message = transitService.init(vo);
-		System.out.println(message.getMessage());
 		return message;
 	}
-
 
 	public ResultMessage addCar(List<CarVO> vo) {
 		cars.addAll(vo);
 		Initialable<CarVO, CarPO> car = new Car();
 		ResultMessage message = car.init(cars);
-		System.out.println(message.getMessage());
 		return message;
 	}
 
@@ -107,22 +103,21 @@ public class Initial {
 		inventories.addAll(vo);
 		Initialable<InventoryInSheetVO, InventoryInSheetPO> inventory = new Inventory();
 		ResultMessage message = inventory.init(vo);
-		System.out.println(message.getMessage());
 		return message;
 	}
 
 	public ResultMessage finish() {
 
-		AccountBookPO initialPO=this.createPO();
-		
-		ResultMessage message=new ResultMessage(Result.FAIL);
+		AccountBookPO initialPO = this.createPO();
+
+		ResultMessage message = new ResultMessage(Result.FAIL);
 		try {
-			message=accountBookData.insert(initialPO);
+			message = accountBookData.insert(initialPO);
 		} catch (RemoteException e) {
 			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
-		
+
 		LogTool.setLog("期初建帐");
 
 		return message;
@@ -150,23 +145,22 @@ public class Initial {
 		Initialable<TransitVO, TransitPO> transitService = new Transit();
 		List<TransitPO> transitPOs = this.changeVOToPO(transitService, transits);
 		initialPO.setTransit(transitPOs);
-		
-		initialPO.setId(this.createId());
-		
+
+		initialPO.setDate(this.createId());
+
 		return initialPO;
 	}
 
-	
 	/**
 	 * 期初建帐id编号规则：财务人员编号+"i"+3位数字
 	 */
-	private String createId(){
-		UserInfo user=new User();
-		String userId=user.getCurrentID();
-		ReceiptID idMaker=new ReceiptID();
+	private String createId() {
+		UserInfo user = new User();
+		String userId = user.getCurrentID();
+		ReceiptID idMaker = new ReceiptID();
 		return idMaker.getID(userId, IdType.INITIAL);
 	}
-	
+
 	/**
 	 * 将vo列表转成po列表
 	 */
@@ -180,35 +174,51 @@ public class Initial {
 
 	}
 
-
-	public InitialVO observeInitial() {
+	public InitialVO observeInitial(String date) {
 
 		return null;
 	}
-	
-	private InitialVO show(AccountBookPO po){
-		InitialVO vo=new InitialVO();
-		
-		Initialable<CarVO, CarPO> carService=new Car();
-		vo.cars=this.show(carService, po.getCars());
-		
-		Initialable<AccountVO, AccountPO> accountService=new Account();
-		vo.accounts=this.show(accountService, po.getAccounts());
-		
-		Initialable<InventoryInSheetVO, InventoryInSheetPO> stockService=new Inventory();
-		vo.inventories=this.show(stockService, po.getInventories());
-		
-		Initialable<TransitVO, TransitPO> transitService=new Transit();
-		vo.transits=this.show(transitService, po.getTransit());
-		
-		Initialable<StaffVO, StaffPO> staffService=new Staff();
-		vo.staffs=this.show(staffService, po.getStaffs());
-		
-		vo.id=po.getId();
-		
+
+	private InitialVO show(AccountBookPO po) {
+		InitialVO vo = new InitialVO();
+
+		Initialable<CarVO, CarPO> carService = new Car();
+		vo.cars = this.show(carService, po.getCars());
+
+		Initialable<AccountVO, AccountPO> accountService = new Account();
+		vo.accounts = this.show(accountService, po.getAccounts());
+
+		Initialable<InventoryInSheetVO, InventoryInSheetPO> stockService = new Inventory();
+		vo.inventories = this.show(stockService, po.getInventories());
+
+		Initialable<TransitVO, TransitPO> transitService = new Transit();
+		vo.transits = this.show(transitService, po.getTransit());
+
+		Initialable<StaffVO, StaffPO> staffService = new Staff();
+		vo.staffs = this.show(staffService, po.getStaffs());
+
+		vo.date = po.getDate();
+
 		return vo;
 	}
-	
+
+	public List<String> getDates() {
+		List<String> dates=new ArrayList<>();
+		
+		try {
+			List<AccountBookPO> pos=accountBookData.findAll();
+			for(AccountBookPO po:pos){
+				dates.add(po.getDate());
+			}
+		} catch (RemoteException e) {
+			RMIExceptionHandler.handleRMIException();
+			e.printStackTrace();
+		}
+		
+		
+		return null;
+	}
+
 	/**
 	 * 将po列表转成vo列表
 	 */

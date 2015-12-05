@@ -18,6 +18,6 @@ public interface AccountBookDataService extends Remote{
 	public ResultMessage update(AccountBookPO abp) throws RemoteException;
 	public ResultMessage delete(String id)throws RemoteException;
 	public ResultMessage insert(AccountBookPO abp)throws RemoteException;
-	public AccountBookPO find(String id) throws RemoteException;
+	public AccountBookPO find(String date) throws RemoteException;
 	
 }

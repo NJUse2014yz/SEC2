@@ -64,9 +64,17 @@ public class InitialController implements InitialBlService{
 	}
 
 	@Override
-	public InitialVO observeInitial() {
-		
-		return null;
+	public InitialVO observeInitial(String date) {
+		Initial initial=new Initial();
+		InitialVO vo=initial.observeInitial(date);
+		return vo;
+	}
+
+
+	@Override
+	public List<String> getDates() {
+		Initial initial=new Initial();
+		return initial.getDates();
 	}
 
 	
