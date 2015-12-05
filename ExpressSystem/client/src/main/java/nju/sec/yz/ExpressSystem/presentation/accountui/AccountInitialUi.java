@@ -364,18 +364,25 @@ public class AccountInitialUi extends JPanel{
 				}
 				if(!P)
 				{
-					result=initialBl.addPosition(pvl);
-					if(result.getResult()==Result.SUCCESS)
-					{
-						remove(scrollP);
-	//					scrollP.setVisible(false);
-						warning.setText("营业厅初始化成功");
-						P=true;
-					}
-					else
-					{
-						warning.setText(result.getMessage());
-					}
+//					if(pvl.isEmpty())
+//					{
+//						warning.setText("请先填写营业厅再提交");
+//					}
+//					else
+//					{
+						result=initialBl.addPosition(pvl);
+						if(result.getResult()==Result.SUCCESS)
+						{
+							remove(scrollP);
+		//					scrollP.setVisible(false);
+							warning.setText("营业厅初始化成功");
+							P=true;
+						}
+						else
+						{
+							warning.setText(result.getMessage());
+						}
+//					}
 					warning.setVisible(true);
 				}
 				
@@ -401,19 +408,26 @@ public class AccountInitialUi extends JPanel{
 							tvl.add(tv);
 						}
 					}
-					result=initialBl.addTransit(tvl);
-					if(result.getResult()==Result.SUCCESS)
-					{
-						remove(scrollT);
-	//					scrollP.setVisible(false);
-						buttonAG.setVisible(false);
-						warning.setText("中转中心初始化成功");
-						T=true;
-					}
-					else
-					{
-						warning.setText(result.getMessage());
-					}
+//					if(tvl.isEmpty())
+//					{
+//						warning.setText("请先填写中转中心再提交");
+//					}
+//					else
+//					{
+						result=initialBl.addTransit(tvl);
+						if(result.getResult()==Result.SUCCESS)
+						{
+							remove(scrollT);
+		//					scrollP.setVisible(false);
+							buttonAG.setVisible(false);
+							warning.setText("中转中心初始化成功");
+							T=true;
+						}
+						else
+						{
+							warning.setText(result.getMessage());
+						}
+//					}
 					warning.setVisible(true);
 				}
 				
@@ -465,19 +479,26 @@ public class AccountInitialUi extends JPanel{
 							svl.add(sv);
 						}
 					}
-					result=initialBl.addStaff(svl);
-					if(result.getResult()==Result.SUCCESS)
-					{
-						remove(scrollS);
-	//					scrollS.setVisible(false);
-						buttonS.setVisible(false);
-						warning.setText("人员初始化成功");
-						S=true;
-					}
-					else
-					{
-						warning.setText(result.getMessage());
-					}
+//					if(svl.isEmpty())
+//					{
+//						warning.setText("请先填写人员再提交");
+//					}
+//					else
+//					{
+						result=initialBl.addStaff(svl);
+						if(result.getResult()==Result.SUCCESS)
+						{
+							remove(scrollS);
+		//					scrollS.setVisible(false);
+							buttonS.setVisible(false);
+							warning.setText("人员初始化成功");
+							S=true;
+						}
+						else
+						{
+							warning.setText(result.getMessage());
+						}
+//					}
 					warning.setVisible(true);
 				}
 				
@@ -497,19 +518,26 @@ public class AccountInitialUi extends JPanel{
 							cvl.add(cv);
 						}
 					}
-					result=initialBl.addCar(cvl);
-					if(result.getResult()==Result.SUCCESS)
-					{
-						remove(scrollC);
-	//					scrollC.setVisible(false);
-						buttonC.setVisible(false);
-						warning.setText("车辆初始化成功");
-						C=true;
-					}
-					else
-					{
-						warning.setText(result.getMessage());
-					}
+//					if(cvl.isEmpty())
+//					{
+//						warning.setText("请先填写车辆再提交");
+//					}
+//					else
+//					{
+						result=initialBl.addCar(cvl);
+						if(result.getResult()==Result.SUCCESS)
+						{
+							remove(scrollC);
+		//					scrollC.setVisible(false);
+							buttonC.setVisible(false);
+							warning.setText("车辆初始化成功");
+							C=true;
+						}
+						else
+						{
+							warning.setText(result.getMessage());
+						}
+//					}
 					warning.setVisible(true);
 				}
 				
@@ -533,19 +561,26 @@ public class AccountInitialUi extends JPanel{
 							iisvl.add(iisv);
 						}
 					}
-					result=initialBl.addStock(iisvl);
-					if(result.getResult()==Result.SUCCESS)
-					{
-						remove(scrollI);
-	//					scrollI.setVisible(false);
-						buttonI.setVisible(false);
-						warning.setText("库存初始化成功");
-						I=true;
-					}
-					else
-					{
-						warning.setText(result.getMessage());
-					}
+//					if(iisvl.isEmpty())
+//					{
+//						warning.setText("请先填写库存再提交");
+//					}
+//					else
+//					{
+						result=initialBl.addStock(iisvl);
+						if(result.getResult()==Result.SUCCESS)
+						{
+							remove(scrollI);
+		//					scrollI.setVisible(false);
+							buttonI.setVisible(false);
+							warning.setText("库存初始化成功");
+							I=true;
+						}
+						else
+						{
+							warning.setText(result.getMessage());
+						}
+//					}
 					warning.setVisible(true);
 				}
 				if(!A)
@@ -561,21 +596,28 @@ public class AccountInitialUi extends JPanel{
 							acvl.add(acv);
 						}
 					}
-					result=initialBl.addAccount(acvl);
-					if(result.getResult()==Result.SUCCESS)
-					{
-						remove(scrollA);
-	//					scrollA.setVisible(false);
-						buttonA.setVisible(false);
-						warning.setText("账户初始化成功");
-						A=true;
-					}
-					else
-					{
-						warning.setText(result.getMessage());
+//					if(acvl.isEmpty())
+//					{
+//						warning.setText("请先填写账户再提交");
+//					}
+//					else
+//					{
+						result=initialBl.addAccount(acvl);
+						if(result.getResult()==Result.SUCCESS)
+						{
+							remove(scrollA);
+		//					scrollA.setVisible(false);
+							buttonA.setVisible(false);
+							warning.setText("账户初始化成功");
+							A=true;
+						}
+						else
+						{
+							warning.setText(result.getMessage());
+						}
 					}
 					warning.setVisible(true);
-				}
+//				}
 				if(P&&T&&S&&C&&A&&I)
 				{
 					result=initialBl.finish();

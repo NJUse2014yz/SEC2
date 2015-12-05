@@ -19,8 +19,10 @@ import javax.swing.table.TableModel;
 
 import nju.sec.yz.ExpressSystem.bl.inventorybl.InventoryController;
 import nju.sec.yz.ExpressSystem.blservice.inventoryBlService.InventoryBlService;
+import nju.sec.yz.ExpressSystem.common.InventoryInInformation;
 import nju.sec.yz.ExpressSystem.presentation.DateChooser;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
+import nju.sec.yz.ExpressSystem.vo.InventoryInSheetVO;
 import nju.sec.yz.ExpressSystem.vo.InventoryListVO;
 
 public class InventoryObserve extends JPanel{
@@ -87,21 +89,26 @@ private InventoryBlService inventoryservice=new InventoryController();
 				}else{
 				//成功
 
-				ArrayList<InventoryListVO> vo=inventoryservice.observeStock(date1.getTime(),date2.getTime());
-
-
-//				InventoryListVO vo=inventoryservice.observeStock(null,date1.getTime(),date2.getTime());
-
-//				ArrayList<InventoryVO> vo=(ArrayList<InventoryVO>) inventoryservice.observeStock(null,date1.getTime(),date2.getTime());
+					InventoryListVO vo=inventoryservice.observeStock(date1.getTime(),date2.getTime());
+				ArrayList<InventoryInSheetVO> involist=(ArrayList<InventoryInSheetVO>) inventoryservice.checkStock().inList;
 				
-
+				Object[][] tableData = new Object[involist.size()][7];
+				for(int i=0;i<involist.size();i++){
+					InventoryInInformation temp=involist.get(i).getInventoryInInformation();
+					tableData[i][0]=involist.get(i).getBarId();
+					tableData[i][1]=temp.getTime();
+					tableData[i][2]=temp.getDestination();
+					tableData[i][3]=temp.getBlock();
+					tableData[i][4]=temp.getPositon();
+					tableData[i][5]=involist.get(i).getBarId();
+					tableData[i][6]=involist.get(i).getBarId();
+				}
 				TableModel model=table.getModel();
-				Object[][] newTableData=new Object[vo.size()][7];
 				
-				model=new DefaultTableModel(newTableData,columnTitle);
+				model=new DefaultTableModel(tableData,columnTitle);
 				table.setModel(model);
 //需要得到一个当前数目的值				
-				total.setText(Integer.toString(vo.size()));
+				total.setText(Integer.toString(involist.size()));
 				total.setBounds(229, 334, 62, 23);
 				total.setForeground(Color.GRAY);
 				total.setFont(new Font("Dialog", 0, 18));

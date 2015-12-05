@@ -4,7 +4,7 @@ package nju.sec.yz.ExpressSystem.vo;
  * @author 周聪
  *
  */
-public class CollectionRecordVO {
+public class CollectionRecordVO extends ReceiptVO{
 
 	private String time;
 	private double amount;

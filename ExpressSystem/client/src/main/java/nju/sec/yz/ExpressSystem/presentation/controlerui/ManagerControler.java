@@ -100,7 +100,7 @@ public ManagerButtonComponent mbc;
 			mainControler.mainFrame.nextPanel(new ManagerReceiptList(mainControler,mbc));
 			break;
 		case RECEIPT_MODIFY:
-			mainControler.mainFrame.nextPanel(new ManagerReceiptModify(mainControler,mbc));
+//			mainControler.mainFrame.nextPanel(new ManagerReceiptModify(mainControler,mbc));
 			break;
 		case ACCOUNT_CHECK:
 			mainControler.mainFrame.nextPanel(new ManagerAccountCheck(mainControler,mbc));

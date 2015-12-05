@@ -148,12 +148,10 @@ public class ManagerAgencyDelete extends JPanel{
 		confirm.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				int[] deletelines=table.getSelectedRows();
-				System.out.println(transits.size());
 				for(int i=0;i<deletelines.length;i++){
 					if(deletelines[i]<transits.size()){
 						manager.deleteTransit((String)table.getValueAt(deletelines[i], 1));
 					}else{
-						System.out.println(positions.get(deletelines[i]-transits.size())==null);
 						String transitBelong=positions.get(deletelines[i]-transits.size()).getTransitId();
 						manager.deletePosition(transitBelong, (String)table.getValueAt(deletelines[i], 1));
 					}
