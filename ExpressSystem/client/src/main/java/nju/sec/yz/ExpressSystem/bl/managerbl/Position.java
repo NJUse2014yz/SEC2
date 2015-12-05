@@ -112,6 +112,7 @@ public class Position implements Initialable<PositionVO, PositionPO>{
 			PositionVO position=vos.get(i);
 			message=this.addPosition(position);
 			if(message.getResult()==Result.FAIL)
+				System.out.println(message.getMessage());
 				return new ResultMessage(Result.FAIL,i+" "+message.getMessage());
 		}
 		

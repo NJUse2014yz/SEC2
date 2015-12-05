@@ -90,12 +90,6 @@ public class Initial {
 		return message;
 	}
 
-	public ResultMessage addPosition(List<PositionVO> vo) {
-		positions.addAll(vo);
-		Initialable<PositionVO, PositionPO> positionServise = new Position();
-		ResultMessage message = positionServise.init(vo);
-		return message;
-	}
 
 	public ResultMessage addCar(List<CarVO> vo) {
 		cars.addAll(vo);
@@ -156,10 +150,6 @@ public class Initial {
 		Initialable<TransitVO, TransitPO> transitService = new Transit();
 		List<TransitPO> transitPOs = this.changeVOToPO(transitService, transits);
 		initialPO.setTransit(transitPOs);
-
-		Initialable<PositionVO, PositionPO> positionService = new Position();
-		List<PositionPO> positionPOs = this.changeVOToPO(positionService, positions);
-		initialPO.setPosition(positionPOs);
 		
 		initialPO.setId(this.createId());
 		
@@ -207,9 +197,6 @@ public class Initial {
 		
 		Initialable<InventoryInSheetVO, InventoryInSheetPO> stockService=new Inventory();
 		vo.inventories=this.show(stockService, po.getInventories());
-		
-		Initialable<PositionVO, PositionPO> positionService=new Position();
-		vo.positions=this.show(positionService, po.getPosition());
 		
 		Initialable<TransitVO, TransitPO> transitService=new Transit();
 		vo.transits=this.show(transitService, po.getTransit());

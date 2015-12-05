@@ -29,10 +29,6 @@ public interface InitialBlService {
 	 */
 	public ResultMessage addTransit(List<TransitVO> vo);
 	
-	/**
-	 * 添加初始营业厅
-	 */
-	public ResultMessage addPosition(List<PositionVO> vo);
 	
 	/**
 	 * 添加初始车辆

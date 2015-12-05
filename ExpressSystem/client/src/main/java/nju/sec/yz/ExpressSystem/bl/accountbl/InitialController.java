@@ -37,11 +37,7 @@ public class InitialController implements InitialBlService{
 		return message;
 	}
 
-	@Override
-	public ResultMessage addPosition(List<PositionVO> vo) {
-		ResultMessage message=initial.addPosition(vo);
-		return message;
-	}
+	
 
 	@Override
 	public ResultMessage addCar(List<CarVO> vo) {

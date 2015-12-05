@@ -248,6 +248,18 @@ public class Transit implements AgencyInfo, Initialable<TransitVO, TransitPO> {
 	 */
 	public TransitPO changeVOToPO(TransitVO vo) {
 		TransitPO po = new TransitPO(vo.name, vo.id, vo.location);
+		
+		//复制营业厅
+		List<PositionVO> vos = vo.getPositions();
+		List<PositionPO> positions = new ArrayList<>();
+
+		for (PositionVO positionVO : vos) {
+			PositionPO positionPO = new PositionPO(positionVO.getName(), positionVO.getId(), positionVO.getTransitId(), positionVO.getLocation());
+			positions.add(positionPO);
+		}
+		
+		po.setPositions(positions);
+		
 		return po;
 	}
 
