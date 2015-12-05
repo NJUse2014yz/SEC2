@@ -5,8 +5,6 @@ package nju.sec.yz.ExpressSystem.vo;
  * 收款单
  */
 
-import java.util.ArrayList;
-
 /**
  * 
  * @author YU Fan

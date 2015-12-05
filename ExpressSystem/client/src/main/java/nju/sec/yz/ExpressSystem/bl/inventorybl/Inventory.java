@@ -229,11 +229,11 @@ public class Inventory implements Initialable<InventoryInSheetVO, InventoryInShe
 	private String getTxtPath(InventoryListVO vo) {
 		List<InventoryInSheetVO> inlist = vo.inList;
 		int count = Integer.parseInt(getCurrentCounter()) + 1;
-		String[] title = { "快递单号 ", "入库日期 ", "到达地 ", "区号 ", "排号 ", "架号 ", "位号 ", "中转中心编号" };
-		File file = new File("File/" + TimeTool.getDate() + "InventoryList" + count);
+		String[] title1 = { "快递单号 ", "入库日期 ", "到达地 ", "区号 ", "排号 ", "架号 ", "位号 ", "中转中心编号" };
+		File file = new File("File/inventoryFile/" + TimeTool.getDate() + "InventoryList" + count);
 		try {
 			FileWriter fw = new FileWriter(file);
-			for (String str : title) {
+			for (String str : title1) {
 				fw.write(str);
 			}
 			for (int i = 0; i < inlist.size(); i++) {
@@ -293,7 +293,7 @@ public class Inventory implements Initialable<InventoryInSheetVO, InventoryInShe
 	 * 保存当天文件日期和计数的次数
 	 */
 	private void saveCounter(String str) {
-		File file = new File("File/count_excel");
+		File file = new File("File/inventory_count_excel");
 		try {
 			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file));
 			out.writeObject(str);
@@ -307,7 +307,7 @@ public class Inventory implements Initialable<InventoryInSheetVO, InventoryInShe
 	 * 获得文件计数的次数
 	 */
 	private String getCurrentCounter() {
-		File file = new File("File/count_excel");
+		File file = new File("File/inventory_count_excel");
 		String str = "";
 		try {
 			ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
