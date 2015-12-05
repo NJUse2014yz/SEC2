@@ -16,7 +16,6 @@ import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.data.fileUtility.SerializableFileHelper;
 import nju.sec.yz.ExpressSystem.dataservice.carAndDriverDataSevice.CarDataService;
 import nju.sec.yz.ExpressSystem.po.CarPO;
-import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 
 public class CarDataImpl extends UnicastRemoteObject implements CarDataService{
 

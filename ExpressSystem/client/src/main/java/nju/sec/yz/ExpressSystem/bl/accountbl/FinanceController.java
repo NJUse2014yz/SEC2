@@ -3,17 +3,12 @@ package nju.sec.yz.ExpressSystem.bl.accountbl;
 import java.util.List;
 
 import nju.sec.yz.ExpressSystem.bl.tool.LogTool;
-import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.blservice.accountBlService.FinanceBlSevice;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
-import nju.sec.yz.ExpressSystem.vo.AccountVO;
 import nju.sec.yz.ExpressSystem.vo.BussinessVO;
-import nju.sec.yz.ExpressSystem.vo.InitialVO;
-import nju.sec.yz.ExpressSystem.vo.LogVO;
 import nju.sec.yz.ExpressSystem.vo.OutVO;
 import nju.sec.yz.ExpressSystem.vo.PaymentSheetVO;
 import nju.sec.yz.ExpressSystem.vo.ProfitVO;
-import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 /**
  * 负责财务进出的逻辑控制
  * @author 周聪
@@ -64,15 +59,17 @@ public class FinanceController implements FinanceBlSevice{
 	}
 
 	@Override
-	public void exportCostToExcel(ProfitVO rv) {
-		// TODO Auto-generated method stub
-		
+	public ResultMessage exportCostToExcel(ProfitVO rv) {
+		Finance finance=new Finance();
+		ResultMessage message=finance.exportCostToExcel(rv);
+		return message;
 	}
 
 	@Override
-	public void exportBussinessToExcel(BussinessVO vo) {
-		// TODO Auto-generated method stub
-		
+	public ResultMessage exportBussinessToExcel(BussinessVO vo) {
+		Finance finance=new Finance();
+		ResultMessage message=finance.exportBussinessToExcel(vo);
+		return message;
 	}
 	
 	
