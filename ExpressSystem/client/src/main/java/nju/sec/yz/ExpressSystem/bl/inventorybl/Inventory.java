@@ -165,7 +165,6 @@ public class Inventory implements Initialable<InventoryInSheetVO, InventoryInShe
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}
-		System.out.println(result);
 		return result;	
 
 	}
