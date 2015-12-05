@@ -38,10 +38,10 @@ public interface FinanceBlSevice {
 	/**
 	 * 导出成本收益表的excel文件
 	 */
-	public void exportCostToExcel(ProfitVO vo);
+	public ResultMessage exportCostToExcel(ProfitVO vo);
 	
 	/**
 	 * 导出经营情况表的excel文件
 	 */
-	public void exportBussinessToExcel(BussinessVO vo);
+	public ResultMessage exportBussinessToExcel(BussinessVO vo);
 }

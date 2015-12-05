@@ -222,7 +222,7 @@ public class Inventory implements Initialable<InventoryInSheetVO, InventoryInShe
 		ResultMessage message = new ResultMessage(Result.SUCCESS);
 		String filename = getFileName();
 		String txt = getTxtPath(vo);
-		ExcelTool.exportExcel(filename, txt);
+		message=ExcelTool.exportExcel(filename, txt);
 		return message;
 	}
 
