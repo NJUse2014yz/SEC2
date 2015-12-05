@@ -67,8 +67,8 @@ public class ManagerReceiptList extends JPanel {
 		setLayout(null);
 		setSize(490, 550);
 		setVisible(true);
-//				maincontroler.mainFrame.nextPanel(new
-//						 ManagerReceiptModify(maincontroler,mbc,new ReceiptVO(),"寄件单"));
+				maincontroler.mainFrame.nextPanel(new
+						 ManagerReceiptModify(maincontroler,mbc,new ReceiptVO(),"寄件单"));
 
 //				  OrderIn orderIn=new OrderIn(this);
 	}
