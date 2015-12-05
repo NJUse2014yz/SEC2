@@ -24,7 +24,7 @@ import nju.sec.yz.ExpressSystem.vo.TransitVO;
 public class DeliverController implements DeliverBlService{
 
 	
-//	@Override
+    @Override
 	/**
 	 * 快递员查询订单信息
 	 */

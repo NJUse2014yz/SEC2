@@ -33,6 +33,7 @@ public class FinanceController implements FinanceBlSevice{
 	public List<PaymentSheetVO> checkReceipt(String day, String positionId) {
 		Collection in=new Collection();
 		List<PaymentSheetVO> list=in.getByPosition(day, positionId);
+		System.out.println(list.size());
 		return list;
 	}
 

@@ -86,6 +86,9 @@ public class Transit implements AgencyInfo, Initialable<TransitVO, TransitPO> {
 			positions.add(po);
 		}
 
+		if(!isValidTransit(av.getId()))
+			return new ResultMessage(Result.FAIL,"亲，咱们的中转中心编号是城市编码加一位数字哟~");
+		
 		TransitPO po = new TransitPO(av.getName(), av.getId(), positions, av.getLocation());
 
 		try {
@@ -223,7 +226,7 @@ public class Transit implements AgencyInfo, Initialable<TransitVO, TransitPO> {
 		List<TransitPO> pos = new ArrayList<>();
 		for (TransitVO Transit : transits) {
 			boolean validResult = isValidTransit(Transit.id);
-			if (validResult)
+			if (!validResult)
 				return new ResultMessage(Result.FAIL, transits.indexOf(Transit) + " " + "中转中心编号不符合格式");
 
 			TransitPO po = this.changeVOToPO(Transit);
