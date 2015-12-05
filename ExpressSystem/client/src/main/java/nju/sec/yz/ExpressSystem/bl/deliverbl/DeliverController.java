@@ -9,11 +9,13 @@ import nju.sec.yz.ExpressSystem.vo.DeliverVO;
 import nju.sec.yz.ExpressSystem.vo.DeliverySheetVO;
 import nju.sec.yz.ExpressSystem.vo.OfficeArriveSheetVO;
 import nju.sec.yz.ExpressSystem.vo.OfficeLoadSheetVO;
+import nju.sec.yz.ExpressSystem.vo.PositionVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiveVO;
 import nju.sec.yz.ExpressSystem.vo.SendSheetVO;
 import nju.sec.yz.ExpressSystem.vo.TransitArriveSheetVO;
 import nju.sec.yz.ExpressSystem.vo.TransitLoadSheetVO;
 import nju.sec.yz.ExpressSystem.vo.TransitSheetVO;
+import nju.sec.yz.ExpressSystem.vo.TransitVO;
 /**
  * 负责物流信息模块的逻辑控制
  * @author 周聪
@@ -128,6 +130,18 @@ public class DeliverController implements DeliverBlService{
 		TransitCarReceipt receipt=new TransitCarReceipt();
 		ResultMessage message=receipt.make(vo);
 		return message;
+	}
+
+	@Override
+	public TransitVO getCurrentTransit() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public PositionVO getCurrentPosition() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

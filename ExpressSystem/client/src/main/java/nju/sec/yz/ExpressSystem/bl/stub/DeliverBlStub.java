@@ -11,11 +11,13 @@ import nju.sec.yz.ExpressSystem.vo.DeliverySheetVO;
 import nju.sec.yz.ExpressSystem.vo.OfficeArriveSheetVO;
 import nju.sec.yz.ExpressSystem.vo.OfficeLoadSheetVO;
 import nju.sec.yz.ExpressSystem.vo.OrderVO;
+import nju.sec.yz.ExpressSystem.vo.PositionVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiveVO;
 import nju.sec.yz.ExpressSystem.vo.SendSheetVO;
 import nju.sec.yz.ExpressSystem.vo.TransitArriveSheetVO;
 import nju.sec.yz.ExpressSystem.vo.TransitLoadSheetVO;
 import nju.sec.yz.ExpressSystem.vo.TransitSheetVO;
+import nju.sec.yz.ExpressSystem.vo.TransitVO;
 
 public class DeliverBlStub implements DeliverBlService{
 	//物流历史轨迹
@@ -80,6 +82,16 @@ public class DeliverBlStub implements DeliverBlService{
 	}
 	@Override
 	public ResultMessage transitCarReceipt(TransitSheetVO vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public TransitVO getCurrentTransit() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public PositionVO getCurrentPosition() {
 		// TODO Auto-generated method stub
 		return null;
 	}

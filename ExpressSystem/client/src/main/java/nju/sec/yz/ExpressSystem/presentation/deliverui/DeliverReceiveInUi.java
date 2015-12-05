@@ -93,15 +93,15 @@ public class DeliverReceiveInUi extends JPanel{
 				System.out.println(reVO.getReceiveInformation().getId());
 				// 失败
 				System.out.println(result== null);
-//				if (result.getResult() == Result.FAIL) {
-//					warning.setText(result.getMessage());
-//					warning.setBounds(138, 490, 463 - 138, 30);
-//					warning.setFont(new Font("Dialog", 1, 15));
-//					warning.setForeground(Color.red);
-//					add(warning);
-//					repaint();
-//				} else {
-					// 提交成功
+				if (result.getResult() == Result.FAIL) {
+					warning.setText(result.getMessage());
+					warning.setBounds(138, 490, 463 - 138, 30);
+					warning.setFont(new Font("Dialog", 1, 15));
+					warning.setForeground(Color.red);
+					add(warning);
+					repaint();
+				} else {
+					 //提交成功
 					warning.setText("提交成功");
 					warning.setBounds(270, 490, 70, 30);
 					warning.setFont(new Font("Dialog", 1, 15));
@@ -109,7 +109,7 @@ public class DeliverReceiveInUi extends JPanel{
 					warning.setVisible(true);
 					add(warning);
 					repaint();
-//					}
+					}
 				
 				}	
 			

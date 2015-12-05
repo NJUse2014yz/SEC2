@@ -8,11 +8,13 @@ import nju.sec.yz.ExpressSystem.vo.DeliverVO;
 import nju.sec.yz.ExpressSystem.vo.DeliverySheetVO;
 import nju.sec.yz.ExpressSystem.vo.OfficeArriveSheetVO;
 import nju.sec.yz.ExpressSystem.vo.OfficeLoadSheetVO;
+import nju.sec.yz.ExpressSystem.vo.PositionVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiveVO;
 import nju.sec.yz.ExpressSystem.vo.SendSheetVO;
 import nju.sec.yz.ExpressSystem.vo.TransitArriveSheetVO;
 import nju.sec.yz.ExpressSystem.vo.TransitLoadSheetVO;
 import nju.sec.yz.ExpressSystem.vo.TransitSheetVO;
+import nju.sec.yz.ExpressSystem.vo.TransitVO;
 
 /**
  * @author xiaosaisai
@@ -30,14 +32,23 @@ public interface DeliverBlService {
 	 */
 	public List<String> getBarIdList(String transitSheetId);
 	
-	//寄件单
-	public ResultMessage deliverReceipt (SendSheetVO vo);
 	/**
-	 * @author cong
 	 * 快递员查询订单(寄件单)信息
 	 */
 	public SendSheetVO checkDeliverReceipt(String barID);
 	
+	/**
+	 * 获得当前用户所在的中转中心
+	 */
+	public TransitVO getCurrentTransit();
+	
+	/**
+	 * 获得当前用户所在的营业厅
+	 */
+	public PositionVO getCurrentPosition();
+	
+	//寄件单
+	public ResultMessage deliverReceipt (SendSheetVO vo);
 	//收件单
 	public ResultMessage  recieveReceipt(ReceiveVO vo);
 	//营业厅装车单

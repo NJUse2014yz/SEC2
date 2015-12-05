@@ -21,7 +21,6 @@ public class RecieveReceipt {
 		ReceiveInformation info=vo.getReceiveInformation();
 		String validResult=isValid(vo);
 		if(!validResult.equals("success")){
-			System.out.println("亲，系统中不存在订单");
 			return new ResultMessage(Result.FAIL,validResult);
 		}
 			
