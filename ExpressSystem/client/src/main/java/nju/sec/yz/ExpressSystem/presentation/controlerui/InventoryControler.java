@@ -1,6 +1,5 @@
 package nju.sec.yz.ExpressSystem.presentation.controlerui;
 
-import nju.sec.yz.ExpressSystem.presentation.deliverui.DeliverOrderInUi;
 import nju.sec.yz.ExpressSystem.presentation.inventoryui.InventoryCheck;
 import nju.sec.yz.ExpressSystem.presentation.inventoryui.InventoryIn;
 import nju.sec.yz.ExpressSystem.presentation.inventoryui.InventoryMainUi;

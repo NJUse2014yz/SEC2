@@ -3,10 +3,8 @@ package nju.sec.yz.ExpressSystem.presentation.controlerui;
 import javax.swing.JPanel;
 
 import nju.sec.yz.ExpressSystem.presentation.accountui.AccountMainUi;
-import nju.sec.yz.ExpressSystem.presentation.accountui.AccountMainUiTest;
 import nju.sec.yz.ExpressSystem.presentation.deliverui.DeliverMainUi;
 import nju.sec.yz.ExpressSystem.presentation.deliverui.DeliverMainUiTest;
-import nju.sec.yz.ExpressSystem.presentation.deliverui.DeliverOrderInUi;
 import nju.sec.yz.ExpressSystem.presentation.deliverui.DeliverOrderSearchUi;
 import nju.sec.yz.ExpressSystem.presentation.inventoryui.InventoryMainUi;
 import nju.sec.yz.ExpressSystem.presentation.inventoryui.InventoryMainUiTest;

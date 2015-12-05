@@ -173,6 +173,6 @@ public class InventoryInSheet implements ReceiptService {
 			message.setMessage("架号不对哟");
 		if(!ValidHelper.isValidInt(positon))
 			message.setMessage("位号不对哟");
-		return message;
+		return new ResultMessage(Result.SUCCESS);
 	}
 }

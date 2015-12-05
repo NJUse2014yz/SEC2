@@ -6,7 +6,6 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import nju.sec.yz.ExpressSystem.presentation.deliverui.DeliverOrderInUi;
 
 public class MainUi extends JFrame{
 	private JPanel now;
