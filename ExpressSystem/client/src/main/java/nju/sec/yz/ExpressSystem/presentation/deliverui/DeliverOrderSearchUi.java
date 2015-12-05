@@ -1,26 +1,19 @@
 package nju.sec.yz.ExpressSystem.presentation.deliverui;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumn;
 
-import nju.sec.yz.ExpressSystem.bl.deliverbl.Deliver;
 import nju.sec.yz.ExpressSystem.bl.deliverbl.DeliverController;
 import nju.sec.yz.ExpressSystem.blservice.deliverBlService.DeliverBlService;
 import nju.sec.yz.ExpressSystem.common.GoodInformation;
@@ -28,7 +21,7 @@ import nju.sec.yz.ExpressSystem.common.OrderInformation;
 import nju.sec.yz.ExpressSystem.common.SendInformation;
 import nju.sec.yz.ExpressSystem.common.ToAndFromInformation;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
-import nju.sec.yz.ExpressSystem.vo.OrderVO;
+import nju.sec.yz.ExpressSystem.vo.SendSheetVO;
 
 public class DeliverOrderSearchUi extends JPanel {
 	
@@ -66,11 +59,11 @@ public class DeliverOrderSearchUi extends JPanel {
 
 			confirmButton.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
-					OrderVO ordervo=deliver.checkDeliver(searchnumber.getText());
+					SendSheetVO sheetvo=deliver.checkDeliverReceipt(searchnumber.getText());
 					
 					
 //					快递单号填写错误的情况如何考虑
-					if(ordervo==null){
+					if(sheetvo==null){
 						warning=new JLabel();
 						warning.setText("输入信息错误");
 						warning.setBounds(250,490,100,30);
@@ -79,8 +72,7 @@ public class DeliverOrderSearchUi extends JPanel {
 						add(warning);
 						repaint();
 					}else{
-						OrderInformation orderInformation=ordervo.getOrderInformation();
-						SendInformation sendIn=orderInformation.getSendInformation();
+						SendInformation sendIn=sheetvo.getSendInformation();
 						ToAndFromInformation fromPerson=sendIn.getFromPerson();
 						ToAndFromInformation toPerson=sendIn.getToPerson();
 						GoodInformation good=sendIn.getGood();
