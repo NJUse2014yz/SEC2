@@ -683,6 +683,11 @@ public class AccountInitialUi extends JPanel{
 				if(T&&S&&C&&A&&I)
 				{
 					result=initialBl.finish();
+					warningT.setVisible(false);
+					warningS.setVisible(false);
+					warningC.setVisible(false);
+					warningI.setVisible(false);
+					warningA.setVisible(false);
 					if(result.getResult()==Result.SUCCESS)
 					{
 						warning.setText("期初建账成功");
