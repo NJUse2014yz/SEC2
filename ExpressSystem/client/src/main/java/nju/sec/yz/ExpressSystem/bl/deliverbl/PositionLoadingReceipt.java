@@ -7,6 +7,7 @@ import java.util.Set;
 
 import nju.sec.yz.ExpressSystem.bl.carAndDriverbl.Car;
 import nju.sec.yz.ExpressSystem.bl.managerbl.CityConst;
+import nju.sec.yz.ExpressSystem.bl.managerbl.Position;
 import nju.sec.yz.ExpressSystem.bl.managerbl.Price;
 import nju.sec.yz.ExpressSystem.bl.managerbl.PriceService;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptID;
@@ -15,6 +16,7 @@ import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptSaveService;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
 import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.bl.userbl.User;
+import nju.sec.yz.ExpressSystem.common.DeliveryState;
 import nju.sec.yz.ExpressSystem.common.IdType;
 import nju.sec.yz.ExpressSystem.common.LoadInformation;
 import nju.sec.yz.ExpressSystem.common.ReceiptType;
@@ -25,6 +27,7 @@ import nju.sec.yz.ExpressSystem.po.OfficeLoadSheetPO;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.po.TransitLoadSheetPO;
 import nju.sec.yz.ExpressSystem.vo.OfficeLoadSheetVO;
+import nju.sec.yz.ExpressSystem.vo.PositionVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 import nju.sec.yz.ExpressSystem.vo.TransitLoadSheetVO;
 
@@ -115,6 +118,18 @@ public class PositionLoadingReceipt implements ReceiptService{
 		return positionID;
 	}
 	
+	/**
+	 * 获得当前营业厅
+	 */
+	public PositionVO getCurrentPosition(){
+		Position position=new Position();
+		
+		String positionId=this.getCurrentPositionID();
+		
+		return position.findPosition(positionId);
+		
+	}
+	
 	private String getMakePersonId(){
 		User user=new User();
 		String id=user.getCurrentID();
@@ -188,8 +203,20 @@ public class PositionLoadingReceipt implements ReceiptService{
 	
 	@Override
 	public ResultMessage approve(ReceiptVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		List<String> barIds = ((OfficeLoadSheetVO)vo).getBarIds();
+		LoadInformation info = ((OfficeLoadSheetVO)vo).getOfficeLoadInformation();
+		
+		Deliver deliver = new Deliver();
+		Position position=new Position();
+		
+		for(String barId:barIds){
+			String positionName=position.findPosition(info.getAgencyId()).getName();
+			String trail=positionName+" 已发出，下一站 "+info.getDestinationId()+" "+info.getTime();
+			deliver.updateDeliverInfo(barId, trail, DeliveryState.OFFICE_OUT);
+		}
+		
+		
+		return new ResultMessage(Result.SUCCESS);
 	}
 
 	@Override

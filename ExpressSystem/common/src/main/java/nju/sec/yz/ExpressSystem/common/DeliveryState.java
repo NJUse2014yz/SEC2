@@ -12,8 +12,8 @@ public enum DeliveryState  implements Serializable{
 	BROKEN,//损坏
 	OFFICE_IN,
 	OFFICE_OUT,
-	STORE_IN,
-	STORE_OUT,
+	TRANSIT_IN,
+	TRANSIT_OUT,
 	DELIVING,//派件
 	RECEICE;
 }

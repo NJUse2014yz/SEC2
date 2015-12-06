@@ -1,5 +1,9 @@
 package nju.sec.yz.ExpressSystem.bl.deliverbl;
 
+import java.util.List;
+
+import nju.sec.yz.ExpressSystem.bl.managerbl.Position;
+import nju.sec.yz.ExpressSystem.bl.managerbl.Transit;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptID;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptSaveService;
@@ -7,14 +11,14 @@ import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
 import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.bl.userbl.User;
 import nju.sec.yz.ExpressSystem.common.ArriveInformation;
+import nju.sec.yz.ExpressSystem.common.ArriveState;
+import nju.sec.yz.ExpressSystem.common.DeliveryState;
 import nju.sec.yz.ExpressSystem.common.IdType;
 import nju.sec.yz.ExpressSystem.common.ReceiptType;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
-import nju.sec.yz.ExpressSystem.po.OfficeArriveSheetPO;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.po.TransitArriveSheetPO;
-import nju.sec.yz.ExpressSystem.vo.OfficeArriveSheetVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 import nju.sec.yz.ExpressSystem.vo.TransitArriveSheetVO;
 
@@ -83,8 +87,26 @@ public class TransitReceiveReceipt implements ReceiptService {
 
 	@Override
 	public ResultMessage approve(ReceiptVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		ArriveInformation info=((TransitArriveSheetVO)vo).getTransitArriveInformation();
+		List<ArriveState> states=info.getState();
+		
+		BarIdList idService=new BarIdList();
+		List<String> barIds=idService.getBarIds(info.getTransitSheetId());
+		
+		//获得本中转中心名称
+		Transit transit=new Transit();
+		String transitId=vo.getId().split(IdType.POSITION_RECEIVE_RECEIPT.getIdStr())[0];
+		String transitName=transit.observeTransit(transitId).getName(); 
+		
+		//更新物流信息
+		Deliver deliver=new Deliver();
+		for(int i=0;i<barIds.size();i++){
+			String trail=transitName+" 已收入。";
+			trail=trail+states.get(i)+" "+info.getTime();
+			deliver.updateDeliverInfo(barIds.get(i), trail, DeliveryState.TRANSIT_IN);
+		}
+		
+		return new ResultMessage(Result.SUCCESS);
 	}
 
 	@Override

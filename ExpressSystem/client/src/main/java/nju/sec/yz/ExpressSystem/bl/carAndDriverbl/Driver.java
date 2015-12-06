@@ -23,7 +23,7 @@ import nju.sec.yz.ExpressSystem.vo.DriverVO;
  * @author 周聪
  *
  */
-public class Driver implements DriverInitialService {
+public class Driver {
 
 	private DriverDataService data;
 
@@ -189,7 +189,7 @@ public class Driver implements DriverInitialService {
 		return true;
 	}
 
-	@Override
+	
 	public DriverVO show(DriverPO po) {
 		String id = po.getId();
 		String name = po.getName();
@@ -202,7 +202,7 @@ public class Driver implements DriverInitialService {
 		return vo;
 	}
 
-	@Override
+	
 	public DriverPO changeVOToPO(DriverVO vo) {
 		String id = vo.getId();
 		String name = vo.getName();
@@ -215,28 +215,7 @@ public class Driver implements DriverInitialService {
 		return po;
 	}
 
-	@Override
-	public ResultMessage init(List<DriverVO> drivers) {
-		ResultMessage message = new ResultMessage(Result.FAIL);
-
-		List<DriverPO> pos = new ArrayList<>();
-		for (DriverVO Driver : drivers) {
-			String validResult = isValid(Driver);
-			if (!validResult.equals("success"))
-				return new ResultMessage(Result.FAIL, drivers.indexOf(Driver) + " " + validResult);
-
-			DriverPO po = this.changeVOToPO(Driver);
-			pos.add(po);
-		}
-
-		try {
-			message = data.init(pos);
-		} catch (RemoteException e) {
-			RMIExceptionHandler.handleRMIException();
-			e.printStackTrace();
-		}
-		return message;
-	}
+	
 
 	/*
 	 * public void test(){ this.add(new DriverVO("0251234565", "mike",

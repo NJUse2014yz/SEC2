@@ -1,6 +1,7 @@
 package nju.sec.yz.ExpressSystem.bl.accountbl;
 
 import java.rmi.RemoteException;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import nju.sec.yz.ExpressSystem.bl.carAndDriverbl.Car;
@@ -10,6 +11,7 @@ import nju.sec.yz.ExpressSystem.bl.managerbl.Staff;
 import nju.sec.yz.ExpressSystem.bl.managerbl.Transit;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptID;
 import nju.sec.yz.ExpressSystem.bl.tool.LogTool;
+import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.bl.userbl.User;
 import nju.sec.yz.ExpressSystem.bl.userbl.UserInfo;
 import nju.sec.yz.ExpressSystem.blservice.accountBlService.InitialBlService;
@@ -146,20 +148,11 @@ public class Initial {
 		List<TransitPO> transitPOs = this.changeVOToPO(transitService, transits);
 		initialPO.setTransit(transitPOs);
 
-		initialPO.setDate(this.createId());
+		initialPO.setDate(TimeTool.getDate());
 
 		return initialPO;
 	}
 
-	/**
-	 * 期初建帐id编号规则：财务人员编号+"i"+3位数字
-	 */
-	private String createId() {
-		UserInfo user = new User();
-		String userId = user.getCurrentID();
-		ReceiptID idMaker = new ReceiptID();
-		return idMaker.getID(userId, IdType.INITIAL);
-	}
 
 	/**
 	 * 将vo列表转成po列表
@@ -176,7 +169,17 @@ public class Initial {
 
 	public InitialVO observeInitial(String date) {
 
-		return null;
+		InitialVO vo=null;
+		
+		try {
+			AccountBookPO po=accountBookData.find(date);
+			vo=this.show(po);
+		} catch (RemoteException e) {
+			RMIExceptionHandler.handleRMIException();
+			e.printStackTrace();
+		}
+		
+		return vo;
 	}
 
 	private InitialVO show(AccountBookPO po) {
@@ -216,7 +219,7 @@ public class Initial {
 		}
 		
 		
-		return null;
+		return dates;
 	}
 
 	/**

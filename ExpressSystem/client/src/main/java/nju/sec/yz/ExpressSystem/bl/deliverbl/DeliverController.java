@@ -35,8 +35,8 @@ public class DeliverController implements DeliverBlService{
 	
 	@Override
 	public DeliverVO checkDeliver(String id) {
-		
-		return null;
+		Deliver deliver=new Deliver();
+		return deliver.checkDeliver(id);
 	}
 
 	@Override
@@ -134,14 +134,14 @@ public class DeliverController implements DeliverBlService{
 
 	@Override
 	public TransitVO getCurrentTransit() {
-		// TODO Auto-generated method stub
-		return null;
+		TransitLoadingReceipt receipt=new TransitLoadingReceipt();
+		return receipt.getCurrentTransit();
 	}
 
 	@Override
 	public PositionVO getCurrentPosition() {
-		// TODO Auto-generated method stub
-		return null;
+		PositionLoadingReceipt receipt=new PositionLoadingReceipt();
+		return receipt.getCurrentPosition();
 	}
 
 }

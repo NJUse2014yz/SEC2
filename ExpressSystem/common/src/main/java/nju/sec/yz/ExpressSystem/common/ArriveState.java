@@ -8,5 +8,32 @@ import java.io.Serializable;
  *
  */
 public enum ArriveState  implements Serializable{
-	PERFECT,Broken,LOST;
+	PERFECT(){
+
+		@Override
+		public String toString() {
+			
+			return "";
+		}
+		
+	},BROKEN(){
+
+		@Override
+		public String toString() {
+			
+			return "您的快递已损坏。";
+		}
+	
+	},LOST(){
+
+		@Override
+		public String toString() {
+			
+			return "您的快递已丢失。";
+		}
+		
+	};
+	
+	public abstract String toString();
+	
 }

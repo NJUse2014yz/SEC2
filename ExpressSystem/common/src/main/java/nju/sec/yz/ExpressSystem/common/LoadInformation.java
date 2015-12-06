@@ -21,7 +21,7 @@ public class LoadInformation  implements Serializable{
 	private String time;//装车日期
 	private String agencyId;//营业厅编号 （025（城市编码）+000三位数字）
 	private String transportId;//汽运编号 （营业厅编号+日期+00000五位数字）
-	private String destinationId;//到达地（本地中转中心或者其它营业厅）
+	private String destinationId;//到达地（本地中转中心或者其它营业厅）  名称
 	private String carId;//车辆代号
 	private String officerId;//
 	private String driverId;//

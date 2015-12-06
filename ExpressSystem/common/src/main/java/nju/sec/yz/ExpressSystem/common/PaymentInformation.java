@@ -22,6 +22,10 @@ public class PaymentInformation  implements Serializable{
 		this.positionId = positionId;
 	}
 	
+	public PaymentInformation() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public String getTime() {
 		return time;
 	}

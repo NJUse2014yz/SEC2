@@ -2,10 +2,6 @@ package nju.sec.yz.ExpressSystem.bl.deliverbl;
 
 import java.util.List;
 
-import nju.sec.yz.ExpressSystem.bl.managerbl.Transit;
-import nju.sec.yz.ExpressSystem.bl.managerbl.AgencyInfo;
-import nju.sec.yz.ExpressSystem.bl.managerbl.CityConst;
-import nju.sec.yz.ExpressSystem.bl.managerbl.CityDistanceService;
 import nju.sec.yz.ExpressSystem.bl.managerbl.Price;
 import nju.sec.yz.ExpressSystem.bl.managerbl.PriceService;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptID;
@@ -18,6 +14,7 @@ import nju.sec.yz.ExpressSystem.common.ReceiptType;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.TransitFlightInformation;
+import nju.sec.yz.ExpressSystem.common.TransitInformation;
 import nju.sec.yz.ExpressSystem.common.TransportType;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.po.TransitFlightSheetPO;
@@ -102,8 +99,9 @@ public class TransitFlightReceipt implements ReceiptService {
 
 	@Override
 	public ResultMessage approve(ReceiptVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		TransitReceiptHelper helper=new TransitReceiptHelper();
+		helper.approve(vo);
+		return new ResultMessage(Result.SUCCESS);
 	}
 
 	@Override

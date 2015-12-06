@@ -1,5 +1,8 @@
 package nju.sec.yz.ExpressSystem.bl.deliverbl;
 
+import java.util.List;
+
+import nju.sec.yz.ExpressSystem.bl.managerbl.Position;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptID;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptSaveService;
@@ -8,6 +11,8 @@ import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.bl.userbl.User;
 import nju.sec.yz.ExpressSystem.bl.userbl.UserInfo;
 import nju.sec.yz.ExpressSystem.common.ArriveInformation;
+import nju.sec.yz.ExpressSystem.common.ArriveState;
+import nju.sec.yz.ExpressSystem.common.DeliveryState;
 import nju.sec.yz.ExpressSystem.common.IdType;
 import nju.sec.yz.ExpressSystem.common.ReceiptType;
 import nju.sec.yz.ExpressSystem.common.Result;
@@ -91,8 +96,26 @@ public class PositionReceiveReceipt implements ReceiptService {
 
 	@Override
 	public ResultMessage approve(ReceiptVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		ArriveInformation info=((OfficeArriveSheetVO)vo).getOfficeArrive();
+		List<ArriveState> states=info.getState();
+		
+		BarIdList idService=new BarIdList();
+		List<String> barIds=idService.getBarIds(info.getTransitSheetId());
+		
+		//获得本营业厅名称
+		Position position=new Position();
+		String positionId=vo.getId().split(IdType.POSITION_RECEIVE_RECEIPT.getIdStr())[0];
+		String positionName=position.findPosition(positionId).getName(); 
+		
+		//更新物流信息
+		Deliver deliver=new Deliver();
+		for(int i=0;i<barIds.size();i++){
+			String trail=positionName+" 已收入。";
+			trail=trail+states.get(i)+" "+info.getTime();
+			deliver.updateDeliverInfo(barIds.get(i), trail, DeliveryState.OFFICE_IN);
+		}
+		
+		return new ResultMessage(Result.SUCCESS);
 	}
 
 	@Override

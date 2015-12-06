@@ -11,6 +11,7 @@ import nju.sec.yz.ExpressSystem.bl.managerbl.CityConst;
 import nju.sec.yz.ExpressSystem.bl.managerbl.CityDistanceService;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptID;
 import nju.sec.yz.ExpressSystem.bl.userbl.User;
+import nju.sec.yz.ExpressSystem.common.DeliveryState;
 import nju.sec.yz.ExpressSystem.common.IdType;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
@@ -18,6 +19,7 @@ import nju.sec.yz.ExpressSystem.common.TransitInformation;
 import nju.sec.yz.ExpressSystem.po.BarIdsPO;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
+import nju.sec.yz.ExpressSystem.vo.TransitSheetVO;
 
 /**
  * 中转单 中转中心到中转中心
@@ -95,23 +97,24 @@ public class TransitReceiptHelper {
 		return new ResultMessage(Result.SUCCESS);
 	}
 
-	public ResultMessage make(ReceiptVO vo) {
-		
-		return null;
-	}
 	
 	public ResultMessage approve(ReceiptVO vo) {
+		TransitInformation info=((TransitSheetVO)vo).getTransitInformation();
+		List<String> barIds=info.getBarIds();
 		
-		return null;
+		//
+		Deliver deliver=new Deliver();
+		String trail=info.getDeparture()+"已发出，下一站"+info.getDestination();
+		trail=trail+" "+info.getTime();
+		for(String barId:barIds){
+			deliver.updateDeliverInfo(barId, trail, DeliveryState.TRANSIT_OUT);
+		}
+		
+		
+		return new ResultMessage(Result.SUCCESS);
 	}
+
 	
-	public ReceiptVO show(ReceiptPO po) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
-	public ReceiptPO convertToPO(ReceiptVO vo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 }

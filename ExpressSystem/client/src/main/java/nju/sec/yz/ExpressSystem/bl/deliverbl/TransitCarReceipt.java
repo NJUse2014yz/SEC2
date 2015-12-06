@@ -92,8 +92,9 @@ public class TransitCarReceipt implements ReceiptService {
 
 	@Override
 	public ResultMessage approve(ReceiptVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		TransitReceiptHelper helper=new TransitReceiptHelper();
+		helper.approve(vo);
+		return new ResultMessage(Result.SUCCESS);
 	}
 
 	@Override

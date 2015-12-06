@@ -92,8 +92,9 @@ public class TransitTrainReceipt implements ReceiptService {
 
 	@Override
 	public ResultMessage approve(ReceiptVO vo) {
-		
-		return null;
+		TransitReceiptHelper helper=new TransitReceiptHelper();
+		helper.approve(vo);
+		return new ResultMessage(Result.SUCCESS);
 	}
 
 	@Override

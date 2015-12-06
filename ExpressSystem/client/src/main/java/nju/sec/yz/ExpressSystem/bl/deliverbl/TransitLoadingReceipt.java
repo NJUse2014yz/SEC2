@@ -7,8 +7,10 @@ import java.util.Set;
 
 import nju.sec.yz.ExpressSystem.bl.carAndDriverbl.Car;
 import nju.sec.yz.ExpressSystem.bl.managerbl.CityConst;
+import nju.sec.yz.ExpressSystem.bl.managerbl.Position;
 import nju.sec.yz.ExpressSystem.bl.managerbl.Price;
 import nju.sec.yz.ExpressSystem.bl.managerbl.PriceService;
+import nju.sec.yz.ExpressSystem.bl.managerbl.Transit;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptID;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptSaveService;
@@ -16,6 +18,7 @@ import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
 import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.bl.userbl.User;
 import nju.sec.yz.ExpressSystem.bl.userbl.UserInfo;
+import nju.sec.yz.ExpressSystem.common.DeliveryState;
 import nju.sec.yz.ExpressSystem.common.IdType;
 import nju.sec.yz.ExpressSystem.common.LoadInformation;
 import nju.sec.yz.ExpressSystem.common.ReceiptType;
@@ -24,8 +27,10 @@ import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.po.BarIdsPO;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.po.TransitLoadSheetPO;
+import nju.sec.yz.ExpressSystem.vo.OfficeLoadSheetVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 import nju.sec.yz.ExpressSystem.vo.TransitLoadSheetVO;
+import nju.sec.yz.ExpressSystem.vo.TransitVO;
 
 /**
  * 中转中心装车单的领域模型
@@ -145,6 +150,14 @@ public class TransitLoadingReceipt implements ReceiptService {
 		String transitId = userId.split("B")[0];
 		return transitId;
 	}
+	
+	public TransitVO getCurrentTransit(){
+		String transitId=getCurrentTransitId(getCurrentUserId());
+		
+		Transit transit=new Transit();
+		
+		return transit.observeTransit(transitId);
+	}
 
 	@Override
 	public ResultMessage isValid(ReceiptVO vo) {
@@ -188,8 +201,20 @@ public class TransitLoadingReceipt implements ReceiptService {
 
 	@Override
 	public ResultMessage approve(ReceiptVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		List<String> barIds = ((TransitLoadSheetVO)vo).getBarIds();
+		LoadInformation info = ((TransitLoadSheetVO)vo).getTransitLoadInformation();
+		
+		Deliver deliver = new Deliver();
+		Transit transit=new Transit();
+		
+		for(String barId:barIds){
+			String transitName=transit.observeTransit(info.getAgencyId()).getName();
+			String trail=transitName+" 已发出，下一站 "+info.getDestinationId()+" "+info.getTime();
+			deliver.updateDeliverInfo(barId, trail, DeliveryState.TRANSIT_OUT);
+		}
+		
+		
+		return new ResultMessage(Result.SUCCESS);
 	}
 
 	@Override

@@ -8,6 +8,7 @@ import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.bl.userbl.User;
 import nju.sec.yz.ExpressSystem.bl.userbl.UserInfo;
 import nju.sec.yz.ExpressSystem.common.DeliveryInformation;
+import nju.sec.yz.ExpressSystem.common.DeliveryState;
 import nju.sec.yz.ExpressSystem.common.IdType;
 import nju.sec.yz.ExpressSystem.common.ReceiptType;
 import nju.sec.yz.ExpressSystem.common.Result;
@@ -102,8 +103,14 @@ public class PositionSendReceipt implements ReceiptService{
 
 	@Override
 	public ResultMessage approve(ReceiptVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		DeliveryInformation info=((DeliverySheetVO)vo).getDeliveryInformation();
+		
+		String trail="快递员正在派件中。 "+info.getTime();
+		
+		//更新物流信息
+		Deliver deliver=new Deliver();
+		
+		return deliver.updateDeliverInfo(info.getBarId(), trail, DeliveryState.DELIVING);
 	}
 
 
