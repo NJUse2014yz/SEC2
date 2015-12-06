@@ -211,7 +211,7 @@ public class PositionLoadingReceipt implements ReceiptService{
 		
 		for(String barId:barIds){
 			String positionName=position.findPosition(info.getAgencyId()).getName();
-			String trail=positionName+" 已发出，下一站 "+info.getDestinationId()+" "+info.getTime();
+			String trail=positionName+"已发出，下一站"+info.getDestinationId()+" "+info.getTime();
 			deliver.updateDeliverInfo(barId, trail, DeliveryState.OFFICE_OUT);
 		}
 		

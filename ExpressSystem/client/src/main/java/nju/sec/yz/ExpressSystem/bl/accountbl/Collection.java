@@ -25,6 +25,7 @@ import nju.sec.yz.ExpressSystem.po.PositionPO;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.po.TransitLoadSheetPO;
 import nju.sec.yz.ExpressSystem.vo.PaymentSheetVO;
+import nju.sec.yz.ExpressSystem.vo.PaymentVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 import nju.sec.yz.ExpressSystem.vo.TransitLoadSheetVO;
 /**
@@ -232,20 +233,25 @@ public class Collection implements ReceiptService{
 		
 	}
 	
-	public List<PaymentSheetVO> getByPosition(String date,String positionId){
+	public PaymentVO getByPosition(String date,String positionId){
 		List<PaymentSheetPO> pos=new ArrayList<>();
 		List<PaymentSheetVO> vos=new ArrayList<>();
+		double sum=0.0;
 		try {
 			pos=inData.findByPosition(date, positionId);
 			for(PaymentSheetPO po:pos){
 				PaymentSheetVO vo=this.changeVOToPO(po);
 				vos.add(vo);
+				sum=sum+vo.getPaymentInformation().getAmount();
 			}
 		} catch (RemoteException e) {
 			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
-		return vos;
+		PaymentVO vo=new PaymentVO();
+		vo.paymentList=vos;
+		vo.sum=sum;
+		return vo;
 		
 	}
 

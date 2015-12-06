@@ -105,7 +105,7 @@ public class PositionSendReceipt implements ReceiptService{
 	public ResultMessage approve(ReceiptVO vo) {
 		DeliveryInformation info=((DeliverySheetVO)vo).getDeliveryInformation();
 		
-		String trail="快递员正在派件中。 "+info.getTime();
+		String trail="快递员正在派件中。  "+info.getTime();
 		
 		//更新物流信息
 		Deliver deliver=new Deliver();

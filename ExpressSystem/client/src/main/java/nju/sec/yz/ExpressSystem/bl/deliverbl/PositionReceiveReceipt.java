@@ -110,7 +110,7 @@ public class PositionReceiveReceipt implements ReceiptService {
 		//更新物流信息
 		Deliver deliver=new Deliver();
 		for(int i=0;i<barIds.size();i++){
-			String trail=positionName+" 已收入。";
+			String trail=positionName+"已收入。";
 			trail=trail+states.get(i)+" "+info.getTime();
 			deliver.updateDeliverInfo(barIds.get(i), trail, DeliveryState.OFFICE_IN);
 		}

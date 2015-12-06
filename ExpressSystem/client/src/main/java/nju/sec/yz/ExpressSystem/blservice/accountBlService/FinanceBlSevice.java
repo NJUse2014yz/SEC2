@@ -8,6 +8,7 @@ import nju.sec.yz.ExpressSystem.vo.BussinessVO;
 import nju.sec.yz.ExpressSystem.vo.InitialVO;
 import nju.sec.yz.ExpressSystem.vo.OutVO;
 import nju.sec.yz.ExpressSystem.vo.PaymentSheetVO;
+import nju.sec.yz.ExpressSystem.vo.PaymentVO;
 import nju.sec.yz.ExpressSystem.vo.ProfitVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 
@@ -16,11 +17,10 @@ public interface FinanceBlSevice {
 	//查看经营情况表
 	public BussinessVO checkBusinessCircumstance (String begin,String end);
 	/**
-	 * 查看收款单
-	 * 返回值改为List
+	 * 按营业厅查看收款单
 	 * @author cong
 	 */
-	public List<PaymentSheetVO> checkReceipt (String day,String positionId);
+	public PaymentVO checkReceipt (String day,String positionId);
 	
 	
 	/**

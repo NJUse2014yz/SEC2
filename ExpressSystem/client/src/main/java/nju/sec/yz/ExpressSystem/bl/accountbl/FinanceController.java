@@ -8,6 +8,7 @@ import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.BussinessVO;
 import nju.sec.yz.ExpressSystem.vo.OutVO;
 import nju.sec.yz.ExpressSystem.vo.PaymentSheetVO;
+import nju.sec.yz.ExpressSystem.vo.PaymentVO;
 import nju.sec.yz.ExpressSystem.vo.ProfitVO;
 /**
  * 负责财务进出的逻辑控制
@@ -25,10 +26,10 @@ public class FinanceController implements FinanceBlSevice{
 	}
 
 	@Override
-	public List<PaymentSheetVO> checkReceipt(String day, String positionId) {
+	public PaymentVO checkReceipt(String day, String positionId) {
 		Collection in=new Collection();
-		List<PaymentSheetVO> list=in.getByPosition(day, positionId);
-		return list;
+		
+		return in.getByPosition(day, positionId);
 	}
 
 	@Override
