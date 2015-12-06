@@ -209,7 +209,7 @@ public class TransitLoadingReceipt implements ReceiptService {
 		
 		for(String barId:barIds){
 			String transitName=transit.observeTransit(info.getAgencyId()).getName();
-			String trail=transitName+" 已发出，下一站 "+info.getDestinationId()+" "+info.getTime();
+			String trail=transitName+"已发出，下一站"+info.getDestinationId()+" "+info.getTime();
 			deliver.updateDeliverInfo(barId, trail, DeliveryState.TRANSIT_OUT);
 		}
 		
