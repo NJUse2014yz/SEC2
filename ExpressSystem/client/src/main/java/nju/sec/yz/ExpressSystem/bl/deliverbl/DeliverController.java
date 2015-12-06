@@ -144,4 +144,10 @@ public class DeliverController implements DeliverBlService{
 		return receipt.getCurrentPosition();
 	}
 
+	@Override
+	public List<String> getValidAgency() {
+		PositionLoadingReceipt receipt=new PositionLoadingReceipt();
+		return receipt.getValidAgency();
+	}
+
 }

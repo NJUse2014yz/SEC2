@@ -47,6 +47,11 @@ public interface DeliverBlService {
 	 */
 	public PositionVO getCurrentPosition();
 	
+	/**
+	 * 营业厅装车单和到达单可选机构
+	 */
+	public List<String> getValidAgency();
+	
 	//寄件单
 	public ResultMessage deliverReceipt (SendSheetVO vo);
 	//收件单
@@ -71,7 +76,9 @@ public interface DeliverBlService {
 	
 	public ResultMessage transitCarReceipt(TransitSheetVO vo);
 	
-	//获得营业厅的收款记录
+	/**
+	 * 获得营业厅的收款记录
+	 */
 	public List<CollectionRecordVO> getCollectionRecords();
 }
 

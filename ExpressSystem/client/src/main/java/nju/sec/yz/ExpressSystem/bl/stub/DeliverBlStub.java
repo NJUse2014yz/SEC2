@@ -95,5 +95,10 @@ public class DeliverBlStub implements DeliverBlService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public List<String> getValidAgency() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

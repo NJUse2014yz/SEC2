@@ -10,6 +10,7 @@ import nju.sec.yz.ExpressSystem.vo.BussinessVO;
 import nju.sec.yz.ExpressSystem.vo.InitialVO;
 import nju.sec.yz.ExpressSystem.vo.OutVO;
 import nju.sec.yz.ExpressSystem.vo.PaymentSheetVO;
+import nju.sec.yz.ExpressSystem.vo.PaymentVO;
 import nju.sec.yz.ExpressSystem.vo.ProfitVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 
@@ -48,7 +49,7 @@ public class FinanceBlStub implements FinanceBlSevice {
 	}
 
 	@Override
-	public List<PaymentSheetVO> checkReceipt(String day, String positionId) {
+	public PaymentVO checkReceipt(String day, String positionId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

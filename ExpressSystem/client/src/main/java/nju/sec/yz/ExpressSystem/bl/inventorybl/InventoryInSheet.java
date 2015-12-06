@@ -1,6 +1,8 @@
 package nju.sec.yz.ExpressSystem.bl.inventorybl;
 
 import java.rmi.RemoteException;
+
+import nju.sec.yz.ExpressSystem.bl.deliverbl.Deliver;
 import nju.sec.yz.ExpressSystem.bl.deliverbl.ValidHelper;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptID;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;
@@ -161,10 +163,16 @@ public class InventoryInSheet implements ReceiptService {
 		
 		ResultMessage message=new ResultMessage(Result.FAIL);
 		
-		if(!ValidHelper.isBeforeDate(time))
-			message.setMessage("入库日期不符合规范啊");
 		if(!ValidHelper.isBarId(id))
 			message.setMessage("订单条形码不对啊");
+		//判断系统中是否存在该条形码号的物流信息
+		Deliver deliver=new Deliver();
+		if(deliver.checkDeliver(id)==null){
+			return new ResultMessage(Result.FAIL,"系统中还没有订单"+id+"的信息哦");
+		}
+		
+		if(!ValidHelper.isBeforeDate(time))
+			message.setMessage("入库日期不符合规范啊");
 		if(!ValidHelper.isBlock(block))
 			message.setMessage("区号不对哟");
 		if(!ValidHelper.isValidInt(row))

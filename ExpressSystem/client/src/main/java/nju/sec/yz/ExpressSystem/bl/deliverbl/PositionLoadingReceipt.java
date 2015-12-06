@@ -10,6 +10,7 @@ import nju.sec.yz.ExpressSystem.bl.managerbl.CityConst;
 import nju.sec.yz.ExpressSystem.bl.managerbl.Position;
 import nju.sec.yz.ExpressSystem.bl.managerbl.Price;
 import nju.sec.yz.ExpressSystem.bl.managerbl.PriceService;
+import nju.sec.yz.ExpressSystem.bl.managerbl.Transit;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptID;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptSaveService;
@@ -30,6 +31,7 @@ import nju.sec.yz.ExpressSystem.vo.OfficeLoadSheetVO;
 import nju.sec.yz.ExpressSystem.vo.PositionVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 import nju.sec.yz.ExpressSystem.vo.TransitLoadSheetVO;
+import nju.sec.yz.ExpressSystem.vo.TransitVO;
 
 /**
  * 营业厅装车单的领域模型
@@ -128,6 +130,25 @@ public class PositionLoadingReceipt implements ReceiptService{
 		
 		return position.findPosition(positionId);
 		
+	}
+	
+	public List<String> getValidAgency(){
+		List<String> agencies=new ArrayList<>();
+		PositionVO current=this.getCurrentPosition();
+		
+		//获得所属中转中心
+		Transit transitService=new Transit();
+		TransitVO transit=transitService.observeTransit(current.transitId);
+		agencies.add(transit.getName());
+		
+		//添加所属中转中心的其他营业厅
+		for(PositionVO position:transit.getPositions()){
+			agencies.add(position.name);
+		}
+		
+		agencies.remove(current.name);
+		
+		return agencies;
 	}
 	
 	private String getMakePersonId(){

@@ -32,7 +32,9 @@ public class Message{
 		}
 	}
 	
-	
+	/**
+	 * 保存消息到数据层
+	 */
 	public void send(MessageVO vo) {
 		String messageId=this.createId(vo.toPersonId);
 		

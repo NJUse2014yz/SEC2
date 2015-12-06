@@ -10,5 +10,5 @@ public class DeliverVO {
 
 	public String barId;// 标识快递的十位数字条形码号
 
-	public List<String> trails;// 物流轨迹
+	public List<String> trails;// 轨迹+" "+时间
 }
