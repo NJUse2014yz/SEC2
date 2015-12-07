@@ -3,7 +3,7 @@ package nju.sec.yz.ExpressSystem.presentation.controlerui;
 public enum ACCOUNT_CONTROL {
 	ACCOUNT_MAIN,
 	INCOME,
-	INITIAL,
+	INITIAL,CHECK_INITIAL,
 	COST,COST_SUCCESS,
 	TABLE_OPERATE,TABLE_COST,
 	ADD_ACCOUNT,ADD_SUCCESS,

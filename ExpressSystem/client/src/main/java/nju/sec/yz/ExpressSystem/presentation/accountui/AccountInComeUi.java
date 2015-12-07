@@ -1,5 +1,7 @@
 package nju.sec.yz.ExpressSystem.presentation.accountui;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.FocusEvent;
@@ -37,6 +39,7 @@ public class AccountInComeUi extends JPanel{
 	private ManagerController managerController;
 	private FinanceBlSevice finance;
 	
+	private JLabel total;
 	private String[] positions;
 	private DateChooser date;
 	private JComboBox choose;
@@ -50,7 +53,10 @@ public class AccountInComeUi extends JPanel{
 			{"rea","2352616","hes","rea","245367776"},
 			{"20151017","2352616","2352616","2352616","354678998764"}};
 	
-	
+	private static final int total_x=192;
+	private static final int total_y=416;
+	private static final int total_w=90;
+	private static final int total_h=30;
 	private static int date_x=183;
 	private static int date_y=67;
 	private static int choose_x=240;
@@ -169,9 +175,17 @@ public class AccountInComeUi extends JPanel{
 				table.setRowHeight(20);
 				scroll=new JScrollPane(table);
 				scroll.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
+//				total.setText(financeBl.);
 				add(scroll);
 			}
 		});
+		
+		total=new JLabel();
+		total.setBounds(total_x, total_y, total_w, total_h);
+		total.setFont(new Font("Dialog", 1, 15));
+		total.setForeground(Color.white);
+		add(total);
+		total.setVisible(false);
 		
 //		back=new JButton(backIcon);
 //		back.setBounds(back_x,back_y,back_w,back_h);

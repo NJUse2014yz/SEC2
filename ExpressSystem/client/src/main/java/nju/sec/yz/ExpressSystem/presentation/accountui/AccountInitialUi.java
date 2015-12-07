@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +28,7 @@ import nju.sec.yz.ExpressSystem.common.InventoryInInformation;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.Status;
+import nju.sec.yz.ExpressSystem.presentation.controlerui.ACCOUNT_CONTROL;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.AccountControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.AccountVO;
@@ -49,6 +51,7 @@ public class AccountInitialUi extends JPanel{
 	private boolean A=false;
 	private boolean I=false;
 	
+	private JButton check;
 	private JButton buttonAG;
 	private JButton buttonS;
 	private JButton buttonC;
@@ -95,7 +98,10 @@ public class AccountInitialUi extends JPanel{
 	private String[][] dataI=new String[][]{{"","","","","","","",""}};
 	private String num;
 	
-	
+	private static final int check_x=418;
+	private static final int check_y=59;
+	private static final int check_w=50;
+	private static final int check_h=22;
 	private static final int scroll_x=146;
 	private static final int scroll_y=113;
 	private static final int scroll_w=300;
@@ -147,6 +153,7 @@ public class AccountInitialUi extends JPanel{
 	private ImageIcon CIcon=new ImageIcon("graphic/account/button/button_C.jpg");
 	private ImageIcon ACIcon=new ImageIcon("graphic/account/button/button_AC.jpg");
 	private ImageIcon IIcon=new ImageIcon("graphic/account/button/button_I.jpg");
+	private ImageIcon checkIcon=new ImageIcon("graphic/account/button/check_button.gif");
 	
 	public AccountInitialUi(ClientControler mainControler,AccountButtonComponents bc){
 		super();
@@ -236,6 +243,17 @@ public class AccountInitialUi extends JPanel{
 			}
 		});
 		add(buttonI);
+		
+		check=new JButton(checkIcon);
+		check.setBounds(check_x, check_y, check_w, check_h);
+		check.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e)
+			{
+				controler.accountChangePanel(ACCOUNT_CONTROL.CHECK_INITIAL);
+				System.out.println("checkInitial");
+			}
+		});
+		add(check);
 		
 		modelT=new DefaultTableModel(dataT,nameT);
 		modelT.addTableModelListener(new TableModelListener(){

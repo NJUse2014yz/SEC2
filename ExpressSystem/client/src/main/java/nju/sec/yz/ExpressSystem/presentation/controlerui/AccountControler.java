@@ -2,6 +2,7 @@ package nju.sec.yz.ExpressSystem.presentation.controlerui;
 
 import nju.sec.yz.ExpressSystem.presentation.accountui.AccountAddUi;
 import nju.sec.yz.ExpressSystem.presentation.accountui.AccountChechLogUi;
+import nju.sec.yz.ExpressSystem.presentation.accountui.AccountCheckInitialUi;
 import nju.sec.yz.ExpressSystem.presentation.accountui.AccountCostTableUi;
 import nju.sec.yz.ExpressSystem.presentation.accountui.AccountCostUi;
 import nju.sec.yz.ExpressSystem.presentation.accountui.AccountDeleteUi;
@@ -52,7 +53,8 @@ public class AccountControler {
 		case MODIFY_ACCOUNTLIST:
 			mainControler.mainFrame.nextPanel(new AccountModifyUi(mainControler,bc));
 			break;
-		case MODIFY:
+		case CHECK_INITIAL:
+			mainControler.mainFrame.nextPanel(new AccountCheckInitialUi(mainControler,bc));
 			break;
 		case ENQUIRY_ACCOUNT:
 			mainControler.mainFrame.nextPanel(new AccountInquiryUi(mainControler,bc));

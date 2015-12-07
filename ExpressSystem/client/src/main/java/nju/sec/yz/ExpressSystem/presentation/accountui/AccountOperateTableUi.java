@@ -43,9 +43,9 @@ public class AccountOperateTableUi extends JPanel{
 	private JButton confirm;
 	private JButton excle;
 	private JLabel warning;
-	private String[] nameIn=new String[]{"收款日期","收款金额","收款人","快递条形码号"};
+	private String[] nameIn=new String[]{"收款日期","收款金额","收款人","快递条形码号","营业厅编号"};
 	private String[] nameOut=new String[]{"付款日期 ","付款金额","付款人","付款账号","条目","备注"};
-	private String[][] dataIn=new String[][]{{"","","",""}};
+	private String[][] dataIn=new String[][]{{"","","","",""}};
 	private String[][] dataOut=new String[][]{{"","","","","",""}};
 	
 	private static final int begin_x=225;
@@ -129,8 +129,9 @@ public class AccountOperateTableUi extends JPanel{
 					{
 						dataIn[i][0]=invo.get(i).getPaymentInformation().getTime();
 						dataIn[i][1]=Double.toString(invo.get(i).getPaymentInformation().getAmount());
-						dataIn[i][0]=invo.get(i).getPaymentInformation().getInDeliverId();
-						dataIn[i][0]=invo.get(i).getBarIds();
+						dataIn[i][2]=invo.get(i).getPaymentInformation().getInDeliverId();
+						dataIn[i][3]=invo.get(i).getBarIds();
+						dataIn[i][4]=invo.get(i).getPaymentInformation().getPositionId();
 					}
 					inTable=new JTable(dataIn,nameIn);
 					dataOut=new String[sizeOut][6];
