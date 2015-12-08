@@ -160,10 +160,13 @@ public class UserOrderSearchUi extends JPanel {
 //			    		{good.getSize()}	
 			       
 //			   }; 
-			String[][] tableData=new String[trails.size()][1];
+			String[][] tableData=new String[trails.size()][2];
+			String[] temp;
 			for(int i=0;i<trails.size();i++)
 			{
-				tableData[i][0]=trails.get(i);
+				temp=trails.get(i).split(" ");
+				tableData[i][0]=temp[0];
+				tableData[i][1]=temp[1];
 			}
 //		    Object[] columnTitle = {"订单条形码号",
 //		    		"寄件人姓名" , "寄件地址" , "寄件城市",
@@ -173,7 +176,7 @@ public class UserOrderSearchUi extends JPanel {
 //		    		"件数","重量","体积",
 //		    		"品名","尺寸"
 //		    		};  
-			String[] columnTitle={"物流轨迹"};
+			String[] columnTitle={"物流轨迹","时间"};
 			      //以二维数组和一维数组来创建一个JTable对象  
 			      table = new JTable(tableData , columnTitle);  
 			      //将JTable对象放在JScrollPane中，并将该JScrollPane放在窗口中显示出来  
