@@ -56,6 +56,8 @@ public class TransitReceiptTrain extends JPanel {
 	private JLabel fare;
 	private JLabel warning = new JLabel();
 
+	private DateChooser date;
+	
 	public TransitReceiptTrain(ClientControler maincontrol, TransitButtonComponents tbc) {
 		this.maincontrol = maincontrol;
 		this.tbc = tbc;
@@ -69,7 +71,8 @@ public class TransitReceiptTrain extends JPanel {
 		setLayout(null);
 		setSize(490, 550);
 		setVisible(true);
-		DateChooser date = new DateChooser(this, 212, 81);
+		
+		date = new DateChooser(this, 212, 81);
 
 		ArrayList<TransitVO> trans = manager.observeAllTransit();
 		String[] transitAgency = new String[trans.size()];

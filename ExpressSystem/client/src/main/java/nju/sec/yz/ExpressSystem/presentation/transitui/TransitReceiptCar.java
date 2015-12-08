@@ -56,6 +56,8 @@ DeliverBlService deliverblservice=new DeliverController();
 	private JLabel carTransitId;
 	private JLabel fare;
 	private JLabel warning=new JLabel();
+	
+	private DateChooser date;
 	public TransitReceiptCar(ClientControler maincontrol,TransitButtonComponents  tbc) {
 		this.maincontrol=maincontrol;
 		this.tbc=tbc;
@@ -68,7 +70,8 @@ DeliverBlService deliverblservice=new DeliverController();
 	private void iniTransitReceiptCar() {
 		setLayout(null);
 		setSize(490, 550);
-		setVisible(true);	DateChooser date=new DateChooser(this, 212, 81);
+		setVisible(true);	
+		date=new DateChooser(this, 212, 81);
 		
 		ArrayList<TransitVO> trans=manager.observeAllTransit();
 		String[] transitAgency=new String[trans.size()];
@@ -155,9 +158,9 @@ DeliverBlService deliverblservice=new DeliverController();
 				TransitSheetVO vo=new TransitSheetVO();
 				vo.setTransportType(TransportType.PLANE);
 					//destinationId项不存在，用null写入
-					TransitFlightInformation flightInf = new TransitFlightInformation(date.getTime(),
-							departure.getSelectedItem().toString(), destination.getSelectedItem().toString(),
-							transiterId.getText().toString(), BarIdArray);
+				TransitFlightInformation flightInf = new TransitFlightInformation(date.getTime(),
+						departure.getSelectedItem().toString(), destination.getSelectedItem().toString(),
+						transiterId.getText().toString(), BarIdArray);
 					flightInf.setFlightId(carId.getText());
 					flightInf.setShelfId(driverId.getText());
 				vo.setTransitInformation(flightInf);

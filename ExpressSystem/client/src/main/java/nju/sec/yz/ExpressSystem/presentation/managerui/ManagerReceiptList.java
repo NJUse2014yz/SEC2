@@ -77,20 +77,17 @@ public class ManagerReceiptList extends JPanel {
 		mbc.changePanel(this);
 		mbc.change();
 		iniManagerReceiptList();
-		//test the modify
-		
-				maincontroler.mainFrame.nextPanel(new
-						 ManagerReceiptModify(maincontroler,mbc,new ReceiptVO(),"寄件单"));
+		// test the modify
 
-//				  OrderIn orderIn=new OrderIn(this);
+//		maincontroler.mainFrame.nextPanel(new ManagerReceiptModify(maincontroler, mbc, new ReceiptVO(), "寄件单"));
+
+		// OrderIn orderIn=new OrderIn(this);
 	}
 
 	private void iniManagerReceiptList() {
 		setLayout(null);
 		setSize(490, 550);
 		setVisible(true);
-		
-		
 
 		String[] reitype = { "收款单", "付款单", "寄件单", "营业厅装车单", "营业厅收件单", "营业厅派送单", "汽车中转单", "火车中转单", "飞机中转单", "中转中心接收单",
 				"中转中心装车单", "入库单", "出库单" };
@@ -123,41 +120,52 @@ public class ManagerReceiptList extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				volist = receipt.getByType(getType(type.getSelectedItem().toString()));
-				 TableData=new Object[volist.size()][2];
-				 for(int i=0;i<volist.size();i++){
-				 String temp=volist.get(i).getMakeTime();
-				 temp=temp.substring(0,
-				 4)+"/"+temp.substring(4,6)+"/"+temp.substring(6,8);
-				 TableData[i][0]=temp;
-				 TableData[i][1]=volist.get(i).getId();
-				 }
+				TableData = new Object[volist.size()][2];
+				for (int i = 0; i < volist.size(); i++) {
+					String temp = volist.get(i).getMakeTime();
+					temp = temp.substring(0, 4) + "/" + temp.substring(4, 6) + "/" + temp.substring(6, 8);
+					TableData[i][0] = temp;
+					TableData[i][1] = volist.get(i).getId();
+				}
 				switch (type.getSelectedItem().toString()) {
 				case "收款单":
 					iniCollection();
+					break;
 				case "付款单":
 					iniPayment();
+					break;
 				case "寄件单":
 					iniDelReip();
+					break;
 				case "营业厅装车单":
 					iniPosLoad();
+					break;
 				case "营业厅收件单":
 					iniPosReseive();
 				case "营业厅派送单":
 					iniPosSend();
+					break;
 				case "汽车中转单":
 					iniTransCar();
+					break;
 				case "火车中转单":
 					iniTransTrain();
+					break;
 				case "飞机中转单":
 					iniTranFlight();
+					break;
 				case "中转中心接收单":
 					iniTransReceive();
+					break;
 				case "中转中心装车单":
 					iniTransLoad();
+					break;
 				case "入库单":
 					iniInvenIn();
+					break;
 				case "出库单":
 					iniInvenOut();
+					break;
 				}
 				model = new DefaultTableModel(TableData, title);
 				table.setModel(model);
@@ -165,19 +173,19 @@ public class ManagerReceiptList extends JPanel {
 			}
 		});
 
-//		 table.addMouseListener(new MouseAdapter() {
-//		 public void MouseClicked(MouseEvent e){
-//		 if(e.getClickCount()==2){
-//		 int row =((JTable)e.getSource()).rowAtPoint(e.getPoint()); //获得行位置
-//		// int col=((JTable)e.getSource()).columnAtPoint(e.getPoint());
-//		 //获得列位置 String
-//		
-//		 maincontroler.mainFrame.nextPanel(new
-//		 ManagerReceiptModify(maincontroler,mbc,volist.get(row),type.getSelectedItem().toString()));
-//		
-//		 }
-//		 }
-//		 });
+		// table.addMouseListener(new MouseAdapter() {
+		// public void MouseClicked(MouseEvent e){
+		// if(e.getClickCount()==2){
+		// int row =((JTable)e.getSource()).rowAtPoint(e.getPoint()); //获得行位置
+		// // int col=((JTable)e.getSource()).columnAtPoint(e.getPoint());
+		// //获得列位置 String
+		//
+		// maincontroler.mainFrame.nextPanel(new
+		// ManagerReceiptModify(maincontroler,mbc,volist.get(row),type.getSelectedItem().toString()));
+		//
+		// }
+		// }
+		// });
 
 		ImageIcon passIcon = new ImageIcon("graphic/manager/button/pass.png");
 		pass = new JButton(passIcon);
@@ -188,7 +196,9 @@ public class ManagerReceiptList extends JPanel {
 			public void MouseClicked(MouseEvent e) {
 				int[] deletelines = table.getSelectedRows();
 				for (int c = 0; c < deletelines.length; c++) {
-					ResultMessage tempresult = receipt.approve(volist.get(deletelines[c]));
+
+					ResultMessage tempresult = receipt
+							.approve(modifyVO(deletelines[c], volist.get(deletelines[c]).getId()));
 					if (tempresult.getResult() == Result.FAIL) {
 						// 如果失败会跳出，显示失败
 						warning.setText(tempresult.getMessage());
@@ -211,6 +221,8 @@ public class ManagerReceiptList extends JPanel {
 					}
 				}
 			}
+
+			
 		});
 
 		ImageIcon passAllIcon = new ImageIcon("graphic/manager/button/passAll.png");
@@ -221,7 +233,9 @@ public class ManagerReceiptList extends JPanel {
 		passAll.addMouseListener(new MouseAdapter() {
 			public void MouseClicked(MouseEvent e) {
 				for (int c = 0; c < volist.size(); c++) {
-					ResultMessage tempresult = receipt.approve(volist.get(c));
+					
+					ResultMessage tempresult = receipt
+							.approve(modifyVO(c, volist.get(c).getId()));
 					if (tempresult.getResult() == Result.FAIL) {
 						// 如果失败会跳出，显示失败
 						warning.setText(tempresult.getMessage());
@@ -245,10 +259,7 @@ public class ManagerReceiptList extends JPanel {
 				}
 			}
 		});
-		
-		
-		
-		
+
 	}
 
 	@Override
@@ -301,13 +312,13 @@ public class ManagerReceiptList extends JPanel {
 		TableData = new String[volist.size()][6];
 		for (int c = 0; c < volist.size(); c++) {
 			String tempId = volist.get(c).getId();
-			CollectionRecordVO tempvo = (CollectionRecordVO) receipt.getSingle(tempId);
+			CollectionRecordVO tempvo = (CollectionRecordVO) receipt.getSingle((tempId));
 
-//			PaymentInformation tempInf = tempvo.getPaymentInformation();
+			// PaymentInformation tempInf = tempvo.getPaymentInformation();
 			String temp = tempvo.getMakeTime();
 			temp = temp.substring(0, 4) + "/" + temp.substring(4, 6) + "/" + temp.substring(6, 8);
 			TableData[c][0] = temp;
-			TableData[c][1] = tempvo.getBarId();
+			TableData[c][1] = tempvo.getId();
 			TableData[c][2] = tempvo.getMakePerson();
 			TableData[c][3] = tempvo.getTime();
 			TableData[c][4] = tempvo.getDeliverId();
@@ -315,6 +326,21 @@ public class ManagerReceiptList extends JPanel {
 
 		}
 
+	}
+
+	private ReceiptVO modifyCollection(int c, String Id) {
+		CollectionRecordVO tempvo = (CollectionRecordVO) receipt.getSingle((Id));
+		
+		String temp =(String) TableData[c][0];
+		temp = temp.substring(0, 4) + temp.substring(5, 7) + temp.substring(8, 10);
+		tempvo.setMakeTime(temp);
+		tempvo.setBarId((String) TableData[c][1]);
+		tempvo.setMakePerson((String) TableData[c][2]);
+		tempvo.setTime((String) TableData[c][3]);
+		tempvo.setDeliverId((String) TableData[c][4]);
+		tempvo.setAmount((Double) TableData[c][5]);
+		
+		return tempvo;
 	}
 
 	// 付款单
@@ -326,13 +352,13 @@ public class ManagerReceiptList extends JPanel {
 		TableData = new String[volist.size()][7];
 		for (int c = 0; c < volist.size(); c++) {
 			String tempId = volist.get(c).getId();
-			PaymentSheetVO tempvo = (PaymentSheetVO) receipt.getSingle(tempId);
+			PaymentSheetVO tempvo = (PaymentSheetVO) receipt.getSingle((tempId));
 
 			PaymentInformation tempInf = tempvo.getPaymentInformation();
 			String temp = tempvo.getMakeTime();
 			temp = temp.substring(0, 4) + "/" + temp.substring(4, 6) + "/" + temp.substring(6, 8);
 			TableData[c][0] = temp;
-			TableData[c][1] = tempvo.getBarIds();
+			TableData[c][1] = tempvo.getId();
 			TableData[c][2] = tempvo.getMakePerson();
 			TableData[c][3] = tempInf.getPositionId();
 			TableData[c][4] = tempInf.getTime();
@@ -343,288 +369,553 @@ public class ManagerReceiptList extends JPanel {
 
 	}
 
+	private ReceiptVO modifyPayment(int c, String Id) {
+		PaymentSheetVO tempvo = (PaymentSheetVO) receipt.getSingle((Id));
+		PaymentInformation tempInf = tempvo.getPaymentInformation();
+		
+		String temp = (String) TableData[c][0];
+		temp = temp.substring(0, 4) + temp.substring(5, 7) + temp.substring(8, 10);
+		tempvo.setId((String) TableData[c][1]);
+		tempvo.setMakePerson((String) TableData[c][2]);
+		tempInf.setTime((String) TableData[c][3]);
+		tempInf.setInDeliverId((String) TableData[c][4]);
+		tempInf.setAmount((Double) TableData[c][5]);
+
+		tempvo.setPaymentInformation(tempInf);
+		return tempvo;
+	}
+
 	// 寄件单
 	private void iniDelReip() {
 		// TODO Auto-generated method stub
 
-		title=new String[]{"填写日期","表单号","填表人","寄件人姓名","寄件人地址","寄件人手机","收件人姓名",
-				"收件人地址","收件人手机","件数","重量","品名","快递费","预计送达时间"};
-		
+		title = new String[] { "填写日期", "表单号", "填表人", "寄件人姓名", "寄件人地址", "寄件人手机", "收件人姓名", "收件人地址", "收件人手机", "件数", "重量",
+				"品名", "快递费", "预计送达时间" };
+
 		TableData = new String[volist.size()][14];
-		for(int c=0;c<volist.size();c++){
-			String tempId=volist.get(c).getId();
-			SendSheetVO tempvo=(SendSheetVO) receipt.getSingle(tempId);
-			
-			SendInformation tempInf=tempvo.getSendInformation();
-			ToAndFromInformation fromPerson=tempInf.getFromPerson();
-			ToAndFromInformation toPerson=tempInf.getToPerson();
-			GoodInformation good=tempInf.getGood();
-			String temp=tempvo.getMakeTime();
-			 temp=temp.substring(0,4)+"/"+temp.substring(4,6)+"/"+temp.substring(6,8);
-			TableData[c][0]=temp;
-			TableData[c][1]=tempvo.getId();
-			TableData[c][2]=tempvo.getMakePerson();
-			TableData[c][3]=fromPerson.getName();
-			TableData[c][4]=fromPerson.getAddress();
-			TableData[c][5]=fromPerson.getCellphone();
-			TableData[c][6]=toPerson.getName();
-			TableData[c][7]=toPerson.getAddress();
-			TableData[c][8]=toPerson.getCellphone();
-			TableData[c][9]=good.getTotal();
-			TableData[c][10]=good.getWeight();
-			TableData[c][11]=good.getName();
-			TableData[c][12]=tempInf.getCostForAll();
-			TableData[c][13]=tempInf.getPredictTime();
-			
-			
+		for (int c = 0; c < volist.size(); c++) {
+			String tempId = volist.get(c).getId();
+			SendSheetVO tempvo = (SendSheetVO) receipt.getSingle((tempId));
+
+			SendInformation tempInf = tempvo.getSendInformation();
+			ToAndFromInformation fromPerson = tempInf.getFromPerson();
+			ToAndFromInformation toPerson = tempInf.getToPerson();
+			GoodInformation good = tempInf.getGood();
+			String temp = tempvo.getMakeTime();
+			temp = temp.substring(0, 4) + "/" + temp.substring(4, 6) + "/" + temp.substring(6, 8);
+			TableData[c][0] = temp;
+			TableData[c][1] = tempvo.getId();
+			TableData[c][2] = tempvo.getMakePerson();
+			TableData[c][3] = fromPerson.getName();
+			TableData[c][4] = fromPerson.getAddress();
+			TableData[c][5] = fromPerson.getCellphone();
+			TableData[c][6] = toPerson.getName();
+			TableData[c][7] = toPerson.getAddress();
+			TableData[c][8] = toPerson.getCellphone();
+			TableData[c][9] = good.getTotal();
+			TableData[c][10] = good.getWeight();
+			TableData[c][11] = good.getName();
+			TableData[c][12] = tempInf.getCostForAll();
+			TableData[c][13] = tempInf.getPredictTime();
+
+		
 		}
+	}
+
+	private ReceiptVO modifyDelReip(int c, String Id) {
+
+		SendSheetVO tempvo = (SendSheetVO) receipt.getSingle((Id));
+
+		SendInformation tempInf = tempvo.getSendInformation();
+		ToAndFromInformation fromPerson = tempInf.getFromPerson();
+		ToAndFromInformation toPerson = tempInf.getToPerson();
+		GoodInformation good = tempInf.getGood();
+
+		String temp =(String) TableData[c][0];
+		temp = temp.substring(0, 4) + temp.substring(5, 7) + temp.substring(8, 10);
+		tempvo.setMakeTime(temp);
+		tempvo.setId((String) TableData[c][1]);
+		tempvo.setMakePerson((String) TableData[c][2]);
+		tempInf.setCostForAll((Double) TableData[c][12]);
+		tempInf.setPredictTime((int) TableData[c][13]);
+		good.setTotal((String) TableData[c][9]);
+		good.setWeight((String) TableData[c][10]);
+		good.setName((String) TableData[c][11]);
+		fromPerson.setName((String) TableData[c][3]);
+		fromPerson.setAddress((String) TableData[c][4]);
+		fromPerson.setCellphone((String) TableData[c][5]);
+		toPerson.setName((String) TableData[c][6]);
+		toPerson.setAddress((String) TableData[c][7]);
+		toPerson.setCellphone((String) TableData[c][8]);
+
+		tempInf.setFromPerson(fromPerson);
+		tempInf.setToPerson(toPerson);
+		tempvo.setSendInformation(tempInf);
+
+		return tempvo;
 	}
 
 	// 营业厅装车单
 	private void iniPosLoad() {
 		// TODO Auto-generated method stub
 
-		title=new String[]{"填写日期","表单号","填表人","派件时间","递送人"};
-		
+		title = new String[] { "填写日期", "表单号", "填表人", "派件时间", "递送人" };
+
 		TableData = new String[volist.size()][5];
-		for(int c=0;c<volist.size();c++){
-			String tempId=volist.get(c).getId();
-			DeliverySheetVO tempvo=(DeliverySheetVO) receipt.getSingle(tempId);
-			
-			DeliveryInformation tempInf=tempvo.getDeliveryInformation();
-			String temp=tempvo.getMakeTime();
-			 temp=temp.substring(0,4)+"/"+temp.substring(4,6)+"/"+temp.substring(6,8);
-			TableData[c][0]=temp;
-			TableData[c][1]=tempvo.getId();
-			TableData[c][2]=tempvo.getMakePerson();
-			TableData[c][3]=tempInf.getTime();
-			TableData[c][4]=tempInf.getOutDeliverId();
-			
+		for (int c = 0; c < volist.size(); c++) {
+			String tempId = volist.get(c).getId();
+			DeliverySheetVO tempvo = (DeliverySheetVO) receipt.getSingle((tempId));
+
+			DeliveryInformation tempInf = tempvo.getDeliveryInformation();
+			String temp = tempvo.getMakeTime();
+			temp = temp.substring(0, 4) + "/" + temp.substring(4, 6) + "/" + temp.substring(6, 8);
+			TableData[c][0] = temp;
+			TableData[c][1] = tempvo.getId();
+			TableData[c][2] = tempvo.getMakePerson();
+			TableData[c][3] = tempInf.getTime();
+			TableData[c][4] = tempInf.getOutDeliverId();
+
 		}
+	}
+	
+	private ReceiptVO modifyPosLoad(int c, String Id) {
+		DeliverySheetVO tempvo = (DeliverySheetVO) receipt.getSingle((Id));
+		DeliveryInformation tempInf = tempvo.getDeliveryInformation();
+		String temp = (String) TableData[c][0];
+		temp = temp.substring(0, 4) + temp.substring(5, 7) + temp.substring(8, 10);
+		tempvo.setMakeTime(temp);
+		tempvo.setId((String) TableData[c][1]);
+		tempvo.setMakePerson((String) TableData[c][2]);
+		tempInf.setTime((String) TableData[c][3]);
+		tempInf.setOutDeliverId((String) TableData[c][4]);
+
+		tempvo.setDeliveryInformation(tempInf);
+		return tempvo;
+		
 	}
 
 	// 营业厅收件单
 	private void iniPosReseive() {
 		// TODO Auto-generated method stub
-		title=new String[]{"填写日期","表单号","填表人","派件时间","递送人"};
-		
-		TableData = new String[volist.size()][5];
-		for(int c=0;c<volist.size();c++){
-			String tempId=volist.get(c).getId();
-			OfficeArriveSheetVO tempvo=(OfficeArriveSheetVO) receipt.getSingle(tempId);
-			
-			ArriveInformation tempInf=tempvo.getOfficeArrive();
-			String temp=tempvo.getMakeTime();
-			 temp=temp.substring(0,4)+"/"+temp.substring(4,6)+"/"+temp.substring(6,8);
-			TableData[c][0]=temp;
-			TableData[c][1]=tempvo.getId();
-			TableData[c][2]=tempvo.getMakePerson();
-			TableData[c][3]=tempInf.getTime();
-			TableData[c][4]=tempInf.getTransitSheetId();
-			TableData[c][4]=tempInf.getDeparture();
+		title = new String[] { "填写日期", "表单号", "填表人", "派件时间", "递送人" };
+
+		TableData = new String[volist.size()][6];
+		for (int c = 0; c < volist.size(); c++) {
+			String tempId = volist.get(c).getId();
+			OfficeArriveSheetVO tempvo = (OfficeArriveSheetVO) receipt.getSingle((tempId));
+
+			ArriveInformation tempInf = tempvo.getOfficeArrive();
+			String temp = tempvo.getMakeTime();
+			temp = temp.substring(0, 4) + "/" + temp.substring(4, 6) + "/" + temp.substring(6, 8);
+			TableData[c][0] = temp;
+			TableData[c][1] = tempvo.getId();
+			TableData[c][2] = tempvo.getMakePerson();
+			TableData[c][3] = tempInf.getTime();
+			TableData[c][4] = tempInf.getTransitSheetId();
+			TableData[c][5] = tempInf.getDeparture();
 		}
+	}
+	
+	private ReceiptVO modifyPosReseive(int c, String Id) {
+		OfficeArriveSheetVO tempvo = (OfficeArriveSheetVO) receipt.getSingle((Id));
+		ArriveInformation tempInf = tempvo.getOfficeArrive();
+		String temp = (String) TableData[c][0];
+		temp = temp.substring(0, 4) + temp.substring(5, 7) + temp.substring(8, 10);
+		tempvo.setMakeTime(temp);
+		tempvo.setId((String) TableData[c][1]);
+		tempvo.setMakePerson((String) TableData[c][2]);
+		tempInf.setTime((String) TableData[c][3]);
+		tempInf.setTransitSheetId((String) TableData[c][4]);
+		tempInf.setDeparture((String) TableData[c][5]);
+
+		tempvo.setOfficeArrive(tempInf);
+		return tempvo;
+		
 	}
 
 	// 营业厅派送单
 	private void iniPosSend() {
 		// TODO Auto-generated method stub
 
+		title = new String[] { "填写日期", "表单号", "填表人", "派件时间", "派件人" };
 
-		title=new String[]{"填写日期","表单号","填表人","派件时间","派件人"};
-		
 		TableData = new String[volist.size()][5];
-		for(int c=0;c<volist.size();c++){
-			String tempId=volist.get(c).getId();
-			DeliverySheetVO tempvo=(DeliverySheetVO) receipt.getSingle(tempId);
-			
-			DeliveryInformation tempInf=tempvo.getDeliveryInformation();
-			String temp=tempvo.getMakeTime();
-			 temp=temp.substring(0,4)+"/"+temp.substring(4,6)+"/"+temp.substring(6,8);
-			TableData[c][0]=temp;
-			TableData[c][1]=tempvo.getId();
-			TableData[c][2]=tempvo.getMakePerson();
-			TableData[c][3]=tempInf.getTime();
-			TableData[c][4]=tempInf.getOutDeliverId();
-			
+		for (int c = 0; c < volist.size(); c++) {
+			String tempId = volist.get(c).getId();
+			DeliverySheetVO tempvo = (DeliverySheetVO) receipt.getSingle((tempId));
+
+			DeliveryInformation tempInf = tempvo.getDeliveryInformation();
+			String temp = tempvo.getMakeTime();
+			temp = temp.substring(0, 4) + "/" + temp.substring(4, 6) + "/" + temp.substring(6, 8);
+			TableData[c][0] = temp;
+			TableData[c][1] = tempvo.getId();
+			TableData[c][2] = tempvo.getMakePerson();
+			TableData[c][3] = tempInf.getTime();
+			TableData[c][4] = tempInf.getOutDeliverId();
+
 		}
+	}
+	
+
+	private ReceiptVO modifyPosSend(int c, String Id) {
+		DeliverySheetVO tempvo = (DeliverySheetVO) receipt.getSingle((Id));
+		DeliveryInformation tempInf = tempvo.getDeliveryInformation();
+		
+		String temp = (String) TableData[c][0];
+		temp = temp.substring(0, 4) + temp.substring(5, 7) + temp.substring(8, 10);
+		tempvo.setMakeTime(temp);
+		tempvo.setId((String) TableData[c][1]);
+		tempvo.setMakePerson((String) TableData[c][2]);
+		tempInf.setTime((String) TableData[c][3]);
+		tempInf.setOutDeliverId((String) TableData[c][4]);
+
+		tempvo.setDeliveryInformation(tempInf);
+		return tempvo;
+		
 	}
 
 	// 汽车中转单
 	private void iniTransCar() {
 		// TODO Auto-generated method stub
-		title=new String[]{"填写日期","表单号","填表人","中转时间","中转中心汽运编号","出发地","到达地","监装员","押运员"};
-		
+		title = new String[] { "填写日期", "表单号", "填表人", "中转时间", "中转中心汽运编号", "出发地", "到达地", "监装员", "押运员" };
+
 		TableData = new String[volist.size()][9];
-		for(int c=0;c<volist.size();c++){
-			String tempId=volist.get(c).getId();
-			TransitSheetVO tempvo=(TransitSheetVO) receipt.getSingle(tempId);
-			
-			TransitCarInformation tempInf=(TransitCarInformation)tempvo.getTransitInformation();
-			String temp=tempvo.getMakeTime();
-			 temp=temp.substring(0,4)+"/"+temp.substring(4,6)+"/"+temp.substring(6,8);
-			TableData[c][0]=temp;
-			TableData[c][1]=tempvo.getId();
-			TableData[c][2]=tempvo.getMakePerson();
-			TableData[c][3]=tempInf.getTime();
-			TableData[c][4]=tempInf.getCarTransitId();
-			TableData[c][5]=tempInf.getDeparture();
-			TableData[c][6]=tempInf.getDestination();
-			TableData[c][7]=tempInf.getTransiterId();
-			TableData[c][8]=tempInf.getDriverId();
-			
+		for (int c = 0; c < volist.size(); c++) {
+			String tempId = volist.get(c).getId();
+			TransitSheetVO tempvo = (TransitSheetVO) receipt.getSingle((tempId));
+
+			TransitCarInformation tempInf = (TransitCarInformation) tempvo.getTransitInformation();
+			String temp = tempvo.getMakeTime();
+			temp = temp.substring(0, 4) + "/" + temp.substring(4, 6) + "/" + temp.substring(6, 8);
+			TableData[c][0] = temp;
+			TableData[c][1] = tempvo.getId();
+			TableData[c][2] = tempvo.getMakePerson();
+			TableData[c][3] = tempInf.getTime();
+			TableData[c][4] = tempInf.getCarTransitId();
+			TableData[c][5] = tempInf.getDeparture();
+			TableData[c][6] = tempInf.getDestination();
+			TableData[c][7] = tempInf.getTransiterId();
+			TableData[c][8] = tempInf.getDriverId();
 		}
-		}
+	}
+	
+
+	private ReceiptVO modifyTransCar(int c, String Id) {
+		TransitSheetVO tempvo = (TransitSheetVO) receipt.getSingle((Id));
+		TransitCarInformation tempInf = (TransitCarInformation)tempvo.getTransitInformation();
+		
+		String temp = (String) TableData[c][0];
+		temp = temp.substring(0, 4) + temp.substring(5, 7) + temp.substring(8, 10);
+		tempvo.setMakeTime(temp);
+		tempvo.setId((String) TableData[c][1]);
+		tempvo.setMakePerson((String) TableData[c][2]);
+		tempInf.setTime((String) TableData[c][3]);
+		tempInf.setCarTransitId((String) TableData[c][4]);
+		tempInf.setDeparture((String) TableData[c][5]);
+		tempInf.setDestination((String) TableData[c][6]);
+		tempInf.setTransiterId((String) TableData[c][7]);
+		tempInf.setDriverId((String) TableData[c][8]);
+
+		tempvo.setTransitInformation(tempInf);
+		return tempvo;
+		
+	}
+
 
 	// 火车中转单
 	private void iniTransTrain() {
 		// TODO Auto-generated method stub
-		title=new String[]{"填写日期","表单号","填表人","中转时间","中转中心货运编号","出发地","到达地","车厢号","押运员"};
-		
+		title = new String[] { "填写日期", "表单号", "填表人", "中转时间", "中转中心货运编号", "出发地", "到达地", "车厢号", "押运员" };
+
 		TableData = new String[volist.size()][9];
-		for(int c=0;c<volist.size();c++){
-			String tempId=volist.get(c).getId();
-			TransitSheetVO tempvo=(TransitSheetVO) receipt.getSingle(tempId);
-			
-			TransitTrainInformation tempInf=(TransitTrainInformation)tempvo.getTransitInformation();
-			String temp=tempvo.getMakeTime();
-			 temp=temp.substring(0,4)+"/"+temp.substring(4,6)+"/"+temp.substring(6,8);
-			TableData[c][0]=temp;
-			TableData[c][1]=tempvo.getId();
-			TableData[c][2]=tempvo.getMakePerson();
-			TableData[c][3]=tempInf.getTime();
-			TableData[c][4]=tempInf.getTrainTransitId();
-			TableData[c][5]=tempInf.getDeparture();
-			TableData[c][6]=tempInf.getDestination();
-			TableData[c][7]=tempInf.getTransiterId();
-			TableData[c][8]=tempInf.getCarriageId();
-			
+		for (int c = 0; c < volist.size(); c++) {
+			String tempId = volist.get(c).getId();
+			TransitSheetVO tempvo = (TransitSheetVO) receipt.getSingle((tempId));
+
+			TransitTrainInformation tempInf = (TransitTrainInformation) tempvo.getTransitInformation();
+			String temp = tempvo.getMakeTime();
+			temp = temp.substring(0, 4) + "/" + temp.substring(4, 6) + "/" + temp.substring(6, 8);
+			TableData[c][0] = temp;
+			TableData[c][1] = tempvo.getId();
+			TableData[c][2] = tempvo.getMakePerson();
+			TableData[c][3] = tempInf.getTime();
+			TableData[c][4] = tempInf.getTrainTransitId();
+			TableData[c][5] = tempInf.getDeparture();
+			TableData[c][6] = tempInf.getDestination();
+			TableData[c][7] = tempInf.getTransiterId();
+			TableData[c][8] = tempInf.getCarriageId();
 		}
 	}
+	
+	private ReceiptVO modifyTransTrain(int c, String Id) {
+		TransitSheetVO tempvo = (TransitSheetVO) receipt.getSingle((Id));
+		TransitTrainInformation tempInf = (TransitTrainInformation)tempvo.getTransitInformation();
+		
+		String temp = (String) TableData[c][0];
+		temp = temp.substring(0, 4) + temp.substring(5, 7) + temp.substring(8, 10);
+		tempvo.setMakeTime(temp);
+		tempvo.setId((String) TableData[c][1]);
+		tempvo.setMakePerson((String) TableData[c][2]);
+		tempInf.setTime((String) TableData[c][3]);
+		tempInf.setTrainTransitId((String) TableData[c][4]);
+		tempInf.setDeparture((String) TableData[c][5]);
+		tempInf.setDestination((String) TableData[c][6]);
+		tempInf.setTransiterId((String) TableData[c][7]);
+		tempInf.setCarriageId((String) TableData[c][8]);
+
+		tempvo.setTransitInformation(tempInf);
+		return tempvo;
+		
+	}
+
 
 	// 飞机中转单
 	private void iniTranFlight() {
 		// TODO Auto-generated method stub
-		title=new String[]{"填写日期","表单号","填表人","中转时间","中转中心汽运编号","出发地","到达地","货柜号","押运员"};
-		
+		title = new String[] { "填写日期", "表单号", "填表人", "中转时间", "中转中心汽运编号", "出发地", "到达地", "货柜号", "押运员" };
+
 		TableData = new String[volist.size()][9];
-		for(int c=0;c<volist.size();c++){
-			String tempId=volist.get(c).getId();
-			TransitSheetVO tempvo=(TransitSheetVO) receipt.getSingle(tempId);
-			
-			TransitFlightInformation tempInf=(TransitFlightInformation)tempvo.getTransitInformation();
-			String temp=tempvo.getMakeTime();
-			 temp=temp.substring(0,4)+"/"+temp.substring(4,6)+"/"+temp.substring(6,8);
-			TableData[c][0]=temp;
-			TableData[c][1]=tempvo.getId();
-			TableData[c][2]=tempvo.getMakePerson();
-			TableData[c][3]=tempInf.getTime();
-			TableData[c][4]=tempInf.getFlightTransitId();
-			TableData[c][5]=tempInf.getDeparture();
-			TableData[c][6]=tempInf.getDestination();
-			TableData[c][7]=tempInf.getTransiterId();
-			TableData[c][8]=tempInf.getShelfId();
-			
+		for (int c = 0; c < volist.size(); c++) {
+			String tempId = volist.get(c).getId();
+			TransitSheetVO tempvo = (TransitSheetVO) receipt.getSingle((tempId));
+
+			TransitFlightInformation tempInf = (TransitFlightInformation) tempvo.getTransitInformation();
+			String temp = tempvo.getMakeTime();
+			temp = temp.substring(0, 4) + "/" + temp.substring(4, 6) + "/" + temp.substring(6, 8);
+			TableData[c][0] = temp;
+			TableData[c][1] = tempvo.getId();
+			TableData[c][2] = tempvo.getMakePerson();
+			TableData[c][3] = tempInf.getTime();
+			TableData[c][4] = tempInf.getFlightTransitId();
+			TableData[c][5] = tempInf.getDeparture();
+			TableData[c][6] = tempInf.getDestination();
+			TableData[c][7] = tempInf.getTransiterId();
+			TableData[c][8] = tempInf.getShelfId();
 		}
 	}
 
+	private ReceiptVO modifyTranFlight(int c, String Id) {
+		TransitSheetVO tempvo = (TransitSheetVO) receipt.getSingle((Id));
+		TransitFlightInformation tempInf = (TransitFlightInformation)tempvo.getTransitInformation();
+		
+		String temp = (String) TableData[c][0];
+		temp = temp.substring(0, 4) + temp.substring(5, 7) + temp.substring(8, 10);
+		tempvo.setMakeTime(temp);
+		tempvo.setId((String) TableData[c][1]);
+		tempvo.setMakePerson((String) TableData[c][2]);
+		tempInf.setTime((String) TableData[c][3]);
+		tempInf.setFlightTransitId((String) TableData[c][4]);
+		tempInf.setDeparture((String) TableData[c][5]);
+		tempInf.setDestination((String) TableData[c][6]);
+		tempInf.setTransiterId((String) TableData[c][7]);
+		tempInf.setShelfId((String) TableData[c][8]);
+
+		tempvo.setTransitInformation(tempInf);
+		return tempvo;
+		
+	}
 	// 中转中心接收单
 	private void iniTransReceive() {
 		// TODO Auto-generated method stub
 
-		title=new String[]{"填写日期","表单号","填表人","接收时间","中转单编号","出发地"};
-		
-		TableData = new String[volist.size()][9];
-		for(int c=0;c<volist.size();c++){
-			String tempId=volist.get(c).getId();
-			TransitArriveSheetVO tempvo=(TransitArriveSheetVO) receipt.getSingle(tempId);
-			ArriveInformation tempInf=(ArriveInformation)tempvo.getTransitArriveInformation();
-			String temp=tempvo.getMakeTime();
-			 temp=temp.substring(0,4)+"/"+temp.substring(4,6)+"/"+temp.substring(6,8);
-			TableData[c][0]=temp;
-			TableData[c][1]=tempvo.getId();
-			TableData[c][2]=tempvo.getMakePerson();
-			TableData[c][3]=tempInf.getTime();
-			TableData[c][4]=tempInf.getTransitSheetId();
-			TableData[c][5]=tempInf.getDeparture();
-		}
-			
-	}
+		title = new String[] { "填写日期", "表单号", "填表人", "接收时间", "中转单编号", "出发地" };
 
+		TableData = new String[volist.size()][9];
+		for (int c = 0; c < volist.size(); c++) {
+			String tempId = volist.get(c).getId();
+			TransitArriveSheetVO tempvo = (TransitArriveSheetVO) receipt.getSingle((tempId));
+			ArriveInformation tempInf = (ArriveInformation) tempvo.getTransitArriveInformation();
+			String temp = tempvo.getMakeTime();
+			temp = temp.substring(0, 4) + "/" + temp.substring(4, 6) + "/" + temp.substring(6, 8);
+			TableData[c][0] = temp;
+			TableData[c][1] = tempvo.getId();
+			TableData[c][2] = tempvo.getMakePerson();
+			TableData[c][3] = tempInf.getTime();
+			TableData[c][4] = tempInf.getTransitSheetId();
+			TableData[c][5] = tempInf.getDeparture();
+		}
+
+	}
+	private ReceiptVO modifyTransReceive(int c, String Id) {
+		TransitArriveSheetVO tempvo = (TransitArriveSheetVO) receipt.getSingle((Id));
+		ArriveInformation tempInf = (ArriveInformation)tempvo.getTransitArriveInformation();
+		
+		String temp = (String) TableData[c][0];
+		temp = temp.substring(0, 4) + temp.substring(5, 7) + temp.substring(8, 10);
+		tempvo.setMakeTime(temp);
+		tempvo.setId((String) TableData[c][1]);
+		tempvo.setMakePerson((String) TableData[c][2]);
+		tempInf.setTime((String) TableData[c][3]);
+		tempInf.setTransitSheetId((String) TableData[c][4]);
+		tempInf.setDeparture((String) TableData[c][5]);
+		
+		tempvo.setTransitArriveInformation(tempInf);
+		return tempvo;
+		
+	}
 	// 中转中心装车单
 	private void iniTransLoad() {
 		// TODO Auto-generated method stub
-		title=new String[]{"填写日期","表单号","填表人","装车时间","装车单编号","目的地","车辆代号","监装员","押运员","运费"};
-		
-		TableData = new String[volist.size()][10];
-		for(int c=0;c<volist.size();c++){
-			String tempId=volist.get(c).getId();
-			TransitLoadSheetVO tempvo=(TransitLoadSheetVO) receipt.getSingle(tempId);
-			LoadInformation tempInf=(LoadInformation)tempvo.getTransitLoadInformation();	
-			String temp=tempvo.getMakeTime();
-			 temp=temp.substring(0,4)+"/"+temp.substring(4,6)+"/"+temp.substring(6,8);
-			TableData[c][0]=temp;
-			TableData[c][1]=tempvo.getId();
-			TableData[c][2]=tempvo.getMakePerson();
-			TableData[c][3]=tempInf.getTime();
-			TableData[c][4]=tempInf.getTransportId();
-			TableData[c][5]=tempInf.getDestinationId();
-			TableData[c][6]=tempInf.getCarId();
-			TableData[c][7]=tempInf.getOfficerId();
-			TableData[c][8]=tempInf.getDriverId();
-			TableData[c][9]=tempInf.getFare();
-			
-		}
-			
-	}
+		title = new String[] { "填写日期", "表单号", "填表人", "装车时间", "装车单编号", "目的地", "车辆代号", "监装员", "押运员", "运费" };
 
+		TableData = new String[volist.size()][10];
+		for (int c = 0; c < volist.size(); c++) {
+			String tempId = volist.get(c).getId();
+			TransitLoadSheetVO tempvo = (TransitLoadSheetVO) receipt.getSingle((tempId));
+			LoadInformation tempInf = (LoadInformation) tempvo.getTransitLoadInformation();
+			String temp = tempvo.getMakeTime();
+			temp = temp.substring(0, 4) + "/" + temp.substring(4, 6) + "/" + temp.substring(6, 8);
+			TableData[c][0] = temp;
+			TableData[c][1] = tempvo.getId();
+			TableData[c][2] = tempvo.getMakePerson();
+			TableData[c][3] = tempInf.getTime();
+			TableData[c][4] = tempInf.getTransportId();
+			TableData[c][5] = tempInf.getDestinationId();
+			TableData[c][6] = tempInf.getCarId();
+			TableData[c][7] = tempInf.getOfficerId();
+			TableData[c][8] = tempInf.getDriverId();
+			TableData[c][9] = tempInf.getFare();
+		}
+
+	}
+	private ReceiptVO modifyTransLoad(int c, String Id) {
+		TransitLoadSheetVO tempvo = (TransitLoadSheetVO) receipt.getSingle((Id));
+		LoadInformation tempInf = tempvo.getTransitLoadInformation();
+		
+		String temp = (String) TableData[c][0];
+		temp = temp.substring(0, 4) + temp.substring(5, 7) + temp.substring(8, 10);
+		tempvo.setMakeTime(temp);
+		tempvo.setId((String) TableData[c][1]);
+		tempvo.setMakePerson((String) TableData[c][2]);
+		tempInf.setTime((String) TableData[c][3]);
+		tempInf.setTransportId((String) TableData[c][4]);
+		tempInf.setDestinationId((String) TableData[c][5]);
+		tempInf.setCarId((String) TableData[c][6]);
+		tempInf.setOfficerId((String) TableData[c][7]);
+		tempInf.setDriverId((String) TableData[c][8]);
+		tempInf.setFare((Double) TableData[c][9]);
+		
+		tempvo.setTransitLoadInformation(tempInf);
+		return tempvo;
+		
+	}
 	// 入库单
 	private void iniInvenIn() {
 		// TODO Auto-generated method stub
 		// TODO Auto-generated method stub
-				title=new String[]{"填写日期","表单号","填表人","入库时间","目的地","区号","排号","架号","位号"};
-				
-				TableData = new String[volist.size()][9];
-				for(int c=0;c<volist.size();c++){
-					String tempId=volist.get(c).getId();
-					InventoryInSheetVO tempvo=(InventoryInSheetVO) receipt.getSingle(tempId);
-					InventoryInInformation tempInf=(InventoryInInformation)tempvo.getInventoryInInformation();
-					String temp=tempvo.getMakeTime();
-					 temp=temp.substring(0,4)+"/"+temp.substring(4,6)+"/"+temp.substring(6,8);
-					TableData[c][0]=temp;
-					TableData[c][1]=tempvo.getId();
-					TableData[c][2]=tempvo.getMakePerson();
-					TableData[c][3]=tempInf.getTime();
-					TableData[c][4]=tempInf.getDestination();
-					TableData[c][5]=tempInf.getBlock();
-					TableData[c][6]=tempInf.getRow();
-					TableData[c][7]=tempInf.getShelf();
-					TableData[c][8]=tempInf.getPositon();
-					
-				}
+		title = new String[] { "填写日期", "表单号", "填表人", "入库时间", "目的地", "区号", "排号", "架号", "位号" };
+
+		TableData = new String[volist.size()][9];
+		for (int c = 0; c < volist.size(); c++) {
+			String tempId = volist.get(c).getId();
+			InventoryInSheetVO tempvo = (InventoryInSheetVO) receipt.getSingle((tempId));
+			InventoryInInformation tempInf = (InventoryInInformation) tempvo.getInventoryInInformation();
+			String temp = tempvo.getMakeTime();
+			temp = temp.substring(0, 4) + "/" + temp.substring(4, 6) + "/" + temp.substring(6, 8);
+			TableData[c][0] = temp;
+			TableData[c][1] = tempvo.getId();
+			TableData[c][2] = tempvo.getMakePerson();
+			TableData[c][3] = tempInf.getTime();
+			TableData[c][4] = tempInf.getDestination();
+			TableData[c][5] = tempInf.getBlock();
+			TableData[c][6] = tempInf.getRow();
+			TableData[c][7] = tempInf.getShelf();
+			TableData[c][8] = tempInf.getPositon();
+
+		}
+	}
+	private ReceiptVO modifyInvenIn(int c, String Id) {
+		InventoryInSheetVO tempvo = (InventoryInSheetVO) receipt.getSingle((Id));
+		InventoryInInformation tempInf = tempvo.getInventoryInInformation();
+		
+		String temp = (String) TableData[c][0];
+		temp = temp.substring(0, 4) + temp.substring(5, 7) + temp.substring(8, 10);
+		tempvo.setMakeTime(temp);
+		tempvo.setId((String) TableData[c][1]);
+		tempvo.setMakePerson((String) TableData[c][2]);
+		tempInf.setTime((String) TableData[c][3]);
+		tempInf.setDestination((String) TableData[c][4]);
+		tempInf.setBlock((int) TableData[c][5]);
+		tempInf.setRow((int) TableData[c][6]);
+		tempInf.setShelf((int) TableData[c][7]);
+		tempInf.setPositon((int) TableData[c][8]);
+		
+		tempvo.setInventoryInInformation(tempInf);
+		return tempvo;
 	}
 
 	// 出库单
 	private void iniInvenOut() {
-		// TODO Auto-generated method stub
 
-		title=new String[]{"填写日期","表单号","填表人","入库时间","目的地","区号","排号","架号","位号"};
-		
+		title = new String[] { "填写日期", "表单号", "填表人", "入库时间", "目的地", "区号", "排号", "架号", "位号" };
+
 		TableData = new String[volist.size()][9];
-		for(int c=0;c<volist.size();c++){
-			String tempId=volist.get(c).getId();
-			InventoryOutSheetVO tempvo=(InventoryOutSheetVO) receipt.getSingle(tempId);
-			InventoryOutInformation tempInf=(InventoryOutInformation)tempvo.getInventoryOutInformation();
-			String temp=tempvo.getMakeTime();
-			 temp=temp.substring(0,4)+"/"+temp.substring(4,6)+"/"+temp.substring(6,8);
-			TableData[c][0]=temp;
-			TableData[c][1]=tempvo.getId();
-			TableData[c][2]=tempvo.getMakePerson();
-			TableData[c][3]=tempInf.getTime();
-			TableData[c][4]=tempInf.getDestination();
-			TableData[c][5]=tempInf.getTransitId();
-			TableData[c][6]=tempInf.getTransportType();
-			
+		for (int c = 0; c < volist.size(); c++) {
+			String tempId = volist.get(c).getId();
+			InventoryOutSheetVO tempvo = (InventoryOutSheetVO) receipt.getSingle((tempId));
+			InventoryOutInformation tempInf = (InventoryOutInformation) tempvo.getInventoryOutInformation();
+			String temp = tempvo.getMakeTime();
+			temp = temp.substring(0, 4) + "/" + temp.substring(4, 6) + "/" + temp.substring(6, 8);
+			TableData[c][0] = temp;
+			TableData[c][1] = tempvo.getId();
+			TableData[c][2] = tempvo.getMakePerson();
+			TableData[c][3] = tempInf.getTime();
+			TableData[c][4] = tempInf.getDestination();
+			TableData[c][5] = tempInf.getTransitId();
+			TableData[c][6] = tempInf.getTransportType();
 		}
 	}
-
+	private ReceiptVO modifyInvenOut(int c, String Id) {
+		InventoryOutSheetVO tempvo = (InventoryOutSheetVO) receipt.getSingle((Id));
+		InventoryOutInformation tempInf = tempvo.getInventoryOutInformation();
+		
+		String temp = (String) TableData[c][0];
+		temp = temp.substring(0, 4) + temp.substring(5, 7) + temp.substring(8, 10);
+		tempvo.setMakeTime(temp);
+		tempvo.setId((String) TableData[c][1]);
+		tempvo.setMakePerson((String) TableData[c][2]);
+		tempInf.setTime((String) TableData[c][3]);
+		tempInf.setDestination((String) TableData[c][4]);
+		tempInf.setTransitId((String) TableData[c][5]);
+//		tempInf.setTransportType((String) TableData[c][6]);
+		
+		
+		tempvo.setInventoryOutInformation(tempInf);
+		return tempvo;
+		
+	}
+	// 依据类型对表单信息进行更新
+				private ReceiptVO modifyVO(int count, String id) {
+					// TODO Auto-generated method stub
+					switch (type.getSelectedItem().toString()) {
+					case "收款单":
+						return modifyCollection(count, id);
+					case "付款单":
+						return modifyPayment(count, id);
+					case "寄件单":
+						return modifyDelReip(count, id);
+					case "营业厅装车单":
+						return modifyPosLoad(count, id);
+					case "营业厅收件单":
+						return modifyPosReseive(count, id);
+					case "营业厅派送单":
+						return modifyPosSend(count, id);
+					case "汽车中转单":
+						return modifyTransCar(count, id);
+					case "火车中转单":
+						return modifyTransTrain(count, id);
+					case "飞机中转单":
+						return modifyTranFlight(count, id);
+					case "中转中心接收单":
+						return modifyTransReceive(count, id);
+					case "中转中心装车单":
+						return modifyTransLoad(count, id);
+					case "入库单":
+						return modifyInvenIn(count, id);
+					case "出库单":
+						return modifyInvenOut(count, id);
+					default:
+						return null;
+					}
+				}
 }

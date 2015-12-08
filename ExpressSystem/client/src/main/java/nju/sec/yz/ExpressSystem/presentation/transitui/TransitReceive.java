@@ -62,6 +62,8 @@ public class TransitReceive extends JPanel {
 	
 	private JLabel warning=new JLabel();
 	
+	private DateChooser date;
+	
 	public TransitReceive(ClientControler maincontrol,TransitButtonComponents tbc) {
 		this.maincontrol=maincontrol;
 		this.tbc=tbc;
@@ -80,7 +82,7 @@ public class TransitReceive extends JPanel {
 		departure.setBounds(204, 58, 71, 15);
 		add(departure);
 		
-		DateChooser date=new DateChooser(this,222,80);
+		date=new DateChooser(this,222,80);
 		
 		
 //		transitId=new JTextField();

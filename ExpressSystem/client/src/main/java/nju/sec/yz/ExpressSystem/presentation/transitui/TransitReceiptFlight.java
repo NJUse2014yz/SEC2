@@ -60,6 +60,8 @@ public class TransitReceiptFlight extends JPanel{
 	private JLabel fare;
 	private JLabel warning=new JLabel();
 	
+	private DateChooser date;
+	
 	public TransitReceiptFlight(ClientControler maincontrol,TransitButtonComponents tbc) {
 		this.maincontrol=maincontrol;
 		this.tbc=tbc;
@@ -73,7 +75,7 @@ public class TransitReceiptFlight extends JPanel{
 		setSize(490, 550);
 		setVisible(true);
 		
-		DateChooser date=new DateChooser(this, 212, 81);
+		date=new DateChooser(this, 212, 81);
 		
 		
 		

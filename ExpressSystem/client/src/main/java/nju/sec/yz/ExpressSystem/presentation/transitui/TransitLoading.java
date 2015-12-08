@@ -54,6 +54,7 @@ public class TransitLoading extends JPanel{
 	private JLabel transportId;
 	private JLabel fare;
 	
+	private DateChooser date;
 	
 	public TransitLoading(ClientControler maincontrol,TransitButtonComponents tbc) {
 		this.maincontrol=maincontrol;
@@ -70,7 +71,7 @@ public class TransitLoading extends JPanel{
 		setSize(490, 550);
 		setVisible(true);
 		
-		DateChooser date=new DateChooser(this, 220, 81);
+		date=new DateChooser(this, 220, 81);
 		
 		int count=0;
 		ArrayList<TransitVO> trans=manager.observeAllTransit();
