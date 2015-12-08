@@ -13,7 +13,6 @@ import nju.sec.yz.ExpressSystem.presentation.managerui.ManagerConstObserve;
 import nju.sec.yz.ExpressSystem.presentation.managerui.ManagerLogCheck;
 import nju.sec.yz.ExpressSystem.presentation.managerui.ManagerMainUi;
 import nju.sec.yz.ExpressSystem.presentation.managerui.ManagerReceiptList;
-import nju.sec.yz.ExpressSystem.presentation.managerui.ManagerReceiptModify;
 import nju.sec.yz.ExpressSystem.presentation.managerui.ManagerSalaryModify;
 import nju.sec.yz.ExpressSystem.presentation.managerui.ManagerSalaryObserve;
 import nju.sec.yz.ExpressSystem.presentation.managerui.ManagerStaffAdd;

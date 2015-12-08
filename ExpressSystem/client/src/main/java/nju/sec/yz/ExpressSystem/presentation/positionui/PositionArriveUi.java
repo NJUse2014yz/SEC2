@@ -103,7 +103,7 @@ public class PositionArriveUi extends JPanel{
 		this.bc=bc;
 		deliverBl=new DeliverController();
 		manageControler=new ManagerController();
-		List<String> citys=manageControler.getCities();
+		List<String> citys=deliverBl.getValidAgency();
 		city=new String[citys.size()];
 		data=new String[][]{};
 		for(int i=0;i<citys.size();i++)

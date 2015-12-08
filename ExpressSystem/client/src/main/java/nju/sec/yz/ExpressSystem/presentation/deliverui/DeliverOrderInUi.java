@@ -24,7 +24,6 @@ import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.SendInformation;
 import nju.sec.yz.ExpressSystem.common.ToAndFromInformation;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
-import nju.sec.yz.ExpressSystem.presentation.managerui.receipt1;
 import nju.sec.yz.ExpressSystem.vo.SendSheetVO;
 
 public class DeliverOrderInUi extends JPanel {
@@ -77,13 +76,12 @@ public class DeliverOrderInUi extends JPanel {
 		setSize(490, 550);
 		setVisible(true);
 		
-		receipt1 order=new receipt1(this);
 	}
 
 	public void initDeliverOrderIn() {
-//		setLayout(null);
-//		setSize(490, 550);
-//		setVisible(true);
+		setLayout(null);
+		setSize(490, 550);
+		setVisible(true);
 
 		/*
 		 * 确定

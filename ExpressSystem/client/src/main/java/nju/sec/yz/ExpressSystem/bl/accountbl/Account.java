@@ -16,7 +16,7 @@ import nju.sec.yz.ExpressSystem.vo.AccountVO;
  * 
  * @author 周聪
  */
-public class Account implements Initialable<AccountVO, AccountPO> {
+public class Account implements Initialable<AccountVO, AccountPO> ,AccountInfo{
 
 	private AccountDataService accountData;
 	public Account() {
@@ -183,6 +183,18 @@ public class Account implements Initialable<AccountVO, AccountPO> {
 			e.printStackTrace();
 		}
 		return message;
+	}
+	@Override
+	public List<String> getAccounts() {
+		List<String> accounts=new ArrayList<>();
+		
+		List<AccountVO> vos=this.observeList();
+		
+		for(AccountVO vo:vos){
+			accounts.add(vo.getName());
+		}
+		
+		return accounts;
 	}
 
 }
