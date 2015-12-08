@@ -38,8 +38,7 @@ public class User implements UserInfo{
 	}
 	public ResultMessage login(String id, String password) {
 		ResultMessage result=new ResultMessage(Result.SUCCESS);
-		if(id.equals("D110")&&password.equals("120"))
-			return result;
+		
 		
 		UserPO userPo = null;
 		try {
@@ -248,12 +247,15 @@ public class User implements UserInfo{
 		case 'B':
 			if(pow!=Status.TRANSIT)
 				return false;
-			String[] numbers2=id.split("A");
+			String[] numbers2=id.split("B");
 			if(numbers2.length!=2)
 				return false;
 			//中转中心不存在
-			if(agaency.observeTransit(numbers2[0])==null)
+			if(agaency.observeTransit(numbers2[0])==null){
+				System.out.println("not found");
 				return false;
+			}
+				
 			if(!is3Number(numbers2[1]))
 				return false;
 			break;
