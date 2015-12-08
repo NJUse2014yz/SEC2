@@ -119,14 +119,16 @@ public class ManagerReceiptList extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				System.out.println(getType(type.getSelectedItem().toString()) instanceof ReceiptType);
 				volist = receipt.getByType(getType(type.getSelectedItem().toString()));
-				TableData = new Object[volist.size()][2];
-				for (int i = 0; i < volist.size(); i++) {
-					String temp = volist.get(i).getMakeTime();
-					temp = temp.substring(0, 4) + "/" + temp.substring(4, 6) + "/" + temp.substring(6, 8);
-					TableData[i][0] = temp;
-					TableData[i][1] = volist.get(i).getId();
-				}
+				System.out.println(volist.size());
+//				TableData = new Object[volist.size()][2];
+//				for (int i = 0; i < volist.size(); i++) {
+//					String temp = volist.get(i).getMakeTime();
+//					temp = temp.substring(0, 4) + "/" + temp.substring(4, 6) + "/" + temp.substring(6, 8);
+//					TableData[i][0] = temp;
+//					TableData[i][1] = volist.get(i).getId();
+//				}
 				switch (type.getSelectedItem().toString()) {
 				case "收款单":
 					iniCollection();
