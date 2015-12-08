@@ -5,10 +5,13 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
+import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -55,9 +58,11 @@ public class PositionPayUi extends JPanel{
 	private JScrollPane scroll;
 	private JButton confirm;
 	private JLabel warning;
+	private JComboBox<String> account;
+	private String[] accounts={"a"};
 	
-	String[] columnName={"收款日期","收款金额","收款快递员","快递单条形码号"};
-	String[][] data={{"20151017","426.5","2352616","354678998764"},{"20140403","43.5","11bgfs","fgea452q"},{"rea","hes","rea","245367776"},{"20151017","426.5","2352616","354678998764"},{"20151017","426.5","2352616","354678998764"},{"20151017","426.5","2352616","354678998764"},{"20151017","426.5","2352616","354678998764"},{"20151017","426.5","2352616","354678998764"},{"20151017","426.5","2352616","354678998764"},{"20151017","426.5","2352616","354678998764"},{"20151017","426.5","2352616","354678998764"}};
+	String[] columnName={"收款日期","收款金额","收款快递员","快递单条形码号","账户"};
+	String[][] data={{"20151017","426.5","2352616","354678998764",""},{"20140403","43.5","11bgfs","fgea452q",""},{"rea","hes","rea","245367776",""},{"20151017","426.5","2352616","354678998764",""}};
 	
 	public PositionPayUi(ClientControler mainControler,ButtonComponents bc){
 		super();
@@ -67,13 +72,25 @@ public class PositionPayUi extends JPanel{
 		deliverBl=new DeliverController();
 		receiptBl=new Collection();
 		List<CollectionRecordVO> payList=deliverBl.getCollectionRecords();
-		data=new String[payList.size()][4];
-		for(int i=0;i<payList.size();i++)
+		if(payList.size()!=0)
 		{
-			data[i][0]=payList.get(i).getTime();
-			data[i][1]=Double.toString(payList.get(i).getAmount());
-			data[i][2]=payList.get(i).getDeliverId();
-			data[i][3]=payList.get(i).getBarId();
+			data=new String[payList.size()][4];
+			for(int i=0;i<payList.size();i++)
+			{
+				data[i][0]=payList.get(i).getTime();
+				data[i][1]=Double.toString(payList.get(i).getAmount());
+				data[i][2]=payList.get(i).getDeliverId();
+				data[i][3]=payList.get(i).getBarId();
+			}
+		}
+		List<String> accountList=deliverBl.getAccounts();
+		if(accountList.size()!=0)
+		{
+			accounts=new String[accountList.size()];
+			for(int i=0;i<accountList.size();i++)
+			{
+				accounts[i]=accountList.get(i);
+			}
 		}
 		initDeliverMainUi();
 	}
@@ -84,8 +101,9 @@ public class PositionPayUi extends JPanel{
 		bc.change();
 		setLayout(null);
 		setSize(490, 550);
-	
+		
 		payTable=new JTable(data,columnName);
+		payTable.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(new JComboBox(accounts)));
 		payTable.setRowHeight(20);
 //		payTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		scroll=new JScrollPane(payTable);
@@ -103,12 +121,13 @@ public class PositionPayUi extends JPanel{
 		confirm.setBounds(button_x, button_y, button_w, button_h);
 		add(confirm);
 		confirm.addMouseListener(new MouseAdapter(){
-			public void mouseClicked(){
+			public void mouseClicked(MouseEvent e){
 				PaymentSheetVO payvo=new PaymentSheetVO();
 				PaymentInformation pi=new PaymentInformation();
 				pi.setTime(data[payTable.getSelectedRow()][0]);
 				pi.setAmount(Double.parseDouble(data[payTable.getSelectedRow()][1]));
 				pi.setInDeliverId((data[payTable.getSelectedRow()][2]));
+				pi.setAccount((String) payTable.getCellEditor(payTable.getSelectedRow(), 4).getCellEditorValue());
 				payvo.setPaymentInformation(pi);
 				payvo.setBarIds(data[payTable.getSelectedRow()][3]);
 				ResultMessage result=receiptBl.make(payvo);
