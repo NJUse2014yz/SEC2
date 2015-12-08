@@ -106,6 +106,7 @@ public class CityConst implements CityDistanceService {
 		
 		//保存城市
 		City city=new City();
+		
 		city.addCity(info.getFromCity(),info.getFromID());
 		city.addCity(info.getToCity(), info.getToID());
 		

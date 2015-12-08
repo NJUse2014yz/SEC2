@@ -70,7 +70,6 @@ public class City implements CityListService{
 	}
 	
 	public void addCity(String name,String id){
-		
 		CityIdPO po=new CityIdPO(name, id);
 		try {
 			data.addCity(po);

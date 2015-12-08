@@ -48,12 +48,15 @@ public class CityIdDataImpl extends UnicastRemoteObject implements CityIdDataSer
 			System.out.println("插入了一个空的CityIdPO！！！");
 			
 		}
-		
+		System.out.println(cipo.getName());
 		List<CityIdPO> CityIdPOs = getAll();
 		for(CityIdPO po:CityIdPOs){
 				
-			if(po.getId().equals(cipo.getId()))
+			if(po.getId().equals(cipo.getId())||po.getName().equals(cipo.getName())){
+				System.out.println("重复"+po.getName());
 				return ;
+			}
+				
 		}
 		
 		CityIdPOs.add(cipo);
@@ -63,6 +66,19 @@ public class CityIdDataImpl extends UnicastRemoteObject implements CityIdDataSer
 		
 	}
 	
+	public static void main(String[] args) {
+		try {
+			CityIdDataImpl city=new CityIdDataImpl();
+			
+			List<CityIdPO> list=city.getAll();
+			for(CityIdPO po:list){
+				System.out.println(po.getName());
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	/**
 	 * 初始化
