@@ -13,6 +13,8 @@ public class CityInformation  implements Serializable{
 		this.fromCity=from;
 		this.toCity=to;
 		this.distance=distance;
+		this.fromID=fromID;
+		this.toID=toID;
 	}
 	
 	public String getFromCity() {

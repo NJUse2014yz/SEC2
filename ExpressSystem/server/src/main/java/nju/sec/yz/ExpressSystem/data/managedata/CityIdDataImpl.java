@@ -22,7 +22,6 @@ public class CityIdDataImpl extends UnicastRemoteObject implements CityIdDataSer
 
 	public CityIdDataImpl() throws RemoteException {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -45,13 +44,14 @@ public class CityIdDataImpl extends UnicastRemoteObject implements CityIdDataSer
 	@Override
 	public synchronized void addCity(CityIdPO cipo) throws RemoteException {
 		System.out.println("inserting a CityIdPO...");
-		if(cipo==null){
+		if(cipo==null||cipo.getId()==null||cipo.getName()==null){
 			System.out.println("插入了一个空的CityIdPO！！！");
 			
 		}
 		
 		List<CityIdPO> CityIdPOs = getAll();
 		for(CityIdPO po:CityIdPOs){
+				
 			if(po.getId().equals(cipo.getId()))
 				return ;
 		}
