@@ -29,6 +29,7 @@ import nju.sec.yz.ExpressSystem.presentation.DateChooser;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.AccountControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.PaymentSheetVO;
+import nju.sec.yz.ExpressSystem.vo.PaymentVO;
 import nju.sec.yz.ExpressSystem.vo.PositionVO;
 import nju.sec.yz.ExpressSystem.vo.TransitVO;
 
@@ -107,23 +108,26 @@ public class AccountInComeUi extends JPanel{
 			}
 		}
 		
-		List<PaymentSheetVO> sheetlist=finance.checkReceipt(date.getTime(), positions[choose.getSelectedIndex()]);
-		if(sheetlist!=null)
-		{
-			int n=0;
-			data=new String[n][6];
-			PaymentInformation psvoi;
-			for(int i=0;i<sheetlist.size();i++)
-			{
-				psvoi=sheetlist.get(i).getPaymentInformation();
-				data[i][0]=psvoi.getTime();
-				data[i][1]=psvoi.getPositionId();
-				data[i][2]=psvoi.getInDeliverId();
-				data[i][3]=Double.toString(psvoi.getAmount());
-				data[i][4]="";
-			}
-		}
-		
+//		PaymentVO pv=finance.checkReceipt(date.getTime(), positions[choose.getSelectedIndex()]);
+//		if(pv!=null)
+//		{
+//			List<PaymentSheetVO> sheetlist=pv.paymentList;
+//			if(sheetlist!=null)
+//			{
+//				int n=0;
+//				data=new String[n][6];
+//				PaymentInformation psvoi;
+//				for(int i=0;i<sheetlist.size();i++)
+//				{
+//					psvoi=sheetlist.get(i).getPaymentInformation();
+//					data[i][0]=psvoi.getTime();
+//					data[i][1]=psvoi.getPositionId();
+//					data[i][2]=psvoi.getInDeliverId();
+//					data[i][3]=Double.toString(psvoi.getAmount());
+//					data[i][4]="";
+//				}
+//			}
+//		}
 		initAccountUi();
 	}
 	private void initAccountUi() {
@@ -151,20 +155,24 @@ public class AccountInComeUi extends JPanel{
 			public void mouseClicked(MouseEvent e)
 			{
 				remove(scroll);
-				List<PaymentSheetVO> sheetlist=finance.checkReceipt(date.getTime(), positions[choose.getSelectedIndex()]);
-				if(sheetlist!=null)
+				PaymentVO pv=finance.checkReceipt(date.getTime(), positions[choose.getSelectedIndex()]);
+				if(pv!=null)
 				{
-					int n=0;
-					data=new String[n][6];
-					PaymentInformation psvoi;
-					for(int i=0;i<sheetlist.size();i++)
+					List<PaymentSheetVO> sheetlist=pv.paymentList;
+					if(sheetlist!=null)
 					{
-						psvoi=sheetlist.get(i).getPaymentInformation();
-						data[i][0]=psvoi.getTime();
-						data[i][1]=psvoi.getPositionId();
-						data[i][2]=psvoi.getInDeliverId();
-						data[i][3]=Double.toString(psvoi.getAmount());
-						data[i][4]="";
+						int n=0;
+						data=new String[n][6];
+						PaymentInformation psvoi;
+						for(int i=0;i<sheetlist.size();i++)
+						{
+							psvoi=sheetlist.get(i).getPaymentInformation();
+							data[i][0]=psvoi.getTime();
+							data[i][1]=psvoi.getPositionId();
+							data[i][2]=psvoi.getInDeliverId();
+							data[i][3]=Double.toString(psvoi.getAmount());
+							data[i][4]="";
+						}
 					}
 				}
 				else
@@ -175,7 +183,8 @@ public class AccountInComeUi extends JPanel{
 				table.setRowHeight(20);
 				scroll=new JScrollPane(table);
 				scroll.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
-//				total.setText(financeBl.);
+				total.setText(Double.toString(pv.sum));
+				total.setVisible(true);
 				add(scroll);
 			}
 		});

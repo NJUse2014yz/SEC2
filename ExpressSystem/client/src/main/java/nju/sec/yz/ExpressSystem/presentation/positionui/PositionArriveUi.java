@@ -103,7 +103,7 @@ public class PositionArriveUi extends JPanel{
 		this.bc=bc;
 		deliverBl=new DeliverController();
 		manageControler=new ManagerController();
-		List<String> citys=manageControler.getCities();
+		List<String> citys=deliverBl.getValidAgency();
 		city=new String[citys.size()];
 		data=new String[][]{};
 		for(int i=0;i<citys.size();i++)
@@ -194,7 +194,7 @@ public class PositionArriveUi extends JPanel{
 					if(table.getCellEditor(i, 1).getCellEditorValue().equals("完整"))
 						arriveState=ArriveState.PERFECT;
 					else if(table.getCellEditor(i, 1).getCellEditorValue().equals("损坏"))
-						arriveState=ArriveState.Broken;
+						arriveState=ArriveState.BROKEN;
 					else if(table.getCellEditor(i, 1).getCellEditorValue().equals("丢失"))
 						arriveState=ArriveState.LOST;
 					ai.addState(arriveState);

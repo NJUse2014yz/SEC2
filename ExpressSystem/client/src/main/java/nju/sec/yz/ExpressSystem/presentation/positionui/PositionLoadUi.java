@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -44,7 +45,8 @@ public class PositionLoadUi extends JPanel{
 	private ArrayList<String> bars;
 
 	private JComboBox JCdestination;
-	private JTextField JTtransportId;
+//	private JTextField JTtransportId;
+	private JLabel JLtransportId;
 	private JTextField JTPositionId;
 	private JTextField JTCarId;
 	private JComboBox JCloadtime;
@@ -117,7 +119,6 @@ public class PositionLoadUi extends JPanel{
 		this.mainControler=mainControler;
 		controler=mainControler.positionControler;
 		deliverBl=new DeliverController();
-		//constBl=new 
 		this.bc=bc;
 		bars=new ArrayList<String>();
 		date=new DateChooser(this,207,170);
@@ -130,8 +131,14 @@ public class PositionLoadUi extends JPanel{
 		bc.change();
 		setLayout(null);
 		setSize(490, 550);
-		 
-		des=new String[]{"南京","北京","上海"};//(String[])constBl.getCities().toArray();
+		
+		List<String> destination=deliverBl.getValidAgency();
+		int n=destination.size();
+		des=new String[n];
+		for(int i=0;i<n;i++)
+		{
+			des[i]=destination.get(i);
+		}
 		JCdestination=new JComboBox(des);
 		JCdestination.setBounds(destination_x, destination_y, destination_w, destination_h);
 		add(JCdestination);
@@ -141,9 +148,15 @@ public class PositionLoadUi extends JPanel{
 		JTPositionId.setBounds(positionId_x,positionId_y,positionId_w,positionId_h);
 		add(JTPositionId);
 		
-		JTtransportId = new JTextField();
-		JTtransportId.setBounds(transportId_x,transportId_y,transportId_w,transportId_h);
-		add(JTtransportId);
+//		JTtransportId = new JTextField();
+//		JTtransportId.setBounds(transportId_x,transportId_y,transportId_w,transportId_h);
+//		add(JTtransportId);
+		JLtransportId=new JLabel();
+		JLtransportId.setBounds(transportId_x, transportId_y, transportId_w, transportId_h);
+		JLtransportId.setFont(new Font("Dialog", 1, 15));
+		JLtransportId.setForeground(Color.white);
+		add(JLtransportId);
+		JLtransportId.setVisible(false);
 		
 		JTCarId = new JTextField();
 		JTCarId.setBounds(carId_x,carId_y,carId_w,carId_h);
@@ -183,6 +196,13 @@ public class PositionLoadUi extends JPanel{
 		add(warning);
 		warning.setVisible(false);
 		
+		fare=new JLabel();
+		fare.setBounds(fare_x,fare_y,fare_w,fare_h);
+		fare.setFont(new Font("Dialog", 1, 15));
+		fare.setForeground(Color.white);
+		add(fare);
+		fare.setVisible(false);
+		
 		confirm=new JButton(confirmIcon);
 		confirm.setBounds(confirm_x, confirm_y, confirm_w, confirm_h);
 		add(confirm);
@@ -193,7 +213,7 @@ public class PositionLoadUi extends JPanel{
 				li.setAgencyId(JTPositionId.getText());
 				li.setCarId(JTCarId.getText());
 				li.setDriverId(JTdriverId.getText());
-				li.setTransportId(JTtransportId.getText());
+//				li.setTransportId(JTtransportId.getText());
 				li.setOfficerId(JTsuperviserId.getText());
 				li.setDestinationId((String)JCdestination.getSelectedItem());
 				sheet.setOfficeLoadInformation(li);
@@ -207,7 +227,7 @@ public class PositionLoadUi extends JPanel{
 				sheet.setBarIds(bars);
 				sheet.setType(ReceiptType.POSITION_LOADING_RECEIPT);
 				
-				if(JTPositionId.getText().equals("")||JTCarId.getText().equals("")||JTdriverId.getText().equals("")||JTPositionId.getText().equals("")||JTsuperviserId.getText().equals("")||JTtransportId.getText().equals(""))
+				if(JTPositionId.getText().equals("")||JTCarId.getText().equals("")||JTdriverId.getText().equals("")||JTPositionId.getText().equals("")||JTsuperviserId.getText().equals(""))
 				{
 					warning.setText("有必填项未填");
 					warning.setVisible(true);
@@ -220,6 +240,11 @@ public class PositionLoadUi extends JPanel{
 					{
 						warning.setText("提交成功");
 						warning.setVisible(true);
+						String[] message=result.getMessage().split(" ");
+						fare.setText(message[0]);
+						JLtransportId.setText(message[1]);
+						fare.setVisible(true);
+						JLtransportId.setVisible(true);
 						repaint();
 					}
 					else{
