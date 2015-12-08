@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import nju.sec.yz.ExpressSystem.bl.deliverbl.DeliverController;
@@ -56,7 +57,7 @@ public class UserUi extends JPanel{
 	
 	private JTextField JTbarId;
 	private JTextField JTuserName;
-	private JTextField JTpassword;
+	private JPasswordField JTpassword;
 	private JButton login;
 	private JButton search;
 	private JLabel warning;
@@ -92,7 +93,7 @@ public class UserUi extends JPanel{
 		this.JTuserName.setBounds(username_x,username_y,username_w,height);
 		this.add(JTuserName);
 		
-		this.JTpassword=new JTextField();
+		this.JTpassword=new JPasswordField();
 		this.JTpassword.setBounds(password_x,password_y,password_w,height);
 		this.add(JTpassword);
 		
