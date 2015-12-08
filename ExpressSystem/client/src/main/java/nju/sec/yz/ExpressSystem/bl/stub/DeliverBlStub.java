@@ -100,5 +100,10 @@ public class DeliverBlStub implements DeliverBlService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public List<String> getAccounts() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
