@@ -86,11 +86,11 @@ public class TransitReceiptFlight extends JPanel{
 			}
 		
 		departure=new JComboBox(transitAgency);
-		departure.setBounds(198,56,80,20);
+		departure.setBounds(195,56,85,20);
 		add(departure);
 		
 		destination=new JComboBox(transitAgency);
-		destination.setBounds(346,56,80,20);
+		destination.setBounds(343,56,85,20);
 		add(destination);
 		
 		flightId=new JTextField();

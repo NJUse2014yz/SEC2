@@ -55,6 +55,7 @@ public class ManagerStaffList extends JPanel {
 		
 		
 		table=new JTable(null);
+		table.setEnabled(false);
 		
 		
 		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);

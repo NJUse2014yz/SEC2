@@ -60,15 +60,15 @@ public class ManagerConstModify extends JPanel {
 		setVisible(true);
 
 		// table;
-		ArrayList<CityVO> cities = null;
-		// Object[][] TableData=new Object[cities.size()][3];
-		// for(int i=0;i<cities.size();i++){
-		// CityInformation temp=cities.get(i).getCityInformation();
-		// TableData[i][0]=temp.getFromCity();
-		// TableData[i][1]=temp.getToCity();
-		// TableData[i][2]=temp.getDistance();
-		// }
-		Object[][] TableData = null;
+		ArrayList<CityVO> cities = (ArrayList<CityVO>) manager.observeAllCity();
+		 Object[][] TableData=new Object[cities.size()][3];
+		 for(int i=0;i<cities.size();i++){
+		 CityInformation temp=cities.get(i).getCityInformation();
+		 TableData[i][0]=temp.getFromCity();
+		 TableData[i][1]=temp.getToCity();
+		 TableData[i][2]=temp.getDistance();
+		 }
+//		Object[][] TableData = null;
 		String[] columnTitle = { "所在地", "编号", "名称" };
 		TableModel model = new DefaultTableModel(TableData, columnTitle);
 		table = new JTable(model);

@@ -59,6 +59,9 @@ public class ManagerAccountCheck extends JPanel {
 	private JButton confirm;
 
 	private JLabel warning = new JLabel();
+	
+	private String[] nameIn = new String[] { "收款日期", "收款金额", "收款人", "快递条形码号" };
+	private String[] nameOut = new String[] { "付款日期 ", "付款金额", "付款人", "付款账号", "条目", "备注" };
 
 	public ManagerAccountCheck(ClientControler maincontroler, ManagerButtonComponent mbc) {
 		this.maincontroler = maincontroler;
@@ -133,8 +136,7 @@ public class ManagerAccountCheck extends JPanel {
 		date2 = new DateChooser(this, 210, 110);
 		
 		
-		String[] nameIn = new String[] { "收款日期", "收款金额", "收款人", "快递条形码号" };
-		String[] nameOut = new String[] { "付款日期 ", "付款金额", "付款人", "付款账号", "条目", "备注" };
+		
 		String[][] dataIn = new String[][] { { "", "", "", "" } };
 		String[][] dataOut = new String[][] { { "", "", "", "", "", "" } };
 

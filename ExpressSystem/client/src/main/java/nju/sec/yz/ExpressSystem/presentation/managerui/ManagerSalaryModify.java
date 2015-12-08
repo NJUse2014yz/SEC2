@@ -37,8 +37,11 @@ public class ManagerSalaryModify extends JPanel {
 	private JScrollPane jsc;
 
 	private JButton confirm;
-	
-	private JLabel warning=new JLabel();
+
+	private JLabel warning = new JLabel();
+
+	private String[] columnTitle = { "职务", "薪水" };
+	private String[][] TableData = {};
 
 	public ManagerSalaryModify(ClientControler maincontroler, ManagerButtonComponent mbc) {
 		this.maincontroler = maincontroler;
@@ -52,61 +55,64 @@ public class ManagerSalaryModify extends JPanel {
 		setLayout(null);
 		setSize(490, 550);
 		setVisible(true);
-		String[] columnTitle = { "职务", "薪水" };
 
 		powersalary = manager.observeSalary();
-		System.out.println(powersalary.size());
-		String[][] TableData = new String[powersalary.size()][2];
-		for (int i = 0; i < powersalary.size(); i++) {
-			SalaryImformation temp = powersalary.get(i).getSalaryImformation();
-			TableData[i][0] = getpower(temp.getPower());
-			TableData[i][1] = Integer.toString(temp.getSalary());
+
+		if (powersalary.size() != 0) {
+			TableData = new String[powersalary.size()][2];
+
+			for (int i = 0; i < powersalary.size(); i++) {
+				SalaryImformation temp = powersalary.get(i).getSalaryImformation();
+				TableData[i][0] = getpower(temp.getPower());
+				TableData[i][1] = Integer.toString(temp.getSalary());
+			}
 		}
 		TableModel model = new DefaultTableModel(TableData, columnTitle);
-		table.setModel(model);
+		table=new JTable(model);
 		table.setEnabled(false);
 
 		jsc = new JScrollPane(table);
 		jsc.setVisible(true);
 		jsc.setBounds(138, 64, 318, 190);
 		add(jsc);
-		
-		
-		 ImageIcon cinfirmIcon = new ImageIcon("graphic/manager/button/confirm.png");
-			confirm = new JButton(cinfirmIcon);
-			confirm.setBounds(385, 281, 72, 27);
-			add(confirm);
-		    
-			
-			confirm.addMouseListener(new MouseAdapter() {
-				public void mouseClicked(MouseEvent e) {
-						// translate data
-						for(int i=0;i<powersalary.size();i++){
-							SalaryImformation salaryImformation=new SalaryImformation(getstatus(table.getValueAt(i, 0).toString()), Integer.parseInt((String) table.getValueAt(i, 1)));
-							SalaryVO sv=new SalaryVO(salaryImformation);
-							ResultMessage result=manager.modifySalary(sv);
-						if (result.getResult() == Result.FAIL) {
 
-							warning.setText(result.getMessage());
-							warning.setBounds(138, 490, 463 - 138, 30);
-							warning.setFont(new Font("Dialog", 1, 15));
-							warning.setForeground(Color.red);
-							add(warning);
-							repaint();
-							break;
-						}else {
-							// 提交成功
-							warning.setText("提交成功");
-							warning.setBounds(270, 490, 70, 30);
-							warning.setFont(new Font("Dialog", 1, 15));
-							warning.setForeground(Color.red);
-							warning.setVisible(true);
-							add(warning);
-						}
-						}
+		ImageIcon cinfirmIcon = new ImageIcon("graphic/manager/button/confirm.png");
+		confirm = new JButton(cinfirmIcon);
+		confirm.setBounds(385, 281, 72, 27);
+		add(confirm);
+
+		confirm.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				if(e.getClickCount()==2){
+				// translate data
+				for (int i = 0; i < powersalary.size(); i++) {
+					SalaryImformation salaryImformation = new SalaryImformation(
+							getstatus(table.getValueAt(i, 0).toString()),
+							Integer.parseInt((String) table.getValueAt(i, 1)));
+					SalaryVO sv = new SalaryVO(salaryImformation);
+					ResultMessage result = manager.modifySalary(sv);
+					if (result.getResult() == Result.FAIL) {
+
+						warning.setText(result.getMessage());
+						warning.setBounds(138, 490, 463 - 138, 30);
+						warning.setFont(new Font("Dialog", 1, 15));
+						warning.setForeground(Color.red);
+						add(warning);
+						repaint();
+						break;
+					} else {
+						// 提交成功
+						warning.setText("提交成功");
+						warning.setBounds(270, 490, 70, 30);
+						warning.setFont(new Font("Dialog", 1, 15));
+						warning.setForeground(Color.red);
+						warning.setVisible(true);
+						add(warning);
 					}
-				
-				});	
+				}
+			}
+			}
+		});
 
 	}
 
@@ -132,7 +138,7 @@ public class ManagerSalaryModify extends JPanel {
 			return null;
 		}
 	}
-	
+
 	public static Status getstatus(String powerType) {
 		switch (powerType) {
 		case "快递员":
@@ -156,7 +162,7 @@ public class ManagerSalaryModify extends JPanel {
 
 		}
 	}
-	
+
 	@Override
 	public void paintComponent(Graphics g) {
 

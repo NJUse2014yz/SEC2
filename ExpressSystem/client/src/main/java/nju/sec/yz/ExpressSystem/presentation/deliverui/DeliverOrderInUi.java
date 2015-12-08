@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,7 +16,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import nju.sec.yz.ExpressSystem.bl.deliverbl.DeliverController;
+import nju.sec.yz.ExpressSystem.bl.managerbl.ManagerController;
 import nju.sec.yz.ExpressSystem.blservice.deliverBlService.DeliverBlService;
+import nju.sec.yz.ExpressSystem.blservice.managerBlService.AgencyBlService;
 import nju.sec.yz.ExpressSystem.common.DeliveryType;
 import nju.sec.yz.ExpressSystem.common.GoodInformation;
 import nju.sec.yz.ExpressSystem.common.PackType;
@@ -25,10 +28,13 @@ import nju.sec.yz.ExpressSystem.common.SendInformation;
 import nju.sec.yz.ExpressSystem.common.ToAndFromInformation;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.SendSheetVO;
+import nju.sec.yz.ExpressSystem.vo.TransitVO;
 
 public class DeliverOrderInUi extends JPanel {
 
 	DeliverBlService deliverBlService = new DeliverController();
+	
+	AgencyBlService agency=new ManagerController();
 
 	// 确定选项
 	private JButton confirmButton;
@@ -39,7 +45,8 @@ public class DeliverOrderInUi extends JPanel {
 	private JTextField organizaionSender;
 	private JTextField telephoneSender;
 	private JTextField cellphoneSender;
-	private JTextField citySender;
+//	private JTextField citySender;
+	private JComboBox citySender;
 
 	// 收件人信息
 	private JTextField nameConsignee;
@@ -47,7 +54,8 @@ public class DeliverOrderInUi extends JPanel {
 	private JTextField organizaionConsignee;
 	private JTextField telephoneConsignee;
 	private JTextField cellphoneConsignee;
-	private JTextField cityConsignee;
+//	private JTextField cityConsignee;
+	private JComboBox cityConsignee;
 
 	// 货物信息
 	private JTextField nameGood;
@@ -65,6 +73,8 @@ public class DeliverOrderInUi extends JPanel {
 
 	// 提示信息
 	private JLabel warning = new JLabel();
+	//城市选项
+	private String[] city;
 
 	public DeliverOrderInUi(ClientControler controler) {
 
@@ -95,11 +105,16 @@ public class DeliverOrderInUi extends JPanel {
 		confirmButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				// 判断必填项是否填写完成
-				if ((addressSender.getText().equals("")) || (cellphoneSender.getText().equals(""))
-						|| (citySender.getText().equals("")) || (addressConsignee.getText().equals(""))
-						|| (cellphoneConsignee.getText().equals("")) || (cityConsignee.getText().equals(""))
-						|| (totalGood.getText().equals("")) || (weightGood.getText().equals(""))
-						|| (vloumeGood.getText().equals("")) || (sizeGood.getText().equals(""))
+				if ((addressSender.getText().equals("")) 
+						|| (cellphoneSender.getText().equals(""))
+//						|| (citySender.getText().equals("")) 
+						|| (addressConsignee.getText().equals(""))
+						|| (cellphoneConsignee.getText().equals(""))
+//						|| (cityConsignee.getText().equals(""))
+						|| (totalGood.getText().equals("")) 
+						|| (weightGood.getText().equals(""))
+						|| (vloumeGood.getText().equals("")) 
+						|| (sizeGood.getText().equals(""))
 						|| (barId.getText().equals(""))) {
 					warning.setText("尚未完成对带*必填项的填写");
 					warning.setBounds(198, 490, 463 - 198, 30);
@@ -112,10 +127,10 @@ public class DeliverOrderInUi extends JPanel {
 					// translate data
 					SendSheetVO sendsheet = new SendSheetVO();
 					ToAndFromInformation fromPerson = new ToAndFromInformation(nameSender.getText(),
-							citySender.getText(), addressSender.getText(), organizaionSender.getText(),
+							citySender.getSelectedItem().toString(), addressSender.getText(), organizaionSender.getText(),
 							telephoneSender.getText(), cellphoneSender.getText());
 					ToAndFromInformation toPerson = new ToAndFromInformation(nameConsignee.getText(),
-							cityConsignee.getText(), addressConsignee.getText(), organizaionConsignee.getText(),
+							cityConsignee.getSelectedItem().toString(), addressConsignee.getText(), organizaionConsignee.getText(),
 							telephoneConsignee.getText(), cellphoneConsignee.getText());
 					GoodInformation goodIn = new GoodInformation(totalGood.getText(), weightGood.getText(),
 							vloumeGood.getText(), nameGood.getText(), sizeGood.getText());
@@ -193,10 +208,25 @@ public class DeliverOrderInUi extends JPanel {
 		cellphoneSender.setBounds(185, 140, 140, 15);
 		add(cellphoneSender);
 
-		citySender = new JTextField();
-		citySender.setBounds(389, 140, 70, 15);
+		
+		//城市选项
+		
+		ArrayList<TransitVO> transits=agency.observeAllTransit();
+		city=new String[transits.size()];
+		
+		for(int c=0;c<transits.size();c++){
+			city[c]=transits.get(c).getLocation();
+		}
+		
+		citySender = new JComboBox(city);
+		citySender.setBounds(389, 135, 70, 20);
 		add(citySender);
 
+		cityConsignee =  new JComboBox(city);
+		cityConsignee.setBounds(389, 244, 70, 20);
+		add(cityConsignee);
+		
+		
 		nameConsignee = new JTextField();
 		nameConsignee.setBounds(185, 198, 58, 15);
 		add(nameConsignee);
@@ -217,9 +247,6 @@ public class DeliverOrderInUi extends JPanel {
 		cellphoneConsignee.setBounds(185, 249, 140, 15);
 		add(cellphoneConsignee);
 
-		cityConsignee = new JTextField();
-		cityConsignee.setBounds(389, 249, 70, 15);
-		add(cityConsignee);
 
 		totalGood = new JTextField();
 		totalGood.setBounds(185, 279, 58, 15);

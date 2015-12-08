@@ -15,7 +15,7 @@ import nju.sec.yz.ExpressSystem.presentation.controlerui.MAIN_CONTROL;
 public class DeliverButtonComponents{
 
 	
-	private ClientControler maincontroler;
+	private ClientControler mainControler;
 
 	// 侧边栏功能选择项
 	private JButton OrderInButton;
@@ -29,7 +29,7 @@ public class DeliverButtonComponents{
 	public DeliverButtonComponents(ClientControler maincontroler,JPanel panel){
 		
 		
-		this.maincontroler=maincontroler;
+		this.mainControler=maincontroler;
 		/*
 		 * button OrderInButton,OrderSearchButton,ReceiveInButton
 		 */
@@ -53,17 +53,17 @@ public class DeliverButtonComponents{
 
 		OrderInButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				maincontroler.deliverControler.deliverChangePanel(DELIVER_CONTROL.ORDER_IN);
+				mainControler.deliverControler.deliverChangePanel(DELIVER_CONTROL.ORDER_IN);
 			}
 		});
 		OrderSearchButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				maincontroler.deliverControler.deliverChangePanel(DELIVER_CONTROL.DELIVERY_INQUIRY);
+				mainControler.deliverControler.deliverChangePanel(DELIVER_CONTROL.DELIVERY_INQUIRY);
 			}
 		});
 		ReceiveInButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				maincontroler.deliverControler.deliverChangePanel(DELIVER_CONTROL.RECEIVE_IN);
+				mainControler.deliverControler.deliverChangePanel(DELIVER_CONTROL.RECEIVE_IN);
 			}
 		});
 		
@@ -92,7 +92,7 @@ public class DeliverButtonComponents{
 		panel.add(leaveButton);
 		leaveButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				maincontroler.mainChangePanel(MAIN_CONTROL.LOGIN);
+				mainControler.mainChangePanel(MAIN_CONTROL.LOGIN);
 			}
 		});
 	}

@@ -122,6 +122,13 @@ public class ManagerStaffModify extends JPanel {
 		back = new JButton(backIcon);
 		back.setBounds(290, 256, 81, 20);
 		add(back);
+		
+		back.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				maincontroler.mainFrame.nextPanel(new ManagerStaffList(maincontroler,mbc));
+				 
+			}
+		});
 
 		confirm.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {

@@ -29,6 +29,10 @@ public class ManagerSalaryObserve extends JPanel {
 	private JTable table;
 	private JScrollPane jsc;
 
+	
+	private String[] columnTitle={"职务","薪水"};
+	private String[][] TableData={};
+	
 	public ManagerSalaryObserve(ClientControler maincontroler, ManagerButtonComponent mbc) {
 		this.maincontroler = maincontroler;
 		this.mbc = mbc;
@@ -43,18 +47,19 @@ public class ManagerSalaryObserve extends JPanel {
 		setVisible(true);
 		
 		
-		String[] columnTitle={"职务","薪水"};
+		
 		
 		powersalary=manager.observeSalary();
-		System.out.println(powersalary.size());
-		String[][] TableData=new String[powersalary.size()][2];
+		if(powersalary.size()!=0){
+		TableData=new String[powersalary.size()][2];
 		for(int i=0;i<powersalary.size();i++){
 			SalaryImformation temp=powersalary.get(i).getSalaryImformation();
 			TableData[i][0]=getpower(temp.getPower());
 			TableData[i][1]=Integer.toString(temp.getSalary());
 		}
+		}
 		TableModel model=new DefaultTableModel(TableData,columnTitle);
-		table.setModel(model);
+		table=new JTable(model);
 		table.setEnabled(false);
 		
 		jsc=new JScrollPane(table);

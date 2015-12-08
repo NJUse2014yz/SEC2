@@ -107,7 +107,7 @@ public class UserUi extends JPanel{
 				{	
 					if(JTpassword.getText().equals("admin"))
 					{
-						new MainSwitchPanelListener(MAIN_CONTROL.MANAGER,controler,0);
+						new MainSwitchPanelListener(MAIN_CONTROL.ADMINSTRATER,controler,0);
 					}
 					else
 					{

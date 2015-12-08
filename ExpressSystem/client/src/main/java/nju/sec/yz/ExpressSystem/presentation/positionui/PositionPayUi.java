@@ -72,6 +72,7 @@ public class PositionPayUi extends JPanel{
 		deliverBl=new DeliverController();
 		receiptBl=new Collection();
 		List<CollectionRecordVO> payList=deliverBl.getCollectionRecords();
+		System.out.println(payList.size());
 		if(payList.size()!=0)
 		{
 			data=new String[payList.size()][4];

@@ -77,11 +77,6 @@ public class ManagerReceiptList extends JPanel {
 		mbc.changePanel(this);
 		mbc.change();
 		iniManagerReceiptList();
-		// test the modify
-
-//		maincontroler.mainFrame.nextPanel(new ManagerReceiptModify(maincontroler, mbc, new ReceiptVO(), "寄件单"));
-
-		// OrderIn orderIn=new OrderIn(this);
 	}
 
 	private void iniManagerReceiptList() {
@@ -97,6 +92,9 @@ public class ManagerReceiptList extends JPanel {
 
 		model = new DefaultTableModel(TableData, title);
 		table = new JTable(model);
+		table.set
+		
+		
 		jsc = new JScrollPane(table);
 		jsc.setBounds(134, 100, 333, 157);
 		add(jsc);
@@ -104,15 +102,7 @@ public class ManagerReceiptList extends JPanel {
 		model = new DefaultTableModel(TableData, title);
 
 		table.setModel(model);
-		table.setEnabled(false);
-		// JCheckBox check=new JCheckBox();
-		// table.getColumnModel().getColumn(2).setCellEditor(table.getDefaultEditor(Boolean.class));
-
-		// TableColumn aColumn = table.getColumnModel().getColumn(0);
-		// aColumn.setCellEditor(table.getDefaultEditor(Boolean.class));
-		// aColumn.setCellRenderer(table.getDefaultRenderer(Boolean.class));
-		// table.setValueAt(Boolean.FALSE, 1, 0);
-		// table.setValueAt(Boolean.TRUE, 2, 0);
+//		table.setEnabled(false);
 
 		type.addActionListener(new ActionListener() {
 
@@ -120,13 +110,8 @@ public class ManagerReceiptList extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				volist = receipt.getByType(getType(type.getSelectedItem().toString()));
-				TableData = new Object[volist.size()][2];
-				for (int i = 0; i < volist.size(); i++) {
-					String temp = volist.get(i).getMakeTime();
-					temp = temp.substring(0, 4) + "/" + temp.substring(4, 6) + "/" + temp.substring(6, 8);
-					TableData[i][0] = temp;
-					TableData[i][1] = volist.get(i).getId();
-				}
+				System.out.println(volist.size());
+				
 				switch (type.getSelectedItem().toString()) {
 				case "收款单":
 					iniCollection();
@@ -173,19 +158,6 @@ public class ManagerReceiptList extends JPanel {
 			}
 		});
 
-		// table.addMouseListener(new MouseAdapter() {
-		// public void MouseClicked(MouseEvent e){
-		// if(e.getClickCount()==2){
-		// int row =((JTable)e.getSource()).rowAtPoint(e.getPoint()); //获得行位置
-		// // int col=((JTable)e.getSource()).columnAtPoint(e.getPoint());
-		// //获得列位置 String
-		//
-		// maincontroler.mainFrame.nextPanel(new
-		// ManagerReceiptModify(maincontroler,mbc,volist.get(row),type.getSelectedItem().toString()));
-		//
-		// }
-		// }
-		// });
 
 		ImageIcon passIcon = new ImageIcon("graphic/manager/button/pass.png");
 		pass = new JButton(passIcon);
@@ -197,18 +169,32 @@ public class ManagerReceiptList extends JPanel {
 				int[] deletelines = table.getSelectedRows();
 				for (int c = 0; c < deletelines.length; c++) {
 
-					ResultMessage tempresult = receipt
-							.approve(modifyVO(deletelines[c], volist.get(deletelines[c]).getId()));
-					if (tempresult.getResult() == Result.FAIL) {
+					System.out.println(deletelines[0]);
+					ReceiptVO newVO=modifyVO(deletelines[c], volist.get(deletelines[c]).getId());
+					ResultMessage modifyresult=receipt.approve(newVO);
+					ResultMessage approveresult = receipt.approve(newVO);
+					if (modifyresult.getResult() == Result.FAIL) {
 						// 如果失败会跳出，显示失败
-						warning.setText(tempresult.getMessage());
+						System.out.println("modifysuccess!!!!!!!!!!!!!!!");
+						warning.setText(modifyresult.getMessage());
 						warning.setBounds(138, 490, 463 - 138, 30);
 						warning.setFont(new Font("Dialog", 1, 15));
 						warning.setForeground(Color.red);
 						add(warning);
 						repaint();
 						break;
-					} else {
+					} else if(approveresult.getResult() == Result.FAIL){
+						System.out.println("approvesuccess!!!!!!!!!!!!!!!");
+						// 如果失败会跳出，显示失败
+						warning.setText(approveresult.getMessage());
+						warning.setBounds(138, 490, 463 - 138, 30);
+						warning.setFont(new Font("Dialog", 1, 15));
+						warning.setForeground(Color.red);
+						add(warning);
+						repaint();
+						break;
+					}else{
+						System.out.println("success!!!!!!!!!!!!!!!");
 						// 如果成功最后才显示成功
 						warning.setText("提交成功");
 						warning.setBounds(270, 490, 70, 30);
@@ -392,7 +378,7 @@ public class ManagerReceiptList extends JPanel {
 		title = new String[] { "填写日期", "表单号", "填表人", "寄件人姓名", "寄件人地址", "寄件人手机", "收件人姓名", "收件人地址", "收件人手机", "件数", "重量",
 				"品名", "快递费", "预计送达时间" };
 
-		TableData = new String[volist.size()][14];
+		TableData = new Object[volist.size()][14];
 		for (int c = 0; c < volist.size(); c++) {
 			String tempId = volist.get(c).getId();
 			SendSheetVO tempvo = (SendSheetVO) receipt.getSingle((tempId));
