@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import nju.sec.yz.ExpressSystem.bl.deliverbl.DeliverController;
@@ -56,7 +57,7 @@ public class UserUi extends JPanel{
 	
 	private JTextField JTbarId;
 	private JTextField JTuserName;
-	private JTextField JTpassword;
+	private JPasswordField JTpassword;
 	private JButton login;
 	private JButton search;
 	private JLabel warning;
@@ -92,7 +93,7 @@ public class UserUi extends JPanel{
 		this.JTuserName.setBounds(username_x,username_y,username_w,height);
 		this.add(JTuserName);
 		
-		this.JTpassword=new JTextField();
+		this.JTpassword=new JPasswordField();
 		this.JTpassword.setBounds(password_x,password_y,password_w,height);
 		this.add(JTpassword);
 		
@@ -103,31 +104,38 @@ public class UserUi extends JPanel{
 
 				if(userBlService.login(JTuserName.getText(),JTpassword.getText()).getResult()==Result.SUCCESS)
 
-				{
-					char id=JTuserName.getText().charAt(JTuserName.getText().length()-4);
-					switch(id)
+				{	
+					if(JTpassword.getText().equals("admin"))
 					{
-					case 'A':
-						new MainSwitchPanelListener(MAIN_CONTROL.INVENTORY,controler,0);
-						break;
-					case 'B':
-						new MainSwitchPanelListener(MAIN_CONTROL.TRANSITER,controler,0);
-						break;					
-					case 'C':
-						new MainSwitchPanelListener(MAIN_CONTROL.POSITION,controler,0);
-						break;
-					case 'D':
-						new MainSwitchPanelListener(MAIN_CONTROL.DELIVER,controler,0);
-						break;
-					case 'E':
-						new MainSwitchPanelListener(MAIN_CONTROL.ACCOUNTER,controler,0);
-						break;
-					case 'F':
 						new MainSwitchPanelListener(MAIN_CONTROL.ADMINSTRATER,controler,0);
-						break;
-					case 'S':
-						new MainSwitchPanelListener(MAIN_CONTROL.MANAGER,controler,0);
-						break;					
+					}
+					else
+					{
+						char id=JTuserName.getText().charAt(JTuserName.getText().length()-4);
+						switch(id)
+						{
+						case 'A':
+							new MainSwitchPanelListener(MAIN_CONTROL.INVENTORY,controler,0);
+							break;
+						case 'B':
+							new MainSwitchPanelListener(MAIN_CONTROL.TRANSITER,controler,0);
+							break;					
+						case 'C':
+							new MainSwitchPanelListener(MAIN_CONTROL.POSITION,controler,0);
+							break;
+						case 'D':
+							new MainSwitchPanelListener(MAIN_CONTROL.DELIVER,controler,0);
+							break;
+						case 'E':
+							new MainSwitchPanelListener(MAIN_CONTROL.ACCOUNTER,controler,0);
+							break;
+						case 'F':
+							new MainSwitchPanelListener(MAIN_CONTROL.ADMINSTRATER,controler,0);
+							break;
+						case 'S':
+							new MainSwitchPanelListener(MAIN_CONTROL.MANAGER,controler,0);
+							break;					
+						}
 					}
 				}
 				else

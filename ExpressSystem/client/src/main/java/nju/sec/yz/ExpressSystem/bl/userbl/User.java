@@ -38,8 +38,7 @@ public class User implements UserInfo{
 	}
 	public ResultMessage login(String id, String password) {
 		ResultMessage result=new ResultMessage(Result.SUCCESS);
-		if(id.equals("D110")&&password.equals("120"))
-			return result;
+		
 		
 		UserPO userPo = null;
 		try {
@@ -60,6 +59,7 @@ public class User implements UserInfo{
 			return result;
 		}
 		this.saveCurrentUser(userPo);
+		System.out.println(result.getMessage());
 		return result;
 	}
 
@@ -72,7 +72,7 @@ public class User implements UserInfo{
 			ObjectOutputStream out=new ObjectOutputStream(new FileOutputStream(file));
 			out.writeObject(po);
 			out.close();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			
 			e.printStackTrace();
 		}
@@ -106,7 +106,7 @@ public class User implements UserInfo{
 		try {
 			listPO=data.findAll();
 		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 		//将userpo列表转换成uservo列表
@@ -190,6 +190,12 @@ public class User implements UserInfo{
 	}
 	
 	private String isValid(UserVO vo) {
+		/**
+		 * 初始管理猿账户
+		 */
+		if(vo.getPassword().equals("admin")&&vo.getId().equals("admin"))
+			return "success";
+		
 		String id=vo.getId();
 		String name=vo.getName();
 		String password=vo.getPassword();
@@ -242,12 +248,15 @@ public class User implements UserInfo{
 		case 'B':
 			if(pow!=Status.TRANSIT)
 				return false;
-			String[] numbers2=id.split("A");
+			String[] numbers2=id.split("B");
 			if(numbers2.length!=2)
 				return false;
 			//中转中心不存在
-			if(agaency.observeTransit(numbers2[0])==null)
+			if(agaency.observeTransit(numbers2[0])==null){
+				System.out.println("not found");
 				return false;
+			}
+				
 			if(!is3Number(numbers2[1]))
 				return false;
 			break;
@@ -276,7 +285,7 @@ public class User implements UserInfo{
 				return false;
 			break;
 		case 'E':
-			if(pow!=Status.JUNIOR_ACCOUNTANCY||pow!=Status.SENIOR_ACCOUNTANCY)
+			if(pow!=Status.JUNIOR_ACCOUNTANCY&&pow!=Status.SENIOR_ACCOUNTANCY)
 				return false;
 			String number4=id.substring(id.length()-3);
 			if(!is3Number(number4))

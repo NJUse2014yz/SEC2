@@ -141,6 +141,7 @@ public class AccountCheckInitialUi extends JPanel{
 		initialBl=new InitialController();
 		List<String> yearT=initialBl.getDates();
 		int n=yearT.size();
+		System.out.println(n);
 		years=new String[n];
 		for(int i=0;i<n;i++)
 		{

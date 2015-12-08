@@ -210,6 +210,7 @@ public class Initial {
 		
 		try {
 			List<AccountBookPO> pos=accountBookData.findAll();
+			System.out.println(pos.size()+"observing");
 			for(AccountBookPO po:pos){
 				dates.add(po.getDate());
 			}

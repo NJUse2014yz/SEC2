@@ -64,8 +64,9 @@ public class Price implements PriceService{
 	 * 快递费
 	 */
 	public double getDeliverPrice() {
-		PriceVO vo=this.observePrice();
-		return vo.getPriceInformation().getStandard();
+		return 23;
+//		PriceVO vo=this.observePrice();
+//		return vo.getPriceInformation().getStandard();
 	}
 
 	@Override
