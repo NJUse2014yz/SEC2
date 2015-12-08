@@ -32,16 +32,16 @@ public class ClientControler{
 	public TransitControler transitControler=new TransitControler(this);
 	public PositionControler positionControler=new PositionControler(this);
 	
-	JPanel userMainPanel=new UserUi(this);
-	JPanel deliverMainPanel=new DeliverMainUi(this);
-	JPanel inventoryMainPanel=new InventoryMainUi(this);
-	JPanel accountMainPanel=new AccountMainUi(this,accountControler.bc);
-	JPanel managerMainPanel=new ManagerMainUi(this,managerControler.mbc);
-	JPanel positionMainPanel=new PositionMainUi(this,positionControler.bc);
-	JPanel transitMainPanel=new TransitMainUi(this,transitControler.tbc);
-	JPanel adminstraterMainPanel=new AdminstraterMainUi(this,adminstraterControler.bc);
+//	JPanel userMainPanel=new UserUi(this);
+//	JPanel deliverMainPanel=new DeliverMainUi(this);
+//	JPanel inventoryMainPanel=new InventoryMainUi(this);
+//	JPanel accountMainPanel=new AccountMainUi(this,accountControler.bc);
+//	JPanel managerMainPanel=new ManagerMainUi(this,managerControler.mbc);
+//	JPanel positionMainPanel=new PositionMainUi(this,positionControler.bc);
+//	JPanel transitMainPanel=new TransitMainUi(this,transitControler.tbc);
+//	JPanel adminstraterMainPanel=new AdminstraterMainUi(this,adminstraterControler.bc);
 	
-	public MainUi mainFrame=new MainUi(userMainPanel);
+	public MainUi mainFrame=new MainUi(new UserUi(this));
 
 	public void showFrame()
 	{
@@ -52,31 +52,32 @@ public class ClientControler{
 		switch(n)
 		{
 		case LOGIN:
-			mainFrame.nextPanel(userMainPanel);
+			System.out.println("login now");
+			mainFrame.nextPanel(new UserUi(this));
 			break;
 		case DELIVERY_ENQUIRY:
 			mainFrame.nextPanel(new DeliverOrderSearchUi(this));
 			break;
 		case DELIVER:
-			mainFrame.nextPanel(deliverMainPanel);
+			mainFrame.nextPanel(new DeliverMainUi(this));
 			break;
 		case POSITION:
-			mainFrame.nextPanel(positionMainPanel);
+			mainFrame.nextPanel(new PositionMainUi(this,positionControler.bc));
 			break;
 		case TRANSITER:
-			mainFrame.nextPanel(transitMainPanel);
+			mainFrame.nextPanel(new TransitMainUi(this,transitControler.tbc));
 			break;
 		case INVENTORY:
-			mainFrame.nextPanel(inventoryMainPanel);
+			mainFrame.nextPanel(new InventoryMainUi(this));
 			break;
 		case ACCOUNTER:
-			mainFrame.nextPanel(accountMainPanel);
+			mainFrame.nextPanel(new AccountMainUi(this,accountControler.bc));
 			break;
 		case MANAGER:
-			mainFrame.nextPanel(managerMainPanel);
+			mainFrame.nextPanel(new ManagerMainUi(this,managerControler.mbc));
 			break;
 		case ADMINSTRATER:
-			mainFrame.nextPanel(adminstraterMainPanel);
+			mainFrame.nextPanel(new AdminstraterMainUi(this,adminstraterControler.bc));
 			break;
 		default:
 			System.out.println("wrong state");
