@@ -2,6 +2,8 @@ package nju.sec.yz.ExpressSystem.bl.deliverbl;
 
 import java.util.List;
 
+import nju.sec.yz.ExpressSystem.bl.accountbl.Account;
+import nju.sec.yz.ExpressSystem.bl.accountbl.AccountInfo;
 import nju.sec.yz.ExpressSystem.blservice.deliverBlService.DeliverBlService;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.CollectionRecordVO;
@@ -148,6 +150,12 @@ public class DeliverController implements DeliverBlService{
 	public List<String> getValidAgency() {
 		PositionLoadingReceipt receipt=new PositionLoadingReceipt();
 		return receipt.getValidAgency();
+	}
+
+	@Override
+	public List<String> getAccounts() {
+		AccountInfo accountService=new Account();
+		return accountService.getAccounts();
 	}
 
 }

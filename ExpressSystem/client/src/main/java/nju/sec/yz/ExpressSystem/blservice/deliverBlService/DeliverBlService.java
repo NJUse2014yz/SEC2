@@ -52,6 +52,11 @@ public interface DeliverBlService {
 	 */
 	public List<String> getValidAgency();
 	
+	/**
+	 * 
+	 */
+	public List<String> getAccounts();
+	
 	//寄件单
 	public ResultMessage deliverReceipt (SendSheetVO vo);
 	//收件单
