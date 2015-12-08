@@ -30,10 +30,12 @@ public class AccountBookDataImpl extends UnicastRemoteObject implements AccountB
 	public ArrayList<AccountBookPO> findAll() throws RemoteException {
 		File file = new File(SerializableFileHelper.ACCOUNT_BOOK_FILE_NAME);
         if (!file.exists()) {
+        	System.out.println("new accountbook");
             return new ArrayList<>();
         }
         try (ObjectInputStream is = new ObjectInputStream(new FileInputStream(file))) {
             //noinspection unchecked
+        	System.out.println("accountbookSize:");
             return (ArrayList<AccountBookPO>) is.readObject();
         } catch (Exception e) {
             return new ArrayList<>();
