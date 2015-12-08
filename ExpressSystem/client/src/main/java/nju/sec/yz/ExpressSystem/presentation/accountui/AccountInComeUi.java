@@ -29,6 +29,7 @@ import nju.sec.yz.ExpressSystem.presentation.DateChooser;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.AccountControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.PaymentSheetVO;
+import nju.sec.yz.ExpressSystem.vo.PaymentVO;
 import nju.sec.yz.ExpressSystem.vo.PositionVO;
 import nju.sec.yz.ExpressSystem.vo.TransitVO;
 
@@ -107,7 +108,9 @@ public class AccountInComeUi extends JPanel{
 			}
 		}
 		
-		List<PaymentSheetVO> sheetlist=finance.checkReceipt(date.getTime(), positions[choose.getSelectedIndex()]);
+		PaymentVO sheet=finance.checkReceipt(date.getTime(), positions[choose.getSelectedIndex()]);
+		
+		List<PaymentSheetVO> sheetlist=sheet.paymentList;
 		if(sheetlist!=null)
 		{
 			int n=0;
@@ -151,7 +154,9 @@ public class AccountInComeUi extends JPanel{
 			public void mouseClicked(MouseEvent e)
 			{
 				remove(scroll);
-				List<PaymentSheetVO> sheetlist=finance.checkReceipt(date.getTime(), positions[choose.getSelectedIndex()]);
+				PaymentVO sheet=finance.checkReceipt(date.getTime(), positions[choose.getSelectedIndex()]);
+				
+				List<PaymentSheetVO> sheetlist=sheet.paymentList;
 				if(sheetlist!=null)
 				{
 					int n=0;

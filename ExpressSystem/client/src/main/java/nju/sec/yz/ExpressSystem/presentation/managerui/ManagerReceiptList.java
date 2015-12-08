@@ -301,7 +301,7 @@ public class ManagerReceiptList extends JPanel {
 		TableData = new String[volist.size()][6];
 		for (int c = 0; c < volist.size(); c++) {
 			String tempId = volist.get(c).getId();
-			CollectionRecordVO tempvo = (CollectionRecordVO) receipt.getSingle(Integer.parseInt(tempId));
+			CollectionRecordVO tempvo = (CollectionRecordVO) receipt.getSingle(tempId);
 
 //			PaymentInformation tempInf = tempvo.getPaymentInformation();
 			String temp = tempvo.getMakeTime();
@@ -326,7 +326,7 @@ public class ManagerReceiptList extends JPanel {
 		TableData = new String[volist.size()][7];
 		for (int c = 0; c < volist.size(); c++) {
 			String tempId = volist.get(c).getId();
-			PaymentSheetVO tempvo = (PaymentSheetVO) receipt.getSingle(Integer.parseInt(tempId));
+			PaymentSheetVO tempvo = (PaymentSheetVO) receipt.getSingle(tempId);
 
 			PaymentInformation tempInf = tempvo.getPaymentInformation();
 			String temp = tempvo.getMakeTime();
@@ -353,7 +353,7 @@ public class ManagerReceiptList extends JPanel {
 		TableData = new String[volist.size()][14];
 		for(int c=0;c<volist.size();c++){
 			String tempId=volist.get(c).getId();
-			SendSheetVO tempvo=(SendSheetVO) receipt.getSingle(Integer.parseInt(tempId));
+			SendSheetVO tempvo=(SendSheetVO) receipt.getSingle(tempId);
 			
 			SendInformation tempInf=tempvo.getSendInformation();
 			ToAndFromInformation fromPerson=tempInf.getFromPerson();
@@ -389,7 +389,7 @@ public class ManagerReceiptList extends JPanel {
 		TableData = new String[volist.size()][5];
 		for(int c=0;c<volist.size();c++){
 			String tempId=volist.get(c).getId();
-			DeliverySheetVO tempvo=(DeliverySheetVO) receipt.getSingle(Integer.parseInt(tempId));
+			DeliverySheetVO tempvo=(DeliverySheetVO) receipt.getSingle(tempId);
 			
 			DeliveryInformation tempInf=tempvo.getDeliveryInformation();
 			String temp=tempvo.getMakeTime();
@@ -411,7 +411,7 @@ public class ManagerReceiptList extends JPanel {
 		TableData = new String[volist.size()][5];
 		for(int c=0;c<volist.size();c++){
 			String tempId=volist.get(c).getId();
-			OfficeArriveSheetVO tempvo=(OfficeArriveSheetVO) receipt.getSingle(Integer.parseInt(tempId));
+			OfficeArriveSheetVO tempvo=(OfficeArriveSheetVO) receipt.getSingle(tempId);
 			
 			ArriveInformation tempInf=tempvo.getOfficeArrive();
 			String temp=tempvo.getMakeTime();
@@ -435,7 +435,7 @@ public class ManagerReceiptList extends JPanel {
 		TableData = new String[volist.size()][5];
 		for(int c=0;c<volist.size();c++){
 			String tempId=volist.get(c).getId();
-			DeliverySheetVO tempvo=(DeliverySheetVO) receipt.getSingle(Integer.parseInt(tempId));
+			DeliverySheetVO tempvo=(DeliverySheetVO) receipt.getSingle(tempId);
 			
 			DeliveryInformation tempInf=tempvo.getDeliveryInformation();
 			String temp=tempvo.getMakeTime();
@@ -457,7 +457,7 @@ public class ManagerReceiptList extends JPanel {
 		TableData = new String[volist.size()][9];
 		for(int c=0;c<volist.size();c++){
 			String tempId=volist.get(c).getId();
-			TransitSheetVO tempvo=(TransitSheetVO) receipt.getSingle(Integer.parseInt(tempId));
+			TransitSheetVO tempvo=(TransitSheetVO) receipt.getSingle(tempId);
 			
 			TransitCarInformation tempInf=(TransitCarInformation)tempvo.getTransitInformation();
 			String temp=tempvo.getMakeTime();
@@ -483,7 +483,7 @@ public class ManagerReceiptList extends JPanel {
 		TableData = new String[volist.size()][9];
 		for(int c=0;c<volist.size();c++){
 			String tempId=volist.get(c).getId();
-			TransitSheetVO tempvo=(TransitSheetVO) receipt.getSingle(Integer.parseInt(tempId));
+			TransitSheetVO tempvo=(TransitSheetVO) receipt.getSingle(tempId);
 			
 			TransitTrainInformation tempInf=(TransitTrainInformation)tempvo.getTransitInformation();
 			String temp=tempvo.getMakeTime();
@@ -509,7 +509,7 @@ public class ManagerReceiptList extends JPanel {
 		TableData = new String[volist.size()][9];
 		for(int c=0;c<volist.size();c++){
 			String tempId=volist.get(c).getId();
-			TransitSheetVO tempvo=(TransitSheetVO) receipt.getSingle(Integer.parseInt(tempId));
+			TransitSheetVO tempvo=(TransitSheetVO) receipt.getSingle(tempId);
 			
 			TransitFlightInformation tempInf=(TransitFlightInformation)tempvo.getTransitInformation();
 			String temp=tempvo.getMakeTime();
@@ -536,7 +536,7 @@ public class ManagerReceiptList extends JPanel {
 		TableData = new String[volist.size()][9];
 		for(int c=0;c<volist.size();c++){
 			String tempId=volist.get(c).getId();
-			TransitArriveSheetVO tempvo=(TransitArriveSheetVO) receipt.getSingle(Integer.parseInt(tempId));
+			TransitArriveSheetVO tempvo=(TransitArriveSheetVO) receipt.getSingle(tempId);
 			ArriveInformation tempInf=(ArriveInformation)tempvo.getTransitArriveInformation();
 			String temp=tempvo.getMakeTime();
 			 temp=temp.substring(0,4)+"/"+temp.substring(4,6)+"/"+temp.substring(6,8);
@@ -558,7 +558,7 @@ public class ManagerReceiptList extends JPanel {
 		TableData = new String[volist.size()][10];
 		for(int c=0;c<volist.size();c++){
 			String tempId=volist.get(c).getId();
-			TransitLoadSheetVO tempvo=(TransitLoadSheetVO) receipt.getSingle(Integer.parseInt(tempId));
+			TransitLoadSheetVO tempvo=(TransitLoadSheetVO) receipt.getSingle(tempId);
 			LoadInformation tempInf=(LoadInformation)tempvo.getTransitLoadInformation();	
 			String temp=tempvo.getMakeTime();
 			 temp=temp.substring(0,4)+"/"+temp.substring(4,6)+"/"+temp.substring(6,8);
@@ -586,7 +586,7 @@ public class ManagerReceiptList extends JPanel {
 				TableData = new String[volist.size()][9];
 				for(int c=0;c<volist.size();c++){
 					String tempId=volist.get(c).getId();
-					InventoryInSheetVO tempvo=(InventoryInSheetVO) receipt.getSingle(Integer.parseInt(tempId));
+					InventoryInSheetVO tempvo=(InventoryInSheetVO) receipt.getSingle(tempId);
 					InventoryInInformation tempInf=(InventoryInInformation)tempvo.getInventoryInInformation();
 					String temp=tempvo.getMakeTime();
 					 temp=temp.substring(0,4)+"/"+temp.substring(4,6)+"/"+temp.substring(6,8);
@@ -612,7 +612,7 @@ public class ManagerReceiptList extends JPanel {
 		TableData = new String[volist.size()][9];
 		for(int c=0;c<volist.size();c++){
 			String tempId=volist.get(c).getId();
-			InventoryOutSheetVO tempvo=(InventoryOutSheetVO) receipt.getSingle(Integer.parseInt(tempId));
+			InventoryOutSheetVO tempvo=(InventoryOutSheetVO) receipt.getSingle(tempId);
 			InventoryOutInformation tempInf=(InventoryOutInformation)tempvo.getInventoryOutInformation();
 			String temp=tempvo.getMakeTime();
 			 temp=temp.substring(0,4)+"/"+temp.substring(4,6)+"/"+temp.substring(6,8);

@@ -220,7 +220,7 @@ public class TransitReceive extends JPanel {
 		case "完整":
 			return ArriveState.PERFECT;
 		case "损坏":
-			return ArriveState.Broken;
+			return ArriveState.BROKEN;
 		case "丢失":
 			return ArriveState.LOST;
 		default:
