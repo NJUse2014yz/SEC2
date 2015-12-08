@@ -103,12 +103,14 @@ public class Collection implements ReceiptService{
 		String id=info.getInDeliverId();
 		String time=info.getTime();
 		String positionId=info.getPositionId();
+		String account=info.getAccount();
 		
 		PaymentInformation information=new PaymentInformation();
 		information.setAmount(amount);
 		information.setInDeliverId(id);
 		information.setTime(time);
 		information.setPositionId(positionId);
+		information.setAccount(account);
 		
 		return information;
 	}
@@ -138,7 +140,7 @@ public class Collection implements ReceiptService{
 		PaymentSheetVO receipt=(PaymentSheetVO)vo;
 		PaymentInformation info=receipt.getPaymentInformation();
 		Account account=new Account();
-//	TODO	account.updateCollection(info.get, info.getAmount());
+		account.updateCollection(info.getAccount(), info.getAmount());
 		PaymentSheetPO po=(PaymentSheetPO)this.convertToPO(receipt);
 		ResultMessage message=this.addCollection(po);
 		return message;

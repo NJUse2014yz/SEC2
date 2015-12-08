@@ -116,6 +116,9 @@ public class Account implements Initialable<AccountVO, AccountPO> ,AccountInfo{
 	 */
 	public ResultMessage updatePayment(String account, double d) {
 		AccountVO vo = this.observeAccount(account);
+		
+		if(vo==null)
+			return new ResultMessage(Result.FAIL,"更新银行账户信息失败");
 
 		vo.setBalance(vo.getBalance() - d);
 
