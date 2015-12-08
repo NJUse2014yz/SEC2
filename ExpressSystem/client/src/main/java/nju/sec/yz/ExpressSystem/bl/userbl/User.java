@@ -59,6 +59,7 @@ public class User implements UserInfo{
 			return result;
 		}
 		this.saveCurrentUser(userPo);
+		System.out.println(result.getMessage());
 		return result;
 	}
 
@@ -71,7 +72,7 @@ public class User implements UserInfo{
 			ObjectOutputStream out=new ObjectOutputStream(new FileOutputStream(file));
 			out.writeObject(po);
 			out.close();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			
 			e.printStackTrace();
 		}
@@ -105,7 +106,7 @@ public class User implements UserInfo{
 		try {
 			listPO=data.findAll();
 		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 		//将userpo列表转换成uservo列表
@@ -284,7 +285,7 @@ public class User implements UserInfo{
 				return false;
 			break;
 		case 'E':
-			if(pow!=Status.JUNIOR_ACCOUNTANCY||pow!=Status.SENIOR_ACCOUNTANCY)
+			if(pow!=Status.JUNIOR_ACCOUNTANCY&&pow!=Status.SENIOR_ACCOUNTANCY)
 				return false;
 			String number4=id.substring(id.length()-3);
 			if(!is3Number(number4))
