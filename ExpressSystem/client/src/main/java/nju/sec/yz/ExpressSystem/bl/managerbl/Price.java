@@ -47,7 +47,6 @@ public class Price implements PriceService{
 
 	public PriceVO observePrice(){
 		PricePO po=null;
-		System.out.println("price");
 		try{
 			po=data.findAllPrice();		
 			if(po==null)
@@ -57,6 +56,7 @@ public class Price implements PriceService{
 			e.printStackTrace();
 		}
 		PriceVO vo=changePoToVo(po);
+		System.out.println(vo.getPriceInformation().getPriceForPlane());
 		return vo;
 	}
 	

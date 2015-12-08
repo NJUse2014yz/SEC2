@@ -156,6 +156,7 @@ public class ConstDataImpl extends UnicastRemoteObject implements ConstDataServi
 		ResultMessage message=saveData(dao);
 		return message;
 	}
+	
 
 	@Override
 	public PricePO findAllPrice() throws RemoteException {

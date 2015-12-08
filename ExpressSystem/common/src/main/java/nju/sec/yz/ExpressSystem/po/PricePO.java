@@ -8,6 +8,10 @@ import nju.sec.yz.ExpressSystem.common.PriceInformation;
 
 public class PricePO implements Serializable{
 	private PriceInformation priceInformation;
+	
+	public PricePO(){
+		priceInformation=new PriceInformation();
+	}
 
 	public PriceInformation getPriceInformation() {
 		return priceInformation;
