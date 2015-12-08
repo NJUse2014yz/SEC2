@@ -104,31 +104,38 @@ public class UserUi extends JPanel{
 
 				if(userBlService.login(JTuserName.getText(),JTpassword.getText()).getResult()==Result.SUCCESS)
 
-				{
-					char id=JTuserName.getText().charAt(JTuserName.getText().length()-4);
-					switch(id)
+				{	
+					if(JTpassword.getText()=="admin")
 					{
-					case 'A':
-						new MainSwitchPanelListener(MAIN_CONTROL.INVENTORY,controler,0);
-						break;
-					case 'B':
-						new MainSwitchPanelListener(MAIN_CONTROL.TRANSITER,controler,0);
-						break;					
-					case 'C':
-						new MainSwitchPanelListener(MAIN_CONTROL.POSITION,controler,0);
-						break;
-					case 'D':
-						new MainSwitchPanelListener(MAIN_CONTROL.DELIVER,controler,0);
-						break;
-					case 'E':
-						new MainSwitchPanelListener(MAIN_CONTROL.ACCOUNTER,controler,0);
-						break;
-					case 'F':
-						new MainSwitchPanelListener(MAIN_CONTROL.ADMINSTRATER,controler,0);
-						break;
-					case 'S':
 						new MainSwitchPanelListener(MAIN_CONTROL.MANAGER,controler,0);
-						break;					
+					}
+					else
+					{
+						char id=JTuserName.getText().charAt(JTuserName.getText().length()-4);
+						switch(id)
+						{
+						case 'A':
+							new MainSwitchPanelListener(MAIN_CONTROL.INVENTORY,controler,0);
+							break;
+						case 'B':
+							new MainSwitchPanelListener(MAIN_CONTROL.TRANSITER,controler,0);
+							break;					
+						case 'C':
+							new MainSwitchPanelListener(MAIN_CONTROL.POSITION,controler,0);
+							break;
+						case 'D':
+							new MainSwitchPanelListener(MAIN_CONTROL.DELIVER,controler,0);
+							break;
+						case 'E':
+							new MainSwitchPanelListener(MAIN_CONTROL.ACCOUNTER,controler,0);
+							break;
+						case 'F':
+							new MainSwitchPanelListener(MAIN_CONTROL.ADMINSTRATER,controler,0);
+							break;
+						case 'S':
+							new MainSwitchPanelListener(MAIN_CONTROL.MANAGER,controler,0);
+							break;					
+						}
 					}
 				}
 				else
