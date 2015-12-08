@@ -190,6 +190,12 @@ public class User implements UserInfo{
 	}
 	
 	private String isValid(UserVO vo) {
+		/**
+		 * 初始管理猿账户
+		 */
+		if(vo.getPassword().equals("admin")&&vo.getId().equals("admin"))
+			return "success";
+		
 		String id=vo.getId();
 		String name=vo.getName();
 		String password=vo.getPassword();
