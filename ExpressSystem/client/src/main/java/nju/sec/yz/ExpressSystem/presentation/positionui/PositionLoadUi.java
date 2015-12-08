@@ -145,6 +145,7 @@ public class PositionLoadUi extends JPanel{
 		
 		
 		JTPositionId = new JTextField();
+		JTPositionId.setText(deliverBl.getCurrentPosition().id);
 		JTPositionId.setBounds(positionId_x,positionId_y,positionId_w,positionId_h);
 		add(JTPositionId);
 		

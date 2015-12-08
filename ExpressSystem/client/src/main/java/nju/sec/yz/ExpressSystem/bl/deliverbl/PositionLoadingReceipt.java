@@ -135,6 +135,8 @@ public class PositionLoadingReceipt implements ReceiptService{
 	public List<String> getValidAgency(){
 		List<String> agencies=new ArrayList<>();
 		PositionVO current=this.getCurrentPosition();
+		if(current==null)
+			return agencies;
 		
 		//获得所属中转中心
 		Transit transitService=new Transit();
