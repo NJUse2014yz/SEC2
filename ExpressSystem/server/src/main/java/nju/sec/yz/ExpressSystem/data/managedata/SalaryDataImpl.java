@@ -13,6 +13,7 @@ import java.util.List;
 
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.common.SalaryImformation;
 import nju.sec.yz.ExpressSystem.common.Status;
 import nju.sec.yz.ExpressSystem.data.fileUtility.SerializableFileHelper;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.SalaryDataService;
@@ -41,12 +42,25 @@ public class SalaryDataImpl extends UnicastRemoteObject implements SalaryDataSer
 			return new ResultMessage(Result.FAIL, "文件读写错误");
 		}
 	}
+	
+	private ArrayList<SalaryPO> init(){
+		ArrayList<SalaryPO> pos=new ArrayList<>();
+		pos.add(new SalaryPO(new SalaryImformation(Status.ADMINISTRATOR, 0)));
+		pos.add(new SalaryPO(new SalaryImformation(Status.DELIVER, 0)));
+		pos.add(new SalaryPO(new SalaryImformation(Status.INVENTORY, 0)));
+		pos.add(new SalaryPO(new SalaryImformation(Status.JUNIOR_ACCOUNTANCY, 0)));
+		pos.add(new SalaryPO(new SalaryImformation(Status.MANAGER, 0)));
+		pos.add(new SalaryPO(new SalaryImformation(Status.POSITION, 0)));
+		pos.add(new SalaryPO(new SalaryImformation(Status.SENIOR_ACCOUNTANCY, 0)));
+		pos.add(new SalaryPO(new SalaryImformation(Status.TRANSIT, 0)));
+		return pos;
+	}
 
 	@Override
 	public ArrayList<SalaryPO> findAll() throws RemoteException {
 		File file = new File(SerializableFileHelper.SALARY_FILE_NAME);
         if (!file.exists()) {
-            return new ArrayList<>();
+            return this.init();
         }
         try (ObjectInputStream is = new ObjectInputStream(new FileInputStream(file))) {
             //noinspection unchecked

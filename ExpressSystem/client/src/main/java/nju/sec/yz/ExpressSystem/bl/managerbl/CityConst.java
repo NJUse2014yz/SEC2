@@ -69,10 +69,8 @@ public class CityConst implements CityDistanceService {
 	
 	public List<CityVO> getAllCity() {
 		List<CityVO> cities=new ArrayList<>();
-		System.out.println("city");
 		try {
 			List<CityPO> pos=data.findAllCity();
-			System.out.println("citySize:"+pos.size());
 			for(CityPO po:pos){
 				CityInformation info=this.copyInfo(po.getCityInformation());
 				CityVO city=new CityVO(info);
@@ -82,7 +80,6 @@ public class CityConst implements CityDistanceService {
 			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
-		System.out.println("citySize:"+cities.size());
 		return cities;
 	}
 
