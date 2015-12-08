@@ -49,13 +49,15 @@ public class CollectionRecord {
 	}
 	
 	public List<CollectionRecordVO> getRecords(){
-		String positionId=this.getCurrentPositionID();
 		
+		String positionId=this.getCurrentPositionID();
+		System.out.println(positionId);
 		List<CollectionRecordVO> vos=new ArrayList<>();
 		List<CollectionRecordPO> pos=null;
 		
 		try {
 			pos=data.getRecords(positionId);
+			System.out.println(pos.size());
 		} catch (RemoteException e) {
 			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();

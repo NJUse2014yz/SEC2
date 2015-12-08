@@ -94,6 +94,7 @@ public class ConstDataImpl extends UnicastRemoteObject implements ConstDataServi
 
 	@Override
 	public List<CityPO> findAllCity() throws RemoteException {
+		System.out.println("finding a CityPO...");
 		ConstDao dao=this.getDao();
 		List<CityPO> pos=dao.getDistances();
 		return pos;

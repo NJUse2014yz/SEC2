@@ -92,6 +92,7 @@ public class ReceiptList implements ReceiptSaveService{
 		ArrayList<ReceiptVO> receiptVOs=new ArrayList<>();
 		try {
 			List<ReceiptPO> receiptPOs=receiptData.findAll();
+			System.out.println(receiptPOs.size());
 			ReceiptVO vo=null;
 			for(ReceiptPO po:receiptPOs){
 				if(po.getType()==type){

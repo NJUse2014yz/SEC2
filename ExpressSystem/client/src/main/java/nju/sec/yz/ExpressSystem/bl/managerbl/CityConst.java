@@ -6,6 +6,7 @@ import java.util.List;
 
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
 import nju.sec.yz.ExpressSystem.client.RMIExceptionHandler;
+import nju.sec.yz.ExpressSystem.client.RMIHelper;
 import nju.sec.yz.ExpressSystem.common.CityInformation;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
@@ -28,7 +29,7 @@ public class CityConst implements CityDistanceService {
 		try {
 			data=DatafactoryProxy.getConstDataService();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 	}
@@ -44,7 +45,7 @@ public class CityConst implements CityDistanceService {
 		try {
 			message=data.updateCity(po);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 		
@@ -59,7 +60,7 @@ public class CityConst implements CityDistanceService {
 			CityInformation infoCopy=this.copyInfo(info);
 			vo=new CityVO(infoCopy);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 		
@@ -68,9 +69,10 @@ public class CityConst implements CityDistanceService {
 	
 	public List<CityVO> getAllCity() {
 		List<CityVO> cities=new ArrayList<>();
-		
+		System.out.println("city");
 		try {
 			List<CityPO> pos=data.findAllCity();
+			System.out.println("citySize:"+pos.size());
 			for(CityPO po:pos){
 				CityInformation info=this.copyInfo(po.getCityInformation());
 				CityVO city=new CityVO(info);
@@ -80,7 +82,7 @@ public class CityConst implements CityDistanceService {
 			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
-		
+		System.out.println("citySize:"+cities.size());
 		return cities;
 	}
 
@@ -101,7 +103,7 @@ public class CityConst implements CityDistanceService {
 				return message;
 			message=data.insert(po2);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 		
@@ -125,7 +127,7 @@ public class CityConst implements CityDistanceService {
 		try {
 			message=data.delete(beginPlace, endPlace);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
+			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
 		return message;

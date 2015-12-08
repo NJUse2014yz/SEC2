@@ -52,8 +52,11 @@ public class CollectionRecordDataImpl extends UnicastRemoteObject implements Col
 		
 		List<CollectionRecordPO> CollectionRecordPOs = getRecords();
 		for(CollectionRecordPO cpo:CollectionRecordPOs){
-			if(cpo.getBarId().equals(cpo.getBarId()))
+			if(po.getBarId().equals(cpo.getBarId())){
+				System.out.println("重复");
 				return;
+			}
+				
 		}
 		
 		CollectionRecordPOs.add(po);
@@ -101,6 +104,7 @@ public class CollectionRecordDataImpl extends UnicastRemoteObject implements Col
 	public List<CollectionRecordPO> getRecords(String positionId) throws RemoteException {
 		List<CollectionRecordPO> pos=new ArrayList<>();
 		List<CollectionRecordPO> allPO=this.getRecords();
+		System.out.println(allPO.size());
 		for(CollectionRecordPO po:allPO){
 			if(po.getPositionId().equals(positionId))
 				pos.add(po);
