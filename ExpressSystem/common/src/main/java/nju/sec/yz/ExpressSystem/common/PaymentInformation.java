@@ -12,14 +12,16 @@ public class PaymentInformation  implements Serializable{
 	private double amount;
 	private String inDeliverId;
 	private String positionId;
+	private String account;//收款账户名
 	
 	public PaymentInformation(String time, double amount, String inDeliverId,
-			String positionId) {
+			String positionId,String account) {
 		super();
 		this.time = time;
 		this.amount = amount;
 		this.inDeliverId = inDeliverId;
 		this.positionId = positionId;
+		this.account=account;
 	}
 	
 	public PaymentInformation() {
@@ -49,6 +51,14 @@ public class PaymentInformation  implements Serializable{
 	}
 	public void setPositionId(String positionId) {
 		this.positionId = positionId;
+	}
+
+	public String getAccount() {
+		return account;
+	}
+
+	public void setAccount(String account) {
+		this.account = account;
 	}
 	
 }
