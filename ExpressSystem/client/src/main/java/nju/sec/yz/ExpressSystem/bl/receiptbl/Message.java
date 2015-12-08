@@ -62,10 +62,6 @@ public class Message{
 		return id;
 	}
 	
-	
-		
-	
-	
 	public List<MessageVO> getNewMessages() {
 		UserInfo user=new User();
 		String currentUser=user.getCurrentID();

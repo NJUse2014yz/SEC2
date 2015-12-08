@@ -3,16 +3,13 @@ package nju.sec.yz.ExpressSystem.bl.accountbl;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
-
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
 import nju.sec.yz.ExpressSystem.client.RMIExceptionHandler;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.AccountDataService;
 import nju.sec.yz.ExpressSystem.po.AccountPO;
-import nju.sec.yz.ExpressSystem.po.CarPO;
 import nju.sec.yz.ExpressSystem.vo.AccountVO;
-import nju.sec.yz.ExpressSystem.vo.CarVO;
 
 /**
  * Account的领域模型对象 负责账户管理的具体实现
@@ -22,7 +19,6 @@ import nju.sec.yz.ExpressSystem.vo.CarVO;
 public class Account implements Initialable<AccountVO, AccountPO> {
 
 	private AccountDataService accountData;
-
 	public Account() {
 		try {
 			accountData = DatafactoryProxy.getAccountDataService();
@@ -31,7 +27,6 @@ public class Account implements Initialable<AccountVO, AccountPO> {
 			e.printStackTrace();
 		}
 	}
-
 	public ResultMessage addAccount(AccountVO av) {
 		ResultMessage message = null;
 		// 验证information
