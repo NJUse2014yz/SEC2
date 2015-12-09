@@ -95,6 +95,7 @@ public class ReceiptList implements ReceiptSaveService{
 			System.out.println(receiptPOs.size());
 			ReceiptVO vo=null;
 			for(ReceiptPO po:receiptPOs){
+				System.out.println(po.getType());
 				if(po.getType()==type){
 					vo=this.show(po);
 					receiptVOs.add(vo);

@@ -149,5 +149,19 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataS
 	}
 	
 	
+	public static void main(String[] args) {
+		try {
+			ReceiptDataImpl receipt=new ReceiptDataImpl();
+			List<ReceiptPO> list=receipt.findAll();
+			for(ReceiptPO po:list){
+				System.out.println(po.getType()+" "+po.getMakePerson()+" "+po.getId());
+			}
+		
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 
 }

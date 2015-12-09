@@ -49,6 +49,8 @@ public enum ReceiptType {
 
 	
 
-	
+	public static void main(String[] args) {
+		System.out.println(INVENTORY_IN);
+	}
 
 }
