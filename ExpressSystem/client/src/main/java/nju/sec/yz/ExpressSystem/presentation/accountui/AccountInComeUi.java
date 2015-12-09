@@ -88,6 +88,7 @@ public class AccountInComeUi extends JPanel{
 		managerController=new ManagerController();
 		this.bc=bc;
 		managerController=new ManagerController();
+		
 		ArrayList<PositionVO> positionlist=new ArrayList<PositionVO>();
 		ArrayList<TransitVO> transitvo=managerController.observeAllTransit();
 		if(transitvo!=null)

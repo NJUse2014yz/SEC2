@@ -10,12 +10,6 @@
   <name>server</name>
   <url>http://maven.apache.org</url>
 	
-	<parent>
-    <groupId>edu.nju.expressManageSystem</groupId>
-    <artifactId>express-all</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    </parent>
-	
 	
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

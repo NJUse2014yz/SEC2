@@ -75,13 +75,14 @@ public class PositionPayUi extends JPanel{
 		System.out.println(payList.size());
 		if(payList.size()!=0)
 		{
-			data=new String[payList.size()][4];
+			data=new String[payList.size()][5];
 			for(int i=0;i<payList.size();i++)
 			{
 				data[i][0]=payList.get(i).getTime();
 				data[i][1]=Double.toString(payList.get(i).getAmount());
 				data[i][2]=payList.get(i).getDeliverId();
 				data[i][3]=payList.get(i).getBarId();
+				data[i][4]="";
 			}
 		}
 		List<String> accountList=deliverBl.getAccounts();
