@@ -99,6 +99,7 @@ public class ConstDataImpl extends UnicastRemoteObject implements ConstDataServi
 		List<CityPO> pos=dao.getDistances();
 		return pos;
 	}
+	
 
 	@Override
 	public synchronized ResultMessage insert(CityPO cpo) throws RemoteException {

@@ -48,12 +48,14 @@ public class CityIdDataImpl extends UnicastRemoteObject implements CityIdDataSer
 			System.out.println("插入了一个空的CityIdPO！！！");
 			
 		}
-		System.out.println(cipo.getName());
+		
 		List<CityIdPO> CityIdPOs = getAll();
 		for(CityIdPO po:CityIdPOs){
 				
 			if(po.getId().equals(cipo.getId())||po.getName().equals(cipo.getName())){
-				System.out.println("重复"+po.getName());
+				System.out.println("重复");
+				System.out.println(po.getId()+po.getName());
+				System.out.println(cipo.getId()+cipo.getName());
 				return ;
 			}
 				

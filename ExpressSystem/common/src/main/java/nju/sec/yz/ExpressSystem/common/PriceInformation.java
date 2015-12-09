@@ -6,7 +6,7 @@ public class PriceInformation  implements Serializable{
 	private double priceForCar=2;
 	private double priceForTrain=0.2;
 	private double priceForPlane=20;
-	private double standard=23000;
+	private double standard=23;
 	public double getPriceForCar() {
 		return priceForCar;
 	}
