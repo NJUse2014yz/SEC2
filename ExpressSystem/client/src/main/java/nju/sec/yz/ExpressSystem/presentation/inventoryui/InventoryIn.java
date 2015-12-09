@@ -46,6 +46,8 @@ public class InventoryIn extends JPanel{
 	private JButton confirm;
 	private JLabel warning=new JLabel();
 	
+	private DateChooser date;
+	
 	
 	public InventoryIn(ClientControler maincontroler){
 		this.maincontroler=maincontroler;
@@ -66,7 +68,7 @@ public class InventoryIn extends JPanel{
 		barId.setBounds(213, 59, 182, 18);
 		add(barId);
 		
-		DateChooser date =new DateChooser(this,213,82);
+		date =new DateChooser(this,213,82);
 		
 		ArrayList<TransitVO> trans=manager.observeAllTransit();
 		String[] desti=new String[trans.size()];

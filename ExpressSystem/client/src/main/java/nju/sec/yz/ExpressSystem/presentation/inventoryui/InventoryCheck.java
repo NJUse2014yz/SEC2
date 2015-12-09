@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ScrollPaneConstants;
 
 import nju.sec.yz.ExpressSystem.bl.inventorybl.InventoryController;
 import nju.sec.yz.ExpressSystem.blservice.inventoryBlService.InventoryBlService;
@@ -66,16 +67,33 @@ public class InventoryCheck extends JPanel{
 		}
 		String[] columnTitle = { "快递编号", "入库日期", "目的地", "区号", "排号", "架号", "位号" };
 		table = new JTable(tableData, columnTitle);
+		
+		table.getColumnModel().getColumn(0).setMinWidth(80);
+		table.getColumnModel().getColumn(1).setMinWidth(60);
+		table.getColumnModel().getColumn(2).setMinWidth(60);
+		table.getColumnModel().getColumn(3).setMinWidth(60);
+		table.getColumnModel().getColumn(4).setMinWidth(60);
+		table.getColumnModel().getColumn(5).setMinWidth(60);
+		table.getColumnModel().getColumn(6).setMinWidth(60);
+		
+		 
+		
 		// 将JTable对象放在JScrollPane中，并将该JScrollPane放在窗口中显示出来
 		JScrollPane jsc = new JScrollPane(table);
 		jsc.setVisible(true);
 		jsc.setBounds(136,62,325, 208);
 		add(jsc);
 		
+		// 水平滚动条
+		jsc.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		jsc.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS); 
+		jsc.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		table.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+		
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 		String temp=df.format(new Date());// new Date()为获取当前系统时间
 		time.setText("当前时间： "+temp);
-		time.setBounds(198, 490, 463 - 198, 30);
+		time.setBounds(137, 296, 463 - 198, 30);
 		time.setFont(new Font("Dialog", 1, 15));
 		time.setForeground(Color.LIGHT_GRAY);
 		time.setVisible(true);

@@ -113,6 +113,7 @@ public class TransitLoading extends JPanel{
 		
 				model = new DefaultTableModel(tableData,columnTitle);
 				barId = new JTable(model);
+				barId.getColumnModel().getColumn(0).setMaxWidth(30);
 
 //			      barId = new JTable(tableData , columnTitle);  
 //			      model=barId.getModel();

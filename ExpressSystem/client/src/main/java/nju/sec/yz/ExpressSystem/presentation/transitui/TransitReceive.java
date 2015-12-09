@@ -125,6 +125,9 @@ public class TransitReceive extends JPanel {
 		     		table = new JTable(model);
 		     		table.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(state));
 		     		
+		     		table.getColumnModel().getColumn(0).setMaxWidth(30);
+		     		table.getColumnModel().getColumn(3).setMaxWidth(60);
+		     		
 		     	      //将JTable对象放在JScrollPane中，并将该JScrollPane放在窗口中显示出来  
 		     	      JScrollPane jsc=new JScrollPane(table);  
 		     	      jsc.setVisible(true);

@@ -37,6 +37,9 @@ private InventoryBlService inventoryservice=new InventoryController();
 	private JLabel total=new JLabel();
 	private JTable table;
 	
+	private DateChooser date1;
+	private DateChooser date2;
+	
 
 	public InventoryObserve(ClientControler maincontroler){
 		this.maincontroler=maincontroler;
@@ -50,8 +53,8 @@ private InventoryBlService inventoryservice=new InventoryController();
 		setVisible(true);
 		
 		InventoryButtonComponents ibc=new InventoryButtonComponents(maincontroler,this);
-		DateChooser date1=new DateChooser(this,214,60);
-		DateChooser date2=new DateChooser(this,214,87);
+		date1=new DateChooser(this,214,60);
+		date2=new DateChooser(this,214,87);
 		
 		
 		

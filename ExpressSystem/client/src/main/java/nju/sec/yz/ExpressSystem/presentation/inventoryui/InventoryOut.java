@@ -46,6 +46,9 @@ private InventoryBlService inventoryservice=new InventoryController();
 	private JButton confirm;
 	private JLabel warning=new JLabel();
 	
+	
+	private DateChooser date ;
+	
 	public InventoryOut(ClientControler maincontroler){
 		this.maincontroler=maincontroler;
 		iniInventoryOut();
@@ -63,7 +66,7 @@ InventoryButtonComponents ibc=new InventoryButtonComponents(maincontroler,this);
 		barId.setBounds(213, 59, 182, 18);
 		add(barId);
 		
-		DateChooser date =new DateChooser(this,213,82);
+		date =new DateChooser(this,213,82);
 		
 		ArrayList<TransitVO> trans=manager.observeAllTransit();
 		String[] desti=new String[trans.size()];

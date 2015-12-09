@@ -111,6 +111,7 @@ public class TransitReceiptFlight extends JPanel{
 
 		model = new DefaultTableModel(tableData, columnTitle);
 		barId = new JTable(model);
+		barId.getColumnModel().getColumn(0).setMaxWidth(30);
 
 		JScrollPane jsc = new JScrollPane(barId);
 		jsc.setVisible(true);
