@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import componentui.MessageDeclare;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.PositionControler;
 
@@ -30,7 +31,9 @@ public class PositionMainUi extends JPanel{
 		setSize(490, 550);
 		setVisible(true);
 
-		
+
+		//显示消息列表
+		MessageDeclare message=new MessageDeclare(this);
 	}
 
 	

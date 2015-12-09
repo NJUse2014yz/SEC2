@@ -6,6 +6,7 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import componentui.MessageDeclare;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.TransitControler;
 import nju.sec.yz.ExpressSystem.presentation.deliverui.DeliverButtonComponents;
@@ -32,7 +33,9 @@ public class TransitMainUi extends JPanel{
 			setLayout(null);
 			setSize(490, 550);
 			setVisible(true);
-			
+
+			//显示消息列表
+			MessageDeclare message=new MessageDeclare(this);
 		}
 		
 		@Override

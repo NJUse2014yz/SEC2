@@ -6,6 +6,7 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import componentui.MessageDeclare;
 import nju.sec.yz.ExpressSystem.bl.inventorybl.InventoryController;
 import nju.sec.yz.ExpressSystem.blservice.inventoryBlService.InventoryBlService;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
@@ -25,6 +26,8 @@ public class InventoryMainUi extends JPanel {
 		setSize(490, 550);
 		setVisible(true);
 		InventoryButtonComponents ibc=new InventoryButtonComponents(maincontroler,this);
+		
+		MessageDeclare message=new MessageDeclare(this);
 	}
 	@Override
 	public void paintComponent(Graphics g){

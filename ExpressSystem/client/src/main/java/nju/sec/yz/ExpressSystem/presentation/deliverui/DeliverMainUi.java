@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import componentui.MessageDeclare;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.DELIVER_CONTROL;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.DeliverControler;
@@ -35,6 +36,9 @@ public class DeliverMainUi extends JPanel {
 		setSize(490, 550);
 		setVisible(true);
 
+
+		//显示消息列表
+		MessageDeclare message=new MessageDeclare(this);
 		
 	}
 
