@@ -3,6 +3,8 @@ package nju.sec.yz.ExpressSystem.bl.accountbl;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
+
+import nju.sec.yz.ExpressSystem.bl.deliverbl.CollectionRecord;
 import nju.sec.yz.ExpressSystem.bl.deliverbl.ValidHelper;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptID;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;
@@ -60,7 +62,11 @@ public class Collection implements ReceiptService{
 			return validResult;
 		
 		//营业厅id
-		info.setPositionId(this.getPositionId(info.getPositionId()));
+		info.setPositionId(info.getPositionId());
+		
+		//删除记录
+		CollectionRecord record=new CollectionRecord();
+		record.deleteRecord(receipt.getBarIds());
 		
 		//创建po
 		PaymentSheetPO po=new PaymentSheetPO();

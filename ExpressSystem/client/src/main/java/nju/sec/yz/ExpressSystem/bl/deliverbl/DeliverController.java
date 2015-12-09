@@ -103,6 +103,8 @@ public class DeliverController implements DeliverBlService{
 		return records;
 	}
 
+	
+	
 	@Override
 	/**
 	 * 输入中转单编号获得条形码号列表
@@ -157,5 +159,7 @@ public class DeliverController implements DeliverBlService{
 		AccountInfo accountService=new Account();
 		return accountService.getAccounts();
 	}
+
+	
 
 }
