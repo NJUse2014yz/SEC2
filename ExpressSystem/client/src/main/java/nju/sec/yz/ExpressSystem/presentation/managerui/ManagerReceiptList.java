@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -92,7 +93,7 @@ public class ManagerReceiptList extends JPanel {
 
 		model = new DefaultTableModel(TableData, title);
 		table = new JTable(model);
-		table.set
+		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		
 		
 		jsc = new JScrollPane(table);
@@ -165,7 +166,7 @@ public class ManagerReceiptList extends JPanel {
 		add(pass);
 
 		pass.addMouseListener(new MouseAdapter() {
-			public void MouseClicked(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) {
 				int[] deletelines = table.getSelectedRows();
 				for (int c = 0; c < deletelines.length; c++) {
 
@@ -217,7 +218,7 @@ public class ManagerReceiptList extends JPanel {
 		add(passAll);
 
 		passAll.addMouseListener(new MouseAdapter() {
-			public void MouseClicked(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) {
 				for (int c = 0; c < volist.size(); c++) {
 					
 					ResultMessage tempresult = receipt
@@ -791,7 +792,7 @@ public class ManagerReceiptList extends JPanel {
 		// TODO Auto-generated method stub
 		title = new String[] { "填写日期", "表单号", "填表人", "入库时间", "目的地", "区号", "排号", "架号", "位号" };
 
-		TableData = new String[volist.size()][9];
+		TableData = new Object[volist.size()][9];
 		for (int c = 0; c < volist.size(); c++) {
 			String tempId = volist.get(c).getId();
 			InventoryInSheetVO tempvo = (InventoryInSheetVO) receipt.getSingle((tempId));
