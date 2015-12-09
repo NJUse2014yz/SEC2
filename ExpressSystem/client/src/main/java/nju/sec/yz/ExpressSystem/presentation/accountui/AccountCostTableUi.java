@@ -25,6 +25,7 @@ public class AccountCostTableUi extends JPanel{
 	private ClientControler mainControler;
 	private AccountControler controler;
 	private FinanceBlSevice financeBl;
+	private ProfitVO pvo;
 	
 	private JLabel in;
 	private JLabel out;
@@ -91,7 +92,7 @@ public class AccountCostTableUi extends JPanel{
 		add(warning);
 		warning.setVisible(false);
 		
-		ProfitVO pvo=financeBl.makeCostReceipt();
+		pvo=financeBl.makeCostReceipt();
 		if(pvo!=null){
 			in.setText(Double.toString(pvo.in));
 			out.setText(Double.toString(pvo.out));
