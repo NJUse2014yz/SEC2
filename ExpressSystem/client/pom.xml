@@ -36,6 +36,15 @@
   	  <version>0.0.1-SNAPSHOT</version>
    	</dependency>
    	
+   	<dependency>
+   	<groupId>org.jxl.tool</groupId>
+	<artifactId>Excel</artifactId>
+	<version>1</version>
+	<scope>system</scope>
+	<systemPath>${project.basedir}/lib/jxl.jar
+	</systemPath>
+	</dependency>
+	
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
