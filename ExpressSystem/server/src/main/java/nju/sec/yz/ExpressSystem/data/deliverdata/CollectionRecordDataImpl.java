@@ -85,6 +85,16 @@ public class CollectionRecordDataImpl extends UnicastRemoteObject implements Col
 		}
 		
 	}
+	
+	public static void main(String[] args) {
+		try {
+			CollectionRecordDataImpl data=new CollectionRecordDataImpl();
+			data.saveData(new ArrayList<CollectionRecordPO>());
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	
 	private List<CollectionRecordPO> getRecords() {
