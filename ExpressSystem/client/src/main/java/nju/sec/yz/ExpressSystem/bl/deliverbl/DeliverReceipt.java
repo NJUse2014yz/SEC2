@@ -263,6 +263,11 @@ public class DeliverReceipt implements ReceiptService{
 			message.setMessage("亲，重量x是要满足0<x<65536的数字哟");
 		if(!ValidHelper.isBarId(barId))			
 			message.setMessage("亲，咱们的订单号是十位数字哟~");
+		
+		Deliver deliver=new Deliver();
+		if(deliver.checkDeliver(barId)!=null)
+			message.setMessage("亲，这订单号已经填过了哦~");
+		
 		if(!ValidHelper.isValidNumber(vloume))
 			message.setMessage("亲，体积是要满足0<x<65536的数字哟");
 		if(!isSize(size))

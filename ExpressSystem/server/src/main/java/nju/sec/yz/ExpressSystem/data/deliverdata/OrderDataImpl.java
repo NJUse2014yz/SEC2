@@ -49,7 +49,7 @@ public class OrderDataImpl extends UnicastRemoteObject implements OrderDataServi
 		}
 		List<SendSheetPO> POs = findAll();
 		for (SendSheetPO po : POs) {
-			String carID = po.getId();
+			String carID = po.getSendInformation().getBarId();
 			if (barID.equals(carID))
 				return po;
 		}
@@ -70,6 +70,18 @@ public class OrderDataImpl extends UnicastRemoteObject implements OrderDataServi
         } catch (Exception e) {
             return new ArrayList<>();
         }
+	}
+	
+	public static void main(String[] args) {
+		try {
+			OrderDataImpl data=new OrderDataImpl();
+			List<SendSheetPO> pos=data.findAll();
+			for(SendSheetPO po:pos){
+				System.out.println(po.getSendInformation().getBarId());
+			}
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
