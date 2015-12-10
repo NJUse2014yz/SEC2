@@ -167,7 +167,7 @@ public class TransitLoading extends JPanel{
 						for(int i=0;i<barId.getRowCount()-1;i++){
 							BarIdArray.add((String) barId.getValueAt(i, 1));
 						}
-						System.out.println(BarIdArray.get(3));
+						//System.out.println(BarIdArray.get(3));
 					TransitLoadSheetVO vo=new TransitLoadSheetVO();
 						//destinationId项不存在，用null写入
 					LoadInformation loadInf = new LoadInformation(date.getTime(), agencyId.getSelectedItem().toString(),
