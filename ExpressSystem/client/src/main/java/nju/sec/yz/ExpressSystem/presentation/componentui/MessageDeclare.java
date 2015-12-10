@@ -43,14 +43,10 @@ public class MessageDeclare {
 			announce.append("单据"+volist.get(c).messageId+"已经通过审批\r\n");
 		}
 		
-		
-		
-//		announce.setLineWrap(true);// 激活自动换行功能
-//		announce.setWrapStyleWord(true);// 激活断行不断字功能
-		
 		jsc=new JScrollPane(announce);
 		jsc.setBounds(154,84,292,180);
 		jsc.setOpaque(false);
+		jsc.setBorder(BorderFactory.createLineBorder(Color.WHITE,0));
 		panel.add(jsc);
 		
 		ImageIcon IknowIcon=new ImageIcon("graphic/common/Iknow.png");

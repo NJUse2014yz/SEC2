@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.List;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -20,67 +19,60 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import nju.sec.yz.ExpressSystem.bl.deliverbl.DeliverController;
-import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptController;
 import nju.sec.yz.ExpressSystem.blservice.deliverBlService.DeliverBlService;
-import nju.sec.yz.ExpressSystem.blservice.receiptBlService.ReceiptBlService;
 import nju.sec.yz.ExpressSystem.common.ArriveInformation;
 import nju.sec.yz.ExpressSystem.common.ArriveState;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.presentation.DateChooser;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
-import nju.sec.yz.ExpressSystem.vo.OfficeLoadSheetVO;
-import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
+import nju.sec.yz.ExpressSystem.vo.BarIdsVO;
 import nju.sec.yz.ExpressSystem.vo.TransitArriveSheetVO;
+
 /*
  * 2015/11/29
  * zhangqi
  * 删除中转中心编号的填写
  */
 public class TransitReceive extends JPanel {
-	
+
 	ClientControler maincontrol;
 	DeliverBlService deliverBlService = new DeliverController();
 	TransitButtonComponents tbc;
-	
-	
+
 	private JButton confirm;
-	private JTextField departure;
+	
+//	private JTextField departure;
+	private JLabel departure;
 	private JComboBox state;
 	private JTextField transitSheetId;
-//	private JTextField transitId;
-	
+	// private JTextField transitId;
+
 	private JTable table;
 	private TableModel model;
 	private JScrollPane jsc;
-	
-	private JLabel warning=new JLabel();
-	
+
+	private JLabel warning = new JLabel();
+
 	private DateChooser date;
-	
-	public TransitReceive(ClientControler maincontrol,TransitButtonComponents tbc) {
-		this.maincontrol=maincontrol;
-		this.tbc=tbc;
+
+	public TransitReceive(ClientControler maincontrol, TransitButtonComponents tbc) {
+		this.maincontrol = maincontrol;
+		this.tbc = tbc;
 		tbc.setNextPanel(this);
 		tbc.iniTransit();
-		
+
 		initTransitReceive();
 	}
-	
+
 	private void initTransitReceive() {
 		setLayout(null);
 		setSize(490, 550);
 		setVisible(true);
-		
-		departure=new JTextField();
-		departure.setBounds(204, 58, 71, 15);
-		add(departure);
 		
 		date=new DateChooser(this,222,80);
 		
@@ -90,7 +82,7 @@ public class TransitReceive extends JPanel {
 //		add(transitId);
 		
 		transitSheetId=new JTextField();
-		transitSheetId.setBounds(222, 109, 122, 18);
+		transitSheetId.setBounds(222, 58, 122, 18);
 		add(transitSheetId);
 		
 		//监听回车
@@ -111,8 +103,16 @@ public class TransitReceive extends JPanel {
 						add(warning);
 						repaint();
 		         }else{
-		        	ArrayList Ids=(ArrayList) deliverBlService.getBarIdList(transitSheetId.getText());
+		        	BarIdsVO vo= deliverBlService.getBarIdList(transitSheetId.getText());
+		        	ArrayList Ids=(ArrayList) vo.barIds;
 		        	
+		        	departure=new JLabel();
+		        	departure.setText(vo.fromAgency);
+		    		departure.setBounds(204, 106, 71, 18);
+		    		departure.setFont(new Font("Dialog", 1, 15));
+		    		departure.setForeground(Color.LIGHT_GRAY);
+		    		add(departure);
+		    		
 		        	String[] sta={"完整","损坏","丢失"};
 		     		state=new JComboBox(sta);
 		     		
@@ -221,9 +221,9 @@ public class TransitReceive extends JPanel {
 			}
 		});
 	}
-	
-	private static ArriveState getState(String state){
-		switch (state){
+
+	private static ArriveState getState(String state) {
+		switch (state) {
 		case "完整":
 			return ArriveState.PERFECT;
 		case "损坏":
@@ -234,8 +234,7 @@ public class TransitReceive extends JPanel {
 			return null;
 		}
 	}
-	
-	
+
 	@Override
 	public void paintComponent(Graphics g) {
 
