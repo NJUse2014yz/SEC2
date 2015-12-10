@@ -125,7 +125,7 @@ public class AccountOperateTableUi extends JPanel{
 					int sizeIn=invo.size();
 					int sizeOut=outvo.size();
 					System.out.println(sizeIn+" "+sizeOut);
-					dataIn=new String[sizeIn][4];
+					dataIn=new String[sizeIn][5];
 					for(int i=0;i<sizeIn;i++)
 					{
 						dataIn[i][0]=invo.get(i).getPaymentInformation().getTime();
