@@ -52,21 +52,23 @@ public class ManagerConstAdd extends JPanel{
 		 * @author cong
 		 * 交换id和名称坐标
 		 */
-		fromID=new JTextField();
-		fromID.setBounds(388, 93, 78, 18);
-		add(fromID);
-		
 		toCity=new JTextField();
 		toCity.setBounds(210, 93, 91, 18);
 		add(toCity);
 		
 		toID=new JTextField();
-		toID.setBounds(388, 64, 78, 18);
+		toID.setBounds(388, 93, 78, 18);
 		add(toID);
 		
 		fromCity=new JTextField();
 		fromCity.setBounds(210, 64, 91, 18);
 		add(fromCity);
+		
+		fromID=new JTextField();
+		fromID.setBounds(388, 64, 78, 18);
+		add(fromID);
+		
+		
 		
 		distance=new JTextField();
 		distance.setBounds(190, 125, 66, 18);

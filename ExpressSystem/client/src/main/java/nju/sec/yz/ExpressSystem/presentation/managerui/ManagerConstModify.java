@@ -45,6 +45,8 @@ public class ManagerConstModify extends JPanel {
 	private JButton confirm;
 
 	private JLabel warning = new JLabel();
+	
+	private ArrayList<CityVO> cities;
 
 	public ManagerConstModify(ClientControler maincontroler, ManagerButtonComponent mbc) {
 		this.maincontroler = maincontroler;
@@ -60,16 +62,23 @@ public class ManagerConstModify extends JPanel {
 		setVisible(true);
 
 		// table;
-		ArrayList<CityVO> cities = (ArrayList<CityVO>) manager.observeAllCity();
-		 Object[][] TableData=new Object[cities.size()][3];
+		cities = (ArrayList<CityVO>) manager.observeAllCity();
+		 Object[][] TableData=new Object[cities.size()][5];
 		 for(int i=0;i<cities.size();i++){
 		 CityInformation temp=cities.get(i).getCityInformation();
 		 TableData[i][0]=temp.getFromCity();
-		 TableData[i][1]=temp.getToCity();
-		 TableData[i][2]=temp.getDistance();
+		 TableData[i][1]=temp.getFromID();
+		 
+		 TableData[i][2]=temp.getToCity();
+		 TableData[i][3]=temp.getToID();
+		 TableData[i][4]=temp.getDistance();
+		 
+		 if(i==(cities.size()-1)){
+			 System.out.println(TableData[i][1]);
+			 System.out.println(TableData[i][3]);}
 		 }
 //		Object[][] TableData = null;
-		String[] columnTitle = { "所在地", "编号", "名称" };
+		String[] columnTitle = { "出发地","出发地编号", "到达地","到达地编号", "距离" };
 		TableModel model = new DefaultTableModel(TableData, columnTitle);
 		table = new JTable(model);
 
@@ -80,9 +89,9 @@ public class ManagerConstModify extends JPanel {
 
 		// 四个常量描述
 		PriceVO pv = manager.observePrize();
-		// PriceInformation pinf=pv.getPriceInformation();
+		PriceInformation pinf=pv.getPriceInformation();
 
-		PriceInformation pinf = new PriceInformation();
+//		PriceInformation pinf = new PriceInformation();
 
 		priceForPlane = new JTextField();
 		priceForPlane.setText(Double.toString(pinf.getPriceForCar()));
@@ -130,8 +139,10 @@ public class ManagerConstModify extends JPanel {
 					for (int i = 0; i < cities.size(); i++) {
 						CityInformation cityImformation = cities.get(i).getCityInformation();
 						cityImformation.setFromCity(table.getValueAt(i, 0).toString());
-						cityImformation.setToCity(table.getValueAt(i, 1).toString());
-						cityImformation.setDistance((Double) table.getValueAt(i, 0));
+						cityImformation.setFromID(table.getValueAt(i, 1).toString());
+						cityImformation.setToCity(table.getValueAt(i, 2).toString());
+						cityImformation.setToID(table.getValueAt(i, 3).toString());
+						cityImformation.setDistance((Double) table.getValueAt(i, 4));
 						CityVO cv = new CityVO(cityImformation);
 						ResultMessage tableresult = manager.modifyCity(cv);
 						if (tableresult.getResult() == Result.FAIL) {

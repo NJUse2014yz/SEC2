@@ -47,69 +47,69 @@ public class ManagerConstObserve extends JPanel {
 		setLayout(null);
 		setSize(490, 550);
 		setVisible(true);
-		
-		//table;
+
+		// table;
 		ArrayList<CityVO> cities = (ArrayList<CityVO>) manager.observeAllCity();
-		Object[][] TableData=new Object[cities.size()][3];
-		for(int i=0;i<cities.size();i++){
-			CityInformation temp=cities.get(i).getCityInformation();
-			TableData[i][0]=temp.getFromCity();
-			TableData[i][1]=temp.getToCity();
-			TableData[i][2]=temp.getDistance();
+		Object[][] TableData = new Object[cities.size()][5];
+		for (int i = 0; i < cities.size(); i++) {
+			CityInformation temp = cities.get(i).getCityInformation();
+			TableData[i][0] = temp.getFromCity();
+			TableData[i][1] = temp.getFromID();
+			TableData[i][2] = temp.getToCity();
+			TableData[i][3] = temp.getToID();
+			TableData[i][4] = temp.getDistance();
 		}
-		String[] columnTitle={"所在地","编号","名称"};
-		TableModel model=new DefaultTableModel(TableData,columnTitle);
-		table=new JTable(model);
+		// Object[][] TableData = null;
+		String[] columnTitle = { "出发地", "出发地编号", "到达地", "到达地编号", "距离" };
+		TableModel model = new DefaultTableModel(TableData, columnTitle);
+		table = new JTable(model);
 
-		jsc=new JScrollPane(table);
+		jsc = new JScrollPane(table);
 		jsc.setVisible(true);
-	    jsc.setBounds(143,63,320,184);
-	    add(jsc);
-		
-	    
-	    PriceVO pv=manager.observePrize();
-//	    PriceInformation pinf=pv.getPriceInformation();
-	    
-	    PriceInformation pinf=new PriceInformation();
-	    
-	    priceForPlane=new JLabel();
-	    priceForPlane.setText(Double.toString(pinf.getPriceForCar()));
-	    priceForPlane.setBounds(216, 259, 70, 27);
-	    priceForPlane.setForeground(Color.GRAY);
-	    priceForPlane.setFont(new Font("Dialog", 0, 18));
-	    add(priceForPlane);
-	    
-	    priceForTrain=new JLabel();
-	    priceForTrain.setText(Double.toString(pinf.getPriceForCar()));
-	    priceForTrain.setBounds(216, 289, 70, 27);
-	    priceForTrain.setForeground(Color.GRAY);
-	    priceForTrain.setFont(new Font("Dialog", 0, 18));
-	    add(priceForTrain);
-	    
-	    priceForCar=new JLabel();
-	    priceForCar.setText(Double.toString(pinf.getPriceForCar()));
-	    priceForCar.setBounds(216, 319, 70, 27);
-	    priceForCar.setForeground(Color.GRAY);
-	    priceForCar.setFont(new Font("Dialog", 0, 18));
-	    add(priceForCar);
-	    
-	    standard=new JLabel();
-	    standard.setText(Double.toString(pinf.getPriceForCar()));
-	    standard.setBounds(286, 348, 70, 27);
-	    standard.setForeground(Color.GRAY);
-	    standard.setFont(new Font("Dialog", 0, 18));
-	    add(standard);
-	    
-		
+		jsc.setBounds(143, 63, 320, 184);
+		add(jsc);
+
+		PriceVO pv = manager.observePrize();
+		 PriceInformation pinf=pv.getPriceInformation();
+
+
+		priceForPlane = new JLabel();
+		priceForPlane.setText(Double.toString(pinf.getPriceForCar()));
+		priceForPlane.setBounds(216, 259, 70, 27);
+		priceForPlane.setForeground(Color.GRAY);
+		priceForPlane.setFont(new Font("Dialog", 0, 18));
+		add(priceForPlane);
+
+		priceForTrain = new JLabel();
+		priceForTrain.setText(Double.toString(pinf.getPriceForCar()));
+		priceForTrain.setBounds(216, 289, 70, 27);
+		priceForTrain.setForeground(Color.GRAY);
+		priceForTrain.setFont(new Font("Dialog", 0, 18));
+		add(priceForTrain);
+
+		priceForCar = new JLabel();
+		priceForCar.setText(Double.toString(pinf.getPriceForCar()));
+		priceForCar.setBounds(216, 319, 70, 27);
+		priceForCar.setForeground(Color.GRAY);
+		priceForCar.setFont(new Font("Dialog", 0, 18));
+		add(priceForCar);
+
+		standard = new JLabel();
+		standard.setText(Double.toString(pinf.getPriceForCar()));
+		standard.setBounds(286, 348, 70, 27);
+		standard.setForeground(Color.GRAY);
+		standard.setFont(new Font("Dialog", 0, 18));
+		add(standard);
+
 	}
-	
-@Override
-public void paintComponent(Graphics g) {
 
-	Image img01 = new ImageIcon("graphic/manager/background/background16.png").getImage();
+	@Override
+	public void paintComponent(Graphics g) {
 
-	g.drawImage(img01, 0, 0, 490, 550, null);
+		Image img01 = new ImageIcon("graphic/manager/background/background16.png").getImage();
 
-}
+		g.drawImage(img01, 0, 0, 490, 550, null);
+
+	}
 
 }
