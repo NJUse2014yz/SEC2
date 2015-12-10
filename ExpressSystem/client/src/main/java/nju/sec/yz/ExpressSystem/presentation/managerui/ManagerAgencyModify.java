@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.List;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -17,6 +16,8 @@ import javax.swing.JTextField;
 
 import nju.sec.yz.ExpressSystem.bl.managerbl.ManagerController;
 import nju.sec.yz.ExpressSystem.blservice.managerBlService.AgencyBlService;
+import nju.sec.yz.ExpressSystem.common.Result;
+import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.PositionVO;
 import nju.sec.yz.ExpressSystem.vo.TransitVO;
@@ -38,8 +39,14 @@ public class ManagerAgencyModify extends JPanel {
 	private JLabel warning = new JLabel();
 	private JLabel transit;
 	
+	
 	//记为positon序号
 	private int count = 0;
+	
+	private TransitVO vo;
+	
+	private ArrayList<PositionVO> listVO;
+	
 
 	public ManagerAgencyModify(ClientControler maincontroler, ManagerButtonComponent mbc, ArrayList<String> num) {
 		this.maincontroler = maincontroler;
@@ -94,10 +101,11 @@ public class ManagerAgencyModify extends JPanel {
 		}
 	}
 
-	private void iniTransit(TransitVO vo) {
-		location.setText(vo.getLocation());
-		name.setText(vo.getName());
-		Id.setText(vo.getId());
+	private void iniTransit(TransitVO tvo) {
+		this.vo=tvo;
+		location.setText(this.vo.getLocation());
+		name.setText(this.vo.getName());
+		Id.setText(this.vo.getId());
 
 		confirm.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -113,15 +121,35 @@ public class ManagerAgencyModify extends JPanel {
 					vo.setId(Id.getText());
 					vo.setLocation(location.getText());
 					vo.setName(name.getText());
-					manager.modifyTransit(vo);
+					ResultMessage result=manager.modifyTransit(vo);
+					
+					// 失败
+					if (result.getResult() == Result.FAIL) {
+
+						warning.setText(result.getMessage());
+						warning.setBounds(138, 490, 463 - 138, 30);
+						warning.setFont(new Font("Dialog", 1, 15));
+						warning.setForeground(Color.red);
+						add(warning);
+						repaint();
+					} else {
+						// 提交成功
+						warning.setText("提交成功");
+						warning.setBounds(270, 490, 70, 30);
+						warning.setFont(new Font("Dialog", 1, 15));
+						warning.setForeground(Color.red);
+						warning.setVisible(true);
+						add(warning);
+					}
 				}
 			}
 		});
 	}
 
-	private void iniPosition(TransitVO vo, String Pid) {
+	private void iniPosition(TransitVO tvo, String Pid) {
 
-		ArrayList<PositionVO> listVO = (ArrayList<PositionVO>) vo.getPositions();
+		this.vo=tvo;
+		listVO = (ArrayList<PositionVO>) vo.getPositions();
 		
 		for (count=0; !(listVO.get(count).getId() .equals(Pid)) ; count++) {}
 		
@@ -153,13 +181,33 @@ public class ManagerAgencyModify extends JPanel {
 					repaint();
 				} else {
 					//如果transitId没有改变
-					if(TransitId.getText().equals(transit)){
+					if(TransitId.getText().equals(vo.getId())){
 						listVO.get(count).setId(Id.getText());
 						listVO.get(count).setLocation(location.getText());
 						listVO.get(count).setName(name.getText());
 						
 						vo.setPositions(listVO);
-						manager.modifyTransit(vo);
+						ResultMessage result=manager.modifyTransit(vo);
+						
+						// 失败
+						if (result.getResult() == Result.FAIL) {
+
+							warning.setText(result.getMessage());
+							warning.setBounds(138, 490, 463 - 138, 30);
+							warning.setFont(new Font("Dialog", 1, 15));
+							warning.setForeground(Color.red);
+							add(warning);
+							repaint();
+						} else {
+							// 提交成功
+							warning.setText("提交成功");
+							warning.setBounds(270, 490, 70, 30);
+							warning.setFont(new Font("Dialog", 1, 15));
+							warning.setForeground(Color.red);
+							warning.setVisible(true);
+							add(warning);
+
+						}
 					}else{
 						//判断新写入的Transit是否存在
 						//不存在
@@ -178,7 +226,28 @@ public class ManagerAgencyModify extends JPanel {
 						    //在原有transit中删去
 						    listVO.remove(count);
 						    vo.setPositions(listVO);
-						    manager.modifyTransit(vo);
+						    ResultMessage result=manager.modifyTransit(vo);
+						    
+						 // 失败
+							if (result.getResult() == Result.FAIL) {
+
+								warning.setText(result.getMessage());
+								warning.setBounds(138, 490, 463 - 138, 30);
+								warning.setFont(new Font("Dialog", 1, 15));
+								warning.setForeground(Color.red);
+								add(warning);
+								repaint();
+							} else {
+//								// 提交成功
+//								warning.setText("提交成功");
+//								warning.setBounds(270, 490, 70, 30);
+//								warning.setFont(new Font("Dialog", 1, 15));
+//								warning.setForeground(Color.red);
+//								warning.setVisible(true);
+//								add(warning);
+
+							
+						   
 						    //在现有transit中新增
 							TransitVO traVO=manager.observeTransit(traId);
 							temp.setId(Id.getText());
@@ -188,9 +257,28 @@ public class ManagerAgencyModify extends JPanel {
 							ArrayList<PositionVO> polist=(ArrayList<PositionVO>) traVO.getPositions();
 							polist.add(temp);
 							traVO.setPositions(polist);
-							manager.modifyTransit(traVO);
+							result=manager.modifyTransit(traVO);
+							
+							if (result.getResult() == Result.FAIL) {
+
+								warning.setText(result.getMessage());
+								warning.setBounds(138, 490, 463 - 138, 30);
+								warning.setFont(new Font("Dialog", 1, 15));
+								warning.setForeground(Color.red);
+								add(warning);
+								repaint();
+							} else {
+								// 提交成功
+								warning.setText("提交成功");
+								warning.setBounds(270, 490, 70, 30);
+								warning.setFont(new Font("Dialog", 1, 15));
+								warning.setForeground(Color.red);
+								warning.setVisible(true);
+								add(warning);
+							}
 						}
 					}
+				}
 				}
 			}
 		});

@@ -134,7 +134,7 @@ public class InDataImpl extends UnicastRemoteObject implements InDataService{
 			InDataImpl data=new InDataImpl();
 			List<PaymentSheetPO> pos=data.findAll();
 			for(PaymentSheetPO po:pos){
-				System.out.println(po.getPaymentInformation().getAccount());
+				System.out.println(po.getPaymentInformation().getTime());
 			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
@@ -173,6 +173,7 @@ public class InDataImpl extends UnicastRemoteObject implements InDataService{
 		int min=Integer.parseInt(begin);
 		int max=Integer.parseInt(end);
 		for (PaymentSheetPO po : inPOs) {
+			
 			int date=Integer.parseInt(po.getPaymentInformation().getTime());
 			if (date>=min&&date<=max)
 				results.add(po);
@@ -181,5 +182,7 @@ public class InDataImpl extends UnicastRemoteObject implements InDataService{
 		
 		return results;
 	}
+	
+	
 
 }
