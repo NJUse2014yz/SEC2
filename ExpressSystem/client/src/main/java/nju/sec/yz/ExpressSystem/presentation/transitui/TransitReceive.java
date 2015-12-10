@@ -98,10 +98,10 @@ public class TransitReceive extends JPanel {
 		      public void keyPressed(KeyEvent e)    
 		      {    
 		    	  
-		        if(e.getKeyChar()=='\n' )   //按回车键执行相应操作KeyEvent.VK_ENTER; 
+		        if(e.getKeyChar()==KeyEvent.VK_ENTER )  { //按回车键执行相应操作KeyEvent.VK_ENTER; 
 //		    	  if(transitSheetId.getText().toString().length()==11)
-		        { 
-		        	System.out.println(transitSheetId.getText());
+		         System.out.println("!!!!!!!!!!!!!!!!!");
+		        	System.out.println(transitSheetId.getText().toString());
 		         if(deliverBlService.getBarIdList(transitSheetId.getText())==null){
 		        	 warning.setText("中转单号错误");
 						warning.setBounds(198, 490, 463 - 198, 30);
@@ -128,7 +128,7 @@ public class TransitReceive extends JPanel {
 		     		table.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(state));
 		     		
 		     		table.getColumnModel().getColumn(0).setMaxWidth(30);
-		     		table.getColumnModel().getColumn(3).setMaxWidth(60);
+		     		table.getColumnModel().getColumn(2).setMinWidth(80);
 		     		
 		     	      //将JTable对象放在JScrollPane中，并将该JScrollPane放在窗口中显示出来  
 		     	      JScrollPane jsc=new JScrollPane(table);  
