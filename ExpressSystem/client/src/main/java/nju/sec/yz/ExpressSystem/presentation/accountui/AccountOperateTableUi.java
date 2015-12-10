@@ -124,6 +124,7 @@ public class AccountOperateTableUi extends JPanel{
 					List<OutVO> outvo=bussinessvo.out;
 					int sizeIn=invo.size();
 					int sizeOut=outvo.size();
+					System.out.println(sizeIn+" "+sizeOut);
 					dataIn=new String[sizeIn][4];
 					for(int i=0;i<sizeIn;i++)
 					{
