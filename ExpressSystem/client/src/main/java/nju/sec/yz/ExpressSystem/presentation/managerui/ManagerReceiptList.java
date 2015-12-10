@@ -44,6 +44,7 @@ import nju.sec.yz.ExpressSystem.vo.DeliverySheetVO;
 import nju.sec.yz.ExpressSystem.vo.InventoryInSheetVO;
 import nju.sec.yz.ExpressSystem.vo.InventoryOutSheetVO;
 import nju.sec.yz.ExpressSystem.vo.OfficeArriveSheetVO;
+import nju.sec.yz.ExpressSystem.vo.OutVO;
 import nju.sec.yz.ExpressSystem.vo.PaymentSheetVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 import nju.sec.yz.ExpressSystem.vo.SendSheetVO;
@@ -316,7 +317,7 @@ public class ManagerReceiptList extends JPanel {
 	}
 
 	private ReceiptVO modifyCollection(int c, String Id) {
-		CollectionRecordVO tempvo = (CollectionRecordVO) receipt.getSingle((Id));
+		PaymentSheetVO tempvo = (PaymentSheetVO) receipt.getSingle((Id));
 		
 		String temp =(String) TableData[c][0];
 		temp = temp.substring(0, 4) + temp.substring(5, 7) + temp.substring(8, 10);
@@ -357,7 +358,7 @@ public class ManagerReceiptList extends JPanel {
 	}
 
 	private ReceiptVO modifyPayment(int c, String Id) {
-		PaymentSheetVO tempvo = (PaymentSheetVO) receipt.getSingle((Id));
+		OutVO tempvo = (OutVO) receipt.getSingle((Id));
 		PaymentInformation tempInf = tempvo.getPaymentInformation();
 		
 		String temp = (String) TableData[c][0];
