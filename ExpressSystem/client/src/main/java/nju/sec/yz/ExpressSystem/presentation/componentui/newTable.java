@@ -75,6 +75,34 @@ public class newTable{
 	{
 		panel.add(scroll);
 	}
+	/**
+	 * 获得某个位置的字符串
+	 * @param r int 行
+	 * @param c int 列
+	 * @return String r行c列内容
+	 */
+	public String getValueAt(int r,int c)
+	{
+		return (String) model.getValueAt(r, c);
+	}
+	/**
+	 * 获得某个位置的下拉框
+	 * @param r int 行
+	 * @param c int 列
+	 * @return 该位置的下拉框
+	 */
+	public JComboBox getJComboBox(int r,int c)
+	{
+		return (JComboBox)((DefaultCellEditor) table.getColumnModel().getColumn(c).getCellEditor()).getComponent();
+	}
+	/**
+	 * 获得表格的行数
+	 * @return int 表格的行数
+	 */
+	public int getRowNumber()
+	{
+		return table.getRowCount()-1;
+	}
 	
 	/**
 	 * 提供新创建的空字符串数组

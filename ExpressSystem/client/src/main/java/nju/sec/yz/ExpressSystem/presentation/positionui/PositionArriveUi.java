@@ -62,7 +62,8 @@ public class PositionArriveUi extends JPanel{
 	private Object[][] data;
 	private int n=0;
 	
-	private JComboBox JCdeparture;
+//	private JComboBox JCdeparture;
+	private JLabel departure;
 	private JTextField JTtranferId;
 	private DateChooser date;
 	private JTable table;
@@ -125,9 +126,15 @@ public class PositionArriveUi extends JPanel{
 		setLayout(null);
 		setSize(490, 550);
 		
-		JCdeparture=new JComboBox(city);
-		JCdeparture.setBounds(departure_x, departure_y, departure_w, h);
-		add(JCdeparture);
+//		JCdeparture=new JComboBox(city);
+//		JCdeparture.setBounds(departure_x, departure_y, departure_w, h);
+//		add(JCdeparture);
+		departure=new JLabel();
+		departure.setBounds(departure_x, departure_y, departure_w, h);
+		departure.setFont(new Font("Dialog", 1, 15));
+		departure.setForeground(Color.white);
+		add(departure);
+		departure.setVisible(false);
 		
 		JTtranferId=new JTextField();
 		JTtranferId.setBounds(tranferId_x,tranferId_y,tranferId_w,h);
@@ -139,7 +146,9 @@ public class PositionArriveUi extends JPanel{
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
-				List<String> bars=deliverBl.getBarIdList(JTtranferId.getText());
+				List<String> bars=deliverBl.getBarIdList(JTtranferId.getText()).barIds;
+				departure.setText(deliverBl.getBarIdList(JTtranferId.getText()).fromAgency);
+				departure.setVisible(true);
 //				ArrayList<String> bars=new ArrayList<String>();
 //				bars.add("12345");
 //				bars.add("12345");
@@ -199,7 +208,7 @@ public class PositionArriveUi extends JPanel{
 						arriveState=ArriveState.LOST;
 					ai.addState(arriveState);
 				}
-				ai.setDeparture((String)JCdeparture.getSelectedItem());
+//				ai.setDeparture((String)JCdeparture.getSelectedItem());
 				ai.setTime(date.getTime());
 				ai.setTransitSheetId(JTtranferId.getText());
 				sheet.setOfficeArrive(ai);
