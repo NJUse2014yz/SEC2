@@ -91,7 +91,7 @@ public class TransitReceiveReceipt implements ReceiptService {
 		List<ArriveState> states=info.getState();
 		
 		BarIdList idService=new BarIdList();
-		List<String> barIds=idService.getBarIds(info.getTransitSheetId());
+		List<String> barIds=idService.getBarIds(info.getTransitSheetId()).barIds;
 		
 		//获得本中转中心名称
 		Transit transit=new Transit();
@@ -138,7 +138,7 @@ public class TransitReceiveReceipt implements ReceiptService {
 		ArriveInformation info = receipt.getTransitArriveInformation();
 		if (!ValidHelper.isBeforeDate(info.getTime()))
 			return new ResultMessage(Result.FAIL, "看看日期是不是输错了~");
-		if (info.getState() == null)
+		if (info.getState() == null||info.getState().size()==0)
 			return new ResultMessage(Result.FAIL, "中转单不存在");
 		return new ResultMessage(Result.SUCCESS);
 	}

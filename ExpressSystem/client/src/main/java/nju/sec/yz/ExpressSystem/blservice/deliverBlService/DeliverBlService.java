@@ -3,6 +3,7 @@ package nju.sec.yz.ExpressSystem.blservice.deliverBlService;
 import java.util.List;
 
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.vo.BarIdsVO;
 import nju.sec.yz.ExpressSystem.vo.CollectionRecordVO;
 import nju.sec.yz.ExpressSystem.vo.DeliverVO;
 import nju.sec.yz.ExpressSystem.vo.DeliverySheetVO;
@@ -30,7 +31,7 @@ public interface DeliverBlService {
 	/**
 	 * 到达单输入中转单编号获得条形码号列表
 	 */
-	public List<String> getBarIdList(String transitSheetId);
+	public BarIdsVO getBarIdList(String transitSheetId);
 	
 	/**
 	 * 快递员查询订单(寄件单)信息
