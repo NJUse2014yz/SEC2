@@ -15,6 +15,7 @@ import nju.sec.yz.ExpressSystem.presentation.transitui.TransitMainUi;
 import nju.sec.yz.ExpressSystem.presentation.transitui.TransitMainUiTest;
 import nju.sec.yz.ExpressSystem.presentation.userui.AdminstraterMainUi;
 import nju.sec.yz.ExpressSystem.presentation.userui.AdminstraterMainUiTest;
+import nju.sec.yz.ExpressSystem.presentation.userui.UserOrderSearchUi;
 import nju.sec.yz.ExpressSystem.presentation.userui.UserUi;
 import nju.sec.yz.ExpressSystem.presentation.userui.UserUiTest;
 
@@ -55,9 +56,9 @@ public class ClientControler{
 			System.out.println("login now");
 			mainFrame.nextPanel(new UserUi(this));
 			break;
-		case DELIVERY_ENQUIRY:
-			mainFrame.nextPanel(new DeliverOrderSearchUi(this));
-			break;
+//		case DELIVERY_ENQUIRY:
+//			mainFrame.nextPanel(new UserOrderSearchUi(this));
+//			break;
 		case DELIVER:
 			mainFrame.nextPanel(new DeliverMainUi(this));
 			break;

@@ -154,7 +154,7 @@ public class UserUi extends JPanel{
 			public void mouseClicked(MouseEvent e) {
 				if(deliverBlService.checkDeliver(JTbarId.getText())!=null)
 				{
-					new MainSwitchPanelListener(MAIN_CONTROL.DELIVERY_ENQUIRY,controler,0);//暂时使用快递员的查询界面
+					controler.mainFrame.nextPanel(new UserOrderSearchUi(controler,JTbarId.getText()));
 				}
 				else
 				{
