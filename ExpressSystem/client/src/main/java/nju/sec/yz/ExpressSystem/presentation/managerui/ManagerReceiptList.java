@@ -296,10 +296,10 @@ public class ManagerReceiptList extends JPanel {
 		// TODO Auto-generated method stub
 		title = new String[] { "填写日期", "表单号", "填表人", "收款时间", "收款人", "收款金额" };
 
-		TableData = new String[volist.size()][6];
+		TableData = new Object[volist.size()][6];
 		for (int c = 0; c < volist.size(); c++) {
 			String tempId = volist.get(c).getId();
-			CollectionRecordVO tempvo = (CollectionRecordVO) receipt.getSingle((tempId));
+			PaymentSheetVO tempvo = (PaymentSheetVO) receipt.getSingle((tempId));
 
 			// PaymentInformation tempInf = tempvo.getPaymentInformation();
 			String temp = tempvo.getMakeTime();
@@ -307,9 +307,9 @@ public class ManagerReceiptList extends JPanel {
 			TableData[c][0] = temp;
 			TableData[c][1] = tempvo.getId();
 			TableData[c][2] = tempvo.getMakePerson();
-			TableData[c][3] = tempvo.getTime();
-			TableData[c][4] = tempvo.getDeliverId();
-			TableData[c][5] = tempvo.getAmount();
+			TableData[c][3] = tempvo.getPaymentInformation().getTime();
+			TableData[c][4] = tempvo.getPaymentInformation().getInDeliverId();
+			TableData[c][5] = tempvo.getPaymentInformation().getAmount();
 
 		}
 
