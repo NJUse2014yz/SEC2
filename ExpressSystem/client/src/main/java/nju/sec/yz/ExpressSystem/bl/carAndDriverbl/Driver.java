@@ -6,6 +6,8 @@ import java.util.List;
 
 import nju.sec.yz.ExpressSystem.bl.deliverbl.ValidHelper;
 import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
+import nju.sec.yz.ExpressSystem.bl.userbl.User;
+import nju.sec.yz.ExpressSystem.bl.userbl.UserInfo;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
 import nju.sec.yz.ExpressSystem.client.RMIExceptionHandler;
 import nju.sec.yz.ExpressSystem.common.Result;
@@ -27,6 +29,8 @@ public class Driver {
 
 	private DriverDataService data;
 
+	private String positionId = this.getCurrentPosition();
+
 	public Driver() {
 		try {
 			data = DatafactoryProxy.getDriverDataService();
@@ -41,7 +45,7 @@ public class Driver {
 		ArrayList<DriverVO> listVO = new ArrayList<DriverVO>();
 		// 获取数据库中的userpo列表
 		try {
-			listPO = data.findAll();
+			listPO = data.findAll(positionId);
 		} catch (RemoteException e) {
 			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
@@ -54,8 +58,23 @@ public class Driver {
 		return listVO;
 	}
 
+	/**
+	 * 获得当前用户所属营业厅 业务员只能操作本营业厅车辆
+	 */
+	private String getCurrentPosition() {
+		UserInfo userService = new User();
+		String userId = userService.getCurrentID();
+		if (userId == null || userId.contains("C"))
+			return null;
+		return userId.split("C")[0];
+
+	}
+
 	public DriverVO getSingle(String id) {
 		DriverVO vo = null;
+		// 只能查询本营业厅
+		if (!id.contains(positionId))
+			return null;
 		try {
 			DriverPO po = data.find(id);
 			if (po == null)
@@ -180,7 +199,7 @@ public class Driver {
 			return false;
 		if (!ValidHelper.isNumber(strs[0]))
 			return false;
-		if (strs[0].length() != 6 && strs[0].length() != 7)
+		if (strs[0].equals(positionId))
 			return false;
 		if (!ValidHelper.isNumber(strs[1]))
 			return false;
@@ -189,7 +208,6 @@ public class Driver {
 		return true;
 	}
 
-	
 	public DriverVO show(DriverPO po) {
 		String id = po.getId();
 		String name = po.getName();
@@ -202,7 +220,6 @@ public class Driver {
 		return vo;
 	}
 
-	
 	public DriverPO changeVOToPO(DriverVO vo) {
 		String id = vo.getId();
 		String name = vo.getName();
@@ -214,8 +231,6 @@ public class Driver {
 		DriverPO po = new DriverPO(id, name, birthDate, personID, phoneNumber, sex, licenseDeadLine);
 		return po;
 	}
-
-	
 
 	/*
 	 * public void test(){ this.add(new DriverVO("0251234565", "mike",

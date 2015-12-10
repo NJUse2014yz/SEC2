@@ -25,5 +25,11 @@ public interface CarDataService extends Remote{
 
 	public ResultMessage init(List<CarPO> cars) throws RemoteException;
 
-	public ArrayList<CarPO> findAll() throws RemoteException;
+	/**
+	 * 查询本营业厅的车辆
+	 * @param positionId
+	 * @return
+	 * @throws RemoteException
+	 */
+	public ArrayList<CarPO> findAll(String positionId) throws RemoteException;
 }
