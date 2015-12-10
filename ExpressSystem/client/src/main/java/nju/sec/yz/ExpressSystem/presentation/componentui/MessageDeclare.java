@@ -1,9 +1,12 @@
 package nju.sec.yz.ExpressSystem.presentation.componentui;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -29,16 +32,16 @@ public class MessageDeclare {
 		volist=(ArrayList<MessageVO>) message.getNewMessages();
 		
 		announce=new JTextArea(volist.size(),21);
+		announce.setBorder(BorderFactory.createLineBorder(Color.WHITE,0));
+		
+		announce.setForeground(Color.LIGHT_GRAY);
+		
+		Font font = new Font("Microsoft YaHei",Font.PLAIN,15);
+		announce.setFont(font);
+		announce.setOpaque(false);
 		for(int c=0;c<volist.size();c++){
 			announce.append("单据"+volist.get(c).messageId+"已经通过审批\r\n");
 		}
-//		announce=new JTextArea(21,21);
-//		announce.append("aaaaaa\r\n");
-//		announce.append("bbbbbb\r\n");
-//		announce.append("cccccc\r\n");
-//		announce.append("dddddd\r\n");
-//		announce.append("eeeeee\r\n");
-//		
 		
 		
 		
@@ -47,6 +50,7 @@ public class MessageDeclare {
 		
 		jsc=new JScrollPane(announce);
 		jsc.setBounds(154,84,292,180);
+		jsc.setOpaque(false);
 		panel.add(jsc);
 		
 		ImageIcon IknowIcon=new ImageIcon("graphic/common/Iknow.png");
