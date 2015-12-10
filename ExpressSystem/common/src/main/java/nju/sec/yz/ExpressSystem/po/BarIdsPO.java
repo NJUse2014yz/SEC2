@@ -13,10 +13,16 @@ public class BarIdsPO implements Serializable{
 	
 	String receiptId;//中转单id
 
-	public BarIdsPO(List<String> barIds, String receiptId) {
+	String fromAgency;//出发地名称
+	
+	String destinationId;//目的地id
+
+	public BarIdsPO(List<String> barIds, String receiptId, String fromAgency, String destinationId) {
 		super();
 		this.barIds = barIds;
 		this.receiptId = receiptId;
+		this.fromAgency = fromAgency;
+		this.destinationId = destinationId;
 	}
 
 	public List<String> getBarIds() {
@@ -33,6 +39,22 @@ public class BarIdsPO implements Serializable{
 
 	public void setReceiptId(String receiptId) {
 		this.receiptId = receiptId;
+	}
+
+	public String getFromAgency() {
+		return fromAgency;
+	}
+
+	public void setFromAgency(String fromAgency) {
+		this.fromAgency = fromAgency;
+	}
+
+	public String getDestinationId() {
+		return destinationId;
+	}
+
+	public void setDestinationId(String destinationId) {
+		this.destinationId = destinationId;
 	}
 	
 	

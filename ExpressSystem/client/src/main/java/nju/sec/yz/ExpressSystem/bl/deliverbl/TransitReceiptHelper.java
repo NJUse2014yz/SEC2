@@ -32,11 +32,14 @@ public class TransitReceiptHelper {
 	/**
 	 * 保存条形码号供到达单使用
 	 */
-	public void saveBarIds(List<String> barIDs,String receiptId){
+	public void saveBarIds(List<String> barIDs,String receiptId,String destinationName){
 		BarIdList barIds=new BarIdList();
 		ArrayList<String> ids2=new ArrayList<>();
 		ids2.addAll(barIDs);
-		BarIdsPO list=new BarIdsPO(ids2, receiptId);
+		AgencyInfo agencyService=new Transit();
+		String fromAgency=agencyService.getName(getCurrentTransitID());//出发地名称
+		String destination=agencyService.getId(destinationName);//到达地id
+		BarIdsPO list=new BarIdsPO(ids2, receiptId,fromAgency,destination);
 		barIds.addBarIds(list);
 	}
 
