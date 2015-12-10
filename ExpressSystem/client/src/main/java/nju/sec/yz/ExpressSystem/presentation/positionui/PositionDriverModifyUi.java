@@ -65,6 +65,23 @@ public class PositionDriverModifyUi extends JPanel{
 		this.bc=bc;
 		driverBl=new DriverController();
 		drivers=driverBl.getAll();
+		data=new String[drivers.size()][6];
+		for(int i=0;i<drivers.size();i++)
+		{
+			data[i][0]=drivers.get(i).getId();
+			data[i][1]=drivers.get(i).getName();
+			String SeX="";
+			if(drivers.get(i).getSex().equals(Sex.MALE))
+				SeX="男";
+			else
+				SeX="女";
+			data[i][2]=SeX;
+			data[i][3]=drivers.get(i).getBirthDate();
+			data[i][4]=drivers.get(i).getPersonID();
+			data[i][5]=drivers.get(i).getPhoneNumber();
+			data[i][6]=drivers.get(i).getAgency();
+			data[i][7]=drivers.get(i).getLicenseDeadLine();
+		}
 		initDeliverMainUi();
 	}
 

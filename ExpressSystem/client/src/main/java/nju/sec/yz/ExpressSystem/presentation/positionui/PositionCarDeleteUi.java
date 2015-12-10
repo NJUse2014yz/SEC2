@@ -78,6 +78,16 @@ public class PositionCarDeleteUi extends JPanel{
 		this.bc=bc;
 		carBl=new CarController();
 		cars=carBl.getAll();
+		data=new String[cars.size()][6];
+		for(int i=0;i<cars.size();i++)
+		{
+			data[i][0]=cars.get(i).getId();
+			data[i][1]=cars.get(i).getNumber();
+			data[i][2]=cars.get(i).getMechine();
+			data[i][3]=cars.get(i).getDipan();
+			data[i][4]=cars.get(i).getBuytime();
+			data[i][5]=Integer.toString(cars.get(i).getWorktime());
+		}
 		initDeliverMainUi();
 	}
 
@@ -122,6 +132,7 @@ public class PositionCarDeleteUi extends JPanel{
 		back.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
 			{
+				remove(scroll);
 				data=new String[cars.size()][6];
 				for(int i=0;i<cars.size();i++)
 				{
@@ -133,6 +144,12 @@ public class PositionCarDeleteUi extends JPanel{
 					data[i][5]=Integer.toString(cars.get(i).getWorktime());
 				}
 //				table=new JTable(data,name);
+				table=new JTable(data, name);
+				table.setRowHeight(20);
+				table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+				scroll=new JScrollPane(table);
+				scroll.setBounds(scroll_x,scroll_y,scroll_w,scroll_h);
+				add(scroll);
 				search.setText("");
 				warning.setVisible(false);
 				repaint();
