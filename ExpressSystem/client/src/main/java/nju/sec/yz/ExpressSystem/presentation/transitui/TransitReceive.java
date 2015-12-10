@@ -97,9 +97,11 @@ public class TransitReceive extends JPanel {
 		transitSheetId.addKeyListener(new KeyAdapter(){ 
 		      public void keyPressed(KeyEvent e)    
 		      {    
-		        if(e.getKeyChar()==KeyEvent.VK_ENTER )   //按回车键执行相应操作; 
+		    	  
+		        if(e.getKeyChar()=='\n' )   //按回车键执行相应操作KeyEvent.VK_ENTER; 
+//		    	  if(transitSheetId.getText().toString().length()==11)
 		        { 
-		        	
+		        	System.out.println(transitSheetId.getText());
 		         if(deliverBlService.getBarIdList(transitSheetId.getText())==null){
 		        	 warning.setText("中转单号错误");
 						warning.setBounds(198, 490, 463 - 198, 30);
