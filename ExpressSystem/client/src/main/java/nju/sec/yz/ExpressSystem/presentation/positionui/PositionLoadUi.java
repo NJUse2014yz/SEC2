@@ -31,6 +31,7 @@ import nju.sec.yz.ExpressSystem.common.ReceiptType;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.presentation.DateChooser;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.PositionControler;
 import nju.sec.yz.ExpressSystem.vo.OfficeLoadSheetVO;
@@ -171,7 +172,7 @@ public class PositionLoadUi extends JPanel{
 		JTsuperviserId.setBounds(superviserId_x,superviserId_y,superviserId_w,superviserId_h);
 		add(JTsuperviserId);
 		
-		model=new DefaultTableModel(data,name);
+		/*model=new DefaultTableModel(data,name);
 		barIds=new JTable(model);
 		model.addTableModelListener(new TableModelListener(){
 			@Override
@@ -188,7 +189,11 @@ public class PositionLoadUi extends JPanel{
 		});
 		scroller=new JScrollPane(barIds);
 		scroller.setBounds(scroll_x,scroll_y,scroll_w,scroll_h);
-		add(scroller);
+		add(scroller);*/
+		newTable table=new newTable(data,name,this,true);
+		table.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
+		table.join();
+		//上面用来实验newTable
 		
 		warning=new JLabel();
 		warning.setBounds(warning_x, warning_y, warning_w, warning_h);
