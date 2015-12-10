@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -29,6 +30,7 @@ import nju.sec.yz.ExpressSystem.common.GoodInformation;
 import nju.sec.yz.ExpressSystem.common.InventoryInInformation;
 import nju.sec.yz.ExpressSystem.common.InventoryOutInformation;
 import nju.sec.yz.ExpressSystem.common.LoadInformation;
+import nju.sec.yz.ExpressSystem.common.OutInformation;
 import nju.sec.yz.ExpressSystem.common.PaymentInformation;
 import nju.sec.yz.ExpressSystem.common.ReceiptType;
 import nju.sec.yz.ExpressSystem.common.Result;
@@ -98,6 +100,12 @@ public class ManagerReceiptList extends JPanel {
 		
 		
 		jsc = new JScrollPane(table);
+		 // 水平滚动条
+		jsc.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		jsc.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS); 
+		jsc.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		table.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+      
 		jsc.setBounds(134, 100, 333, 157);
 		add(jsc);
 
@@ -116,10 +124,10 @@ public class ManagerReceiptList extends JPanel {
 				
 				switch (type.getSelectedItem().toString()) {
 				case "收款单":
-					iniCollection();
+					iniPayment();
 					break;
 				case "付款单":
-					iniPayment();
+					iniOut();
 					break;
 				case "寄件单":
 					iniDelReip();
@@ -292,31 +300,34 @@ public class ManagerReceiptList extends JPanel {
 		}
 	}
 
-	// 收款单
-	private void iniCollection() {
+	// 付款单
+	private void iniOut() {
 		// TODO Auto-generated method stub
-		title = new String[] { "填写日期", "表单号", "填表人", "收款时间", "收款人", "收款金额" };
+		title = new String[] { "填写日期", "表单号", "填表人", "付款时间",  "收款金额","收款人","付款账号","条目","账户" };
 
-		TableData = new Object[volist.size()][6];
+		TableData = new Object[volist.size()][9];
 		for (int c = 0; c < volist.size(); c++) {
 			String tempId = volist.get(c).getId();
-			PaymentSheetVO tempvo = (PaymentSheetVO) receipt.getSingle((tempId));
-
+			OutVO tempvo = (OutVO) receipt.getSingle((tempId));
+			OutInformation tempInf=tempvo.getOutInformation();
 			// PaymentInformation tempInf = tempvo.getPaymentInformation();
 			String temp = tempvo.getMakeTime();
 			temp = temp.substring(0, 4) + "/" + temp.substring(4, 6) + "/" + temp.substring(6, 8);
 			TableData[c][0] = temp;
 			TableData[c][1] = tempvo.getId();
 			TableData[c][2] = tempvo.getMakePerson();
-			TableData[c][3] = tempvo.getPaymentInformation().getTime();
-			TableData[c][4] = tempvo.getPaymentInformation().getInDeliverId();
-			TableData[c][5] = tempvo.getPaymentInformation().getAmount();
-
+			TableData[c][3] = tempInf.getDate();
+			TableData[c][4] = tempInf.getNum();
+			TableData[c][5] = tempInf.getPerson();
+			TableData[c][6] = tempInf.getAccount();
+			TableData[c][7] = tempInf.getReason();
+			TableData[c][8] = tempInf.getComments();
+			
 		}
 
 	}
 
-	private ReceiptVO modifyCollection(int c, String Id) {
+	private ReceiptVO modifyOut(int c, String Id) {
 		PaymentSheetVO tempvo = (PaymentSheetVO) receipt.getSingle((Id));
 		
 		String temp =(String) TableData[c][0];
@@ -331,13 +342,13 @@ public class ManagerReceiptList extends JPanel {
 		return tempvo;
 	}
 
-	// 付款单
+	// 收款单
 	private void iniPayment() {
 		// TODO Auto-generated method stub
 
-		title = new String[] { "填写日期", "表单号", "填表人", "营业厅编号", "收款时间", "收款人", "收款金额" };
+		title = new String[] { "填写日期", "表单号", "填表人", "营业厅编号", "收款时间", "收款人", "收款金额","收款账户" };
 
-		TableData = new String[volist.size()][7];
+		TableData = new Object[volist.size()][8];
 		for (int c = 0; c < volist.size(); c++) {
 			String tempId = volist.get(c).getId();
 			PaymentSheetVO tempvo = (PaymentSheetVO) receipt.getSingle((tempId));
@@ -352,22 +363,25 @@ public class ManagerReceiptList extends JPanel {
 			TableData[c][4] = tempInf.getTime();
 			TableData[c][5] = tempInf.getInDeliverId();
 			TableData[c][6] = tempInf.getAmount();
+			TableData[c][7]=tempInf.getAccount();
 
 		}
 
 	}
 
 	private ReceiptVO modifyPayment(int c, String Id) {
-		OutVO tempvo = (OutVO) receipt.getSingle((Id));
+		PaymentSheetVO tempvo = (PaymentSheetVO) receipt.getSingle((Id));
 		PaymentInformation tempInf = tempvo.getPaymentInformation();
 		
 		String temp = (String) TableData[c][0];
 		temp = temp.substring(0, 4) + temp.substring(5, 7) + temp.substring(8, 10);
 		tempvo.setId((String) TableData[c][1]);
 		tempvo.setMakePerson((String) TableData[c][2]);
-		tempInf.setTime((String) TableData[c][3]);
-		tempInf.setInDeliverId((String) TableData[c][4]);
-		tempInf.setAmount((Double) TableData[c][5]);
+		tempInf.setPositionId((String) TableData[c][3]);
+		tempInf.setTime((String) TableData[c][4]);
+		tempInf.setInDeliverId((String) TableData[c][5]);
+		tempInf.setAmount((Double) TableData[c][6]);
+		tempInf.setAccount((String) TableData[c][7]);
 
 		tempvo.setPaymentInformation(tempInf);
 		return tempvo;
@@ -877,9 +891,9 @@ public class ManagerReceiptList extends JPanel {
 					// TODO Auto-generated method stub
 					switch (type.getSelectedItem().toString()) {
 					case "收款单":
-						return modifyCollection(count, id);
-					case "付款单":
 						return modifyPayment(count, id);
+					case "付款单":
+						return modifyOut(count, id);
 					case "寄件单":
 						return modifyDelReip(count, id);
 					case "营业厅装车单":
