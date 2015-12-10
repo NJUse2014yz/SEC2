@@ -50,6 +50,7 @@ public class MessageDeclare {
 		
 		jsc=new JScrollPane(announce);
 		jsc.setBounds(154,84,292,180);
+		jsc.setOpaque(false);
 		panel.add(jsc);
 		
 		ImageIcon IknowIcon=new ImageIcon("graphic/common/Iknow.png");

@@ -6,6 +6,7 @@ import nju.sec.yz.ExpressSystem.bl.accountbl.Account;
 import nju.sec.yz.ExpressSystem.bl.accountbl.AccountInfo;
 import nju.sec.yz.ExpressSystem.blservice.deliverBlService.DeliverBlService;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.vo.BarIdsVO;
 import nju.sec.yz.ExpressSystem.vo.CollectionRecordVO;
 import nju.sec.yz.ExpressSystem.vo.DeliverVO;
 import nju.sec.yz.ExpressSystem.vo.DeliverySheetVO;
@@ -109,9 +110,9 @@ public class DeliverController implements DeliverBlService{
 	/**
 	 * 输入中转单编号获得条形码号列表
 	 */
-	public List<String> getBarIdList(String transitSheetId) {
+	public BarIdsVO getBarIdList(String transitSheetId) {
 		BarIdList list=new BarIdList();
-		List<String> barIds=list.getBarIds(transitSheetId);
+		BarIdsVO  barIds=list.getBarIds(transitSheetId);
 		return barIds;
 	}
 
