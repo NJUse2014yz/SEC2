@@ -117,8 +117,8 @@ public class DriverDataImpl extends UnicastRemoteObject implements DriverDataSer
 		return message;
 	}
 
-	@Override
-	public ArrayList<DriverPO> findAll() throws RemoteException {
+	
+	private ArrayList<DriverPO> findAll() throws RemoteException {
 		File file = new File(SerializableFileHelper.DRIVER_FILE_NAME);
         if (!file.exists()) {
             return new ArrayList<>();
@@ -146,6 +146,19 @@ public class DriverDataImpl extends UnicastRemoteObject implements DriverDataSer
 			e.printStackTrace();
 			return new ResultMessage(Result.FAIL, "文件读写错误");
 		}
+	}
+	
+	@Override
+	public ArrayList<DriverPO> findAll(String positionId) throws RemoteException {
+		ArrayList<DriverPO> results=new ArrayList<>();
+		
+		List<DriverPO> carPOs = findAll();
+		
+		for(DriverPO po:carPOs){
+			if(po.getId().contains(positionId))
+				results.add(po);
+		}
+		return results;
 	}
 
 

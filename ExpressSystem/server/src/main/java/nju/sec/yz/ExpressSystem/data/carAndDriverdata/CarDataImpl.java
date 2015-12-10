@@ -42,8 +42,7 @@ public class CarDataImpl extends UnicastRemoteObject implements CarDataService{
 	}
 	
 	
-	@Override
-	public ArrayList<CarPO> findAll() throws RemoteException {
+	private ArrayList<CarPO> findAll() throws RemoteException {
 		File file = new File(SerializableFileHelper.CAR_FILE_NAME);
         if (!file.exists()) {
             return new ArrayList<>();
@@ -148,6 +147,19 @@ public class CarDataImpl extends UnicastRemoteObject implements CarDataService{
 	public ResultMessage init(List<CarPO> cars) throws RemoteException {
 		ResultMessage message=this.saveData(cars);
 		return message;
+	}
+
+	@Override
+	public ArrayList<CarPO> findAll(String positionId) throws RemoteException {
+		ArrayList<CarPO> results=new ArrayList<>();
+		
+		List<CarPO> carPOs = findAll();
+		
+		for(CarPO po:carPOs){
+			if(po.getId().contains(positionId))
+				results.add(po);
+		}
+		return results;
 	}
 
 }

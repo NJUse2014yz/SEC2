@@ -214,6 +214,7 @@ public class PositionLoadingReceipt implements ReceiptService{
 		
 		//验证info
 		LoadInformation info=receipt.getOfficeLoadInformation();
+		System.out.println(info.getTime());
 		if(!ValidHelper.isBeforeDate(info.getTime()))
 			validResult.setMessage("看看时间是不是输错了~");
 		Car car=new Car();

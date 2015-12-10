@@ -36,6 +36,8 @@ public class Message{
 	 * 保存消息到数据层
 	 */
 	public void send(MessageVO vo) {
+		System.out.println("sending a message");
+		
 		String messageId=this.createId(vo.toPersonId);
 		
 		ReceiptList receiptHelper=new ReceiptList();
@@ -71,6 +73,7 @@ public class Message{
 		
 		try {
 			List<MessagePO> pos=data.getMessages(currentUser);
+			System.out.println("get "+pos.size()+" messages");
 			for(MessagePO po:pos){
 				ReceiptVO receipt=receiptHelper.show(po.getReceipt());
 				MessageVO message=new MessageVO(receipt.getMakePerson(), po.getOperation(), receipt);

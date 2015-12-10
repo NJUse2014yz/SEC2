@@ -4,6 +4,8 @@ import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 
 public class ValidHelper {
 	
+	
+	
 	/**
 	 * 是否符合日期的格式
 	 */

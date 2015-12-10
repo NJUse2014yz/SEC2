@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
 
 import nju.sec.yz.ExpressSystem.bl.deliverbl.DeliverController;
 import nju.sec.yz.ExpressSystem.blservice.deliverBlService.DeliverBlService;
@@ -78,24 +79,24 @@ public class DeliverOrderSearchUi extends JPanel {
 						GoodInformation good=sendIn.getGood();
 						JTable table;  
 						   Object[][] tableData =   
-						    {  {sendIn.getBarId()},
-						    		{fromPerson.getName()},
-						    		{fromPerson.getAddress()},
-						    		{fromPerson.getCity()},
-						    		{fromPerson.getOrg()},
-						    		{fromPerson.getTelephone()},
-						    		{fromPerson.getCellphone()},
-						    		{toPerson.getName()},
-						    		{toPerson.getAddress()},
-						    		{toPerson.getCity()},
-						    		{toPerson.getOrg()},
-						    		{toPerson.getTelephone()},
-						    		{toPerson.getCellphone()},
-						    		{good.getTotal()},
-						    		{good.getWeight()},
-						    		{good.getVloume()},
-						    		{good.getName()},
-						    		{good.getSize()}	
+						    {  {sendIn.getBarId(),
+						    		fromPerson.getName(),
+						    		fromPerson.getAddress(),
+						    		fromPerson.getCity(),
+						    		fromPerson.getOrg(),
+						    		fromPerson.getTelephone(),
+						    		fromPerson.getCellphone(),
+						    		toPerson.getName(),
+						    		toPerson.getAddress(),
+						    		toPerson.getCity(),
+						    		toPerson.getOrg(),
+						    		toPerson.getTelephone(),
+						    		toPerson.getCellphone(),
+						    		good.getTotal(),
+						    		good.getWeight(),
+						    		good.getVloume(),
+						    		good.getName(),
+						    		good.getSize()}	
 						       
 						   };  
 					    Object[] columnTitle = {"订单条形码号",
@@ -108,8 +109,16 @@ public class DeliverOrderSearchUi extends JPanel {
 					    		};  
 						      //以二维数组和一维数组来创建一个JTable对象  
 						      table = new JTable(tableData , columnTitle);  
+						      for(int c=0;c<18;c++){
+						    	  table.getColumnModel().getColumn(c).setMinWidth(80);
+						      }
 						      //将JTable对象放在JScrollPane中，并将该JScrollPane放在窗口中显示出来  
 						      JScrollPane jsc=new JScrollPane(table);  
+						   // 水平滚动条
+								jsc.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+								jsc.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS); 
+								jsc.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+								table.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
 						      jsc.setVisible(true);
 						      jsc.setBounds(144,105,315,177);
 						      add(jsc);

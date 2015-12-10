@@ -26,6 +26,7 @@ import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.SendInformation;
 import nju.sec.yz.ExpressSystem.common.ToAndFromInformation;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJText;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.SendSheetVO;
 import nju.sec.yz.ExpressSystem.vo.TransitVO;
@@ -188,7 +189,7 @@ public class DeliverOrderInUi extends JPanel {
 		 * textfield
 		 */
 
-		nameSender = new JTextField();
+		nameSender = new newJText();
 		nameSender.setBounds(185, 87, 58, 15);
 		add(nameSender);
 

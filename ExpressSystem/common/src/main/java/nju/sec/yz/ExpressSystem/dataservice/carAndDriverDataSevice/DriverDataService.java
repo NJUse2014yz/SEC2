@@ -24,5 +24,10 @@ public interface DriverDataService extends Remote{
 
 	public ResultMessage init(List<DriverPO> drivers) throws RemoteException;
 
-	public ArrayList<DriverPO> findAll() throws RemoteException;
+	/**
+	 * 查询本营业厅的司机
+	 * @return
+	 * @throws RemoteException
+	 */
+	public ArrayList<DriverPO> findAll(String positionId) throws RemoteException;
 }
