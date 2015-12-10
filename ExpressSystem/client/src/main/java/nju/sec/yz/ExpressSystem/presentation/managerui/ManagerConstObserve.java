@@ -74,14 +74,14 @@ public class ManagerConstObserve extends JPanel {
 
 
 		priceForPlane = new JLabel();
-		priceForPlane.setText(Double.toString(pinf.getPriceForCar()));
+		priceForPlane.setText(Double.toString(pinf.getPriceForPlane()));
 		priceForPlane.setBounds(216, 259, 70, 27);
 		priceForPlane.setForeground(Color.GRAY);
 		priceForPlane.setFont(new Font("Dialog", 0, 18));
 		add(priceForPlane);
 
 		priceForTrain = new JLabel();
-		priceForTrain.setText(Double.toString(pinf.getPriceForCar()));
+		priceForTrain.setText(Double.toString(pinf.getPriceForTrain()));
 		priceForTrain.setBounds(216, 289, 70, 27);
 		priceForTrain.setForeground(Color.GRAY);
 		priceForTrain.setFont(new Font("Dialog", 0, 18));
@@ -95,7 +95,7 @@ public class ManagerConstObserve extends JPanel {
 		add(priceForCar);
 
 		standard = new JLabel();
-		standard.setText(Double.toString(pinf.getPriceForCar()));
+		standard.setText(Double.toString(pinf.getStandard()));
 		standard.setBounds(286, 348, 70, 27);
 		standard.setForeground(Color.GRAY);
 		standard.setFont(new Font("Dialog", 0, 18));

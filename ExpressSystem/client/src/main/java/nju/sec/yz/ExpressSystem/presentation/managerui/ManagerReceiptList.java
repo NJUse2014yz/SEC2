@@ -328,16 +328,21 @@ public class ManagerReceiptList extends JPanel {
 	}
 
 	private ReceiptVO modifyOut(int c, String Id) {
-		PaymentSheetVO tempvo = (PaymentSheetVO) receipt.getSingle((Id));
+//		PaymentSheetVO tempvo = (PaymentSheetVO) receipt.getSingle((Id));
+		OutVO tempvo = (OutVO) receipt.getSingle((Id));
+		OutInformation tempInf=tempvo.getOutInformation();
 		
 		String temp =(String) TableData[c][0];
 		temp = temp.substring(0, 4) + temp.substring(5, 7) + temp.substring(8, 10);
 		tempvo.setMakeTime(temp);
-		tempvo.setBarId((String) TableData[c][1]);
+		tempvo.setId((String) TableData[c][1]);
 		tempvo.setMakePerson((String) TableData[c][2]);
-		tempvo.setTime((String) TableData[c][3]);
-		tempvo.setDeliverId((String) TableData[c][4]);
-		tempvo.setAmount((Double) TableData[c][5]);
+		tempInf.setDate((String) TableData[c][3]);
+		tempInf.setNum((Double) TableData[c][4]);
+		tempInf.setPerson((String) TableData[c][5]);
+		tempInf.setAccount((String) TableData[c][6]);
+		tempInf.setReason((String) TableData[c][7]);
+		tempInf.setComments((String) TableData[c][8]);
 		
 		return tempvo;
 	}
