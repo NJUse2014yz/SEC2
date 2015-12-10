@@ -34,12 +34,12 @@ public class DeliverMainUi extends JPanel {
 		
 		setLayout(null);
 		setSize(490, 550);
-		setVisible(true);
+
 
 
 		//显示消息列表
 		MessageDeclare message=new MessageDeclare(this);
-		
+		setVisible(true);
 	}
 
 	

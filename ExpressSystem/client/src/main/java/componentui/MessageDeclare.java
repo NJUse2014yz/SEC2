@@ -29,11 +29,9 @@ public class MessageDeclare {
 		volist=(ArrayList<MessageVO>) message.getNewMessages();
 		
 		announce=new JTextArea(volist.size(),21);
-		
 		for(int c=0;c<volist.size();c++){
 			announce.append("单据"+volist.get(c).messageId+"已经通过审批\r\n");
 		}
-		
 //		announce=new JTextArea(21,21);
 //		announce.append("aaaaaa\r\n");
 //		announce.append("bbbbbb\r\n");
