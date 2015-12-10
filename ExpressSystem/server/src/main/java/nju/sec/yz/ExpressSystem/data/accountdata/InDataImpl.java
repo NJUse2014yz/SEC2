@@ -116,6 +116,7 @@ public class InDataImpl extends UnicastRemoteObject implements InDataService{
 
 	@Override
 	public ArrayList<PaymentSheetPO> findAll() throws RemoteException {
+		System.out.println("get all collections");
 		File file = new File(SerializableFileHelper.IN_FILE_NAME);
         if (!file.exists()) {
             return new ArrayList<>();
@@ -126,6 +127,20 @@ public class InDataImpl extends UnicastRemoteObject implements InDataService{
         } catch (Exception e) {
             return new ArrayList<>();
         }
+	}
+	
+	public static void main(String[] args) {
+		try {
+			InDataImpl data=new InDataImpl();
+			List<PaymentSheetPO> pos=data.findAll();
+			for(PaymentSheetPO po:pos){
+				System.out.println(po.getPaymentInformation().getAccount());
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		};
+		
 	}
 	
 	/**

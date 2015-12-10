@@ -64,7 +64,7 @@ public class Driver {
 	private String getCurrentPosition() {
 		UserInfo userService = new User();
 		String userId = userService.getCurrentID();
-		if (userId == null || userId.contains("C"))
+		if (userId == null || !userId.contains("C"))
 			return null;
 		return userId.split("C")[0];
 
@@ -199,7 +199,7 @@ public class Driver {
 			return false;
 		if (!ValidHelper.isNumber(strs[0]))
 			return false;
-		if (strs[0].equals(positionId))
+		if (!strs[0].equals(positionId))
 			return false;
 		if (!ValidHelper.isNumber(strs[1]))
 			return false;

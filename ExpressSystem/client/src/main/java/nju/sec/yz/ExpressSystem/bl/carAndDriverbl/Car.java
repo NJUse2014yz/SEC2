@@ -57,7 +57,6 @@ public class Car implements Initialable<CarVO, CarPO> {
 	}
 
 	public CarVO getSingle(String id) {
-
 		// 只能查询本营业厅车辆
 		if (!id.contains(positionId))
 			return null;
@@ -80,7 +79,8 @@ public class Car implements Initialable<CarVO, CarPO> {
 	private String getCurrentPosition() {
 		UserInfo userService = new User();
 		String userId = userService.getCurrentID();
-		if (userId == null || userId.contains("C"))
+		
+		if (userId == null || !userId.contains("C"))
 			return null;
 		return userId.split("C")[0];
 
@@ -150,6 +150,8 @@ public class Car implements Initialable<CarVO, CarPO> {
 		String machine = vo.getMechine();
 		if (!isId(id))
 			return "看看车辆ID输对了没哦";
+		if(!id.contains(positionId))
+			return "只能添加本营业厅的车辆哦";
 		if (!isNumber(number))
 			return "看看车牌号输对了没哦";
 		if (!ValidHelper.isBeforeDate(time))
@@ -172,9 +174,10 @@ public class Car implements Initialable<CarVO, CarPO> {
 				&& a != '黔' && a != '云' && a != '藏' && a != '陕' && a != '甘' && a != '宁') {
 			return false;
 		}
-
+		System.out.println("hh");
 		if (b < 'A' || b > 'Z')
 			return false;
+		
 		for (int i = 2; i < number.length(); i++) {
 			char temp = number.charAt(i);
 			if ((!(temp >= 'A' && temp <= 'Z')) && (!(temp >= '0' && temp <= '9')))
@@ -187,15 +190,19 @@ public class Car implements Initialable<CarVO, CarPO> {
 	 * 验证车辆id 中转单要用到
 	 */
 	public boolean isId(String id) {
+	
 		if (!id.contains("B"))
 			return false;
 		String strs[] = id.split("B");
+		
 		if (strs.length != 2)
 			return false;
 		if (!ValidHelper.isNumber(strs[0]))
 			return false;
-		if (strs[0].equals(positionId))
+		if (strs[0].length()!=6&&strs[0].length()!=7){
 			return false;
+		}
+			
 		if (!ValidHelper.isNumber(strs[1]))
 			return false;
 		if (strs[1].length() != 3)
