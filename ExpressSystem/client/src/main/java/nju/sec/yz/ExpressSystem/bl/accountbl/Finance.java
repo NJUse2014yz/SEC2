@@ -42,6 +42,8 @@ public class Finance {
 		Collection in=new Collection();
 		vo.in=in.getByTime(begin, end);
 		
+		System.out.println("find "+vo.in.size()+" collections");
+		
 		Payment out=new Payment();
 		vo.out=out.getByTime(begin, end);
 		

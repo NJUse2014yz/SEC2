@@ -46,6 +46,9 @@ public class PositionLoadingReceipt implements ReceiptService{
 		LoadInformation info=receipt.getOfficeLoadInformation();
 		List<String> barIDs=receipt.getBarIds();
 		
+		if(info.getTime()==null)
+			info.setTime(TimeTool.getDate());
+		
 		//验证
 		ResultMessage validResult=isValid(receipt);
 		if(validResult.getResult()==Result.FAIL)
@@ -216,12 +219,12 @@ public class PositionLoadingReceipt implements ReceiptService{
 		LoadInformation info=receipt.getOfficeLoadInformation();
 		System.out.println(info.getTime());
 		if(!ValidHelper.isBeforeDate(info.getTime()))
-			validResult.setMessage("看看时间是不是输错了~");
+			return new ResultMessage(Result.FAIL,"看看时间是不是输错了~");
 		Car car=new Car();
 		if(!car.isId(info.getCarId()))
-			validResult.setMessage("看看车辆ID输对了没哦");
+			return new ResultMessage(Result.FAIL,"看看车辆ID输对了没哦");
 		
-		return validResult;
+		return new ResultMessage(Result.SUCCESS);
 	}
 	
 	
