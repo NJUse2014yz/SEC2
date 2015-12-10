@@ -63,7 +63,7 @@ public class TransitTrainReceipt implements ReceiptService {
 			return saveResult;
 
 		// 保存条形码号供到达单使用
-		helper.saveBarIds(barIds, receiptId);
+		helper.saveBarIds(barIds, receiptId,info.getDestination());
 
 		return new ResultMessage(Result.SUCCESS, fare + " " + transportID);
 	}

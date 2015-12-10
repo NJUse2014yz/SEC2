@@ -270,6 +270,39 @@ public class Transit implements AgencyInfo, Initialable<TransitVO, TransitPO> {
 		return po;
 	}
 
+	@Override
+	public String getName(String id) {
+		//找中转中心
+		TransitVO vo=this.observeTransit(id);
+		if(vo!=null)
+			return vo.name;
+		
+		//找营业厅
+		Position position=new Position();
+		PositionVO vo2=position.findPosition(id);
+		
+		return vo2.name;
+	}
+
+	@Override
+	public String getId(String name) {
+		List<TransitVO> transits = this.observeAllTransit();
+
+		for (TransitVO transit : transits) {
+			// 匹配中转中心
+			if (transit.getName().equals(name))
+				return transit.getId();
+			// 查找中转中心中的营业厅
+			for (PositionVO position : transit.getPositions()) {
+				// 匹配营业厅
+				if (position.getName().equals(name))
+					return position.getId();
+			}
+
+		}
+		return null;
+	}
+
 	/*
 	 * public void test(){ this.addTransit(new TransitVO("广州中转中心", "0201","广州"
 	 * )); this.addPosition(new PositionVO("北京朝阳营业厅", "010001", "0101", "北京"));

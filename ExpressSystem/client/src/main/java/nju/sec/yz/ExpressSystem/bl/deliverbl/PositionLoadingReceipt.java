@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import nju.sec.yz.ExpressSystem.bl.carAndDriverbl.Car;
+import nju.sec.yz.ExpressSystem.bl.managerbl.AgencyInfo;
 import nju.sec.yz.ExpressSystem.bl.managerbl.CityConst;
 import nju.sec.yz.ExpressSystem.bl.managerbl.Position;
 import nju.sec.yz.ExpressSystem.bl.managerbl.Price;
@@ -87,7 +88,10 @@ public class PositionLoadingReceipt implements ReceiptService{
 		BarIdList barIds=new BarIdList();
 		ArrayList<String> ids2=new ArrayList<>();
 		ids2.addAll(barIDs);
-		BarIdsPO list=new BarIdsPO(ids2, receiptID);
+		AgencyInfo agencyService=new Transit();
+		String fromAgency=agencyService.getName(positionID);//出发地名称
+		String destination=agencyService.getId(info.getDestinationId());//到达地id
+		BarIdsPO list=new BarIdsPO(ids2, receiptID,fromAgency,destination);
 		barIds.addBarIds(list);
 		
 		return new ResultMessage(Result.SUCCESS,fare+" "+transportID);
