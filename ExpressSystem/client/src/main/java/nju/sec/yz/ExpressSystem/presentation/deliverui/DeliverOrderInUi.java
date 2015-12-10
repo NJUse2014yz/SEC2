@@ -190,7 +190,7 @@ public class DeliverOrderInUi extends JPanel {
 		 */
 
 		nameSender = new newJText();
-		nameSender.setBounds(185, 87, 58, 15);
+		nameSender.setBounds(185, 84, 58, 18);
 		add(nameSender);
 
 		addressSender = new JTextField();

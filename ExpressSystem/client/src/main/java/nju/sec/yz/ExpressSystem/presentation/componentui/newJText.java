@@ -1,9 +1,7 @@
 package nju.sec.yz.ExpressSystem.presentation.componentui;
 
 import java.awt.Color;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.Font;
 
 import javax.swing.BorderFactory;
 import javax.swing.JTextField;
@@ -18,39 +16,15 @@ public class newJText extends JTextField{
 	}
 	
 	private void iniText(){
-		setBorder(BorderFactory.createLineBorder(Color.WHITE));
-		setForeground(Color.WHITE);
+		//画线+去框
+		setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.WHITE));
+		
+		setForeground(Color.LIGHT_GRAY);
+		
+		Font font = new Font("Microsoft YaHei",Font.PLAIN,15);
+		setFont(font);
 		setOpaque(false);
 		
-		addMouseListener(new MouseAdapter(){
-
-			
-
-//			@Override
-//			public void mousePressed(MouseEvent e) {
-//				// TODO Auto-generated method stub
-//				setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
-//			}
-//
-//			@Override
-//			public void mouseReleased(MouseEvent e) {
-//				// TODO Auto-generated method stub
-//				setBorder(BorderFactory.createLineBorder(Color.WHITE));
-//			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				setBorder(BorderFactory.createLineBorder(Color.WHITE));
-			}
-			
-		});
 	}
 	
 	
