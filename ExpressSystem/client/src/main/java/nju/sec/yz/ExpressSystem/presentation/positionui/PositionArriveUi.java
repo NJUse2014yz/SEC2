@@ -13,6 +13,7 @@ import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.script.Bindings;
 import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -41,6 +42,7 @@ import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.presentation.DateChooser;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.PositionControler;
+import nju.sec.yz.ExpressSystem.vo.BarIdsVO;
 import nju.sec.yz.ExpressSystem.vo.DeliverySheetVO;
 import nju.sec.yz.ExpressSystem.vo.OfficeArriveSheetVO;
 import nju.sec.yz.ExpressSystem.vo.OfficeLoadSheetVO;
@@ -146,8 +148,12 @@ public class PositionArriveUi extends JPanel{
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
-				List<String> bars=deliverBl.getBarIdList(JTtranferId.getText()).barIds;
-				departure.setText(deliverBl.getBarIdList(JTtranferId.getText()).fromAgency);
+				BarIdsVO vo=deliverBl.getBarIdList(JTtranferId.getText());
+				
+				if(vo==null)
+					return;
+				List<String> bars=vo.barIds;
+				departure.setText(vo.fromAgency);
 				departure.setVisible(true);
 //				ArrayList<String> bars=new ArrayList<String>();
 //				bars.add("12345");

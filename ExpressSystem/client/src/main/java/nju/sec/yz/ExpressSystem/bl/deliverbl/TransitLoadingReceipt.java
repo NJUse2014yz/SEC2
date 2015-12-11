@@ -87,6 +87,7 @@ public class TransitLoadingReceipt implements ReceiptService {
 		barIdsCopy2.addAll(barIDs);
 		AgencyInfo agencyService=new Transit();
 		String fromAgency=agencyService.getName(transitId);//出发地名称
+		System.out.println(info.getDestinationId());
 		String destination=agencyService.getId(info.getDestinationId());//到达地id
 		BarIdsPO list = new BarIdsPO(barIdsCopy2, receiptId,fromAgency,destination);
 		barIds.addBarIds(list);
@@ -154,6 +155,7 @@ public class TransitLoadingReceipt implements ReceiptService {
 		String transitId = userId.split("B")[0];
 		return transitId;
 	}
+	
 	
 	public TransitVO getCurrentTransit(){
 		String transitId=getCurrentTransitId(getCurrentUserId());

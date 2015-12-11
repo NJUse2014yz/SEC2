@@ -17,6 +17,7 @@ import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.data.fileUtility.SerializableFileHelper;
 import nju.sec.yz.ExpressSystem.dataservice.receiptDataSevice.ReceiptDataService;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
+import nju.sec.yz.ExpressSystem.po.TransitLoadSheetPO;
 
 public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataService {
 
@@ -156,6 +157,7 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataS
 			for(ReceiptPO po:list){
 				System.out.println(po.getType()+" "+po.getMakePerson()+" "+po.getId());
 			}
+			TransitLoadSheetPO po=(TransitLoadSheetPO)(list.get(4));
 		
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
