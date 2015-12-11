@@ -199,6 +199,8 @@ public class TransitLoadingReceipt implements ReceiptService {
 		Car car = new Car();
 		if (!car.isId(info.getCarId()))
 			validResult.setMessage("看看车辆ID输对了没哦");
+		else
+			validResult.setResult(Result.SUCCESS);
 
 		return validResult;
 	}

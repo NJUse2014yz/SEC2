@@ -53,26 +53,42 @@ public class BarIdList {
 		if(po==null)
 			return null;
 		
-		//检查当前机构是否为到达地
-		UserInfo user=new User();
-		String userId=user.getCurrentID();
-		String destination;
-		if(userId.contains("C")){
-			destination=userId.split("C")[0];
-		}else if(userId.contains("B")){
-			destination=userId.split("B")[0];
-		}else{
-			return null;
-		}
 		
-		if(!destination.equals(po.getDestinationId()))
-			return null;
 		BarIdsVO vo=new BarIdsVO();
 		vo.barIds.addAll(po.getBarIds());
 		vo.fromAgency=po.getFromAgency();
 		
 		return vo;
 	}
+	
+	/**
+	 * 输入中转单编号获得条形码号列表
+	 * 需验证机构id
+	 */
+	public BarIdsVO getBarIds(String transitSheetId,String destinationId){
+		BarIdsPO po=null;
+		try {
+			po=data.get(transitSheetId);
+		} catch (RemoteException e) {
+			RMIExceptionHandler.handleRMIException();
+			e.printStackTrace();
+		}
+		
+		if(po==null)
+			return null;
+		
+		//到达地不是当前机构
+		if(!po.getDestinationId().equals(destinationId))
+			return null;
+		
+		BarIdsVO vo=new BarIdsVO();
+		vo.barIds.addAll(po.getBarIds());
+		vo.fromAgency=po.getFromAgency();
+		
+		return vo;
+		
+	}
+	
 	
 	//TODO
 	public void deleteBarIds(String transitSheetId){
