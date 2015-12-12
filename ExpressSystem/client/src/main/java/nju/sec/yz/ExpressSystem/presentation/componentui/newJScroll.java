@@ -15,6 +15,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.plaf.basic.BasicArrowButton;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 
@@ -31,6 +32,8 @@ public class newJScroll extends JScrollPane {
 		setOpaque(false);
 		getViewport().setOpaque(false);
 		setBorder(BorderFactory.createLineBorder(Color.WHITE,0));
+		
+		setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		
 		getVerticalScrollBar().setUI(new myScrollBarUI());
         getHorizontalScrollBar().setUI(new myScrollBarUI());

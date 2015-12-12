@@ -40,8 +40,8 @@ import nju.sec.yz.ExpressSystem.common.ToAndFromInformation;
 import nju.sec.yz.ExpressSystem.common.TransitCarInformation;
 import nju.sec.yz.ExpressSystem.common.TransitFlightInformation;
 import nju.sec.yz.ExpressSystem.common.TransitTrainInformation;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJCombo;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
-import nju.sec.yz.ExpressSystem.vo.CollectionRecordVO;
 import nju.sec.yz.ExpressSystem.vo.DeliverySheetVO;
 import nju.sec.yz.ExpressSystem.vo.InventoryInSheetVO;
 import nju.sec.yz.ExpressSystem.vo.InventoryOutSheetVO;
@@ -90,7 +90,7 @@ public class ManagerReceiptList extends JPanel {
 
 		String[] reitype = { "收款单", "付款单", "寄件单", "营业厅装车单", "营业厅收件单", "营业厅派送单", "汽车中转单", "火车中转单", "飞机中转单", "中转中心接收单",
 				"中转中心装车单", "入库单", "出库单" };
-		type = new JComboBox(reitype);
+		type = new newJCombo(reitype);
 		type.setBounds(246, 67, 121, 20);
 		add(type);
 

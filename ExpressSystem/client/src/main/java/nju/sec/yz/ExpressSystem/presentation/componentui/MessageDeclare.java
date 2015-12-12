@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.plaf.ScrollPaneUI;
 
 import nju.sec.yz.ExpressSystem.bl.receiptbl.MessageController;
@@ -57,6 +58,11 @@ public class MessageDeclare {
 //		jsc.setBorder(BorderFactory.createLineBorder(Color.WHITE,0));
 //		jsc.setUI(new ScrollPaneUI() {
 //		});
+		jsc.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		jsc.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS); 
+		jsc.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+//		table.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+      
 		panel.add(jsc);
 		
 		
