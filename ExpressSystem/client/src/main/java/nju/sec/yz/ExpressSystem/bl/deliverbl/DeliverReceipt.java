@@ -18,6 +18,7 @@ import nju.sec.yz.ExpressSystem.common.DeliveryType;
 import nju.sec.yz.ExpressSystem.common.GoodInformation;
 import nju.sec.yz.ExpressSystem.common.IdType;
 import nju.sec.yz.ExpressSystem.common.PackType;
+import nju.sec.yz.ExpressSystem.common.ReceiptOperation;
 import nju.sec.yz.ExpressSystem.common.ReceiptType;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
@@ -346,6 +347,18 @@ public class DeliverReceipt implements ReceiptService{
 		double distance=cities.getDistance(from, to);
 		System.out.println("distance="+distance);
 		return distance;
+	}
+
+	@Override
+	public String showMessage(ReceiptVO vo, ReceiptOperation operation) {
+		SendSheetVO sendReceipt=(SendSheetVO)vo;
+		SendInformation info=sendReceipt.getSendInformation();
+		String month=TimeTool.getMonth(vo.getMakeTime());
+		String day=TimeTool.getDay(vo.getMakeTime());
+		
+		String message="您"+"填写的寄件单已"+operation+"\r\n";
+		
+		return message;
 	}
 
 

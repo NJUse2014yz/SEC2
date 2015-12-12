@@ -153,8 +153,9 @@ public class ReceiptList implements ReceiptSaveService{
 			this.delete(vo.getId());
 			
 			//消息发送
+			String showMessage=receipt.showMessage(vo, ReceiptOperation.APPROVE);
 			Message sender=new Message();
-			sender.send(new MessageVO(vo.getMakePerson(), ReceiptOperation.APPROVE, vo));
+			sender.send(new MessageVO(vo.getMakePerson(), showMessage));
 			
 		} catch (InstantiationException | IllegalAccessException e) {
 			e.printStackTrace();
@@ -182,8 +183,9 @@ public class ReceiptList implements ReceiptSaveService{
 			message=this.update(po);
 			
 			//消息发送
+			String showMessage=receipt.showMessage(vo, ReceiptOperation.MODIFY);
 			Message sender=new Message();
-			sender.send(new MessageVO(vo.getMakePerson(), ReceiptOperation.MODIFY, vo));
+			sender.send(new MessageVO(vo.getMakePerson(), showMessage));
 			
 		} catch (InstantiationException | IllegalAccessException e) {
 			e.printStackTrace();

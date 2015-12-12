@@ -14,34 +14,22 @@ public class MessagePO implements Serializable{
 
 	private String toPersonId;//收信息的人
 	
-	private ReceiptOperation operation;//修改或通过
-	
-	private ReceiptPO receipt;//审批通过的单据
+	private String message;
 	
 	public MessagePO() {
 		
 	}
-	
-	
 
-	public MessagePO(String messageId, String toPersonId, ReceiptOperation operation, ReceiptPO receipt) {
+	public MessagePO(String messageId, String toPersonId, String message) {
 		super();
 		this.messageId = messageId;
 		this.toPersonId = toPersonId;
-		this.operation = operation;
-		this.receipt = receipt;
+		this.message = message;
 	}
-
-
-
-
-
-
 
 	public String getMessageId() {
 		return messageId;
 	}
-
 
 	public void setMessageId(String messageId) {
 		this.messageId = messageId;
@@ -55,37 +43,14 @@ public class MessagePO implements Serializable{
 		this.toPersonId = toPersonId;
 	}
 
-
-
-
-
-	public ReceiptOperation getOperation() {
-		return operation;
+	public String getMessage() {
+		return message;
 	}
 
-
-
-
-
-	public void setOperation(ReceiptOperation operation) {
-		this.operation = operation;
+	public void setMessage(String message) {
+		this.message = message;
 	}
-
-
-
-
-
-	public ReceiptPO getReceipt() {
-		return receipt;
-	}
-
-
-
-
-
-	public void setReceipt(ReceiptPO receipt) {
-		this.receipt = receipt;
-	}
+	
 	
 	
 }

@@ -1,5 +1,6 @@
 package nju.sec.yz.ExpressSystem.bl.receiptbl;
 
+import nju.sec.yz.ExpressSystem.common.ReceiptOperation;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
@@ -8,7 +9,7 @@ import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
  * 所有单据的通用接口
  * @author 周聪
  */
-public interface ReceiptService {
+public interface  ReceiptService {
 	/**
 	 * 制定单据
 	 */
@@ -33,4 +34,9 @@ public interface ReceiptService {
 	 * 将PO转换成VO
 	 */
 	public ReceiptVO show(ReceiptPO po);
+	
+	/**
+	 * 获得消息
+	 */
+	public String showMessage(ReceiptVO vo,ReceiptOperation operation);
 }
