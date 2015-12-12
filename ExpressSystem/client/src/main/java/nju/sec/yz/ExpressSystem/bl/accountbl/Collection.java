@@ -10,6 +10,7 @@ import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptID;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptSaveService;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
+import nju.sec.yz.ExpressSystem.bl.tool.StringTool;
 import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.bl.userbl.User;
 import nju.sec.yz.ExpressSystem.bl.userbl.UserInfo;
@@ -261,6 +262,19 @@ public class Collection implements ReceiptService{
 		vo.sum=sum;
 		return vo;
 		
+	}
+
+
+	@Override
+	public String showMessage(ReceiptVO vo) {
+		PaymentSheetVO receipt=(PaymentSheetVO)vo;
+		PaymentInformation info=this.copyInfo(receipt.getPaymentInformation());
+		
+		String message="	收款人："+info.getInDeliverId()+StringTool.nextLine();
+		message=message+"	收款金额："+info.getAmount()+StringTool.nextLine();
+		message=message+"	收款账户："+info.getAccount()+StringTool.nextLine();
+		
+		return message;
 	}
 
 

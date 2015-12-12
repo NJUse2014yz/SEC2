@@ -20,6 +20,8 @@ import nju.sec.yz.ExpressSystem.bl.deliverbl.TransitReceiveReceipt;
 import nju.sec.yz.ExpressSystem.bl.deliverbl.TransitTrainReceipt;
 import nju.sec.yz.ExpressSystem.bl.inventorybl.InventoryInSheet;
 import nju.sec.yz.ExpressSystem.bl.inventorybl.InventoryOutSheet;
+import nju.sec.yz.ExpressSystem.bl.tool.StringTool;
+import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
 import nju.sec.yz.ExpressSystem.client.RMIExceptionHandler;
 import nju.sec.yz.ExpressSystem.common.ReceiptOperation;
@@ -153,7 +155,8 @@ public class ReceiptList implements ReceiptSaveService{
 			this.delete(vo.getId());
 			
 			//消息发送
-			String showMessage=receipt.showMessage(vo, ReceiptOperation.APPROVE);
+			String showMessage=this.showMessage(vo, ReceiptOperation.APPROVE);
+			showMessage=showMessage+receipt.showMessage(vo);
 			Message sender=new Message();
 			sender.send(new MessageVO(vo.getMakePerson(), showMessage));
 			
@@ -183,7 +186,8 @@ public class ReceiptList implements ReceiptSaveService{
 			message=this.update(po);
 			
 			//消息发送
-			String showMessage=receipt.showMessage(vo, ReceiptOperation.MODIFY);
+			String showMessage=this.showMessage(vo, ReceiptOperation.MODIFY);
+			showMessage=showMessage+receipt.showMessage(vo);
 			Message sender=new Message();
 			sender.send(new MessageVO(vo.getMakePerson(), showMessage));
 			
@@ -218,6 +222,20 @@ public class ReceiptList implements ReceiptSaveService{
 		}
 		
 		return new ResultMessage(Result.SUCCESS);
+	}
+	
+	/**
+	 * 生成反馈消息
+	 * @param vo
+	 * @return
+	 */
+	private String showMessage(ReceiptVO vo,ReceiptOperation operation){
+		String month=TimeTool.getMonth(vo.getMakeTime());
+		String day=TimeTool.getDay(vo.getMakeTime());
+		
+		String message="您"+month+"月"+day+"日"+"填写的"+vo.getType()+"已"+operation+StringTool.nextLine();
+		
+		return message;
 	}
 	
 	@Override

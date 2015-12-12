@@ -40,10 +40,7 @@ public class Message{
 		
 		String messageId=this.createId(vo.toPersonId);
 		
-		ReceiptList receiptHelper=new ReceiptList();
-		ReceiptPO receipt=receiptHelper.convertToPO(vo.receipt);
-		
-		MessagePO po=new MessagePO(messageId, vo.toPersonId, vo.operation, receipt);
+		MessagePO po=new MessagePO(messageId, vo.toPersonId, vo.message);
 
 		try {
 			data.addMessage(po);
@@ -68,7 +65,7 @@ public class Message{
 	public List<MessageVO> getNewMessages() {
 		UserInfo user=new User();
 		String currentUser=user.getCurrentID();
-		ReceiptList receiptHelper=new ReceiptList();
+		
 		
 		List<MessageVO> messages=new ArrayList<>();
 		
@@ -76,8 +73,8 @@ public class Message{
 			List<MessagePO> pos=data.getMessages(currentUser);
 			System.out.println("get "+pos.size()+" messages");
 			for(MessagePO po:pos){
-				ReceiptVO receipt=receiptHelper.show(po.getReceipt());
-				MessageVO message=new MessageVO(receipt.getMakePerson(), po.getOperation(), receipt);
+				
+				MessageVO message=new MessageVO(po.getMessageId(), po.getToPersonId(), po.getMessage());
 				messages.add(message);
 			}
 		} catch (RemoteException e) {

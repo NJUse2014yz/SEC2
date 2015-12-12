@@ -10,6 +10,7 @@ import nju.sec.yz.ExpressSystem.bl.managerbl.AgencyInfo;
 import nju.sec.yz.ExpressSystem.bl.managerbl.CityConst;
 import nju.sec.yz.ExpressSystem.bl.managerbl.CityDistanceService;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptID;
+import nju.sec.yz.ExpressSystem.bl.tool.StringTool;
 import nju.sec.yz.ExpressSystem.bl.userbl.User;
 import nju.sec.yz.ExpressSystem.common.DeliveryState;
 import nju.sec.yz.ExpressSystem.common.IdType;
@@ -117,6 +118,17 @@ public class TransitReceiptHelper {
 		return new ResultMessage(Result.SUCCESS);
 	}
 
+	
+	public String showMessage(TransitInformation info){
+		String message="	到达地："+info.getDestination()+StringTool.nextLine();
+		
+		message=message+"	装运订单："+StringTool.nextLine();
+		for(String barId:info.getBarIds()){
+			message=message+"	"+barId+StringTool.nextLine();
+		}
+		
+		return message;
+	}
 	
 	
 	

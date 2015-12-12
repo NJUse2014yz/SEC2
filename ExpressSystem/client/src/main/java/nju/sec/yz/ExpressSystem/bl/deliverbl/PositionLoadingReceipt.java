@@ -15,6 +15,7 @@ import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptID;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptSaveService;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
+import nju.sec.yz.ExpressSystem.bl.tool.StringTool;
 import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.bl.userbl.User;
 import nju.sec.yz.ExpressSystem.common.DeliveryState;
@@ -279,6 +280,21 @@ public class PositionLoadingReceipt implements ReceiptService{
 		po.setMakeTime(vo.getMakeTime());
 		po.setType(vo.getType());
 		return po;
+	}
+
+
+	@Override
+	public String showMessage(ReceiptVO vo) {
+		OfficeLoadSheetVO receipt=(OfficeLoadSheetVO)vo;
+		LoadInformation info = ((OfficeLoadSheetVO)vo).getOfficeLoadInformation();
+
+		String message="	到达地："+info.getDestinationId()+StringTool.nextLine();
+		message=message+"	装运订单："+StringTool.nextLine();
+		for(String barId:receipt.getBarIds()){
+			message=message+"	"+barId+StringTool.nextLine();
+		}
+		
+		return message;
 	}
 
 

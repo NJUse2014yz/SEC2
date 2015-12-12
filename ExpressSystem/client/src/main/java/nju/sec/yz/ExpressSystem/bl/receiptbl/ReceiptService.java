@@ -38,5 +38,5 @@ public interface  ReceiptService {
 	/**
 	 * 获得消息
 	 */
-	public String showMessage(ReceiptVO vo,ReceiptOperation operation);
+	public String showMessage(ReceiptVO vo);
 }

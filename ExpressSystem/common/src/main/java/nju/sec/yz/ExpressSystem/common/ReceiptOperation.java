@@ -15,8 +15,6 @@ public enum ReceiptOperation {
 		}
 	};
 	
-	/*public static void main(String[] args) {
-		System.out.println(APPROVE);
-	}*/
+	
 	
 }

@@ -9,6 +9,7 @@ import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptID;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptSaveService;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
+import nju.sec.yz.ExpressSystem.bl.tool.StringTool;
 import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.bl.userbl.User;
 import nju.sec.yz.ExpressSystem.bl.userbl.UserInfo;
@@ -350,13 +351,12 @@ public class DeliverReceipt implements ReceiptService{
 	}
 
 	@Override
-	public String showMessage(ReceiptVO vo, ReceiptOperation operation) {
+	public String showMessage(ReceiptVO vo) {
 		SendSheetVO sendReceipt=(SendSheetVO)vo;
 		SendInformation info=sendReceipt.getSendInformation();
-		String month=TimeTool.getMonth(vo.getMakeTime());
-		String day=TimeTool.getDay(vo.getMakeTime());
-		
-		String message="您"+"填写的寄件单已"+operation+"\r\n";
+		String message="	条形码号："+info.getBarId()+StringTool.nextLine();
+		message=message+"	寄件人："+info.getFromPerson()+StringTool.nextLine();
+		message=message+"	收件人："+info.getToPerson()+StringTool.nextLine();
 		
 		return message;
 	}

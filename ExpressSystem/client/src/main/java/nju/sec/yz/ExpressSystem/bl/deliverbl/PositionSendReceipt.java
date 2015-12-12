@@ -4,6 +4,7 @@ import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptID;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptSaveService;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
+import nju.sec.yz.ExpressSystem.bl.tool.StringTool;
 import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.bl.userbl.User;
 import nju.sec.yz.ExpressSystem.bl.userbl.UserInfo;
@@ -139,6 +140,14 @@ public class PositionSendReceipt implements ReceiptService{
 		po.setType(vo.getType());
 		
 		return po;
+	}
+
+	@Override
+	public String showMessage(ReceiptVO vo) {
+		DeliveryInformation info=((DeliverySheetVO)vo).getDeliveryInformation();
+		String message="	条形码号："+info.getBarId()+StringTool.nextLine();
+		message=message+"	派送员id："+info.getOutDeliverId()+StringTool.nextLine();
+		return null;
 	}
 
 
