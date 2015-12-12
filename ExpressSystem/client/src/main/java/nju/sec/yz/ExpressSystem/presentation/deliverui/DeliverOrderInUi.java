@@ -26,6 +26,7 @@ import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.SendInformation;
 import nju.sec.yz.ExpressSystem.common.ToAndFromInformation;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJCombo;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJText;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.SendSheetVO;
@@ -219,7 +220,7 @@ public class DeliverOrderInUi extends JPanel {
 			city[c]=transits.get(c).getLocation();
 		}
 		
-		citySender = new JComboBox(city);
+		citySender = new newJCombo(city);
 		citySender.setBounds(389, 135, 70, 20);
 		add(citySender);
 

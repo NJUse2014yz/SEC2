@@ -10,8 +10,10 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.plaf.ScrollPaneUI;
 
 import nju.sec.yz.ExpressSystem.bl.receiptbl.MessageController;
 import nju.sec.yz.ExpressSystem.blservice.receiptBlService.MessageBlService;
@@ -43,11 +45,20 @@ public class MessageDeclare {
 			announce.append("单据"+volist.get(c).messageId+"已经通过审批\r\n");
 		}
 		
-		jsc=new JScrollPane(announce);
+		
+		for(int c=0;c<50;c++){
+			announce.append("!!!!!!!!!!!!!!!!!!!!!!!!!!!!\r\n");
+		}
+		
+		jsc=new newJScroll(announce);
 		jsc.setBounds(154,84,292,180);
-		jsc.setOpaque(false);
-		jsc.setBorder(BorderFactory.createLineBorder(Color.WHITE,0));
+//		jsc.setOpaque(false);
+//		jsc.getViewport().setOpaque(false);
+//		jsc.setBorder(BorderFactory.createLineBorder(Color.WHITE,0));
+//		jsc.setUI(new ScrollPaneUI() {
+//		});
 		panel.add(jsc);
+		
 		
 		ImageIcon IknowIcon=new ImageIcon("graphic/common/Iknow.png");
 		confirm=new JButton(IknowIcon);
