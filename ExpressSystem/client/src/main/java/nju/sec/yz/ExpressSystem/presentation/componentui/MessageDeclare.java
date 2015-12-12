@@ -46,7 +46,7 @@ public class MessageDeclare {
 		}
 		
 		
-		for(int c=0;c<50;c++){
+		for(int c=0;c<20;c++){
 			announce.append("!!!!!!!!!!!!!!!!!!!!!!!!!!!!\r\n");
 		}
 		
