@@ -9,6 +9,7 @@ import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptID;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptSaveService;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
+import nju.sec.yz.ExpressSystem.bl.tool.StringTool;
 import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.bl.userbl.User;
 import nju.sec.yz.ExpressSystem.bl.userbl.UserInfo;
@@ -195,5 +196,14 @@ public class Payment implements ReceiptService {
 		
 		
 		return results;
+	}
+
+	@Override
+	public String showMessage(ReceiptVO vo) {
+		OutVO receipt=(OutVO)vo;
+		OutInformation info=receipt.getOutInformation();
+		String message="付款金额："+info.getAccount()+StringTool.nextLine();
+		message=message+"付款原因："+info.getReason()+StringTool.nextLine();
+		return message;
 	}
 }

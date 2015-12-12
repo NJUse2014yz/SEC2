@@ -48,4 +48,10 @@ public class DeliverReceiptMockObject implements ReceiptService{
 		return null;
 	}
 
+	@Override
+	public String showMessage(ReceiptVO vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

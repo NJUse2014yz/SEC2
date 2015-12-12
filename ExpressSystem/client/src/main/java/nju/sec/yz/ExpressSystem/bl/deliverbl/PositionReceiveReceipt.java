@@ -7,6 +7,7 @@ import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptID;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptSaveService;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
+import nju.sec.yz.ExpressSystem.bl.tool.StringTool;
 import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.bl.userbl.User;
 import nju.sec.yz.ExpressSystem.bl.userbl.UserInfo;
@@ -139,6 +140,15 @@ public class PositionReceiveReceipt implements ReceiptService {
 		po.setMakeTime(vo.getMakeTime());
 		po.setType(vo.getType());
 		return po;
+	}
+
+	@Override
+	public String showMessage(ReceiptVO vo) {
+		ArriveInformation info=((OfficeArriveSheetVO)vo).getOfficeArrive();
+		String message="出发地："+info.getDeparture()+StringTool.nextLine();
+		message=message+"中转单编号："+info.getTransitSheetId()+StringTool.nextLine();
+		
+		return message;
 	}
 
 }

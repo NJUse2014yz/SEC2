@@ -8,6 +8,7 @@ import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptID;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
 import nju.sec.yz.ExpressSystem.bl.tool.ObjectDeepCopy;
+import nju.sec.yz.ExpressSystem.bl.tool.StringTool;
 import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.bl.userbl.User;
 import nju.sec.yz.ExpressSystem.bl.userbl.UserInfo;
@@ -182,5 +183,17 @@ public class InventoryInSheet implements ReceiptService {
 		if(!ValidHelper.isValidInt(positon))
 			message.setMessage("位号不对哟");
 		return new ResultMessage(Result.SUCCESS);
+	}
+	@Override
+	public String showMessage(ReceiptVO vo) {
+		InventoryInSheetVO ivo=(InventoryInSheetVO)vo;
+		InventoryInInformation info=ivo.getInventoryInInformation();
+		String message="条形码号："+ivo.getBarId()+StringTool.nextLine();
+		message=message+"区号："+info.getBlock()+StringTool.nextLine();
+		message=message+"行号："+info.getRow()+StringTool.nextLine();
+		message=message+"架号："+info.getShelf()+StringTool.nextLine();
+		message=message+"位号："+info.getShelf()+StringTool.nextLine();
+		
+		return message;
 	}
 }

@@ -33,8 +33,6 @@ public class newTable{
 	private DefaultTableModel model;
 	private boolean isMaker=false;//如果是制作时使用，设为true，可以扩展表格
 	private JScrollPane scroll;
-//	private Vector<Vector<String>> data=new Vector<Vector<String>>();
-//	private Vector<String> name=new Vector<String>();
 	
 	private int x=0;
 	private int y=0;
@@ -60,6 +58,13 @@ public class newTable{
 	public void resetData()
 	{
 		table.updateUI();
+	}
+	/**
+	 * 停止自适应，使用滑动条
+	 */
+	public void stopAutoRewidth()
+	{
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 	}
 	/**
 	 * 给表格某列添加下拉框

@@ -1,27 +1,29 @@
 package nju.sec.yz.ExpressSystem.vo;
 
 
-import nju.sec.yz.ExpressSystem.common.ReceiptOperation;
-
-import nju.sec.yz.ExpressSystem.po.ReceiptPO;
-
 public class MessageVO {
 	
 	public String messageId;//消息的id
 	
 	public String toPersonId;//收信息的人
 	
-	public ReceiptOperation operation;//修改或通过
+	public String message;//消息
 	
-	public ReceiptVO receipt;//审批通过的单据
-
-	public MessageVO(String toPersonId, ReceiptOperation operation, ReceiptVO receipt) {
+	
+	public MessageVO(String toPersonId, String message) {
 		super();
 		this.toPersonId = toPersonId;
-		this.operation = operation;
-		this.receipt = receipt;
+		this.message = message;
 	}
-	
+
+	public MessageVO(String messageId, String toPersonId, String message) {
+		super();
+		this.messageId = messageId;
+		this.toPersonId = toPersonId;
+		this.message = message;
+	}
+
+
 	public MessageVO(){
 		
 	}

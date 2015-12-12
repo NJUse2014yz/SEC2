@@ -8,6 +8,7 @@ import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptID;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptSaveService;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
+import nju.sec.yz.ExpressSystem.bl.tool.StringTool;
 import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.bl.userbl.User;
 import nju.sec.yz.ExpressSystem.common.ArriveInformation;
@@ -19,6 +20,7 @@ import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.po.TransitArriveSheetPO;
+import nju.sec.yz.ExpressSystem.vo.OfficeArriveSheetVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 import nju.sec.yz.ExpressSystem.vo.TransitArriveSheetVO;
 
@@ -51,7 +53,7 @@ public class TransitReceiveReceipt implements ReceiptService {
 		po.setId(receiptId);
 		po.setMakePerson(maker);
 		po.setMakeTime(TimeTool.getDate());
-		po.setType(ReceiptType.POSITION_RECEIVE_RECEIPT);
+		po.setType(ReceiptType.TRANSIT_RECEIVE_RECEIPT);
 
 		// 提交
 		ReceiptSaveService receiptList = new ReceiptList();
@@ -142,5 +144,12 @@ public class TransitReceiveReceipt implements ReceiptService {
 			return new ResultMessage(Result.FAIL, "中转单不存在");
 		return new ResultMessage(Result.SUCCESS);
 	}
-
+	@Override
+	public String showMessage(ReceiptVO vo) {
+		ArriveInformation info=((TransitArriveSheetVO)vo).getTransitArriveInformation();
+		String message="	出发地："+info.getDeparture()+StringTool.nextLine();
+		message=message+"	中转单编号："+info.getTransitSheetId()+StringTool.nextLine();
+		
+		return message;
+	}
 }
