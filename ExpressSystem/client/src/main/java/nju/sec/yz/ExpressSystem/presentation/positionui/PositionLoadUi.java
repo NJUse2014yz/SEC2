@@ -8,6 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -46,7 +47,6 @@ public class PositionLoadUi extends JPanel{
 	private ArrayList<String> bars;
 
 	private JComboBox JCdestination;
-//	private JTextField JTtransportId;
 	private JLabel JLtransportId;
 	private JTextField JTPositionId;
 	private JTextField JTCarId;
@@ -58,8 +58,8 @@ public class PositionLoadUi extends JPanel{
 	private JTable barIds;
 	private JButton confirm;
 	private JLabel warning;
-	private String[] name={"订单条形码号"};
-	private String[][] data={{""}};
+	private Vector<String> name=new Vector<String>();
+	private Vector<Vector<String>> data=new Vector<Vector<String>>();
 	private DefaultTableModel model;
 
 	private static final int destination_x=193;
@@ -123,6 +123,10 @@ public class PositionLoadUi extends JPanel{
 		this.bc=bc;
 		bars=new ArrayList<String>();
 		date=new DateChooser(this,207,170);
+		name.add("订单条形码号");
+		Vector<String> vector=new Vector<String>();
+		vector.add("");
+		data.add(vector);
 		initDeliverMainUi();
 	}
 
@@ -150,9 +154,6 @@ public class PositionLoadUi extends JPanel{
 		JTPositionId.setBounds(positionId_x,positionId_y,positionId_w,positionId_h);
 		add(JTPositionId);
 		
-//		JTtransportId = new JTextField();
-//		JTtransportId.setBounds(transportId_x,transportId_y,transportId_w,transportId_h);
-//		add(JTtransportId);
 		JLtransportId=new JLabel();
 		JLtransportId.setBounds(transportId_x, transportId_y, transportId_w, transportId_h);
 		JLtransportId.setFont(new Font("Dialog", 1, 15));
@@ -172,28 +173,9 @@ public class PositionLoadUi extends JPanel{
 		JTsuperviserId.setBounds(superviserId_x,superviserId_y,superviserId_w,superviserId_h);
 		add(JTsuperviserId);
 		
-		/*model=new DefaultTableModel(data,name);
-		barIds=new JTable(model);
-		model.addTableModelListener(new TableModelListener(){
-			@Override
-			public void tableChanged(TableModelEvent e) {
-				// TODO Auto-generated method stub
-				int num=model.getRowCount();
-				String temp=(String) model.getValueAt(num-1, 0);
-				if(temp!=""){
-					String[] conponent={""};
-					((DefaultTableModel) model).addRow(conponent); 
-				}
-				repaint();
-			}
-		});
-		scroller=new JScrollPane(barIds);
-		scroller.setBounds(scroll_x,scroll_y,scroll_w,scroll_h);
-		add(scroller);*/
 		newTable table=new newTable(data,name,this,true);
 		table.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
 		table.join();
-		//上面用来实验newTable
 		
 		warning=new JLabel();
 		warning.setBounds(warning_x, warning_y, warning_w, warning_h);

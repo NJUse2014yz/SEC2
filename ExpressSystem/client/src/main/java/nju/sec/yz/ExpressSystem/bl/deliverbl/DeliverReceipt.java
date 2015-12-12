@@ -9,6 +9,7 @@ import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptID;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptSaveService;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
+import nju.sec.yz.ExpressSystem.bl.tool.StringTool;
 import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.bl.userbl.User;
 import nju.sec.yz.ExpressSystem.bl.userbl.UserInfo;
@@ -18,6 +19,7 @@ import nju.sec.yz.ExpressSystem.common.DeliveryType;
 import nju.sec.yz.ExpressSystem.common.GoodInformation;
 import nju.sec.yz.ExpressSystem.common.IdType;
 import nju.sec.yz.ExpressSystem.common.PackType;
+import nju.sec.yz.ExpressSystem.common.ReceiptOperation;
 import nju.sec.yz.ExpressSystem.common.ReceiptType;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
@@ -27,6 +29,7 @@ import nju.sec.yz.ExpressSystem.dataservice.deliverDataSevice.OrderDataService;
 import nju.sec.yz.ExpressSystem.po.CollectionRecordPO;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.po.SendSheetPO;
+import nju.sec.yz.ExpressSystem.vo.DeliverVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 import nju.sec.yz.ExpressSystem.vo.SendSheetVO;
 /**
@@ -252,27 +255,27 @@ public class DeliverReceipt implements ReceiptService{
 		String size=sif.getGood().getSize();
 		
 		ResultMessage message=new ResultMessage(Result.FAIL);
-		
+		Deliver deliver=new Deliver();
 		if(!ValidHelper.isCellphone(fromCellphone))
 			message.setMessage("亲，不要告诉我寄件人手机号不是11位数字~");
-		if(!ValidHelper.isCellphone(toCellphone))
+		else if(!ValidHelper.isCellphone(toCellphone))
 			message.setMessage("亲，不要告诉我收件人手机号不是11位数字~");
-		if(!ValidHelper.isValidNumber(total))
+		else if(!ValidHelper.isValidNumber(total))
 			message.setMessage("亲，件数x是要满足0<x<65536的数字哟");
-		if(!ValidHelper.isValidNumber(weight))
+		else if(!ValidHelper.isValidNumber(weight))
 			message.setMessage("亲，重量x是要满足0<x<65536的数字哟");
-		if(!ValidHelper.isBarId(barId))			
+		else if(!ValidHelper.isBarId(barId))			
 			message.setMessage("亲，咱们的订单号是十位数字哟~");
 		
-		Deliver deliver=new Deliver();
-		if(deliver.checkDeliver(barId)!=null)
+		
+		else if(deliver.checkDeliver(barId)!=null)
 			message.setMessage("亲，这订单号已经填过了哦~");
 		
-		if(!ValidHelper.isValidNumber(vloume))
+		else if(!ValidHelper.isValidNumber(vloume))
 			message.setMessage("亲，体积是要满足0<x<65536的数字哟");
-		if(!isSize(size))
+		else if(!isSize(size))
 			message.setMessage("亲，尺寸可是要满足“数*数*数”的格式哟");
-		else
+		else 
 			message.setResult(Result.SUCCESS);
 		return message;
 	}
@@ -346,6 +349,17 @@ public class DeliverReceipt implements ReceiptService{
 		double distance=cities.getDistance(from, to);
 		System.out.println("distance="+distance);
 		return distance;
+	}
+
+	@Override
+	public String showMessage(ReceiptVO vo) {
+		SendSheetVO sendReceipt=(SendSheetVO)vo;
+		SendInformation info=sendReceipt.getSendInformation();
+		String message="条形码号："+info.getBarId()+StringTool.nextLine();
+		message=message+"寄件人："+info.getFromPerson().getName()+StringTool.nextLine();
+		message=message+"收件人："+info.getToPerson().getName()+StringTool.nextLine();
+		
+		return message;
 	}
 
 

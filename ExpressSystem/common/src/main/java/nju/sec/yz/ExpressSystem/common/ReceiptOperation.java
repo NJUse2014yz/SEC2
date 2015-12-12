@@ -5,18 +5,16 @@ public enum ReceiptOperation {
 	APPROVE(){
 		@Override
 		public String toString(){
-			return "审批通过";
+			return "通过审批";
 		}
 		
 	},MODIFY(){
 		@Override
 		public String toString(){
-			return "修改";
+			return "被修改";
 		}
 	};
 	
-	/*public static void main(String[] args) {
-		System.out.println(APPROVE);
-	}*/
+	
 	
 }

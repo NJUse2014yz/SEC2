@@ -6,7 +6,9 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -21,6 +23,7 @@ import nju.sec.yz.ExpressSystem.blservice.userBlService.UserBlService;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.Status;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.AdminstraterControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.UserVO;
@@ -33,12 +36,11 @@ public class AdminstraterInquiryUi extends JPanel{
 	
 	private JTextField input;
 	private JButton search;
-	private JTable table;
-	private JScrollPane scroll;
+	private newTable table;
 	private JButton back;
 	private JLabel warning;
-	private String[] name={"编号","密码","权限","姓名"};
-	private String[][] data={{"","","",""}};
+	private Vector<String> name=new Vector<String>();
+	private Vector<Vector<String>> data=new Vector<Vector<String>>();
 	private List<UserVO> uvl;
 	
 	private static final int input_x=214;
@@ -73,15 +75,7 @@ public class AdminstraterInquiryUi extends JPanel{
 		this.controler=mainControler.adminstraterControler;
 		userBl=new UserController();
 		uvl=userBl.getAll();
-		int n=uvl.size();
-		data=new String[n][4];
-		for(int i=0;i<n;i++)
-		{
-			data[i][0]=uvl.get(i).getId();
-			data[i][1]=uvl.get(i).getPassword();
-			data[i][2]=getStatus(uvl.get(i));
-			data[i][3]=uvl.get(i).getName();
-		}
+		changeData(uvl);
 		initAdminstraterUi();
 	}
 	private void initAdminstraterUi()
@@ -100,26 +94,17 @@ public class AdminstraterInquiryUi extends JPanel{
 		search.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
 			{
-				UserVO uv=userBl.getSingle(input.getText());
-				if(getStatus(uv)!=null)
-				{
-					data=new String[][]{{uv.getId(),uv.getPassword(),getStatus(uv),uv.getName()}};
-					remove(scroll);
-					table=new JTable(data,name);
-					table.setRowHeight(20);
-					scroll=new JScrollPane(table);
-					scroll.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
-					add(scroll);
-				}
+				uvl=new ArrayList<UserVO>();
+				uvl.add(userBl.getSingle(input.getText()));
+				changeData(uvl);
+				table.resetData();
 			}
 		});
 		add(search);
 		
-		table=new JTable(data,name);
-		table.setRowHeight(20);
-		scroll=new JScrollPane(table);
-		scroll.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
-		add(scroll);
+		table=new newTable(data,name,this,false);
+		table.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
+		table.join();
 		
 		back=new JButton(backIcon);
 		back.setBounds(back_x, back_y, back_w, back_h);
@@ -127,21 +112,8 @@ public class AdminstraterInquiryUi extends JPanel{
 			public void mouseClicked(MouseEvent e)
 			{
 				uvl=userBl.getAll();
-				int n=uvl.size();
-				data=new String[n][4];
-				for(int i=0;i<n;i++)
-				{
-					data[i][0]=uvl.get(i).getId();
-					data[i][1]=uvl.get(i).getPassword();
-					data[i][2]=getStatus(uvl.get(i));
-					data[i][3]=uvl.get(i).getName();
-				}
-				remove(scroll);
-				table=new JTable(data,name);
-				table.setRowHeight(20);
-				scroll=new JScrollPane(table);
-				scroll.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
-				add(scroll);
+				changeData(uvl);
+				table.resetData();
 			}
 		});
 		add(back);
@@ -155,7 +127,25 @@ public class AdminstraterInquiryUi extends JPanel{
 		
 		setVisible(true);
 	}
-	public String getStatus(UserVO uv){
+	private void changeData(List<UserVO> uvl)
+	{
+		data.removeAllElements();
+		int n=uvl.size();
+		name.add("编号");
+		name.add("密码");
+		name.add("权限");
+		name.add("姓名");
+		for(int i=0;i<n;i++)
+		{
+			Vector<String> vector=new Vector<String>();
+			vector.add(uvl.get(i).getId());
+			vector.add(uvl.get(i).getPassword());
+			vector.add(getStatus(uvl.get(i)));
+			vector.add(uvl.get(i).getName());
+			data.add(vector);
+		}
+	}
+	private String getStatus(UserVO uv){
 		if(uv!=null)
 		{
 			Status po=uv.getPower();

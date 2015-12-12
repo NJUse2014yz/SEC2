@@ -2,11 +2,14 @@ package nju.sec.yz.ExpressSystem.bl.inventorybl;
 
 import java.rmi.RemoteException;
 
+import javax.xml.stream.events.StartDocument;
+
 import nju.sec.yz.ExpressSystem.bl.deliverbl.Deliver;
 import nju.sec.yz.ExpressSystem.bl.deliverbl.ValidHelper;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptID;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
+import nju.sec.yz.ExpressSystem.bl.tool.StringTool;
 import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.bl.userbl.User;
 import nju.sec.yz.ExpressSystem.bl.userbl.UserInfo;
@@ -173,6 +176,13 @@ public class InventoryOutSheet implements ReceiptService {
 			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
+		return message;
+	}
+
+	@Override
+	public String showMessage(ReceiptVO vo) {
+		InventoryOutSheetVO ovo = (InventoryOutSheetVO) vo;
+		String message="条形码号"+ovo.getBarId()+StringTool.nextLine();
 		return message;
 	}
 }

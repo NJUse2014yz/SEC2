@@ -8,12 +8,14 @@ import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptID;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptSaveService;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
+import nju.sec.yz.ExpressSystem.bl.tool.StringTool;
 import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.common.IdType;
 import nju.sec.yz.ExpressSystem.common.ReceiptType;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.TransitFlightInformation;
+import nju.sec.yz.ExpressSystem.common.TransitInformation;
 import nju.sec.yz.ExpressSystem.common.TransitTrainInformation;
 import nju.sec.yz.ExpressSystem.common.TransportType;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
@@ -132,6 +134,14 @@ public class TransitTrainReceipt implements ReceiptService {
 		vo.copy(po);
 		
 		return vo;
+	}
+	
+	@Override
+	public String showMessage(ReceiptVO vo) {
+		TransitInformation info=((TransitSheetVO)vo).getTransitInformation();
+		TransitReceiptHelper helper=new TransitReceiptHelper();
+
+		return helper.showMessage(info);
 	}
 
 }

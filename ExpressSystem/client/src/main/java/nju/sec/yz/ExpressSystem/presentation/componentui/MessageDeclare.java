@@ -43,7 +43,7 @@ public class MessageDeclare {
 		announce.setFont(font);
 		announce.setOpaque(false);
 		for(int c=0;c<volist.size();c++){
-			announce.append("单据"+volist.get(c).messageId+"已经通过审批\r\n");
+			announce.append(volist.get(c).message);
 		}
 		
 		
