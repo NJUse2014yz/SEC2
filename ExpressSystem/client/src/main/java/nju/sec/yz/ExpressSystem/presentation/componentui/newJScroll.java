@@ -19,7 +19,7 @@ import javax.swing.plaf.basic.BasicArrowButton;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 
 
-public class newJScroll extends JScrollPane{
+public class newJScroll extends JScrollPane {
 
 	protected newJScroll(Component view) {
 		super(view);
