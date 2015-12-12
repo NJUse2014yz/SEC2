@@ -92,7 +92,7 @@ public class DeliverDataImpl extends UnicastRemoteObject implements DeliverDataS
 			DeliverDataImpl deliverDataImpl=new DeliverDataImpl();
 			List<DeliverPO> pos=deliverDataImpl.findAll();
 			for(DeliverPO po:pos){
-				System.out.println(po.getTrails().get(0));
+				System.out.println(po.getBarId()+po.getTrails().get(0)+po.getState());
 			}
 		} catch (RemoteException e) {
 			e.printStackTrace();

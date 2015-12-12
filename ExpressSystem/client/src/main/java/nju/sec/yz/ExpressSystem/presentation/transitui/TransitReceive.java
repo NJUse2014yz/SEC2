@@ -188,7 +188,6 @@ public class TransitReceive extends JPanel {
 						String temp=(String) table.getCellEditor(i,2).getCellEditorValue();
 						statelist.add(getState(temp));
 					}
-					
 					arrive.setState(statelist);
 					
 					

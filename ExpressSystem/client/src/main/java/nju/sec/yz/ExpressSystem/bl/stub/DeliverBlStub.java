@@ -5,6 +5,7 @@ import java.util.List;
 import nju.sec.yz.ExpressSystem.blservice.deliverBlService.DeliverBlService;
 import nju.sec.yz.ExpressSystem.common.OrderInformation;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.vo.BarIdsVO;
 import nju.sec.yz.ExpressSystem.vo.CollectionRecordVO;
 import nju.sec.yz.ExpressSystem.vo.DeliverVO;
 import nju.sec.yz.ExpressSystem.vo.DeliverySheetVO;
@@ -66,7 +67,7 @@ public class DeliverBlStub implements DeliverBlService{
 		return null;
 	}
 	@Override
-	public List<String> getBarIdList(String transitSheetId) {
+	public BarIdsVO getBarIdList(String transitSheetId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
