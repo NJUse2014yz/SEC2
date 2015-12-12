@@ -79,21 +79,19 @@ public class newTable{
 	 * 获得某个位置的字符串
 	 * @param r int 行
 	 * @param c int 列
+	 * @param isChoose boolean 是否为下拉框
 	 * @return String r行c列内容
 	 */
-	public String getValueAt(int r,int c)
+	public String getValueAt(int r,int c,boolean isChoose)
 	{
-		return (String) model.getValueAt(r, c);
-	}
-	/**
-	 * 获得某个位置的下拉框
-	 * @param r int 行
-	 * @param c int 列
-	 * @return 该位置的下拉框
-	 */
-	public JComboBox getJComboBox(int r,int c)
-	{
-		return (JComboBox)((DefaultCellEditor) table.getColumnModel().getColumn(c).getCellEditor()).getComponent();
+		if(isChoose)
+		{
+			return (String) table.getCellEditor(r, c).getCellEditorValue();
+		}
+		else
+		{
+			return (String) model.getValueAt(r, c);
+		}
 	}
 	/**
 	 * 获得表格的行数
@@ -141,6 +139,8 @@ public class newTable{
 			});
 		}
 		table=new JTable(model);
+		table.setOpaque(false);
+		table.setFont("Microsoft YaHei",);
 		table.setRowHeight(20);
 		scroll=new JScrollPane(table);
 	}
