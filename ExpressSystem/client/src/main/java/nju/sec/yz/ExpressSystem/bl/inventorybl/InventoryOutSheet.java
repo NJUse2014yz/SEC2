@@ -182,7 +182,7 @@ public class InventoryOutSheet implements ReceiptService {
 	@Override
 	public String showMessage(ReceiptVO vo) {
 		InventoryOutSheetVO ovo = (InventoryOutSheetVO) vo;
-		String message="	条形码号"+ovo.getBarId()+StringTool.nextLine();
+		String message="条形码号"+ovo.getBarId()+StringTool.nextLine();
 		return message;
 	}
 }

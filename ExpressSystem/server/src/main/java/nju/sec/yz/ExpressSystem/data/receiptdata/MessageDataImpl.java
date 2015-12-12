@@ -111,6 +111,7 @@ public class MessageDataImpl extends UnicastRemoteObject implements MessageDataS
 			for(MessagePO po:pos){
 				System.out.println(po.getMessageId()+" "+po.getToPersonId());
 			}
+			
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

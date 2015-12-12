@@ -156,7 +156,7 @@ public class ReceiptList implements ReceiptSaveService{
 			
 			//消息发送
 			String showMessage=this.showMessage(vo, ReceiptOperation.APPROVE);
-			showMessage=showMessage+receipt.showMessage(vo);
+			showMessage=showMessage+receipt.showMessage(vo)+StringTool.nextLine();
 			Message sender=new Message();
 			sender.send(new MessageVO(vo.getMakePerson(), showMessage));
 			
@@ -187,7 +187,7 @@ public class ReceiptList implements ReceiptSaveService{
 			
 			//消息发送
 			String showMessage=this.showMessage(vo, ReceiptOperation.MODIFY);
-			showMessage=showMessage+receipt.showMessage(vo);
+			showMessage=showMessage+receipt.showMessage(vo)+StringTool.nextLine();
 			Message sender=new Message();
 			sender.send(new MessageVO(vo.getMakePerson(), showMessage));
 			

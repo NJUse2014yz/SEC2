@@ -53,7 +53,7 @@ public class TransitReceiveReceipt implements ReceiptService {
 		po.setId(receiptId);
 		po.setMakePerson(maker);
 		po.setMakeTime(TimeTool.getDate());
-		po.setType(ReceiptType.POSITION_RECEIVE_RECEIPT);
+		po.setType(ReceiptType.TRANSIT_RECEIVE_RECEIPT);
 
 		// 提交
 		ReceiptSaveService receiptList = new ReceiptList();

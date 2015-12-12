@@ -120,9 +120,9 @@ public class TransitReceiptHelper {
 
 	
 	public String showMessage(TransitInformation info){
-		String message="	到达地："+info.getDestination()+StringTool.nextLine();
+		String message="到达地："+info.getDestination()+StringTool.nextLine();
 		
-		message=message+"	装运订单："+StringTool.nextLine();
+		message=message+"装运订单："+StringTool.nextLine();
 		for(String barId:info.getBarIds()){
 			message=message+"	"+barId+StringTool.nextLine();
 		}

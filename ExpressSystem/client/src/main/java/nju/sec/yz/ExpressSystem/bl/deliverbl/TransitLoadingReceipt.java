@@ -196,10 +196,10 @@ public class TransitLoadingReceipt implements ReceiptService {
 
 		// 验证info
 		LoadInformation info = receipt.getTransitLoadInformation();
+		Car car = new Car();
 		if (!ValidHelper.isBeforeDate(info.getTime()))
 			validResult.setMessage("看看时间是不是输错了~");
-		Car car = new Car();
-		if (!car.isId(info.getCarId()))
+		else if (!car.isId(info.getCarId()))
 			validResult.setMessage("看看车辆ID输对了没哦");
 		else
 			validResult.setResult(Result.SUCCESS);
@@ -260,8 +260,8 @@ public class TransitLoadingReceipt implements ReceiptService {
 	public String showMessage(ReceiptVO vo) {
 		TransitLoadSheetVO receipt = (TransitLoadSheetVO) vo;
 		LoadInformation info = ((TransitLoadSheetVO) vo).getTransitLoadInformation();
-		String message = "	到达地：" + info.getDestinationId() + StringTool.nextLine();
-		message=message+"	装运订单："+StringTool.nextLine();
+		String message = "到达地：" + info.getDestinationId() + StringTool.nextLine();
+		message=message+"装运订单："+StringTool.nextLine();
 		for(String barId:receipt.getBarIds()){
 			message=message+"	"+barId+StringTool.nextLine();
 		}

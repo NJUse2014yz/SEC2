@@ -270,9 +270,9 @@ public class Collection implements ReceiptService{
 		PaymentSheetVO receipt=(PaymentSheetVO)vo;
 		PaymentInformation info=this.copyInfo(receipt.getPaymentInformation());
 		
-		String message="	收款人："+info.getInDeliverId()+StringTool.nextLine();
-		message=message+"	收款金额："+info.getAmount()+StringTool.nextLine();
-		message=message+"	收款账户："+info.getAccount()+StringTool.nextLine();
+		String message="收款人："+info.getInDeliverId()+StringTool.nextLine();
+		message=message+"收款金额："+info.getAmount()+StringTool.nextLine();
+		message=message+"收款账户："+info.getAccount()+StringTool.nextLine();
 		
 		return message;
 	}

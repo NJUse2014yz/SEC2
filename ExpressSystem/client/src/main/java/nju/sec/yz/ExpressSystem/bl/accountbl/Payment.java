@@ -202,8 +202,8 @@ public class Payment implements ReceiptService {
 	public String showMessage(ReceiptVO vo) {
 		OutVO receipt=(OutVO)vo;
 		OutInformation info=receipt.getOutInformation();
-		String message="	付款金额："+info.getAccount()+StringTool.nextLine();
-		message=message+"	付款原因："+info.getReason()+StringTool.nextLine();
+		String message="付款金额："+info.getAccount()+StringTool.nextLine();
+		message=message+"付款原因："+info.getReason()+StringTool.nextLine();
 		return message;
 	}
 }

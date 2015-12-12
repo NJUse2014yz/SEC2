@@ -188,11 +188,11 @@ public class InventoryInSheet implements ReceiptService {
 	public String showMessage(ReceiptVO vo) {
 		InventoryInSheetVO ivo=(InventoryInSheetVO)vo;
 		InventoryInInformation info=ivo.getInventoryInInformation();
-		String message="	条形码号："+ivo.getBarId()+StringTool.nextLine();
-		message=message+"	区号："+info.getBlock()+StringTool.nextLine();
-		message=message+"	行号："+info.getRow()+StringTool.nextLine();
-		message=message+"	架号："+info.getShelf()+StringTool.nextLine();
-		message=message+"	位号："+info.getShelf()+StringTool.nextLine();
+		String message="条形码号："+ivo.getBarId()+StringTool.nextLine();
+		message=message+"区号："+info.getBlock()+StringTool.nextLine();
+		message=message+"行号："+info.getRow()+StringTool.nextLine();
+		message=message+"架号："+info.getShelf()+StringTool.nextLine();
+		message=message+"位号："+info.getShelf()+StringTool.nextLine();
 		
 		return message;
 	}

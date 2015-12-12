@@ -145,8 +145,8 @@ public class PositionSendReceipt implements ReceiptService{
 	@Override
 	public String showMessage(ReceiptVO vo) {
 		DeliveryInformation info=((DeliverySheetVO)vo).getDeliveryInformation();
-		String message="	条形码号："+info.getBarId()+StringTool.nextLine();
-		message=message+"	派送员id："+info.getOutDeliverId()+StringTool.nextLine();
+		String message="条形码号："+info.getBarId()+StringTool.nextLine();
+		message=message+"派送员id："+info.getOutDeliverId()+StringTool.nextLine();
 		return null;
 	}
 

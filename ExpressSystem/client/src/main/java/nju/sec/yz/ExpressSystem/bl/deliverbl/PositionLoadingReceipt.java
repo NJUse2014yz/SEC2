@@ -288,8 +288,8 @@ public class PositionLoadingReceipt implements ReceiptService{
 		OfficeLoadSheetVO receipt=(OfficeLoadSheetVO)vo;
 		LoadInformation info = ((OfficeLoadSheetVO)vo).getOfficeLoadInformation();
 
-		String message="	到达地："+info.getDestinationId()+StringTool.nextLine();
-		message=message+"	装运订单："+StringTool.nextLine();
+		String message="到达地："+info.getDestinationId()+StringTool.nextLine();
+		message=message+"装运订单："+StringTool.nextLine();
 		for(String barId:receipt.getBarIds()){
 			message=message+"	"+barId+StringTool.nextLine();
 		}

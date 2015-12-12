@@ -145,8 +145,8 @@ public class PositionReceiveReceipt implements ReceiptService {
 	@Override
 	public String showMessage(ReceiptVO vo) {
 		ArriveInformation info=((OfficeArriveSheetVO)vo).getOfficeArrive();
-		String message="	出发地："+info.getDeparture()+StringTool.nextLine();
-		message=message+"	中转单编号："+info.getTransitSheetId()+StringTool.nextLine();
+		String message="出发地："+info.getDeparture()+StringTool.nextLine();
+		message=message+"中转单编号："+info.getTransitSheetId()+StringTool.nextLine();
 		
 		return message;
 	}
