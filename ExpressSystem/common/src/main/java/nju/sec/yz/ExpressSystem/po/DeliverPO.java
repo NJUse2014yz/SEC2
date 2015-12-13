@@ -45,6 +45,7 @@ public class DeliverPO implements Serializable{
 		super();
 		this.state = state;
 		this.barId = barId;
+		this.trails=new ArrayList<>();
 		this.trails.addAll(trails);
 		this.next = next;
 	}

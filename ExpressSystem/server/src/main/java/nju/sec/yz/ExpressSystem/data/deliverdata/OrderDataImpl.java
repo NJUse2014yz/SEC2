@@ -79,6 +79,7 @@ public class OrderDataImpl extends UnicastRemoteObject implements OrderDataServi
 			for(SendSheetPO po:pos){
 				System.out.println(po.getSendInformation().getBarId());
 			}
+			
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

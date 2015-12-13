@@ -94,6 +94,7 @@ public class DeliverDataImpl extends UnicastRemoteObject implements DeliverDataS
 			for(DeliverPO po:pos){
 				System.out.println(po.getBarId()+po.getTrails().get(0)+po.getState());
 			}
+			
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
