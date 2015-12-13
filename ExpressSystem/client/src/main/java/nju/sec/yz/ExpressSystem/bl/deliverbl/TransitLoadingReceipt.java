@@ -29,6 +29,7 @@ import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.po.BarIdsPO;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.po.TransitLoadSheetPO;
+import nju.sec.yz.ExpressSystem.vo.DeliverStateVO;
 import nju.sec.yz.ExpressSystem.vo.OfficeLoadSheetVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 import nju.sec.yz.ExpressSystem.vo.TransitLoadSheetVO;
@@ -81,6 +82,12 @@ public class TransitLoadingReceipt implements ReceiptService {
 		ResultMessage saveResult = receiptList.saveReceipt(po);
 		if (saveResult.getResult() == Result.FAIL)
 			return saveResult;
+
+		// 更新物流信息
+		Deliver deliver = new Deliver();
+		for (String barId : receipt.getBarIds()) {
+			deliver.submit(barId);
+		}
 
 		// 保存条形码号供到达单使用
 		BarIdList barIds = new BarIdList();
@@ -192,6 +199,9 @@ public class TransitLoadingReceipt implements ReceiptService {
 				validResult.setMessage("系统中还没有订单" + barID + "的信息哦~");
 				return validResult;
 			}
+			
+			if(isRightTrail(barID))
+				return new ResultMessage(Result.FAIL,"订单号是不是填错了~");
 		}
 
 		// 验证info
@@ -206,6 +216,23 @@ public class TransitLoadingReceipt implements ReceiptService {
 
 		return validResult;
 	}
+	
+	private boolean isRightTrail(String barId){
+		String currentAgency=this.getCurrentTransitId(getCurrentUserId());
+		
+		Deliver deliver=new Deliver();
+		DeliverStateVO vo=deliver.getDeliverState(barId);
+		
+		
+		if(vo==null)//物流信息不存在
+			return false;
+		else if(!vo.nextAgency.equals(currentAgency))//下个机构id不是当前机构
+			return false;
+		//营业厅装车单在快递员揽件或者营业厅有到达单之后
+		else if(vo.state!=DeliveryState.INVENTORY_OUT)
+			return false;
+		return true;
+	}
 
 	@Override
 	public ResultMessage approve(ReceiptVO vo) {
@@ -213,12 +240,13 @@ public class TransitLoadingReceipt implements ReceiptService {
 		LoadInformation info = ((TransitLoadSheetVO) vo).getTransitLoadInformation();
 
 		Deliver deliver = new Deliver();
-		Transit transit = new Transit();
+		AgencyInfo transit = new Transit();
 
 		for (String barId : barIds) {
-			String transitName = transit.observeTransit(info.getAgencyId()).getName();
+			String transitName = transit.getName(info.getAgencyId());
+			String destination=transit.getId(info.getDestinationId());
 			String trail = transitName + "已发出，下一站" + info.getDestinationId() + " " + info.getTime();
-			deliver.updateDeliverInfo(barId, trail, DeliveryState.TRANSIT_OUT);
+			deliver.updateDeliverInfo(barId, trail, DeliveryState.TRANSIT_OUT,destination);
 		}
 
 		return new ResultMessage(Result.SUCCESS);
@@ -261,9 +289,9 @@ public class TransitLoadingReceipt implements ReceiptService {
 		TransitLoadSheetVO receipt = (TransitLoadSheetVO) vo;
 		LoadInformation info = ((TransitLoadSheetVO) vo).getTransitLoadInformation();
 		String message = "到达地：" + info.getDestinationId() + StringTool.nextLine();
-		message=message+"装运订单："+StringTool.nextLine();
-		for(String barId:receipt.getBarIds()){
-			message=message+"	"+barId+StringTool.nextLine();
+		message = message + "装运订单：" + StringTool.nextLine();
+		for (String barId : receipt.getBarIds()) {
+			message = message + "	" + barId + StringTool.nextLine();
 		}
 		return message;
 	}

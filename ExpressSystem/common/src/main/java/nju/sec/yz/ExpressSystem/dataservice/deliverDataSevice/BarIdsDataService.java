@@ -12,4 +12,6 @@ public interface BarIdsDataService extends Remote{
 	
 	public BarIdsPO get(String transitId) throws RemoteException;
 	
+	public void update(BarIdsPO po) throws RemoteException;
+	
 }

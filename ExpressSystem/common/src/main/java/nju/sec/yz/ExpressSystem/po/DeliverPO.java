@@ -27,20 +27,29 @@ public class DeliverPO implements Serializable{
 	
 	private List<String> trails;//物流轨迹
 	
-	//填写寄件单以后开始生成PO
+	private String next;//物流轨迹下个机构的id
+	
+	/**
+	 * 填写寄件单以后开始生成PO
+	 * 处于待审批状态
+	 */
 	public DeliverPO(String id){
 		this.barId=id;
-		this.state=DeliveryState.GATHER;
+		this.state=DeliveryState.SUBMIT;
 		this.trails=new ArrayList<>();
 	}
 	
-	public DeliverPO(DeliveryState state, String barId, List<String> trails) {
+	
+
+	public DeliverPO(DeliveryState state, String barId, List<String> trails, String next) {
 		super();
 		this.state = state;
 		this.barId = barId;
-		this.trails=new ArrayList<>();
 		this.trails.addAll(trails);
+		this.next = next;
 	}
+
+
 
 	public void addTrail(String trail){
 		trails.add(trail);
@@ -65,6 +74,14 @@ public class DeliverPO implements Serializable{
 	}
 	public void setBarId(String id) {
 		this.barId = id;
+	}
+
+	public String getNext() {
+		return next;
+	}
+
+	public void setNext(String next) {
+		this.next = next;
 	}
 	
 }

@@ -16,6 +16,7 @@ import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.po.DeliverySheetPO;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
+import nju.sec.yz.ExpressSystem.vo.DeliverStateVO;
 import nju.sec.yz.ExpressSystem.vo.DeliverySheetVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 
@@ -48,6 +49,10 @@ public class PositionSendReceipt implements ReceiptService{
 		//提交给总经理
 		ReceiptSaveService receiptList=new ReceiptList();
 		receiptList.saveReceipt(po);
+		
+		//更新物流信息
+		Deliver deliver=new Deliver();
+		deliver.submit(info.getBarId());
 		
 		return new ResultMessage(Result.SUCCESS);
 	}
@@ -90,16 +95,41 @@ public class PositionSendReceipt implements ReceiptService{
 		DeliveryInformation info=receipt.getDeliveryInformation();
 		String time=info.getTime();
 		String barId=info.getBarId();
+		String deliverId=info.getOutDeliverId();
+		
+		UserInfo user=new User();
+		if(!user.isUser(deliverId))
+			return new ResultMessage(Result.FAIL,"快递员id是不是填错了~");
+		
 		if(!ValidHelper.isBeforeDate(time))
 			validResult.setMessage("再看看时间是不是输错了~");
 		else if(!ValidHelper.isBarId(barId))
 			validResult.setMessage("亲，咱们的订单号是十位数字哟~");
 		else if(deliver.checkDeliver(barId)==null){
 			validResult.setMessage("亲，系统中不存在订单"+barId);
-		}
+		}else if(!isRightTrail(barId))
+			validResult.setMessage("订单号是不是填错了~");
 		else
 			validResult.setResult(Result.SUCCESS);
 		return validResult;
+	}
+	
+	private boolean isRightTrail(String barId){
+		String currentAgency=this.getDeliverId().split("C")[0];
+		
+		Deliver deliver=new Deliver();
+		DeliverStateVO vo=deliver.getDeliverState(barId);
+		
+		if(vo==null)//物流信息不存在
+			return false;
+		else if(!vo.nextAgency.equals(currentAgency))//下个机构id不是当前机构
+			return false;
+		//
+		else if(vo.state!=DeliveryState.GATHER&&vo.state!=DeliveryState.OFFICE_IN)
+			return false;
+		
+		
+		return true;
 	}
 
 	@Override
@@ -108,10 +138,12 @@ public class PositionSendReceipt implements ReceiptService{
 		
 		String trail="快递员正在派件中。  "+info.getTime();
 		
+		String currentAgency=info.getOutDeliverId();//下个轨迹为某个快递员
+		
 		//更新物流信息
 		Deliver deliver=new Deliver();
 		
-		return deliver.updateDeliverInfo(info.getBarId(), trail, DeliveryState.DELIVING);
+		return deliver.updateDeliverInfo(info.getBarId(), trail, DeliveryState.DELIVING,currentAgency);
 	}
 
 

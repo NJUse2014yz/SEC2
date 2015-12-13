@@ -117,6 +117,18 @@ public class BarIdsDataImpl extends UnicastRemoteObject implements BarIdsDataSer
 		
 		return null;
 	}
+	@Override
+	public void update(BarIdsPO po) throws RemoteException {
+		List<BarIdsPO> list=this.findAll();
+		for(int i=0;i<list.size();i++){
+			if(list.get(i).getReceiptId().equals(po.getReceiptId())){
+				list.remove(i);
+				list.add(po);
+				return;
+			}
+		}
+		
+	}
 
 	public static void main(String[] args) {
 		try {
@@ -133,6 +145,7 @@ public class BarIdsDataImpl extends UnicastRemoteObject implements BarIdsDataSer
 			e.printStackTrace();
 		}
 	}
+
 	
 	
 }

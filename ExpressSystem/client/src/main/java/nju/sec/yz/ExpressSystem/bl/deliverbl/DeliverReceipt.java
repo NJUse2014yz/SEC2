@@ -15,6 +15,7 @@ import nju.sec.yz.ExpressSystem.bl.userbl.User;
 import nju.sec.yz.ExpressSystem.bl.userbl.UserInfo;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
 import nju.sec.yz.ExpressSystem.client.RMIExceptionHandler;
+import nju.sec.yz.ExpressSystem.common.DeliveryState;
 import nju.sec.yz.ExpressSystem.common.DeliveryType;
 import nju.sec.yz.ExpressSystem.common.GoodInformation;
 import nju.sec.yz.ExpressSystem.common.IdType;
@@ -92,6 +93,10 @@ public class DeliverReceipt implements ReceiptService{
 		ResultMessage saveResult=receiptList.saveReceipt(receipt);
 		if(saveResult.getResult()==Result.FAIL)
 			return saveResult;
+		
+		//更新物流信息
+		Deliver deliver=new Deliver();
+		deliver.newDeliverInfo(info.getBarId(), "快递员正在揽件中... "+TimeTool.getDate());
 		
 		//保存收款记录(暂定审批前保存)
 		String deliverId=receipt.getMakePerson();
@@ -207,8 +212,10 @@ public class DeliverReceipt implements ReceiptService{
 		
 		//更新物流信息
 		Deliver deliver=new Deliver();
-		ResultMessage resultMessage = deliver.newDeliverInfo(info.getBarId(),
-				"快递员已揽件，预计" + info.getPredictTime() + "天送达" + " " + vo.getMakeTime());
+		String nextAgency=vo.getMakePerson().split("D")[0];
+		String trail="快递员已揽件，预计" + info.getPredictTime() + "天送达" + " " + vo.getMakeTime();
+		ResultMessage resultMessage = deliver.updateDeliverInfo(info.getBarId(), trail, DeliveryState.GATHER,
+				nextAgency);
 		System.out.println("Approving...");
 		return resultMessage;
 	}

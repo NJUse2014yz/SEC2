@@ -16,6 +16,10 @@ public class BarIdsPO implements Serializable{
 	String fromAgency;//出发地名称
 	
 	String destinationId;//目的地id
+	
+	private boolean isArrived;//标记是否到达目的地
+	
+	
 
 	public BarIdsPO(List<String> barIds, String receiptId, String fromAgency, String destinationId) {
 		super();
@@ -25,6 +29,14 @@ public class BarIdsPO implements Serializable{
 		this.destinationId = destinationId;
 	}
 
+	public boolean isArrived(){
+		return isArrived;
+	}
+	
+	public void arrive(){
+		this.isArrived=true;
+	}
+	
 	public List<String> getBarIds() {
 		return barIds;
 	}

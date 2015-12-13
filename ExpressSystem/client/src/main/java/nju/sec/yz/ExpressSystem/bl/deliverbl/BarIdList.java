@@ -89,6 +89,36 @@ public class BarIdList {
 		
 	}
 	
+	public void arrive(String transitSheetId){
+		
+		try {
+		BarIdsPO po=data.get(transitSheetId);
+		if(po==null)
+			return;
+		po.arrive();
+		data.update(po);
+		} catch (RemoteException e) {
+			RMIExceptionHandler.handleRMIException();
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 中转单对应的到达单是否填过？
+	 */
+	public boolean isArrived(String transitSheetId){
+		BarIdsPO po=null;
+		try {
+			po=data.get(transitSheetId);
+		} catch (RemoteException e) {
+			RMIExceptionHandler.handleRMIException();
+			e.printStackTrace();
+		}
+		
+		if(po==null)
+			return false;
+		return po.isArrived();
+	}
 	
 	//TODO
 	public void deleteBarIds(String transitSheetId){

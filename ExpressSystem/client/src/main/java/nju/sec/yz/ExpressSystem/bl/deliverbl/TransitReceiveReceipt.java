@@ -49,7 +49,8 @@ public class TransitReceiveReceipt implements ReceiptService {
 		// 生成po
 		TransitArriveSheetPO po = new TransitArriveSheetPO();
 		ArriveInformation infoCopy = new ArriveInformation(info);
-		po.setTransitArriveInformation(infoCopy);;
+		po.setTransitArriveInformation(infoCopy);
+		;
 		po.setId(receiptId);
 		po.setMakePerson(maker);
 		po.setMakeTime(TimeTool.getDate());
@@ -60,6 +61,10 @@ public class TransitReceiveReceipt implements ReceiptService {
 		ResultMessage saveResult = receiptList.saveReceipt(po);
 		if (saveResult.getResult() == Result.FAIL)
 			return saveResult;
+
+		// 更新物流信息
+		BarIdList list = new BarIdList();
+		list.arrive(info.getTransitSheetId());
 
 		return new ResultMessage(Result.SUCCESS);
 	}
@@ -89,44 +94,45 @@ public class TransitReceiveReceipt implements ReceiptService {
 
 	@Override
 	public ResultMessage approve(ReceiptVO vo) {
-		ArriveInformation info=((TransitArriveSheetVO)vo).getTransitArriveInformation();
-		List<ArriveState> states=info.getState();
-		
-		BarIdList idService=new BarIdList();
-		List<String> barIds=idService.getBarIds(info.getTransitSheetId()).barIds;
-		
-		//获得本中转中心名称
-		Transit transit=new Transit();
-		String transitId=vo.getId().split(IdType.POSITION_RECEIVE_RECEIPT.getIdStr())[0];
-		String transitName=transit.observeTransit(transitId).getName(); 
-		
-		//更新物流信息
-		Deliver deliver=new Deliver();
-		for(int i=0;i<barIds.size();i++){
-			String trail=transitName+"已收入。";
-			trail=trail+states.get(i)+" "+info.getTime();
-			deliver.updateDeliverInfo(barIds.get(i), trail, DeliveryState.TRANSIT_IN);
+		ArriveInformation info = ((TransitArriveSheetVO) vo).getTransitArriveInformation();
+		List<ArriveState> states = info.getState();
+
+		BarIdList idService = new BarIdList();
+		List<String> barIds = idService.getBarIds(info.getTransitSheetId()).barIds;
+
+		// 获得本中转中心名称
+		Transit transit = new Transit();
+		String transitId = vo.getId().split(IdType.POSITION_RECEIVE_RECEIPT.getIdStr())[0];
+		String transitName = transit.observeTransit(transitId).getName();
+
+		// 更新物流信息
+		Deliver deliver = new Deliver();
+		for (int i = 0; i < barIds.size(); i++) {
+			String trail = transitName + "已收入。";
+			trail = trail + states.get(i) + " " + info.getTime();
+			deliver.updateDeliverInfo(barIds.get(i), trail, DeliveryState.TRANSIT_IN,transitId);
 		}
-		
+
 		return new ResultMessage(Result.SUCCESS);
 	}
 
 	@Override
 	public ReceiptVO show(ReceiptPO po) {
-		TransitArriveSheetPO receipt=(TransitArriveSheetPO)po;
-		ArriveInformation info=new ArriveInformation(receipt.getTransitArriveInformation());
-		TransitArriveSheetVO vo=new TransitArriveSheetVO();
-		vo.setTransitArriveInformation(info);;
+		TransitArriveSheetPO receipt = (TransitArriveSheetPO) po;
+		ArriveInformation info = new ArriveInformation(receipt.getTransitArriveInformation());
+		TransitArriveSheetVO vo = new TransitArriveSheetVO();
+		vo.setTransitArriveInformation(info);
 		vo.copy(po);
 		return vo;
 	}
 
 	@Override
 	public ReceiptPO convertToPO(ReceiptVO vo) {
-		TransitArriveSheetVO receipt=(TransitArriveSheetVO)vo;
-		ArriveInformation info=new ArriveInformation(receipt.getTransitArriveInformation());
-		TransitArriveSheetPO po=new TransitArriveSheetPO();
-		po.setTransitArriveInformation(info);;
+		TransitArriveSheetVO receipt = (TransitArriveSheetVO) vo;
+		ArriveInformation info = new ArriveInformation(receipt.getTransitArriveInformation());
+		TransitArriveSheetPO po = new TransitArriveSheetPO();
+		po.setTransitArriveInformation(info);
+		;
 		po.setId(vo.getId());
 		po.setMakePerson(vo.getMakePerson());
 		po.setMakeTime(vo.getMakeTime());
@@ -140,16 +146,20 @@ public class TransitReceiveReceipt implements ReceiptService {
 		ArriveInformation info = receipt.getTransitArriveInformation();
 		if (!ValidHelper.isBeforeDate(info.getTime()))
 			return new ResultMessage(Result.FAIL, "看看日期是不是输错了~");
-		if (info.getState() == null||info.getState().size()==0)
+		if (info.getState() == null || info.getState().size() == 0)
 			return new ResultMessage(Result.FAIL, "中转单不存在");
+		BarIdList list=new BarIdList();
+		if(list.isArrived(info.getTransitSheetId()))
+			return new ResultMessage(Result.FAIL,"这到达单已经填过了哦~");
 		return new ResultMessage(Result.SUCCESS);
 	}
+
 	@Override
 	public String showMessage(ReceiptVO vo) {
-		ArriveInformation info=((TransitArriveSheetVO)vo).getTransitArriveInformation();
-		String message="	出发地："+info.getDeparture()+StringTool.nextLine();
-		message=message+"	中转单编号："+info.getTransitSheetId()+StringTool.nextLine();
-		
+		ArriveInformation info = ((TransitArriveSheetVO) vo).getTransitArriveInformation();
+		String message = "	出发地：" + info.getDeparture() + StringTool.nextLine();
+		message = message + "	中转单编号：" + info.getTransitSheetId() + StringTool.nextLine();
+
 		return message;
 	}
 }

@@ -54,7 +54,11 @@ public class PositionReceiveReceipt implements ReceiptService {
 		po.setMakePerson(makerId);
 		po.setMakeTime(TimeTool.getDate());
 		po.setType(ReceiptType.POSITION_RECEIVE_RECEIPT);
-
+		
+		//更新物流信息
+		BarIdList list=new BarIdList();
+		list.arrive(info.getTransitSheetId());
+		
 		// 提交
 		ReceiptSaveService receiptList = new ReceiptList();
 		ResultMessage saveResult = receiptList.saveReceipt(po);
@@ -91,7 +95,10 @@ public class PositionReceiveReceipt implements ReceiptService {
 		if (!ValidHelper.isBeforeDate(info.getTime()))
 			return new ResultMessage(Result.FAIL, "看看日期是不是输错了~");
 		if(info.getState()==null||info.getState().size()==0)
-			return new ResultMessage(Result.FAIL,"中转单不存在");
+			return new ResultMessage(Result.FAIL,"中转单不存在或目的地不是本营业厅");
+		BarIdList list=new BarIdList();
+		if(list.isArrived(info.getTransitSheetId()))
+			return new ResultMessage(Result.FAIL,"这到达单已经填过了哦~");
 		return new ResultMessage(Result.SUCCESS);
 	}
 
@@ -113,7 +120,7 @@ public class PositionReceiveReceipt implements ReceiptService {
 		for(int i=0;i<barIds.size();i++){
 			String trail=positionName+"已收入。";
 			trail=trail+states.get(i)+" "+info.getTime();
-			deliver.updateDeliverInfo(barIds.get(i), trail, DeliveryState.OFFICE_IN);
+			deliver.updateDeliverInfo(barIds.get(i), trail, DeliveryState.OFFICE_IN,positionId);
 		}
 		
 		return new ResultMessage(Result.SUCCESS);

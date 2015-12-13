@@ -8,6 +8,7 @@ import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.dataservice.deliverDataSevice.DeliverDataService;
 import nju.sec.yz.ExpressSystem.po.DeliverPO;
+import nju.sec.yz.ExpressSystem.vo.DeliverStateVO;
 import nju.sec.yz.ExpressSystem.vo.DeliverVO;
 
 /**
@@ -48,6 +49,26 @@ public class Deliver {
 	}
 	
 	/**
+	 * 获得barId的下个轨迹和物流状态
+	 * 检查物流轨迹是否正确时用
+	 */
+	public DeliverStateVO getDeliverState(String barId){
+		DeliverStateVO vo=new DeliverStateVO();
+		try {
+			DeliverPO po=data.find(barId);
+			if(po==null)
+				return null;
+			vo.state=po.getState();
+			vo.nextAgency=po.getNext();
+		} catch (RemoteException e) {
+			RMIExceptionHandler.handleRMIException();
+			e.printStackTrace();
+		}
+		
+		return vo;
+	}
+	
+	/**
 	 * 寄件单通过审批后通过此方法更新寄件信息
 	 * 此时新建该条形码号对应的物流信息
 	 */
@@ -66,11 +87,26 @@ public class Deliver {
 		}
 		return message;
 	}
+	
+	/**
+	 * 单据待审批时改变物流状态为submit
+	 * @param barId
+	 */
+	public void submit(String barId){
+		try {
+			DeliverPO po=data.find(barId);
+			po.setState(DeliveryState.SUBMIT);
+			data.update(po);
+		} catch (RemoteException e) {
+			RMIExceptionHandler.handleRMIException();
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * 其他单据通过此方法更新信息
 	 */
-	public ResultMessage updateDeliverInfo(String barId,String trail,DeliveryState state) {
+	public ResultMessage updateDeliverInfo(String barId,String trail,DeliveryState state,String next) {
 		
 		//查找物流信息
 		DeliverVO info=this.checkDeliver(barId);
@@ -83,7 +119,7 @@ public class Deliver {
 		info.state=state;
 		
 		//将修改持久化
-		DeliverPO po=new DeliverPO(info.state, info.barId, info.trails);
+		DeliverPO po=new DeliverPO(info.state, info.barId, info.trails,next);
 		ResultMessage message=this.updateDeliverData(po);
 		
 		return message;

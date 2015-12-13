@@ -28,6 +28,7 @@ import nju.sec.yz.ExpressSystem.po.BarIdsPO;
 import nju.sec.yz.ExpressSystem.po.OfficeLoadSheetPO;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.po.TransitLoadSheetPO;
+import nju.sec.yz.ExpressSystem.vo.DeliverStateVO;
 import nju.sec.yz.ExpressSystem.vo.OfficeLoadSheetVO;
 import nju.sec.yz.ExpressSystem.vo.PositionVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
@@ -83,6 +84,12 @@ public class PositionLoadingReceipt implements ReceiptService{
 		ResultMessage saveResult=receiptList.saveReceipt(po);
 		if(saveResult.getResult()==Result.FAIL)
 			return saveResult;
+		
+		//更新物流信息
+		Deliver deliver=new Deliver();
+		for(String barId:receipt.getBarIds()){
+			deliver.submit(barId);
+		}
 		
 		//保存条形码号供到达单使用
 		BarIdList barIds=new BarIdList();
@@ -206,15 +213,15 @@ public class PositionLoadingReceipt implements ReceiptService{
 		if(idSet.size()>barIDs.size())
 			return new ResultMessage(Result.FAIL,"有条形码号重复了~");
 		
-		Deliver deliver=new Deliver();
+		
 		for(String barID:barIDs){
 			if(!ValidHelper.isBarId(barID)){
 				validResult.setMessage("亲，咱们的订单号是十位数字哟~");
 				return validResult;
 			}
 			//判断系统中是否存在该条形码号的物流信息
-			if(deliver.checkDeliver(barID)==null){
-				validResult.setMessage("系统中还没有订单"+barID+"的信息哦");
+			if(!isRightTrail(barID)){
+				validResult.setMessage("订单号"+barID+"是不是填错了~");
 				return validResult;
 			}
 		}
@@ -231,6 +238,23 @@ public class PositionLoadingReceipt implements ReceiptService{
 		return new ResultMessage(Result.SUCCESS);
 	}
 	
+	private boolean isRightTrail(String barId){
+		String currentAgency=this.getCurrentPositionID();
+		
+		Deliver deliver=new Deliver();
+		DeliverStateVO vo=deliver.getDeliverState(barId);
+		
+		
+		if(vo==null)//物流信息不存在
+			return false;
+		else if(!vo.nextAgency.equals(currentAgency))//下个机构id不是当前机构
+			return false;
+		//营业厅装车单在快递员揽件或者营业厅有到达单之后
+		else if(vo.state!=DeliveryState.GATHER&&vo.state!=DeliveryState.OFFICE_IN)
+			return false;
+		return true;
+	}
+	
 	
 	@Override
 	public ResultMessage approve(ReceiptVO vo) {
@@ -238,12 +262,12 @@ public class PositionLoadingReceipt implements ReceiptService{
 		LoadInformation info = ((OfficeLoadSheetVO)vo).getOfficeLoadInformation();
 		
 		Deliver deliver = new Deliver();
-		Position position=new Position();
-		
+		AgencyInfo agencyService=new Transit();
 		for(String barId:barIds){
-			String positionName=position.findPosition(info.getAgencyId()).getName();
+			String positionName=agencyService.getName(info.getAgencyId());
+			String nextAgency=agencyService.getId(info.getDestinationId());//获得下一个轨迹id
 			String trail=positionName+"已发出，下一站"+info.getDestinationId()+" "+info.getTime();
-			deliver.updateDeliverInfo(barId, trail, DeliveryState.OFFICE_OUT);
+			deliver.updateDeliverInfo(barId, trail, DeliveryState.OFFICE_OUT,nextAgency);
 		}
 		
 		
