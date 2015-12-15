@@ -102,6 +102,7 @@ public class Car implements Initialable<CarVO, CarPO> {
 		try {
 			CarPO po = changeVOToPO(vo);
 			message = carData.insert(po);
+			message.setMessage(message.getMessage()+" "+po.getWorktime());
 		} catch (RemoteException e) {
 			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
@@ -138,6 +139,7 @@ public class Car implements Initialable<CarVO, CarPO> {
 		CarPO po = changeVOToPO(vo);
 		try {
 			message = carData.update(po);
+			message.setMessage(message.getMessage()+" "+po.getWorktime());
 		} catch (RemoteException e) {
 			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();

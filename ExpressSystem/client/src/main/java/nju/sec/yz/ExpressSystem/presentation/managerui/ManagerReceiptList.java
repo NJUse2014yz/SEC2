@@ -181,7 +181,7 @@ public class ManagerReceiptList extends JPanel {
 
 					System.out.println(deletelines[0]);
 					ReceiptVO newVO=modifyVO(deletelines[c], volist.get(deletelines[c]).getId());
-					ResultMessage modifyresult=receipt.approve(newVO);
+					ResultMessage modifyresult=receipt.modify(newVO);
 					ResultMessage approveresult = receipt.approve(newVO);
 					if (modifyresult.getResult() == Result.FAIL) {
 						// 如果失败会跳出，显示失败

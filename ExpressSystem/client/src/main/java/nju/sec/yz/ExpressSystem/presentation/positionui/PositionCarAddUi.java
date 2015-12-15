@@ -32,7 +32,7 @@ public class PositionCarAddUi extends JPanel{
 	private JTextField JTmechine;
 	private JTextField JTdipan;
 	private DateChooser buyTime;
-	private DateChooser workTime;
+	private JLabel workTime;
 	private JButton confirm;
 	private JLabel warning;
 	private ButtonComponents bc;
@@ -52,7 +52,7 @@ public class PositionCarAddUi extends JPanel{
 	private static int buyTime_x=218;
 	private static int buyTime_y=174;
 	private static int workTime_x=218;
-	private static int workTime_y=200;
+	private static int workTime_y=195;
 	private static int confirm_x=370;
 	private static int confirm_y=232;
 	private static int confirm_w=72;
@@ -100,7 +100,11 @@ public class PositionCarAddUi extends JPanel{
 		
 		buyTime=new DateChooser(this, buyTime_x, buyTime_y);
 		
-		workTime=new DateChooser(this,workTime_x,workTime_y);
+		workTime=new JLabel();
+		workTime.setFont(new Font("Dialog",1,10));
+		workTime.setForeground(Color.WHITE);
+		workTime.setBounds(workTime_x, workTime_y, warning_w, warning_h);
+		add(workTime);
 
 		warning=new JLabel();
 		warning.setBounds(warning_x, warning_y, warning_w, warning_h);
@@ -125,17 +129,19 @@ public class PositionCarAddUi extends JPanel{
 				{
 					CarVO carvo=new CarVO(JTcarId.getText(),JTcarCard.getText(),buyTime.getTime(),JTmechine.getText(),JTdipan.getText());
 					ResultMessage result=carBl.add(carvo);
+					String[] message=result.getMessage().split(" ");
 					if(result.getResult()==Result.SUCCESS)
 					{
 						warning.setText("提交成功");
 						warning.setVisible(true);
-						repaint();
 					}
 					else{
-						warning.setText(result.getMessage());
+						warning.setText(message[0]);
 						warning.setVisible(true);
-						repaint();
 					}
+					workTime.setText(message[1]+"年");
+					workTime.setVisible(true);
+					repaint();
 				}
 			}
 		});

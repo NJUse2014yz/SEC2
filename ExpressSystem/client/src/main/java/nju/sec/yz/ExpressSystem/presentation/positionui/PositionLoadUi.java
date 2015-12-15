@@ -198,6 +198,7 @@ public class PositionLoadUi extends JPanel{
 		add(confirm);
 		confirm.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
+				bars.clear();
 				OfficeLoadSheetVO sheet=new OfficeLoadSheetVO();
 				LoadInformation li=new LoadInformation();
 				li.setAgencyId(JTPositionId.getText());

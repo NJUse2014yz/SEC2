@@ -68,7 +68,7 @@ public class MessageDeclare {
 		
 		ImageIcon IknowIcon=new ImageIcon("graphic/common/Iknow.png");
 		confirm=new newJBut("我知道了",Color.YELLOW,Color.RED);
-		confirm.setBounds(374,270,72,24);
+		confirm.setBounds(364,270,100,24);
 		panel.add(confirm);
 		
 		confirm.addMouseListener(new MouseAdapter() {
