@@ -7,6 +7,10 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.text.MutableAttributeSet;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledEditorKit;
 
 public class newJBut extends JButton {
 Color forecolor;
@@ -28,19 +32,22 @@ Color generalcolor;
 		this.aftercolor=after;
 		//设为透明
 		setContentAreaFilled(false);
-		setText(text);
-		setFont(new Font("Microsoft YaHei",Font.PLAIN,15));
+		setBorderPainted(false);
+		Font font=new Font("Microsoft YaHei",Font.PLAIN,15);
+		setFont(font);
+		
+		setText("<html><u>"+text+"</u></html>");
+		
 		setForeground(forecolor);
 		//设置横线
-		setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, forecolor));
 		
 		 addMouseListener(new MouseAdapter() {  
 	            
 	            @Override  
 	            public void mouseClicked(MouseEvent e) {  
-	            	forecolor=aftercolor;
-	            	setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, aftercolor));
+//	            	forecolor=aftercolor;
 	            	setForeground(aftercolor);
+	            	setBorderPainted(false);
 	                repaint();  
 	            }  
 	        });  
