@@ -75,6 +75,10 @@ public class newTable{
 	{
 		table.getColumnModel().getColumn(column).setCellEditor(new DefaultCellEditor(choose));
 	}
+	/**
+	 * 得到model
+	 * @return table's model
+	 */
 	public DefaultTableModel getModel()
 	{
 		return this.model;
@@ -189,6 +193,10 @@ public class newTable{
         
 	} 
 }
+/**
+ * @author YU Fan
+ * @usage 表格的渲染器
+ */
 class MyTableCellRenderer extends DefaultTableCellRenderer
 {
 	private float lineSize=1;
