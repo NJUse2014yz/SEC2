@@ -151,6 +151,7 @@ public class PositionDriverDeleteUi extends JPanel{
 				if(result.getResult()==Result.SUCCESS){
 					warning.setText("删除成功");
 					drivers.remove(table.getSelectedRow());
+					data.remove(table.getSelectedRow());
 					table.resetData();
 				}
 				else

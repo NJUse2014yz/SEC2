@@ -146,6 +146,7 @@ public class PositionCarDeleteUi extends JPanel{
 				if(result.getResult()==Result.SUCCESS){
 					warning.setText("删除成功");
 					cars.remove(table.getSelectedRow());
+					data.remove(table.getSelectedRow());
 					table.resetData();
 				}
 				else
