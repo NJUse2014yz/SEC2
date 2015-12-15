@@ -141,7 +141,8 @@ public class PositionCarModifyFillUi extends JPanel{
 					{
 						warning.setText("提交成功");
 						warning.setVisible(true);
-						workTime.setText(Integer.toString(carBl.getSingle(carvo.getId()).getWorktime()));
+						workTime.setText(result.getMessage().substring(8));
+						workTime.setVisible(true);
 						repaint();
 					}
 					else{

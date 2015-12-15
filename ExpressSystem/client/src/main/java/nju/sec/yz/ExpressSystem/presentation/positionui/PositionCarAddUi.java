@@ -32,7 +32,7 @@ public class PositionCarAddUi extends JPanel{
 	private JTextField JTmechine;
 	private JTextField JTdipan;
 	private DateChooser buyTime;
-	private DateChooser workTime;
+	private JLabel workTime;
 	private JButton confirm;
 	private JLabel warning;
 	private ButtonComponents bc;
@@ -100,7 +100,11 @@ public class PositionCarAddUi extends JPanel{
 		
 		buyTime=new DateChooser(this, buyTime_x, buyTime_y);
 		
-		workTime=new DateChooser(this,workTime_x,workTime_y);
+		workTime=new JLabel();
+		workTime.setFont(new Font("Dialog",1,15));
+		workTime.setForeground(Color.WHITE);
+		workTime.setBounds(workTime_x, workTime_y, warning_w, warning_h);
+		add(workTime);
 
 		warning=new JLabel();
 		warning.setBounds(warning_x, warning_y, warning_w, warning_h);
@@ -129,6 +133,8 @@ public class PositionCarAddUi extends JPanel{
 					{
 						warning.setText("提交成功");
 						warning.setVisible(true);
+						workTime.setText(result.getMessage().substring(8));
+						workTime.setVisible(true);
 						repaint();
 					}
 					else{
