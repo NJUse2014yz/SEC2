@@ -103,14 +103,11 @@ public class TransitReceiptHelper {
 			if (deliver.checkDeliver(barId) == null) {
 				return new ResultMessage(Result.FAIL, "系统中还没有订单" + barId + "的信息哦");
 			}
-
-			if (isRightTrail(barId))
-				return new ResultMessage(Result.FAIL, "订单号是不是填错了~");
 		}
 		return new ResultMessage(Result.SUCCESS);
 	}
 
-	private boolean isRightTrail(String barId) {
+	public boolean isRightTrail(String barId) {
 		String currentAgency = this.getCurrentTransitID();
 
 		Deliver deliver = new Deliver();

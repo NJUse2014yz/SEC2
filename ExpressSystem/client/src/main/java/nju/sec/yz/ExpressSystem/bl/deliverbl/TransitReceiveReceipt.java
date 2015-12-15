@@ -40,6 +40,10 @@ public class TransitReceiveReceipt implements ReceiptService {
 		ResultMessage validResult = isValid(receipt);
 		if (validResult.getResult() == Result.FAIL)
 			return validResult;
+		
+		BarIdList list=new BarIdList();
+		if(list.isArrived(info.getTransitSheetId()))
+			return new ResultMessage(Result.FAIL,"这到达单已经填过了哦~");
 
 		// 生成id
 		String maker = this.getMakePersonId();
@@ -63,7 +67,7 @@ public class TransitReceiveReceipt implements ReceiptService {
 			return saveResult;
 
 		// 更新物流信息
-		BarIdList list = new BarIdList();
+		
 		list.arrive(info.getTransitSheetId());
 
 		return new ResultMessage(Result.SUCCESS);
