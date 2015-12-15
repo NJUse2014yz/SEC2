@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nju.sec.yz.ExpressSystem.bl.accountbl.Initialable;
+import nju.sec.yz.ExpressSystem.bl.deliverbl.Deliver;
 import nju.sec.yz.ExpressSystem.bl.deliverbl.ValidHelper;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptService;
 import nju.sec.yz.ExpressSystem.bl.tool.ExcelTool;
@@ -26,6 +27,7 @@ import nju.sec.yz.ExpressSystem.common.InventoryInInformation;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice.InventoryDataService;
+import nju.sec.yz.ExpressSystem.po.DeliverPO;
 import nju.sec.yz.ExpressSystem.po.InventoryInSheetPO;
 import nju.sec.yz.ExpressSystem.po.InventoryOutSheetPO;
 import nju.sec.yz.ExpressSystem.vo.InventoryInSheetVO;
@@ -182,14 +184,26 @@ public class Inventory implements Initialable<InventoryInSheetVO, InventoryInShe
 	}
 
 	/**
+	 * 是否报警
+	 */
+	boolean isOverFlow(){
+		try {
+			int size=data.findAll(getTransit()).size();
+			if(size+1>rate*room)
+				return true;
+		} catch (RemoteException e) {
+			RMIExceptionHandler.handleRMIException();
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	/**
 	 * 入库时添加库存
 	 */
 	public ResultMessage updateIn(InventoryInSheetPO po) {
 		ResultMessage message = new ResultMessage(Result.FAIL);
 		try {
-			int size=data.findAll(getTransit()).size();
-			if(size+1>rate*room)
-				message.setMessage("这是一条库存报警的提示，请手动调整分区");
 			message = data.insert(po);
 		} catch (RemoteException e) {
 			RMIExceptionHandler.handleRMIException();
@@ -334,15 +348,23 @@ public class Inventory implements Initialable<InventoryInSheetVO, InventoryInShe
 		ReceiptService in=new InventoryInSheet();
 		
 		List<InventoryInSheetPO> pos = new ArrayList<>();
+		
 		for (InventoryInSheetVO InventoryIn : vos) {
 			ResultMessage validResult = in.isValid(InventoryIn);
-			if (validResult.getResult()==Result.FAIL)
-				return new ResultMessage(Result.FAIL, vos.indexOf(InventoryIn) + " " + validResult.getMessage());
+			if(!validResult.getMessage().equals("订单号是不是填错了~"))//期初建账时不管物流轨迹
+				if (validResult.getResult() == Result.FAIL)
+					return new ResultMessage(Result.FAIL, vos.indexOf(InventoryIn) + " " + validResult.getMessage());
 
+		}
+		
+		//全部验证通过后更新数据
+		Deliver deliver=new Deliver();
+		for (InventoryInSheetVO InventoryIn : vos) {
 			InventoryInSheetPO po = this.changeVOToPO(InventoryIn);
 			pos.add(po);
+			deliver.init(po.getBarId(), po.getInventoryInInformation().getTransit());
 		}
-
+		
 		try {
 			message = data.init(pos);
 		} catch (RemoteException e) {

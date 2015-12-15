@@ -89,6 +89,10 @@ public class Car implements Initialable<CarVO, CarPO> {
 	public ResultMessage add(CarVO vo) {
 		ResultMessage message = null;
 		// 验证information
+		
+		if(!vo.getId().contains(positionId))
+			return new ResultMessage(Result.FAIL,"只能添加本营业厅的车辆哦");
+		
 		String validresult = isValid(vo);
 		if (!validresult.equals("success")) {
 			System.out.println(validresult);
@@ -150,8 +154,7 @@ public class Car implements Initialable<CarVO, CarPO> {
 		String machine = vo.getMechine();
 		if (!isId(id))
 			return "看看车辆ID输对了没哦";
-		if(!id.contains(positionId))
-			return "只能添加本营业厅的车辆哦";
+		
 		if (!isNumber(number))
 			return "看看车牌号输对了没哦";
 		if (!ValidHelper.isBeforeDate(time))

@@ -15,6 +15,7 @@ import nju.sec.yz.ExpressSystem.bl.userbl.User;
 import nju.sec.yz.ExpressSystem.bl.userbl.UserInfo;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
 import nju.sec.yz.ExpressSystem.client.RMIExceptionHandler;
+import nju.sec.yz.ExpressSystem.common.DeliveryState;
 import nju.sec.yz.ExpressSystem.common.IdType;
 import nju.sec.yz.ExpressSystem.common.InventoryOutInformation;
 import nju.sec.yz.ExpressSystem.common.ReceiptType;
@@ -23,6 +24,7 @@ import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.dataservice.inventoryDataSevice.InventoryOutDataService;
 import nju.sec.yz.ExpressSystem.po.InventoryOutSheetPO;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
+import nju.sec.yz.ExpressSystem.vo.DeliverStateVO;
 import nju.sec.yz.ExpressSystem.vo.InventoryOutSheetVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 
@@ -51,6 +53,10 @@ public class InventoryOutSheet implements ReceiptService {
 	public ResultMessage approve(ReceiptVO vo) {
 		InventoryOutSheetPO outPO = (InventoryOutSheetPO) convertToPO(vo);
 		ResultMessage resultMessage = updateOutReceipt(outPO);
+		
+		Deliver deliver=new Deliver();
+		deliver.updateDeliverInfo(outPO.getBarId(),DeliveryState.INVENTORY_OUT);
+		
 		System.out.println("Approving...");
 		return resultMessage;
 	}
@@ -75,6 +81,10 @@ public class InventoryOutSheet implements ReceiptService {
 
 		ReceiptList receiptList = new ReceiptList();
 		receiptList.saveReceipt(outPO);
+
+		// 更新物流信息
+		Deliver deliver = new Deliver();
+		deliver.submit(outSheet.getBarId());
 
 		return new ResultMessage(Result.SUCCESS);
 	}
@@ -156,11 +166,28 @@ public class InventoryOutSheet implements ReceiptService {
 		if (deliver.checkDeliver(id) == null) {
 			return new ResultMessage(Result.FAIL, "系统中还没有订单" + id + "的信息哦");
 		}
+		
+		if(!isRightTrail(id))
+			return new ResultMessage(Result.FAIL,"订单号是不是填错了~");
+		
 		if (!ValidHelper.isBeforeDate(time))
-			message.setMessage("出库时间不对哦");
+			return new ResultMessage(Result.FAIL,"出库时间不对哦");
 		if (!ValidHelper.isTransitID(transitId))
-			message.setMessage("中转中心编号不对哦");
-		return message;
+			return new ResultMessage(Result.FAIL,"中转中心编号不对哦");
+		return new ResultMessage(Result.SUCCESS);
+	}
+	
+	/**
+	 * 物流轨迹是否正确
+	 */
+	private boolean isRightTrail(String barId){
+		Deliver deliver=new Deliver();
+		DeliverStateVO vo=deliver.getDeliverState(barId);
+		if(!this.getTransitID().equals(vo.nextAgency))
+			return false;
+		if(vo.state!=DeliveryState.INVENTORY_IN)
+			return false;
+		return true;
 	}
 
 	public ResultMessage updateOutReceipt(InventoryOutSheetPO outPO) {
@@ -182,7 +209,7 @@ public class InventoryOutSheet implements ReceiptService {
 	@Override
 	public String showMessage(ReceiptVO vo) {
 		InventoryOutSheetVO ovo = (InventoryOutSheetVO) vo;
-		String message="条形码号"+ovo.getBarId()+StringTool.nextLine();
+		String message = "条形码号" + ovo.getBarId() + StringTool.nextLine();
 		return message;
 	}
 }

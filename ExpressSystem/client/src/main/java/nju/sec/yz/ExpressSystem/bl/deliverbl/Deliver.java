@@ -1,6 +1,9 @@
 package nju.sec.yz.ExpressSystem.bl.deliverbl;
 
 import java.rmi.RemoteException;
+
+import nju.sec.yz.ExpressSystem.bl.managerbl.AgencyInfo;
+import nju.sec.yz.ExpressSystem.bl.managerbl.Transit;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
 import nju.sec.yz.ExpressSystem.client.RMIExceptionHandler;
 import nju.sec.yz.ExpressSystem.common.DeliveryState;
@@ -102,6 +105,42 @@ public class Deliver {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * 改变物流状态
+	 * 出库入库时用
+	 */
+	public void updateDeliverInfo(String barId,DeliveryState state){
+		try {
+			DeliverPO po=data.find(barId);
+			po.setState(state);
+			data.update(po);
+		} catch (RemoteException e) {
+			RMIExceptionHandler.handleRMIException();
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 期初建帐初始化改变物流状态
+	 */
+	public void init(String barId,String transitId){
+		AgencyInfo agency=new Transit();
+		String transitName=agency.getName(transitId);
+		
+		DeliverPO po=new DeliverPO(barId);
+		po.setState(DeliveryState.INVENTORY_IN);
+		po.setNext(transitId);
+		po.addTrail("快递已到达"+transitName);
+		
+		try {
+			data.insert(po);
+		} catch (RemoteException e) {
+			RMIExceptionHandler.handleRMIException();
+			e.printStackTrace();
+		}
+	}
+	
 
 	/**
 	 * 其他单据通过此方法更新信息
