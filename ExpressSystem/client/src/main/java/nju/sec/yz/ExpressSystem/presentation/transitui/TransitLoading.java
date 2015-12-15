@@ -170,8 +170,8 @@ public class TransitLoading extends JPanel{
 						//System.out.println(BarIdArray.get(3));
 					TransitLoadSheetVO vo=new TransitLoadSheetVO();
 						//destinationId项不存在，用null写入
-					LoadInformation loadInf = new LoadInformation(date.getTime(), agencyId.getSelectedItem().toString(),
-							null, carId.getText(), officerId.getText(), driverId.getText());	
+					LoadInformation loadInf = new LoadInformation(date.getTime(),null, agencyId.getSelectedItem().toString(),
+							 carId.getText(), officerId.getText(), driverId.getText());	
 					vo.setTransitLoadInformation(loadInf);
 					vo.setBarIds(BarIdArray);
 					ResultMessage result=deliverblservice.transitLoadingReceipt(vo);

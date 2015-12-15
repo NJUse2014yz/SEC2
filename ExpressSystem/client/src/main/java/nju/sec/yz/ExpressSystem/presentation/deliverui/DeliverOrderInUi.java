@@ -123,8 +123,6 @@ public class DeliverOrderInUi extends JPanel {
 					warning.setFont(new Font("Dialog", 1, 15));
 					warning.setForeground(Color.red);
 					warning.setVisible(true);
-					add(warning);
-					repaint();
 				} else {
 					// translate data
 					SendSheetVO sendsheet = new SendSheetVO();
@@ -148,8 +146,6 @@ public class DeliverOrderInUi extends JPanel {
 						warning.setBounds(138, 490, 463 - 138, 30);
 						warning.setFont(new Font("Dialog", 1, 15));
 						warning.setForeground(Color.red);
-						add(warning);
-						repaint();
 					} else {
 						// 提交成功
 						warning.setText("提交成功");
@@ -157,7 +153,6 @@ public class DeliverOrderInUi extends JPanel {
 						warning.setFont(new Font("Dialog", 1, 15));
 						warning.setForeground(Color.red);
 						warning.setVisible(true);
-						add(warning);
 
 						String temp = result.getMessage();
 
@@ -180,9 +175,10 @@ public class DeliverOrderInUi extends JPanel {
 						costForAll.setVisible(true);
 						add(costForAll);
 
-						repaint();
 					}
 				}
+				add(warning);
+				repaint();
 			}
 		});
 
