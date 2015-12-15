@@ -135,11 +135,10 @@ public class BarIdsDataImpl extends UnicastRemoteObject implements BarIdsDataSer
 			BarIdsDataImpl data=new BarIdsDataImpl();
 			List<BarIdsPO> list=data.findAll();
 			for(BarIdsPO po:list){
-				System.out.println(po.getReceiptId()+" "+ po.getDestinationId()+" "+po.getFromAgency());;
+				System.out.println(po.getReceiptId()+" "+ po.getDestinationId()+" "+po.getFromAgency()+po.getBarIds().size());;
+				
 			}
-			BarIdsPO po=list.get(2);
-			po.setDestinationId("025001");
-			data.saveData(list);
+			
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

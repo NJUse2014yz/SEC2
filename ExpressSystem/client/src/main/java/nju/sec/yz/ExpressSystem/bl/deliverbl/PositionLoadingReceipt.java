@@ -205,6 +205,11 @@ public class PositionLoadingReceipt implements ReceiptService{
 		
 		OfficeLoadSheetVO receipt=(OfficeLoadSheetVO)vo;
 		
+		String date=receipt.getOfficeLoadInformation().getTime();
+		
+		if(!ValidHelper.isBeforeDate(date))
+			return new ResultMessage(Result.FAIL,"不能选超过今天的时间哦~");
+		
 		//验证barid
 		List<String> barIDs=receipt.getBarIds();
 		

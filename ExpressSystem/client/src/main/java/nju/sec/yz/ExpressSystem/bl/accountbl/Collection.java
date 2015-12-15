@@ -129,6 +129,8 @@ public class Collection implements ReceiptService{
 		
 		
 		PaymentInformation info=receipt.getPaymentInformation();
+		if(info.getAccount()==null||info.getAccount().length()==0)
+			return new ResultMessage(Result.FAIL,"还没选择账户~");
 		
 		//info
 		UserInfo user=new User();
