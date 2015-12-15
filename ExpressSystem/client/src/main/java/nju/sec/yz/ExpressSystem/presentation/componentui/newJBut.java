@@ -37,7 +37,7 @@ Color generalcolor;
 		setFont(font);
 		
 		setText("<html><u>"+text+"</u></html>");
-		
+		setFocusPainted(false);
 		setForeground(forecolor);
 		//设置横线
 		
