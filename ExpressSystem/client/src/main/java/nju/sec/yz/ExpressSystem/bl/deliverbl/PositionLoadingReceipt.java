@@ -47,7 +47,7 @@ public class PositionLoadingReceipt implements ReceiptService{
 		OfficeLoadSheetVO receipt=(OfficeLoadSheetVO)vo;
 		LoadInformation info=receipt.getOfficeLoadInformation();
 		List<String> barIDs=receipt.getBarIds();
-		
+		System.out.println("idsize:"+barIDs.size());
 		if(info.getTime()==null)
 			info.setTime(TimeTool.getDate());
 		
@@ -55,6 +55,15 @@ public class PositionLoadingReceipt implements ReceiptService{
 		ResultMessage validResult=isValid(receipt);
 		if(validResult.getResult()==Result.FAIL)
 			return validResult;
+		
+		for(String barID:receipt.getBarIds()){
+			// 判断系统中是否存在该条形码号的物流信息
+			if (!isRightTrail(barID)) {
+				validResult.setMessage("订单号" + barID + "是不是填错了~");
+				return validResult;
+			}
+		}
+		
 		
 		//生成各种id
 		String positionID=this.getCurrentPositionID();
@@ -95,6 +104,8 @@ public class PositionLoadingReceipt implements ReceiptService{
 		BarIdList barIds=new BarIdList();
 		ArrayList<String> ids2=new ArrayList<>();
 		ids2.addAll(barIDs);
+		System.out.println("idsize:"+barIDs.size());
+		System.out.println("idsize:"+ids2.size());
 		AgencyInfo agencyService=new Transit();
 		String fromAgency=agencyService.getName(positionID);//出发地名称
 		String destination=agencyService.getId(info.getDestinationId());//到达地id
@@ -220,18 +231,14 @@ public class PositionLoadingReceipt implements ReceiptService{
 		Set<String> idSet=new HashSet<>(barIDs);
 		if(idSet.size()>barIDs.size())
 			return new ResultMessage(Result.FAIL,"有条形码号重复了~");
-		
+		System.out.println("idsize:"+barIDs.size());
 		
 		for(String barID:barIDs){
 			if(!ValidHelper.isBarId(barID)){
 				validResult.setMessage("亲，咱们的订单号是十位数字哟~");
 				return validResult;
 			}
-			//判断系统中是否存在该条形码号的物流信息
-			if(!isRightTrail(barID)){
-				validResult.setMessage("订单号"+barID+"是不是填错了~");
-				return validResult;
-			}
+			
 		}
 		
 		//验证info

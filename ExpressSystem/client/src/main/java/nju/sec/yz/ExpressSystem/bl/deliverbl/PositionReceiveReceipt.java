@@ -40,6 +40,10 @@ public class PositionReceiveReceipt implements ReceiptService {
 		ResultMessage validResult = isValid(receipt);
 		if (validResult.getResult() == Result.FAIL)
 			return validResult;
+		
+		BarIdList list=new BarIdList();
+		if(list.isArrived(info.getTransitSheetId()))
+			return new ResultMessage(Result.FAIL,"这到达单已经填过了哦~");
 
 		// 生成id
 		String makerId = this.getMakePersonId();
@@ -56,7 +60,7 @@ public class PositionReceiveReceipt implements ReceiptService {
 		po.setType(ReceiptType.POSITION_RECEIVE_RECEIPT);
 		
 		//更新物流信息
-		BarIdList list=new BarIdList();
+		
 		list.arrive(info.getTransitSheetId());
 		
 		// 提交
@@ -96,9 +100,7 @@ public class PositionReceiveReceipt implements ReceiptService {
 			return new ResultMessage(Result.FAIL, "看看日期是不是输错了~");
 		if(info.getState()==null||info.getState().size()==0)
 			return new ResultMessage(Result.FAIL,"中转单不存在或目的地不是本营业厅");
-		BarIdList list=new BarIdList();
-		if(list.isArrived(info.getTransitSheetId()))
-			return new ResultMessage(Result.FAIL,"这到达单已经填过了哦~");
+		
 		return new ResultMessage(Result.SUCCESS);
 	}
 

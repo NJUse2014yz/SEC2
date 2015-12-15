@@ -52,6 +52,15 @@ public class TransitLoadingReceipt implements ReceiptService {
 		ResultMessage validResult = isValid(receipt);
 		if (validResult.getResult() == Result.FAIL)
 			return validResult;
+		
+		for(String barID:receipt.getBarIds()){
+			// 判断系统中是否存在该条形码号的物流信息
+			if (!isRightTrail(barID)) {
+				validResult.setMessage("订单号" + barID + "是不是填错了~");
+				return validResult;
+			}
+		}
+		
 
 		// 生成各种id
 		String userId = this.getCurrentUserId();

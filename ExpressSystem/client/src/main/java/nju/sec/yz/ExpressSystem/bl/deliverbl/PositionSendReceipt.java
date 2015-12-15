@@ -37,6 +37,9 @@ public class PositionSendReceipt implements ReceiptService{
 		if(validResult.getResult()==Result.FAIL)
 			return validResult;
 		
+		if(!isRightTrail(info.getBarId()))
+			validResult.setMessage("订单号是不是填错了~");
+		
 		//创建po
 		DeliverySheetPO po=new DeliverySheetPO();
 		DeliveryInformation imInformation=this.copyInfo(info);
@@ -107,8 +110,7 @@ public class PositionSendReceipt implements ReceiptService{
 			validResult.setMessage("亲，咱们的订单号是十位数字哟~");
 		else if(deliver.checkDeliver(barId)==null){
 			validResult.setMessage("亲，系统中不存在订单"+barId);
-		}else if(!isRightTrail(barId))
-			validResult.setMessage("订单号是不是填错了~");
+		}
 		else
 			validResult.setResult(Result.SUCCESS);
 		return validResult;

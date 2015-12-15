@@ -63,6 +63,11 @@ public class DeliverReceipt implements ReceiptService{
 		ResultMessage validresult=isValid(sendReceipt);
 		if(validresult.getResult()==Result.FAIL)
 			return validresult;
+		
+		Deliver deliver=new Deliver();
+		if(deliver.checkDeliver(information.getBarId())!=null)
+			return new ResultMessage(Result.FAIL,"亲，这订单号已经填过了哦~");
+		
 		//自动计算运费和到达时间
 		String fromCity=information.getFromPerson().getCity();
 		String toCity=information.getToPerson().getCity();
@@ -95,7 +100,7 @@ public class DeliverReceipt implements ReceiptService{
 			return saveResult;
 		
 		//更新物流信息
-		Deliver deliver=new Deliver();
+		
 		deliver.newDeliverInfo(info.getBarId(), "快递员正在揽件中... "+TimeTool.getDate());
 		
 		//保存收款记录(暂定审批前保存)
@@ -262,7 +267,7 @@ public class DeliverReceipt implements ReceiptService{
 		String size=sif.getGood().getSize();
 		
 		ResultMessage message=new ResultMessage(Result.FAIL);
-		Deliver deliver=new Deliver();
+		
 		if(!ValidHelper.isCellphone(fromCellphone))
 			message.setMessage("亲，不要告诉我寄件人手机号不是11位数字~");
 		else if(!ValidHelper.isCellphone(toCellphone))
@@ -275,8 +280,7 @@ public class DeliverReceipt implements ReceiptService{
 			message.setMessage("亲，咱们的订单号是十位数字哟~");
 		
 		
-		else if(deliver.checkDeliver(barId)!=null)
-			message.setMessage("亲，这订单号已经填过了哦~");
+		
 		
 		else if(!ValidHelper.isValidNumber(vloume))
 			message.setMessage("亲，体积是要满足0<x<65536的数字哟");
