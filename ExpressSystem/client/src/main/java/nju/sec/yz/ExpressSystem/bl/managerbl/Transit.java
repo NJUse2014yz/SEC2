@@ -236,6 +236,10 @@ public class Transit implements AgencyInfo, Initialable<TransitVO, TransitPO> {
 					return new ResultMessage(Result.FAIL,"有营业厅的id不符合格式哦~");
 			}
 			
+			
+		}
+		//验证后添加
+		for (TransitVO transit : transits) {
 			TransitPO po = this.changeVOToPO(transit);
 			pos.add(po);
 		}
