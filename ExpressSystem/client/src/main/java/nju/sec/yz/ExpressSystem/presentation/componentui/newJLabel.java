@@ -2,6 +2,8 @@ package nju.sec.yz.ExpressSystem.presentation.componentui;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JLabel;
 
@@ -10,17 +12,50 @@ import nju.sec.yz.ExpressSystem.common.ResultMessage;
 
 public class newJLabel extends JLabel {
 
-	protected newJLabel() {
+	public newJLabel() {
 		super();
 		init();
 		// TODO Auto-generated constructor stub
 	}
 
-	protected newJLabel(String text) {
+	public newJLabel(String text) {
 		super(text);
 		init();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	Color forecolor;
+	Color aftercolor;
+	
+	public newJLabel (String text, Color fore, Color after) {
+	// 设置按钮无框但有下划线，写入名称和前后颜色
+//		public newJBut
+			this.forecolor = fore;
+			this.aftercolor = after;
+			// 设为透明
+//			setContentAreaFilled(false);
+//			setBorderPainted(false);
+			Font font = new Font("Microsoft YaHei", Font.PLAIN, 15);
+			setFont(font);
+
+			setText("<html><u>" + text + "</u></html>");
+//			setFocusPainted(false);
+			setForeground(forecolor);
+			// 设置横线
+
+			addMouseListener(new MouseAdapter() {
+
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					// forecolor=aftercolor;
+					setForeground(aftercolor);
+//					setBorderPainted(false);
+					repaint();
+				}
+			});
+		}
+	
 	
 	private void init(){
 		setFont(new Font("Microsoft YaHei", Font.PLAIN, 15));

@@ -26,6 +26,7 @@ import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.SendInformation;
 import nju.sec.yz.ExpressSystem.common.ToAndFromInformation;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJCombo;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJText;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
@@ -98,8 +99,9 @@ public class DeliverOrderInUi extends JPanel {
 		/*
 		 * 确定
 		 */
-		ImageIcon cinfirmIcon = new ImageIcon("graphic/deliver/button/confirm.png");
-		confirmButton = new JButton(cinfirmIcon);
+//		ImageIcon cinfirmIcon = new ImageIcon("graphic/deliver/button/confirm.png");
+//		confirmButton = new JButton(cinfirmIcon);
+		confirmButton = new newJBut("确定");
 		confirmButton.setBounds(378, 456, 76, 27);
 		add(confirmButton);
 		setVisible(true);

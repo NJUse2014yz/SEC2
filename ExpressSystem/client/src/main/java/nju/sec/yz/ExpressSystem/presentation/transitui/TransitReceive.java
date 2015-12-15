@@ -168,7 +168,8 @@ public class TransitReceive extends JPanel {
 		
 		confirm.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				if((departure.getText().equals(""))||(transitSheetId.getText().equals(""))){
+				if((transitSheetId.getText().equals(""))){
+//						(departure.getText().equals(""))||
 					warning.setText("尚未完成对项目的填写");
 					warning.setBounds(198, 490, 463 - 198, 30);
 					warning.setFont(new Font("Dialog", 1, 15));

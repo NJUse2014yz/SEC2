@@ -8,13 +8,11 @@ import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.plaf.ScrollPaneUI;
 
 import nju.sec.yz.ExpressSystem.bl.receiptbl.MessageController;
 import nju.sec.yz.ExpressSystem.blservice.receiptBlService.MessageBlService;
@@ -23,7 +21,7 @@ import nju.sec.yz.ExpressSystem.vo.MessageVO;
 public class MessageDeclare {
 
 	private JTextArea announce;
-	private JButton confirm;
+	private JLabel confirm;
 	private JScrollPane jsc;
 	
 	private MessageBlService message=new MessageController();
@@ -67,7 +65,7 @@ public class MessageDeclare {
 		
 		
 		ImageIcon IknowIcon=new ImageIcon("graphic/common/Iknow.png");
-		confirm=new newJBut("我知道了",Color.YELLOW,Color.RED);
+		confirm=new newJLabel("我知道了",Color.YELLOW,Color.RED);
 		confirm.setBounds(364,270,100,24);
 		panel.add(confirm);
 		
