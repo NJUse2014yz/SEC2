@@ -54,8 +54,6 @@ public class PositionLoadUi extends JPanel{
 	private JTextField JTsuperviserId;
 	private JTextField JTdriverId;
 	private JLabel fare;
-//	private JScrollPane scroller;
-//	private JTable barIds;
 	private newTable table;
 	private JButton confirm;
 	private JLabel warning;

@@ -10,6 +10,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
+import java.awt.event.MouseAdapter;
 import java.util.Vector;
 import java.util.function.UnaryOperator;
 
@@ -38,6 +39,7 @@ public class newTable{
 	private int y=0;
 	private int w=0;
 	private int h=0;
+	
 	
 	/**
 	 * @param data String[][] 表格数据
@@ -100,6 +102,18 @@ public class newTable{
 	public void join()
 	{
 		panel.add(scroll);
+	}
+	/**
+	 * 为表格增加监听
+	 * @param ma MouseAdapter 监听器
+	 */
+	public void addMouseListener(MouseAdapter ma)
+	{
+		table.addMouseListener(ma);
+	}
+	public int getSelectedRow()
+	{
+		return table.getSelectedRow();
 	}
 	/**
 	 * 获得某个位置的字符串

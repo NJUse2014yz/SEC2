@@ -7,6 +7,8 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -18,6 +20,7 @@ import javax.swing.JTextField;
 
 import nju.sec.yz.ExpressSystem.bl.carAndDriverbl.CarController;
 import nju.sec.yz.ExpressSystem.blservice.carAndDriverBlService.CarBlService;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.PositionControler;
 import nju.sec.yz.ExpressSystem.vo.CarVO;
@@ -31,11 +34,11 @@ public class PositionCarInquiryUi extends JPanel{
 	private JTextField search;
 	private JButton searchButton;
 	private JLabel warning;
-	private JTable table;
+	private newTable table;
 	private JButton back;
-	private JScrollPane scroll;
-	private String[][] data={{"a","f","d","e","f","g","h"},{"a","f","d","e","g","h"},{"a","f","d","e","g","h"},{"a","f","d","e","g","h"},{"a","f","d","e","g","h"},{"a","f","d","e","g","h"}};
-	private String[] name={"车辆代号","车牌号","发动机号","底盘号","购买时间","服役时间"};
+	private Vector<String> name=new Vector<String>();
+	private Vector<Vector<String>> data=new Vector<Vector<String>>();
+	
 	private ArrayList<CarVO> cars;
 	
 	private static final int search_x=227;
@@ -70,17 +73,14 @@ public class PositionCarInquiryUi extends JPanel{
 		controler=mainControler.positionControler;
 		this.bc=bc;	
 		carBl=new CarController();
+		name.add("车辆代号");
+		name.add("车牌号");
+		name.add("发动机号");
+		name.add("底盘号");
+		name.add("购买时间");
+		name.add("服役时间");
 		cars=carBl.getAll();
-		data=new String[cars.size()][6];
-		for(int i=0;i<cars.size();i++)
-		{
-			data[i][0]=cars.get(i).getId();
-			data[i][1]=cars.get(i).getNumber();
-			data[i][2]=cars.get(i).getMechine();
-			data[i][3]=cars.get(i).getDipan();
-			data[i][4]=cars.get(i).getBuytime();
-			data[i][5]=Integer.toString(cars.get(i).getWorktime());
-		}
+		changeData(cars);
 		initDeliverMainUi();
 	}
 
@@ -91,12 +91,10 @@ public class PositionCarInquiryUi extends JPanel{
 		setLayout(null);
 		setSize(490, 550);
 		
-		table=new JTable(data, name);
-		table.setRowHeight(20);
-		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		scroll=new JScrollPane(table);
-		scroll.setBounds(scroll_x,scroll_y,scroll_w,scroll_h);
-		add(scroll);
+		table=new newTable(data,name,this,false);
+		table.stopAutoRewidth();
+		table.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
+		table.join();
 		
 		searchButton=new JButton(searchIcon);
 		searchButton.setBounds(search_button_x,search_button_y,search_button_w,search_button_h);
@@ -104,9 +102,10 @@ public class PositionCarInquiryUi extends JPanel{
 			public void mouseClicked(MouseEvent e)
 			{
 				if(carBl.getSingle(search.getText())!=null){
-					CarVO carvo=carBl.getSingle(search.getText());
-					data=new String[][]{{carvo.getId(),carvo.getNumber(),carvo.getMechine(),carvo.getBuytime(),Integer.toString(carvo.getWorktime())}};
-					repaint();
+					ArrayList<CarVO> cl=new ArrayList<CarVO>();
+					cl.add(carBl.getSingle(search.getText()));
+					changeData(cl);
+					table.resetData();
 				}
 				else{
 					warning.setText("编号输入有误，请重新输入");
@@ -125,27 +124,8 @@ public class PositionCarInquiryUi extends JPanel{
 		back.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
 			{
-				remove(scroll);
-				data=new String[cars.size()][6];
-				for(int i=0;i<cars.size();i++)
-				{
-					data[i][0]=cars.get(i).getId();
-					data[i][1]=cars.get(i).getNumber();
-					data[i][2]=cars.get(i).getMechine();
-					data[i][3]=cars.get(i).getDipan();
-					data[i][4]=cars.get(i).getBuytime();
-					data[i][5]=Integer.toString(cars.get(i).getWorktime());
-				}
-				search.setText("");
-//				table=new JTable(data,name);
-				table=new JTable(data,name);
-				table.setRowHeight(20);
-				table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-				scroll=new JScrollPane(table);
-				scroll.setBounds(scroll_x,scroll_y,scroll_w,scroll_h);
-				add(scroll);
-				warning.setVisible(false);
-				repaint();
+				changeData(cars);
+				table.resetData();
 			}
 		});
 		add(back);
@@ -159,7 +139,22 @@ public class PositionCarInquiryUi extends JPanel{
 		
 		setVisible(true);
 	}
-
+	private void changeData(List<CarVO> cl)
+	{
+		data.removeAllElements();
+		int n=cl.size();
+		for(int i=0;i<n;i++)
+		{
+			Vector<String> vector=new Vector<String>();
+			vector.add(cl.get(i).getId());
+			vector.add(cl.get(i).getNumber());
+			vector.add(cl.get(i).getMechine());
+			vector.add(cl.get(i).getDipan());
+			vector.add(cl.get(i).getBuytime());
+			vector.add(Integer.toString(cl.get(i).getWorktime()));
+			data.add(vector);
+		}
+	}
 	
 	
 	@Override

@@ -22,6 +22,7 @@ import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.Sex;
 import nju.sec.yz.ExpressSystem.presentation.DateChooser;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
+import nju.sec.yz.ExpressSystem.presentation.controlerui.POSITION_CONTROL;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.PositionControler;
 import nju.sec.yz.ExpressSystem.vo.DriverVO;
 
@@ -40,6 +41,7 @@ public class PositionDriverModifyFillUi extends JPanel{
 	private JTextField agency;
 	private DateChooser limit;
 	private JButton confirm;
+	private JButton back;
 	private JLabel warning;
 	private DriverVO drivervo;
 	
@@ -72,12 +74,16 @@ public class PositionDriverModifyFillUi extends JPanel{
 	private static final int confirm_y=257;
 	private static final int confirm_w=72;
 	private static final int confirm_h=24;
+	private static int back_x=270;
+	private static int back_y=232;
+	private static int back_w=90;
+	private static int back_h=20;
 	private static final int warning_x=197;
 	private static final int warning_y=487;
 	private static final int warning_w=275;
 	private static final int warning_h=30;
 	private ImageIcon confirmIcon=new ImageIcon("graphic/position/button/button_confirm.png");
-	
+	private ImageIcon backIcon=new ImageIcon("graphic/position/button/button_back.png");
 	
 	private static final int h=20;
 	
@@ -146,6 +152,15 @@ public class PositionDriverModifyFillUi extends JPanel{
 		warning.setForeground(Color.red);
 		add(warning);
 		warning.setVisible(false);
+		
+		back=new JButton(backIcon);
+		back.setBounds(back_x,back_y,back_w,back_h);
+		back.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e)
+			{
+				controler.positionChangePanel(POSITION_CONTROL.CAR_MODIFY);
+			}
+		});
 		
 		confirm=new JButton(confirmIcon);
 		confirm.setBounds(confirm_x,confirm_y,confirm_w,confirm_h);
