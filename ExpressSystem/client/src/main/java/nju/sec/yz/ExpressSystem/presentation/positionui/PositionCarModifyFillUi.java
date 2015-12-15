@@ -54,7 +54,7 @@ public class PositionCarModifyFillUi extends JPanel{
 	private static int buyTime_x=218;
 	private static int buyTime_y=174;
 	private static int workTime_x=218;
-	private static int workTime_y=200;
+	private static int workTime_y=195;
 	private static int confirm_x=370;
 	private static int confirm_y=232;
 	private static int confirm_w=72;
@@ -109,7 +109,7 @@ public class PositionCarModifyFillUi extends JPanel{
 		buyTime=new DateChooser(new Date(Integer.parseInt(carvo.getBuytime().substring(0, 4)),Integer.parseInt(carvo.getBuytime().substring(4,6)),Integer.parseInt(carvo.getBuytime().substring(6,8))),this, buyTime_x, buyTime_y);
 		
 		workTime=new JLabel();
-		workTime.setFont(new Font("Dialog",1,15));
+		workTime.setFont(new Font("Dialog",1,10));
 		workTime.setForeground(Color.WHITE);
 		workTime.setBounds(workTime_x, workTime_y, warning_w, warning_h);
 		add(workTime);
@@ -137,19 +137,19 @@ public class PositionCarModifyFillUi extends JPanel{
 				{
 					CarVO carvo=new CarVO(JTcarId.getText(),JTcarCard.getText(),buyTime.getTime(),JTmechine.getText(),JTdipan.getText());
 					ResultMessage result=carBl.modify(carvo);
+					String[] message=result.getMessage().split(" ");
 					if(result.getResult()==Result.SUCCESS)
 					{
 						warning.setText("提交成功");
 						warning.setVisible(true);
-						workTime.setText(result.getMessage().substring(8));
-						workTime.setVisible(true);
-						repaint();
 					}
 					else{
-						warning.setText(result.getMessage());
+						warning.setText(message[0]);
 						warning.setVisible(true);
-						repaint();
 					}
+					workTime.setText(message[1]+"年");
+					workTime.setVisible(true);
+					repaint();
 				}
 			}
 		});
