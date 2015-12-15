@@ -27,21 +27,7 @@ import javax.swing.plaf.basic.ComboPopup;
 
 public class newJCombo extends JComboBox {
 
-	// public newJCombo(String[] str){
-	// for(int c=0;c<str.length;c++){
-	// addItem(str[c]);
-	// }
-	// ComboBoxEditor editor=getEditor();
-	// setBackground(new Color(70,70,70));
-	// setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY,0));
-	//
-	// Font font = new Font("Microsoft YaHei",Font.PLAIN,15);
-	// setFont(font);
-	//
-	// setForeground(Color.LIGHT_GRAY);
-	//
-	//
-	// }
+	
 	public newJCombo() {
 		super();
 		init();

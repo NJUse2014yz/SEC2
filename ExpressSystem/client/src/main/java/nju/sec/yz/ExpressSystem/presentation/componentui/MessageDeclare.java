@@ -67,7 +67,7 @@ public class MessageDeclare {
 		
 		
 		ImageIcon IknowIcon=new ImageIcon("graphic/common/Iknow.png");
-		confirm=new JButton(IknowIcon);
+		confirm=new newJBut("我知道了",Color.YELLOW,Color.RED);
 		confirm.setBounds(374,270,72,24);
 		panel.add(confirm);
 		

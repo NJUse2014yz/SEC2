@@ -32,7 +32,7 @@ public class newTable{
 	private JTable table;
 	private DefaultTableModel model;
 	private boolean isMaker=false;//如果是制作时使用，设为true，可以扩展表格
-	private JScrollPane scroll;
+	private newJScroll scroll;
 	
 	private int x=0;
 	private int y=0;
@@ -74,6 +74,10 @@ public class newTable{
 	public void setJComboBox(JComboBox choose,int column)
 	{
 		table.getColumnModel().getColumn(column).setCellEditor(new DefaultCellEditor(choose));
+	}
+	public DefaultTableModel getModel()
+	{
+		return this.model;
 	}
 	/**
 	 * 设置表格的位置大小
@@ -176,8 +180,8 @@ public class newTable{
 		table.setDefaultRenderer(Object.class,new MyTableCellRenderer(0.3,new Color(97,96,96),15,new Color(172,173,173)));
 		table.setRowHeight(20);
 		
-		scroll=new JScrollPane();
-		scroll.setViewportView(table);
+		scroll=new newJScroll(table);
+//		scroll.setViewportView(table);
 		scroll.setOpaque(false);
 		scroll.getViewport().setOpaque(false);
 		scroll.setColumnHeaderView(table.getTableHeader());//设置头部（HeaderView部分）  

@@ -40,8 +40,8 @@ public class newJScroll extends JScrollPane {
 	}
 
 	public class myScrollBarUI extends BasicScrollBarUI{
-		
-		private static final float ARC_NUMBER = 20.0f;
+		//圆角矩形的弧度
+		private static final float ARC_NUMBER = 12.0f;
 		
 		@Override
 	    protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
