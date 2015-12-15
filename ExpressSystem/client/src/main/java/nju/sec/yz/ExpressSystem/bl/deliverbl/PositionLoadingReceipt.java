@@ -208,6 +208,9 @@ public class PositionLoadingReceipt implements ReceiptService{
 		//验证barid
 		List<String> barIDs=receipt.getBarIds();
 		
+		if(barIDs==null||barIDs.size()==0)
+			return new ResultMessage(Result.FAIL,"还没填订单号~");
+		
 		//验证是否有重复
 		Set<String> idSet=new HashSet<>(barIDs);
 		if(idSet.size()>barIDs.size())
