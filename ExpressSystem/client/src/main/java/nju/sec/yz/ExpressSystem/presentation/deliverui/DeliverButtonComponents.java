@@ -1,5 +1,6 @@
 package nju.sec.yz.ExpressSystem.presentation.deliverui;
 
+import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -8,6 +9,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.DELIVER_CONTROL;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.MAIN_CONTROL;
@@ -33,20 +36,20 @@ public class DeliverButtonComponents{
 		/*
 		 * button OrderInButton,OrderSearchButton,ReceiveInButton
 		 */
-		ImageIcon OrderInIcon = new ImageIcon("graphic/deliver/button/buttonOrderIn.png");
-		OrderInButton = new JButton(OrderInIcon);
+//		ImageIcon OrderInIcon = new ImageIcon("graphic/deliver/button/buttonOrderIn.png");
+		OrderInButton = new newJBut("订单输入");
 		OrderInButton.setBounds(14, 50, 108, 41);
 		panel.add(OrderInButton);
 		panel.setVisible(true);
 
-		ImageIcon OrderSearchIcon = new ImageIcon("graphic/deliver/button/buttonOrderSearch.png");
-		OrderSearchButton = new JButton(OrderSearchIcon);
+//		ImageIcon OrderSearchIcon = new ImageIcon("graphic/deliver/button/buttonOrderSearch.png");
+		OrderSearchButton = new newJBut("订单查询");
 		OrderSearchButton.setBounds(14, 92, 108, 41);
 		panel.add(OrderSearchButton);
 		panel.setVisible(true);
 
-		ImageIcon ReceiveInIcon = new ImageIcon("graphic/deliver/button/buttonReceiveIn.png");
-		ReceiveInButton = new JButton(ReceiveInIcon);
+//		ImageIcon ReceiveInIcon = new ImageIcon("graphic/deliver/button/buttonReceiveIn.png");
+		ReceiveInButton = new newJBut("收件信息输入");
 		ReceiveInButton.setBounds(14, 134, 108, 41);
 		panel.add(ReceiveInButton);
 		panel.setVisible(true);
@@ -86,7 +89,7 @@ public class DeliverButtonComponents{
 		});
 		
 		//离开当前账户
-		leaveButton=new JLabel();
+		leaveButton=new newJLabel("注销",Color.WHITE,Color.YELLOW);
 		leaveButton.setBounds(433, 21, 37, 20);
 		leaveButton.setVisible(true);
 		panel.add(leaveButton);

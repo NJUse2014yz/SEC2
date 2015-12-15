@@ -64,14 +64,14 @@ public class newJLabel extends JLabel {
 	
 	
 	//针对warning的2个方法
-	private void NotFilled(){
+	public void NotFilled(){
 		setText("尚未完成对必填项的填写");
 		setBounds(198, 490, 463 - 198, 30);
 		setForeground(Color.red);
 		setVisible(true);
 	}
 	
-	private void Reply(ResultMessage result){
+	public void Reply(ResultMessage result){
 		// 失败
 		setForeground(Color.red);
 		if (result.getResult() == Result.FAIL) {

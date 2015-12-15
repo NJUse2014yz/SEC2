@@ -135,6 +135,8 @@ public class TransitReceive extends JPanel {
 		     	      jsc.setVisible(true);
 		     	      jsc.setBounds(141,138,321,191);
 		     	      add(jsc);
+		     	      
+		     	      confirm.setVisible(true);
 		     		
 		     	      repaint();
 		         }
@@ -164,7 +166,7 @@ public class TransitReceive extends JPanel {
 		confirm = new JButton(cinfirmIcon);
 		confirm.setBounds(389, 334, 76, 27);
 		add(confirm);
-		setVisible(true);
+		confirm.setVisible(false);
 		
 		confirm.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -180,7 +182,7 @@ public class TransitReceive extends JPanel {
 				}else
 				{
 					ArriveInformation arrive=new ArriveInformation();
-					arrive.setDeparture(departure.getText());
+//					arrive.setDeparture(departure.getText());
 					arrive.setTime(date.getTime());
 //					arrive.setTransitId(transitId.getText());
 					

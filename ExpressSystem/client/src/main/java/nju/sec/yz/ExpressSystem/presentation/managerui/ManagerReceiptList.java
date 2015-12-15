@@ -46,6 +46,7 @@ import nju.sec.yz.ExpressSystem.vo.DeliverySheetVO;
 import nju.sec.yz.ExpressSystem.vo.InventoryInSheetVO;
 import nju.sec.yz.ExpressSystem.vo.InventoryOutSheetVO;
 import nju.sec.yz.ExpressSystem.vo.OfficeArriveSheetVO;
+import nju.sec.yz.ExpressSystem.vo.OfficeLoadSheetVO;
 import nju.sec.yz.ExpressSystem.vo.OutVO;
 import nju.sec.yz.ExpressSystem.vo.PaymentSheetVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
@@ -471,7 +472,7 @@ public class ManagerReceiptList extends JPanel {
 		TableData = new String[volist.size()][5];
 		for (int c = 0; c < volist.size(); c++) {
 			String tempId = volist.get(c).getId();
-			DeliverySheetVO tempvo = (DeliverySheetVO) receipt.getSingle((tempId));
+			OfficeLoadSheetVO tempvo = (OfficeLoadSheetVO) receipt.getSingle((tempId));
 
 			DeliveryInformation tempInf = tempvo.getDeliveryInformation();
 			String temp = tempvo.getMakeTime();
