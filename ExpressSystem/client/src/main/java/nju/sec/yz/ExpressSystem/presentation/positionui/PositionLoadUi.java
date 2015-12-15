@@ -54,8 +54,9 @@ public class PositionLoadUi extends JPanel{
 	private JTextField JTsuperviserId;
 	private JTextField JTdriverId;
 	private JLabel fare;
-	private JScrollPane scroller;
-	private JTable barIds;
+//	private JScrollPane scroller;
+//	private JTable barIds;
+	private newTable table;
 	private JButton confirm;
 	private JLabel warning;
 	private Vector<String> name=new Vector<String>();
@@ -173,9 +174,10 @@ public class PositionLoadUi extends JPanel{
 		JTsuperviserId.setBounds(superviserId_x,superviserId_y,superviserId_w,superviserId_h);
 		add(JTsuperviserId);
 		
-		newTable table=new newTable(data,name,this,true);
+		table=new newTable(data,name,this,true);
 		table.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
 		table.join();
+		model=table.getModel();
 		
 		warning=new JLabel();
 		warning.setBounds(warning_x, warning_y, warning_w, warning_h);
