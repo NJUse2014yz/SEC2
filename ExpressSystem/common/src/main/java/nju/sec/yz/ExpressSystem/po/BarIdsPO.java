@@ -2,6 +2,8 @@ package nju.sec.yz.ExpressSystem.po;
 
 import java.io.Serializable;
 import java.util.List;
+
+import nju.sec.yz.ExpressSystem.common.TransportType;
 /**
  * 中转单的所有条形码号
  * @author 周聪
@@ -18,6 +20,10 @@ public class BarIdsPO implements Serializable{
 	String destinationId;//目的地id
 	
 	private boolean isArrived;//标记是否到达目的地
+	
+	private boolean isOut;//是否出库
+	
+	private TransportType type;//运输方式
 	
 	
 
@@ -67,6 +73,22 @@ public class BarIdsPO implements Serializable{
 
 	public void setDestinationId(String destinationId) {
 		this.destinationId = destinationId;
+	}
+
+	public boolean isOut() {
+		return isOut;
+	}
+
+	public void out() {
+		this.isOut = true;
+	}
+
+	public TransportType getType() {
+		return type;
+	}
+
+	public void setType(TransportType type) {
+		this.type = type;
 	}
 	
 	

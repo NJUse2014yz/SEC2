@@ -44,8 +44,7 @@ public class TransitFlightReceipt implements ReceiptService {
 		for(String barID:info.getBarIds()){
 			// 判断系统中是否存在该条形码号的物流信息
 			if (!helper.isRightTrail(barID)) {
-				validResult.setMessage("订单号" + barID + "是不是填错了~");
-				return validResult;
+				return new ResultMessage(Result.FAIL,"订单号" + barID + "是不是填错了~");
 			}
 		}
 
@@ -60,6 +59,8 @@ public class TransitFlightReceipt implements ReceiptService {
 		double fare = this.cost(barIds.size(),distance);
 		System.out.println("size"+barIds.size());
 		info.setFare(fare);
+		
+		info.setType(TransportType.PLANE);
 		
 		//生成po
 		TransitFlightSheetPO po=new TransitFlightSheetPO();
@@ -76,10 +77,9 @@ public class TransitFlightReceipt implements ReceiptService {
 		if(saveResult.getResult()==Result.FAIL)
 			return saveResult;
 
-		System.out.println(receiptId);
 		
-		//保存条形码号供到达单使用
-		helper.saveBarIds(barIds, receiptId,info.getDestination());
+		
+		
 		
 		return new ResultMessage(Result.SUCCESS, fare + " " + transportID);
 	}

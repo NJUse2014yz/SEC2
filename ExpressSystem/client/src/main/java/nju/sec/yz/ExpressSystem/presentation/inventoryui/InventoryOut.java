@@ -59,7 +59,7 @@ private InventoryBlService inventoryservice=new InventoryController();
 		setSize(490, 550);
 		setVisible(true);
 		
-InventoryButtonComponents ibc=new InventoryButtonComponents(maincontroler,this);
+		InventoryButtonComponents ibc=new InventoryButtonComponents(maincontroler,this);
 		
 		
 		barId=new JTextField();

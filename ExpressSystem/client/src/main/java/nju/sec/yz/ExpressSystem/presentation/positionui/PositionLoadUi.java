@@ -231,7 +231,7 @@ public class PositionLoadUi extends JPanel{
 						warning.setVisible(true);
 						String[] message=result.getMessage().split(" ");
 						fare.setText(message[0]);
-						JLtransportId.setText(message[1]);
+						JLtransportId.setText(message[1]);//汽运编号报错
 						fare.setVisible(true);
 						JLtransportId.setVisible(true);
 						repaint();

@@ -20,6 +20,7 @@ import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.po.OfficeArriveSheetPO;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
+import nju.sec.yz.ExpressSystem.vo.DeliverStateVO;
 import nju.sec.yz.ExpressSystem.vo.OfficeArriveSheetVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 
@@ -41,7 +42,17 @@ public class PositionReceiveReceipt implements ReceiptService {
 		if (validResult.getResult() == Result.FAIL)
 			return validResult;
 		
+		
+		
 		BarIdList list=new BarIdList();
+		
+		//验证中转单是否通过审批
+		List<String> barIds=list.getBarIds(info.getTransitSheetId()).barIds;
+		for(String barId:barIds){
+			if(!isRightTrail(barId))
+				return new ResultMessage(Result.FAIL,"中转单还没通过审批~");
+		}
+		//验证到达单是否提交
 		if(list.isArrived(info.getTransitSheetId()))
 			return new ResultMessage(Result.FAIL,"这到达单已经填过了哦~");
 
@@ -70,6 +81,22 @@ public class PositionReceiveReceipt implements ReceiptService {
 			return saveResult;
 
 		return new ResultMessage(Result.SUCCESS);
+	}
+	
+	private boolean isRightTrail(String barId){
+		
+		
+		Deliver deliver=new Deliver();
+		DeliverStateVO vo=deliver.getDeliverState(barId);
+		
+		
+		if(vo==null)//物流信息不存在
+			return false;
+		
+	
+		else if(vo.state!=DeliveryState.OFFICE_OUT&&vo.state!=DeliveryState.TRANSIT_OUT)
+			return false;
+		return true;
 	}
 
 	private String getReceiptId(String positionId) {

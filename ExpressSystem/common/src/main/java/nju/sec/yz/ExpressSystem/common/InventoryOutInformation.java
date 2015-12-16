@@ -11,15 +11,16 @@ public class InventoryOutInformation  implements Serializable{
 	private String time;
 	private String destination;
 	private TransportType transportType;
-	private String transitId;
+	private String transitSheetId;//中转单编号
+	private String transitId;//中转中心编号
 	
 	public InventoryOutInformation(String time, String destination,
-			TransportType transportType, String transitId) {
+			TransportType transportType, String transitSheetId) {
 		super();
 		this.time = time;
 		this.destination = destination;
 		this.transportType = transportType;
-		this.transitId = transitId;
+		this.setTransitSheetId(transitSheetId);
 	}
 	public String getTime() {
 		return time;
@@ -44,5 +45,11 @@ public class InventoryOutInformation  implements Serializable{
 	}
 	public void setTransitId(String transitId) {
 		this.transitId = transitId;
+	}
+	public String getTransitSheetId() {
+		return transitSheetId;
+	}
+	public void setTransitSheetId(String transitSheetId) {
+		this.transitSheetId = transitSheetId;
 	}
 }

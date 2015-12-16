@@ -16,7 +16,16 @@ public class TransitInformation  implements Serializable{
 	protected String transiterId;//押运员
 	protected ArrayList<String> barIds;//
 	protected double fare;//运费
+	protected TransportType type;
 	
+	public TransportType getType() {
+		return type;
+	}
+
+	public void setType(TransportType type) {
+		this.type = type;
+	}
+
 	public TransitInformation() {
 		
 	}
