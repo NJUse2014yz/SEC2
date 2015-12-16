@@ -6,7 +6,9 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,6 +21,7 @@ import javax.swing.JTextField;
 import nju.sec.yz.ExpressSystem.bl.userbl.UserController;
 import nju.sec.yz.ExpressSystem.blservice.userBlService.UserBlService;
 import nju.sec.yz.ExpressSystem.common.Status;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.AdminstraterControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.UserVO;
@@ -31,12 +34,11 @@ public class AdminstraterModifyUi extends JPanel{
 	
 	private JTextField input;
 	private JButton search;
-	private JTable table;
-	private JScrollPane scroll;
+	private newTable table;
 	private JButton back;
 	private JLabel warning;
-	private String[] name={"编号","密码","权限","姓名"};
-	private String[][] data={{"","","",""}};
+	private Vector<String> name=new Vector<String>();
+	private Vector<Vector<String>> data=new Vector<Vector<String>>();
 	private List<UserVO> uvl;
 	
 	private static final int input_x=214;
@@ -71,15 +73,11 @@ public class AdminstraterModifyUi extends JPanel{
 		this.controler=mainControler.adminstraterControler;
 		userBl=new UserController();
 		uvl=userBl.getAll();
-		int n=uvl.size();
-		data=new String[n][4];
-		for(int i=0;i<n;i++)
-		{
-			data[i][0]=uvl.get(i).getId();
-			data[i][1]=uvl.get(i).getPassword();
-			data[i][2]=getStatus(uvl.get(i));
-			data[i][3]=uvl.get(i).getName();
-		}
+		name.add("编号");
+		name.add("密码");
+		name.add("权限");
+		name.add("姓名");
+		changeData(uvl);
 		initAdminstraterUi();
 	}
 	private void initAdminstraterUi()
@@ -98,32 +96,27 @@ public class AdminstraterModifyUi extends JPanel{
 		search.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
 			{
+				ArrayList<UserVO> ul=new ArrayList<UserVO>();
 				UserVO uv=userBl.getSingle(input.getText());
-				if(getStatus(uv)!=null)
+				ul.add(uv);
+				if(uv!=null)
 				{
-					data=new String[][]{{uv.getId(),uv.getPassword(),getStatus(uv),uv.getName()}};
-					remove(scroll);
-					table=new JTable(data,name);
-					table.setRowHeight(20);
-					scroll=new JScrollPane(table);
-					scroll.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
-					add(scroll);
+					changeData(ul);
+					table.resetData();
 				}
 			}
 		});
 		add(search);
 		
-		table=new JTable(data,name);
-		table.setRowHeight(20);
+		table=new newTable(data,name,this,false);
+		table.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
 		table.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
 			{
-				mainControler.mainFrame.nextPanel(new AdminstraterModifyFillUi(mainControler,bc,data[table.getSelectedRow()][0]));
+				mainControler.mainFrame.nextPanel(new AdminstraterModifyFillUi(mainControler,bc,data.get(table.getSelectedRow()).get(0)));
 			}
 		});
-		scroll=new JScrollPane(table);
-		scroll.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
-		add(scroll);
+		table.join();
 		
 		back=new JButton(backIcon);
 		back.setBounds(back_x, back_y, back_w, back_h);
@@ -131,21 +124,8 @@ public class AdminstraterModifyUi extends JPanel{
 			public void mouseClicked(MouseEvent e)
 			{
 				uvl=userBl.getAll();
-				int n=uvl.size();
-				data=new String[n][4];
-				for(int i=0;i<n;i++)
-				{
-					data[i][0]=uvl.get(i).getId();
-					data[i][1]=uvl.get(i).getPassword();
-					data[i][2]=getStatus(uvl.get(i));
-					data[i][3]=uvl.get(i).getName();
-				}
-				remove(scroll);
-				table=new JTable(data,name);
-				table.setRowHeight(20);
-				scroll=new JScrollPane(table);
-				scroll.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
-				add(scroll);
+				changeData(uvl);
+				table.resetData();
 			}
 		});
 		add(back);
@@ -159,45 +139,54 @@ public class AdminstraterModifyUi extends JPanel{
 		
 		setVisible(true);
 	}
-	public String getStatus(UserVO uv){
-		if(uv!=null)
+	private void changeData(List<UserVO> ul)
+	{
+		data.removeAllElements();
+		for(int i=0;i<ul.size();i++)
 		{
-			Status po=uv.getPower();
-			if(po==Status.DELIVER)
-			{
-				return "快递员";
-			}
-			else if(po==Status.POSITION)
-			{
-				return "营业厅业务员";
-			}
-			else if(po==Status.TRANSIT)
-			{
-				return "中转中心业务员";
-			}
-			else if(po==Status.INVENTORY)
-			{
-				return "中转中心从仓库管理人员";
-			}
-			else if(po==Status.SENIOR_ACCOUNTANCY)
-			{
-				return "高级财务人员";
-			}
-			else if(po==Status.JUNIOR_ACCOUNTANCY)
-			{
-				return "低级财务人员";
-			}
-			else if(po==Status.MANAGER)
-			{
-				return "总经理";
-			}
-			else 
-			{
-				return "管理员";
-			}
+			Vector<String> vector=new Vector<String>();
+			vector.add(ul.get(i).getId());
+			vector.add(ul.get(i).getPassword());
+			vector.add(getStatus(ul.get(i).getPower()));
+			vector.add(ul.get(i).getName());
+			data.add(vector);
 		}
-		else
-			return null;
+	}
+	public String getStatus(Status po){
+	
+		if(po==Status.DELIVER)
+		{
+			return "快递员";
+		}
+		else if(po==Status.POSITION)
+		{
+			return "营业厅业务员";
+		}
+		else if(po==Status.TRANSIT)
+		{
+			return "中转中心业务员";
+		}
+		else if(po==Status.INVENTORY)
+		{
+			return "中转中心从仓库管理人员";
+		}
+		else if(po==Status.SENIOR_ACCOUNTANCY)
+		{
+			return "高级财务人员";
+		}
+		else if(po==Status.JUNIOR_ACCOUNTANCY)
+		{
+			return "低级财务人员";
+		}
+		else if(po==Status.MANAGER)
+		{
+			return "总经理";
+		}
+		else 
+		{
+			return "管理员";
+		}
+		
 	}
 	@Override
 	public void paintComponent(Graphics g) {

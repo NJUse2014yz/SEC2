@@ -88,10 +88,11 @@ public class PositionPayUi extends JPanel{
 		List<String> accountList=deliverBl.getAccounts();
 		if(accountList.size()!=0)
 		{
-			accounts=new String[accountList.size()];
-			for(int i=0;i<accountList.size();i++)
+			accounts=new String[accountList.size()+1];
+			accounts[0]=null;
+			for(int i=1;i<=accountList.size();i++)
 			{
-				accounts[i]=accountList.get(i);
+				accounts[i]=accountList.get(i-1);
 			}
 		}
 		initDeliverMainUi();

@@ -19,6 +19,7 @@ import nju.sec.yz.ExpressSystem.blservice.userBlService.UserBlService;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.Status;
+import nju.sec.yz.ExpressSystem.presentation.controlerui.ADMINSTRATER_CONTROL;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.AdminstraterControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.MAIN_CONTROL;
@@ -152,7 +153,7 @@ public class AdminstraterModifyFillUi extends JPanel{
 		back.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
 			{
-				mainControler.mainChangePanel(MAIN_CONTROL.ADMINSTRATER);;
+				controler.adminstraterChangePanel(ADMINSTRATER_CONTROL.USER_LIST);
 			}
 		});
 		add(back);

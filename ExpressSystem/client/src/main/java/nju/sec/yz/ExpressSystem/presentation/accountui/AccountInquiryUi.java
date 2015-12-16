@@ -6,7 +6,9 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -18,6 +20,7 @@ import javax.swing.JTextField;
 
 import nju.sec.yz.ExpressSystem.bl.accountbl.AccountController;
 import nju.sec.yz.ExpressSystem.blservice.accountBlService.AccountBlService;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.AccountControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.AccountVO;
@@ -30,11 +33,13 @@ public class AccountInquiryUi extends JPanel{
 	
 	private JTextField JTsearch;
 	private JButton JBsearch;
-	private JTable table;
-	private JScrollPane scroll;
+	private newTable table;
 	private JButton back;
 	private JLabel warning;
-	
+	private List<AccountVO> avo;
+	private Vector<Vector<String>> data=new Vector<Vector<String>>(); 
+	private Vector<String> name=new Vector<String>();
+ 	
 	private static final int jt_x=224;
 	private static final int jt_y=61;
 	private static final int jt_w=221;
@@ -56,9 +61,6 @@ public class AccountInquiryUi extends JPanel{
 	private static final int warning_w=275;
 	private static final int warning_h=30;
 	
-	private String[] name={"名称","金额"};
-	private String[][] data={{"",""}};
-	
 	private ImageIcon searchIcon=new ImageIcon("graphic/account/button/search_button.jpg");
 	private ImageIcon backIcon=new ImageIcon("graphic/account/button/back_button.jpg");
 
@@ -68,16 +70,10 @@ public class AccountInquiryUi extends JPanel{
 		controler=mainControler.accountControler;
 		this.bc=bc;
 		accountBl=new AccountController();
-		List<AccountVO> avo=accountBl.observeList();
-		if(avo!=null){
-			int l=avo.size();
-			data=new String[l][2];
-			for(int i=0;i<l;i++)
-			{
-				data[i][0]=avo.get(i).getName();
-				data[i][1]=Double.toString(avo.get(i).getBalance());
-			}
-		}
+		avo=accountBl.observeList();
+		changeData(avo);
+		name.add("名称");
+		name.add("余额");
 		initAccountUi();
 	}
 	private void initAccountUi() {
@@ -95,15 +91,12 @@ public class AccountInquiryUi extends JPanel{
 			public void mouseClicked(MouseEvent e)
 			{
 				AccountVO av=accountBl.observeAccount(JTsearch.getText());
+				ArrayList<AccountVO> al=new ArrayList<AccountVO>();
+				al.add(av);
 				if(av!=null)
 				{
-					remove(scroll);
-					data=new String[][]{{av.getName(),Double.toString(av.getBalance())}};
-					table=new JTable(data,name);
-					table.setRowHeight(20);
-					scroll=new JScrollPane(table);
-					scroll.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
-					add(scroll);
+					changeData(al);
+					table.resetData();
 				}
 				else
 				{
@@ -127,32 +120,21 @@ public class AccountInquiryUi extends JPanel{
 				List<AccountVO> avo=accountBl.observeList();
 				if(avo!=null)
 				{
-					int l=avo.size();
-					data=new String[l][2];
-					for(int i=0;i<l;i++)
-					{
-						data[i][0]=avo.get(i).getName();
-						data[i][1]=Double.toString(avo.get(i).getBalance());
-					}
+					changeData(avo);
+					table.resetData();
 				}
 				else
-					data=new String[][]{{"",""}};
-				remove(scroll);
-				table=new JTable(data,name);
-				table.setRowHeight(20);
-				scroll=new JScrollPane(table);
-				scroll.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
-				add(scroll);
-				repaint();
+				{
+					data.removeAllElements();
+					table.resetData();
+				}
 			}
 		});
 		add(back);
 		
-		table=new JTable(data,name);
-		table.setRowHeight(20);
-		scroll=new JScrollPane(table);
-		scroll.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
-		add(scroll);
+		table=new newTable(data,name,this,false);
+		table.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
+		table.join();
 		
 		warning=new JLabel();
 		warning.setBounds(warning_x, warning_y, warning_w, warning_h);
@@ -162,6 +144,17 @@ public class AccountInquiryUi extends JPanel{
 		warning.setVisible(false);
 		
 		setVisible(true);
+	}
+	private void changeData(List<AccountVO> avo)
+	{
+		data.removeAllElements();
+		for(int i=0;i<avo.size();i++)
+		{
+			Vector<String> vector=new Vector<String>();
+			vector.add(avo.get(i).getName());
+			vector.add(Double.toString(avo.get(i).getBalance()));
+			data.add(vector);
+		}
 	}
 	@Override
 	public void paintComponent(Graphics g) {
