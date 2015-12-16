@@ -214,6 +214,12 @@ public class AccountCheckInitialUi extends JPanel{
 				num=years[choose.getSelectedIndex()];
 				iv=initialBl.observeInitial(num);
 				changeData(iv);
+				tableT.resetData();
+				tableP.resetData();
+				tableS.resetData();
+				tableC.resetData();
+				tableA.resetData();
+				tableI.resetData();
 			}
 			
 		});
@@ -411,12 +417,6 @@ public class AccountCheckInitialUi extends JPanel{
 			vector.add(Integer.toString(iv.inventories.get(i).getInventoryInInformation().getShelf()));
 			vector.add(Integer.toString(iv.inventories.get(i).getInventoryInInformation().getPositon()));
 		}
-		tableT.resetData();
-		tableP.resetData();
-		tableS.resetData();
-		tableC.resetData();
-		tableA.resetData();
-		tableI.resetData();
 	}
 	@Override
 	public void paintComponent(Graphics g) {

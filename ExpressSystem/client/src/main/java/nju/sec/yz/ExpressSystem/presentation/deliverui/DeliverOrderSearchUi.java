@@ -6,6 +6,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -21,155 +23,122 @@ import nju.sec.yz.ExpressSystem.common.GoodInformation;
 import nju.sec.yz.ExpressSystem.common.OrderInformation;
 import nju.sec.yz.ExpressSystem.common.SendInformation;
 import nju.sec.yz.ExpressSystem.common.ToAndFromInformation;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
+import nju.sec.yz.ExpressSystem.vo.DeliverVO;
 import nju.sec.yz.ExpressSystem.vo.SendSheetVO;
 
 public class DeliverOrderSearchUi extends JPanel {
+	private DeliverBlService deliver=new DeliverController();
+	// 确定选项
+	private JLabel confirmButton;
+	private JTextField searchnumber;
+	//提示信息
+	private JLabel warning;
+	private newTable table;
+	private Vector<Vector<String>> data=new Vector<Vector<String>>();
+	private Vector<String> name=new Vector<String>();
+	private ArrayList<DeliverVO> dl;
 	
-	DeliverBlService deliver=new DeliverController();
-	
-		// 确定选项
-		private JLabel confirmButton;
+	public DeliverOrderSearchUi(ClientControler controler) {
+		initDeliverOrderSearch();
+		DeliverButtonComponents bc=new DeliverButtonComponents(controler,this);
+	}
+
+
+
+	private void initDeliverOrderSearch() {
+		setLayout(null);
+		setSize(490, 550);
 		
+		name.add("订单条形码号");
+		name.add("寄件人姓名");
+		name.add("寄件地址");
+		name.add("寄件城市");
+		name.add("寄件单位");
+		name.add("寄件人电话");
+		name.add("寄件人手机号");
+		name.add("收件人姓名");
+		name.add("收件地址");
+		name.add("收件城市");
+		name.add("收件单位");
+		name.add("收件人电话");
+		name.add("收件人手机号");
+		name.add("件数");
+		name.add("重量");
+		name.add("体积");
+		name.add("品名");
+		name.add("尺寸");
 		
-		private JTextField searchnumber;
+		table = new newTable(data, name, this, false);
+		table.setBounds(144, 105, 315, 177);
+		table.stopAutoRewidth();
+		table.join();
 
-		//提示信息
-		private JLabel warning;
-		
-		
-		
-		public DeliverOrderSearchUi(ClientControler controler) {
-			initDeliverOrderSearch();
-			DeliverButtonComponents bc=new DeliverButtonComponents(controler,this);
-		}
+		confirmButton = new JLabel();
+		confirmButton.setBounds(441, 72, 23, 21);
+		add(confirmButton);
 
-
-
-		private void initDeliverOrderSearch() {
-			setLayout(null);
-			setSize(490, 550);
-			setVisible(true);
-
-			/*
-			 * 确定
-			 */
-			confirmButton = new JLabel();
-			confirmButton.setBounds(441, 72, 23, 21);
-			add(confirmButton);
-
-			confirmButton.addMouseListener(new MouseAdapter() {
-				public void mouseClicked(MouseEvent e) {
-					SendSheetVO sheetvo=deliver.checkDeliverReceipt(searchnumber.getText());
-					
-					
+		confirmButton.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				SendSheetVO sheetvo=deliver.checkDeliverReceipt(searchnumber.getText());
 //					快递单号填写错误的情况如何考虑
-					if(sheetvo==null){
-						warning=new JLabel();
-						warning.setText("输入信息错误");
-						warning.setBounds(250,490,100,30);
-						warning.setFont(new Font("Dialog",1,15));
-						warning.setForeground(Color.red);
-						add(warning);
-						repaint();
-					}else{
-						SendInformation sendIn=sheetvo.getSendInformation();
-						ToAndFromInformation fromPerson=sendIn.getFromPerson();
-						ToAndFromInformation toPerson=sendIn.getToPerson();
-						GoodInformation good=sendIn.getGood();
-						JTable table;  
-						   Object[][] tableData =   
-						    {  {sendIn.getBarId(),
-						    		fromPerson.getName(),
-						    		fromPerson.getAddress(),
-						    		fromPerson.getCity(),
-						    		fromPerson.getOrg(),
-						    		fromPerson.getTelephone(),
-						    		fromPerson.getCellphone(),
-						    		toPerson.getName(),
-						    		toPerson.getAddress(),
-						    		toPerson.getCity(),
-						    		toPerson.getOrg(),
-						    		toPerson.getTelephone(),
-						    		toPerson.getCellphone(),
-						    		good.getTotal(),
-						    		good.getWeight(),
-						    		good.getVloume(),
-						    		good.getName(),
-						    		good.getSize()}	
-						       
-						   };  
-					    Object[] columnTitle = {"订单条形码号",
-					    		"寄件人姓名" , "寄件地址" , "寄件城市",
-					    		"寄件单位","寄件人电话","寄件人手机号",
-					    		"收件人姓名","收件地址","收件城市",
-					    		"收件单位","收件人电话","收件人手机号",
-					    		"件数","重量","体积",
-					    		"品名","尺寸"
-					    		};  
-						      //以二维数组和一维数组来创建一个JTable对象  
-						      table = new JTable(tableData , columnTitle);  
-						      for(int c=0;c<18;c++){
-						    	  table.getColumnModel().getColumn(c).setMinWidth(80);
-						      }
-						      //将JTable对象放在JScrollPane中，并将该JScrollPane放在窗口中显示出来  
-						      JScrollPane jsc=new JScrollPane(table);  
-						   // 水平滚动条
-								jsc.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-								jsc.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS); 
-								jsc.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-								table.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-						      jsc.setVisible(true);
-						      jsc.setBounds(144,105,315,177);
-						      add(jsc);
-						      repaint();
-						
-					}
-					
-					
-					
+				if(sheetvo==null)
+				{
+					warning=new JLabel();
+					warning.setText("输入信息错误");
+					warning.setBounds(250,490,100,30);
+					warning.setFont(new Font("Dialog",1,15));
+					warning.setForeground(Color.red);
+					add(warning);
+					repaint();
+				}else{
+					changeData(sheetvo);
 				}
-				});
-			
-			
-
-			
-			/*
-			 * textfield
-			 */
-
-			searchnumber = new JTextField();
-			searchnumber.setBounds(221, 72, 219, 20);
-			add(searchnumber);
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-		}
-
-
-
-		@Override
-		public void paintComponent(Graphics g) {
-
-			Image img01 = new ImageIcon("graphic/deliver/background/background03.png").getImage();
-
-			g.drawImage(img01, 0, 0, 490, 550, null);
-
-		}
-
+			}
+		});
+		/*
+		 * textfield
+		 */
+		searchnumber = new JTextField();
+		searchnumber.setBounds(221, 72, 219, 20);
+		add(searchnumber);
 		
+		setVisible(true);
+	}
+	private void changeData(SendSheetVO sheetvo)
+	{
+		SendInformation sendIn=sheetvo.getSendInformation();
+		ToAndFromInformation fromPerson=sendIn.getFromPerson();
+		ToAndFromInformation toPerson=sendIn.getToPerson();
+		GoodInformation good=sendIn.getGood();
 		
+		Vector<String> vector=new Vector<String>();
+		vector.add(sendIn.getBarId());
+		vector.add(fromPerson.getName());
+		vector.add(fromPerson.getAddress());
+		vector.add(fromPerson.getCity());
+		vector.add(fromPerson.getOrg());
+		vector.add(fromPerson.getTelephone());
+		vector.add(fromPerson.getCellphone());
+		vector.add(toPerson.getName());
+		vector.add(toPerson.getAddress());
+		vector.add(toPerson.getCity());
+		vector.add(toPerson.getOrg());
+		vector.add(toPerson.getTelephone());
+		vector.add(toPerson.getCellphone());
+		vector.add(good.getTotal());
+		vector.add(good.getWeight());
+		vector.add(good.getVloume());
+		vector.add(good.getName());
+		vector.add(good.getSize()); 
+		data.add(vector);
+	}
+	@Override
+	public void paintComponent(Graphics g) {
+		Image img01 = new ImageIcon("graphic/deliver/background/background03.png").getImage();
+		g.drawImage(img01, 0, 0, 490, 550, null);
+	}
 }
 
 

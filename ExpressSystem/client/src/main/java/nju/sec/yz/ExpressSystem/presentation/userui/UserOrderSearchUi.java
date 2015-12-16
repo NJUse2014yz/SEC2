@@ -75,8 +75,6 @@ public class UserOrderSearchUi extends JPanel {
 		confirmButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				DeliverVO ordervo=deliver.checkDeliver(searchnumber.getText());
-				
-				
 //					快递单号填写错误的情况如何考虑
 				if(ordervo==null){
 					warning=new JLabel();

@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -27,19 +28,20 @@ import nju.sec.yz.ExpressSystem.blservice.deliverBlService.DeliverBlService;
 import nju.sec.yz.ExpressSystem.blservice.managerBlService.AgencyBlService;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.common.TransitCarInformation;
 import nju.sec.yz.ExpressSystem.common.TransitFlightInformation;
 import nju.sec.yz.ExpressSystem.common.TransportType;
 import nju.sec.yz.ExpressSystem.presentation.DateChooser;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.TransitSheetVO;
 import nju.sec.yz.ExpressSystem.vo.TransitVO;
 
 public class TransitReceiptCar extends JPanel{
-	
-DeliverBlService deliverblservice=new DeliverController();
-	
+	DeliverBlService deliverblservice=new DeliverController();
 	ClientControler maincontrol;
 	TransitButtonComponents tbc;
+	
 	private AgencyBlService manager = new ManagerController();
 	
 	private JTextField carId;
@@ -48,14 +50,14 @@ DeliverBlService deliverblservice=new DeliverController();
 	
 	private JComboBox departure;
 	private JComboBox destination;
-	private JTable barId;
-	private TableModel model;
-	
+	private newTable barId;
 	private JButton confirm;
-	
 	private JLabel carTransitId;
 	private JLabel fare;
-	private JLabel warning=new JLabel();
+	private JLabel warning;
+	
+	private Vector<Vector<String>> data=new Vector<Vector<String>>();
+	private Vector<String> name=new Vector<String>();
 	
 	private DateChooser date;
 	public TransitReceiptCar(ClientControler maincontrol,TransitButtonComponents  tbc) {
@@ -64,7 +66,6 @@ DeliverBlService deliverblservice=new DeliverController();
 		tbc.setNextPanel(this);
 		tbc.change();
 		iniTransitReceiptCar();
-		
 	}
 
 	private void iniTransitReceiptCar() {
@@ -75,9 +76,10 @@ DeliverBlService deliverblservice=new DeliverController();
 		
 		ArrayList<TransitVO> trans=manager.observeAllTransit();
 		String[] transitAgency=new String[trans.size()];
-		for(int i=0;i<trans.size();i++){
+		for(int i=0;i<trans.size();i++)
+		{
 			transitAgency[i]=trans.get(i).getName();
-			}
+		}
 		
 		departure=new JComboBox(transitAgency);
 		departure.setBounds(195,56,85,20);
@@ -99,40 +101,33 @@ DeliverBlService deliverblservice=new DeliverController();
 		transiterId.setBounds(405, 138, 50, 18);
 		add(transiterId);
 
-		String[][] tableData = { { "1", "" } };
-		String[] columnTitle = { "编号", "订单条形码号" };
-		// 以二维数组和一维数组来创建一个JTable对象
-
-		model = new DefaultTableModel(tableData, columnTitle);
-		barId = new JTable(model);
-		barId.getColumnModel().getColumn(0).setMaxWidth(30);
-
-		JScrollPane jsc = new JScrollPane(barId);
-		jsc.setVisible(true);
-		jsc.setBounds(137, 218, 329, 191);
-		add(jsc);
-			
-			
-		// 使得表格大小随订单信息的填入而改变
-		model.addTableModelListener(new TableModelListener() {
-			@Override
-			public void tableChanged(TableModelEvent e) {
-				// TODO Auto-generated method stub
-				int num = model.getRowCount();
-				String temp = (String) model.getValueAt(num - 1, 1);
-				if (temp != "") {
-					String[] conponent = { Integer.toString(num + 1), "" };
-					((DefaultTableModel) model).addRow(conponent);
-				}
-				repaint();
-			}
-		});
+		fare = new JLabel();
+		fare.setBounds(180, 192, 70, 30);
+		fare.setForeground(Color.GRAY);
+		fare.setFont(new Font("Dialog", 0, 18));
+		fare.setVisible(false);
+		add(fare);
 		
+		carTransitId = new JLabel();
+		carTransitId.setBounds(290, 165, 140, 30);
+		carTransitId.setForeground(Color.GRAY);
+		carTransitId.setFont(new Font("Dialog", 0, 18));
+		carTransitId.setVisible(false);
+		add(carTransitId);
 		
+		warning=new JLabel();
+		warning.setBounds(198, 490, 463 - 198, 30);
+		warning.setFont(new Font("Dialog", 1, 15));
+		warning.setForeground(Color.red);
+		warning.setVisible(false);
+		add(warning);
+	
+		name.add("订单条形码号");
+		barId = new newTable(data,name,this,true);
+		barId.setBounds(137, 218, 329, 191);
+		barId.initialBlank(1);
+		barId.join();
 
-		/*
-		 * 确定
-		 */
 		ImageIcon cinfirmIcon = new ImageIcon("graphic/deliver/button/confirm.png");
 		confirm = new JButton(cinfirmIcon);
 		confirm.setBounds(388, 419, 76, 27);
@@ -145,69 +140,51 @@ DeliverBlService deliverblservice=new DeliverController();
 				if ((carId.getText().equals("")) || (driverId.getText().equals(""))
 						|| (transiterId.getText().equals("")) ) {
 					warning.setText("尚未完成对必填项的填写");
-					warning.setBounds(198, 490, 463 - 198, 30);
-					warning.setFont(new Font("Dialog", 1, 15));
-					warning.setForeground(Color.red);
 					warning.setVisible(true);
-					add(warning);
 					repaint();
-				} else {
+				} 
+				else
+				{
 					ArrayList<String> BarIdArray=new ArrayList<String>();
 					for(int i=0;i<barId.getRowCount()-1;i++){
-						BarIdArray.add((String) barId.getValueAt(i, 1));
-					}
+						BarIdArray.add(barId.getValueAt(i,0,false));
+				}
 				TransitSheetVO vo=new TransitSheetVO();
 				vo.setTransportType(TransportType.PLANE);
 					//destinationId项不存在，用null写入
-				TransitFlightInformation flightInf = new TransitFlightInformation(date.getTime(),
+				TransitCarInformation carInf = new TransitCarInformation(date.getTime(),
 						departure.getSelectedItem().toString(), destination.getSelectedItem().toString(),
 						transiterId.getText().toString(), BarIdArray);
-					flightInf.setFlightId(carId.getText());
-					flightInf.setShelfId(driverId.getText());
-				vo.setTransitInformation(flightInf);
+				carInf.setCarId(carId.getText());
+				carInf.setDriverId(driverId.getText());
+				vo.setTransitInformation(carInf);
 				ResultMessage result=deliverblservice.transitCarReceipt(vo);
 				//成功
 				if(result.getResult()==Result.SUCCESS){
 					
 					warning.setText("提交成功");
-					warning.setBounds(270, 490, 70, 30);
-					warning.setFont(new Font("Dialog", 1, 15));
-					warning.setForeground(Color.red);
 					warning.setVisible(true);
-					add(warning);
-					
-					fare = new JLabel();
-					fare.setText(Double.toString(flightInf.getFare()) + "元");
-					fare.setBounds(180, 192, 70, 30);
-					fare.setForeground(Color.GRAY);
-					fare.setFont(new Font("Dialog", 0, 18));
+				
+					String[] message=result.getMessage().split(" ");
+					fare.setText(message[0] + "元");
 					fare.setVisible(true);
-					add(fare);
-					
-					carTransitId = new JLabel();
-					carTransitId.setText(flightInf.getFlightTransitId());
-					carTransitId.setBounds(290, 165, 140, 30);
-					carTransitId.setForeground(Color.GRAY);
-					carTransitId.setFont(new Font("Dialog", 0, 18));
+				
+					carTransitId.setText(message[1]);
 					carTransitId.setVisible(true);
-					add(carTransitId);
-					
-					
+				
 					repaint();
-				}else{
+				}
+				else
+				{
 					//失败
 					warning.setText(result.getMessage());
-					warning.setBounds(138, 490, 463 - 138, 30);
-					warning.setFont(new Font("Dialog", 1, 15));
-					warning.setForeground(Color.red);
-					add(warning);
+					warning.setVisible(true);
 					repaint();
 				}
-				}
 			}
-		});	
-
-	}
+		}
+	});	
+}
 	
 	@Override
 	public void paintComponent(Graphics g) {
