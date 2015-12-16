@@ -56,7 +56,7 @@ public class InventoryOutSheet implements ReceiptService {
 		Deliver deliver=new Deliver();
 		deliver.updateDeliverInfo(outPO.getBarId(),DeliveryState.INVENTORY_OUT);
 		
-		System.out.println("Approving...");
+		
 		return resultMessage;
 	}
 
@@ -166,12 +166,8 @@ public class InventoryOutSheet implements ReceiptService {
 		String id = ovo.getBarId();
 		String time = information.getTime();
 		// destination和transportType 不用判断
-		
-
-		ResultMessage message = new ResultMessage(Result.FAIL);
-
 		if (!ValidHelper.isBarId(id))
-			message.setMessage("订单条形码号不对哦");
+			return new ResultMessage(Result.FAIL,"订单条形码号不对哦");
 		// 判断系统中是否存在该条形码号的物流信息
 		Deliver deliver = new Deliver();
 		if (deliver.checkDeliver(id) == null) {
@@ -192,8 +188,7 @@ public class InventoryOutSheet implements ReceiptService {
 	private boolean isRightTrail(String barId){
 		Deliver deliver=new Deliver();
 		DeliverStateVO vo=deliver.getDeliverState(barId);
-		if(!this.getTransitID().equals(vo.nextAgency))
-			return false;
+		
 		if(vo.state!=DeliveryState.TRANSIT_OUT)
 			return false;
 		return true;
