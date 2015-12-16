@@ -8,6 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -21,6 +22,7 @@ import nju.sec.yz.ExpressSystem.blservice.accountBlService.FinanceBlSevice;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.presentation.DateChooser;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.AccountControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.BussinessVO;
@@ -36,17 +38,15 @@ public class AccountOperateTableUi extends JPanel{
 	
 	private DateChooser begin;
 	private DateChooser end;
-	private JTable inTable;
-	private JTable outTable;
-	private JScrollPane inScroll;
-	private JScrollPane outScroll;
+	private newTable tableIn;
+	private newTable tableOut;
 	private JButton confirm;
 	private JButton excle;
 	private JLabel warning;
-	private String[] nameIn=new String[]{"收款日期","收款金额","收款人","快递条形码号","营业厅编号"};
-	private String[] nameOut=new String[]{"付款日期 ","付款金额","付款人","付款账号","条目","备注"};
-	private String[][] dataIn=new String[][]{{"","","","",""}};
-	private String[][] dataOut=new String[][]{{"","","","","",""}};
+	private Vector<String> nameIn=new Vector<String>();
+	private Vector<String> nameOut=new Vector<String>();
+	private Vector<Vector<String>> dataIn=new Vector<Vector<String>>();
+	private Vector<Vector<String>> dataOut=new Vector<Vector<String>>();
 	
 	private static final int begin_x=225;
 	private static final int begin_y=59;
@@ -62,17 +62,17 @@ public class AccountOperateTableUi extends JPanel{
 	private static final int confirm_y=84;
 	private static final int confirm_w=72;
 	private static final int confirm_h=24;
-	private static final int excle_x=404;
-	private static final int excle_y=84;
-	private static final int excle_w=72;
-	private static final int excle_h=24;	
+	private static final int excle_x=380;
+	private static final int excle_y=420;
+	private static final int excle_w=80;
+	private static final int excle_h=27;	
 	private static final int warning_x=198;
 	private static final int warning_y=490;
 	private static final int warning_w=275;
 	private static final int warning_h=30;
 	
 	private ImageIcon confirmIcon=new ImageIcon("graphic/account/button/confirm_button.jpg");
-	private ImageIcon excleIcon=new ImageIcon("graphic/account/button/excle_button.jpg");
+	private ImageIcon excleIcon=new ImageIcon("graphic/account/button/excel_button.jpg");
 	public AccountOperateTableUi(ClientControler mainControler,
 			AccountButtonComponents bc) {
 		super();
@@ -80,7 +80,17 @@ public class AccountOperateTableUi extends JPanel{
 		controler=mainControler.accountControler;
 		this.bc=bc;
 		financeBl=new FinanceController();
-
+		nameIn.add("收款日期");
+		nameIn.add("收款金额");
+		nameIn.add("收款人");
+		nameIn.add("快递条形码号");
+		nameIn.add("营业厅编号");
+		nameOut.add("付款日期 ");
+		nameOut.add("付款金额");
+		nameOut.add("付款人");
+		nameOut.add("付款账号");
+		nameOut.add("条目");
+		nameOut.add("备注");
 		initAccountUi();
 	}
 	private void initAccountUi() {
@@ -92,14 +102,12 @@ public class AccountOperateTableUi extends JPanel{
 		begin=new DateChooser(this,begin_x,begin_y);
 		end=new DateChooser(this,end_x,end_y);
 		
-		inTable=new JTable(dataIn,nameIn);
-		inScroll=new JScrollPane(inTable);
-		inScroll.setBounds(in_x, in_y, w, h);
-		add(inScroll);
-		outTable=new JTable(dataOut,nameOut);
-		outScroll=new JScrollPane(outTable);
-		outScroll.setBounds(out_x, out_y, w, h);
-		add(outScroll);
+		tableIn=new newTable(dataIn,nameIn,this,false);
+		tableIn.setBounds(in_x, in_y, w, h);
+		tableIn.join();
+		tableOut=new newTable(dataOut,nameOut,this,false);
+		tableOut.setBounds(out_x, out_y, w, h);
+		tableOut.join();
 		
 		warning=new JLabel();
 		warning.setBounds(warning_x, warning_y, warning_w, warning_h);
@@ -115,50 +123,8 @@ public class AccountOperateTableUi extends JPanel{
 			{
 				bussinessvo=financeBl.checkBusinessCircumstance(begin.getTime(), end.getTime());
 				if(bussinessvo!=null){
-					warning.setVisible(false);
-					remove(inScroll);
-					remove(outScroll);
-					
-					
-					List<PaymentSheetVO> invo=bussinessvo.in;
-					List<OutVO> outvo=bussinessvo.out;
-					int sizeIn=invo.size();
-					int sizeOut=outvo.size();
-					System.out.println(sizeIn+" "+sizeOut);
-					dataIn=new String[sizeIn][5];
-					for(int i=0;i<sizeIn;i++)
-					{
-						dataIn[i][0]=invo.get(i).getPaymentInformation().getTime();
-						dataIn[i][1]=Double.toString(invo.get(i).getPaymentInformation().getAmount());
-						dataIn[i][2]=invo.get(i).getPaymentInformation().getInDeliverId();
-						dataIn[i][3]=invo.get(i).getBarIds();
-						dataIn[i][4]=invo.get(i).getPaymentInformation().getPositionId();
-					}
-					inTable=new JTable(dataIn,nameIn);
-					dataOut=new String[sizeOut][6];
-					for(int i=0;i<sizeOut;i++)
-					{
-						dataOut[i][0]=outvo.get(i).getOutInformation().getDate();
-						dataOut[i][1]=Double.toString(outvo.get(i).getOutInformation().getNum());
-						dataOut[i][2]=outvo.get(i).getOutInformation().getPerson();
-						dataOut[i][3]=outvo.get(i).getOutInformation().getAccount();
-						dataOut[i][4]=outvo.get(i).getOutInformation().getReason();
-						dataOut[i][5]=outvo.get(i).getOutInformation().getComments();
-						
-					}				
-					outTable=new JTable(dataOut,nameOut);
-	
-	//				dataIn=new String[][]{{"1","2","3","4"},{"d","g","g","f"}};
-	//				inTable=new JTable(dataIn,nameIn);
-					inScroll=new JScrollPane(inTable);
-					inScroll.setBounds(in_x, in_y, w, h);
-					add(inScroll);
-	//				dataOut=new String[][]{{"12","gf","r","h","f","w"},{"d","d","g","r","r","5"}};
-	//				outTable=new JTable(dataOut,nameOut);
-					outScroll=new JScrollPane(outTable);
-					outScroll.setBounds(out_x, out_y, w, h);
-					add(outScroll);
-					repaint();
+					warning.setVisible(false);			
+					changeData(bussinessvo);
 				}
 				else{
 					warning.setText("日期选择有误，请重新选择");
@@ -187,7 +153,36 @@ public class AccountOperateTableUi extends JPanel{
 			}
 		});
 		add(excle);
+		
 		setVisible(true);
+	}
+	private void changeData(BussinessVO bl)
+	{
+		List<PaymentSheetVO> invo=bl.in;
+		List<OutVO> outvo=bl.out;
+		for(int i=0;i<invo.size();i++)
+		{
+			Vector<String> vector=new Vector<String>();
+			vector.add(invo.get(i).getPaymentInformation().getTime());
+			vector.add(Double.toString(invo.get(i).getPaymentInformation().getAmount()));
+			vector.add(invo.get(i).getPaymentInformation().getInDeliverId());
+			vector.add(invo.get(i).getBarIds());
+			vector.add(invo.get(i).getPaymentInformation().getPositionId());
+			dataIn.add(vector);
+		}
+		for(int i=0;i<outvo.size();i++)
+		{
+			Vector<String> vector=new Vector<String>();
+			vector.add(outvo.get(i).getOutInformation().getDate());
+			vector.add(Double.toString(outvo.get(i).getOutInformation().getNum()));
+			vector.add(outvo.get(i).getOutInformation().getPerson());
+			vector.add(outvo.get(i).getOutInformation().getAccount());
+			vector.add(outvo.get(i).getOutInformation().getReason());
+			vector.add(outvo.get(i).getOutInformation().getComments());
+			dataOut.add(vector);
+		}		
+		tableIn.resetData();
+		tableOut.resetData();
 	}
 	@Override
 	public void paintComponent(Graphics g) {

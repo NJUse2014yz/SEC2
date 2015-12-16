@@ -8,6 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
@@ -27,6 +28,7 @@ import nju.sec.yz.ExpressSystem.common.InventoryInInformation;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.Status;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ACCOUNT_CONTROL;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.AccountControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
@@ -51,24 +53,12 @@ public class AccountCheckInitialUi extends JPanel{
 	private JButton buttonA;
 	private JButton buttonI;
 	
-	private JTable tableT;
-	private JTable tableP;
-	private JTable tableS;
-	private JTable tableC;
-	private JTable tableA;
-	private JTable tableI;
-	private DefaultTableModel modelT;
-	private DefaultTableModel modelP;
-	private DefaultTableModel modelS;
-	private DefaultTableModel modelC;
-	private DefaultTableModel modelA;
-	private DefaultTableModel modelI;
-	private JScrollPane scrollT;
-	private JScrollPane scrollP;
-	private JScrollPane scrollS;
-	private JScrollPane scrollC;
-	private JScrollPane scrollA;
-	private JScrollPane scrollI;
+	private newTable tableT;
+	private newTable tableP;
+	private newTable tableS;
+	private newTable tableC;
+	private newTable tableA;
+	private newTable tableI;
 	
 	private JComboBox<String> choose;
 	private JButton backI;
@@ -81,18 +71,18 @@ public class AccountCheckInitialUi extends JPanel{
 	private JLabel warning;
 	
 	private String[] power=new String[]{"总经理","高级财务人员","低级财务人员","中转中心业务员","中转中心仓库管理人员","营业厅业务员","快递员","管理员"};
-	private String[] nameT=new String[]{"名称","编号","所在地"};
-	private String[][] dataT=new String[][]{{"","",""}};
-	private String[] nameP=new String[]{"名称","编号","所在地","所属中转中心"};
-	private String[][] dataP=new String[][]{{"","","",""}};
-	private String[] nameS=new String[]{"姓名","编号","职位","所属机构"};
-	private String[][] dataS=new String[][]{{"","","",""}};
-	private String[] nameC=new String[]{"车辆代号","车牌号","服役时间","发动机号","购买时间","底盘号"};
-	private String[][] dataC=new String[][]{{"","","","","",""}};
-	private String[] nameA=new String[]{"名称","余额"};
-	private String[][] dataA=new String[][]{{"",""}};
-	private String[] nameI=new String[]{"id","中转中心编号","入库时间","目的地","区号","排号","架号","位号"};
-	private String[][] dataI=new String[][]{{"","","","","","","",""}};
+	private Vector<Vector<String>> dataT=new Vector<Vector<String>>();
+	private Vector<Vector<String>> dataP=new Vector<Vector<String>>();
+	private Vector<Vector<String>> dataS=new Vector<Vector<String>>();
+	private Vector<Vector<String>> dataC=new Vector<Vector<String>>();
+	private Vector<Vector<String>> dataA=new Vector<Vector<String>>();
+	private Vector<Vector<String>> dataI=new Vector<Vector<String>>();
+	private Vector<String> nameT=new Vector<String>();
+	private Vector<String> nameP=new Vector<String>();
+	private Vector<String> nameS=new Vector<String>();
+	private Vector<String> nameC=new Vector<String>();
+	private Vector<String> nameA=new Vector<String>();
+	private Vector<String> nameI=new Vector<String>();
 	private String num;
 	private String[] years;
 	
@@ -148,12 +138,35 @@ public class AccountCheckInitialUi extends JPanel{
 			years[i]=yearT.get(i);
 		}
 		choose=new JComboBox<String>(years);
-		tableT=new JTable(dataT,nameT);
-		tableP=new JTable(dataP,nameP);
-		tableS=new JTable(dataS,nameS);
-		tableC=new JTable(dataC,nameC);
-		tableA=new JTable(dataA,nameA);
-		tableI=new JTable(dataI,nameI);
+		
+		nameT.add("名称");
+		nameT.add("编号");
+		nameT.add("所在地");
+		nameP.add("名称");
+		nameP.add("编号");
+		nameP.add("所在地");
+		nameP.add("所属中转中心");
+		nameS.add("姓名");
+		nameS.add("编号");
+		nameS.add("职位");
+		nameS.add("所属机构");
+		nameC.add("车辆代号");
+		nameC.add("车牌号");
+		nameC.add("服役时间");
+		nameC.add("发动机号");
+		nameC.add("购买时间");
+		nameC.add("底盘号");
+		nameA.add("名称");
+		nameA.add("余额");
+		nameI.add("id");
+		nameI.add("中转中心编号");
+		nameI.add("入库时间");
+		nameI.add("目的地");
+		nameI.add("区号");
+		nameI.add("排号");
+		nameI.add("架号");
+		nameI.add("位号");
+		
 		initAccountUi();
 	}
 	private void initAccountUi() {
@@ -162,75 +175,47 @@ public class AccountCheckInitialUi extends JPanel{
 		setLayout(null);
 		setSize(490, 550);
 		
+		tableT=new newTable(dataT,nameT,this,false);
+		tableT.setBounds(scrollT_x, scrollT_y, scrollT_w, scrollT_h);
+		tableT.setVisible(false);
+		tableT.join();
+		
+		tableP=new newTable(dataP,nameP,this,false);
+		tableP.setBounds(scrollP_x, scrollP_y, scrollP_w, scrollP_h);
+		tableP.setVisible(false);
+		tableP.join();
+		
+		tableS=new newTable(dataS,nameS,this,false);
+		tableS.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
+		tableS.setVisible(false);
+		tableS.join();
+		
+		tableC=new newTable(dataC,nameC,this,false);
+		tableC.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
+		tableC.stopAutoRewidth();
+		tableC.setVisible(false);
+		tableC.join();
+		
+		tableA=new newTable(dataA,nameA,this,false);
+		tableA.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
+		tableA.setVisible(false);
+		tableA.join();
+		
+		tableI=new newTable(dataI,nameI,this,false);
+		tableI.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
+		tableI.stopAutoRewidth();
+		tableI.setVisible(false);
+		tableI.join();
+		
 		choose.setBounds(year_x,year_y,year_w,year_h);
 		choose.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
 			{
 				num=years[choose.getSelectedIndex()];
 				iv=initialBl.observeInitial(num);
-				
-				dataT=new String[iv.transits.size()][3];
-				int l=0;
-				for(int i=0;i<iv.transits.size();i++)
-				{
-					dataT[i][0]=iv.transits.get(i).name;
-					dataT[i][1]=iv.transits.get(i).id;
-					dataT[i][2]=iv.transits.get(i).location;
-					l+=iv.transits.get(i).positions.size();
-				}
-				
-				dataP=new String[l][4];
-				for(int i=0;i<iv.transits.size();i++)
-				{
-					for(int j=0;j<iv.transits.get(i).positions.size();i++)
-					{
-						dataP[i+j][0]=iv.transits.get(i).positions.get(j).name;
-						dataP[i+j][1]=iv.transits.get(i).positions.get(j).id;
-						dataP[i+j][2]=iv.transits.get(i).positions.get(j).location;
-						dataP[i+j][3]=iv.transits.get(i).positions.get(j).transitId;
-					}
-				}
-				
-				dataS=new String[iv.staffs.size()][4];
-				for(int i=0;i<iv.staffs.size();i++)
-				{
-					dataS[i][0]=iv.staffs.get(i).getName();
-					dataS[i][1]=iv.staffs.get(i).getId();
-					dataS[i][2]=power(iv.staffs.get(i).getPower());
-					dataS[i][3]=iv.staffs.get(i).getAgency();
-				}
-				
-				dataC=new String[iv.cars.size()][6];
-				for(int i=0;i<iv.staffs.size();i++)
-				{
-					dataC[i][0]=iv.cars.get(i).getId();
-					dataC[i][1]=iv.cars.get(i).getNumber();
-					dataC[i][2]=iv.cars.get(i).getBuytime();
-					dataC[i][3]=iv.cars.get(i).getMechine();
-					dataC[i][4]=iv.cars.get(i).getDipan();
-					dataC[i][5]=Integer.toString(iv.cars.get(i).getWorktime());
-				}
-				
-				dataI=new String[iv.inventories.size()][8];
-				for(int i=0;i<iv.accounts.size();i++)
-				{
-					dataI[i][0]=iv.inventories.get(i).getId();
-					dataI[i][1]=iv.inventories.get(i).getInventoryInInformation().getTransit();
-					dataI[i][2]=iv.inventories.get(i).getInventoryInInformation().getTime();
-					dataI[i][3]=iv.inventories.get(i).getInventoryInInformation().getDestination();
-					dataI[i][4]=Integer.toString(iv.inventories.get(i).getInventoryInInformation().getBlock());
-					dataI[i][5]=Integer.toString(iv.inventories.get(i).getInventoryInInformation().getRow());
-					dataI[i][6]=Integer.toString(iv.inventories.get(i).getInventoryInInformation().getShelf());
-					dataI[i][7]=Integer.toString(iv.inventories.get(i).getInventoryInInformation().getPositon());
-				}
-				
-				tableT=new JTable(dataT,nameT);
-				tableP=new JTable(dataP,nameP);
-				tableS=new JTable(dataS,nameS);
-				tableC=new JTable(dataC,nameC);
-				tableA=new JTable(dataA,nameA);
-				tableI=new JTable(dataI,nameI);
+				changeData(iv);
 			}
+			
 		});
 		add(choose);
 		
@@ -249,12 +234,12 @@ public class AccountCheckInitialUi extends JPanel{
 		buttonAG.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
 			{
-				scrollT.setVisible(true);
-				scrollP.setVisible(true);
-				scrollS.setVisible(false);
-				scrollC.setVisible(false);
-				scrollA.setVisible(false);
-				scrollI.setVisible(false);
+				tableT.setVisible(true);
+				tableP.setVisible(true);
+				tableS.setVisible(false);
+				tableC.setVisible(false);
+				tableA.setVisible(false);
+				tableI.setVisible(false);
 			}
 		});
 		add(buttonAG);
@@ -264,12 +249,12 @@ public class AccountCheckInitialUi extends JPanel{
 		buttonS.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
 			{
-				scrollT.setVisible(false);
-				scrollP.setVisible(false);
-				scrollS.setVisible(true);
-				scrollC.setVisible(false);
-				scrollA.setVisible(false);
-				scrollI.setVisible(false);
+				tableT.setVisible(false);
+				tableP.setVisible(false);
+				tableS.setVisible(true);
+				tableC.setVisible(false);
+				tableA.setVisible(false);
+				tableI.setVisible(false);
 			}
 		});
 		add(buttonS);
@@ -279,12 +264,12 @@ public class AccountCheckInitialUi extends JPanel{
 		buttonC.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
 			{
-				scrollT.setVisible(false);
-				scrollP.setVisible(false);
-				scrollS.setVisible(false);
-				scrollC.setVisible(true);
-				scrollA.setVisible(false);
-				scrollI.setVisible(false);
+				tableT.setVisible(false);
+				tableP.setVisible(false);
+				tableS.setVisible(false);
+				tableC.setVisible(true);
+				tableA.setVisible(false);
+				tableI.setVisible(false);
 			}
 		});
 		add(buttonC);
@@ -294,12 +279,12 @@ public class AccountCheckInitialUi extends JPanel{
 		buttonA.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
 			{
-				scrollT.setVisible(false);
-				scrollP.setVisible(false);
-				scrollS.setVisible(false);
-				scrollC.setVisible(false);
-				scrollA.setVisible(true);
-				scrollI.setVisible(false);
+				tableT.setVisible(false);
+				tableP.setVisible(false);
+				tableS.setVisible(false);
+				tableC.setVisible(false);
+				tableA.setVisible(true);
+				tableI.setVisible(false);
 			}
 		});
 		add(buttonA);
@@ -309,48 +294,15 @@ public class AccountCheckInitialUi extends JPanel{
 		buttonI.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
 			{
-				scrollT.setVisible(false);
-				scrollP.setVisible(false);
-				scrollS.setVisible(false);
-				scrollC.setVisible(false);
-				scrollA.setVisible(false);
-				scrollI.setVisible(true);
+				tableT.setVisible(false);
+				tableP.setVisible(false);
+				tableS.setVisible(false);
+				tableC.setVisible(false);
+				tableA.setVisible(false);
+				tableI.setVisible(true);
 			}
 		});
 		add(buttonI);
-		
-		scrollT=new JScrollPane(tableT);
-		scrollT.setBounds(scrollT_x, scrollT_y, scrollT_w, scrollT_h);
-		scrollT.setVisible(false);
-		add(scrollT);
-		
-		scrollP=new JScrollPane(tableP);
-		scrollP.setBounds(scrollP_x, scrollP_y, scrollP_w, scrollP_h);
-		scrollP.setVisible(false);
-		add(scrollP);
-		
-		tableS.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(new JComboBox(power)));
-		scrollS=new JScrollPane(tableS);
-		scrollS.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
-		scrollS.setVisible(false);
-		add(scrollS);
-		
-		tableC.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		scrollC=new JScrollPane(tableC);
-		scrollC.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
-		scrollC.setVisible(false);
-		add(scrollC);
-		
-		scrollA=new JScrollPane(tableA);
-		scrollA.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
-		scrollA.setVisible(false);
-		add(scrollA);
-		
-		tableI.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		scrollI=new JScrollPane(tableI);
-		scrollI.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
-		scrollI.setVisible(false);
-		add(scrollI);
 		
 		warning=new JLabel();
 		warning.setBounds(warning_x, warning_y, warning_w, warning_h);
@@ -399,6 +351,72 @@ public class AccountCheckInitialUi extends JPanel{
 			}
 		}
 		return pow;
+	}
+	private void changeData(InitialVO iv)
+	{
+		
+		for(int i=0;i<iv.transits.size();i++)
+		{
+			Vector<String> vector=new Vector<String>();
+			vector.add(iv.transits.get(i).name);
+			vector.add(iv.transits.get(i).id);
+			vector.add(iv.transits.get(i).location);
+			dataT.add(vector);
+		}
+		
+		for(int i=0;i<iv.transits.size();i++)
+		{
+			for(int j=0;j<iv.transits.get(i).positions.size();i++)
+			{
+				Vector<String> vector=new Vector<String>();
+				vector.add(iv.transits.get(i).positions.get(j).name);
+				vector.add(iv.transits.get(i).positions.get(j).id);
+				vector.add(iv.transits.get(i).positions.get(j).location);
+				vector.add(iv.transits.get(i).positions.get(j).transitId);
+				dataP.add(vector);
+			}
+		}
+		
+		for(int i=0;i<iv.staffs.size();i++)
+		{
+			Vector<String> vector=new Vector<String>();
+			vector.add(iv.staffs.get(i).getName());
+			vector.add(iv.staffs.get(i).getId());
+			vector.add(power(iv.staffs.get(i).getPower()));
+			vector.add(iv.staffs.get(i).getAgency());
+			dataS.add(vector);
+		}
+		
+		for(int i=0;i<iv.staffs.size();i++)
+		{
+			Vector<String> vector=new Vector<String>();
+			vector.add(iv.cars.get(i).getId());
+			vector.add(iv.cars.get(i).getNumber());
+			vector.add(iv.cars.get(i).getBuytime());
+			vector.add(iv.cars.get(i).getMechine());
+			vector.add(iv.cars.get(i).getDipan());
+			vector.add(Integer.toString(iv.cars.get(i).getWorktime()));
+			dataC.add(vector);
+		}
+		
+		for(int i=0;i<iv.accounts.size();i++)
+		{
+			Vector<String> vector=new Vector<String>();
+			vector.add(iv.inventories.get(i).getId());
+			vector.add(iv.inventories.get(i).getInventoryInInformation().getTransit());
+			vector.add(iv.inventories.get(i).getInventoryInInformation().getTime());
+			vector.add(iv.inventories.get(i).getInventoryInInformation().getDestination());
+			vector.add(Integer.toString(iv.inventories.get(i).getInventoryInInformation().getBlock()));
+			vector.add(Integer.toString(iv.inventories.get(i).getInventoryInInformation().getRow()));
+			vector.add(Integer.toString(iv.inventories.get(i).getInventoryInInformation().getShelf()));
+			vector.add(Integer.toString(iv.inventories.get(i).getInventoryInInformation().getPositon()));
+		}
+		tableT.resetData();
+		tableP.resetData();
+		tableS.resetData();
+		tableC.resetData();
+		tableA.resetData();
+		tableI.resetData();
 	}
 	@Override
 	public void paintComponent(Graphics g) {

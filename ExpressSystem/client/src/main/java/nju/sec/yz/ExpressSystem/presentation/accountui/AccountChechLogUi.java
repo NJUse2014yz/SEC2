@@ -7,6 +7,8 @@ import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,8 +19,10 @@ import javax.swing.JTable;
 import nju.sec.yz.ExpressSystem.bl.accountbl.LogController;
 import nju.sec.yz.ExpressSystem.blservice.accountBlService.LogBlService;
 import nju.sec.yz.ExpressSystem.presentation.DateChooser;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.AccountControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
+import nju.sec.yz.ExpressSystem.vo.AccountVO;
 import nju.sec.yz.ExpressSystem.vo.LogVO;
 
 public class AccountChechLogUi extends JPanel{
@@ -28,11 +32,12 @@ public class AccountChechLogUi extends JPanel{
 	private LogBlService logBl;
 	
 	private DateChooser date;
-	private JTable table;
-	private JScrollPane scroll;
+	private newTable table;
 	private JButton all;
-	private String[] name={"时间","人员","操作"};
-	private String[][] data={{"","",""}};
+	private ArrayList<LogVO> logs;
+	private Vector<Vector<String>> data=new Vector<Vector<String>>(); 
+	private Vector<String> name=new Vector<String>();
+ 	
 	
 	private static final int date_x=259;
 	private static final int date_y=73;
@@ -53,17 +58,13 @@ public class AccountChechLogUi extends JPanel{
 		controler=mainControler.accountControler;
 		this.bc=bc;
 		logBl=new LogController();
-		ArrayList<LogVO> logs=logBl.getAll();
+		name.add("时间");
+		name.add("人员");
+		name.add("操作");
+		logs=logBl.getAll();
 		if(logs!=null)
 		{
-			int l=logs.size();
-			data=new String[l][3];
-			for(int i=0;i<l;i++)
-			{
-				data[i][0]=logs.get(i).getTime();
-				data[i][1]=logs.get(i).getPerson();
-				data[i][2]=logs.get(i).getOperation();
-			}
+			changeData(logs);
 		}
 		initAccountUi();
 	}
@@ -88,58 +89,43 @@ public class AccountChechLogUi extends JPanel{
 				ArrayList<LogVO> logs=logBl.getAll();
 				if(logs!=null)
 				{
-					int l=logs.size();
-					data=new String[l][3];
-					for(int i=0;i<l;i++)
-					{
-						data[i][0]=logs.get(i).getTime();
-						data[i][1]=logs.get(i).getPerson();
-						data[i][2]=logs.get(i).getOperation();
-					}
+					changeData(logs);
+					table.resetData();
 				}
-				remove(scroll);
-				table=new JTable(data,name);
-				table.setRowHeight(20);
-				scroll=new JScrollPane(table);
-				scroll.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
-				add(scroll);
 			}
 		});
-		table=new JTable(data,name);
-		table.setRowHeight(20);
-		scroll=new JScrollPane(table);
-		scroll.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
-		add(scroll);
+		table=new newTable(data,name,this,false);
+		table.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
+		table.join();
 		
 		all=new JButton(allIcon);
 		all.setBounds(all_x, all_y, all_w, all_h);
 		all.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
 			{
-				//需要两个DateChooser
 				ArrayList<LogVO> logs=logBl.getByTime(date.getTime());
 				if(logs!=null)
 				{
-					int l=logs.size();
-					data=new String[l][3];
-					for(int i=0;i<l;i++)
-					{
-						data[i][0]=logs.get(i).getTime();
-						data[i][1]=logs.get(i).getPerson();
-						data[i][2]=logs.get(i).getOperation();
-					}
+					changeData(logs);
+					table.resetData();
 				}
-				remove(scroll);
-				table=new JTable(data,name);
-				table.setRowHeight(20);
-				scroll=new JScrollPane(table);
-				scroll.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
-				add(scroll);
 			}
 		});
 		add(all);
 		
 		setVisible(true);
+	}
+	private void changeData(List<LogVO> ll)
+	{
+		data.removeAllElements();
+		for(int i=0;i<ll.size();i++)
+		{
+			Vector<String> vector=new Vector<String>();
+			vector.add(ll.get(i).getTime());
+			vector.add(ll.get(i).getPerson());
+			vector.add(ll.get(i).getOperation());
+			data.add(vector);
+		}
 	}
 	@Override
 	public void paintComponent(Graphics g) {
