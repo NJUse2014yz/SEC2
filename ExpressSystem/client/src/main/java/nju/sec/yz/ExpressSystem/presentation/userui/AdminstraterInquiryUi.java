@@ -74,6 +74,10 @@ public class AdminstraterInquiryUi extends JPanel{
 		this.mainControler=clientControler;
 		this.controler=mainControler.adminstraterControler;
 		userBl=new UserController();
+		name.add("编号");
+		name.add("密码");
+		name.add("权限");
+		name.add("姓名");
 		uvl=userBl.getAll();
 		changeData(uvl);
 		initAdminstraterUi();
@@ -131,10 +135,7 @@ public class AdminstraterInquiryUi extends JPanel{
 	{
 		data.removeAllElements();
 		int n=uvl.size();
-		name.add("编号");
-		name.add("密码");
-		name.add("权限");
-		name.add("姓名");
+		
 		for(int i=0;i<n;i++)
 		{
 			Vector<String> vector=new Vector<String>();

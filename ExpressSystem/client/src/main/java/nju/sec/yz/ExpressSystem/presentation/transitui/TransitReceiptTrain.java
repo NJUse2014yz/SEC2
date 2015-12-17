@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -28,8 +29,10 @@ import nju.sec.yz.ExpressSystem.blservice.managerBlService.AgencyBlService;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.TransitFlightInformation;
+import nju.sec.yz.ExpressSystem.common.TransitTrainInformation;
 import nju.sec.yz.ExpressSystem.common.TransportType;
 import nju.sec.yz.ExpressSystem.presentation.DateChooser;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.TransitSheetVO;
 import nju.sec.yz.ExpressSystem.vo.TransitVO;
@@ -47,16 +50,15 @@ public class TransitReceiptTrain extends JPanel {
 
 	private JComboBox departure;
 	private JComboBox destination;
-	private JTable barId;
-	private TableModel model;
-
+	private newTable barId;
 	private JButton confirm;
-
 	private JLabel trainTransitId;
 	private JLabel fare;
 	private JLabel warning = new JLabel();
-
 	private DateChooser date;
+	
+	private Vector<Vector<String>> data=new Vector<Vector<String>>();
+	private Vector<String> name=new Vector<String>();
 	
 	public TransitReceiptTrain(ClientControler maincontrol, TransitButtonComponents tbc) {
 		this.maincontrol = maincontrol;
@@ -100,37 +102,33 @@ public class TransitReceiptTrain extends JPanel {
 		transiterId.setBounds(405, 138, 50, 18);
 		add(transiterId);
 
-		String[][] tableData = { { "1", "" } };
-		String[] columnTitle = { "编号", "订单条形码号" };
-		// 以二维数组和一维数组来创建一个JTable对象
-
-		model = new DefaultTableModel(tableData, columnTitle);
-		barId = new JTable(model);
-		barId.getColumnModel().getColumn(0).setMaxWidth(30);
-
-		JScrollPane jsc = new JScrollPane(barId);
-		jsc.setVisible(true);
-		jsc.setBounds(137, 218, 329, 191);
-		add(jsc);
-
-		// 使得表格大小随订单信息的填入而改变
-		model.addTableModelListener(new TableModelListener() {
-			@Override
-			public void tableChanged(TableModelEvent e) {
-				// TODO Auto-generated method stub
-				int num = model.getRowCount();
-				String temp = (String) model.getValueAt(num - 1, 1);
-				if (temp != "") {
-					String[] conponent = { Integer.toString(num + 1), "" };
-					((DefaultTableModel) model).addRow(conponent);
-				}
-				repaint();
-			}
-		});
-
-		/*
-		 * 确定
-		 */
+		trainTransitId = new JLabel();
+		trainTransitId.setBounds(290, 165, 140, 30);
+		trainTransitId.setForeground(Color.GRAY);
+		trainTransitId.setFont(new Font("Dialog", 0, 18));
+		trainTransitId.setVisible(false);
+		add(trainTransitId);
+		
+		fare = new JLabel();
+		fare.setBounds(180, 192, 70, 30);
+		fare.setForeground(Color.GRAY);
+		fare.setFont(new Font("Dialog", 0, 18));
+		fare.setVisible(false);
+		add(fare);
+		
+		warning=new JLabel();
+		warning.setBounds(198, 490, 463 - 198, 30);
+		warning.setFont(new Font("Dialog", 1, 15));
+		warning.setForeground(Color.red);
+		warning.setVisible(false);
+		add(warning);
+	
+		name.add("订单条形码号");
+		barId = new newTable(data,name,this,true);
+		barId.setBounds(137, 218, 329, 191);
+		barId.initialBlank(1);
+		barId.join();
+		
 		ImageIcon cinfirmIcon = new ImageIcon("graphic/deliver/button/confirm.png");
 		confirm = new JButton(cinfirmIcon);
 		confirm.setBounds(388, 419, 76, 27);
@@ -143,61 +141,42 @@ public class TransitReceiptTrain extends JPanel {
 				if ((trainId.getText().equals("")) || (carriageId.getText().equals(""))
 						|| (transiterId.getText().equals(""))) {
 					warning.setText("尚未完成对必填项的填写");
-					warning.setBounds(198, 490, 463 - 198, 30);
-					warning.setFont(new Font("Dialog", 1, 15));
-					warning.setForeground(Color.red);
 					warning.setVisible(true);
-					add(warning);
 					repaint();
 				} else {
 					ArrayList<String> BarIdArray = new ArrayList<String>();
 					for (int i = 0; i < barId.getRowCount() - 1; i++) {
-						BarIdArray.add((String) barId.getValueAt(i, 1));
+						BarIdArray.add((String) barId.getValueAt(i,0,false));
 					}
 					TransitSheetVO vo = new TransitSheetVO();
 					// destinationId项不存在，用null写入
-					TransitFlightInformation flightInf = new TransitFlightInformation(date.getTime(),
+					TransitTrainInformation trainInf = new TransitTrainInformation(date.getTime(),
 							departure.getSelectedItem().toString(), destination.getSelectedItem().toString(),
 							transiterId.getText().toString(), BarIdArray);
-					flightInf.setFlightId(trainId.getText());
-					flightInf.setShelfId(carriageId.getText());
+					trainInf.setTrainId(trainId.getText());
+					trainInf.setCarriageId(carriageId.getText());
 					vo.setTransportType(TransportType.TRAIN);
-					vo.setTransitInformation(flightInf);
+					vo.setTransitInformation(trainInf);
 					ResultMessage result = deliverblservice.transitTrainReceipt(vo);
 					// 成功
 					if (result.getResult() == Result.SUCCESS) {
 
+
 						warning.setText("提交成功");
-						warning.setBounds(270, 490, 70, 30);
-						warning.setFont(new Font("Dialog", 1, 15));
-						warning.setForeground(Color.red);
 						warning.setVisible(true);
-						add(warning);
-
-						fare = new JLabel();
-						fare.setText(Double.toString(flightInf.getFare()) + "元");
-						fare.setBounds(180, 192, 70, 30);
-						fare.setForeground(Color.GRAY);
-						fare.setFont(new Font("Dialog", 0, 18));
+					
+						String[] message=result.getMessage().split(" ");
+						fare.setText(message[0] + "元");
 						fare.setVisible(true);
-						add(fare);
-
-						trainTransitId = new JLabel();
-						trainTransitId.setText(flightInf.getFlightTransitId());
-						trainTransitId.setBounds(290, 165, 140, 30);
-						trainTransitId.setForeground(Color.GRAY);
-						trainTransitId.setFont(new Font("Dialog", 0, 18));
+					
+						trainTransitId.setText(message[1]);
 						trainTransitId.setVisible(true);
-						add(trainTransitId);
-
+						
 						repaint();
 					} else {
 						// 失败
 						warning.setText(result.getMessage());
-						warning.setBounds(138, 490, 463 - 138, 30);
-						warning.setFont(new Font("Dialog", 1, 15));
-						warning.setForeground(Color.red);
-						add(warning);
+						warning.setVisible(true);
 						repaint();
 					}
 				}

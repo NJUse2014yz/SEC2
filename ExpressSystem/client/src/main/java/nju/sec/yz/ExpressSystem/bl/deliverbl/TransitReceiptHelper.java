@@ -31,25 +31,7 @@ import nju.sec.yz.ExpressSystem.vo.TransitSheetVO;
  */
 public class TransitReceiptHelper {
 
-	/**
-	 * 保存条形码号供到达单使用
-	 */
-	public void saveBarIds(List<String> barIDs, String receiptId, String destinationName) {
-		// 更新物流信息
-		Deliver deliver = new Deliver();
-		for (String barId : barIDs) {
-			deliver.submit(barId);
-		}
-
-		BarIdList barIds = new BarIdList();
-		ArrayList<String> ids2 = new ArrayList<>();
-		ids2.addAll(barIDs);
-		AgencyInfo agencyService = new Transit();
-		String fromAgency = agencyService.getName(getCurrentTransitID());// 出发地名称
-		String destination = agencyService.getId(destinationName);// 到达地id
-		BarIdsPO list = new BarIdsPO(ids2, receiptId, fromAgency, destination);
-		barIds.addBarIds(list);
-	}
+	
 
 	public double distance(String beginTransit, String endTransit) {
 		// 出发地和到达地都是中转中心名称
@@ -103,14 +85,11 @@ public class TransitReceiptHelper {
 			if (deliver.checkDeliver(barId) == null) {
 				return new ResultMessage(Result.FAIL, "系统中还没有订单" + barId + "的信息哦");
 			}
-
-			if (isRightTrail(barId))
-				return new ResultMessage(Result.FAIL, "订单号是不是填错了~");
 		}
 		return new ResultMessage(Result.SUCCESS);
 	}
 
-	private boolean isRightTrail(String barId) {
+	public boolean isRightTrail(String barId) {
 		String currentAgency = this.getCurrentTransitID();
 
 		Deliver deliver = new Deliver();
@@ -121,7 +100,7 @@ public class TransitReceiptHelper {
 		else if (!vo.nextAgency.equals(currentAgency))// 下个机构id不是当前机构
 			return false;
 		// 营业厅装车单在快递员揽件或者营业厅有到达单之后
-		else if (vo.state != DeliveryState.INVENTORY_OUT)
+		else if (vo.state != DeliveryState.INVENTORY_IN)
 			return false;
 		return true;
 	}
@@ -131,14 +110,22 @@ public class TransitReceiptHelper {
 		List<String> barIds = info.getBarIds();
 
 		//
-		AgencyInfo agency = new Transit();
+		AgencyInfo agencyService = new Transit();
 		Deliver deliver = new Deliver();
-		String destinationId = agency.getId(info.getDestination());
+		String destinationId = agencyService.getId(info.getDestination());
 		String trail = info.getDeparture() + "已发出，下一站" + info.getDestination();
 		trail = trail + " " + info.getTime();
 		for (String barId : barIds) {
 			deliver.updateDeliverInfo(barId, trail, DeliveryState.TRANSIT_OUT, destinationId);
 		}
+
+		// 保存条形码号供到达单和出库单使用
+		BarIdList idService = new BarIdList();
+		ArrayList<String> ids = new ArrayList<>();
+		ids.addAll(barIds);
+		BarIdsPO list = new BarIdsPO(ids, vo.getId(), info.getDeparture(), destinationId);
+		list.setType(info.getType());
+		idService.addBarIds(list);
 
 		return new ResultMessage(Result.SUCCESS);
 	}

@@ -37,12 +37,21 @@ public class TransitTrainReceipt implements ReceiptService {
 		ResultMessage validResult = isValid(receipt);
 		if (validResult.getResult() == Result.FAIL)
 			return validResult;
+		
+		for(String barID:info.getBarIds()){
+			// 判断系统中是否存在该条形码号的物流信息
+			if (!helper.isRightTrail(barID)) {
+				return new ResultMessage(Result.FAIL,"订单号" + barID + "是不是填错了~");
+			}
+		}
 
 		// 生成各种id
 		String transitID = helper.getCurrentTransitID();
 		String transportID = this.createTransportID(transitID);
 		String receiptId = helper.creatReceiptID(transportID);
 		info.setTrainTransitId(transportID);
+		
+		info.setType(TransportType.TRAIN);
 
 		// 计算运费
 		double distance = helper.distance(info.getDeparture(), info.getDestination());
@@ -64,8 +73,7 @@ public class TransitTrainReceipt implements ReceiptService {
 		if (saveResult.getResult() == Result.FAIL)
 			return saveResult;
 
-		// 保存条形码号供到达单使用
-		helper.saveBarIds(barIds, receiptId,info.getDestination());
+		
 
 		return new ResultMessage(Result.SUCCESS, fare + " " + transportID);
 	}

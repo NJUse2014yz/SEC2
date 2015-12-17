@@ -2,8 +2,7 @@ package nju.sec.yz.ExpressSystem.bl.inventorybl;
 
 import java.rmi.RemoteException;
 
-import javax.xml.stream.events.StartDocument;
-
+import nju.sec.yz.ExpressSystem.bl.deliverbl.BarIdList;
 import nju.sec.yz.ExpressSystem.bl.deliverbl.Deliver;
 import nju.sec.yz.ExpressSystem.bl.deliverbl.ValidHelper;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptID;
@@ -57,7 +56,7 @@ public class InventoryOutSheet implements ReceiptService {
 		Deliver deliver=new Deliver();
 		deliver.updateDeliverInfo(outPO.getBarId(),DeliveryState.INVENTORY_OUT);
 		
-		System.out.println("Approving...");
+		
 		return resultMessage;
 	}
 
@@ -71,7 +70,12 @@ public class InventoryOutSheet implements ReceiptService {
 		ResultMessage message = isValid(outSheet);
 		if (message.getResult() == Result.FAIL)
 			return message;
-
+		if(!isRightTrail(outSheet.getBarId()))
+			return new ResultMessage(Result.FAIL,"订单是不是已经出库了~");
+		
+		outSheet.getInventoryOutInformation().setTransitId(getTransitID());
+		
+		
 		// 创建PO交给receiptList
 		InventoryOutSheetPO outPO = (InventoryOutSheetPO) convertToPO(vo);
 		outPO.setId(createID());
@@ -85,6 +89,9 @@ public class InventoryOutSheet implements ReceiptService {
 		// 更新物流信息
 		Deliver deliver = new Deliver();
 		deliver.submit(outSheet.getBarId());
+		
+		BarIdList list=new BarIdList();
+		list.out(outPO.getInventoryOutInformation().getTransitSheetId());
 
 		return new ResultMessage(Result.SUCCESS);
 	}
@@ -123,9 +130,11 @@ public class InventoryOutSheet implements ReceiptService {
 	public ReceiptVO show(ReceiptPO po) {
 		InventoryOutSheetPO outSheet = (InventoryOutSheetPO) po;
 		InventoryOutInformation io = outSheet.getInventoryOutInformation();
-		InventoryOutSheetVO outVO = new InventoryOutSheetVO(new InventoryOutInformation(io.getTime(), io.getTransitId(),
-				io.getTransportType(), io.getDestination()), outSheet.getBarId());
+		InventoryOutSheetVO outVO = new InventoryOutSheetVO(new InventoryOutInformation(io.getTime(), io.getDestination(),
+				io.getTransportType(), io.getTransitSheetId()), outSheet.getBarId());
 
+		outVO.getInventoryOutInformation().setTransitId(io.getTransitId());
+		
 		outVO.setId(outSheet.getId());
 		outVO.setType(ReceiptType.INVENTORY_OUT);
 		outVO.setMakePerson(outSheet.getMakePerson());
@@ -137,9 +146,11 @@ public class InventoryOutSheet implements ReceiptService {
 	public ReceiptPO convertToPO(ReceiptVO vo) {
 		InventoryOutSheetVO outSheet = (InventoryOutSheetVO) vo;
 		InventoryOutInformation io = outSheet.getInventoryOutInformation();
-		InventoryOutSheetPO outPO = new InventoryOutSheetPO(new InventoryOutInformation(io.getTime(), io.getTransitId(),
-				io.getTransportType(), io.getDestination()), outSheet.getBarId());
+		InventoryOutSheetPO outPO = new InventoryOutSheetPO(new InventoryOutInformation(io.getTime(),io.getDestination() ,
+				io.getTransportType(),io.getTransitSheetId()), outSheet.getBarId());
 
+		outPO.getInventoryOutInformation().setTransitId(io.getTransitId());
+		
 		outPO.setId(outSheet.getId());
 		outPO.setType(ReceiptType.INVENTORY_OUT);
 		outPO.setMakePerson(outSheet.getMakePerson());
@@ -155,25 +166,19 @@ public class InventoryOutSheet implements ReceiptService {
 		String id = ovo.getBarId();
 		String time = information.getTime();
 		// destination和transportType 不用判断
-		String transitId = information.getTransitId();
-
-		ResultMessage message = new ResultMessage(Result.FAIL);
-
 		if (!ValidHelper.isBarId(id))
-			message.setMessage("订单条形码号不对哦");
+			return new ResultMessage(Result.FAIL,"订单条形码号不对哦");
 		// 判断系统中是否存在该条形码号的物流信息
 		Deliver deliver = new Deliver();
 		if (deliver.checkDeliver(id) == null) {
 			return new ResultMessage(Result.FAIL, "系统中还没有订单" + id + "的信息哦");
 		}
 		
-		if(!isRightTrail(id))
-			return new ResultMessage(Result.FAIL,"订单号是不是填错了~");
+		
 		
 		if (!ValidHelper.isBeforeDate(time))
 			return new ResultMessage(Result.FAIL,"出库时间不对哦");
-		if (!ValidHelper.isTransitID(transitId))
-			return new ResultMessage(Result.FAIL,"中转中心编号不对哦");
+		
 		return new ResultMessage(Result.SUCCESS);
 	}
 	
@@ -183,9 +188,8 @@ public class InventoryOutSheet implements ReceiptService {
 	private boolean isRightTrail(String barId){
 		Deliver deliver=new Deliver();
 		DeliverStateVO vo=deliver.getDeliverState(barId);
-		if(!this.getTransitID().equals(vo.nextAgency))
-			return false;
-		if(vo.state!=DeliveryState.INVENTORY_IN)
+		
+		if(vo.state!=DeliveryState.TRANSIT_OUT)
 			return false;
 		return true;
 	}

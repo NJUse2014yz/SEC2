@@ -106,11 +106,10 @@ public class DeliverController implements DeliverBlService {
 
 	@Override
 	/**
-	 * 输入中转单编号获得条形码号列表
+	 * 到达单输入中转单编号获得条形码号列表
 	 */
 	public BarIdsVO getBarIdList(String transitSheetId) {
 		BarIdList list = new BarIdList();
-		
 
 		//获得目的地id
 		UserInfo user = new User();

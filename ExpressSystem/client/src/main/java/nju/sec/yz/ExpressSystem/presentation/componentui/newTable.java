@@ -10,6 +10,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
+import java.awt.event.MouseAdapter;
 import java.util.Vector;
 import java.util.function.UnaryOperator;
 
@@ -39,6 +40,7 @@ public class newTable{
 	private int w=0;
 	private int h=0;
 	
+	
 	/**
 	 * @param data String[][] 表格数据
 	 * @param name String[] 表头
@@ -65,6 +67,14 @@ public class newTable{
 	public void stopAutoRewidth()
 	{
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+	}
+	/**
+	 * 给需要用户填写的表格创建空的一行
+	 * @param n int 列数
+	 */
+	public void initialBlank(int n)
+	{
+		model.addRow(createRow(n)); 
 	}
 	/**
 	 * 给表格某列添加下拉框
@@ -100,6 +110,37 @@ public class newTable{
 	public void join()
 	{
 		panel.add(scroll);
+	}
+	/**
+	 * 设置表格是否可见
+	 * @param v boolean 可见为true
+	 */
+	public void setVisible(boolean v) {
+		scroll.setVisible(v);
+	}
+	/**
+	 * 为表格增加监听
+	 * @param ma MouseAdapter 监听器
+	 */
+	public void addMouseListener(MouseAdapter ma)
+	{
+		table.addMouseListener(ma);
+	}
+	/**
+	 * 得到被选择的行编号
+	 * @return int 被选行编号
+	 */
+	public int getSelectedRow()
+	{
+		return table.getSelectedRow();
+	}
+	/**
+	 * 得到表格的行数
+	 * @return int 表格的行数
+	 */
+	public int getRowCount()
+	{
+		return table.getRowCount();
 	}
 	/**
 	 * 获得某个位置的字符串
@@ -191,7 +232,8 @@ public class newTable{
 		scroll.setColumnHeaderView(table.getTableHeader());//设置头部（HeaderView部分）  
         scroll.getColumnHeader().setOpaque(false);//再取出头部，并设置为透明  
         
-	} 
+	}
+	 
 }
 /**
  * @author YU Fan

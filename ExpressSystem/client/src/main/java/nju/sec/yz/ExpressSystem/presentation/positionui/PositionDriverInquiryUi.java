@@ -7,6 +7,8 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,6 +21,7 @@ import javax.swing.JTextField;
 import nju.sec.yz.ExpressSystem.bl.carAndDriverbl.DriverController;
 import nju.sec.yz.ExpressSystem.blservice.carAndDriverBlService.DriverBlService;
 import nju.sec.yz.ExpressSystem.common.Sex;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.PositionControler;
 import nju.sec.yz.ExpressSystem.vo.DriverVO;
@@ -32,11 +35,10 @@ public class PositionDriverInquiryUi extends JPanel{
 	private JTextField search;
 	private JButton searchButton;
 	private JLabel warning;
-	private JTable table;
 	private JButton back;
-	private JScrollPane scroll;
-	private String[][] data={{"12345","张三","男","19680403","123456789","123456","芜湖营业厅","20250908"},{"12345","张三","男","19680403","123456789","123456","芜湖营业厅","20250908"}};
-	private String[] name={"司机编号","姓名","性别","出生日期","身份证号","手机","车辆单位","行驶证期限"};
+	private newTable table;
+	private Vector<String> name=new Vector<String>();
+	private Vector<Vector<String>> data=new Vector<Vector<String>>();
 	private ArrayList<DriverVO> drivers;
 	
 	private static final int search_x=226;
@@ -71,24 +73,15 @@ public class PositionDriverInquiryUi extends JPanel{
 		this.bc=bc;
 		driverBl=new DriverController();
 		drivers=driverBl.getAll();
-		
-		data=new String[drivers.size()][6];
-		for(int i=0;i<drivers.size();i++)
-		{
-			data[i][0]=drivers.get(i).getId();
-			data[i][1]=drivers.get(i).getName();
-			String SeX="";
-			if(drivers.get(i).getSex().equals(Sex.MALE))
-				SeX="男";
-			else
-				SeX="女";
-			data[i][2]=SeX;
-			data[i][3]=drivers.get(i).getBirthDate();
-			data[i][4]=drivers.get(i).getPersonID();
-			data[i][5]=drivers.get(i).getPhoneNumber();
-			data[i][6]=drivers.get(i).getAgency();
-			data[i][7]=drivers.get(i).getLicenseDeadLine();
-		}
+		changeData(drivers);
+		name.add("司机编号");
+		name.add("姓名");
+		name.add("性别");
+		name.add("出生日期");
+		name.add("身份证号");
+		name.add("手机");
+		name.add("车辆单位");
+		name.add("行驶证期限");
 		initDeliverMainUi();
 	}
 
@@ -99,12 +92,10 @@ public class PositionDriverInquiryUi extends JPanel{
 		setLayout(null);
 		setSize(490, 550);
 		
-		table=new JTable(data,name);
-		table.setRowHeight(20);
-		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		scroll=new JScrollPane(table);
-		scroll.setBounds(scroll_x,scroll_y,scroll_w,scroll_h);
-		add(scroll);
+		table=new newTable(data,name,this,false);
+		table.stopAutoRewidth();
+		table.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
+		table.join();
 		
 		searchButton=new JButton(searchIcon);
 		searchButton.setBounds(search_button_x,search_button_y,search_button_w,search_button_h);
@@ -112,14 +103,10 @@ public class PositionDriverInquiryUi extends JPanel{
 			public void mouseClicked(MouseEvent e)
 			{
 				if(driverBl.getSingle(search.getText())!=null){
-					DriverVO drivervo=driverBl.getSingle(search.getText());
-					String SeX="";
-					if(drivervo.getSex().equals(Sex.MALE))
-						SeX="男";
-					else
-						SeX="女";
-					data=new String[][]{{drivervo.getId(),drivervo.getName(),SeX,drivervo.getBirthDate(),drivervo.getPersonID(),drivervo.getPhoneNumber(),drivervo.getAgency(),drivervo.getLicenseDeadLine()}};
-					repaint();
+					ArrayList<DriverVO> dl=new ArrayList<DriverVO>();
+					dl.add(driverBl.getSingle(search.getText()));
+					changeData(dl);
+					table.resetData();
 				}
 				else{
 					warning.setText("编号输入有误，请重新输入");
@@ -138,34 +125,8 @@ public class PositionDriverInquiryUi extends JPanel{
 		back.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
 			{
-				remove(scroll);
-				data=new String[drivers.size()][6];
-				for(int i=0;i<drivers.size();i++)
-				{
-					data[i][0]=drivers.get(i).getId();
-					data[i][1]=drivers.get(i).getName();
-					String SeX="";
-					if(drivers.get(i).getSex().equals(Sex.MALE))
-						SeX="男";
-					else
-						SeX="女";
-					data[i][2]=SeX;
-					data[i][3]=drivers.get(i).getBirthDate();
-					data[i][4]=drivers.get(i).getPersonID();
-					data[i][5]=drivers.get(i).getPhoneNumber();
-					data[i][6]=drivers.get(i).getAgency();
-					data[i][7]=drivers.get(i).getLicenseDeadLine();
-				}
-				table=new JTable(data,name);
-				table.setRowHeight(20);
-				table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-				scroll=new JScrollPane(table);
-				scroll.setBounds(scroll_x,scroll_y,scroll_w,scroll_h);
-				add(scroll);
-//				table=new JTable(data,name);
-				search.setText("");
-				warning.setVisible(false);
-				repaint();
+				changeData(drivers);
+				table.resetData();
 			}
 		});
 		add(back);
@@ -182,7 +143,31 @@ public class PositionDriverInquiryUi extends JPanel{
 
 		
 	}
-
+	private void changeData(List<DriverVO> dl)
+	{
+		data.removeAllElements();
+		int n=dl.size();
+		for(int i=0;i<n;i++)
+		{
+			Vector<String> vector=new Vector<String>();
+			vector.add(dl.get(i).getId());
+			vector.add(dl.get(i).getName());
+			vector.add(e2s(dl.get(i).getSex()));
+			vector.add(dl.get(i).getBirthDate());
+			vector.add(dl.get(i).getPersonID());
+			vector.add(dl.get(i).getPhoneNumber());
+			vector.add(dl.get(i).getAgency());
+			vector.add(dl.get(i).getLicenseDeadLine());
+			data.add(vector);
+		}
+	}
+	private String e2s(Sex s)
+	{
+		if(s.equals(Sex.MALE))
+			return "男";
+		else
+			return "女";
+	}
 	
 	
 	@Override

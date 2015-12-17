@@ -2,10 +2,8 @@ package nju.sec.yz.ExpressSystem.bl.carAndDriverbl;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.List;
 
 import nju.sec.yz.ExpressSystem.bl.deliverbl.ValidHelper;
-import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.bl.userbl.User;
 import nju.sec.yz.ExpressSystem.bl.userbl.UserInfo;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
@@ -14,9 +12,7 @@ import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.Sex;
 import nju.sec.yz.ExpressSystem.dataservice.carAndDriverDataSevice.DriverDataService;
-import nju.sec.yz.ExpressSystem.po.CarPO;
 import nju.sec.yz.ExpressSystem.po.DriverPO;
-import nju.sec.yz.ExpressSystem.vo.CarVO;
 import nju.sec.yz.ExpressSystem.vo.DriverVO;
 
 /**
@@ -181,8 +177,8 @@ public class Driver {
 
 	private boolean isBeforeDate(String date) {
 		if (ValidHelper.isBeforeDate(date))
-			return false;
-		return true;
+			return true;
+		return false;
 	}
 
 	private boolean isLaterDate(String date) {

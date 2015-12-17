@@ -26,6 +26,7 @@ import nju.sec.yz.ExpressSystem.common.LoadInformation;
 import nju.sec.yz.ExpressSystem.common.ReceiptType;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.common.TransportType;
 import nju.sec.yz.ExpressSystem.po.BarIdsPO;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.po.TransitLoadSheetPO;
@@ -53,11 +54,17 @@ public class TransitLoadingReceipt implements ReceiptService {
 		if (validResult.getResult() == Result.FAIL)
 			return validResult;
 
+		for (String barID : receipt.getBarIds()) {
+			// 判断系统中是否存在该条形码号的物流信息
+			if (!isRightTrail(barID)) {
+				return new ResultMessage(Result.FAIL, "订单号" + barID + "是不是填错了~");
+			}
+		}
+
 		// 生成各种id
 		String userId = this.getCurrentUserId();
 		String transitId = this.getCurrentTransitId(userId);
 		String transportId = this.getTransportId(transitId);
-		String receiptId = this.getReceiptId(transitId);
 
 		// 计算运费
 		double fare = this.cost(barIDs.size());
@@ -73,7 +80,7 @@ public class TransitLoadingReceipt implements ReceiptService {
 		barIdsCopy.addAll(barIDs);
 		po.setBarIds(barIdsCopy);
 		po.setMakePerson(userId);
-		po.setId(receiptId);
+		po.setId(transportId);// 汽运编号作为单据id
 		po.setMakeTime(TimeTool.getDate());
 		po.setType(ReceiptType.TRANSIT_LOADING_RECEIPT);
 
@@ -89,16 +96,7 @@ public class TransitLoadingReceipt implements ReceiptService {
 			deliver.submit(barId);
 		}
 
-		// 保存条形码号供到达单使用
-		BarIdList barIds = new BarIdList();
-		ArrayList<String> barIdsCopy2 = new ArrayList<>();
-		barIdsCopy2.addAll(barIDs);
-		AgencyInfo agencyService = new Transit();
-		String fromAgency = agencyService.getName(transitId);// 出发地名称
-		System.out.println(info.getDestinationId());
-		String destination = agencyService.getId(info.getDestinationId());// 到达地id
-		BarIdsPO list = new BarIdsPO(barIdsCopy2, receiptId, fromAgency, destination);
-		barIds.addBarIds(list);
+		
 
 		return new ResultMessage(Result.SUCCESS, fare + "");
 	}
@@ -128,12 +126,6 @@ public class TransitLoadingReceipt implements ReceiptService {
 		double price = priceService.getCarPrice();
 		double cost = weight * distance * price;
 		return cost;
-	}
-
-	private String getReceiptId(String transitId) {
-		ReceiptID id = new ReceiptID();
-		String receiptID = id.getID(transitId, IdType.TRANSIT_LOADING_RECEIPT);
-		return receiptID;
 	}
 
 	/**
@@ -199,9 +191,9 @@ public class TransitLoadingReceipt implements ReceiptService {
 				validResult.setMessage("系统中还没有订单" + barID + "的信息哦~");
 				return validResult;
 			}
-			
-			if(isRightTrail(barID))
-				return new ResultMessage(Result.FAIL,"订单号是不是填错了~");
+
+			if (isRightTrail(barID))
+				return new ResultMessage(Result.FAIL, "订单号是不是填错了~");
 		}
 
 		// 验证info
@@ -216,20 +208,19 @@ public class TransitLoadingReceipt implements ReceiptService {
 
 		return validResult;
 	}
-	
-	private boolean isRightTrail(String barId){
-		String currentAgency=this.getCurrentTransitId(getCurrentUserId());
-		
-		Deliver deliver=new Deliver();
-		DeliverStateVO vo=deliver.getDeliverState(barId);
-		
-		
-		if(vo==null)//物流信息不存在
+
+	private boolean isRightTrail(String barId) {
+		String currentAgency = this.getCurrentTransitId(getCurrentUserId());
+
+		Deliver deliver = new Deliver();
+		DeliverStateVO vo = deliver.getDeliverState(barId);
+
+		if (vo == null)// 物流信息不存在
 			return false;
-		else if(!vo.nextAgency.equals(currentAgency))//下个机构id不是当前机构
+		else if (!vo.nextAgency.equals(currentAgency))// 下个机构id不是当前机构
 			return false;
-		//营业厅装车单在快递员揽件或者营业厅有到达单之后
-		else if(vo.state!=DeliveryState.INVENTORY_OUT)
+		// 先入库再装车再出库
+		else if (vo.state != DeliveryState.INVENTORY_IN)
 			return false;
 		return true;
 	}
@@ -240,14 +231,22 @@ public class TransitLoadingReceipt implements ReceiptService {
 		LoadInformation info = ((TransitLoadSheetVO) vo).getTransitLoadInformation();
 
 		Deliver deliver = new Deliver();
-		AgencyInfo transit = new Transit();
+		AgencyInfo agencyService = new Transit();
 
+		String transitName = agencyService.getName(info.getAgencyId());
+		String destination = agencyService.getId(info.getDestinationId());
 		for (String barId : barIds) {
-			String transitName = transit.getName(info.getAgencyId());
-			String destination=transit.getId(info.getDestinationId());
 			String trail = transitName + "已发出，下一站" + info.getDestinationId() + " " + info.getTime();
-			deliver.updateDeliverInfo(barId, trail, DeliveryState.TRANSIT_OUT,destination);
+			deliver.updateDeliverInfo(barId, trail, DeliveryState.TRANSIT_OUT, destination);
 		}
+
+		// 保存条形码号供到达单使用
+		BarIdList idService = new BarIdList();
+		ArrayList<String> ids = new ArrayList<>();
+		ids.addAll(barIds);
+		BarIdsPO list = new BarIdsPO(ids, info.getTransportId(), transitName, destination);
+		list.setType(TransportType.CAR);
+		idService.addBarIds(list);
 
 		return new ResultMessage(Result.SUCCESS);
 	}

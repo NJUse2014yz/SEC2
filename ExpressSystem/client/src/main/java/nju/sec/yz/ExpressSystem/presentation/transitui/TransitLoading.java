@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -29,6 +30,7 @@ import nju.sec.yz.ExpressSystem.common.LoadInformation;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.presentation.DateChooser;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.PositionVO;
 import nju.sec.yz.ExpressSystem.vo.TransitLoadSheetVO;
@@ -38,7 +40,6 @@ public class TransitLoading extends JPanel{
 	
 	DeliverBlService deliverblservice=new DeliverController();
 	private AgencyBlService manager=new ManagerController();
-	
 	private ClientControler maincontrol;
 	private TransitButtonComponents tbc;
 	
@@ -47,15 +48,17 @@ public class TransitLoading extends JPanel{
 	private JTextField carId;
 	private JTextField officerId;
 	private JTextField driverId;
-	private JTable barId;
-	private TableModel model;
-	
-	private JLabel warning=new JLabel();
+	private newTable barId;
+	private JLabel warning;
 	private JLabel transportId;
 	private JLabel fare;
+	private Vector<Vector<String>> data=new Vector<Vector<String>>();
+	private Vector<String> name=new Vector<String>();
 	
 	private DateChooser date;
 	
+	private ImageIcon confirmIcon = new ImageIcon("graphic/deliver/button/confirm.png");
+
 	public TransitLoading(ClientControler maincontrol,TransitButtonComponents tbc) {
 		this.maincontrol=maincontrol;
 		this.tbc=tbc;
@@ -63,13 +66,10 @@ public class TransitLoading extends JPanel{
 		tbc.iniTransit();
 		
 		initTransitLoading();
-		
-		
 	}
 	private void initTransitLoading() {
 		setLayout(null);
 		setSize(490, 550);
-		setVisible(true);
 		
 		date=new DateChooser(this, 220, 81);
 		
@@ -105,126 +105,86 @@ public class TransitLoading extends JPanel{
 		driverId.setBounds(368, 136, 90, 18);
 		add(driverId);
 		
+		transportId = new JLabel();
+		transportId.setBounds(290, 165, 140, 30);
+		transportId.setForeground(Color.GRAY);
+		transportId.setFont(new Font("Dialog", 0, 18));
+		transportId.setVisible(false);
+		add(transportId);
 		
+		name.add("订单条形码号");
 		
-		String[][] tableData = {{"1",""}};
-		String[] columnTitle = {"编号","订单条形码号"};  
-			      //以二维数组和一维数组来创建一个JTable对象  
+		barId = new newTable(data,name,this,true);
+		barId.setBounds(141,218,321,191);
+		barId.initialBlank(2);
+		barId.join();
 		
-				model = new DefaultTableModel(tableData,columnTitle);
-				barId = new JTable(model);
-				barId.getColumnModel().getColumn(0).setMaxWidth(30);
-
-//			      barId = new JTable(tableData , columnTitle);  
-//			      model=barId.getModel();
-			      //将JTable对象放在JScrollPane中，并将该JScrollPane放在窗口中显示出来  
-			      JScrollPane jsc=new JScrollPane(barId);  
-			      jsc.setVisible(true);
-			      jsc.setBounds(141,218,321,191);
-			      add(jsc);
-			
-			
-			
-			//使得表格大小随订单信息的填入而改变
-			model.addTableModelListener(new TableModelListener(){
-				@Override
-				public void tableChanged(TableModelEvent e) {
-					// TODO Auto-generated method stub
-					int num=model.getRowCount();
-					String temp=(String) model.getValueAt(num-1, 1);
-					if(temp!=""){
-						String[] conponent={Integer.toString(num+1),""};
-						((DefaultTableModel) model).addRow(conponent); 
-					}
+		fare = new JLabel();
+		fare.setBounds(180, 192, 70, 30);
+		fare.setForeground(Color.GRAY);
+		fare.setFont(new Font("Dialog", 0, 18));
+		fare.setVisible(false);
+		add(fare);
+		
+		warning=new JLabel();
+		warning.setBounds(198, 490, 463 - 198, 30);
+		warning.setFont(new Font("Dialog", 1, 15));
+		warning.setForeground(Color.red);
+		warning.setVisible(false);
+		add(warning);
+		
+		confirm = new JButton(confirmIcon);
+		confirm.setBounds(388, 419, 76, 27);
+		confirm.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				// 判断必填项是否填写完成
+				if ((carId.getText().equals("")) || (driverId.getText().equals(""))
+						|| (officerId.getText().equals("")) ) {
+					warning.setText("尚未完成对必填项的填写");
+					warning.setVisible(false);
 					repaint();
-				}
-			});
-			
-			
-			/*
-			 * 确定
-			 */
-			ImageIcon cinfirmIcon = new ImageIcon("graphic/deliver/button/confirm.png");
-			confirm = new JButton(cinfirmIcon);
-			confirm.setBounds(388, 419, 76, 27);
-			add(confirm);
-			setVisible(true);
-
-			confirm.addMouseListener(new MouseAdapter() {
-				public void mouseClicked(MouseEvent e) {
-					// 判断必填项是否填写完成
-					if ((carId.getText().equals("")) || (driverId.getText().equals(""))
-							|| (officerId.getText().equals("")) ) {
-						warning.setText("尚未完成对必填项的填写");
-						warning.setBounds(198, 490, 463 - 198, 30);
-						warning.setFont(new Font("Dialog", 1, 15));
-						warning.setForeground(Color.red);
-						warning.setVisible(true);
-						add(warning);
-						repaint();
-					} else {
-						ArrayList<String> BarIdArray=new ArrayList<String>();
-						for(int i=0;i<barId.getRowCount()-1;i++){
-							BarIdArray.add((String) barId.getValueAt(i, 1));
-						}
-						//System.out.println(BarIdArray.get(3));
+				} else {
+					ArrayList<String> BarIdArray=new ArrayList<String>();
+					for(int i=0;i<barId.getRowCount()-1;i++){
+						BarIdArray.add(barId.getValueAt(i,0,false));
+					}
 					TransitLoadSheetVO vo=new TransitLoadSheetVO();
-						//destinationId项不存在，用null写入
-					LoadInformation loadInf = new LoadInformation(date.getTime(),null, agencyId.getSelectedItem().toString(),
-							 carId.getText(), officerId.getText(), driverId.getText());	
+					//destinationId项不存在，用null写入
+					LoadInformation loadInf = new LoadInformation(
+							date.getTime(), null, agencyId.getSelectedItem().toString(),
+							carId.getText(), officerId.getText(),driverId.getText());
 					vo.setTransitLoadInformation(loadInf);
 					vo.setBarIds(BarIdArray);
 					ResultMessage result=deliverblservice.transitLoadingReceipt(vo);
 					//成功
 					if(result.getResult()==Result.SUCCESS){
 						warning.setText("提交成功");
-						warning.setBounds(270, 490, 70, 30);
-						warning.setFont(new Font("Dialog", 1, 15));
-						warning.setForeground(Color.red);
 						warning.setVisible(true);
-						add(warning);
 						
-						fare = new JLabel();
 						fare.setText(Double.toString(loadInf.getFare()) + "元");
-						fare.setBounds(180, 192, 70, 30);
-						fare.setForeground(Color.GRAY);
-						fare.setFont(new Font("Dialog", 0, 18));
 						fare.setVisible(true);
-						add(fare);
-						
-						transportId = new JLabel();
+
 						transportId.setText(loadInf.getTransportId());
-						transportId.setBounds(290, 165, 140, 30);
-						transportId.setForeground(Color.GRAY);
-						transportId.setFont(new Font("Dialog", 0, 18));
-						transportId.setVisible(true);
-						add(transportId);
-						
-						
+						transportId.setVisible(false);
+
 						repaint();
 					}else{
 						//失败
 						warning.setText(result.getMessage());
-						warning.setBounds(138, 490, 463 - 138, 30);
-						warning.setFont(new Font("Dialog", 1, 15));
-						warning.setForeground(Color.red);
-						add(warning);
+						warning.setVisible(true);
 						repaint();
 					}
-					}
 				}
-			});	
-
+			}
+		});	
+		add(confirm);
+			
+		setVisible(true);
 	}
-	
 	
 	@Override
 	public void paintComponent(Graphics g) {
-
 		Image img01 = new ImageIcon("graphic/transit/background/background02.png").getImage();
-
 		g.drawImage(img01, 0, 0, 490, 550, null);
-
 	}
-
 }

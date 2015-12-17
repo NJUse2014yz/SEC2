@@ -10,6 +10,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
@@ -26,6 +27,7 @@ import nju.sec.yz.ExpressSystem.bl.managerbl.ManagerController;
 import nju.sec.yz.ExpressSystem.blservice.accountBlService.FinanceBlSevice;
 import nju.sec.yz.ExpressSystem.common.PaymentInformation;
 import nju.sec.yz.ExpressSystem.presentation.DateChooser;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.AccountControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.PaymentSheetVO;
@@ -44,15 +46,11 @@ public class AccountInComeUi extends JPanel{
 	private String[] positions;
 	private DateChooser date;
 	private JComboBox choose;
-	private JTable table;
-	private JScrollPane scroll;
+	private newTable table;
 //	private JButton back;
 	private JButton confirm;
-	private String[] name={"收款日期","收款单位","收款人","收款金额","收款地点"};
-	private String[][] data={{"20151017","426.5","354678998764","2352616","2352616"},
-			{"20140403","11bgfs","fgea452q","2352616","2352616"},
-			{"rea","2352616","hes","rea","245367776"},
-			{"20151017","2352616","2352616","2352616","354678998764"}};
+	private Vector<String> name=new Vector<String>();
+	private Vector<Vector<String>> data=new Vector<Vector<String>>();
 	
 	private static final int total_x=192;
 	private static final int total_y=416;
@@ -68,10 +66,6 @@ public class AccountInComeUi extends JPanel{
 	private static int scroll_y=122;
 	private static int scroll_w=317;
 	private static int scroll_h=267;
-//	private static int back_x=376;
-//	private static int back_y=404;
-//	private static int back_w=80;
-//	private static int back_h=25;
 	private static int confirm_x=412;
 	private static int confirm_y=95;
 	private static int confirm_w=72;
@@ -109,26 +103,12 @@ public class AccountInComeUi extends JPanel{
 			}
 		}
 		
-//		PaymentVO pv=finance.checkReceipt(date.getTime(), positions[choose.getSelectedIndex()]);
-//		if(pv!=null)
-//		{
-//			List<PaymentSheetVO> sheetlist=pv.paymentList;
-//			if(sheetlist!=null)
-//			{
-//				int n=0;
-//				data=new String[n][6];
-//				PaymentInformation psvoi;
-//				for(int i=0;i<sheetlist.size();i++)
-//				{
-//					psvoi=sheetlist.get(i).getPaymentInformation();
-//					data[i][0]=psvoi.getTime();
-//					data[i][1]=psvoi.getPositionId();
-//					data[i][2]=psvoi.getInDeliverId();
-//					data[i][3]=Double.toString(psvoi.getAmount());
-//					data[i][4]="";
-//				}
-//			}
-//		}
+		name.add("收款日期");
+		name.add("收款单位");
+		name.add("收款人");
+		name.add("收款金额");
+		name.add("收款地点");
+		
 		initAccountUi();
 	}
 	private void initAccountUi() {
@@ -142,12 +122,10 @@ public class AccountInComeUi extends JPanel{
 		choose.setBounds(choose_x, choose_y, choose_w, choose_h);
 		add(choose);
 		
-		table=new JTable(data,name);
-		table.setRowHeight(20);
-		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		scroll=new JScrollPane(table);
-		scroll.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
-		add(scroll);
+		table=new newTable(data,name,this,false);
+		table.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
+		table.stopAutoRewidth();
+		table.join();
 		
 		confirm=new JButton(confirmIcon);
 		confirm.setBounds(confirm_x, confirm_y, confirm_w, confirm_h);
@@ -155,38 +133,16 @@ public class AccountInComeUi extends JPanel{
 		confirm.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
 			{
-				remove(scroll);
 				PaymentVO pv=finance.checkReceipt(date.getTime(), positions[choose.getSelectedIndex()]);
 				if(pv!=null)
 				{
 					List<PaymentSheetVO> sheetlist=pv.paymentList;
-					if(sheetlist!=null)
-					{
-						int n=0;
-						data=new String[n][6];
-						PaymentInformation psvoi;
-						for(int i=0;i<sheetlist.size();i++)
-						{
-							psvoi=sheetlist.get(i).getPaymentInformation();
-							data[i][0]=psvoi.getTime();
-							data[i][1]=psvoi.getPositionId();
-							data[i][2]=psvoi.getInDeliverId();
-							data[i][3]=Double.toString(psvoi.getAmount());
-							data[i][4]="";
-						}
-					}
+					changeData(sheetlist);
 				}
 				else
 				{
-					data=new String[][]{{"","","","",""}};
+					changeData(new ArrayList<PaymentSheetVO>());
 				}
-				table=new JTable(data,name);
-				table.setRowHeight(20);
-				scroll=new JScrollPane(table);
-				scroll.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
-				total.setText(Double.toString(pv.sum));
-				total.setVisible(true);
-				add(scroll);
 			}
 		});
 		
@@ -197,17 +153,26 @@ public class AccountInComeUi extends JPanel{
 		add(total);
 		total.setVisible(false);
 		
-//		back=new JButton(backIcon);
-//		back.setBounds(back_x,back_y,back_w,back_h);
-//		back.addMouseListener(new MouseAdapter(){
-//			public void mouseClicked(MouseEvent e)
-//			{
-//				
-//			}
-//		});
-//		add(back);
-		
 		setVisible(true);
+	}
+	private void changeData(List<PaymentSheetVO> sheetlist)
+	{
+		data.removeAllElements();
+		if(sheetlist!=null)
+		{
+			PaymentInformation psvoi;
+			for(int i=0;i<sheetlist.size();i++)
+			{
+				psvoi=sheetlist.get(i).getPaymentInformation();
+				Vector<String> vector=new Vector<String>();
+				vector.add(psvoi.getTime());
+				vector.add(psvoi.getPositionId());
+				vector.add(psvoi.getInDeliverId());
+				vector.add(Double.toString(psvoi.getAmount()));
+				vector.add("");
+				data.add(vector);
+			}
+		}
 	}
 	@Override
 	public void paintComponent(Graphics g) {

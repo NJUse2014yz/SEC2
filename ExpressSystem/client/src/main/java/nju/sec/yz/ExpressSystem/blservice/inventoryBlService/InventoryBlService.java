@@ -4,12 +4,19 @@ import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.InventoryInSheetVO;
 import nju.sec.yz.ExpressSystem.vo.InventoryListVO;
 import nju.sec.yz.ExpressSystem.vo.InventoryOutSheetVO;
+import nju.sec.yz.ExpressSystem.vo.TransitOutVO;
 
 /**
  * @author xiaosaisai
  * 库存管理
  */
 public interface InventoryBlService {
+	/**
+	 * 前置条件：中转单出发地需为当前用户中转中心
+	 * 输入中转单或汽运编号获得条形码号列表，目的地，运输方式
+	 */
+	public TransitOutVO getBarIdList(String transitSheetId);
+	
 	//库存查看
 	public InventoryListVO observeStock(String begin,String end);
 	//库存盘点
