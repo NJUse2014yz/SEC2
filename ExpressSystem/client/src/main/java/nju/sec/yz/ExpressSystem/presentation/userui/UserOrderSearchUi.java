@@ -74,7 +74,7 @@ public class UserOrderSearchUi extends JPanel {
 		setSize(490, 550);
 		setVisible(true);
 
-		confirmButton = new JButton(searchIcon);
+		confirmButton = new JButton(SearchIcon);
 		confirmButton.setBounds(441, 72, 23, 21);
 		add(confirmButton);
 

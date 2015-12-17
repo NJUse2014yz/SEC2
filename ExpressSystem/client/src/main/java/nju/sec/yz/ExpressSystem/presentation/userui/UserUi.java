@@ -65,7 +65,10 @@ public class UserUi extends JPanel{
 	private ImageIcon login_button=new ImageIcon("graphic/main/button/login_button.png");
 	private ImageIcon search_button=new ImageIcon("graphic/main/button/search_button.png");
 	private Image background = new ImageIcon("graphic/main/background/main_background.png").getImage();
+	// 退出系统
+	private JButton exitButton;
 	
+	ImageIcon ExitIcon = new ImageIcon("graphic/common/exit.gif");
 	public UserUi(ClientControler controler)
 	{
 		super();
@@ -165,6 +168,18 @@ public class UserUi extends JPanel{
 			}
 		});
 		this.add(search);
+		
+		exitButton= new JButton(ExitIcon);
+		exitButton.setOpaque(false);
+		exitButton.setBorder(null);
+		exitButton.setContentAreaFilled(false); 
+		exitButton.setBounds(490-19,0,19,19);
+		add(exitButton);
+		exitButton.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				System.exit(0);
+			}
+		});
 //		this.repaint();
 		this.setVisible(true);
 	}
