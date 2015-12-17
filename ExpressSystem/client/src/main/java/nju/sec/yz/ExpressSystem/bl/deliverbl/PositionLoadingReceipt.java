@@ -236,6 +236,8 @@ public class PositionLoadingReceipt implements ReceiptService {
 		Deliver deliver = new Deliver();
 		DeliverStateVO vo = deliver.getDeliverState(barId);
 
+		System.out.println("agency:"+currentAgency);
+		System.out.println(vo.state);
 		if (vo == null)// 物流信息不存在
 			return false;
 		else if (!vo.nextAgency.equals(currentAgency))// 下个机构id不是当前机构
@@ -311,7 +313,7 @@ public class PositionLoadingReceipt implements ReceiptService {
 		LoadInformation info = ((OfficeLoadSheetVO) vo).getOfficeLoadInformation();
 
 		String message = "到达地：" + info.getDestinationId() + StringTool.nextLine();
-		message = message + "装运订单：" + StringTool.nextLine();
+		message = message + "装运订单：" ;
 		for (String barId : receipt.getBarIds()) {
 			message = message + "	" + barId + StringTool.nextLine();
 		}
