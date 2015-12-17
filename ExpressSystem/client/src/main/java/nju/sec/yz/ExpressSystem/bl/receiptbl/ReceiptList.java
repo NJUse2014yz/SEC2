@@ -32,6 +32,7 @@ import nju.sec.yz.ExpressSystem.dataservice.receiptDataSevice.ReceiptDataService
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.vo.MessageVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
+import nju.sec.yz.ExpressSystem.vo.SendSheetVO;
 
 /**
  * 表单列表的领域模型对象
@@ -181,6 +182,7 @@ public class ReceiptList implements ReceiptSaveService{
 		try {
 			if(this.getSingle(vo.getId())==null)
 				return new ResultMessage(Result.FAIL,"单据不存在~");
+			System.out.println(((SendSheetVO)vo).getSendInformation().getCostForAll());
 			ReceiptService receipt=RECEIPT_MAP.get(vo.getType()).newInstance();
 			//修改信息有误
 			ResultMessage validResult=receipt.isValid(vo);
