@@ -122,6 +122,8 @@ public class User implements UserInfo{
 		UserVO vo=null;
 		try {
 			UserPO	po=data.find(id);
+			if(po==null)
+				return null;
 			vo=changePoToVo(po);
 		} catch (RemoteException e) {
 			RMIExceptionHandler.handleRMIException();
