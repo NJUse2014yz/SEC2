@@ -253,7 +253,9 @@ public class PositionLoadingReceipt implements ReceiptService {
 
 		Deliver deliver = new Deliver();
 		AgencyInfo agencyService = new Transit();
+		
 		String positionName = agencyService.getName(info.getAgencyId());
+		
 		String nextAgency = agencyService.getId(info.getDestinationId());// 获得下一个轨迹id
 		for (String barId : barIds) {
 			String trail = positionName + "已发出，下一站" + info.getDestinationId() + " " + info.getTime();
@@ -264,9 +266,9 @@ public class PositionLoadingReceipt implements ReceiptService {
 		BarIdList idService = new BarIdList();
 		ArrayList<String> ids = new ArrayList<>();
 		ids.addAll(barIds);
-		String fromAgency = agencyService.getName(positionName);// 出发地名称
-		String destination = agencyService.getId(info.getDestinationId());// 到达地id
-		BarIdsPO list = new BarIdsPO(ids, info.getTransportId(), fromAgency, destination);
+		
+		
+		BarIdsPO list = new BarIdsPO(ids, info.getTransportId(), positionName, nextAgency);
 		list.setType(TransportType.CAR);
 		idService.addBarIds(list);
 
