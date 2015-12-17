@@ -102,6 +102,27 @@ public class TransitReceive extends JPanel {
 						warning.setVisible(true);
 						add(warning);
 						repaint();
+<<<<<<< HEAD
+					} else {
+						BarIdsVO vo = deliverBlService
+								.getBarIdList(transitSheetId.getText());
+						ArrayList<String> Ids = (ArrayList<String>) vo.barIds;
+						changeData(Ids);
+						
+						departure = new JLabel();
+						departure.setText(vo.fromAgency);
+						departure.setBounds(204, 106, 71, 18);
+						departure.setFont(new Font("Dialog", 1, 15));
+						departure.setForeground(Color.LIGHT_GRAY);
+						add(departure);
+
+						repaint();
+					}
+				}
+			}
+		});	
+
+=======
 		         }else{
 		        	BarIdsVO vo= deliverBlService.getBarIdList(transitSheetId.getText());
 		        	ArrayList Ids=(ArrayList) vo.barIds;
@@ -162,6 +183,7 @@ public class TransitReceive extends JPanel {
 //		});
 		
 		
+>>>>>>> 2ddb06c41918c353addbe77b2abef5585534170e
 		ImageIcon cinfirmIcon = new ImageIcon("graphic/deliver/button/confirm.png");
 		confirm = new JButton(cinfirmIcon);
 		confirm.setBounds(389, 334, 76, 27);

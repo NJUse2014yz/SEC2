@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -40,7 +39,9 @@ import nju.sec.yz.ExpressSystem.common.ToAndFromInformation;
 import nju.sec.yz.ExpressSystem.common.TransitCarInformation;
 import nju.sec.yz.ExpressSystem.common.TransitFlightInformation;
 import nju.sec.yz.ExpressSystem.common.TransitTrainInformation;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJCombo;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.DeliverySheetVO;
 import nju.sec.yz.ExpressSystem.vo.InventoryInSheetVO;
@@ -69,12 +70,13 @@ public class ManagerReceiptList extends JPanel {
 	private Object[][] TableData = {};
 	private String[] title;
 
-	private JButton pass;
-	private JButton passAll;
+	private newJBut pass;
+	private newJBut passAll;
+	private newJBut modify;
 
 	private ArrayList<ReceiptVO> volist;
 
-	private JLabel warning = new JLabel();
+	private newJLabel warning = new newJLabel();
 
 	public ManagerReceiptList(ClientControler maincontroler, ManagerButtonComponent mbc) {
 		this.maincontroler = maincontroler;
@@ -88,6 +90,8 @@ public class ManagerReceiptList extends JPanel {
 		setLayout(null);
 		setSize(490, 550);
 		setVisible(true);
+	
+		warning.setForeground(Color.red);
 
 		String[] reitype = { "收款单", "付款单", "寄件单", "营业厅装车单", "营业厅收件单", "营业厅派送单", "汽车中转单", "火车中转单", "飞机中转单", "中转中心接收单",
 				"中转中心装车单", "入库单", "出库单" };
@@ -170,48 +174,30 @@ public class ManagerReceiptList extends JPanel {
 		});
 
 
-		ImageIcon passIcon = new ImageIcon("graphic/manager/button/pass.png");
-		pass = new JButton(passIcon);
+//		ImageIcon passIcon = new ImageIcon("graphic/manager/button/pass.png");
+		pass = new newJBut("通过");
 		pass.setBounds(467 - 75, 262, 75, 27);
 		add(pass);
 
 		pass.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
+				System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 				int[] deletelines = table.getSelectedRows();
 				for (int c = 0; c < deletelines.length; c++) {
-
-					System.out.println(deletelines[0]);
-					ReceiptVO newVO=modifyVO(deletelines[c], volist.get(deletelines[c]).getId());
-					ResultMessage modifyresult=receipt.modify(newVO);
-					ResultMessage approveresult = receipt.approve(newVO);
-					if (modifyresult.getResult() == Result.FAIL) {
+					ResultMessage tempresult = receipt
+							.approve(modifyVO(deletelines[c], volist.get(deletelines[c]).getId()));
+					
+					if (tempresult.getResult() == Result.FAIL) {
 						// 如果失败会跳出，显示失败
-						System.out.println("modifysuccess!!!!!!!!!!!!!!!");
-						warning.setText(modifyresult.getMessage());
+						warning.setText(tempresult.getMessage());
 						warning.setBounds(138, 490, 463 - 138, 30);
-						warning.setFont(new Font("Dialog", 1, 15));
-						warning.setForeground(Color.red);
 						add(warning);
 						repaint();
 						break;
-					} else if(approveresult.getResult() == Result.FAIL){
-						System.out.println("approvesuccess!!!!!!!!!!!!!!!");
-						// 如果失败会跳出，显示失败
-						warning.setText(approveresult.getMessage());
-						warning.setBounds(138, 490, 463 - 138, 30);
-						warning.setFont(new Font("Dialog", 1, 15));
-						warning.setForeground(Color.red);
-						add(warning);
-						repaint();
-						break;
-					}else{
-						System.out.println("success!!!!!!!!!!!!!!!");
+					} else {
 						// 如果成功最后才显示成功
 						warning.setText("提交成功");
 						warning.setBounds(270, 490, 70, 30);
-						warning.setFont(new Font("Dialog", 1, 15));
-						warning.setForeground(Color.red);
-						warning.setVisible(true);
 						add(warning);
 
 						repaint();
@@ -222,13 +208,15 @@ public class ManagerReceiptList extends JPanel {
 			
 		});
 
-		ImageIcon passAllIcon = new ImageIcon("graphic/manager/button/passAll.png");
-		passAll = new JButton(passAllIcon);
+//		ImageIcon passAllIcon = new ImageIcon("graphic/manager/button/passAll.png");
+		passAll = new newJBut("全部通过");
 		passAll.setBounds(467 - 160, 262, 75, 27);
 		add(passAll);
 
 		passAll.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
+				System.out.println("BBBBBBBBBBBBBBBBBBBBBB");
+				int[] changedlines = table.getSelectedRows();
 				for (int c = 0; c < volist.size(); c++) {
 					
 					ResultMessage tempresult = receipt
@@ -237,23 +225,45 @@ public class ManagerReceiptList extends JPanel {
 						// 如果失败会跳出，显示失败
 						warning.setText(tempresult.getMessage());
 						warning.setBounds(138, 490, 463 - 138, 30);
-						warning.setFont(new Font("Dialog", 1, 15));
-						warning.setForeground(Color.red);
 						add(warning);
 						repaint();
 						break;
-					} else {
-						// 如果成功最后才显示成功
+					} else{// 如果成功最后才显示成功
 						warning.setText("提交成功");
 						warning.setBounds(270, 490, 70, 30);
-						warning.setFont(new Font("Dialog", 1, 15));
-						warning.setForeground(Color.red);
-						warning.setVisible(true);
 						add(warning);
 
-						repaint();
+						repaint();	
+						}
+				}
+			}
+		});
+		
+		modify = new newJBut("修改");
+		modify.setBounds(467 - 245, 262, 75, 27);
+		add(modify);
+		
+		modify.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("CCCCCCCCCCCCCCCCCCCCCCCC");
+				int[] changedlines = table.getSelectedRows();
+				warning.setText("提交成功");
+				warning.setBounds(270, 490, 70, 30);
+				add(warning);
+				warning.setVisible(true);
+				for (int c = 0; c < changedlines.length; c++) {
+					ResultMessage tempresult = receipt
+							.modify(modifyVO(changedlines[c], volist.get(changedlines[c]).getId()));
+					System.out.println("KKKKKKKKKKKKKKKKK");
+					if (tempresult.getResult() == Result.FAIL) {
+						// 如果失败会跳出，显示失败
+						warning.setText(tempresult.getMessage());
+						warning.setBounds(138, 490, 463 - 138, 30);
+						add(warning);
+						break;
 					}
 				}
+				repaint();
 			}
 		});
 
