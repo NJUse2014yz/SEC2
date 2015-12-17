@@ -124,6 +124,9 @@ public class AdminstraterDeleteUi extends JPanel{
 						table.resetData();
 					}
 				}
+				else{
+					warning.setText("Id不存在");
+				}
 			}
 			}
 		});
