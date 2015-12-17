@@ -10,7 +10,7 @@ public class OutVO extends ReceiptVO{
 
 	private OutInformation outInformation;
 
-	public OutVO(String date, int num, String person, String account, String reason, String comments) {
+	public OutVO(String date, double num, String person, String account, String reason, String comments) {
 		super();
 		outInformation=new OutInformation();
 		outInformation.setAccount(account);
