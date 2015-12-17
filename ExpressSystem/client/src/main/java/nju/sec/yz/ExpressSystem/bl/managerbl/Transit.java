@@ -285,6 +285,9 @@ public class Transit implements AgencyInfo, Initialable<TransitVO, TransitPO> {
 		Position position=new Position();
 		PositionVO vo2=position.findPosition(id);
 		
+		if(vo2==null)
+			return null;
+		
 		return vo2.name;
 	}
 
