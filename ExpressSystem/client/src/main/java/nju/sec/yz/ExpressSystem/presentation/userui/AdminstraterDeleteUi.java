@@ -10,12 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import nju.sec.yz.ExpressSystem.bl.userbl.UserController;
@@ -23,6 +22,8 @@ import nju.sec.yz.ExpressSystem.blservice.userBlService.UserBlService;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.Status;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.AdminstraterControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
@@ -37,9 +38,9 @@ public class AdminstraterDeleteUi extends JPanel{
 	private JTextField input;
 	private JButton search;
 	private newTable table;
-	private JButton back;
-	private JButton confirm;
-	private JLabel warning;
+	private newJBut back;
+	private newJBut confirm;
+	private newJLabel warning=new newJLabel();
 	private Vector<String> name=new Vector<String>();
 	private Vector<Vector<String>> data=new Vector<Vector<String>>();
 	private List<UserVO> uvl;
@@ -56,9 +57,9 @@ public class AdminstraterDeleteUi extends JPanel{
 	private static final int scroll_y=98;
 	private static final int scroll_w=319;
 	private static final int scroll_h=191;
-	private static final int back_x=291;
+	private static final int back_x=261;
 	private static final int back_y=300;
-	private static final int back_w=80;
+	private static final int back_w=110;
 	private static final int back_h=25;
 	private static final int confirm_x=385;
 	private static final int confirm_y=300;
@@ -95,14 +96,23 @@ public class AdminstraterDeleteUi extends JPanel{
 		setSize(490,550);
 		
 		input=new JTextField();
+		input.setBorder(BorderFactory.createLineBorder(Color.white,0));
 		input.setBounds(input_x, input_y, input_w, input_h);
 		add(input);
 		
+		add(warning);
+		warning.setVisible(false);
+		
 		search=new JButton(searchIcon);
 		search.setBounds(search_x, search_y, search_w, search_h);
+		search.setBorderPainted(false);
 		search.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
 			{
+				if(input.getText().equals("")){
+					warning.NotFilled();
+					repaint();
+				}else{
 				UserVO uv=userBl.getSingle(input.getText());
 				if(uv!=null)
 				{
@@ -115,6 +125,7 @@ public class AdminstraterDeleteUi extends JPanel{
 					}
 				}
 			}
+			}
 		});
 		add(search);
 		
@@ -122,7 +133,7 @@ public class AdminstraterDeleteUi extends JPanel{
 		table.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
 		table.join();
 		
-		back=new JButton(backIcon);
+		back=new newJBut("返回原列表");
 		back.setBounds(back_x, back_y, back_w, back_h);
 		back.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
@@ -134,34 +145,25 @@ public class AdminstraterDeleteUi extends JPanel{
 		});
 		add(back);
 		
-		confirm=new JButton(confirmIcon);
+		confirm=new newJBut("删除");
 		confirm.setBounds(confirm_x, confirm_y, confirm_w, confirm_h);
 		confirm.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
 			{
 				ResultMessage result=userBl.del(data.get(table.getSelectedRow()).get(0));
+				warning.Reply(result);
 				if(result.getResult()==Result.SUCCESS)
 				{
-					warning.setText("删除成功");
 					uvl=userBl.getAll();//用remove更好?
 					changeData(uvl);
 					table.resetData();
 				}
-				else
-				{
-					warning.setText(result.getMessage());
-				}
-				warning.setVisible(true);
+				repaint();
 			}
 		});
 		add(confirm);
 		
-		warning=new JLabel();
-		warning.setBounds(warning_x, warning_y, warning_w, warning_h);
-		warning.setFont(new Font("Dialog", 1, 15));
-		warning.setForeground(Color.red);
-		add(warning);
-		warning.setVisible(false);
+		
 		
 		setVisible(true);
 	}

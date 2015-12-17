@@ -13,6 +13,7 @@ public class newJText extends JTextField{
 	}
 	
 	public newJText(String str){
+		super(str);
 		iniText();
 	}
 	

@@ -14,13 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 import nju.sec.yz.ExpressSystem.bl.deliverbl.DeliverController;
 import nju.sec.yz.ExpressSystem.bl.managerbl.ManagerController;
@@ -28,10 +22,13 @@ import nju.sec.yz.ExpressSystem.blservice.deliverBlService.DeliverBlService;
 import nju.sec.yz.ExpressSystem.blservice.managerBlService.AgencyBlService;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
-import nju.sec.yz.ExpressSystem.common.TransitFlightInformation;
 import nju.sec.yz.ExpressSystem.common.TransitTrainInformation;
 import nju.sec.yz.ExpressSystem.common.TransportType;
 import nju.sec.yz.ExpressSystem.presentation.DateChooser;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJCombo;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJText;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.TransitSheetVO;
@@ -44,17 +41,17 @@ public class TransitReceiptTrain extends JPanel {
 	ClientControler maincontrol;
 	TransitButtonComponents tbc;
 
-	private JTextField trainId;
-	private JTextField carriageId;
-	private JTextField transiterId;
+	private newJText trainId;
+	private newJText carriageId;
+	private newJText transiterId;
 
-	private JComboBox departure;
-	private JComboBox destination;
+	private newJCombo departure;
+	private newJCombo destination;
 	private newTable barId;
-	private JButton confirm;
-	private JLabel trainTransitId;
-	private JLabel fare;
-	private JLabel warning = new JLabel();
+	private newJBut confirm;
+	private newJLabel trainTransitId;
+	private newJLabel fare;
+	private newJLabel warning = new newJLabel();
 	private DateChooser date;
 	
 	private Vector<Vector<String>> data=new Vector<Vector<String>>();
@@ -82,44 +79,37 @@ public class TransitReceiptTrain extends JPanel {
 			transitAgency[i] = trans.get(i).getName();
 		}
 
-		departure=new JComboBox(transitAgency);
-		departure.setBounds(195,56,85,20);
+		departure=new newJCombo(transitAgency);
+		departure.setBounds(195,56,110,20);
 		add(departure);
 		
-		destination=new JComboBox(transitAgency);
-		destination.setBounds(343,56,85,20);
+		destination=new newJCombo(transitAgency);
+		destination.setBounds(365,56,110,20);
 		add(destination);
 
-		trainId = new JTextField();
+		trainId = new newJText();
 		trainId.setBounds(192, 110, 184, 18);
 		add(trainId);
 
-		carriageId = new JTextField();
+		carriageId = new newJText();
 		carriageId.setBounds(192, 138, 141, 18);
 		add(carriageId);
 
-		transiterId = new JTextField();
+		transiterId = new newJText();
 		transiterId.setBounds(405, 138, 50, 18);
 		add(transiterId);
 
-		trainTransitId = new JLabel();
-		trainTransitId.setBounds(290, 165, 140, 30);
-		trainTransitId.setForeground(Color.GRAY);
-		trainTransitId.setFont(new Font("Dialog", 0, 18));
+		trainTransitId = new newJLabel();
+		trainTransitId.setBounds(290, 164, 140, 22);
 		trainTransitId.setVisible(false);
 		add(trainTransitId);
 		
-		fare = new JLabel();
-		fare.setBounds(180, 192, 70, 30);
-		fare.setForeground(Color.GRAY);
-		fare.setFont(new Font("Dialog", 0, 18));
+		fare = new newJLabel();
+		fare.setBounds(180, 190, 70, 22);
 		fare.setVisible(false);
 		add(fare);
 		
-		warning=new JLabel();
-		warning.setBounds(198, 490, 463 - 198, 30);
-		warning.setFont(new Font("Dialog", 1, 15));
-		warning.setForeground(Color.red);
+		warning=new newJLabel();
 		warning.setVisible(false);
 		add(warning);
 	
@@ -129,8 +119,8 @@ public class TransitReceiptTrain extends JPanel {
 		barId.initialBlank(1);
 		barId.join();
 		
-		ImageIcon cinfirmIcon = new ImageIcon("graphic/deliver/button/confirm.png");
-		confirm = new JButton(cinfirmIcon);
+//		ImageIcon cinfirmIcon = new ImageIcon("graphic/deliver/button/confirm.png");
+		confirm = new newJBut("确定");
 		confirm.setBounds(388, 419, 76, 27);
 		add(confirm);
 		setVisible(true);
@@ -140,9 +130,8 @@ public class TransitReceiptTrain extends JPanel {
 				// 判断必填项是否填写完成
 				if ((trainId.getText().equals("")) || (carriageId.getText().equals(""))
 						|| (transiterId.getText().equals(""))) {
-					warning.setText("尚未完成对必填项的填写");
-					warning.setVisible(true);
-					repaint();
+					warning.NotFilled();
+					
 				} else {
 					ArrayList<String> BarIdArray = new ArrayList<String>();
 					for (int i = 0; i < barId.getRowCount() - 1; i++) {
@@ -158,13 +147,10 @@ public class TransitReceiptTrain extends JPanel {
 					vo.setTransportType(TransportType.TRAIN);
 					vo.setTransitInformation(trainInf);
 					ResultMessage result = deliverblservice.transitTrainReceipt(vo);
+					warning.Reply(result);
 					// 成功
 					if (result.getResult() == Result.SUCCESS) {
 
-
-						warning.setText("提交成功");
-						warning.setVisible(true);
-					
 						String[] message=result.getMessage().split(" ");
 						fare.setText(message[0] + "元");
 						fare.setVisible(true);
@@ -172,14 +158,10 @@ public class TransitReceiptTrain extends JPanel {
 						trainTransitId.setText(message[1]);
 						trainTransitId.setVisible(true);
 						
-						repaint();
-					} else {
-						// 失败
-						warning.setText(result.getMessage());
-						warning.setVisible(true);
-						repaint();
+						confirm.setEnabled(false);
 					}
 				}
+				repaint();
 			}
 		});
 

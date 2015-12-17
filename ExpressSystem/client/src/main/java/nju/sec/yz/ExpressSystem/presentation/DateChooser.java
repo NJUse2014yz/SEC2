@@ -133,6 +133,7 @@ import javax.swing.event.AncestorListener;
          ImageIcon dateIcon = new ImageIcon("graphic/common/time.png");
          choose=new JButton(dateIcon);
          choose.setBounds(x+width,y,23,length);
+         choose.setBorderPainted(false);
          choose.setVisible(true);
          panel.add(choose);
          panel.add(showDate);

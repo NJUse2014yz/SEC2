@@ -4,21 +4,16 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -29,6 +24,10 @@ import nju.sec.yz.ExpressSystem.common.ArriveState;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.presentation.DateChooser;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJCombo;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJText;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.BarIdsVO;
 import nju.sec.yz.ExpressSystem.vo.TransitArriveSheetVO;
@@ -44,19 +43,20 @@ public class TransitReceive extends JPanel {
 	DeliverBlService deliverBlService = new DeliverController();
 	TransitButtonComponents tbc;
 
-	private JButton confirm;
+	private newJBut searchInf;
+	private newJBut confirm;
 	
 //	private JTextField departure;
-	private JLabel departure;
-	private JComboBox state;
-	private JTextField transitSheetId;
+	private newJLabel departure;
+	private newJCombo state;
+	private newJText transitSheetId;
 	// private JTextField transitId;
 
 	private JTable table;
 	private TableModel model;
 	private JScrollPane jsc;
 
-	private JLabel warning = new JLabel();
+	private newJLabel warning = new newJLabel();
 
 	private DateChooser date;
 
@@ -81,61 +81,38 @@ public class TransitReceive extends JPanel {
 //		transitId.setBounds(252, 136, 93, 15);
 //		add(transitId);
 		
-		transitSheetId=new JTextField();
+		transitSheetId=new newJText();
 		transitSheetId.setBounds(222, 58, 122, 18);
 		add(transitSheetId);
 		
-		//监听回车
-		transitSheetId.addKeyListener(new KeyAdapter(){ 
-		      public void keyPressed(KeyEvent e)    
+		searchInf=new newJBut("确定");
+		searchInf.setBounds(364,54,76,27);
+		add(searchInf);
+		
+		
+		add(warning);
+		
+		//监听对订单信息的搜索
+		searchInf.addMouseListener(new MouseAdapter(){ 
+		      public void mousePressed(MouseEvent e)    
 		      {    
-		    	  
-		        if(e.getKeyChar()==KeyEvent.VK_ENTER )  { //按回车键执行相应操作KeyEvent.VK_ENTER; 
-//		    	  if(transitSheetId.getText().toString().length()==11)
-		         System.out.println("!!!!!!!!!!!!!!!!!");
-		        	System.out.println(transitSheetId.getText().toString());
 		         if(deliverBlService.getBarIdList(transitSheetId.getText())==null){
 		        	 warning.setText("中转单号错误");
 						warning.setBounds(198, 490, 463 - 198, 30);
-						warning.setFont(new Font("Dialog", 1, 15));
 						warning.setForeground(Color.red);
 						warning.setVisible(true);
-						add(warning);
-						repaint();
-<<<<<<< HEAD
+
+						confirm.setVisible(false);
 					} else {
-						BarIdsVO vo = deliverBlService
-								.getBarIdList(transitSheetId.getText());
-						ArrayList<String> Ids = (ArrayList<String>) vo.barIds;
-						changeData(Ids);
-						
-						departure = new JLabel();
-						departure.setText(vo.fromAgency);
-						departure.setBounds(204, 106, 71, 18);
-						departure.setFont(new Font("Dialog", 1, 15));
-						departure.setForeground(Color.LIGHT_GRAY);
-						add(departure);
-
-						repaint();
-					}
-				}
-			}
-		});	
-
-=======
-		         }else{
 		        	BarIdsVO vo= deliverBlService.getBarIdList(transitSheetId.getText());
 		        	ArrayList Ids=(ArrayList) vo.barIds;
 		        	
-		        	departure=new JLabel();
-		        	departure.setText(vo.fromAgency);
+		        	departure=new newJLabel(vo.fromAgency);
 		    		departure.setBounds(204, 106, 71, 18);
-		    		departure.setFont(new Font("Dialog", 1, 15));
-		    		departure.setForeground(Color.LIGHT_GRAY);
 		    		add(departure);
 		    		
 		        	String[] sta={"完整","损坏","丢失"};
-		     		state=new JComboBox(sta);
+		     		state=new newJCombo(sta);
 		     		
 		     		Object[][] TableData=new Object[Ids.size()][3];
 		     		String[] columnTitle={"编号","快递单号","到达状态"};
@@ -159,33 +136,12 @@ public class TransitReceive extends JPanel {
 		     	      
 		     	      confirm.setVisible(true);
 		     		
-		     	      repaint();
 		         }
+		         repaint();
 		        } 
-		      } 
 		    });
 		
-		
-		
-		//使得表格大小随订单信息的填入而改变
-//		model.addTableModelListener(new TableModelListener(){
-//			@Override
-//			public void tableChanged(TableModelEvent e) {
-//				// TODO Auto-generated method stub
-//				int num=model.getRowCount();
-//				String temp=(String) model.getValueAt(num-1, 1);
-//				if(temp!=""){
-//					Object[] conponent={Integer.toString(num+1),""};
-//					((DefaultTableModel) model).addRow(conponent); 
-//				}
-//				repaint();
-//			}
-//		});
-		
-		
->>>>>>> 2ddb06c41918c353addbe77b2abef5585534170e
-		ImageIcon cinfirmIcon = new ImageIcon("graphic/deliver/button/confirm.png");
-		confirm = new JButton(cinfirmIcon);
+		confirm = new newJBut("确定");
 		confirm.setBounds(389, 334, 76, 27);
 		add(confirm);
 		confirm.setVisible(false);
@@ -194,13 +150,7 @@ public class TransitReceive extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				if((transitSheetId.getText().equals(""))){
 //						(departure.getText().equals(""))||
-					warning.setText("尚未完成对项目的填写");
-					warning.setBounds(198, 490, 463 - 198, 30);
-					warning.setFont(new Font("Dialog", 1, 15));
-					warning.setForeground(Color.red);
-					warning.setVisible(true);
-					add(warning);
-					repaint();
+					warning.NotFilled();
 				}else
 				{
 					ArriveInformation arrive=new ArriveInformation();
@@ -221,24 +171,8 @@ public class TransitReceive extends JPanel {
 //					vo.setTransitId(transitId.getText());
 					vo.setTransitId(transitSheetId.getText());
 					ResultMessage result=deliverBlService.transitReceiveReceipt(vo);
-					if(result.getResult()==Result.SUCCESS){
-						warning.setText("提交成功");
-						warning.setBounds(270, 490, 70, 30);
-						warning.setFont(new Font("Dialog", 1, 15));
-						warning.setForeground(Color.red);
-						warning.setVisible(true);
-						add(warning);
-
-						repaint();
-					}else{
-						//失败的情况
-						warning.setText(result.getMessage());
-						warning.setBounds(138, 490, 463 - 138, 30);
-						warning.setFont(new Font("Dialog", 1, 15));
-						warning.setForeground(Color.red);
-						add(warning);
-						repaint();
-					}
+					warning.Reply(result);
+					repaint();
 				}
 				
 				
