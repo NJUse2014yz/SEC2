@@ -15,13 +15,13 @@ import javax.swing.JTextField;
 
 import nju.sec.yz.ExpressSystem.bl.deliverbl.DeliverController;
 import nju.sec.yz.ExpressSystem.blservice.deliverBlService.DeliverBlService;
-import nju.sec.yz.ExpressSystem.common.OrderInformation;
 import nju.sec.yz.ExpressSystem.common.ReceiveInformation;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.presentation.DateChooser;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJText;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
-import nju.sec.yz.ExpressSystem.vo.OrderVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiveVO;
 
 public class DeliverReceiveInUi extends JPanel{
@@ -54,19 +54,19 @@ public class DeliverReceiveInUi extends JPanel{
 		 * textfield
 		 */
 
-		id = new JTextField();
-		id.setBounds(244, 61, 182, 20);
+		id = new newJText();
+		id.setBounds(244, 59, 182, 20);
 		add(id);
 		
-		receiver = new JTextField();
-		receiver.setBounds(200, 113, 101, 20);
+		receiver = new newJText();
+		receiver.setBounds(200, 112, 101, 20);
 		add(receiver);
 		
 		/*
 		 * 确定
 		 */
-		ImageIcon cinfirmIcon = new ImageIcon("graphic/deliver/button/confirm.png");
-		confirmButton = new JButton(cinfirmIcon);
+//		ImageIcon cinfirmIcon = new ImageIcon("graphic/deliver/button/confirm.png");
+		confirmButton = new newJBut("确定");
 		confirmButton.setBounds(355, 190, 76, 27);
 		add(confirmButton);
 		setVisible(true);
@@ -108,6 +108,7 @@ public class DeliverReceiveInUi extends JPanel{
 					warning.setForeground(Color.red);
 					warning.setVisible(true);
 					add(warning);
+					confirmButton.setEnabled(false);
 					repaint();
 					}
 				

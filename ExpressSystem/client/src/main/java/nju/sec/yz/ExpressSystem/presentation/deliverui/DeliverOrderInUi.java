@@ -177,6 +177,8 @@ public class DeliverOrderInUi extends JPanel {
 //						costForAll.setFont(new Font("Dialog", 0, 18));
 //						costForAll.setVisible(true);
 						add(costForAll);
+						
+						confirmButton.setEnabled(false);
 
 					}
 				}

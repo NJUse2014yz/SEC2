@@ -3,44 +3,43 @@ package nju.sec.yz.ExpressSystem.presentation;
 
 
 import java.awt.BasicStroke;
- import java.awt.BorderLayout;
- import java.awt.Color;
- import java.awt.Component;
- import java.awt.Cursor;
- import java.awt.Dimension;
- import java.awt.Font;
- import java.awt.Graphics;
- import java.awt.Graphics2D;
- import java.awt.GridLayout;
-import java.awt.Image;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GridLayout;
 import java.awt.Point;
- import java.awt.Polygon;
- import java.awt.Stroke;
- import java.awt.Toolkit;
- import java.awt.event.FocusEvent;
- import java.awt.event.FocusListener;
- import java.awt.event.MouseAdapter;
- import java.awt.event.MouseEvent;
- import java.awt.event.MouseListener;
- import java.awt.event.MouseMotionListener;
- import java.text.SimpleDateFormat;
- import java.util.ArrayList;
- import java.util.Calendar;
- import java.util.Comparator;
- import java.util.Date;
- import java.util.List;
- import javax.swing.BorderFactory;
+import java.awt.Polygon;
+import java.awt.Stroke;
+import java.awt.Toolkit;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
+
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
- import javax.swing.JFrame;
- import javax.swing.JLabel;
- import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.Popup;
- import javax.swing.PopupFactory;
- import javax.swing.SwingUtilities;
- import javax.swing.event.AncestorEvent;
- import javax.swing.event.AncestorListener;
+import javax.swing.PopupFactory;
+import javax.swing.SwingUtilities;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 
 /**
   * public DateChooser(JPanel panel,int x,int y)
@@ -66,7 +65,7 @@ import javax.swing.Popup;
      private int x;
      private int y;
      private int width=100;
-     private int length=24;
+     private int length=20;
      private JPanel panel;
      /**
       * Creates a new instance of DateChooser
@@ -85,6 +84,7 @@ import javax.swing.Popup;
          initPanel();
          initLabel();
          panel.add(showDate);
+         
          
      }
      public void setEnabled(boolean b){
@@ -125,9 +125,11 @@ import javax.swing.Popup;
      //初始化标签
     private void initLabel(){
          showDate=new JTextField(sdf.format(initDate));
+         showDate.setBackground(new Color(240,240,240));
          showDate.setRequestFocusEnabled(true);
          showDate.setVisible(true);
          showDate.setBounds(x,y,width,length);
+         showDate.setBorder(BorderFactory.createLineBorder(Color.WHITE,0));
          ImageIcon dateIcon = new ImageIcon("graphic/common/time.png");
          choose=new JButton(dateIcon);
          choose.setBounds(x+width,y,23,length);
