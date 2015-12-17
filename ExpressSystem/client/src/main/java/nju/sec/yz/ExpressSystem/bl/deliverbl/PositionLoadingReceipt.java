@@ -266,8 +266,6 @@ public class PositionLoadingReceipt implements ReceiptService {
 		BarIdList idService = new BarIdList();
 		ArrayList<String> ids = new ArrayList<>();
 		ids.addAll(barIds);
-		
-		
 		BarIdsPO list = new BarIdsPO(ids, info.getTransportId(), positionName, nextAgency);
 		list.setType(TransportType.CAR);
 		idService.addBarIds(list);

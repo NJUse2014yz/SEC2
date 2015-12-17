@@ -80,6 +80,7 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataS
 			if (id.equals(receiptID)) {
 				receiptPOs.remove(i);
 				receiptPOs.add(rpo);
+				
 				ResultMessage message=saveData(receiptPOs);
 				return message;
 			}

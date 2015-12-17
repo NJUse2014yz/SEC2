@@ -32,6 +32,7 @@ import nju.sec.yz.ExpressSystem.dataservice.receiptDataSevice.ReceiptDataService
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.vo.MessageVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
+import nju.sec.yz.ExpressSystem.vo.SendSheetVO;
 
 /**
  * 表单列表的领域模型对象
