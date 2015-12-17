@@ -94,8 +94,10 @@ public class ReceiptList implements ReceiptSaveService{
 		ArrayList<ReceiptVO> receiptVOs=new ArrayList<>();
 		try {
 			List<ReceiptPO> receiptPOs=receiptData.findAll();
+			System.out.println(receiptPOs.size());
 			ReceiptVO vo=null;
 			for(ReceiptPO po:receiptPOs){
+				System.out.println(po.getType());
 				if(po.getType()==type){
 					vo=this.show(po);
 					receiptVOs.add(vo);
@@ -144,12 +146,7 @@ public class ReceiptList implements ReceiptSaveService{
 	
 	public ResultMessage approve(ReceiptVO vo) {
 		ResultMessage message=null;
-		System.out.println("正在审批"+vo.getType());
 		try {
-			//单据数据中是否存在该单据
-			if(this.getSingle(vo.getId())==null)
-				return new ResultMessage(Result.FAIL,"单据已审批");
-			
 			//单据信息更新交给相应receipt处理
 			ReceiptService receipt=RECEIPT_MAP.get(vo.getType()).newInstance();
 			message=receipt.approve(vo);
@@ -177,13 +174,7 @@ public class ReceiptList implements ReceiptSaveService{
 	 */
 	public ResultMessage modify(ReceiptVO vo) {
 		ResultMessage message=null;
-		System.out.println("正在修改"+vo.getType());
 		try {
-			
-			//单据数据中是否存在该单据
-			if(this.getSingle(vo.getId())==null)
-				return new ResultMessage(Result.FAIL,"单据不存在");
-			
 			ReceiptService receipt=RECEIPT_MAP.get(vo.getType()).newInstance();
 			//修改信息有误
 			ResultMessage validResult=receipt.isValid(vo);

@@ -208,7 +208,7 @@ public class DeliverReceipt implements ReceiptService {
 				nextAgency);
 		System.out.println("Approving...");
 
-		// 保存收款记录
+		// 保存收款记录(暂定审批前保存)
 		String deliverId = receipt.getMakePerson();
 		String positionId = deliverId.split("D")[0];
 		CollectionRecordPO record = new CollectionRecordPO(info.getBarId(), receipt.getMakeTime(), info.getCostForAll(),

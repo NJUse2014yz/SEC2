@@ -181,7 +181,7 @@ public class PositionDriverModifyFillUi extends JPanel{
 						seX=Sex.FEMALE;
 					
 					DriverVO drivervo=new DriverVO(driverId.getText(),name.getText(),date.getTime(),id.getText(),cellphone.getText(),seX,agency.getText(),limit.getTime());
-					ResultMessage result=driverBl.modify(drivervo);
+					ResultMessage result=driverBl.add(drivervo);
 					if(result.getResult()==Result.SUCCESS)
 					{
 						warning.setText("提交成功");
