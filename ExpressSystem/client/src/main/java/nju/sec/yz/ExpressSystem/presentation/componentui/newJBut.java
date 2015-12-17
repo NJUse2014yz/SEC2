@@ -16,7 +16,7 @@ import javax.swing.JButton;
 
 public class newJBut extends JButton {
 	Color generalcolor=new Color(139,196,213);
-
+	Color bottomcolor=new Color(70,70,70,50);
 	private boolean hover;
 
 //	// 设置按钮无框但有下划线，写入名称和前后颜色
@@ -46,10 +46,11 @@ public class newJBut extends JButton {
 //		});
 //	}
 
-	public newJBut(String text,Color color) {
+	public newJBut(String text,Color framecolor,Color bottom) {
 		super(text);
 		// TODO Auto-generated constructor stub
-		generalcolor=color;
+		generalcolor=framecolor;
+		bottomcolor=bottom;
 		init();
 	}
 

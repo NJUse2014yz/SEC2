@@ -1,5 +1,6 @@
 package nju.sec.yz.ExpressSystem.presentation.transitui;
 
+import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -8,9 +9,10 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.MAIN_CONTROL;
-import nju.sec.yz.ExpressSystem.presentation.controlerui.POSITION_CONTROL;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.TRANSIT_CONTROL;
 
 public class TransitButtonComponents {
@@ -28,6 +30,8 @@ public class TransitButtonComponents {
 	private JButton exitButton;
 	//退出当前帐户
 	private JLabel leaveButton;
+	
+	private Color newcolor=new Color(111,131,255);
 	
 //	ImageIcon loadingIcon = new ImageIcon("graphic/transit/button/loading.png");
 //	ImageIcon receiptIcon01 = new ImageIcon("graphic/transit/button/receipt01.png");
@@ -150,7 +154,7 @@ public class TransitButtonComponents {
 		});
 		
 		//离开当前账户
-		leaveButton=new JLabel();
+		leaveButton=new newJLabel("注销",Color.WHITE,Color.YELLOW);
 		leaveButton.setBounds(433, 21, 37, 20);
 		leaveButton.setVisible(true);
 		
@@ -170,31 +174,31 @@ public class TransitButtonComponents {
 		 * 侧边栏功能选择项
 		 */
 		
-		TransitLoading= new JButton(loadingIcon);
+		TransitLoading= new newJBut("货物装运");
 		TransitLoading.setBounds(12, 50, 108, 41);
 //		panel.add(TransitLoading);
 		
-		TransitReceipt= new JButton(receiptIcon01);
+		TransitReceipt= new newJBut("中转单");
 		TransitReceipt.setBounds(12, 92, 108, 41);
 //		panel.add(TransitReceipt);
 		
 		
-		TransitReceive= new JButton(receiveIcon);
+		TransitReceive= new newJBut("接收单");
 		TransitReceive.setBounds(12, 134, 108, 41);
 //		panel.add(TransitReceive);
 		
 		
-		fight= new JButton(fightIcon);
+		fight= new newJBut("航运管理",newcolor);
 		fight.setSize(109,27);
 		fight.setVisible(false);
 		
 		
-		train= new JButton(trainIcon);
+		train= new newJBut("铁运管理",newcolor);
 		train.setSize(109,27);
 		train.setVisible(false);
 		
 		
-		car= new JButton(carIcon);
+		car= new newJBut("汽运管理",newcolor);
 		car.setSize(109,27);
 		car.setVisible(false);
 		

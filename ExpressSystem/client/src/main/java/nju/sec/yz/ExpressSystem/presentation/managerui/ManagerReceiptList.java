@@ -433,8 +433,8 @@ public class ManagerReceiptList extends JPanel {
 			TableData[c][9] = good.getTotal();
 			TableData[c][10] = good.getWeight();
 			TableData[c][11] = good.getName();
-			TableData[c][12] = tempInf.getCostForAll();
-			TableData[c][13] = tempInf.getPredictTime();
+			TableData[c][12] = ((Double)tempInf.getCostForAll()).toString();
+			TableData[c][13] =((Integer)tempInf.getPredictTime()).toString();
 
 		
 		}
@@ -449,27 +449,29 @@ public class ManagerReceiptList extends JPanel {
 		ToAndFromInformation toPerson = tempInf.getToPerson();
 		GoodInformation good = tempInf.getGood();
 
-		String temp =(String) TableData[c][0];
+		String temp =(String)  table.getValueAt(c, 0);
 		temp = temp.substring(0, 4) + temp.substring(5, 7) + temp.substring(8, 10);
 		tempvo.setMakeTime(temp);
-		tempvo.setId((String) TableData[c][1]);
-		tempvo.setMakePerson((String) TableData[c][2]);
-		tempInf.setCostForAll((Double) TableData[c][12]);
-		tempInf.setPredictTime((int) TableData[c][13]);
-		good.setTotal((String) TableData[c][9]);
-		good.setWeight((String) TableData[c][10]);
-		good.setName((String) TableData[c][11]);
-		fromPerson.setName((String) TableData[c][3]);
-		fromPerson.setAddress((String) TableData[c][4]);
-		fromPerson.setCellphone((String) TableData[c][5]);
-		toPerson.setName((String) TableData[c][6]);
-		toPerson.setAddress((String) TableData[c][7]);
-		toPerson.setCellphone((String) TableData[c][8]);
+		tempvo.setId((String)table.getValueAt(c, 1));
+		tempvo.setMakePerson((String) table.getValueAt(c, 2));
+		tempInf.setCostForAll(Double.parseDouble((String) table.getValueAt(c, 12)));
+//		tempInf.setCostForAll((Double)table.getValueAt(c, 12));
+		tempInf.setPredictTime(Integer.parseInt((String) table.getValueAt(c, 13)));
+//		tempInf.setPredictTime((int)table.getValueAt(c, 13));
+		good.setTotal((String)table.getValueAt(c, 9));
+		good.setWeight((String) table.getValueAt(c, 10));
+		good.setName((String) table.getValueAt(c, 11));
+		fromPerson.setName((String) table.getValueAt(c, 3));
+		fromPerson.setAddress((String) table.getValueAt(c, 4));
+		fromPerson.setCellphone((String) table.getValueAt(c, 5));
+		toPerson.setName((String)table.getValueAt(c, 6));
+		toPerson.setAddress((String) table.getValueAt(c, 7));
+		toPerson.setCellphone((String) table.getValueAt(c, 8));
 
 		tempInf.setFromPerson(fromPerson);
 		tempInf.setToPerson(toPerson);
 		tempvo.setSendInformation(tempInf);
-
+		
 		return tempvo;
 	}
 
