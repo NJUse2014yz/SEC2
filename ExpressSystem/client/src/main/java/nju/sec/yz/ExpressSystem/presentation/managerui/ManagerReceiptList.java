@@ -90,7 +90,7 @@ public class ManagerReceiptList extends JPanel {
 		setLayout(null);
 		setSize(490, 550);
 		setVisible(true);
-	
+
 		warning.setForeground(Color.red);
 
 		String[] reitype = { "收款单", "付款单", "寄件单", "营业厅装车单", "营业厅收件单", "营业厅派送单", "汽车中转单", "火车中转单", "飞机中转单", "中转中心接收单",
@@ -102,22 +102,21 @@ public class ManagerReceiptList extends JPanel {
 		model = new DefaultTableModel(TableData, title);
 		table = new JTable(model);
 		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		
-		
+
 		jsc = new JScrollPane(table);
-		 // 水平滚动条
+		// 水平滚动条
 		jsc.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		jsc.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS); 
+		jsc.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		jsc.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		table.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-      
+
 		jsc.setBounds(134, 100, 333, 157);
 		add(jsc);
 
 		model = new DefaultTableModel(TableData, title);
 
 		table.setModel(model);
-//		table.setEnabled(false);
+		// table.setEnabled(false);
 
 		type.addActionListener(new ActionListener() {
 
@@ -126,7 +125,7 @@ public class ManagerReceiptList extends JPanel {
 				// TODO Auto-generated method stub
 				volist = receipt.getByType(getType(type.getSelectedItem().toString()));
 				System.out.println(volist.size());
-				
+
 				switch (type.getSelectedItem().toString()) {
 				case "收款单":
 					iniPayment();
@@ -173,8 +172,8 @@ public class ManagerReceiptList extends JPanel {
 			}
 		});
 
-
-//		ImageIcon passIcon = new ImageIcon("graphic/manager/button/pass.png");
+		// ImageIcon passIcon = new
+		// ImageIcon("graphic/manager/button/pass.png");
 		pass = new newJBut("通过");
 		pass.setBounds(467 - 75, 262, 75, 27);
 		add(pass);
@@ -186,7 +185,7 @@ public class ManagerReceiptList extends JPanel {
 				for (int c = 0; c < deletelines.length; c++) {
 					ResultMessage tempresult = receipt
 							.approve(modifyVO(deletelines[c], volist.get(deletelines[c]).getId()));
-					
+
 					if (tempresult.getResult() == Result.FAIL) {
 						// 如果失败会跳出，显示失败
 						warning.setText(tempresult.getMessage());
@@ -205,10 +204,10 @@ public class ManagerReceiptList extends JPanel {
 				}
 			}
 
-			
 		});
 
-//		ImageIcon passAllIcon = new ImageIcon("graphic/manager/button/passAll.png");
+		// ImageIcon passAllIcon = new
+		// ImageIcon("graphic/manager/button/passAll.png");
 		passAll = new newJBut("全部通过");
 		passAll.setBounds(467 - 160, 262, 75, 27);
 		add(passAll);
@@ -218,9 +217,8 @@ public class ManagerReceiptList extends JPanel {
 				System.out.println("BBBBBBBBBBBBBBBBBBBBBB");
 				int[] changedlines = table.getSelectedRows();
 				for (int c = 0; c < volist.size(); c++) {
-					
-					ResultMessage tempresult = receipt
-							.approve(modifyVO(c, volist.get(c).getId()));
+
+					ResultMessage tempresult = receipt.approve(modifyVO(c, volist.get(c).getId()));
 					if (tempresult.getResult() == Result.FAIL) {
 						// 如果失败会跳出，显示失败
 						warning.setText(tempresult.getMessage());
@@ -228,21 +226,21 @@ public class ManagerReceiptList extends JPanel {
 						add(warning);
 						repaint();
 						break;
-					} else{// 如果成功最后才显示成功
+					} else {// 如果成功最后才显示成功
 						warning.setText("提交成功");
 						warning.setBounds(270, 490, 70, 30);
 						add(warning);
 
-						repaint();	
-						}
+						repaint();
+					}
 				}
 			}
 		});
-		
+
 		modify = new newJBut("修改");
 		modify.setBounds(467 - 245, 262, 75, 27);
 		add(modify);
-		
+
 		modify.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				System.out.println("CCCCCCCCCCCCCCCCCCCCCCCC");
@@ -314,13 +312,13 @@ public class ManagerReceiptList extends JPanel {
 	// 付款单
 	private void iniOut() {
 		// TODO Auto-generated method stub
-		title = new String[] { "填写日期", "表单号", "填表人", "付款时间",  "收款金额","收款人","付款账号","条目","账户" };
+		title = new String[] { "填写日期", "表单号", "填表人", "付款时间", "收款金额", "收款人", "付款账号", "条目", "账户" };
 
 		TableData = new Object[volist.size()][9];
 		for (int c = 0; c < volist.size(); c++) {
 			String tempId = volist.get(c).getId();
 			OutVO tempvo = (OutVO) receipt.getSingle((tempId));
-			OutInformation tempInf=tempvo.getOutInformation();
+			OutInformation tempInf = tempvo.getOutInformation();
 			// PaymentInformation tempInf = tempvo.getPaymentInformation();
 			String temp = tempvo.getMakeTime();
 			temp = temp.substring(0, 4) + "/" + temp.substring(4, 6) + "/" + temp.substring(6, 8);
@@ -328,33 +326,33 @@ public class ManagerReceiptList extends JPanel {
 			TableData[c][1] = tempvo.getId();
 			TableData[c][2] = tempvo.getMakePerson();
 			TableData[c][3] = tempInf.getDate();
-			TableData[c][4] = tempInf.getNum();
+			TableData[c][4] = ((Double) tempInf.getNum()).toString();
 			TableData[c][5] = tempInf.getPerson();
 			TableData[c][6] = tempInf.getAccount();
 			TableData[c][7] = tempInf.getReason();
 			TableData[c][8] = tempInf.getComments();
-			
+
 		}
 
 	}
 
 	private ReceiptVO modifyOut(int c, String Id) {
-//		PaymentSheetVO tempvo = (PaymentSheetVO) receipt.getSingle((Id));
+		// PaymentSheetVO tempvo = (PaymentSheetVO) receipt.getSingle((Id));
 		OutVO tempvo = (OutVO) receipt.getSingle((Id));
-		OutInformation tempInf=tempvo.getOutInformation();
-		
-		String temp =(String) TableData[c][0];
+		OutInformation tempInf = tempvo.getOutInformation();
+
+		String temp = (String) table.getValueAt(c, 0);
 		temp = temp.substring(0, 4) + temp.substring(5, 7) + temp.substring(8, 10);
 		tempvo.setMakeTime(temp);
-		tempvo.setId((String) TableData[c][1]);
-		tempvo.setMakePerson((String) TableData[c][2]);
-		tempInf.setDate((String) TableData[c][3]);
-		tempInf.setNum((Double) TableData[c][4]);
-		tempInf.setPerson((String) TableData[c][5]);
-		tempInf.setAccount((String) TableData[c][6]);
-		tempInf.setReason((String) TableData[c][7]);
-		tempInf.setComments((String) TableData[c][8]);
-		
+		tempvo.setId((String) table.getValueAt(c, 1));
+		tempvo.setMakePerson((String) table.getValueAt(c, 2));
+		tempInf.setDate((String) table.getValueAt(c, 3));
+		tempInf.setNum(Double.parseDouble((String) table.getValueAt(c, 4)));
+		tempInf.setPerson((String) table.getValueAt(c, 5));
+		tempInf.setAccount((String) table.getValueAt(c, 6));
+		tempInf.setReason((String) table.getValueAt(c, 7));
+		tempInf.setComments((String) table.getValueAt(c, 8));
+
 		return tempvo;
 	}
 
@@ -362,7 +360,7 @@ public class ManagerReceiptList extends JPanel {
 	private void iniPayment() {
 		// TODO Auto-generated method stub
 
-		title = new String[] { "填写日期", "表单号", "填表人", "营业厅编号", "收款时间", "收款人", "收款金额","收款账户" };
+		title = new String[] { "填写日期", "表单号", "填表人", "营业厅编号", "收款时间", "收款人", "收款金额", "收款账户" };
 
 		TableData = new Object[volist.size()][8];
 		for (int c = 0; c < volist.size(); c++) {
@@ -378,8 +376,8 @@ public class ManagerReceiptList extends JPanel {
 			TableData[c][3] = tempInf.getPositionId();
 			TableData[c][4] = tempInf.getTime();
 			TableData[c][5] = tempInf.getInDeliverId();
-			TableData[c][6] = tempInf.getAmount();
-			TableData[c][7]=tempInf.getAccount();
+			TableData[c][6] = ((Double) tempInf.getAmount()).toString();
+			TableData[c][7] = tempInf.getAccount();
 
 		}
 
@@ -388,16 +386,16 @@ public class ManagerReceiptList extends JPanel {
 	private ReceiptVO modifyPayment(int c, String Id) {
 		PaymentSheetVO tempvo = (PaymentSheetVO) receipt.getSingle((Id));
 		PaymentInformation tempInf = tempvo.getPaymentInformation();
-		
-		String temp = (String) TableData[c][0];
+
+		String temp = (String) table.getValueAt(c, 0);
 		temp = temp.substring(0, 4) + temp.substring(5, 7) + temp.substring(8, 10);
-		tempvo.setId((String) TableData[c][1]);
-		tempvo.setMakePerson((String) TableData[c][2]);
-		tempInf.setPositionId((String) TableData[c][3]);
-		tempInf.setTime((String) TableData[c][4]);
-		tempInf.setInDeliverId((String) TableData[c][5]);
-		tempInf.setAmount((Double) TableData[c][6]);
-		tempInf.setAccount((String) TableData[c][7]);
+		tempvo.setId((String) table.getValueAt(c, 1));
+		tempvo.setMakePerson((String) table.getValueAt(c, 2));
+		tempInf.setPositionId((String) table.getValueAt(c, 3));
+		tempInf.setTime((String) table.getValueAt(c, 4));
+		tempInf.setInDeliverId((String) table.getValueAt(c, 5));
+		tempInf.setAmount(Double.parseDouble((String) table.getValueAt(c, 6)));
+		tempInf.setAccount((String) table.getValueAt(c, 7));
 
 		tempvo.setPaymentInformation(tempInf);
 		return tempvo;
@@ -433,10 +431,9 @@ public class ManagerReceiptList extends JPanel {
 			TableData[c][9] = good.getTotal();
 			TableData[c][10] = good.getWeight();
 			TableData[c][11] = good.getName();
-			TableData[c][12] = ((Double)tempInf.getCostForAll()).toString();
-			TableData[c][13] =((Integer)tempInf.getPredictTime()).toString();
+			TableData[c][12] = ((Double) tempInf.getCostForAll()).toString();
+			TableData[c][13] = ((Integer) tempInf.getPredictTime()).toString();
 
-		
 		}
 	}
 
@@ -449,29 +446,29 @@ public class ManagerReceiptList extends JPanel {
 		ToAndFromInformation toPerson = tempInf.getToPerson();
 		GoodInformation good = tempInf.getGood();
 
-		String temp =(String)  table.getValueAt(c, 0);
+		String temp = (String) table.getValueAt(c, 0);
 		temp = temp.substring(0, 4) + temp.substring(5, 7) + temp.substring(8, 10);
 		tempvo.setMakeTime(temp);
-		tempvo.setId((String)table.getValueAt(c, 1));
+		tempvo.setId((String) table.getValueAt(c, 1));
 		tempvo.setMakePerson((String) table.getValueAt(c, 2));
 		tempInf.setCostForAll(Double.parseDouble((String) table.getValueAt(c, 12)));
-//		tempInf.setCostForAll((Double)table.getValueAt(c, 12));
+		// tempInf.setCostForAll((Double)table.getValueAt(c, 12));
 		tempInf.setPredictTime(Integer.parseInt((String) table.getValueAt(c, 13)));
-//		tempInf.setPredictTime((int)table.getValueAt(c, 13));
-		good.setTotal((String)table.getValueAt(c, 9));
+		// tempInf.setPredictTime((int)table.getValueAt(c, 13));
+		good.setTotal((String) table.getValueAt(c, 9));
 		good.setWeight((String) table.getValueAt(c, 10));
 		good.setName((String) table.getValueAt(c, 11));
 		fromPerson.setName((String) table.getValueAt(c, 3));
 		fromPerson.setAddress((String) table.getValueAt(c, 4));
 		fromPerson.setCellphone((String) table.getValueAt(c, 5));
-		toPerson.setName((String)table.getValueAt(c, 6));
+		toPerson.setName((String) table.getValueAt(c, 6));
 		toPerson.setAddress((String) table.getValueAt(c, 7));
 		toPerson.setCellphone((String) table.getValueAt(c, 8));
 
 		tempInf.setFromPerson(fromPerson);
 		tempInf.setToPerson(toPerson);
 		tempvo.setSendInformation(tempInf);
-		
+
 		return tempvo;
 	}
 
@@ -479,7 +476,7 @@ public class ManagerReceiptList extends JPanel {
 	private void iniPosLoad() {
 		// TODO Auto-generated method stub
 
-		title = new String[] { "填写日期", "表单号", "填表人", "装车时间", "装车机构", "汽运编号","目的地","车辆代号","监装员","装运员","运费" };
+		title = new String[] { "填写日期", "表单号", "填表人", "装车时间", "装车机构", "汽运编号", "目的地", "车辆代号", "监装员", "装运员", "运费" };
 
 		TableData = new Object[volist.size()][11];
 		for (int c = 0; c < volist.size(); c++) {
@@ -499,32 +496,31 @@ public class ManagerReceiptList extends JPanel {
 			TableData[c][7] = tempInf.getCarId();
 			TableData[c][8] = tempInf.getOfficerId();
 			TableData[c][9] = tempInf.getDriverId();
-			TableData[c][10] = tempInf.getFare();
-			
+			TableData[c][10] = ((Double) tempInf.getFare()).toString();
 
 		}
 	}
-	
+
 	private ReceiptVO modifyPosLoad(int c, String Id) {
 		OfficeLoadSheetVO tempvo = (OfficeLoadSheetVO) receipt.getSingle((Id));
 		LoadInformation tempInf = tempvo.getOfficeLoadInformation();
-		String temp = (String) TableData[c][0];
+		String temp = (String) table.getValueAt(c, 0);
 		temp = temp.substring(0, 4) + temp.substring(5, 7) + temp.substring(8, 10);
 		tempvo.setMakeTime(temp);
-		tempvo.setId((String) TableData[c][1]);
-		tempvo.setMakePerson((String) TableData[c][2]);
-		tempInf.setTime((String) TableData[c][3]);
-		tempInf.setAgencyId((String) TableData[c][4]);
-		tempInf.setTransportId((String) TableData[c][5]);
-		tempInf.setDestinationId((String) TableData[c][6]);
-		tempInf.setCarId((String) TableData[c][7]);
-		tempInf.setOfficerId((String) TableData[c][8]);
-		tempInf.setDriverId((String) TableData[c][9]);
-		tempInf.setFare((Double) TableData[c][10]);
+		tempvo.setId((String) table.getValueAt(c, 1));
+		tempvo.setMakePerson((String) table.getValueAt(c, 2));
+		tempInf.setTime((String) table.getValueAt(c, 3));
+		tempInf.setAgencyId((String) table.getValueAt(c, 4));
+		tempInf.setTransportId((String) table.getValueAt(c, 5));
+		tempInf.setDestinationId((String) table.getValueAt(c, 6));
+		tempInf.setCarId((String) table.getValueAt(c, 7));
+		tempInf.setOfficerId((String) table.getValueAt(c, 8));
+		tempInf.setDriverId((String) table.getValueAt(c, 9));
+		tempInf.setFare(Double.parseDouble((String) table.getValueAt(c, 10)));
 
 		tempvo.setOfficeLoadInformation(tempInf);
 		return tempvo;
-		
+
 	}
 
 	// 营业厅收件单
@@ -548,22 +544,22 @@ public class ManagerReceiptList extends JPanel {
 			TableData[c][5] = tempInf.getDeparture();
 		}
 	}
-	
+
 	private ReceiptVO modifyPosReseive(int c, String Id) {
 		OfficeArriveSheetVO tempvo = (OfficeArriveSheetVO) receipt.getSingle((Id));
 		ArriveInformation tempInf = tempvo.getOfficeArrive();
-		String temp = (String) TableData[c][0];
+		String temp = (String) table.getValueAt(c, 0);
 		temp = temp.substring(0, 4) + temp.substring(5, 7) + temp.substring(8, 10);
 		tempvo.setMakeTime(temp);
-		tempvo.setId((String) TableData[c][1]);
-		tempvo.setMakePerson((String) TableData[c][2]);
-		tempInf.setTime((String) TableData[c][3]);
-		tempInf.setTransitSheetId((String) TableData[c][4]);
-		tempInf.setDeparture((String) TableData[c][5]);
+		tempvo.setId((String) table.getValueAt(c, 1));
+		tempvo.setMakePerson((String) table.getValueAt(c, 2));
+		tempInf.setTime((String) table.getValueAt(c, 3));
+		tempInf.setTransitSheetId((String) table.getValueAt(c, 4));
+		tempInf.setDeparture((String) table.getValueAt(c, 5));
 
 		tempvo.setOfficeArrive(tempInf);
 		return tempvo;
-		
+
 	}
 
 	// 营业厅派送单
@@ -588,23 +584,22 @@ public class ManagerReceiptList extends JPanel {
 
 		}
 	}
-	
 
 	private ReceiptVO modifyPosSend(int c, String Id) {
 		DeliverySheetVO tempvo = (DeliverySheetVO) receipt.getSingle((Id));
 		DeliveryInformation tempInf = tempvo.getDeliveryInformation();
-		
-		String temp = (String) TableData[c][0];
+
+		String temp = (String) table.getValueAt(c, 0);
 		temp = temp.substring(0, 4) + temp.substring(5, 7) + temp.substring(8, 10);
 		tempvo.setMakeTime(temp);
-		tempvo.setId((String) TableData[c][1]);
-		tempvo.setMakePerson((String) TableData[c][2]);
-		tempInf.setTime((String) TableData[c][3]);
-		tempInf.setOutDeliverId((String) TableData[c][4]);
+		tempvo.setId((String) table.getValueAt(c, 1));
+		tempvo.setMakePerson((String) table.getValueAt(c, 2));
+		tempInf.setTime((String) table.getValueAt(c, 3));
+		tempInf.setOutDeliverId((String) table.getValueAt(c, 4));
 
 		tempvo.setDeliveryInformation(tempInf);
 		return tempvo;
-		
+
 	}
 
 	// 汽车中转单
@@ -631,29 +626,27 @@ public class ManagerReceiptList extends JPanel {
 			TableData[c][8] = tempInf.getDriverId();
 		}
 	}
-	
 
 	private ReceiptVO modifyTransCar(int c, String Id) {
 		TransitSheetVO tempvo = (TransitSheetVO) receipt.getSingle((Id));
-		TransitCarInformation tempInf = (TransitCarInformation)tempvo.getTransitInformation();
-		
-		String temp = (String) TableData[c][0];
+		TransitCarInformation tempInf = (TransitCarInformation) tempvo.getTransitInformation();
+
+		String temp = (String) table.getValueAt(c, 0);
 		temp = temp.substring(0, 4) + temp.substring(5, 7) + temp.substring(8, 10);
 		tempvo.setMakeTime(temp);
-		tempvo.setId((String) TableData[c][1]);
-		tempvo.setMakePerson((String) TableData[c][2]);
-		tempInf.setTime((String) TableData[c][3]);
-		tempInf.setCarTransitId((String) TableData[c][4]);
-		tempInf.setDeparture((String) TableData[c][5]);
-		tempInf.setDestination((String) TableData[c][6]);
-		tempInf.setTransiterId((String) TableData[c][7]);
-		tempInf.setDriverId((String) TableData[c][8]);
+		tempvo.setId((String) table.getValueAt(c, 1));
+		tempvo.setMakePerson((String) table.getValueAt(c, 2));
+		tempInf.setTime((String) table.getValueAt(c, 3));
+		tempInf.setCarTransitId((String) table.getValueAt(c, 4));
+		tempInf.setDeparture((String) table.getValueAt(c, 5));
+		tempInf.setDestination((String) table.getValueAt(c, 6));
+		tempInf.setTransiterId((String) table.getValueAt(c, 7));
+		tempInf.setDriverId((String) table.getValueAt(c, 8));
 
 		tempvo.setTransitInformation(tempInf);
 		return tempvo;
-		
-	}
 
+	}
 
 	// 火车中转单
 	private void iniTransTrain() {
@@ -679,28 +672,27 @@ public class ManagerReceiptList extends JPanel {
 			TableData[c][8] = tempInf.getCarriageId();
 		}
 	}
-	
+
 	private ReceiptVO modifyTransTrain(int c, String Id) {
 		TransitSheetVO tempvo = (TransitSheetVO) receipt.getSingle((Id));
-		TransitTrainInformation tempInf = (TransitTrainInformation)tempvo.getTransitInformation();
-		
-		String temp = (String) TableData[c][0];
+		TransitTrainInformation tempInf = (TransitTrainInformation) tempvo.getTransitInformation();
+
+		String temp = (String) table.getValueAt(c, 0);
 		temp = temp.substring(0, 4) + temp.substring(5, 7) + temp.substring(8, 10);
 		tempvo.setMakeTime(temp);
-		tempvo.setId((String) TableData[c][1]);
-		tempvo.setMakePerson((String) TableData[c][2]);
-		tempInf.setTime((String) TableData[c][3]);
-		tempInf.setTrainTransitId((String) TableData[c][4]);
-		tempInf.setDeparture((String) TableData[c][5]);
-		tempInf.setDestination((String) TableData[c][6]);
-		tempInf.setTransiterId((String) TableData[c][7]);
-		tempInf.setCarriageId((String) TableData[c][8]);
+		tempvo.setId((String) table.getValueAt(c, 1));
+		tempvo.setMakePerson((String) table.getValueAt(c, 2));
+		tempInf.setTime((String) table.getValueAt(c, 3));
+		tempInf.setTrainTransitId((String) table.getValueAt(c, 4));
+		tempInf.setDeparture((String) table.getValueAt(c, 5));
+		tempInf.setDestination((String) table.getValueAt(c, 6));
+		tempInf.setTransiterId((String) table.getValueAt(c, 7));
+		tempInf.setCarriageId((String) table.getValueAt(c, 8));
 
 		tempvo.setTransitInformation(tempInf);
 		return tempvo;
-		
-	}
 
+	}
 
 	// 飞机中转单
 	private void iniTranFlight() {
@@ -729,24 +721,25 @@ public class ManagerReceiptList extends JPanel {
 
 	private ReceiptVO modifyTranFlight(int c, String Id) {
 		TransitSheetVO tempvo = (TransitSheetVO) receipt.getSingle((Id));
-		TransitFlightInformation tempInf = (TransitFlightInformation)tempvo.getTransitInformation();
-		
-		String temp = (String) TableData[c][0];
+		TransitFlightInformation tempInf = (TransitFlightInformation) tempvo.getTransitInformation();
+
+		String temp = (String) table.getValueAt(c, 0);
 		temp = temp.substring(0, 4) + temp.substring(5, 7) + temp.substring(8, 10);
 		tempvo.setMakeTime(temp);
-		tempvo.setId((String) TableData[c][1]);
-		tempvo.setMakePerson((String) TableData[c][2]);
-		tempInf.setTime((String) TableData[c][3]);
-		tempInf.setFlightTransitId((String) TableData[c][4]);
-		tempInf.setDeparture((String) TableData[c][5]);
-		tempInf.setDestination((String) TableData[c][6]);
-		tempInf.setTransiterId((String) TableData[c][7]);
-		tempInf.setShelfId((String) TableData[c][8]);
+		tempvo.setId((String) table.getValueAt(c, 1));
+		tempvo.setMakePerson((String) table.getValueAt(c, 2));
+		tempInf.setTime((String) table.getValueAt(c, 3));
+		tempInf.setFlightTransitId((String) table.getValueAt(c, 4));
+		tempInf.setDeparture((String) table.getValueAt(c, 5));
+		tempInf.setDestination((String) table.getValueAt(c, 6));
+		tempInf.setTransiterId((String) table.getValueAt(c, 7));
+		tempInf.setShelfId((String) table.getValueAt(c, 8));
 
 		tempvo.setTransitInformation(tempInf);
 		return tempvo;
-		
+
 	}
+
 	// 中转中心接收单
 	private void iniTransReceive() {
 		// TODO Auto-generated method stub
@@ -769,23 +762,25 @@ public class ManagerReceiptList extends JPanel {
 		}
 
 	}
+
 	private ReceiptVO modifyTransReceive(int c, String Id) {
 		TransitArriveSheetVO tempvo = (TransitArriveSheetVO) receipt.getSingle((Id));
-		ArriveInformation tempInf = (ArriveInformation)tempvo.getTransitArriveInformation();
-		
-		String temp = (String) TableData[c][0];
+		ArriveInformation tempInf = (ArriveInformation) tempvo.getTransitArriveInformation();
+
+		String temp = (String) table.getValueAt(c, 0);
 		temp = temp.substring(0, 4) + temp.substring(5, 7) + temp.substring(8, 10);
 		tempvo.setMakeTime(temp);
-		tempvo.setId((String) TableData[c][1]);
-		tempvo.setMakePerson((String) TableData[c][2]);
-		tempInf.setTime((String) TableData[c][3]);
-		tempInf.setTransitSheetId((String) TableData[c][4]);
-		tempInf.setDeparture((String) TableData[c][5]);
-		
+		tempvo.setId((String) table.getValueAt(c, 1));
+		tempvo.setMakePerson((String) table.getValueAt(c, 2));
+		tempInf.setTime((String) table.getValueAt(c, 3));
+		tempInf.setTransitSheetId((String) table.getValueAt(c, 4));
+		tempInf.setDeparture((String) table.getValueAt(c, 5));
+
 		tempvo.setTransitArriveInformation(tempInf);
 		return tempvo;
-		
+
 	}
+
 	// 中转中心装车单
 	private void iniTransLoad() {
 		// TODO Auto-generated method stub
@@ -807,31 +802,33 @@ public class ManagerReceiptList extends JPanel {
 			TableData[c][6] = tempInf.getCarId();
 			TableData[c][7] = tempInf.getOfficerId();
 			TableData[c][8] = tempInf.getDriverId();
-			TableData[c][9] = tempInf.getFare();
+			TableData[c][9] = ((Double) tempInf.getFare()).toString();
 		}
 
 	}
+
 	private ReceiptVO modifyTransLoad(int c, String Id) {
 		TransitLoadSheetVO tempvo = (TransitLoadSheetVO) receipt.getSingle((Id));
 		LoadInformation tempInf = tempvo.getTransitLoadInformation();
-		
-		String temp = (String) TableData[c][0];
+
+		String temp = (String) table.getValueAt(c, 0);
 		temp = temp.substring(0, 4) + temp.substring(5, 7) + temp.substring(8, 10);
 		tempvo.setMakeTime(temp);
-		tempvo.setId((String) TableData[c][1]);
-		tempvo.setMakePerson((String) TableData[c][2]);
-		tempInf.setTime((String) TableData[c][3]);
-		tempInf.setTransportId((String) TableData[c][4]);
-		tempInf.setDestinationId((String) TableData[c][5]);
-		tempInf.setCarId((String) TableData[c][6]);
-		tempInf.setOfficerId((String) TableData[c][7]);
-		tempInf.setDriverId((String) TableData[c][8]);
-		tempInf.setFare((Double) TableData[c][9]);
-		
+		tempvo.setId((String) table.getValueAt(c, 1));
+		tempvo.setMakePerson((String) table.getValueAt(c, 2));
+		tempInf.setTime((String) table.getValueAt(c, 3));
+		tempInf.setTransportId((String) table.getValueAt(c, 4));
+		tempInf.setDestinationId((String) table.getValueAt(c, 5));
+		tempInf.setCarId((String) table.getValueAt(c, 6));
+		tempInf.setOfficerId((String) table.getValueAt(c, 7));
+		tempInf.setDriverId((String) table.getValueAt(c, 8));
+		tempInf.setFare(Double.parseDouble((String) table.getValueAt(c, 9)));
+
 		tempvo.setTransitLoadInformation(tempInf);
 		return tempvo;
-		
+
 	}
+
 	// 入库单
 	private void iniInvenIn() {
 		// TODO Auto-generated method stub
@@ -850,29 +847,30 @@ public class ManagerReceiptList extends JPanel {
 			TableData[c][2] = tempvo.getMakePerson();
 			TableData[c][3] = tempInf.getTime();
 			TableData[c][4] = tempInf.getDestination();
-			TableData[c][5] = tempInf.getBlock();
-			TableData[c][6] = tempInf.getRow();
-			TableData[c][7] = tempInf.getShelf();
-			TableData[c][8] = tempInf.getPositon();
+			TableData[c][5] = ((Integer) tempInf.getBlock()).toString();
+			TableData[c][6] = ((Integer) tempInf.getRow()).toString();
+			TableData[c][7] = ((Integer) tempInf.getShelf()).toString();
+			TableData[c][8] = ((Integer) tempInf.getPositon()).toString();
 
 		}
 	}
+
 	private ReceiptVO modifyInvenIn(int c, String Id) {
 		InventoryInSheetVO tempvo = (InventoryInSheetVO) receipt.getSingle((Id));
 		InventoryInInformation tempInf = tempvo.getInventoryInInformation();
-		
-		String temp = (String) TableData[c][0];
+
+		String temp = (String) table.getValueAt(c, 0);
 		temp = temp.substring(0, 4) + temp.substring(5, 7) + temp.substring(8, 10);
 		tempvo.setMakeTime(temp);
-		tempvo.setId((String) TableData[c][1]);
-		tempvo.setMakePerson((String) TableData[c][2]);
-		tempInf.setTime((String) TableData[c][3]);
-		tempInf.setDestination((String) TableData[c][4]);
-		tempInf.setBlock((int) TableData[c][5]);
-		tempInf.setRow((int) TableData[c][6]);
-		tempInf.setShelf((int) TableData[c][7]);
-		tempInf.setPositon((int) TableData[c][8]);
-		
+		tempvo.setId((String) table.getValueAt(c, 1));
+		tempvo.setMakePerson((String) table.getValueAt(c, 2));
+		tempInf.setTime((String) table.getValueAt(c, 3));
+		tempInf.setDestination((String) table.getValueAt(c, 4));
+		tempInf.setBlock(Integer.parseInt((String) table.getValueAt(c, 5)));
+		tempInf.setRow(Integer.parseInt((String) table.getValueAt(c, 6)));
+		tempInf.setShelf(Integer.parseInt((String) table.getValueAt(c, 7)));
+		tempInf.setPositon(Integer.parseInt((String) table.getValueAt(c, 8)));
+
 		tempvo.setInventoryInInformation(tempInf);
 		return tempvo;
 	}
@@ -898,57 +896,58 @@ public class ManagerReceiptList extends JPanel {
 			TableData[c][6] = tempInf.getTransportType();
 		}
 	}
+
 	private ReceiptVO modifyInvenOut(int c, String Id) {
 		InventoryOutSheetVO tempvo = (InventoryOutSheetVO) receipt.getSingle((Id));
 		InventoryOutInformation tempInf = tempvo.getInventoryOutInformation();
-		
-		String temp = (String) TableData[c][0];
+
+		String temp = (String) table.getValueAt(c, 0);
 		temp = temp.substring(0, 4) + temp.substring(5, 7) + temp.substring(8, 10);
 		tempvo.setMakeTime(temp);
-		tempvo.setId((String) TableData[c][1]);
-		tempvo.setMakePerson((String) TableData[c][2]);
-		tempInf.setTime((String) TableData[c][3]);
-		tempInf.setDestination((String) TableData[c][4]);
-		tempInf.setTransitId((String) TableData[c][5]);
-//		tempInf.setTransportType((String) TableData[c][6]);
-		
-		
+		tempvo.setId((String) table.getValueAt(c, 1));
+		tempvo.setMakePerson((String) table.getValueAt(c, 2));
+		tempInf.setTime((String) table.getValueAt(c, 3));
+		tempInf.setDestination((String) table.getValueAt(c, 4));
+		tempInf.setTransitId((String) table.getValueAt(c, 5));
+		// tempInf.setTransportType((String) TableData[c][6]);
+
 		tempvo.setInventoryOutInformation(tempInf);
 		return tempvo;
-		
+
 	}
+
 	// 依据类型对表单信息进行更新
-				private ReceiptVO modifyVO(int count, String id) {
-					// TODO Auto-generated method stub
-					switch (type.getSelectedItem().toString()) {
-					case "收款单":
-						return modifyPayment(count, id);
-					case "付款单":
-						return modifyOut(count, id);
-					case "寄件单":
-						return modifyDelReip(count, id);
-					case "营业厅装车单":
-						return modifyPosLoad(count, id);
-					case "营业厅收件单":
-						return modifyPosReseive(count, id);
-					case "营业厅派送单":
-						return modifyPosSend(count, id);
-					case "汽车中转单":
-						return modifyTransCar(count, id);
-					case "火车中转单":
-						return modifyTransTrain(count, id);
-					case "飞机中转单":
-						return modifyTranFlight(count, id);
-					case "中转中心接收单":
-						return modifyTransReceive(count, id);
-					case "中转中心装车单":
-						return modifyTransLoad(count, id);
-					case "入库单":
-						return modifyInvenIn(count, id);
-					case "出库单":
-						return modifyInvenOut(count, id);
-					default:
-						return null;
-					}
-				}
+	private ReceiptVO modifyVO(int count, String id) {
+		// TODO Auto-generated method stub
+		switch (type.getSelectedItem().toString()) {
+		case "收款单":
+			return modifyPayment(count, id);
+		case "付款单":
+			return modifyOut(count, id);
+		case "寄件单":
+			return modifyDelReip(count, id);
+		case "营业厅装车单":
+			return modifyPosLoad(count, id);
+		case "营业厅收件单":
+			return modifyPosReseive(count, id);
+		case "营业厅派送单":
+			return modifyPosSend(count, id);
+		case "汽车中转单":
+			return modifyTransCar(count, id);
+		case "火车中转单":
+			return modifyTransTrain(count, id);
+		case "飞机中转单":
+			return modifyTranFlight(count, id);
+		case "中转中心接收单":
+			return modifyTransReceive(count, id);
+		case "中转中心装车单":
+			return modifyTransLoad(count, id);
+		case "入库单":
+			return modifyInvenIn(count, id);
+		case "出库单":
+			return modifyInvenOut(count, id);
+		default:
+			return null;
+		}
+	}
 }
