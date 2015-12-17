@@ -202,7 +202,7 @@ public class AdminstraterModifyFillUi extends JPanel{
 						st=Status.ADMINISTRATOR;
 					}
 					UserVO uv=new UserVO(id.getText(),name.getText(),password.getText(),st);
-					ResultMessage result=userBl.add(uv);
+					ResultMessage result=userBl.modify(uv);
 					if(result.getResult()==Result.SUCCESS)
 					{
 						warning.setText("提交成功");

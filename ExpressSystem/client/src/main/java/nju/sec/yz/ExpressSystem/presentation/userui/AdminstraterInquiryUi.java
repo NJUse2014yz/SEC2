@@ -164,7 +164,7 @@ public class AdminstraterInquiryUi extends JPanel{
 			}
 			else if(po==Status.INVENTORY)
 			{
-				return "中转中心从仓库管理人员";
+				return "中转中心仓库管理人员";
 			}
 			else if(po==Status.SENIOR_ACCOUNTANCY)
 			{
