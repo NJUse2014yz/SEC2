@@ -46,6 +46,7 @@ import nju.sec.yz.ExpressSystem.vo.DeliverySheetVO;
 import nju.sec.yz.ExpressSystem.vo.InventoryInSheetVO;
 import nju.sec.yz.ExpressSystem.vo.InventoryOutSheetVO;
 import nju.sec.yz.ExpressSystem.vo.OfficeArriveSheetVO;
+import nju.sec.yz.ExpressSystem.vo.OfficeLoadSheetVO;
 import nju.sec.yz.ExpressSystem.vo.OutVO;
 import nju.sec.yz.ExpressSystem.vo.PaymentSheetVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
@@ -466,37 +467,50 @@ public class ManagerReceiptList extends JPanel {
 	private void iniPosLoad() {
 		// TODO Auto-generated method stub
 
-		title = new String[] { "填写日期", "表单号", "填表人", "派件时间", "递送人" };
+		title = new String[] { "填写日期", "表单号", "填表人", "装车时间", "装车机构", "汽运编号","目的地","车辆代号","监装员","装运员","运费" };
 
-		TableData = new String[volist.size()][5];
+		TableData = new Object[volist.size()][11];
 		for (int c = 0; c < volist.size(); c++) {
 			String tempId = volist.get(c).getId();
-			DeliverySheetVO tempvo = (DeliverySheetVO) receipt.getSingle((tempId));
+			OfficeLoadSheetVO tempvo = (OfficeLoadSheetVO) receipt.getSingle((tempId));
 
-			DeliveryInformation tempInf = tempvo.getDeliveryInformation();
+			LoadInformation tempInf = tempvo.getOfficeLoadInformation();
 			String temp = tempvo.getMakeTime();
 			temp = temp.substring(0, 4) + "/" + temp.substring(4, 6) + "/" + temp.substring(6, 8);
 			TableData[c][0] = temp;
 			TableData[c][1] = tempvo.getId();
 			TableData[c][2] = tempvo.getMakePerson();
 			TableData[c][3] = tempInf.getTime();
-			TableData[c][4] = tempInf.getOutDeliverId();
+			TableData[c][4] = tempInf.getAgencyId();
+			TableData[c][5] = tempInf.getTransportId();
+			TableData[c][6] = tempInf.getDestinationId();
+			TableData[c][7] = tempInf.getCarId();
+			TableData[c][8] = tempInf.getOfficerId();
+			TableData[c][9] = tempInf.getDriverId();
+			TableData[c][10] = tempInf.getFare();
+			
 
 		}
 	}
 	
 	private ReceiptVO modifyPosLoad(int c, String Id) {
-		DeliverySheetVO tempvo = (DeliverySheetVO) receipt.getSingle((Id));
-		DeliveryInformation tempInf = tempvo.getDeliveryInformation();
+		OfficeLoadSheetVO tempvo = (OfficeLoadSheetVO) receipt.getSingle((Id));
+		LoadInformation tempInf = tempvo.getOfficeLoadInformation();
 		String temp = (String) TableData[c][0];
 		temp = temp.substring(0, 4) + temp.substring(5, 7) + temp.substring(8, 10);
 		tempvo.setMakeTime(temp);
 		tempvo.setId((String) TableData[c][1]);
 		tempvo.setMakePerson((String) TableData[c][2]);
 		tempInf.setTime((String) TableData[c][3]);
-		tempInf.setOutDeliverId((String) TableData[c][4]);
+		tempInf.setAgencyId((String) TableData[c][4]);
+		tempInf.setTransportId((String) TableData[c][5]);
+		tempInf.setDestinationId((String) TableData[c][6]);
+		tempInf.setCarId((String) TableData[c][7]);
+		tempInf.setOfficerId((String) TableData[c][8]);
+		tempInf.setDriverId((String) TableData[c][9]);
+		tempInf.setFare((Double) TableData[c][10]);
 
-		tempvo.setDeliveryInformation(tempInf);
+		tempvo.setOfficeLoadInformation(tempInf);
 		return tempvo;
 		
 	}

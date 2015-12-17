@@ -30,7 +30,7 @@ public class DriverPO implements Serializable{
 	//性别
 	private Sex sex;
 	
-
+	private String agency;
 	//行驶证期限(日期)
 	private String licenseDeadLine;
 
@@ -45,7 +45,18 @@ public class DriverPO implements Serializable{
 		this.sex = sex;
 		this.licenseDeadLine = licenseDeadLine;
 	}
-
+	public DriverPO(String id, String name, String birthDate, String personID, String phoneNumber, Sex sex,
+			String agency,String licenseDeadLine) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.birthDate = birthDate;
+		this.personID = personID;
+		this.phoneNumber = phoneNumber;
+		this.setAgency(agency);
+		this.sex = sex;
+		this.licenseDeadLine = licenseDeadLine;
+	}
 	public String getId() {
 		return id;
 	}
@@ -101,13 +112,11 @@ public class DriverPO implements Serializable{
 	public void setLicenseDeadLine(String licenseDeadLine) {
 		this.licenseDeadLine = licenseDeadLine;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+	public String getAgency() {
+		return agency;
+	}
+	public void setAgency(String agency) {
+		this.agency = agency;
+	}	
 	
 }
