@@ -236,8 +236,7 @@ public class PositionLoadingReceipt implements ReceiptService {
 		Deliver deliver = new Deliver();
 		DeliverStateVO vo = deliver.getDeliverState(barId);
 
-		System.out.println("agency:"+currentAgency);
-		System.out.println(vo.state);
+		
 		if (vo == null)// 物流信息不存在
 			return false;
 		else if (!vo.nextAgency.equals(currentAgency))// 下个机构id不是当前机构

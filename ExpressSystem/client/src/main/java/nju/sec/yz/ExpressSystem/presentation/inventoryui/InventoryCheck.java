@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -21,6 +22,7 @@ import javax.swing.ScrollPaneConstants;
 import nju.sec.yz.ExpressSystem.bl.inventorybl.InventoryController;
 import nju.sec.yz.ExpressSystem.blservice.inventoryBlService.InventoryBlService;
 import nju.sec.yz.ExpressSystem.common.InventoryInInformation;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.InventoryInSheetVO;
 import nju.sec.yz.ExpressSystem.vo.InventoryListVO;
@@ -33,7 +35,9 @@ public class InventoryCheck extends JPanel{
 
 	private JButton toExcel;
 //	private JLabel warning=new JLabel();
-	private JTable table;
+	private newTable table;
+	private Vector<Vector<String>> data=new Vector<Vector<String>>();
+	private Vector<String> name=new Vector<String>();
 	
 	private JLabel time=new JLabel();
 	
@@ -48,47 +52,25 @@ public class InventoryCheck extends JPanel{
 		setSize(490, 550);
 		setVisible(true);
 		
+		name.add("快递编号");
+		name.add("入库日期");
+		name.add("目的地");
+		name.add("区号");
+		name.add("排号");
+		name.add("架号");
+		name.add("位号");
+		
 		InventoryButtonComponents ibc=new InventoryButtonComponents(maincontroler,this);
 		
 		InventoryListVO vo=inventoryservice.checkStock();
 
 		ArrayList<InventoryInSheetVO> involist=(ArrayList<InventoryInSheetVO>) inventoryservice.checkStock().inList;
+		changeData(involist);
 		
-		Object[][] tableData = new Object[involist.size()][7];
-		for(int i=0;i<involist.size();i++){
-			InventoryInInformation temp=involist.get(i).getInventoryInInformation();
-			tableData[i][0]=involist.get(i).getBarId();
-			tableData[i][1]=temp.getTime();
-			tableData[i][2]=temp.getDestination();
-			tableData[i][3]=temp.getBlock();
-			tableData[i][4]=temp.getPositon();
-			tableData[i][5]=involist.get(i).getBarId();
-			tableData[i][6]=involist.get(i).getBarId();
-		}
-		String[] columnTitle = { "快递编号", "入库日期", "目的地", "区号", "排号", "架号", "位号" };
-		table = new JTable(tableData, columnTitle);
-		
-		table.getColumnModel().getColumn(0).setMinWidth(80);
-		table.getColumnModel().getColumn(1).setMinWidth(60);
-		table.getColumnModel().getColumn(2).setMinWidth(60);
-		table.getColumnModel().getColumn(3).setMinWidth(60);
-		table.getColumnModel().getColumn(4).setMinWidth(60);
-		table.getColumnModel().getColumn(5).setMinWidth(60);
-		table.getColumnModel().getColumn(6).setMinWidth(60);
-		
-		 
-		
-		// 将JTable对象放在JScrollPane中，并将该JScrollPane放在窗口中显示出来
-		JScrollPane jsc = new JScrollPane(table);
-		jsc.setVisible(true);
-		jsc.setBounds(136,62,325, 208);
-		add(jsc);
-		
-		// 水平滚动条
-		jsc.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		jsc.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS); 
-		jsc.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		table.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+		table = new newTable(data,name,this,false);
+		table.setBounds(136,62,325, 208);
+		table.stopAutoRewidth();
+		table.join();
 		
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 		String temp=df.format(new Date());// new Date()为获取当前系统时间
@@ -112,7 +94,20 @@ public class InventoryCheck extends JPanel{
 			}
 		});
 	}
-	
+	private void changeData(ArrayList<InventoryInSheetVO> involist)
+	{
+		for(int i=0;i<involist.size();i++){
+			InventoryInInformation temp=involist.get(i).getInventoryInInformation();
+			Vector<String> vector=new Vector<String>();
+			tableData[i][0]=involist.get(i).getBarId());
+			tableData[i][1]=temp.getTime());
+			tableData[i][2]=temp.getDestination());
+			tableData[i][3]=temp.getBlock());
+			tableData[i][4]=temp.getPositon());
+			tableData[i][5]=involist.get(i).getBarId());
+			tableData[i][6]=involist.get(i).getBarId());
+		}
+	}
 	@Override
 	public void paintComponent(Graphics g){
 		Image img01=new ImageIcon("graphic/inventory/background/background04.png").getImage();

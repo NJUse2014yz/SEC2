@@ -142,6 +142,7 @@ public class ManagerReceiptList extends JPanel {
 					break;
 				case "营业厅收件单":
 					iniPosReseive();
+					break;
 				case "营业厅派送单":
 					iniPosSend();
 					break;
@@ -528,7 +529,7 @@ public class ManagerReceiptList extends JPanel {
 	// 营业厅收件单
 	private void iniPosReseive() {
 		// TODO Auto-generated method stub
-		title = new String[] { "填写日期", "表单号", "填表人", "派件时间", "递送人" };
+		title = new String[] { "填写日期", "表单号", "填表人", "收件时间", "出发地" };
 
 		TableData = new String[volist.size()][6];
 		for (int c = 0; c < volist.size(); c++) {
