@@ -125,7 +125,7 @@ public class AccountCostUi extends JPanel{
 				}
 				else
 				{
-					OutVO outvo=new OutVO(date.getTime(),Integer.parseInt(amount.getText()),person.getText(),account.getText(),detail.getSelectedObjects().toString(),ps.getText());
+					OutVO outvo=new OutVO(date.getTime(),Integer.parseInt(amount.getText()),person.getText(),account.getText(),detail.getSelectedItem().toString(),ps.getText());
 					ResultMessage result=financeBl.makePayment(outvo);
 					if(result.getResult()==Result.SUCCESS)
 					{
