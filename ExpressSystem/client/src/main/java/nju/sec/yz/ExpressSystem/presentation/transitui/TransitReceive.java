@@ -108,7 +108,7 @@ public class TransitReceive extends JPanel {
 		        	ArrayList Ids=(ArrayList) vo.barIds;
 		        	
 		        	departure=new newJLabel(vo.fromAgency);
-		    		departure.setBounds(204, 106, 71, 18);
+		    		departure.setBounds(204, 109,140, 18);
 		    		add(departure);
 		    		
 		        	String[] sta={"完整","损坏","丢失"};
@@ -120,6 +120,8 @@ public class TransitReceive extends JPanel {
 		     			TableData[i][0]=i+1;
 		     			TableData[i][1]=Ids.get(i);
 		     		}
+		     		
+		     		warning.setText("");
 		     		
 		     		model = new DefaultTableModel(TableData,columnTitle);
 		     		table = new JTable(model);
@@ -159,7 +161,7 @@ public class TransitReceive extends JPanel {
 //					arrive.setTransitId(transitId.getText());
 					
 					ArrayList<ArriveState> statelist=new ArrayList<ArriveState>();
-					for(int i=0;i<model.getRowCount()-1;i++){
+					for(int i=0;i<model.getRowCount();i++){
 						String temp=(String) table.getCellEditor(i,2).getCellEditorValue();
 						statelist.add(getState(temp));
 					}
