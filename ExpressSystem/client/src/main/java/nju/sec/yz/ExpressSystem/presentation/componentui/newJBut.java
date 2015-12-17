@@ -15,8 +15,6 @@ import java.awt.geom.RoundRectangle2D;
 import javax.swing.JButton;
 
 public class newJBut extends JButton {
-//	Color forecolor;
-//	Color aftercolor;
 	Color generalcolor=new Color(139,196,213);
 
 	private boolean hover;
@@ -48,9 +46,10 @@ public class newJBut extends JButton {
 //		});
 //	}
 
-	public newJBut() {
-		super();
+	public newJBut(String text,Color color) {
+		super(text);
 		// TODO Auto-generated constructor stub
+		generalcolor=color;
 		init();
 	}
 

@@ -210,9 +210,10 @@ public class Driver {
 		String birthDate = po.getBirthDate();
 		String personID = po.getPersonID();
 		String phoneNumber = po.getPhoneNumber();
+		String agency=po.getAgency();
 		Sex sex = po.getSex();
 		String licenseDeadLine = po.getLicenseDeadLine();
-		DriverVO vo = new DriverVO(id, name, birthDate, personID, phoneNumber, sex, licenseDeadLine);
+		DriverVO vo = new DriverVO(id, name, birthDate, personID, phoneNumber, sex,agency, licenseDeadLine);
 		return vo;
 	}
 
@@ -222,9 +223,10 @@ public class Driver {
 		String birthDate = vo.getBirthDate();
 		String personID = vo.getPersonID();
 		String phoneNumber = vo.getPhoneNumber();
+		String agency=vo.getAgency();
 		Sex sex = vo.getSex();
 		String licenseDeadLine = vo.getLicenseDeadLine();
-		DriverPO po = new DriverPO(id, name, birthDate, personID, phoneNumber, sex, licenseDeadLine);
+		DriverPO po = new DriverPO(id, name, birthDate, personID, phoneNumber,sex,agency, licenseDeadLine);
 		return po;
 	}
 

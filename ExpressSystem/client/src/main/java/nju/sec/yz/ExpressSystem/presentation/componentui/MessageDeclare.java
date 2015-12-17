@@ -30,32 +30,14 @@ public class MessageDeclare {
 			
 	public MessageDeclare(JPanel panel){
 		
-		volist=(ArrayList<MessageVO>) message.getNewMessages();
-		
-		announce=new JTextArea(volist.size(),21);
-		announce.setBorder(BorderFactory.createLineBorder(Color.WHITE,0));
-		
-		announce.setForeground(Color.LIGHT_GRAY);
-		
-		Font font = new Font("Microsoft YaHei",Font.PLAIN,15);
-		announce.setFont(font);
-		announce.setOpaque(false);
-		for(int c=0;c<volist.size();c++){
-			announce.append(volist.get(c).message);
-		}
-		
-		
-		for(int c=0;c<20;c++){
-			announce.append("!!!!!!!!!!!!!!!!!!!!!!!!!!!!\r\n");
-		}
-		
+		initTextArea();
+//		
+//		for(int c=0;c<20;c++){
+//			announce.append("!!!!!!!!!!!!!!!!!!!!!!!!!!!!\r\n");
+//		}
+//		
 		jsc=new newJScroll(announce);
 		jsc.setBounds(154,84,292,180);
-//		jsc.setOpaque(false);
-//		jsc.getViewport().setOpaque(false);
-//		jsc.setBorder(BorderFactory.createLineBorder(Color.WHITE,0));
-//		jsc.setUI(new ScrollPaneUI() {
-//		});
 		jsc.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		jsc.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS); 
 		jsc.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -75,7 +57,25 @@ public class MessageDeclare {
 				for(int c=0;c<volist.size();c++){
 					message.hasRead(volist.get(c).messageId);
 				}
+				initTextArea();
 			}
 		});
+	}
+	
+	private void initTextArea(){
+		volist=(ArrayList<MessageVO>) message.getNewMessages();
+		
+		announce=new JTextArea(volist.size(),21);
+		announce.setBorder(BorderFactory.createLineBorder(Color.WHITE,0));
+		
+		announce.setForeground(Color.LIGHT_GRAY);
+		
+		Font font = new Font("Microsoft YaHei",Font.PLAIN,15);
+		announce.setFont(font);
+		announce.setOpaque(false);
+		for(int c=0;c<volist.size();c++){
+			announce.append(volist.get(c).message);
+		}
+		
 	}
 }

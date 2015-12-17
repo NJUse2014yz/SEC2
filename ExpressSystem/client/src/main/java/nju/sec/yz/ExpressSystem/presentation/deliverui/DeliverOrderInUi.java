@@ -28,6 +28,7 @@ import nju.sec.yz.ExpressSystem.common.SendInformation;
 import nju.sec.yz.ExpressSystem.common.ToAndFromInformation;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJCombo;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJText;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.SendSheetVO;
@@ -75,7 +76,7 @@ public class DeliverOrderInUi extends JPanel {
 	private static JComboBox deliveryType;
 
 	// 提示信息
-	private JLabel warning = new JLabel();
+	private newJLabel warning = new newJLabel();
 	//城市选项
 	private String[] city;
 
@@ -84,10 +85,6 @@ public class DeliverOrderInUi extends JPanel {
 		initDeliverOrderIn();
 		// 侧边栏功能选择项、退出系统、退出当前帐户
 		DeliverButtonComponents bc = new DeliverButtonComponents(controler, this);
-
-		setLayout(null);
-		setSize(490, 550);
-		setVisible(true);
 		
 	}
 
@@ -120,11 +117,12 @@ public class DeliverOrderInUi extends JPanel {
 						|| (vloumeGood.getText().equals("")) 
 						|| (sizeGood.getText().equals(""))
 						|| (barId.getText().equals(""))) {
-					warning.setText("尚未完成对带*必填项的填写");
-					warning.setBounds(198, 490, 463 - 198, 30);
-					warning.setFont(new Font("Dialog", 1, 15));
-					warning.setForeground(Color.red);
-					warning.setVisible(true);
+					warning.NotFilled();
+//					warning.setText("尚未完成对带*必填项的填写");
+//					warning.setBounds(198, 490, 463 - 198, 30);
+//					warning.setFont(new Font("Dialog", 1, 15));
+//					warning.setForeground(Color.red);
+//					warning.setVisible(true);
 				} else {
 					// translate data
 					SendSheetVO sendsheet = new SendSheetVO();
@@ -141,41 +139,46 @@ public class DeliverOrderInUi extends JPanel {
 					sendsheet.setSendInformation(sendIn);
 					// 判断输入的信息是否正确
 					ResultMessage result = deliverBlService.deliverReceipt(sendsheet);
+					warning.Reply(result);
 					// 失败
-					if (result.getResult() == Result.FAIL) {
-
-						warning.setText(result.getMessage());
-						warning.setBounds(138, 490, 463 - 138, 30);
-						warning.setFont(new Font("Dialog", 1, 15));
-						warning.setForeground(Color.red);
-					} else {
-						// 提交成功
-						warning.setText("提交成功");
-						warning.setBounds(270, 490, 70, 30);
-						warning.setFont(new Font("Dialog", 1, 15));
-						warning.setForeground(Color.red);
-						warning.setVisible(true);
+//					if (result.getResult() == Result.FAIL) {
+//
+//						warning.setText(result.getMessage());
+//						warning.setBounds(138, 490, 463 - 138, 30);
+//						warning.setFont(new Font("Dialog", 1, 15));
+//						warning.setForeground(Color.red);
+//					} else {
+//						// 提交成功
+//						warning.setText("提交成功");
+//						warning.setBounds(270, 490, 70, 30);
+//						warning.setFont(new Font("Dialog", 1, 15));
+//						warning.setForeground(Color.red);
+//						warning.setVisible(true);
+					if (result.getResult() != Result.FAIL) {
+					
 
 						String temp = result.getMessage();
 
 						double cost = Double.parseDouble(temp.substring(0, temp.indexOf(' ')));
 						int time = Integer.parseInt(temp.substring(temp.indexOf(' ') + 1, temp.length()));
 
-						JLabel predictTime = new JLabel();
+						JLabel predictTime = new newJLabel();
 						predictTime.setText(Integer.toString(time) + "天");
 						predictTime.setBounds(305, 428, 70, 30);
-						predictTime.setForeground(Color.GRAY);
-						predictTime.setFont(new Font("Dialog", 0, 18));
-						predictTime.setVisible(true);
+//						predictTime.setForeground(Color.GRAY);
+//						predictTime.setFont(new Font("Dialog", 0, 18));
+//						predictTime.setVisible(true);
 						add(predictTime);
 
-						JLabel costForAll = new JLabel();
+						JLabel costForAll = new newJLabel();
 						costForAll.setText(Double.toString(cost) + "元");
 						costForAll.setBounds(193, 428, 70, 30);
-						costForAll.setForeground(Color.GRAY);
-						costForAll.setFont(new Font("Dialog", 0, 18));
-						costForAll.setVisible(true);
+//						costForAll.setForeground(Color.GRAY);
+//						costForAll.setFont(new Font("Dialog", 0, 18));
+//						costForAll.setVisible(true);
 						add(costForAll);
+						
+						confirmButton.setEnabled(false);
 
 					}
 				}
@@ -192,19 +195,19 @@ public class DeliverOrderInUi extends JPanel {
 		nameSender.setBounds(185, 84, 58, 18);
 		add(nameSender);
 
-		addressSender = new JTextField();
+		addressSender = new newJText();
 		addressSender.setBounds(295, 87, 116, 15);
 		add(addressSender);
 
-		organizaionSender = new JTextField();
+		organizaionSender = new newJText();
 		organizaionSender.setBounds(185, 113, 85, 15);
 		add(organizaionSender);
 
-		telephoneSender = new JTextField();
+		telephoneSender = new newJText();
 		telephoneSender.setBounds(319, 113, 140, 15);
 		add(telephoneSender);
 
-		cellphoneSender = new JTextField();
+		cellphoneSender = new newJText();
 		cellphoneSender.setBounds(185, 140, 140, 15);
 		add(cellphoneSender);
 
@@ -222,63 +225,63 @@ public class DeliverOrderInUi extends JPanel {
 		citySender.setBounds(389, 135, 70, 20);
 		add(citySender);
 
-		cityConsignee =  new JComboBox(city);
+		cityConsignee =  new newJCombo(city);
 		cityConsignee.setBounds(389, 244, 70, 20);
 		add(cityConsignee);
 		
 		
-		nameConsignee = new JTextField();
+		nameConsignee = new newJText();
 		nameConsignee.setBounds(185, 198, 58, 15);
 		add(nameConsignee);
 
-		addressConsignee = new JTextField();
+		addressConsignee = new newJText();
 		addressConsignee.setBounds(295, 198, 116, 15);
 		add(addressConsignee);
 
-		organizaionConsignee = new JTextField();
+		organizaionConsignee = new newJText();
 		organizaionConsignee.setBounds(185, 224, 85, 15);
 		add(organizaionConsignee);
 
-		telephoneConsignee = new JTextField();
+		telephoneConsignee = new newJText();
 		telephoneConsignee.setBounds(319, 224, 140, 15);
 		add(telephoneConsignee);
 
-		cellphoneConsignee = new JTextField();
+		cellphoneConsignee = new newJText();
 		cellphoneConsignee.setBounds(185, 249, 140, 15);
 		add(cellphoneConsignee);
 
 
-		totalGood = new JTextField();
+		totalGood = new newJText();
 		totalGood.setBounds(185, 279, 58, 15);
 		add(totalGood);
 
-		weightGood = new JTextField();
+		weightGood = new newJText();
 		weightGood.setBounds(330, 279, 58, 15);
 		add(weightGood);
 
-		vloumeGood = new JTextField();
+		vloumeGood = new newJText();
 		vloumeGood.setBounds(185, 303, 58, 15);
 		add(vloumeGood);
 
-		nameGood = new JTextField();
+		nameGood = new newJText();
 		nameGood.setBounds(332, 303, 58, 15);
 		add(nameGood);
 
-		sizeGood = new JTextField();
+		sizeGood = new newJText();
 		sizeGood.setBounds(185, 327, 85, 15);
 		add(sizeGood);
 
-		barId = new JTextField();
+		barId = new newJText();
 		barId.setBounds(252, 354, 140, 15);
 		add(barId);
 
 		String[] pack={"纸箱","木箱","快递袋","其它"};
-		packType = new JComboBox(pack);
+		packType = new newJCombo(pack);
 		packType.setBounds(198, 378, 85, 20);
 		add(packType);
 
 		String[] delivery={"经济快递","标准快递","特快"};
-		deliveryType = new JComboBox(delivery);
+		deliveryType = new newJCombo(delivery);
 		deliveryType.setBounds(225, 407, 85, 20);
 		add(deliveryType);
 	}

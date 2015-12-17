@@ -29,13 +29,13 @@ public class TransitButtonComponents {
 	//退出当前帐户
 	private JLabel leaveButton;
 	
-	ImageIcon loadingIcon = new ImageIcon("graphic/transit/button/loading.png");
-	ImageIcon receiptIcon01 = new ImageIcon("graphic/transit/button/receipt01.png");
-	ImageIcon receiptIcon02 = new ImageIcon("graphic/transit/button/receipt02.png");
-	ImageIcon receiveIcon = new ImageIcon("graphic/transit/button/receive.png");
-	ImageIcon fightIcon = new ImageIcon("graphic/transit/button/fight.png");
-	ImageIcon trainIcon = new ImageIcon("graphic/transit/button/train.png");
-	ImageIcon carIcon = new ImageIcon("graphic/transit/button/car.png");
+//	ImageIcon loadingIcon = new ImageIcon("graphic/transit/button/loading.png");
+//	ImageIcon receiptIcon01 = new ImageIcon("graphic/transit/button/receipt01.png");
+//	ImageIcon receiptIcon02 = new ImageIcon("graphic/transit/button/receipt02.png");
+//	ImageIcon receiveIcon = new ImageIcon("graphic/transit/button/receive.png");
+//	ImageIcon fightIcon = new ImageIcon("graphic/transit/button/fight.png");
+//	ImageIcon trainIcon = new ImageIcon("graphic/transit/button/train.png");
+//	ImageIcon carIcon = new ImageIcon("graphic/transit/button/car.png");
 	
 	
 	
@@ -77,7 +77,7 @@ public class TransitButtonComponents {
 				train.setVisible(false);
 				car.setVisible(false);
 				TransitReceive.setBounds(12, 134, 108, 41);
-				TransitReceipt.setIcon(receiptIcon01);
+//				TransitReceipt.setIcon(receiptIcon01);
 				maincontroler.transitControler.transitChangePanel(TRANSIT_CONTROL.TRANSIT);
 			}
 		});
@@ -88,14 +88,14 @@ public class TransitButtonComponents {
 				train.setVisible(false);
 				car.setVisible(false);
 				TransitReceive.setBounds(12, 134, 108, 41);
-				TransitReceipt.setIcon(receiptIcon01);
+//				TransitReceipt.setIcon(receiptIcon01);
 				maincontroler.transitControler.transitChangePanel(TRANSIT_CONTROL.ARRIVE);
 			}
 		});
 		
 		TransitReceipt.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				TransitReceipt.setIcon(receiptIcon02);
+//				TransitReceipt.setIcon(receiptIcon02);
 				TransitReceive.setBounds(12, 134+27*3, 108, 41);
 				fight.setLocation(12, 134);
 				train.setLocation(12, 134+27);
