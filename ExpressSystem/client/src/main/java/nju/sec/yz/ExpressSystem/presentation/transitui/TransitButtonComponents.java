@@ -31,8 +31,7 @@ public class TransitButtonComponents {
 	//退出当前帐户
 	private JLabel leaveButton;
 	
-	private Color framecolor=new Color(55,51,146);
-	private Color bottomcolor=new Color(180,180,180,50);
+	private Color framecolor=new Color(110,119,237);
 	
 //	ImageIcon loadingIcon = new ImageIcon("graphic/transit/button/loading.png");
 //	ImageIcon receiptIcon01 = new ImageIcon("graphic/transit/button/receipt01.png");
@@ -189,17 +188,17 @@ public class TransitButtonComponents {
 //		panel.add(TransitReceive);
 		
 		
-		fight= new newJBut("航运管理",framecolor,bottomcolor);
+		fight= new newJBut("航运管理",framecolor);
 		fight.setSize(109,27);
 		fight.setVisible(false);
 		
 		
-		train= new newJBut("铁运管理",framecolor,bottomcolor);
+		train= new newJBut("铁运管理",framecolor);
 		train.setSize(109,27);
 		train.setVisible(false);
 		
 		
-		car= new newJBut("汽运管理",framecolor,bottomcolor);
+		car= new newJBut("汽运管理",framecolor);
 		car.setSize(109,27);
 		car.setVisible(false);
 		

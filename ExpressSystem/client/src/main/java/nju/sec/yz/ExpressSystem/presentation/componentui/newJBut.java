@@ -46,11 +46,10 @@ public class newJBut extends JButton {
 //		});
 //	}
 
-	public newJBut(String text,Color framecolor,Color bottom) {
+	public newJBut(String text,Color framecolor) {
 		super(text);
 		// TODO Auto-generated constructor stub
 		generalcolor=framecolor;
-		bottomcolor=bottom;
 		init();
 	}
 

@@ -1,5 +1,6 @@
 package nju.sec.yz.ExpressSystem.presentation.positionui;
 
+import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -8,8 +9,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
-import nju.sec.yz.ExpressSystem.presentation.controlerui.DELIVER_CONTROL;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.MAIN_CONTROL;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.POSITION_CONTROL;
 
@@ -33,35 +35,37 @@ public class ButtonComponents{
 		private ClientControler maincontroler;
 	
 		// 侧边栏功能选择项
-		private static JButton arriveButton;
-		private static JButton deliveButton;
-		private static JButton payButton;
-		private static JButton carButton;
-		private static JButton driverButton;
-		private static JButton loadButton;
-		private static JButton addButton;
-		private static JButton modifyButton;
-		private static JButton deleteButton;
-		private static JButton inquiryButton;
+		private static newJBut arriveButton;
+		private static newJBut deliveButton;
+		private static newJBut payButton;
+		private static newJBut carButton;
+		private static newJBut driverButton;
+		private static newJBut loadButton;
+		private static newJBut addButton;
+		private static newJBut modifyButton;
+		private static newJBut deleteButton;
+		private static newJBut inquiryButton;
 		
-		ImageIcon inquiryIcon = new ImageIcon("graphic/position/button/button_inquiry.png");
-		ImageIcon arriveIcon = new ImageIcon("graphic/position/button/button_arrive.png");
-		ImageIcon deliveIcon = new ImageIcon("graphic/position/button/button_delive.png");
-		ImageIcon payIcon = new ImageIcon("graphic/position/button/button_pay.png");
-		ImageIcon carIcon1 = new ImageIcon("graphic/position/button/button_car1.png");
-		ImageIcon carIcon2 = new ImageIcon("graphic/position/button/button_car2.png");
-		ImageIcon driverIcon1 = new ImageIcon("graphic/position/button/button_driver1.png");
-		ImageIcon driverIcon2 = new ImageIcon("graphic/position/button/button_driver2.png");
-		ImageIcon loadIcon = new ImageIcon("graphic/position/button/button_load.png");
-		ImageIcon addIcon = new ImageIcon("graphic/position/button/button_add.png");
-		ImageIcon deleteIcon = new ImageIcon("graphic/position/button/button_delete.png");
-		ImageIcon modifyIcon = new ImageIcon("graphic/position/button/button_modify.png");
+//		ImageIcon inquiryIcon = new ImageIcon("graphic/position/button/button_inquiry.png");
+//		ImageIcon arriveIcon = new ImageIcon("graphic/position/button/button_arrive.png");
+//		ImageIcon deliveIcon = new ImageIcon("graphic/position/button/button_delive.png");
+//		ImageIcon payIcon = new ImageIcon("graphic/position/button/button_pay.png");
+//		ImageIcon carIcon1 = new ImageIcon("graphic/position/button/button_car1.png");
+//		ImageIcon carIcon2 = new ImageIcon("graphic/position/button/button_car2.png");
+//		ImageIcon driverIcon1 = new ImageIcon("graphic/position/button/button_driver1.png");
+//		ImageIcon driverIcon2 = new ImageIcon("graphic/position/button/button_driver2.png");
+//		ImageIcon loadIcon = new ImageIcon("graphic/position/button/button_load.png");
+//		ImageIcon addIcon = new ImageIcon("graphic/position/button/button_add.png");
+//		ImageIcon deleteIcon = new ImageIcon("graphic/position/button/button_delete.png");
+//		ImageIcon modifyIcon = new ImageIcon("graphic/position/button/button_modify.png");
 		ImageIcon ExitIcon = new ImageIcon("graphic/common/exit.gif");
 		// 退出系统
 		private JButton exitButton;
 		//退出当前帐户
-		private JLabel leaveButton;
+		private newJLabel leaveButton;
 	
+		private Color framecolor=new Color(110,119,237);
+		
 		public ButtonComponents(ClientControler maincontroler){
 			this.maincontroler=maincontroler;
 		}
@@ -76,53 +80,53 @@ public class ButtonComponents{
 		}
 		public void init(){
 			
-			arriveButton = new JButton(arriveIcon);
+			arriveButton = new newJBut("接收货物");
 			arriveButton.setBounds(Button_x, arrive_y, Button_w, Button_h);
 			
-			deliveButton = new JButton(deliveIcon);
+			deliveButton = new newJBut("派件");
 			deliveButton.setBounds(Button_x, delive_y, Button_w, Button_h);
 
 			
-			payButton = new JButton(payIcon);
+			payButton = new newJBut("收款记录");
 			payButton.setBounds(Button_x, pay_y, Button_w, Button_h);
 			
 			
-			carButton = new JButton(carIcon1);
+			carButton =new newJBut("车辆信息");
 			carButton.setBounds(Button_x, car_y, Button_w, Button_h);
 
 			
-			driverButton = new JButton(driverIcon1);
+			driverButton = new newJBut("司机信息");
 			driverButton.setBounds(Button_x, driver_y1, Button_w, Button_h);
 
 			
-			loadButton = new JButton(loadIcon);
+			loadButton = new newJBut("装车管理");
 			loadButton.setBounds(Button_x, load_y1, Button_w, Button_h);
 
 			
-			addButton = new JButton(addIcon);
+			addButton = new newJBut("增加",framecolor);
 			addButton.setSize(button_w, button_h);
 //			addButton.setBounds(Button_x, load_y1, Button_w, Button_h);
 			addButton.setVisible(false);
 
 			
-			deleteButton = new JButton(deleteIcon);
+			deleteButton = new newJBut("删除",framecolor);
 			deleteButton.setSize(button_w, button_h);
 //			deleteButton.setBounds(Button_x, load_y1, Button_w, Button_h);
 			deleteButton.setVisible(false);
 
 			
-			modifyButton = new JButton(modifyIcon);
+			modifyButton = new newJBut("修改",framecolor);
 			modifyButton.setSize(button_w, button_h);
 //			modifyButton.setBounds(Button_x, load_y1, Button_w, Button_h);
 			modifyButton.setVisible(false);
 
 			
-			inquiryButton = new JButton(inquiryIcon);
+			inquiryButton = new newJBut("查询",framecolor);
 			inquiryButton.setSize(button_w, button_h);
 //			inquiryButton.setBounds(Button_x, load_y1, Button_w, Button_h);
 			inquiryButton.setVisible(false);
 			//离开当前账户
-			leaveButton=new JLabel();
+			leaveButton=new newJLabel("注销",Color.white,Color.YELLOW);
 			leaveButton.setBounds(433, 21, 37, 20);
 			leaveButton.setVisible(true);
 			
@@ -140,8 +144,8 @@ public class ButtonComponents{
 					modifyButton.setVisible(false);
 					deleteButton.setVisible(false);
 					inquiryButton.setVisible(false);
-					carButton.setIcon(carIcon1);
-					driverButton.setIcon(driverIcon1);
+//					carButton.setIcon(carIcon1);
+//					driverButton.setIcon(driverIcon1);
 					driverButton.setLocation(Button_x, driver_y1);
 					loadButton.setLocation(Button_x,load_y1);
 					maincontroler.positionControler.positionChangePanel(POSITION_CONTROL.ARRIVE);
@@ -153,8 +157,8 @@ public class ButtonComponents{
 					modifyButton.setVisible(false);
 					deleteButton.setVisible(false);
 					inquiryButton.setVisible(false);
-					carButton.setIcon(carIcon1);
-					driverButton.setIcon(driverIcon1);
+//					carButton.setIcon(carIcon1);
+//					driverButton.setIcon(driverIcon1);
 					driverButton.setLocation(Button_x, driver_y1);
 					loadButton.setLocation(Button_x,load_y1);
 					maincontroler.positionControler.positionChangePanel(POSITION_CONTROL.DELIVE);
@@ -166,8 +170,8 @@ public class ButtonComponents{
 					modifyButton.setVisible(false);
 					deleteButton.setVisible(false);
 					inquiryButton.setVisible(false);
-					carButton.setIcon(carIcon1);
-					driverButton.setIcon(driverIcon1);
+//					carButton.setIcon(carIcon1);
+//					driverButton.setIcon(driverIcon1);
 					driverButton.setLocation(Button_x, driver_y1);
 					loadButton.setLocation(Button_x,load_y1);
 					maincontroler.positionControler.positionChangePanel(POSITION_CONTROL.GETPAY);
@@ -176,7 +180,7 @@ public class ButtonComponents{
 			carButton.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
 //					maincontroler.positionControler.positionChangePanel(POSITION_CONTROL.ARRIVE);
-					carButton.setIcon(carIcon2);
+//					carButton.setIcon(carIcon2);
 					addButton.setLocation(Button_x, driver_y1);
 					addButton.setVisible(true);
 					addButton.addMouseListener(new MouseAdapter(){
@@ -209,7 +213,7 @@ public class ButtonComponents{
 							maincontroler.positionControler.positionChangePanel(POSITION_CONTROL.CAR_INQUIRY);
 						}
 					});
-					driverButton.setIcon(driverIcon1);
+//					driverButton.setIcon(driverIcon1);
 					driverButton.setLocation(Button_x, driver_y2);
 					loadButton.setLocation(Button_x,load_y2);
 					panel.repaint();
@@ -218,8 +222,8 @@ public class ButtonComponents{
 			driverButton.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
 //					maincontroler.positionControler.positionChangePanel(POSITION_CONTROL.DELIVE);
-					carButton.setIcon(carIcon1);
-					driverButton.setIcon(driverIcon2);
+//					carButton.setIcon(carIcon1);
+//					driverButton.setIcon(driverIcon2);
 					addButton.setLocation(Button_x,load_y1);
 					addButton.setVisible(true);
 					addButton.addMouseListener(new MouseAdapter(){
@@ -263,8 +267,8 @@ public class ButtonComponents{
 					modifyButton.setVisible(false);
 					deleteButton.setVisible(false);
 					inquiryButton.setVisible(false);
-					carButton.setIcon(carIcon1);
-					driverButton.setIcon(driverIcon1);
+//					carButton.setIcon(carIcon1);
+//					driverButton.setIcon(driverIcon1);
 					driverButton.setLocation(Button_x, driver_y1);
 					loadButton.setLocation(Button_x,load_y1);
 					maincontroler.positionControler.positionChangePanel(POSITION_CONTROL.LOAD);

@@ -22,7 +22,7 @@ import javax.swing.plaf.basic.BasicScrollBarUI;
 
 public class newJScroll extends JScrollPane {
 
-	protected newJScroll(Component view) {
+	public newJScroll(Component view) {
 		super(view);
 		init();
 	}

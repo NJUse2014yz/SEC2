@@ -46,8 +46,7 @@ public class AdminstraterButtonComponents{
 		//退出当前帐户
 		private JLabel leaveButton;
 		
-		private Color framecolor=new Color(55,51,146);
-		private Color bottomcolor=new Color(180,180,180,50);
+		private Color framecolor=new Color(110,119,237);
 	
 		public AdminstraterButtonComponents(ClientControler maincontroler){
 			this.maincontroler=maincontroler;
@@ -66,25 +65,25 @@ public class AdminstraterButtonComponents{
 			manageButton.setBounds(Button_x, manage_y1, Button_w, Button_h);
 
 			
-			addButton = new newJBut("增加",framecolor,bottomcolor);
+			addButton = new newJBut("增加",framecolor);
 			addButton.setSize(button_w, button_h);
 //			addButton.setBounds(Button_x, load_y1, Button_w, Button_h);
 			addButton.setVisible(false);
 
 			
-			deleteButton = new newJBut("删除",framecolor,bottomcolor);
+			deleteButton = new newJBut("删除",framecolor);
 			deleteButton.setSize(button_w, button_h);
 //			deleteButton.setBounds(Button_x, load_y1, Button_w, Button_h);
 			deleteButton.setVisible(false);
 
 			
-			modifyButton = new newJBut("修改",framecolor,bottomcolor);
+			modifyButton = new newJBut("修改",framecolor);
 			modifyButton.setSize(button_w, button_h);
 //			modifyButton.setBounds(Button_x, load_y1, Button_w, Button_h);
 			modifyButton.setVisible(false);
 
 			
-			inquiryButton = new newJBut("查询",framecolor,bottomcolor);
+			inquiryButton = new newJBut("查询",framecolor);
 			inquiryButton.setSize(button_w, button_h);
 //			inquiryButton.setBounds(Button_x, load_y1, Button_w, Button_h);
 			inquiryButton.setVisible(false);

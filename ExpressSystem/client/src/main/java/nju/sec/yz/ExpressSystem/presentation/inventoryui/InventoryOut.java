@@ -9,11 +9,11 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 import nju.sec.yz.ExpressSystem.bl.inventorybl.InventoryController;
 import nju.sec.yz.ExpressSystem.bl.managerbl.ManagerController;
@@ -24,9 +24,14 @@ import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.TransportType;
 import nju.sec.yz.ExpressSystem.presentation.DateChooser;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJCombo;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJScroll;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJText;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
-import nju.sec.yz.ExpressSystem.vo.InventoryInSheetVO;
 import nju.sec.yz.ExpressSystem.vo.InventoryOutSheetVO;
+import nju.sec.yz.ExpressSystem.vo.TransitOutVO;
 import nju.sec.yz.ExpressSystem.vo.TransitVO;
 
 public class InventoryOut extends JPanel {
@@ -36,18 +41,24 @@ private InventoryBlService inventoryservice=new InventoryController();
 	private ClientControler maincontroler;
 	private AgencyBlService manager=new ManagerController();
 	
-	private JTextField barId;
-	private JComboBox destination;
+//	private JTextField barId;
+	private newJCombo destination;
 	
-	private JComboBox transportType;
-	private JTextField transitSheetId;
+	private newJCombo transportType;
+	private newJText transitSheetId;
 	
+	private newJBut searchBarId;
+	private newJBut confirm;
+	private newJLabel warning=new newJLabel();
 	
-	private JButton confirm;
-	private JLabel warning=new JLabel();
-	
+	private JTable table;
+	private TableModel model;
+	private newJScroll jsc;
 	
 	private DateChooser date ;
+	
+	String[][] TableData={};
+	String[] Title={"快递单号"};
 	
 	public InventoryOut(ClientControler maincontroler){
 		this.maincontroler=maincontroler;
@@ -62,9 +73,9 @@ private InventoryBlService inventoryservice=new InventoryController();
 		InventoryButtonComponents ibc=new InventoryButtonComponents(maincontroler,this);
 		
 		
-		barId=new JTextField();
-		barId.setBounds(213, 59, 182, 18);
-		add(barId);
+//		barId=new JTextField();
+//		barId.setBounds(213, 59, 182, 18);
+//		add(barId);
 		
 		date =new DateChooser(this,213,82);
 		
@@ -73,28 +84,72 @@ private InventoryBlService inventoryservice=new InventoryController();
 		for(int i=0;i<trans.size();i++){
 			desti[i]=trans.get(i).getName();
 		}
-		destination=new JComboBox(desti);
+		destination=new newJCombo(desti);
 		destination.setBounds(202, 110, 98, 20);
 		add(destination);
 		
 		String[] blo={"飞机","火车","汽车"};
-		transportType=new JComboBox(blo);
+		transportType=new newJCombo(blo);
 		transportType.setBounds(225,139,58,19);
 		add(transportType);
 		
-		transitSheetId=new JTextField();
-		transitSheetId.setBounds(323, 168, 134, 18);
+		transitSheetId=new newJText();
+		transitSheetId.setBounds(323, 59, 134, 18);
 		add(transitSheetId);
 		
-
+		model=new DefaultTableModel(TableData,Title);
+		table=new JTable(model);
+		jsc=new newJScroll(table);
+		jsc.setBounds(143,127,321,196);
+		
+		
+		/*
+		 * 	生成货单表格
+		 */
+		searchBarId = new newJBut("确定");
+		searchBarId.setBounds(363, 199, 76, 27);
+		add(searchBarId);
+		
+		searchBarId.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				warning.setForeground(Color.red);
+				warning.setBounds(138, 490, 463 - 138, 30);
+				// 判断必填项是否填写完成
+				if ((transitSheetId.getText().equals("")) || (transitSheetId.getText().equals(""))
+						) {
+					warning.setText("尚未填写中转单号");
+				} else {
+					// translate data
+					TransitOutVO vo=inventoryservice.getBarIdList(transitSheetId.getText());
+					if(vo==null){
+						warning.setText("中转单号输入错误");
+					} else {
+						// 提交成功
+						ArrayList<String> barIdList=(ArrayList<String>) vo.barIds;
+						TableData=new String[barIdList.size()][1];
+						for(int c=0;c<barIdList.size();c++){
+							TableData[c][0]=barIdList.get(c);
+						}
+						model=new DefaultTableModel(TableData,Title);
+						table.setModel(model);
+						table.repaint();
+						
+					}
+				}
+				add(warning);
+				repaint();
+			}
+		});
+		
+		
 		/*
 		 * 确定
 		 */
-		ImageIcon cinfirmIcon = new ImageIcon("graphic/deliver/button/confirm.png");
-		confirm = new JButton(cinfirmIcon);
+//		ImageIcon cinfirmIcon = new ImageIcon("graphic/deliver/button/confirm.png");
+		confirm = new newJBut("确定");
 		confirm.setBounds(363, 199, 76, 27);
 		add(confirm);
-		setVisible(true);
+		setVisible(false);
 
 		confirm.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
