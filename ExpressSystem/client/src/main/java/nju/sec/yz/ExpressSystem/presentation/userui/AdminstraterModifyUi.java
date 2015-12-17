@@ -106,6 +106,12 @@ public class AdminstraterModifyUi extends JPanel{
 				{
 					changeData(ul);
 					table.resetData();
+				}else{
+					warning.setText("Id不存在");
+					warning.setForeground(Color.red);
+					warning.setBounds(138, 490, 463 - 138, 30);
+					warning.setVisible(true);
+					repaint();
 				}
 			}
 		});

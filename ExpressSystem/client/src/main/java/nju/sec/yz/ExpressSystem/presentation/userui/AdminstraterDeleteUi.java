@@ -109,10 +109,7 @@ public class AdminstraterDeleteUi extends JPanel{
 		search.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
 			{
-				if(input.getText().equals("")){
-					warning.NotFilled();
-					repaint();
-				}else{
+				
 				UserVO uv=userBl.getSingle(input.getText());
 				if(uv!=null)
 				{
@@ -126,9 +123,14 @@ public class AdminstraterDeleteUi extends JPanel{
 				}
 				else{
 					warning.setText("Id不存在");
+					warning.setForeground(Color.red);
+					warning.setBounds(138, 490, 463 - 138, 30);
+					warning.setVisible(true);
 				}
+				repaint();
 			}
-			}
+				
+				
 		});
 		add(search);
 		

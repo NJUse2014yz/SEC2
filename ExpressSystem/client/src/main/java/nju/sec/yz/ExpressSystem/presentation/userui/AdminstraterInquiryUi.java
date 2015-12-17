@@ -101,8 +101,18 @@ public class AdminstraterInquiryUi extends JPanel{
 			{
 				uvl=new ArrayList<UserVO>();
 				uvl.add(userBl.getSingle(input.getText()));
-				changeData(uvl);
-				table.resetData();
+				if(userBl.getSingle(input.getText())!=null)
+				{
+					changeData(uvl);
+					table.resetData();
+				}
+			else{
+				warning.setText("Id不存在");
+				warning.setForeground(Color.red);
+				warning.setBounds(138, 490, 463 - 138, 30);
+				warning.setVisible(true);
+			}
+			repaint();
 			}
 		});
 		add(search);
