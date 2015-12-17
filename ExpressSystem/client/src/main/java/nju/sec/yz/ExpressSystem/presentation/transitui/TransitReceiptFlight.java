@@ -14,27 +14,23 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 import nju.sec.yz.ExpressSystem.bl.deliverbl.DeliverController;
 import nju.sec.yz.ExpressSystem.bl.managerbl.ManagerController;
 import nju.sec.yz.ExpressSystem.blservice.deliverBlService.DeliverBlService;
 import nju.sec.yz.ExpressSystem.blservice.managerBlService.AgencyBlService;
-import nju.sec.yz.ExpressSystem.common.LoadInformation;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.TransitFlightInformation;
 import nju.sec.yz.ExpressSystem.common.TransportType;
 import nju.sec.yz.ExpressSystem.presentation.DateChooser;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJCombo;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJText;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
-import nju.sec.yz.ExpressSystem.vo.PositionVO;
 import nju.sec.yz.ExpressSystem.vo.TransitSheetVO;
 import nju.sec.yz.ExpressSystem.vo.TransitVO;
 
@@ -47,17 +43,17 @@ public class TransitReceiptFlight extends JPanel{
 	TransitButtonComponents tbc;
 	
 	
-	private JTextField flightId;
-	private JTextField shelfId;
-	private JTextField transiterId;
+	private newJText flightId;
+	private newJText shelfId;
+	private newJText transiterId;
 	
-	private JComboBox departure;
-	private JComboBox destination;
+	private newJCombo departure;
+	private newJCombo destination;
 	private newTable barId;
-	private JButton confirm;
-	private JLabel flightTransitId;
-	private JLabel fare;
-	private JLabel warning=new JLabel();
+	private newJBut confirm;
+	private newJLabel flightTransitId;
+	private newJLabel fare;
+	private newJLabel warning=new newJLabel();
 	private DateChooser date;
 	
 	private Vector<Vector<String>> data=new Vector<Vector<String>>();
@@ -84,44 +80,37 @@ public class TransitReceiptFlight extends JPanel{
 			transitAgency[i]=trans.get(i).getName();
 			}
 		
-		departure=new JComboBox(transitAgency);
-		departure.setBounds(195,56,85,20);
+		departure=new newJCombo(transitAgency);
+		departure.setBounds(195,56,110,20);
 		add(departure);
 		
-		destination=new JComboBox(transitAgency);
-		destination.setBounds(343,56,85,20);
+		destination=new newJCombo(transitAgency);
+		destination.setBounds(368,56,110,20);
 		add(destination);
 		
-		flightId=new JTextField();
-		flightId.setBounds(192, 110, 184, 18);
+		flightId=new newJText();
+		flightId.setBounds(192, 108, 184, 18);
 		add(flightId);
 		
-		shelfId=new JTextField();
-		shelfId.setBounds(192, 138, 141, 18);
+		shelfId=new newJText();
+		shelfId.setBounds(192, 136, 141, 18);
 		add(shelfId);
 		
-		transiterId = new JTextField();
-		transiterId.setBounds(405, 138, 50, 18);
+		transiterId = new newJText();
+		transiterId.setBounds(405, 136, 50, 18);
 		add(transiterId);
 
-		fare = new JLabel();
-		fare.setBounds(180, 192, 70, 30);
-		fare.setForeground(Color.GRAY);
-		fare.setFont(new Font("Dialog", 0, 18));
+		fare = new newJLabel();
+		fare.setBounds(180, 188, 70, 22);
 		fare.setVisible(false);
 		add(fare);
 		
-		flightTransitId = new JLabel();
-		flightTransitId.setBounds(290, 165, 140, 30);
-		flightTransitId.setForeground(Color.GRAY);
-		flightTransitId.setFont(new Font("Dialog", 0, 18));
+		flightTransitId = new newJLabel();
+		flightTransitId.setBounds(290, 163, 140, 22);
 		flightTransitId.setVisible(false);
 		add(flightTransitId);
 		
-		warning=new JLabel();
 		warning.setBounds(198, 490, 463 - 198, 30);
-		warning.setFont(new Font("Dialog", 1, 15));
-		warning.setForeground(Color.red);
 		warning.setVisible(false);
 		add(warning);
 	
@@ -132,7 +121,7 @@ public class TransitReceiptFlight extends JPanel{
 		barId.join();
 			
 		ImageIcon cinfirmIcon = new ImageIcon("graphic/deliver/button/confirm.png");
-		confirm = new JButton(cinfirmIcon);
+		confirm = new newJBut("确定");
 		confirm.setBounds(388, 419, 76, 27);
 		add(confirm);
 		setVisible(true);
@@ -142,9 +131,7 @@ public class TransitReceiptFlight extends JPanel{
 				// 判断必填项是否填写完成
 				if ((flightId.getText().equals("")) || (shelfId.getText().equals(""))
 						|| (transiterId.getText().equals("")) ) {
-					warning.setText("尚未完成对必填项的填写");
-					warning.setVisible(true);
-					repaint();
+					warning.NotFilled();
 				} else {
 					ArrayList<String> BarIdArray=new ArrayList<String>();
 					for(int i=0;i<barId.getRowCount()-1;i++){
@@ -161,26 +148,19 @@ public class TransitReceiptFlight extends JPanel{
 				vo.setTransportType(TransportType.PLANE);
 				ResultMessage result=deliverblservice.transitFlightReceipt(vo);
 				//成功
+				warning.Reply(result);
 				if(result.getResult()==Result.SUCCESS){
-					
-					warning.setText("提交成功");
-					warning.setVisible(true);
-				
 					String[] message=result.getMessage().split(" ");
 					fare.setText(message[0] + "元");
 					fare.setVisible(true);
 				
 					flightTransitId.setText(message[1]);
 					flightTransitId.setVisible(true);
-				
-					repaint();
-				}else{
-					//失败
-					warning.setText(result.getMessage());
-					warning.setVisible(true);
-					repaint();
+					
+					confirm.setEnabled(false);
 				}
 				}
+				repaint();
 			}
 		});	
 

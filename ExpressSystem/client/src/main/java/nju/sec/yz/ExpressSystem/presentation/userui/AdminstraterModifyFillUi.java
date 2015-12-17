@@ -19,10 +19,13 @@ import nju.sec.yz.ExpressSystem.blservice.userBlService.UserBlService;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.Status;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJCombo;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJText;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ADMINSTRATER_CONTROL;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.AdminstraterControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
-import nju.sec.yz.ExpressSystem.presentation.controlerui.MAIN_CONTROL;
 import nju.sec.yz.ExpressSystem.vo.UserVO;
 
 public class AdminstraterModifyFillUi extends JPanel{
@@ -32,21 +35,21 @@ public class AdminstraterModifyFillUi extends JPanel{
 	private UserBlService userBl;
 	
 	private UserVO uv;
-	private JTextField id;
-	private JTextField password;
-	private JTextField name;
-	private JComboBox<String> power;
-	private JButton confirm;
-	private JLabel warning;
+	private newJText id;
+	private newJText password;
+	private newJText name;
+	private newJCombo power;
+	private newJBut confirm;
+	private newJLabel warning=new newJLabel();
 	private String[] job={"快递员","营业厅业务员","中转中心业务员","中转中心仓库管理人员","高级财务人员","低级财务人员","总经理","管理员"};
-	private JButton back;
+	private newJBut back;
 
-	private static final int back_x=287;
-	private static final int back_y=163;
-	private static final int back_w=80;
+	private static final int back_x=257;
+	private static final int back_y=183;
+	private static final int back_w=110;
 	private static final int back_h=25;
 	private static final int id_x=216;
-	private static final int id_y=75;
+	private static final int id_y=73;
 	private static final int id_w=181;
 	private static final int id_h=19;
 	private static final int password_x=187;
@@ -54,15 +57,15 @@ public class AdminstraterModifyFillUi extends JPanel{
 	private static final int password_w=132;
 	private static final int password_h=17;
 	private static final int pow_x=187;
-	private static final int pow_y=129;
-	private static final int pow_w=132;
-	private static final int pow_h=17;
+	private static final int pow_y=127;
+	private static final int pow_w=145;
+	private static final int pow_h=20;
 	private static final int name_x=187;
-	private static final int name_y=156;
+	private static final int name_y=154;
 	private static final int name_w=90;
 	private static final int name_h=17;
 	private static final int confirm_x=381;
-	private static final int confirm_y=163;
+	private static final int confirm_y=183;
 	private static final int confirm_w=72;
 	private static final int confirm_h=24;
 	private static final int warning_x=198;
@@ -70,8 +73,8 @@ public class AdminstraterModifyFillUi extends JPanel{
 	private static final int warning_w=275;
 	private static final int warning_h=30;
 	
-	private ImageIcon backIcon=new ImageIcon("graphic/adminstrater/button/back_button.jpg");
-	private ImageIcon confirmIcon=new ImageIcon("graphic/adminstrater/button/confirm_button.jpg");
+//	private ImageIcon backIcon=new ImageIcon("graphic/adminstrater/button/back_button.jpg");
+//	private ImageIcon confirmIcon=new ImageIcon("graphic/adminstrater/button/confirm_button.jpg");
 	
 	public AdminstraterModifyFillUi(ClientControler clientControler,AdminstraterButtonComponents bc,String id) {
 		super();
@@ -89,17 +92,15 @@ public class AdminstraterModifyFillUi extends JPanel{
 		setLayout(null);
 		setSize(490,550);
 		
-		id=new JTextField();
-		id.setText(uv.getId());
+		id=new newJText(uv.getId());
 		id.setBounds(id_x, id_y, id_w, id_h);
 		add(id);
 		
-		password=new JTextField();
-		password.setText(uv.getPassword());
+		password=new newJText(uv.getPassword());
 		password.setBounds(password_x, password_y, password_w, password_h);
 		add(password);
 		
-		power=new JComboBox<String>(job);
+		power=new newJCombo(job);
 		Status po=uv.getPower();
 		if(po==Status.DELIVER)
 		{
@@ -136,19 +137,14 @@ public class AdminstraterModifyFillUi extends JPanel{
 		power.setBounds(pow_x, pow_y, pow_w, pow_h);
 		add(power);
 		
-		name=new JTextField();
-		name.setText(uv.getName());
+		name=new newJText(uv.getName());
 		name.setBounds(name_x, name_y, name_w, name_h);
 		add(name);
 		
-		warning=new JLabel();
-		warning.setBounds(warning_x, warning_y, warning_w, warning_h);
-		warning.setFont(new Font("Dialog", 1, 15));
-		warning.setForeground(Color.red);
 		add(warning);
 		warning.setVisible(false);
 		
-		back=new JButton(backIcon);
+		back=new newJBut("返回原列表");
 		back.setBounds(back_x, back_y, back_w, back_h);
 		back.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
@@ -158,14 +154,14 @@ public class AdminstraterModifyFillUi extends JPanel{
 		});
 		add(back);
 		
-		confirm=new JButton(confirmIcon);
+		confirm=new newJBut("确定");
 		confirm.setBounds(confirm_x, confirm_y, confirm_w, confirm_h);
 		confirm.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
 			{
 				if(id.getText().equals("")||password.getText().equals(""))
 				{
-					warning.setText("有必填项未填写");
+					warning.NotFilled();
 				}
 				else{
 					Status st=Status.ADMINISTRATOR;
@@ -202,17 +198,14 @@ public class AdminstraterModifyFillUi extends JPanel{
 						st=Status.ADMINISTRATOR;
 					}
 					UserVO uv=new UserVO(id.getText(),name.getText(),password.getText(),st);
-					ResultMessage result=userBl.add(uv);
-					if(result.getResult()==Result.SUCCESS)
-					{
-						warning.setText("提交成功");
+					ResultMessage result=userBl.modify(uv);
+					warning.Reply(result);
+					if(result.getResult()==Result.SUCCESS){
+						confirm.setEnabled(false);
 					}
-					else
-					{
-						warning.setText(result.getMessage());
-					}
-					warning.setVisible(true);
 				}
+				
+				repaint();
 			}
 		});
 		add(confirm);
@@ -222,7 +215,7 @@ public class AdminstraterModifyFillUi extends JPanel{
 	@Override
 	public void paintComponent(Graphics g) {
 
-		Image img01 = new ImageIcon("graphic/adminstrater/background/modify_background2.png").getImage();
+		Image img01 = new ImageIcon("graphic/adminstrater/background/add_background.png").getImage();
 
 		g.drawImage(img01, 0, 0, 490, 550, null);
 

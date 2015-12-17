@@ -1,5 +1,6 @@
 package nju.sec.yz.ExpressSystem.presentation.userui;
 
+import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -8,17 +9,17 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ADMINSTRATER_CONTROL;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
-import nju.sec.yz.ExpressSystem.presentation.controlerui.DELIVER_CONTROL;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.MAIN_CONTROL;
-import nju.sec.yz.ExpressSystem.presentation.controlerui.POSITION_CONTROL;
 
 public class AdminstraterButtonComponents{
 	public int a=0;
 		private static JPanel panel;
 	
-		private static final int Button_x=14;
+		private static final int Button_x=12;
 		private static final int manage_y1=51;
 		private static final int Button_w=108;
 		private static final int Button_h=41;
@@ -27,23 +28,26 @@ public class AdminstraterButtonComponents{
 		private ClientControler maincontroler;
 	
 		// 侧边栏功能选择项
-		private static JButton manageButton;
-		private static JButton addButton;
-		private static JButton modifyButton;
-		private static JButton deleteButton;
-		private static JButton inquiryButton;
+		private static newJBut manageButton;
+		private static newJBut addButton;
+		private static newJBut modifyButton;
+		private static newJBut deleteButton;
+		private static newJBut inquiryButton;
 		
-		ImageIcon manageIcon1 = new ImageIcon("graphic/adminstrater/button/manage_button1.jpg");
-		ImageIcon manageIcon2 = new ImageIcon("graphic/adminstrater/button/manage_button2.jpg");
-		ImageIcon addIcon = new ImageIcon("graphic/adminstrater/button/add_button.jpg");
-		ImageIcon deleteIcon = new ImageIcon("graphic/adminstrater/button/delete_button.jpg");
-		ImageIcon modifyIcon = new ImageIcon("graphic/adminstrater/button/modify_button.jpg");
-		ImageIcon inquiryIcon = new ImageIcon("graphic/adminstrater/button/inquiry_button.jpg");
+//		ImageIcon manageIcon1 = new ImageIcon("graphic/adminstrater/button/manage_button1.jpg");
+//		ImageIcon manageIcon2 = new ImageIcon("graphic/adminstrater/button/manage_button2.jpg");
+//		ImageIcon addIcon = new ImageIcon("graphic/adminstrater/button/add_button.jpg");
+//		ImageIcon deleteIcon = new ImageIcon("graphic/adminstrater/button/delete_button.jpg");
+//		ImageIcon modifyIcon = new ImageIcon("graphic/adminstrater/button/modify_button.jpg");
+//		ImageIcon inquiryIcon = new ImageIcon("graphic/adminstrater/button/inquiry_button.jpg");
 		ImageIcon ExitIcon = new ImageIcon("graphic/common/exit.gif");
 		// 退出系统
 		private JButton exitButton;
 		//退出当前帐户
 		private JLabel leaveButton;
+		
+		private Color framecolor=new Color(55,51,146);
+		private Color bottomcolor=new Color(180,180,180,50);
 	
 		public AdminstraterButtonComponents(ClientControler maincontroler){
 			this.maincontroler=maincontroler;
@@ -58,35 +62,35 @@ public class AdminstraterButtonComponents{
 			this.panel=panel;
 		}
 		public void init(){
-			manageButton = new JButton(manageIcon1);
+			manageButton = new newJBut("用户管理");
 			manageButton.setBounds(Button_x, manage_y1, Button_w, Button_h);
 
 			
-			addButton = new JButton(addIcon);
+			addButton = new newJBut("增加",framecolor,bottomcolor);
 			addButton.setSize(button_w, button_h);
 //			addButton.setBounds(Button_x, load_y1, Button_w, Button_h);
 			addButton.setVisible(false);
 
 			
-			deleteButton = new JButton(deleteIcon);
+			deleteButton = new newJBut("删除",framecolor,bottomcolor);
 			deleteButton.setSize(button_w, button_h);
 //			deleteButton.setBounds(Button_x, load_y1, Button_w, Button_h);
 			deleteButton.setVisible(false);
 
 			
-			modifyButton = new JButton(modifyIcon);
+			modifyButton = new newJBut("修改",framecolor,bottomcolor);
 			modifyButton.setSize(button_w, button_h);
 //			modifyButton.setBounds(Button_x, load_y1, Button_w, Button_h);
 			modifyButton.setVisible(false);
 
 			
-			inquiryButton = new JButton(inquiryIcon);
+			inquiryButton = new newJBut("查询",framecolor,bottomcolor);
 			inquiryButton.setSize(button_w, button_h);
 //			inquiryButton.setBounds(Button_x, load_y1, Button_w, Button_h);
 			inquiryButton.setVisible(false);
 			//离开当前账户
-			leaveButton=new JLabel();
-			leaveButton.setBounds(433, 21, 37, 20);
+			leaveButton=new newJLabel("注销",Color.WHITE,Color.YELLOW);
+			leaveButton.setBounds(433, 15, 37, 20);
 			leaveButton.setVisible(true);
 			
 			exitButton= new JButton(ExitIcon);
@@ -100,7 +104,7 @@ public class AdminstraterButtonComponents{
 			manageButton.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
 //					maincontroler.positionControler.positionChangePanel(POSITION_CONTROL.ARRIVE);
-					manageButton.setIcon(manageIcon2);
+//					manageButton.setIcon(manageIcon2);
 					addButton.setLocation(Button_x, manage_y1+Button_h);
 					addButton.setVisible(true);
 					addButton.addMouseListener(new MouseAdapter(){

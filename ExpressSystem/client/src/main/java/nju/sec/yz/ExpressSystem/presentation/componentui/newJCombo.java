@@ -79,7 +79,7 @@ public class newJCombo extends JComboBox {
 			list.setSelectionForeground(Color.BLACK);
 			
 			list.setBorder(null);
-			renderer.setFont(new Font("Microsoft YaHei", Font.PLAIN, 15));
+			renderer.setFont(new Font("Microsoft YaHei", Font.PLAIN, 14));
 			renderer.setHorizontalAlignment(JLabel.CENTER);
 			return renderer;
 		}
@@ -141,7 +141,7 @@ public class newJCombo extends JComboBox {
 
 		public void paintCurrentValue(Graphics g, Rectangle bounds, boolean hasFocus) {
 			Font oldFont = comboBox.getFont();
-			comboBox.setFont(new Font("Microsoft YaHei",Font.PLAIN,15));
+			comboBox.setFont(new Font("Microsoft YaHei",Font.PLAIN,14));
 			comboBox.setForeground(Color.BLACK);
 			
 			super.paintCurrentValue(g, bounds, hasFocus);
