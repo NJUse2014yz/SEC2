@@ -63,7 +63,7 @@ public class Collection implements ReceiptService{
 			return validResult;
 		
 		//营业厅id
-		info.setPositionId(info.getPositionId());
+		info.setPositionId(this.getPositionId(info.getInDeliverId()));
 		
 		//删除记录
 		CollectionRecord record=new CollectionRecord();
