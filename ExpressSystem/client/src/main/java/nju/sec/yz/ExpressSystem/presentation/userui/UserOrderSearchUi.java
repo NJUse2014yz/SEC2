@@ -39,7 +39,7 @@ public class UserOrderSearchUi extends JPanel {
 	ClientControler mainControler;
 	DeliverBlService deliver=new DeliverController();
 	// 确定选项
-	private JLabel confirmButton;
+	private JButton confirmButton;
 	private JTextField searchnumber;
 	//提示信息
 	private JLabel warning;
@@ -48,16 +48,25 @@ public class UserOrderSearchUi extends JPanel {
 	//退出当前帐户
 	private JLabel leaveButton;
 	
+	private newTable table;
+	private Vector<Vector<String>> data=new Vector<Vector<String>>();
+	private Vector<String> name=new Vector<String>();
+	private List<String> trails; 
+	
 	private String id;
 	private DeliverVO ordervo;
 	
+	ImageIcon SearchIcon=new ImageIcon("graphic/adminstrater/button/search_button.jpg");
 	ImageIcon ExitIcon = new ImageIcon("graphic/common/exit.gif");
 	
 	public UserOrderSearchUi(ClientControler controler,String id) {
 		mainControler=controler;
 		this.id=id;
 		ordervo=deliver.checkDeliver(id);
-		showtable();
+		name.add("物流轨迹");
+		name.add("时间");
+		trails= ordervo.trails;
+		changeData(trails);
 		initDeliverOrderSearch();
 	}
 	private void initDeliverOrderSearch() {
@@ -65,35 +74,31 @@ public class UserOrderSearchUi extends JPanel {
 		setSize(490, 550);
 		setVisible(true);
 
-		/*
-		 * 确定
-		 */
-		confirmButton = new JLabel();
+		confirmButton = new JButton(searchIcon);
 		confirmButton.setBounds(441, 72, 23, 21);
 		add(confirmButton);
 
+		warning=new JLabel();
+		warning.setBounds(250,490,100,30);
+		warning.setFont(new Font("Dialog",1,15));
+		warning.setForeground(Color.red);
+		warning.setVisible(false);
+		add(warning);
+		
 		confirmButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				DeliverVO ordervo=deliver.checkDeliver(searchnumber.getText());
-//					快递单号填写错误的情况如何考虑
+				ordervo=deliver.checkDeliver(searchnumber.getText());
 				if(ordervo==null){
-					warning=new JLabel();
 					warning.setText("输入信息错误");
-					warning.setBounds(250,490,100,30);
-					warning.setFont(new Font("Dialog",1,15));
-					warning.setForeground(Color.red);
-					add(warning);
+					warning.setVisible(true);
 					repaint();
 				}else{
-					showtable();
+					changeData(ordervo.trails);
+					table.resetData();
 				}
 			}
 			});
 		
-		/*
-		 * textfield
-		 */
-
 		searchnumber = new JTextField();
 		searchnumber.setBounds(221, 72, 219, 20);
 		add(searchnumber);
@@ -123,6 +128,10 @@ public class UserOrderSearchUi extends JPanel {
 			}
 		});
 		
+		table = new newTable(data, name, this, false);
+		table.setBounds(144, 105, 315, 177);
+		table.join();
+		
 	}
 	@Override
 	public void paintComponent(Graphics g) {
@@ -132,27 +141,21 @@ public class UserOrderSearchUi extends JPanel {
 		g.drawImage(img01, 0, 0, 490, 550, null);
 
 	}
-	private void showtable(){
-		List<String> trails=ordervo.trails;
-		String[] temp;
-		newTable table;  
-		Vector<Vector<String>> data=new Vector<Vector<String>>();
-		Vector<String> name=new Vector<String>();
-		for(int i=0;i<trails.size();i++)
+
+	private void changeData(List<String> trails) {
+		if(warning!=null)
 		{
-			temp=trails.get(i).split(" ");
-			Vector<String> vector=new Vector<String>();
+			warning.setVisible(false);
+		}
+		data.removeAllElements();
+		for (int i = 0; i < trails.size(); i++) {
+			String[] temp;
+			temp = trails.get(i).split(" ");
+			Vector<String> vector = new Vector<String>();
 			vector.add(temp[0]);
 			vector.add(temp[1]);
 			data.add(vector);
 		}
-		String[] columnTitle={"物流轨迹","时间"};
-		      //以二维数组和一维数组来创建一个JTable对象  
-		      table = new newTable(data,name,this,false);  
-		      //将JTable对象放在JScrollPane中，并将该JScrollPane放在窗口中显示出来  
-		      table.setBounds(144,105,315,177);
-		      repaint();
-	
 	}
 }
 

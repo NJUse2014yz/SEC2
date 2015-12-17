@@ -127,68 +127,7 @@ public class TransitReceive extends JPanel {
 				}
 			}
 		});	
-//=======
-//		         }else{
-//		        	BarIdsVO vo= deliverBlService.getBarIdList(transitSheetId.getText());
-//		        	ArrayList Ids=(ArrayList) vo.barIds;
-//		        	
-//		        	departure=new JLabel();
-//		        	departure.setText(vo.fromAgency);
-//		    		departure.setBounds(204, 106, 71, 18);
-//		    		departure.setFont(new Font("Dialog", 1, 15));
-//		    		departure.setForeground(Color.LIGHT_GRAY);
-//		    		add(departure);
-//		    		
-//		        	String[] sta={"完整","损坏","丢失"};
-//		     		state=new JComboBox(sta);
-//		     		
-//		     		Object[][] TableData=new Object[Ids.size()][3];
-//		     		String[] columnTitle={"编号","快递单号","到达状态"};
-//		     		for(int i=0;i<Ids.size();i++){
-//		     			TableData[i][0]=i+1;
-//		     			TableData[i][1]=Ids.get(i);
-//		     		}
-//		     		
-//		     		model = new DefaultTableModel(TableData,columnTitle);
-//		     		table = new JTable(model);
-//		     		table.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(state));
-//		     		
-//		     		table.getColumnModel().getColumn(0).setMaxWidth(30);
-//		     		table.getColumnModel().getColumn(2).setMinWidth(80);
-//		     		
-//		     	      //将JTable对象放在JScrollPane中，并将该JScrollPane放在窗口中显示出来  
-//		     	      JScrollPane jsc=new JScrollPane(table);  
-//		     	      jsc.setVisible(true);
-//		     	      jsc.setBounds(141,138,321,191);
-//		     	      add(jsc);
-//		     	      
-//		     	      confirm.setVisible(true);
-//		     		
-//		     	      repaint();
-//		         }
-//		        } 
-//		      } 
-//		    });
-//		
-//		
-//		
-//		//使得表格大小随订单信息的填入而改变
-////		model.addTableModelListener(new TableModelListener(){
-////			@Override
-////			public void tableChanged(TableModelEvent e) {
-////				// TODO Auto-generated method stub
-////				int num=model.getRowCount();
-////				String temp=(String) model.getValueAt(num-1, 1);
-////				if(temp!=""){
-////					Object[] conponent={Integer.toString(num+1),""};
-////					((DefaultTableModel) model).addRow(conponent); 
-////				}
-////				repaint();
-////			}
-////		});
-//		
-//		
-//>>>>>>> 438a2039b2b076475fc75653bdd4452f430ddd06
+
 		ImageIcon cinfirmIcon = new ImageIcon("graphic/deliver/button/confirm.png");
 		confirm = new JButton(cinfirmIcon);
 		confirm.setBounds(389, 334, 76, 27);
