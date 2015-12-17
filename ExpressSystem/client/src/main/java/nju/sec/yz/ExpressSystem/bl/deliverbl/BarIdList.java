@@ -99,10 +99,12 @@ public class BarIdList {
 
 		try {
 			BarIdsPO po = data.get(transitSheetId);
+			
 			if (po == null)
 				return;
 			po.arrive();
 			data.update(po);
+			
 		} catch (RemoteException e) {
 			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
@@ -122,7 +124,7 @@ public class BarIdList {
 		}
 
 		if (po == null)
-			return false;
+			return true;
 		return po.isArrived();
 	}
 

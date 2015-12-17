@@ -73,7 +73,7 @@ public class PositionReceiveReceipt implements ReceiptService {
 		//更新物流信息
 		
 		list.arrive(info.getTransitSheetId());
-		
+		System.out.println(list.isArrived(info.getTransitSheetId()));
 		// 提交
 		ReceiptSaveService receiptList = new ReceiptList();
 		ResultMessage saveResult = receiptList.saveReceipt(po);

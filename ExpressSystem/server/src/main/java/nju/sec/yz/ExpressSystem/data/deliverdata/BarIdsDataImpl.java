@@ -124,6 +124,7 @@ public class BarIdsDataImpl extends UnicastRemoteObject implements BarIdsDataSer
 			if(list.get(i).getReceiptId().equals(po.getReceiptId())){
 				list.remove(i);
 				list.add(po);
+				this.saveData(list);
 				return;
 			}
 		}
