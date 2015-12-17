@@ -182,7 +182,6 @@ public class ReceiptList implements ReceiptSaveService{
 		try {
 			if(this.getSingle(vo.getId())==null)
 				return new ResultMessage(Result.FAIL,"单据不存在~");
-			System.out.println(((SendSheetVO)vo).getSendInformation().getCostForAll());
 			ReceiptService receipt=RECEIPT_MAP.get(vo.getType()).newInstance();
 			//修改信息有误
 			ResultMessage validResult=receipt.isValid(vo);
