@@ -204,7 +204,7 @@ public class User implements UserInfo{
 		Status pow=vo.getPower();
 		
 		if(!isId(id,pow))
-			return "亲，id不符合身份验证规则";
+			return "亲，id设置有误或者跟权限不匹配哦";
 		if(!isName(name))
 			return "亲，名字不要太长哦(length<=8)";
 		if(!isPassword(password))
