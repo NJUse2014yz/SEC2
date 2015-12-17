@@ -38,7 +38,7 @@ public class PositionSendReceipt implements ReceiptService{
 			return validResult;
 		
 		if(!isRightTrail(info.getBarId()))
-			validResult.setMessage("订单号是不是填错了~");
+			return new ResultMessage(Result.FAIL,"订单号是不是填错了~");
 		
 		//创建po
 		DeliverySheetPO po=new DeliverySheetPO();

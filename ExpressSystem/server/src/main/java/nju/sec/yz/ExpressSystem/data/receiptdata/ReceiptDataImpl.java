@@ -164,7 +164,6 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataS
 				System.out.println(po.getType()+" "+po.getMakePerson()+" "+po.getId());
 			}
 			
-		
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

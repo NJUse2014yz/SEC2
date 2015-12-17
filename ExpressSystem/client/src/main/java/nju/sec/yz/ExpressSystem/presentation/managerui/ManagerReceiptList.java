@@ -527,7 +527,7 @@ public class ManagerReceiptList extends JPanel {
 	// 营业厅收件单
 	private void iniPosReseive() {
 		// TODO Auto-generated method stub
-		title = new String[] { "填写日期", "表单号", "填表人", "收件时间", "出发地" };
+		title = new String[] { "填写日期", "表单号", "填表人", "收件时间", "中转单编号","出发地" };
 
 		TableData = new String[volist.size()][6];
 		for (int c = 0; c < volist.size(); c++) {
