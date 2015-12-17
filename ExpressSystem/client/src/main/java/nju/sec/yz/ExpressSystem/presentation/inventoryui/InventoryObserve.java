@@ -126,6 +126,7 @@ private InventoryBlService inventoryservice=new InventoryController();
 	}
 	private void changeData(ArrayList<InventoryInSheetVO> involist)
 	{
+		data.removeAllElements();
 		for(int i=0;i<involist.size();i++){
 			InventoryInInformation temp=involist.get(i).getInventoryInInformation();
 			Vector<String> vector=new Vector<String>();

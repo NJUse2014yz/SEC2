@@ -96,16 +96,18 @@ public class InventoryCheck extends JPanel{
 	}
 	private void changeData(ArrayList<InventoryInSheetVO> involist)
 	{
+		data.removeAllElements();
 		for(int i=0;i<involist.size();i++){
 			InventoryInInformation temp=involist.get(i).getInventoryInInformation();
 			Vector<String> vector=new Vector<String>();
-			tableData[i][0]=involist.get(i).getBarId());
-			tableData[i][1]=temp.getTime());
-			tableData[i][2]=temp.getDestination());
-			tableData[i][3]=temp.getBlock());
-			tableData[i][4]=temp.getPositon());
-			tableData[i][5]=involist.get(i).getBarId());
-			tableData[i][6]=involist.get(i).getBarId());
+			vector.add(involist.get(i).getBarId());
+			vector.add(temp.getTime());
+			vector.add(temp.getDestination());
+			vector.add(Integer.toString(temp.getBlock()));
+			vector.add(Integer.toString(temp.getRow()));
+			vector.add(Integer.toString(temp.getShelf()));
+			vector.add(Integer.toString(temp.getPositon()));
+			data.add(vector);
 		}
 	}
 	@Override

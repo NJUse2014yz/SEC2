@@ -12,6 +12,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import javax.script.Bindings;
 import javax.swing.DefaultCellEditor;
@@ -40,6 +41,7 @@ import nju.sec.yz.ExpressSystem.common.ReceiptType;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.presentation.DateChooser;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.PositionControler;
 import nju.sec.yz.ExpressSystem.vo.BarIdsVO;
@@ -60,18 +62,17 @@ public class PositionArriveUi extends JPanel{
 	private ClientControler mainControler;
 	private PositionControler controler;
 	private ButtonComponents bc;
-	private String[] name={"条形码号","货物到达状态"};
-	private Object[][] data;
+	private Vector<String> name;
+	private Vector<Vector<String>> data;
 	private int n=0;
 	
-//	private JComboBox JCdeparture;
 	private JLabel departure;
 	private JTextField JTtranferId;
 	private DateChooser date;
-	private JTable table;
-	private JScrollPane scroll;
+	private newTable table;
 	private JButton confirm;
 	private JLabel warning;
+	private JButton yes;
 	
 	public static final int departure_x=192;
 	public static final int departure_y=63;
@@ -108,29 +109,21 @@ public class PositionArriveUi extends JPanel{
 		manageControler=new ManagerController();
 		List<String> citys=deliverBl.getValidAgency();
 		city=new String[citys.size()];
-		data=new String[][]{};
-		for(int i=0;i<citys.size();i++)
-		{
-			city[i]=citys.get(i);
-		}
+		name.add("条形码号");
+		name.add("货物到达状态");
 		initDeliverMainUi();
 	}
-/*	public PositionArriveUi()
-	{
-		city=new String[]{"南京","北京","上海"};
-		data=new String[][]{{"",""}};
-		initDeliverMainUi();
-	}*/
-
 	private void initDeliverMainUi() {
 		bc.changePanel(this);
 		bc.change();
 		setLayout(null);
 		setSize(490, 550);
 		
-//		JCdeparture=new JComboBox(city);
-//		JCdeparture.setBounds(departure_x, departure_y, departure_w, h);
-//		add(JCdeparture);
+		table=new newTable(data,name,this,false);
+		table.setJComboBox(new JComboBox(new String[]{"完整","丢失","损坏"}), 1);
+		table.setBounds(scroll_x,scroll_y,scroll_w,scroll_h);
+		table.join();
+		
 		departure=new JLabel();
 		departure.setBounds(departure_x, departure_y, departure_w, h);
 		departure.setFont(new Font("Dialog", 1, 15));
@@ -140,14 +133,13 @@ public class PositionArriveUi extends JPanel{
 		
 		JTtranferId=new JTextField();
 		JTtranferId.setBounds(tranferId_x,tranferId_y,tranferId_w,h);
-		JTtranferId.addFocusListener(new FocusListener(){
-			@Override
-			public void focusGained(FocusEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			@Override
-			public void focusLost(FocusEvent e) {
+		add(JTtranferId);
+		
+		yes=new JButton();
+		yes.setBounds(tranferId_x+100, tranferId_y,72,24);
+		yes.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e)
+			{
 				BarIdsVO vo=deliverBl.getBarIdList(JTtranferId.getText());
 				
 				if(vo==null)
@@ -155,27 +147,16 @@ public class PositionArriveUi extends JPanel{
 				List<String> bars=vo.barIds;
 				departure.setText(vo.fromAgency);
 				departure.setVisible(true);
-//				ArrayList<String> bars=new ArrayList<String>();
-//				bars.add("12345");
-//				bars.add("12345");
-//				bars.add("12345");
 				System.out.println("here");
 				if(bars!=null)
-				{	n=bars.size();
-					data=new String[bars.size()][2];
-					for(int i=0;i<n;i++)
+				{	for(int i=0;i<bars.size();i++)
 					{
-						data[i][0]=bars.get(i);
-						data[i][1]="";
+						Vector<String> vector=new Vector<String>();
+						vector.add(bars.get(i));
+						vector.add("");
+						data.add(vector);
 					}
-					table=new JTable(data,name);
-					table.getColumnModel().getColumn(1).setCellEditor(new DefaultCellEditor(new JComboBox(new String[]{"完整","丢失","损坏"})));
-					table.setRowHeight(20);
-					scroll=new JScrollPane(table);
-					scroll.setBounds(scroll_x,scroll_y,scroll_w,scroll_h);
-					add(scroll);
-//					table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-					repaint();
+					table.resetData();
 				}
 				else{
 					warning.setText("中转单编号不存在，请检查");
@@ -184,7 +165,7 @@ public class PositionArriveUi extends JPanel{
 				}
 			}
 		});
-		add(JTtranferId);
+		add(yes);
 		
 		date=new DateChooser(this,date_x,date_y);
 		
@@ -206,15 +187,14 @@ public class PositionArriveUi extends JPanel{
 				ArriveInformation ai=new ArriveInformation();
 				for(int i=0;i<n;i++)
 				{
-					if(table.getCellEditor(i, 1).getCellEditorValue().equals("完整"))
+					if(table.getValueAt(i, 1, true).equals("完整"))
 						arriveState=ArriveState.PERFECT;
-					else if(table.getCellEditor(i, 1).getCellEditorValue().equals("损坏"))
+					else if(table.getValueAt(i, 1, true).equals("损坏"))
 						arriveState=ArriveState.BROKEN;
-					else if(table.getCellEditor(i, 1).getCellEditorValue().equals("丢失"))
+					else if(table.getValueAt(i, 1, true).equals("丢失"))
 						arriveState=ArriveState.LOST;
 					ai.addState(arriveState);
 				}
-//				ai.setDeparture((String)JCdeparture.getSelectedItem());
 				ai.setTime(date.getTime());
 				ai.setTransitSheetId(JTtranferId.getText());
 				sheet.setOfficeArrive(ai);
@@ -246,8 +226,6 @@ public class PositionArriveUi extends JPanel{
 		setVisible(true);
 	}
 
-	
-	
 	@Override
 	public void paintComponent(Graphics g) {
 
@@ -256,15 +234,5 @@ public class PositionArriveUi extends JPanel{
 		g.drawImage(img01, 0, 0, 490, 550, null);
 
 	}
-/*	public static void main(String[] args)
-	{
-		JFrame frame=new JFrame();
-		frame.setSize(490, 550);
-		frame.setLocation(300, 300);
-		frame.setLayout(null);
-		frame.add(new PositionArriveUi());
-		frame.setVisible(true);
-		frame.show();
-	}*/
 
 }

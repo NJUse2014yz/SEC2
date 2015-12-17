@@ -24,6 +24,7 @@ import nju.sec.yz.ExpressSystem.bl.accountbl.FinanceController;
 import nju.sec.yz.ExpressSystem.blservice.accountBlService.AccountBlService;
 import nju.sec.yz.ExpressSystem.blservice.accountBlService.FinanceBlSevice;
 import nju.sec.yz.ExpressSystem.presentation.DateChooser;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.AccountVO;
 import nju.sec.yz.ExpressSystem.vo.BussinessVO;
@@ -43,17 +44,11 @@ public class ManagerAccountCheck extends JPanel {
 
 	private JComboBox choice;
 
-	private JTable table;
-	private JScrollPane jsc;
-	private TableModel model;
+	private newTable tableI;
+	private newTable tableO;
+	private newTable tableA;
+	private newTable tableC;
 
-	private Object[][] TableData;
-	private String[] title;
-
-	private JTable inTable;
-	private JTable outTable;
-	private JScrollPane inScroll;
-	private JScrollPane outScroll;
 	private DateChooser date1;
 	private DateChooser date2;
 	private JButton confirm;
@@ -62,7 +57,9 @@ public class ManagerAccountCheck extends JPanel {
 	
 	private String[] nameIn = new String[] { "收款日期", "收款金额", "收款人", "快递条形码号" };
 	private String[] nameOut = new String[] { "付款日期 ", "付款金额", "付款人", "付款账号", "条目", "备注" };
-
+	String[] choices = { "账户信息", "经营情况表", "成本收益表" };
+	String[] title = { "账号", "余额" };
+	
 	public ManagerAccountCheck(ClientControler maincontroler, ManagerButtonComponent mbc) {
 		this.maincontroler = maincontroler;
 		this.mbc = mbc;
@@ -77,7 +74,7 @@ public class ManagerAccountCheck extends JPanel {
 		setSize(490, 550);
 		setVisible(true);
 
-		String[] choices = { "账户信息", "经营情况表", "成本收益表" };
+		
 		choice = new JComboBox(choices);
 		choice.setBounds(244, 62, 80, 21);
 		add(choice);
@@ -91,32 +88,11 @@ public class ManagerAccountCheck extends JPanel {
 					if (choice.getSelectedItem().equals("账户信息")) {
 						iniAccount();
 					} else {
-						// (choice.getSelectedItem().equals("成本收益表")) {
 						iniCost();
 					}
-					removeAll();
-					model = new DefaultTableModel(TableData, title);
-					table.setModel(model);
-					// table.repaint();
-					add(jsc);
-					add(choice);
-					mbc.add();
-					repaint();
 				}
 			}
-
 		});
-
-		TableData = null;
-		title = null;
-
-		model = new DefaultTableModel(TableData, title);
-		table = new JTable(model);
-		jsc = new JScrollPane(table);
-		jsc.setBounds(142, 91, 317, 199);
-		add(jsc);
-		jsc.setVisible(true);
-
 	}
 
 	private void iniCost() {
@@ -129,26 +105,10 @@ public class ManagerAccountCheck extends JPanel {
 	}
 
 	private void iniOperate() {
-		// TODO Auto-generated method stub
-		
-		
 		date1 = new DateChooser(this, 210, 88);
 		date2 = new DateChooser(this, 210, 110);
 		
-		
-		
-		String[][] dataIn = new String[][] { { "", "", "", "" } };
-		String[][] dataOut = new String[][] { { "", "", "", "", "", "" } };
-
 		ImageIcon confirmIcon = new ImageIcon("graphic/account/button/confirm_button.jpg");
-		inTable = new JTable(dataIn, nameIn);
-		inScroll = new JScrollPane(inTable);
-		inScroll.setBounds(144, 137, 320, 144);
-		add(inScroll);
-		outTable = new JTable(dataOut, nameOut);
-		outScroll = new JScrollPane(outTable);
-		outScroll.setBounds(144, 294, 320, 144);
-		add(outScroll);
 
 		confirm = new JButton(confirmIcon);
 		confirm.setBounds(392, 104, 72, 24);
@@ -207,7 +167,7 @@ public class ManagerAccountCheck extends JPanel {
 //			TableData[i][0] = accountlist.get(i).getName();
 //			TableData[i][1] = accountlist.get(i).getBalance();
 //		}
-		String[] title = { "账号", "余额" };
+		
 
 	}
 
