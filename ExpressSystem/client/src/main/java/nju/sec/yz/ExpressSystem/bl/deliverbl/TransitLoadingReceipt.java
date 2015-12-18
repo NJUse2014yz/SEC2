@@ -174,12 +174,15 @@ public class TransitLoadingReceipt implements ReceiptService {
 
 		// 验证barid
 		List<String> barIDs = receipt.getBarIds();
+		
+		if(barIDs==null||barIDs.size()==0)
+			return new ResultMessage(Result.FAIL,"还没填订单号哦~");
 
 		// 验证是否有重复
 		Set<String> idSet = new HashSet<>(barIDs);
-		if (idSet.size() > barIDs.size())
+		if (idSet.size() < barIDs.size())
 			return new ResultMessage(Result.FAIL, "有条形码号重复了~");
-
+		
 		for (String barID : barIDs) {
 			if (!ValidHelper.isBarId(barID)) {
 				validResult.setMessage("亲，咱们的订单号是十位数字哟~");
@@ -192,8 +195,7 @@ public class TransitLoadingReceipt implements ReceiptService {
 				return validResult;
 			}
 
-			if (isRightTrail(barID))
-				return new ResultMessage(Result.FAIL, "订单号是不是填错了~");
+			
 		}
 
 		// 验证info
@@ -288,9 +290,9 @@ public class TransitLoadingReceipt implements ReceiptService {
 		TransitLoadSheetVO receipt = (TransitLoadSheetVO) vo;
 		LoadInformation info = ((TransitLoadSheetVO) vo).getTransitLoadInformation();
 		String message = "到达地：" + info.getDestinationId() + StringTool.nextLine();
-		message = message + "装运订单：" + StringTool.nextLine();
+		message = message + "装运订单：" ;
 		for (String barId : receipt.getBarIds()) {
-			message = message + "	" + barId + StringTool.nextLine();
+			message = message  + barId + StringTool.nextLine();
 		}
 		return message;
 	}

@@ -38,18 +38,18 @@ public class TransitCarReceipt implements ReceiptService {
 		ResultMessage validResult = isValid(receipt);
 		if (validResult.getResult() == Result.FAIL)
 			return validResult;
-		
-		for(String barID:info.getBarIds()){
+
+		for (String barID : info.getBarIds()) {
 			// 判断系统中是否存在该条形码号的物流信息
 			if (!helper.isRightTrail(barID)) {
-				return new ResultMessage(Result.FAIL,"订单号" + barID + "是不是填错了~");
+				return new ResultMessage(Result.FAIL, "订单号" + barID + "是不是填错了~");
 			}
 		}
 
 		// 生成各种id
 		String transitID = helper.getCurrentTransitID();
 		String transportID = this.createTransportID(transitID);
-		
+
 		info.setCarTransitId(transportID);
 		info.setType(TransportType.CAR);
 
@@ -62,7 +62,7 @@ public class TransitCarReceipt implements ReceiptService {
 		TransitCarSheetPO po = new TransitCarSheetPO();
 		TransitCarInformation infoCopy = new TransitCarInformation(info);
 		po.setTransitInformation(infoCopy);
-		po.setId(transportID );
+		po.setId(transportID);
 		po.setMakePerson(helper.getMakePersonId());
 		po.setMakeTime(TimeTool.getDate());
 		po.setType(ReceiptType.TRANSIT_CAR_RECEIPT);
@@ -73,7 +73,11 @@ public class TransitCarReceipt implements ReceiptService {
 		if (saveResult.getResult() == Result.FAIL)
 			return saveResult;
 
-		
+		// 更新物流信息
+		Deliver deliver = new Deliver();
+		for (String barId : receipt.getTransitInformation().getBarIds()) {
+			deliver.submit(barId);
+		}
 
 		return new ResultMessage(Result.SUCCESS, fare + " " + transportID);
 	}
@@ -146,8 +150,8 @@ public class TransitCarReceipt implements ReceiptService {
 
 	@Override
 	public String showMessage(ReceiptVO vo) {
-		TransitInformation info=((TransitSheetVO)vo).getTransitInformation();
-		TransitReceiptHelper helper=new TransitReceiptHelper();
+		TransitInformation info = ((TransitSheetVO) vo).getTransitInformation();
+		TransitReceiptHelper helper = new TransitReceiptHelper();
 
 		return helper.showMessage(info);
 	}

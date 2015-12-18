@@ -45,7 +45,7 @@ public class TransitReceiptCar extends JPanel{
 	private newJText driverId;
 	private newJText transiterId;
 	
-	private newJCombo departure;
+	private newJLabel departure;
 	private newJCombo destination;
 	private newTable barId;
 	private newJBut confirm;
@@ -78,8 +78,11 @@ public class TransitReceiptCar extends JPanel{
 			transitAgency[i]=trans.get(i).getName();
 		}
 		
-		departure=new newJCombo(transitAgency);
+		TransitVO transit=deliverblservice.getCurrentTransit();
+		departure=new newJLabel();
+		departure.setText(transit.name);
 		departure.setBounds(195,56,110,20);
+		departure.setVisible(true);
 		add(departure);
 		
 		destination=new newJCombo(transitAgency);
@@ -145,8 +148,9 @@ public class TransitReceiptCar extends JPanel{
 				TransitSheetVO vo=new TransitSheetVO();
 				vo.setTransportType(TransportType.PLANE);
 					//destinationId项不存在，用null写入
+				
 				TransitCarInformation carInf = new TransitCarInformation(date.getTime(),
-						departure.getSelectedItem().toString(), destination.getSelectedItem().toString(),
+						departure.getText(), destination.getSelectedItem().toString(),
 						transiterId.getText().toString(), BarIdArray);
 				carInf.setCarId(carId.getText());
 				carInf.setDriverId(driverId.getText());

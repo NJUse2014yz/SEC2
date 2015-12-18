@@ -33,54 +33,55 @@ public class TransitFlightReceipt implements ReceiptService {
 	public ResultMessage make(ReceiptVO vo) {
 		TransitSheetVO receipt = (TransitSheetVO) vo;
 		TransitFlightInformation info = (TransitFlightInformation) receipt.getTransitInformation();
-		List<String> barIds=info.getBarIds();
+		List<String> barIds = info.getBarIds();
 		TransitReceiptHelper helper = new TransitReceiptHelper();
-		
+
 		// 验证
 		ResultMessage validResult = isValid(receipt);
 		if (validResult.getResult() == Result.FAIL)
 			return validResult;
-		
-		for(String barID:info.getBarIds()){
+
+		for (String barID : info.getBarIds()) {
 			// 判断系统中是否存在该条形码号的物流信息
 			if (!helper.isRightTrail(barID)) {
-				return new ResultMessage(Result.FAIL,"订单号" + barID + "是不是填错了~");
+				return new ResultMessage(Result.FAIL, "订单号" + barID + "是不是填错了~");
 			}
 		}
 
 		// 生成各种id
 		String transitID = helper.getCurrentTransitID();
 		String transportID = this.createTransportID(transitID);
-		String receiptId=helper.creatReceiptID(transitID);
+		String receiptId = helper.creatReceiptID(transitID);
 		info.setFlightTransitId(transportID);
 
 		// 计算运费
-		double distance=helper.distance(info.getDeparture(), info.getDestination());
-		double fare = this.cost(barIds.size(),distance);
-		System.out.println("size"+barIds.size());
+		double distance = helper.distance(info.getDeparture(), info.getDestination());
+		double fare = this.cost(barIds.size(), distance);
 		info.setFare(fare);
-		
+
 		info.setType(TransportType.PLANE);
-		
-		//生成po
-		TransitFlightSheetPO po=new TransitFlightSheetPO();
-		TransitFlightInformation infoCopy=new TransitFlightInformation(info);
+
+		// 生成po
+		TransitFlightSheetPO po = new TransitFlightSheetPO();
+		TransitFlightInformation infoCopy = new TransitFlightInformation(info);
 		po.setTransitInformation(infoCopy);
 		po.setId(receiptId);
 		po.setMakePerson(helper.getMakePersonId());
 		po.setMakeTime(TimeTool.getDate());
 		po.setType(ReceiptType.TRANSIT_FLIGHT_RECEIPT);
-		
-		//提交
-		ReceiptSaveService receiptList=new ReceiptList();
-		ResultMessage saveResult=receiptList.saveReceipt(po);
-		if(saveResult.getResult()==Result.FAIL)
+
+		// 提交
+		ReceiptSaveService receiptList = new ReceiptList();
+		ResultMessage saveResult = receiptList.saveReceipt(po);
+		if (saveResult.getResult() == Result.FAIL)
 			return saveResult;
 
-		
-		
-		
-		
+		// 更新物流信息
+		Deliver deliver = new Deliver();
+		for (String barId : receipt.getTransitInformation().getBarIds()) {
+			deliver.submit(barId);
+		}
+
 		return new ResultMessage(Result.SUCCESS, fare + " " + transportID);
 	}
 
@@ -108,17 +109,17 @@ public class TransitFlightReceipt implements ReceiptService {
 
 	@Override
 	public ResultMessage approve(ReceiptVO vo) {
-		TransitReceiptHelper helper=new TransitReceiptHelper();
+		TransitReceiptHelper helper = new TransitReceiptHelper();
 		helper.approve(vo);
 		return new ResultMessage(Result.SUCCESS);
 	}
 
 	@Override
 	public ReceiptPO convertToPO(ReceiptVO vo) {
-		TransitSheetVO receipt=(TransitSheetVO)vo;
-		TransitFlightInformation info=(TransitFlightInformation)receipt.getTransitInformation();
-		TransitFlightInformation infoCopy=new TransitFlightInformation(info);
-		TransitFlightSheetPO po=new TransitFlightSheetPO();
+		TransitSheetVO receipt = (TransitSheetVO) vo;
+		TransitFlightInformation info = (TransitFlightInformation) receipt.getTransitInformation();
+		TransitFlightInformation infoCopy = new TransitFlightInformation(info);
+		TransitFlightSheetPO po = new TransitFlightSheetPO();
 		po.setTransitInformation(infoCopy);
 		po.setId(vo.getId());
 		po.setMakePerson(vo.getMakePerson());
@@ -139,21 +140,21 @@ public class TransitFlightReceipt implements ReceiptService {
 
 	@Override
 	public ReceiptVO show(ReceiptPO po) {
-		TransitFlightSheetPO receipt=(TransitFlightSheetPO)po;
-		TransitFlightInformation info=new TransitFlightInformation(receipt.getTransitInformation());
-		
-		TransitSheetVO vo=new TransitSheetVO();
+		TransitFlightSheetPO receipt = (TransitFlightSheetPO) po;
+		TransitFlightInformation info = new TransitFlightInformation(receipt.getTransitInformation());
+
+		TransitSheetVO vo = new TransitSheetVO();
 		vo.setTransportType(TransportType.PLANE);
 		vo.setTransitInformation(info);
 		vo.copy(po);
-		
+
 		return vo;
 	}
-	
+
 	@Override
 	public String showMessage(ReceiptVO vo) {
-		TransitInformation info=((TransitSheetVO)vo).getTransitInformation();
-		TransitReceiptHelper helper=new TransitReceiptHelper();
+		TransitInformation info = ((TransitSheetVO) vo).getTransitInformation();
+		TransitReceiptHelper helper = new TransitReceiptHelper();
 
 		return helper.showMessage(info);
 	}

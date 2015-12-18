@@ -37,11 +37,11 @@ public class TransitTrainReceipt implements ReceiptService {
 		ResultMessage validResult = isValid(receipt);
 		if (validResult.getResult() == Result.FAIL)
 			return validResult;
-		
-		for(String barID:info.getBarIds()){
+
+		for (String barID : info.getBarIds()) {
 			// 判断系统中是否存在该条形码号的物流信息
 			if (!helper.isRightTrail(barID)) {
-				return new ResultMessage(Result.FAIL,"订单号" + barID + "是不是填错了~");
+				return new ResultMessage(Result.FAIL, "订单号" + barID + "是不是填错了~");
 			}
 		}
 
@@ -50,7 +50,7 @@ public class TransitTrainReceipt implements ReceiptService {
 		String transportID = this.createTransportID(transitID);
 		String receiptId = helper.creatReceiptID(transportID);
 		info.setTrainTransitId(transportID);
-		
+
 		info.setType(TransportType.TRAIN);
 
 		// 计算运费
@@ -73,7 +73,11 @@ public class TransitTrainReceipt implements ReceiptService {
 		if (saveResult.getResult() == Result.FAIL)
 			return saveResult;
 
-		
+		// 更新物流信息
+		Deliver deliver = new Deliver();
+		for (String barId : receipt.getTransitInformation().getBarIds()) {
+			deliver.submit(barId);
+		}
 
 		return new ResultMessage(Result.SUCCESS, fare + " " + transportID);
 	}
@@ -102,17 +106,17 @@ public class TransitTrainReceipt implements ReceiptService {
 
 	@Override
 	public ResultMessage approve(ReceiptVO vo) {
-		TransitReceiptHelper helper=new TransitReceiptHelper();
+		TransitReceiptHelper helper = new TransitReceiptHelper();
 		helper.approve(vo);
 		return new ResultMessage(Result.SUCCESS);
 	}
 
 	@Override
 	public ReceiptPO convertToPO(ReceiptVO vo) {
-		TransitSheetVO receipt=(TransitSheetVO)vo;
-		TransitTrainInformation info=(TransitTrainInformation)receipt.getTransitInformation();
-		TransitTrainInformation infoCopy=new TransitTrainInformation(info);
-		TransitTrainSheetPO po=new TransitTrainSheetPO();
+		TransitSheetVO receipt = (TransitSheetVO) vo;
+		TransitTrainInformation info = (TransitTrainInformation) receipt.getTransitInformation();
+		TransitTrainInformation infoCopy = new TransitTrainInformation(info);
+		TransitTrainSheetPO po = new TransitTrainSheetPO();
 		po.setTransitInformation(infoCopy);
 		po.setId(vo.getId());
 		po.setMakePerson(vo.getMakePerson());
@@ -133,21 +137,21 @@ public class TransitTrainReceipt implements ReceiptService {
 
 	@Override
 	public ReceiptVO show(ReceiptPO po) {
-		TransitTrainSheetPO receipt=(TransitTrainSheetPO)po;
-		TransitTrainInformation info=new TransitTrainInformation(receipt.getTransitInformation());
-		
-		TransitSheetVO vo=new TransitSheetVO();
+		TransitTrainSheetPO receipt = (TransitTrainSheetPO) po;
+		TransitTrainInformation info = new TransitTrainInformation(receipt.getTransitInformation());
+
+		TransitSheetVO vo = new TransitSheetVO();
 		vo.setTransportType(TransportType.TRAIN);
 		vo.setTransitInformation(info);
 		vo.copy(po);
-		
+
 		return vo;
 	}
-	
+
 	@Override
 	public String showMessage(ReceiptVO vo) {
-		TransitInformation info=((TransitSheetVO)vo).getTransitInformation();
-		TransitReceiptHelper helper=new TransitReceiptHelper();
+		TransitInformation info = ((TransitSheetVO) vo).getTransitInformation();
+		TransitReceiptHelper helper = new TransitReceiptHelper();
 
 		return helper.showMessage(info);
 	}

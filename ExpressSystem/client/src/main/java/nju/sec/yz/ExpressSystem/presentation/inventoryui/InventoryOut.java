@@ -44,9 +44,9 @@ private InventoryBlService inventoryservice=new InventoryController();
 	private AgencyBlService manager=new ManagerController();
 	
 //	private JTextField barId;
-	private newJCombo destination;
+	private newJLabel destination;
 	
-	private newJCombo transportType;
+	private newJLabel transportType;
 	private newJText transitSheetId;
 	
 	private newJBut searchBarId;
@@ -79,12 +79,8 @@ private InventoryBlService inventoryservice=new InventoryController();
 		
 		date =new DateChooser(this,213,82);
 		
-		ArrayList<TransitVO> trans=manager.observeAllTransit();
-		String[] desti=new String[trans.size()];
-		for(int i=0;i<trans.size();i++){
-			desti[i]=trans.get(i).getName();
-		}
-		destination=new newJCombo(desti);
+		
+		destination=new newJLabel();
 		destination.setBounds(202, 110, 120, 20);
 		add(destination);
 		
@@ -94,8 +90,8 @@ private InventoryBlService inventoryservice=new InventoryController();
 		warning.setFont(new Font("Dialog", 1, 15));
 		add(warning);
 		
-		String[] blo={"飞机","火车","汽车"};
-		transportType=new newJCombo(blo);
+		
+		transportType=new newJLabel();
 		transportType.setBounds(225,139,58,19);
 		add(transportType);
 		
@@ -129,6 +125,13 @@ private InventoryBlService inventoryservice=new InventoryController();
 					} else {
 						// 提交成功
 						warning.setVisible(false);
+						/**
+						 * 自动显示目的地与运输方式
+						 */
+						transportType.setText(vo.type+"");
+						transportType.setVisible(true);
+						destination.setText(vo.destination);
+						destination.setVisible(true);
 						ArrayList<String> barIdList = (ArrayList<String>) vo.barIds;
 						changeData(barIdList);
 						table.resetData();
@@ -158,7 +161,7 @@ private InventoryBlService inventoryservice=new InventoryController();
 					// translate data
 					InventoryOutInformation invenOutInf = new InventoryOutInformation(date.getTime(),
 							destination.getSelectedItem().toString(),
-							getType(transportType.getSelectedItem().toString()),
+							getType(transportType.getText()),
 							transitSheetId.getText()
 							);
 					//为每个barId制作单子
