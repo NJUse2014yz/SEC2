@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
-import nju.sec.yz.ExpressSystem.client.RMIExceptionHandler;
+import nju.sec.yz.ExpressSystem.client.rmi.RMIExceptionHandler;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.AccountDataService;

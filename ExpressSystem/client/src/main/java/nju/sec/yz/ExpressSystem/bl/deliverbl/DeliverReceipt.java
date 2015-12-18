@@ -14,7 +14,7 @@ import nju.sec.yz.ExpressSystem.bl.tool.TimeTool;
 import nju.sec.yz.ExpressSystem.bl.userbl.User;
 import nju.sec.yz.ExpressSystem.bl.userbl.UserInfo;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
-import nju.sec.yz.ExpressSystem.client.RMIExceptionHandler;
+import nju.sec.yz.ExpressSystem.client.rmi.RMIExceptionHandler;
 import nju.sec.yz.ExpressSystem.common.DeliveryState;
 import nju.sec.yz.ExpressSystem.common.DeliveryType;
 import nju.sec.yz.ExpressSystem.common.GoodInformation;

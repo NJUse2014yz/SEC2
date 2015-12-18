@@ -194,4 +194,10 @@ public class DataFactorySerializableImpl extends UnicastRemoteObject implements 
 		return new MessageDataImpl();
 	}
 
+	@Override
+	public void ping() throws RemoteException {
+		
+		
+	}
+
 }

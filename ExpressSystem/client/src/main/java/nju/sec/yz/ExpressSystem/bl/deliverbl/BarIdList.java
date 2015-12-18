@@ -8,7 +8,7 @@ import nju.sec.yz.ExpressSystem.bl.managerbl.Transit;
 import nju.sec.yz.ExpressSystem.bl.userbl.User;
 import nju.sec.yz.ExpressSystem.bl.userbl.UserInfo;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
-import nju.sec.yz.ExpressSystem.client.RMIExceptionHandler;
+import nju.sec.yz.ExpressSystem.client.rmi.RMIExceptionHandler;
 import nju.sec.yz.ExpressSystem.dataservice.deliverDataSevice.BarIdsDataService;
 import nju.sec.yz.ExpressSystem.po.BarIdsPO;
 import nju.sec.yz.ExpressSystem.vo.BarIdsVO;

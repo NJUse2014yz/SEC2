@@ -5,7 +5,7 @@ import java.rmi.RemoteException;
 import nju.sec.yz.ExpressSystem.bl.managerbl.AgencyInfo;
 import nju.sec.yz.ExpressSystem.bl.managerbl.Transit;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
-import nju.sec.yz.ExpressSystem.client.RMIExceptionHandler;
+import nju.sec.yz.ExpressSystem.client.rmi.RMIExceptionHandler;
 import nju.sec.yz.ExpressSystem.common.DeliveryState;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;

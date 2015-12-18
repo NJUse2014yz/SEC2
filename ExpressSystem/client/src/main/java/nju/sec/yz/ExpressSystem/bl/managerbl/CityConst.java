@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
-import nju.sec.yz.ExpressSystem.client.RMIExceptionHandler;
-import nju.sec.yz.ExpressSystem.client.RMIHelper;
+import nju.sec.yz.ExpressSystem.client.rmi.RMIExceptionHandler;
+import nju.sec.yz.ExpressSystem.client.rmi.RMIHelper;
 import nju.sec.yz.ExpressSystem.common.CityInformation;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;

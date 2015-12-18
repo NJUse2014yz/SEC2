@@ -39,6 +39,10 @@ public class DatafactoryProxy {
 	private static DatafactoryService datafactory;
 
 	
+	static public void ping() throws RemoteException {
+		datafactory.ping();
+	}
+	
 	public static void setDatafactory(DatafactoryService datafactory) {
 		DatafactoryProxy.datafactory = datafactory;
 	}

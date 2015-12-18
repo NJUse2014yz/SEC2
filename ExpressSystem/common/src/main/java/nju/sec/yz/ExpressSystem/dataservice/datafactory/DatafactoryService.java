@@ -33,6 +33,12 @@ import nju.sec.yz.ExpressSystem.dataservice.userDataSevice.UserDataService;
  */
 public interface DatafactoryService extends Remote{
 	
+	/**
+	 * 断线之后检验是否重连的空方法
+	 * @throws RemoteException
+	 */
+	public void ping() throws RemoteException;
+	
 	public MessageDataService getMessageDataService() throws RemoteException;
 	
 	public BarIdsDataService getBarIdsDataService() throws RemoteException;

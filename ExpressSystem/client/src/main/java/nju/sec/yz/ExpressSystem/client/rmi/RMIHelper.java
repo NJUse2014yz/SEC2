@@ -1,4 +1,4 @@
-package nju.sec.yz.ExpressSystem.client;
+package nju.sec.yz.ExpressSystem.client.rmi;
 
 
 import java.io.IOException;
@@ -10,24 +10,26 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.RMISocketFactory;
 
+import nju.sec.yz.ExpressSystem.client.ClientInitException;
+import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
 import nju.sec.yz.ExpressSystem.dataservice.datafactory.DatafactoryService;
 import nju.sec.yz.ExpressSystem.dataservice.deliverDataSevice.DeliverDataService;
 import nju.sec.yz.ExpressSystem.po.DeliverPO;
 
 public class RMIHelper {
 
-    private static final String IP = "localhost"; //Can be read from config file
+    private static final String IP = IPConfig.getIP(); //Can be read from config file
     
     private static boolean inited = false;
 
 
     public synchronized static void init() throws ClientInitException {
-        if (inited) {
-            return;
-        }
+//        if (inited) {
+//            return;
+//        }
         try {
             initObjects();
-            inited = true;
+//            inited = true;
         } catch (Exception e) {
             throw new ClientInitException(e);
         }

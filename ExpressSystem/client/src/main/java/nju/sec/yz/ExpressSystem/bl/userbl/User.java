@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import nju.sec.yz.ExpressSystem.bl.managerbl.Position;
 import nju.sec.yz.ExpressSystem.bl.managerbl.Transit;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
-import nju.sec.yz.ExpressSystem.client.RMIExceptionHandler;
+import nju.sec.yz.ExpressSystem.client.rmi.RMIExceptionHandler;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.Status;
@@ -59,7 +59,6 @@ public class User implements UserInfo{
 			return result;
 		}
 		this.saveCurrentUser(userPo);
-		System.out.println(result.getMessage());
 		return result;
 	}
 

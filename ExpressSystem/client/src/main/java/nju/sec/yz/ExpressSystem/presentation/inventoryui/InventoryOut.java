@@ -160,7 +160,7 @@ private InventoryBlService inventoryservice=new InventoryController();
 				} else {
 					// translate data
 					InventoryOutInformation invenOutInf = new InventoryOutInformation(date.getTime(),
-							destination.getSelectedItem().toString(),
+							destination.getText(),
 							getType(transportType.getText()),
 							transitSheetId.getText()
 							);
