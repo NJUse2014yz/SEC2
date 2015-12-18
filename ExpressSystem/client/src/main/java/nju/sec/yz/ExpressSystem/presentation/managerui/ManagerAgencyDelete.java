@@ -22,6 +22,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import nju.sec.yz.ExpressSystem.bl.managerbl.ManagerController;
+import nju.sec.yz.ExpressSystem.bl.managerbl.Position;
 import nju.sec.yz.ExpressSystem.blservice.managerBlService.AgencyBlService;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
@@ -66,7 +67,7 @@ public class ManagerAgencyDelete extends JPanel{
 		name.add("名称");
 		
 		table=new newTable(data,name,this,false);
-		table.setSelectionMode();
+		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		table.setTableSelect();
 		table.setBounds(137,94,318,181);
 		table.join();
@@ -107,11 +108,22 @@ public class ManagerAgencyDelete extends JPanel{
 					warning.setText("信息未填写");
 					warning.setVisible(true);
 					repaint();
+					
 				} else {
 					AgencyListVO agency = manager
 							.observeTransitByName(searchnum.getText());
-					changeData(agency);
-					table.resetData();
+					if(agency==null)
+					{
+						warning.setText("不存在该机构");
+						warning.setVisible(true);
+						repaint();
+					}
+					else
+					{
+						warning.setVisible(false);
+						changeData(agency);
+						table.resetData();
+					}
 				}
 			}
 		});
@@ -135,37 +147,47 @@ public class ManagerAgencyDelete extends JPanel{
 						manager.deletePosition(transitBelong,table.getValueAt(deletelines[i], 1,false));
 					}
 					original();
+					table.resetData();
 				}
 			}
 		});	
-}
+	}
 	private	void changeData(AgencyListVO agency)
 	{
+		System.out.println(data.size());
+		data.removeAllElements();
 		transits=(ArrayList<TransitVO>) agency.transits;
 		positions=(ArrayList<PositionVO>) agency.positions;
-		int total=0;
-		total+=transits.size();
-		for(int i=0;i<transits.size();i++){
-			total+=transits.get(i).getPositions().size();
-		}
 		for(int i=0;i<transits.size();i++){
 			Vector<String> vector=new Vector<String>();
 			TransitVO temp=transits.get(i);
 			vector.add(temp.getLocation());
 			vector.add(temp.getId());
 			vector.add(temp.getName());
-			for(int j=0;j<positions.size();j++){
-				PositionVO temp2=positions.get(j);
-				vector.add(temp2.getLocation());
-				vector.add(temp2.getId());
-				vector.add(temp2.getName());
-			}
+			data.add(vector);
+		}
+		for(int j=0;j<positions.size();j++){
+			Vector<String> vector=new Vector<String>();
+			PositionVO temp2=positions.get(j);
+			vector.add(temp2.getLocation());
+			vector.add(temp2.getId());
+			vector.add(temp2.getName());
 			data.add(vector);
 		}
 	}
 	
 	private void original(){
-		changeData(new AgencyListVO(manager.observeAllTransit(),new ArrayList<PositionVO>()));
+		ArrayList<TransitVO> t=manager.observeAllTransit();
+		ArrayList<PositionVO> p=new ArrayList<PositionVO>();
+		for(int i=0;i<t.size();i++)
+		{
+			ArrayList<PositionVO> remp=(ArrayList<PositionVO>) t.get(i).positions;
+			for(int j=0;j<remp.size();j++)
+			{
+				p.add(remp.get(j));
+			}
+		}
+		changeData(new AgencyListVO(t,p));
 		table.resetData();
 	}
 		

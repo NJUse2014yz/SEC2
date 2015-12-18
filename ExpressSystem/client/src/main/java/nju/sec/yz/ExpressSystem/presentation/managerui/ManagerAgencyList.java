@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -21,6 +22,7 @@ import javax.swing.table.TableModel;
 
 import nju.sec.yz.ExpressSystem.bl.managerbl.ManagerController;
 import nju.sec.yz.ExpressSystem.blservice.managerBlService.AgencyBlService;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.presentation.positionui.PositionArriveUi;
 import nju.sec.yz.ExpressSystem.vo.AgencyListVO;
@@ -33,9 +35,9 @@ public class ManagerAgencyList extends JPanel{
 	private ManagerButtonComponent mbc;
 	
 	private JTextField searchnum;
-	private JTable table;
-	private TableModel model;
-	private JScrollPane jsc;
+	private newTable table;
+	private Vector<Vector<String>> data=new Vector<Vector<String>>();
+	private Vector<String> name=new Vector<String>();
 	
 	private JButton search;
 	private JButton back;
@@ -64,101 +66,79 @@ public class ManagerAgencyList extends JPanel{
 		setSize(490, 550);
 		setVisible(true);
 		
-		table=new JTable(null);
+		name.add("所在地");
+		name.add("编号");
+		name.add("名称");
+		
+		table=new newTable(data,name,this,false);
 		table.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-		table.setColumnSelectionAllowed(false);
-		table.setRowSelectionAllowed(true);
-//		table.setRowSelectionInterval(0,0); 
-
-		jsc=new JScrollPane(table);
-		jsc.setVisible(true);
-	    jsc.setBounds(137,94,318,181);
-	    add(jsc);
+		table.setTableSelect();
+	    table.setBounds(137,94,318,181);
+		table.join();
 		
 		original();
 		
+		warning.setBounds(198, 490, 463 - 198, 30);
+		warning.setFont(new Font("Dialog", 1, 15));
+		warning.setForeground(Color.red);
+		warning.setVisible(false);
+		add(warning);
 		
-		 searchnum=new JTextField();
-		    searchnum.setBounds(216, 62, 220, 21);
-		    add(searchnum);
-		    
-		    search=new JButton();
-		    search.setBackground(new Color(0,0,255));  
-		    search.setOpaque(false); //设置背景透明
-		    search.setBounds(436,62,21,21);
-		    add(search);
-		    
-			search.addMouseListener(new MouseAdapter() {
-				public void mouseClicked(MouseEvent e) {
-					// 判断必填项是否填写完成
-					if (searchnum.getText().equals("")) {
-						warning.setText("信息未填写");
-						warning.setBounds(198, 490, 463 - 198, 30);
-						warning.setFont(new Font("Dialog", 1, 15));
-						warning.setForeground(Color.red);
+		searchnum=new JTextField();
+		searchnum.setBounds(216, 62, 220, 21);
+		add(searchnum);
+		
+		search=new JButton();
+		search.setBackground(new Color(0,0,255));  
+		search.setOpaque(false); //设置背景透明
+		search.setBounds(436,62,21,21);
+		add(search);
+	    
+		search.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				// 判断必填项是否填写完成
+				if (searchnum.getText().equals("")) {
+					warning.setText("信息未填写");
+					warning.setVisible(true);
+					repaint();
+				}else{
+					AgencyListVO agency=manager.observeTransitByName(searchnum.getText());
+					if(agency==null)
+					{
+						warning.setText("不存在该机构");
 						warning.setVisible(true);
-						add(warning);
 						repaint();
-					}else{
-						AgencyListVO agency=manager.observeTransitByName(searchnum.getText());
-						transits=(ArrayList<TransitVO>) agency.transits;
-						positions=(ArrayList<PositionVO>) agency.positions;
-						
-						int total=0;
-						total+=transits.size();
-						total+=positions.size();
-						
-						String[][] TableData = new String[total][3];
-						String[] columnTitle={"所在地","编号","名称"};
-						for(int i=0;i<transits.size();i++){
-							TransitVO temp=transits.get(i);
-							TableData[i][0]=temp.getLocation();
-							TableData[i][1]=temp.getId();
-							TableData[i][2]=temp.getName();
-							}
-						for(int i=0;i<positions.size();i++){
-							PositionVO temp=positions.get(i);
-							TableData[i+transits.size()][0]=temp.getLocation();
-							TableData[i+transits.size()][1]=temp.getId();
-							TableData[i+transits.size()][2]=temp.getName();
-						}
-						model=new DefaultTableModel(TableData,columnTitle);
-						table.setModel(model);
-						
-						table.repaint();
 					}
-			
+					else
+					{
+						warning.setVisible(false);
+						changeData(agency);
+						table.resetData();
+					}
+				}
 			}
 		});
 			
-			
-			
-			table.addMouseListener(new MouseAdapter() {
-//				this.setRowSelectionAllowed(true);
-
-				 @Override
-				 public void mouseClicked(MouseEvent e) {
-//					 if(e.getClickCount()==2){//鼠标双击
-						 int num=table.getSelectedRow();
-						 System.out.println(num);
-						 if(num<transits.size()){
-							 reference=new ArrayList<String>();
-							 reference.add(transits.get(num).getId());
-							 System.out.println(reference.size());
-						 }else{
-							 reference=new ArrayList<String>();
-							 reference.add(positions.get(num-transits.size()).getTransitId());
-							 reference.add(positions.get(num-transits.size()).getId());
-						 }
-							 if(type.equals("modify")){
-							 maincontroler.mainFrame.nextPanel(new ManagerAgencyModify(maincontroler,mbc,reference));
-							 }else{
-							 maincontroler.mainFrame.nextPanel(new ManagerAgencyObserve(maincontroler,mbc,reference));
-							 }
-						 
-						 }
-//					 }
-				 
+		table.addMouseListener(new MouseAdapter() {
+			 @Override
+			 public void mouseClicked(MouseEvent e) {
+				 int num=table.getSelectedRow();
+				 System.out.println(num);
+				 if(num<transits.size()){
+					 reference=new ArrayList<String>();
+					 reference.add(transits.get(num).getId());
+					 System.out.println(reference.size());
+				 }else{
+					 reference=new ArrayList<String>();
+					 reference.add(positions.get(num-transits.size()).getTransitId());
+					 reference.add(positions.get(num-transits.size()).getId());
+				 }
+					 if(type.equals("modify")){
+						 maincontroler.mainFrame.nextPanel(new ManagerAgencyModify(maincontroler,mbc,reference));
+					 }else{
+						 maincontroler.mainFrame.nextPanel(new ManagerAgencyObserve(maincontroler,mbc,reference));
+					 }
+				 }
 			});
 			
 			
@@ -170,45 +150,47 @@ public class ManagerAgencyList extends JPanel{
 			back.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
 					original();
-					repaint();
+					table.resetData();
 				}
 			});	
 	}
-	
-	
-	
 	private void original(){
-		transits=manager.observeAllTransit();
-		positions=new ArrayList<PositionVO>();
-		
-		int total=0;
-		total=total+transits.size();
-		for(int i=0;i<transits.size();i++){
-			total=total+transits.get(i).getPositions().size();
-		}
-		String[][] TableData = new String[total][3];
-		String[] columnTitle={"所在地","编号","名称"};
-		for(int i=0;i<transits.size();i++){
-			TransitVO temp=transits.get(i);
-			TableData[i][0]=temp.getLocation();
-			TableData[i][1]=temp.getId();
-			
-			TableData[i][2]=temp.getName();
-			positions.addAll(temp.getPositions());
+		ArrayList<TransitVO> t=manager.observeAllTransit();
+		ArrayList<PositionVO> p=new ArrayList<PositionVO>();
+		for(int i=0;i<t.size();i++)
+		{
+			ArrayList<PositionVO> remp=(ArrayList<PositionVO>) t.get(i).positions;
+			for(int j=0;j<remp.size();j++)
+			{
+				p.add(remp.get(j));
 			}
-		for(int i=0;i<positions.size();i++){
-			PositionVO temp=positions.get(i);
-			TableData[i+transits.size()][0]=temp.getLocation();
-			TableData[i+transits.size()][1]=temp.getId();
-			TableData[i+transits.size()][2]=temp.getName();
 		}
-		model=new DefaultTableModel(TableData,columnTitle);
-//		table=new JTable(model);
-		table.setModel(model);
-		table.repaint();
-		
+		changeData(new AgencyListVO(t,p));
+		table.resetData();
 	}
-		
+	private	void changeData(AgencyListVO agency)
+	{
+		System.out.println(data.size());
+		data.removeAllElements();
+		transits=(ArrayList<TransitVO>) agency.transits;
+		positions=(ArrayList<PositionVO>) agency.positions;
+		for(int i=0;i<transits.size();i++){
+			Vector<String> vector=new Vector<String>();
+			TransitVO temp=transits.get(i);
+			vector.add(temp.getLocation());
+			vector.add(temp.getId());
+			vector.add(temp.getName());
+			data.add(vector);
+		}
+		for(int j=0;j<positions.size();j++){
+			Vector<String> vector=new Vector<String>();
+			PositionVO temp2=positions.get(j);
+			vector.add(temp2.getLocation());
+			vector.add(temp2.getId());
+			vector.add(temp2.getName());
+			data.add(vector);
+		}
+	}
 	@Override
 	public void paintComponent(Graphics g) {
 

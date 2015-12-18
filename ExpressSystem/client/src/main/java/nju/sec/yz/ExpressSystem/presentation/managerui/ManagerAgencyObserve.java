@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -20,6 +21,7 @@ import javax.swing.table.TableModel;
 
 import nju.sec.yz.ExpressSystem.bl.managerbl.ManagerController;
 import nju.sec.yz.ExpressSystem.blservice.managerBlService.AgencyBlService;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.PositionVO;
 import nju.sec.yz.ExpressSystem.vo.TransitVO;
@@ -35,12 +37,14 @@ public class ManagerAgencyObserve extends JPanel{
 	private JLabel Id;
 	private JLabel name;
 	private JLabel TransitId;
-
+	private newTable table;
 	private JButton back;
 
 	private JLabel warning = new JLabel();
 	private JLabel transit;
 	
+	private Vector<Vector<String>> data=new Vector<Vector<String>>();
+	private Vector<String> title=new Vector<String>();
 	//记为positon序号
 		private int count = 0;
 	
@@ -64,7 +68,6 @@ public class ManagerAgencyObserve extends JPanel{
 		location.setFont(new Font("Dialog", 1, 15));
 		location.setForeground(Color.white);
 		
-
 		Id = new JLabel();
 		Id.setBounds(190, 118, 73, 18);
 		add(Id);
@@ -77,6 +80,14 @@ public class ManagerAgencyObserve extends JPanel{
 		name.setFont(new Font("Dialog", 1, 15));
 		name.setForeground(Color.white);
 
+		title.add("所在地");
+		title.add("编号");
+		title.add("名称");
+		
+		table=new newTable(data,title,this,false);
+		table.setBounds(137,175,318,181);
+		table.join();
+		
 		ImageIcon backIcon = new ImageIcon("graphic/manager/button/back.png");
 		back = new JButton(backIcon);
 		back.setBounds(370, 360, 81, 20);
@@ -98,65 +109,55 @@ public class ManagerAgencyObserve extends JPanel{
 			iniPosition(vo, num.get(1));
 		}
 	}
-
-
-
-
-private void iniTransit(TransitVO vo) {
-	location.setText(vo.getLocation());
-	name.setText(vo.getName());
-	Id.setText(vo.getId());
-
-	String[][] TableData = new String[vo.getPositions().size()][3];
-	String[] columnTitle={"所在地","编号","名称"};
-	for(int i=0;i<vo.getPositions().size();i++){
-		PositionVO temp=vo.getPositions().get(i);
-		TableData[i][0]=temp.getLocation();
-		TableData[i][1]=temp.getId();
-		TableData[i][2]=temp.getName();
+	private void iniTransit(TransitVO vo) {
+		location.setText(vo.getLocation());
+		name.setText(vo.getName());
+		Id.setText(vo.getId());
+		changeData(vo);
 	}
-	TableModel model=new DefaultTableModel(TableData,columnTitle);
-	JTable table=new JTable(model);
-
-	JScrollPane jsc=new JScrollPane(table);
-	jsc.setVisible(true);
-    jsc.setBounds(137,175,318,181);
-    add(jsc);
 	
-}
-
-private void iniPosition(TransitVO vo, String Pid) {
-
-	ArrayList<PositionVO> listVO = (ArrayList<PositionVO>) vo.getPositions();
+	private void iniPosition(TransitVO vo, String Pid) {
 	
-	for (;!( listVO.get(count).getId() .equals(Pid)); count++) {}
+		ArrayList<PositionVO> listVO = (ArrayList<PositionVO>) vo.getPositions();
+		
+		for (;!( listVO.get(count).getId() .equals(Pid)); count++) {}
+		
+		location.setText(listVO.get(count).getLocation());
+		name.setText(listVO.get(count).getName());
+		Id.setText(Pid);
+		
+		ImageIcon filltransit = new ImageIcon("graphic/manager/button/transit.png");
+		transit = new JLabel(filltransit);
+		transit.setBounds(147, 179, 89, 21);
+		add(transit);
 	
-	location.setText(listVO.get(count).getLocation());
-	name.setText(listVO.get(count).getName());
-	Id.setText(Pid);
+		String transit = listVO.get(count).getTransitId();
+		TransitId = new JLabel();
+		TransitId.setText(transit);
+		TransitId.setBounds(247, 179, 140, 18);
+		add(TransitId);
+		TransitId.setFont(new Font("Dialog", 1, 15));
+		TransitId.setForeground(Color.white);
 	
-	ImageIcon filltransit = new ImageIcon("graphic/manager/button/transit.png");
-	transit = new JLabel(filltransit);
-	transit.setBounds(147, 179, 89, 21);
-	add(transit);
-
-	String transit = listVO.get(count).getTransitId();
-	TransitId = new JLabel();
-	TransitId.setText(transit);
-	TransitId.setBounds(247, 179, 140, 18);
-	add(TransitId);
-	TransitId.setFont(new Font("Dialog", 1, 15));
-	TransitId.setForeground(Color.white);
-
+		
+	}
+	private void changeData(TransitVO vo)
+	{
+		for(int i=0;i<vo.getPositions().size();i++){
+			Vector<String> vector=new Vector<String>();
+			PositionVO temp=vo.getPositions().get(i);
+			vector.add(temp.getLocation());
+			vector.add(temp.getId());
+			vector.add(temp.getName());
+			data.add(vector);
+		}
+	}
+	@Override
+	public void paintComponent(Graphics g) {
 	
-}
-
-@Override
-public void paintComponent(Graphics g) {
-
-	Image img01 = new ImageIcon("graphic/manager/background/background05.png").getImage();
-
-	g.drawImage(img01, 0, 0, 490, 550, null);
-
-}
+		Image img01 = new ImageIcon("graphic/manager/background/background05.png").getImage();
+	
+		g.drawImage(img01, 0, 0, 490, 550, null);
+	
+	}
 }

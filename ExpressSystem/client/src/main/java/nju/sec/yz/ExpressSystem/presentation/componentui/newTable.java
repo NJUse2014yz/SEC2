@@ -89,9 +89,9 @@ public class newTable{
 	/**
 	 * 设置多选
 	 */
-	public void setSelectionMode()
+	public void setSelectionMode(int n)
 	{
-		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		table.setSelectionMode(n);
 	}
 	/**
 	 * 得到model
