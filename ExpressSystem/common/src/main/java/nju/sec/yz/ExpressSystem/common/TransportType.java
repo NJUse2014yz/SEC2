@@ -8,5 +8,20 @@ import java.io.Serializable;
  *
  */
 public enum TransportType  implements Serializable{
-	TRAIN,PLANE,CAR;
+	TRAIN(){
+		@Override
+		public String toString(){
+			return "火车";
+		}
+	},PLANE(){
+		@Override
+		public String toString(){
+			return "飞机";
+		}
+	},CAR(){
+		@Override
+		public String toString(){
+			return "汽车";
+		}
+	};
 }

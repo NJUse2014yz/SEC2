@@ -1,6 +1,12 @@
 package nju.sec.yz.ExpressSystem.bl.inventorybl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import nju.sec.yz.ExpressSystem.bl.deliverbl.BarIdList;
+import nju.sec.yz.ExpressSystem.bl.managerbl.AgencyInfo;
+import nju.sec.yz.ExpressSystem.bl.managerbl.Position;
+import nju.sec.yz.ExpressSystem.bl.managerbl.Transit;
 import nju.sec.yz.ExpressSystem.bl.userbl.User;
 import nju.sec.yz.ExpressSystem.bl.userbl.UserInfo;
 import nju.sec.yz.ExpressSystem.blservice.inventoryBlService.InventoryBlService;
@@ -8,7 +14,9 @@ import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.InventoryInSheetVO;
 import nju.sec.yz.ExpressSystem.vo.InventoryListVO;
 import nju.sec.yz.ExpressSystem.vo.InventoryOutSheetVO;
+import nju.sec.yz.ExpressSystem.vo.PositionVO;
 import nju.sec.yz.ExpressSystem.vo.TransitOutVO;
+import nju.sec.yz.ExpressSystem.vo.TransitVO;
 
 /**
  * 负责实现库存管理界面所需要的服务
@@ -77,6 +85,34 @@ public class InventoryController implements InventoryBlService {
 		Inventory inven = new Inventory();
 		ResultMessage message = inven.setAlertRate(rate);
 		return message;
+	}
+
+	@Override
+	public List<String> getValidDestination() {
+		
+		List<String> destinations=new ArrayList<>();
+		
+		//获得当前中转中心id
+		UserInfo user=new User();
+		String currentTransit=user.getCurrentID().split("A")[0];
+		
+		Transit transitService=new Transit();
+		TransitVO vo=transitService.observeTransit(currentTransit);
+		List<TransitVO> allTransits=transitService.observeAllTransit();
+		
+		if(vo==null)
+			return destinations;
+		
+		for(PositionVO position:vo.getPositions()){
+			destinations.add(position.name);
+		}
+		
+		for(TransitVO transit:allTransits){
+			destinations.add(transit.name);
+		}
+		//删除本中转中心
+		destinations.remove(currentTransit);
+		return destinations;
 	}
 
 }

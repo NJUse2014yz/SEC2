@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -73,11 +74,10 @@ public class InventoryIn extends JPanel{
 		
 		date =new DateChooser(this,216,82);
 		
-		ArrayList<TransitVO> trans=manager.observeAllTransit();
-		String[] desti=new String[trans.size()];
-		for(int i=0;i<trans.size();i++){
-			desti[i]=trans.get(i).getName();
-		}
+		List<String> destinations=inventoryservice.getValidDestination();
+		String[] desti=new String[destinations.size()];
+		destinations.toArray(desti);
+		
 		destination=new newJCombo(desti);
 		destination.setBounds(202, 110, 110, 20);
 		add(destination);

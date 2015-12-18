@@ -47,6 +47,7 @@ public class TransitInformation  implements Serializable{
 		this.barIds=info.getBarIds();
 		this.destination=info.getDestination();
 		this.transiterId=info.getTransiterId();
+		this.type=info.type;
 	}
 	
 	public String getTime() {

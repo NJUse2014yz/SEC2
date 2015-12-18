@@ -97,8 +97,11 @@ public class TransitReceiptHelper {
 
 		if (vo == null)// 物流信息不存在
 			return false;
-		else if (!vo.nextAgency.equals(currentAgency))// 下个机构id不是当前机构
+		else if (!vo.nextAgency.equals(currentAgency)){// 下个机构id不是当前机构
+			
 			return false;
+		}
+			
 		// 营业厅装车单在快递员揽件或者营业厅有到达单之后
 		else if (vo.state != DeliveryState.INVENTORY_IN)
 			return false;
@@ -133,9 +136,9 @@ public class TransitReceiptHelper {
 	public String showMessage(TransitInformation info) {
 		String message = "到达地：" + info.getDestination() + StringTool.nextLine();
 
-		message = message + "装运订单：" + StringTool.nextLine();
+		message = message + "装运订单：";
 		for (String barId : info.getBarIds()) {
-			message = message + "	" + barId + StringTool.nextLine();
+			message = message + barId + StringTool.nextLine();
 		}
 
 		return message;

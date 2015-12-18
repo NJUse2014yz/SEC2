@@ -13,6 +13,7 @@ import java.util.List;
 
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.common.TransportType;
 import nju.sec.yz.ExpressSystem.data.fileUtility.SerializableFileHelper;
 import nju.sec.yz.ExpressSystem.dataservice.deliverDataSevice.BarIdsDataService;
 import nju.sec.yz.ExpressSystem.po.BarIdsPO;
@@ -136,9 +137,12 @@ public class BarIdsDataImpl extends UnicastRemoteObject implements BarIdsDataSer
 			BarIdsDataImpl data=new BarIdsDataImpl();
 			List<BarIdsPO> list=data.findAll();
 			for(BarIdsPO po:list){
-				System.out.println(po.getReceiptId()+" "+ po.getDestinationId()+" "+po.getFromAgency()+" "+po.getBarIds().size()+" "+po.isArrived());;
+				System.out.println(po.getReceiptId()+" "+ po.getDestinationId()+" "+
+						po.getFromAgency()+" "+po.getBarIds().size()+" "+po.isArrived()+" "
+						+po.isOut()+" "+po.getType());;
 				
 			}
+			
 			
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block

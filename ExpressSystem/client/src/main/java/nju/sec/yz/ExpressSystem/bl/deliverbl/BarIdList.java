@@ -174,13 +174,14 @@ public class BarIdList {
 		if (po == null)
 			return null;
 
-		// 到达地不是当前机构
+		// 出发地不是当前机构
 		AgencyInfo agencyService=new Transit();
 		String departure=agencyService.getId(po.getFromAgency());
+		System.out.println(departure);
 		if (!departure.equals(transitId))
 			return null;
 		
-		//到达单已经出库
+		//已经出库
 		if(po.isOut())
 			return null;
 

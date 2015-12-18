@@ -207,7 +207,7 @@ public class PositionLoadingReceipt implements ReceiptService {
 
 		// 验证是否有重复
 		Set<String> idSet = new HashSet<>(barIDs);
-		if (idSet.size() > barIDs.size())
+		if (idSet.size() < barIDs.size())
 			return new ResultMessage(Result.FAIL, "有条形码号重复了~");
 
 		for (String barID : barIDs) {
