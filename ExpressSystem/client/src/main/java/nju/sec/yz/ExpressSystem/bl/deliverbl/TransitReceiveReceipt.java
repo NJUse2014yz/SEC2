@@ -61,7 +61,7 @@ public class TransitReceiveReceipt implements ReceiptService {
 		TransitArriveSheetPO po = new TransitArriveSheetPO();
 		ArriveInformation infoCopy = new ArriveInformation(info);
 		po.setTransitArriveInformation(infoCopy);
-		;
+		
 		po.setId(receiptId);
 		po.setMakePerson(maker);
 		po.setMakeTime(TimeTool.getDate());
@@ -126,7 +126,7 @@ public class TransitReceiveReceipt implements ReceiptService {
 
 		// 获得本中转中心名称
 		Transit transit = new Transit();
-		String transitId = vo.getId().split(IdType.POSITION_RECEIVE_RECEIPT.getIdStr())[0];
+		String transitId = vo.getId().split(IdType.TRANSIT_RECEIVE_RECEIPT.getIdStr())[0];
 		String transitName = transit.observeTransit(transitId).getName();
 
 		// 更新物流信息
@@ -181,8 +181,8 @@ public class TransitReceiveReceipt implements ReceiptService {
 	@Override
 	public String showMessage(ReceiptVO vo) {
 		ArriveInformation info = ((TransitArriveSheetVO) vo).getTransitArriveInformation();
-		String message = "	出发地：" + info.getDeparture() + StringTool.nextLine();
-		message = message + "	中转单编号：" + info.getTransitSheetId() + StringTool.nextLine();
+		String message = "出发地：" + info.getDeparture() + StringTool.nextLine();
+		message = message + "中转单编号：" + info.getTransitSheetId() + StringTool.nextLine();
 
 		return message;
 	}

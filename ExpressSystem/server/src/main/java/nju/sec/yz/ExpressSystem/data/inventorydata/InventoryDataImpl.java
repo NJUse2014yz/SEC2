@@ -54,6 +54,7 @@ public class InventoryDataImpl extends UnicastRemoteObject implements InventoryD
 		List<InventoryInSheetPO> InventoryPOs = findAll();
 		for(InventoryInSheetPO po:InventoryPOs){
 			//同一中转中心同一条形码号
+			System.out.println(po.getBarId()+po.getInventoryInInformation().getTransit());
 			if(po.getBarId().equals(ipo.getBarId())&&po.getInventoryInInformation().getTransit().equals(ipo.getInventoryInInformation().getTransit()))
 				return new ResultMessage(Result.FAIL,"库存信息已存在");
 		}
@@ -119,6 +120,21 @@ public class InventoryDataImpl extends UnicastRemoteObject implements InventoryD
 				result.add(po);
 		}
 		return result;
+	}
+	
+	public static void main(String[] args) {
+		InventoryDataImpl data;
+		try {
+			data = new InventoryDataImpl();
+			List<InventoryInSheetPO> list=data.findAll();
+			for(InventoryInSheetPO po:list){
+				System.out.println(po.getBarId()+" "+po.getInventoryInInformation().getTransit());
+			}
+			
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 

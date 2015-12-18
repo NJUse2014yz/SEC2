@@ -834,9 +834,9 @@ public class ManagerReceiptList extends JPanel {
 	private void iniInvenIn() {
 		// TODO Auto-generated method stub
 		// TODO Auto-generated method stub
-		title = new String[] { "填写日期", "表单号", "填表人", "入库时间", "目的地", "区号", "排号", "架号", "位号" };
+		title = new String[] { "填写日期", "表单号", "填表人", "入库时间", "目的地", "区号", "排号", "架号", "位号","中转中心"};
 
-		TableData = new Object[volist.size()][9];
+		TableData = new Object[volist.size()][10];
 		for (int c = 0; c < volist.size(); c++) {
 			String tempId = volist.get(c).getId();
 			InventoryInSheetVO tempvo = (InventoryInSheetVO) receipt.getSingle((tempId));
@@ -852,7 +852,7 @@ public class ManagerReceiptList extends JPanel {
 			TableData[c][6] = ((Integer) tempInf.getRow()).toString();
 			TableData[c][7] = ((Integer) tempInf.getShelf()).toString();
 			TableData[c][8] = ((Integer) tempInf.getPositon()).toString();
-
+			TableData[c][9] = tempInf.getTransit();
 		}
 	}
 
@@ -871,7 +871,8 @@ public class ManagerReceiptList extends JPanel {
 		tempInf.setRow(Integer.parseInt((String) table.getValueAt(c, 6)));
 		tempInf.setShelf(Integer.parseInt((String) table.getValueAt(c, 7)));
 		tempInf.setPositon(Integer.parseInt((String) table.getValueAt(c, 8)));
-
+		tempInf.setTransit((String) table.getValueAt(c, 9));
+		
 		tempvo.setInventoryInInformation(tempInf);
 		return tempvo;
 	}

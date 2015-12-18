@@ -16,6 +16,7 @@ import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.data.fileUtility.SerializableFileHelper;
 import nju.sec.yz.ExpressSystem.dataservice.receiptDataSevice.ReceiptDataService;
+import nju.sec.yz.ExpressSystem.po.InventoryInSheetPO;
 import nju.sec.yz.ExpressSystem.po.OfficeLoadSheetPO;
 import nju.sec.yz.ExpressSystem.po.PaymentSheetPO;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
@@ -163,6 +164,8 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataS
 			for(ReceiptPO po:list){
 				System.out.println(po.getType()+" "+po.getMakePerson()+" "+po.getId());
 			}
+			InventoryInSheetPO po=(InventoryInSheetPO)list.get(list.size()-1);
+			
 			
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block

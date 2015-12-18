@@ -129,4 +129,19 @@ public class InventoryInDataImpl extends UnicastRemoteObject implements Inventor
 		return result;
 	}
 
+	
+	public static void main(String[] args) {
+		InventoryInDataImpl data;
+		try {
+			data = new InventoryInDataImpl();
+			List<InventoryInSheetPO> list=data.findAll();
+			for(InventoryInSheetPO po:list){
+				System.out.println(po.getBarId()+" "+po.getInventoryInInformation().getTransit());
+			}
+			
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

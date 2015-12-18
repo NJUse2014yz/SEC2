@@ -203,6 +203,7 @@ public class Inventory implements Initialable<InventoryInSheetVO, InventoryInShe
 	 */
 	public ResultMessage updateIn(InventoryInSheetPO po) {
 		ResultMessage message = new ResultMessage(Result.FAIL);
+		System.out.println(po.getInventoryInInformation().getTransit());
 		try {
 			message = data.insert(po);
 		} catch (RemoteException e) {

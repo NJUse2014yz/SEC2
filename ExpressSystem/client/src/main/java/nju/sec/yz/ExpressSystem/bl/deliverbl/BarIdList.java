@@ -122,7 +122,7 @@ public class BarIdList {
 			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 		}
-
+		
 		if (po == null)
 			return true;
 		return po.isArrived();

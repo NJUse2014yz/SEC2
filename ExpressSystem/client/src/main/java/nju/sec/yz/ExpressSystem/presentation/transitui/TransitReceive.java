@@ -156,10 +156,10 @@ public class TransitReceive extends JPanel {
 				}else
 				{
 					ArriveInformation arrive=new ArriveInformation();
-//					arrive.setDeparture(departure.getText());
+					arrive.setDeparture(departure.getText());
 					arrive.setTime(date.getTime());
-//					arrive.setTransitId(transitId.getText());
-					
+					arrive.setTransitSheetId(transitSheetId.getText());
+				
 					ArrayList<ArriveState> statelist=new ArrayList<ArriveState>();
 					for(int i=0;i<model.getRowCount();i++){
 						String temp=(String) table.getCellEditor(i,2).getCellEditorValue();
@@ -171,7 +171,7 @@ public class TransitReceive extends JPanel {
 					TransitArriveSheetVO vo=new TransitArriveSheetVO();
 					vo.setTransitArriveInformation(arrive);
 //					vo.setTransitId(transitId.getText());
-					vo.setTransitId(transitSheetId.getText());
+					
 					ResultMessage result=deliverBlService.transitReceiveReceipt(vo);
 					warning.Reply(result);
 					repaint();

@@ -124,6 +124,7 @@ public class InventoryInSheet implements ReceiptService {
 		// 添加库存
 		Inventory inventory = new Inventory();
 		InventoryInSheetPO poCopy = (InventoryInSheetPO) ObjectDeepCopy.deepCopy(inPO);
+		
 		message = inventory.updateIn(poCopy);
 		if (message.getResult() == Result.FAIL)
 			return message;
