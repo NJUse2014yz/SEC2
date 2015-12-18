@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -28,6 +29,7 @@ import nju.sec.yz.ExpressSystem.blservice.managerBlService.AgencyBlService;
 import nju.sec.yz.ExpressSystem.common.LoadInformation;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.PositionVO;
 import nju.sec.yz.ExpressSystem.vo.TransitLoadSheetVO;
@@ -44,11 +46,10 @@ public class ManagerAgencyAdd extends JPanel {
 	private JTextField TransitId;
 	private JTextField name;
 	private JTextField Id;
-	
-//	private JTable positions; 
-	private JScrollPane jsc;
-	private JTable positions;
-	private TableModel positionId;
+	private JLabel t;
+	private newTable positions;
+	private Vector<Vector<String>> data=new Vector<Vector<String>>();
+	private Vector<String> title=new Vector<String>();
 	
 	private JButton confirm;
 	
@@ -75,26 +76,23 @@ public class ManagerAgencyAdd extends JPanel {
 		confirmPosition();
 //		this.removeAll();
 		original();
-		jsc.setVisible(false);
 		
 		AgencyType.addActionListener(new ActionListener(){           
 			public void actionPerformed(ActionEvent e) {
 				if(AgencyType.getSelectedItem().equals("营业厅")){
-					removeAll();
 					original();
-					jsc.setVisible(false);
-					add(AgencyType);
+					positions.setVisible(false);
+					TransitId.setVisible(true);
+					t.setVisible(true);
 					confirmPosition();
-					mbc.add();
 					repaint();
 				}else{
 					//中转中心
-					removeAll();
 					original();
+					positions.setVisible(true);
 					TransitId.setVisible(false);
-					add(AgencyType);
+					t.setVisible(false);
 					confirmTransit();
-					mbc.add();
 					repaint();
 				}
               }
@@ -128,10 +126,10 @@ public class ManagerAgencyAdd extends JPanel {
 					repaint();
 				} else {
 					ArrayList<PositionVO> Ids=new ArrayList<PositionVO>();
-					for(int i=0;i<positionId.getRowCount()-1;i++){
+					for(int i=0;i<positions.getRowCount()-1;i++){
 						PositionVO pvo=new PositionVO();
 						pvo.setTransitId(Id.getText());
-						pvo.setId((String) positionId.getValueAt(i, 1));
+						pvo.setId(positions.getValueAt(i, 1,false));
 //						Ids.add((String) positionId.getValueAt(i, 1));
 						Ids.add(pvo);
 						
@@ -173,6 +171,8 @@ public class ManagerAgencyAdd extends JPanel {
 		add(confirm);
 		setVisible(true);
 
+		title.add("订单条形码号");
+		
 		confirm.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				// 判断必填项是否填写完成
@@ -237,39 +237,19 @@ public class ManagerAgencyAdd extends JPanel {
 		TransitId.setBounds(247, 179, 140, 18);
 		add(TransitId);
 		
-		String[][] tableData = {{"1",""}};
-		String[] columnTitle = {"编号","所有营业厅编号"};  
-			      //以二维数组和一维数组来创建一个JTable对象  
+		t=new JLabel("所属中转中心");
+		t.setBounds(149, 181,90,25);
+		t.setFont(new Font("Dialog", 1, 15));
+		t.setForeground(Color.white);
+		t.setVisible(false);
+		add(t);
 		
-		positionId = new DefaultTableModel(tableData,columnTitle);
-		positions = new JTable(positionId);
-
-//			      barId = new JTable(tableData , columnTitle);  
-//			      model=barId.getModel();
-			      //将JTable对象放在JScrollPane中，并将该JScrollPane放在窗口中显示出来  
-//			      JScrollPane
-			      jsc=new JScrollPane(positions);  
-			      jsc.setVisible(true);
-			      jsc.setBounds(141,176,321,191);
-			      add(jsc);
+		positions = new newTable(data,title,this,true);
+		positions.setBounds(141,200,321,191);
+		positions.initialBlank(1);
+		positions.join();
+		positions.setVisible(false);
 			
-			
-			
-			//使得表格大小随订单信息的填入而改变
-			      positionId.addTableModelListener(new TableModelListener(){
-				@Override
-				public void tableChanged(TableModelEvent e) {
-					// TODO Auto-generated method stub
-					int num=positionId.getRowCount();
-					String temp=(String) positionId.getValueAt(num-1, 1);
-					if(temp!=""){
-						String[] conponent={Integer.toString(num+1),""};
-						((DefaultTableModel) positionId).addRow(conponent); 
-					}
-					repaint();
-				}
-			});
-		
 		repaint();
 		
 	}    

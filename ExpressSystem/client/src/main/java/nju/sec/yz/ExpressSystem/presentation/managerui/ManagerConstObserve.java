@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -18,6 +20,7 @@ import nju.sec.yz.ExpressSystem.bl.managerbl.ManagerController;
 import nju.sec.yz.ExpressSystem.blservice.managerBlService.ConstBlService;
 import nju.sec.yz.ExpressSystem.common.CityInformation;
 import nju.sec.yz.ExpressSystem.common.PriceInformation;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.CityVO;
 import nju.sec.yz.ExpressSystem.vo.PriceVO;
@@ -27,8 +30,9 @@ public class ManagerConstObserve extends JPanel {
 	private ClientControler maincontroler;
 	private ManagerButtonComponent mbc;
 
-	private JTable table;
-	private JScrollPane jsc;
+	private newTable table;
+	private Vector<Vector<String>> data=new Vector<Vector<String>>();
+	private Vector<String> name=new Vector<String>();
 
 	private JLabel priceForCar;
 	private JLabel priceForTrain;
@@ -48,30 +52,22 @@ public class ManagerConstObserve extends JPanel {
 		setSize(490, 550);
 		setVisible(true);
 
+		name.add("出发地");
+		name.add("出发地编号");
+		name.add("到达地");
+		name.add("到达地编号");
+		name.add("距离");
+		
 		// table;
 		ArrayList<CityVO> cities = (ArrayList<CityVO>) manager.observeAllCity();
-		Object[][] TableData = new Object[cities.size()][5];
-		for (int i = 0; i < cities.size(); i++) {
-			CityInformation temp = cities.get(i).getCityInformation();
-			TableData[i][0] = temp.getFromCity();
-			TableData[i][1] = temp.getFromID();
-			TableData[i][2] = temp.getToCity();
-			TableData[i][3] = temp.getToID();
-			TableData[i][4] = temp.getDistance();
-		}
-		// Object[][] TableData = null;
-		String[] columnTitle = { "出发地", "出发地编号", "到达地", "到达地编号", "距离" };
-		TableModel model = new DefaultTableModel(TableData, columnTitle);
-		table = new JTable(model);
-
-		jsc = new JScrollPane(table);
-		jsc.setVisible(true);
-		jsc.setBounds(143, 63, 320, 184);
-		add(jsc);
+		changeData(cities);
+		
+		table=new newTable(data,name,this,false);
+		table.setBounds(133, 76, 320, 184);
+		table.join();
 
 		PriceVO pv = manager.observePrize();
-		 PriceInformation pinf=pv.getPriceInformation();
-
+		PriceInformation pinf=pv.getPriceInformation();
 
 		priceForPlane = new JLabel();
 		priceForPlane.setText(Double.toString(pinf.getPriceForPlane()));
@@ -102,7 +98,27 @@ public class ManagerConstObserve extends JPanel {
 		add(standard);
 
 	}
-
+	private void changeData(List<CityVO> cities)
+	{
+		data.removeAllElements();
+		for(int i=0;i<cities.size();i++)
+		{
+			Vector<String> vector=new Vector<String>();
+			CityInformation temp=cities.get(i).getCityInformation();
+			
+			vector.add(temp.getFromCity());
+			vector.add(temp.getFromID());
+			vector.add(temp.getToCity());
+			vector.add(temp.getToID());
+			vector.add(Double.toString(temp.getDistance()));
+			data.add(vector);
+//			if(i==(cities.size()-1))
+//			{
+//				 System.out.println(TableData[i][1]);
+//				 System.out.println(TableData[i][3]);
+//			}
+		}
+	}
 	@Override
 	public void paintComponent(Graphics g) {
 

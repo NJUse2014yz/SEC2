@@ -7,6 +7,8 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -24,6 +26,7 @@ import nju.sec.yz.ExpressSystem.common.CityInformation;
 import nju.sec.yz.ExpressSystem.common.PriceInformation;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.CityVO;
 import nju.sec.yz.ExpressSystem.vo.PriceVO;
@@ -34,8 +37,9 @@ public class ManagerConstModify extends JPanel {
 	private ClientControler maincontroler;
 	private ManagerButtonComponent mbc;
 
-	private JTable table;
-	private JScrollPane jsc;
+	private newTable table;
+	private Vector<Vector<String>> data=new Vector<Vector<String>>();
+	private Vector<String> name=new Vector<String>();
 
 	private JTextField priceForCar;
 	private JTextField priceForTrain;
@@ -60,32 +64,20 @@ public class ManagerConstModify extends JPanel {
 		setLayout(null);
 		setSize(490, 550);
 		setVisible(true);
-
+		
+		name.add("出发地");
+		name.add("出发地编号");
+		name.add("到达地");
+		name.add("到达地编号");
+		name.add("距离");
 		// table;
 		cities = (ArrayList<CityVO>) manager.observeAllCity();
-		 Object[][] TableData=new Object[cities.size()][5];
-		 for(int i=0;i<cities.size();i++){
-		 CityInformation temp=cities.get(i).getCityInformation();
-		 TableData[i][0]=temp.getFromCity();
-		 TableData[i][1]=temp.getFromID();
-		 
-		 TableData[i][2]=temp.getToCity();
-		 TableData[i][3]=temp.getToID();
-		 TableData[i][4]=temp.getDistance();
-		 
-		 if(i==(cities.size()-1)){
-			 System.out.println(TableData[i][1]);
-			 System.out.println(TableData[i][3]);}
-		 }
-//		Object[][] TableData = null;
-		String[] columnTitle = { "出发地","出发地编号", "到达地","到达地编号", "距离" };
-		TableModel model = new DefaultTableModel(TableData, columnTitle);
-		table = new JTable(model);
-
-		jsc = new JScrollPane(table);
-		jsc.setVisible(true);
-		jsc.setBounds(133, 76, 320, 184);
-		add(jsc);
+		
+		changeData(cities);
+		
+		table=new newTable(data,name,this,false);
+		table.setBounds(133, 76, 320, 184);
+		table.join();
 
 		// 四个常量描述
 		PriceVO pv = manager.observePrize();
@@ -128,7 +120,7 @@ public class ManagerConstModify extends JPanel {
 				Boolean hasBlank=false; 
 				for(int c=0;c<cities.size();c++){
 					for(int k=0;k<4;k++){
-						String str=(String) table.getValueAt(c, k);
+						String str=(String) table.getValueAt(c, k,false);
 						if(str==null){
 							hasBlank=true;
 							break;
@@ -155,11 +147,11 @@ public class ManagerConstModify extends JPanel {
 					// translate data
 					for (int i = 0; i < cities.size(); i++) {
 						CityInformation cityImformation = cities.get(i).getCityInformation();
-						cityImformation.setFromCity(table.getValueAt(i, 0).toString());
-						cityImformation.setFromID(table.getValueAt(i, 1).toString());
-						cityImformation.setToCity(table.getValueAt(i, 2).toString());
-						cityImformation.setToID(table.getValueAt(i, 3).toString());
-						cityImformation.setDistance((Double) table.getValueAt(i, 4));
+						cityImformation.setFromCity(table.getValueAt(i, 0,false));
+						cityImformation.setFromID(table.getValueAt(i, 1,false));
+						cityImformation.setToCity(table.getValueAt(i, 2,false));
+						cityImformation.setToID(table.getValueAt(i, 3,false));
+						cityImformation.setDistance(Double.parseDouble(table.getValueAt(i, 4,false)));
 						CityVO cv = new CityVO(cityImformation);
 						ResultMessage tableresult = manager.modifyCity(cv);
 						if (tableresult.getResult() == Result.FAIL) {
@@ -172,7 +164,6 @@ public class ManagerConstModify extends JPanel {
 							repaint();
 							break;
 						} else {
-
 							PriceInformation pinf = new PriceInformation();
 							pinf.setPriceForCar(Double.parseDouble(priceForCar.getText()));
 							pinf.setPriceForPlane(Double.parseDouble(priceForPlane.getText()));
@@ -209,7 +200,27 @@ public class ManagerConstModify extends JPanel {
 			}
 		});
 	}
-
+	private void changeData(List<CityVO> cities)
+	{
+		data.removeAllElements();
+		for(int i=0;i<cities.size();i++)
+		{
+			Vector<String> vector=new Vector<String>();
+			CityInformation temp=cities.get(i).getCityInformation();
+			
+			vector.add(temp.getFromCity());
+			vector.add(temp.getFromID());
+			vector.add(temp.getToCity());
+			vector.add(temp.getToID());
+			vector.add(Double.toString(temp.getDistance()));
+			data.add(vector);
+//			if(i==(cities.size()-1))
+//			{
+//				 System.out.println(TableData[i][1]);
+//				 System.out.println(TableData[i][3]);
+//			}
+		}
+	}
 	@Override
 	public void paintComponent(Graphics g) {
 
