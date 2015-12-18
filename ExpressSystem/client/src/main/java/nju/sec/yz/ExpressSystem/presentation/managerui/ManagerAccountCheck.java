@@ -1,5 +1,7 @@
 package nju.sec.yz.ExpressSystem.presentation.managerui;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -8,6 +10,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -44,6 +47,9 @@ public class ManagerAccountCheck extends JPanel {
 
 	private JComboBox choice;
 
+	private JLabel begin;
+	private JLabel end;
+	
 	private newTable tableI;
 	private newTable tableO;
 	private newTable tableA;
@@ -53,13 +59,26 @@ public class ManagerAccountCheck extends JPanel {
 	private DateChooser date2;
 	private JButton confirm;
 
-	private JLabel warning = new JLabel();
+	private JLabel warning;
 	
-	private String[] nameIn = new String[] { "收款日期", "收款金额", "收款人", "快递条形码号" };
-	private String[] nameOut = new String[] { "付款日期 ", "付款金额", "付款人", "付款账号", "条目", "备注" };
-	String[] choices = { "账户信息", "经营情况表", "成本收益表" };
-	String[] title = { "账号", "余额" };
+	private Vector<Vector<String>> dataI=new Vector<Vector<String>>();
+	private Vector<String> nameI=new Vector<String>();
+	private Vector<Vector<String>> dataO=new Vector<Vector<String>>();
+	private Vector<String> nameO=new Vector<String>();
+	private Vector<Vector<String>> dataA=new Vector<Vector<String>>();
+	private Vector<String> nameA=new Vector<String>();
+	private Vector<Vector<String>> dataC=new Vector<Vector<String>>();
+	private Vector<String> nameC=new Vector<String>();
 	
+	private static final int in_x=144;
+	private static final int in_y=117;
+	private static final int out_x=144;
+	private static final int out_y=274;
+	private static final int w=320;
+	private static final int h=144;
+	
+	ImageIcon confirmIcon = new ImageIcon("graphic/account/button/confirm_button.jpg");
+
 	public ManagerAccountCheck(ClientControler maincontroler, ManagerButtonComponent mbc) {
 		this.maincontroler = maincontroler;
 		this.mbc = mbc;
@@ -73,16 +92,72 @@ public class ManagerAccountCheck extends JPanel {
 		setLayout(null);
 		setSize(490, 550);
 		setVisible(true);
-
 		
-		choice = new JComboBox(choices);
+		nameI.add("收款日期");
+		nameI.add("收款金额");
+		nameI.add("收款人");
+		nameI.add("快递条形码号");
+		nameO.add("付款日期 ");
+		nameO.add("付款金额");
+		nameO.add("付款人");
+		nameO.add("付款账号");
+		nameO.add("条目");
+		nameO.add("备注");
+		nameA.add("账号");
+		nameA.add("余额");
+		nameC.add("总收入");
+		nameC.add("总支出");
+		nameC.add("总利润");
+		
+		begin=new JLabel();
+		begin.setText("起始时间");
+		begin.setBounds(139,92,100,30);
+		begin.setFont(new Font("Dialog", 1, 15));
+		begin.setForeground(Color.white);
+		begin.setVisible(false);
+		add(begin);
+		
+		end=new JLabel();
+		end.setText("结束时间");
+		end.setBounds(139,116,100,30);
+		end.setFont(new Font("Dialog", 1, 15));
+		end.setForeground(Color.white);
+		end.setVisible(false);
+		add(end);
+
+		tableI=new newTable(dataI,nameI,this,false);
+		tableI.setBounds(in_x,in_y,w,h);
+		tableI.join();
+		tableI.setVisible(false);
+		
+		tableO=new newTable(dataO,nameO,this,false);
+		tableO.setBounds(out_x,out_y,w,h);
+		tableO.join();
+		tableO.setVisible(false);
+		
+		tableA=new newTable(dataA,nameA,this,false);
+		tableA.setBounds(in_x,in_y,2*w,h);
+		tableA.join();
+		tableA.setVisible(false);
+		
+		tableC=new newTable(dataC,nameC,this,false);
+		tableC.setBounds(in_x,in_y,2*w,h);
+		tableC.join();
+		tableC.setVisible(false);
+		
+		warning= new JLabel();
+		warning.setBounds(198, 490, 463 - 198, 30);
+		warning.setFont(new Font("Dialog", 1, 15));
+		warning.setForeground(Color.red);
+		warning.setVisible(false);
+		add(warning);
+		
+		choice = new JComboBox(new String[]{"账户信息","经营情况表","成本收益表"});
 		choice.setBounds(244, 62, 80, 21);
 		add(choice);
-
 		choice.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (choice.getSelectedItem().equals("经营情况表")) {
-					remove(jsc);
 					iniOperate();
 				} else {
 					if (choice.getSelectedItem().equals("账户信息")) {
@@ -93,63 +168,18 @@ public class ManagerAccountCheck extends JPanel {
 				}
 			}
 		});
-	}
-
-	private void iniCost() {
-		// TODO Auto-generated method stub
-		ProfitVO prvo = finance.makeCostReceipt();
-		TableData = new Object[1][3];
-		TableData[0][0] = prvo.in;
-		TableData[0][1] = prvo.out;
-		TableData[0][2] = prvo.profit;
-	}
-
-	private void iniOperate() {
-		date1 = new DateChooser(this, 210, 88);
-		date2 = new DateChooser(this, 210, 110);
 		
-		ImageIcon confirmIcon = new ImageIcon("graphic/account/button/confirm_button.jpg");
-
 		confirm = new JButton(confirmIcon);
 		confirm.setBounds(392, 104, 72, 24);
 		confirm.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				BussinessVO bvo = finance.checkBusinessCircumstance(date1.getTime(), date2.getTime());
-
-				ArrayList<PaymentSheetVO> in = (ArrayList<PaymentSheetVO>) bvo.in;
-				ArrayList<OutVO> out = (ArrayList<OutVO>) bvo.out;
-
 				
 				if (bvo != null) {
 					warning.setVisible(false);
-					// remove(inScroll);
-					// remove(outScroll);
-
-					int sizeIn = in.size();
-					int sizeOut = out.size();
-					String[][] dataIn = new String[sizeIn][4];
-					for (int i = 0; i < sizeIn; i++) {
-						dataIn[i][0] = in.get(i).getPaymentInformation().getTime();
-						dataIn[i][1] = Double.toString(in.get(i).getPaymentInformation().getAmount());
-						dataIn[i][0] = in.get(i).getPaymentInformation().getInDeliverId();
-						dataIn[i][0] = in.get(i).getBarIds();
-					}
-					inTable = new JTable(dataIn, nameIn);
-					String[][] dataOut = new String[sizeOut][6];
-					for (int i = 0; i < sizeOut; i++) {
-						dataOut[i][0] = out.get(i).getOutInformation().getDate();
-						dataOut[i][1] = Double.toString(out.get(i).getOutInformation().getNum());
-						dataOut[i][2] = out.get(i).getOutInformation().getPerson();
-						dataOut[i][3] = out.get(i).getOutInformation().getAccount();
-						dataOut[i][4] = out.get(i).getOutInformation().getReason();
-						dataOut[i][5] = out.get(i).getOutInformation().getComments();
-
-					}
-					outTable = new JTable(dataOut, nameOut);
-
-					inScroll = new JScrollPane(inTable);
-					outScroll = new JScrollPane(outTable);
-					repaint();
+					changeData(bvo);
+					tableI.resetData();
+					tableO.resetData();
 				} else {
 					warning.setText("日期选择有误，请重新选择");
 					warning.setVisible(true);
@@ -159,16 +189,89 @@ public class ManagerAccountCheck extends JPanel {
 		add(confirm);
 	}
 
-	private void iniAccount() {
-		// TODO Auto-generated method stub
-		ArrayList<AccountVO> accountlist = account.observeList();
-//		TableData = new Object[accountlist.size()][2];
-//		for (int i = 0; i < accountlist.size(); i++) {
-//			TableData[i][0] = accountlist.get(i).getName();
-//			TableData[i][1] = accountlist.get(i).getBalance();
-//		}
-		
+	private void iniCost() {
+		removeAll();
+		tableI.setVisible(false);
+		tableO.setVisible(false);
+		tableA.setVisible(false);
+		tableC.setVisible(true);
+		begin.setVisible(false);
+		end.setVisible(false);
+		mbc.add();
+		add(choice);
+		dataC.removeAllElements();
+		ProfitVO prvo = finance.makeCostReceipt();
+		Vector<String> vector=new Vector<String>();
+		vector.add(Double.toString(prvo.in));
+		vector.add(Double.toString(prvo.out));
+		vector.add(Double.toString(prvo.profit));
+		dataC.add(vector);
+		tableC.resetData();
+		repaint();
+	}
 
+	private void iniOperate() {
+		removeAll();
+		tableI.setVisible(true);
+		tableO.setVisible(true);
+		tableA.setVisible(false);
+		tableC.setVisible(false);
+		begin.setVisible(true);
+		end.setVisible(true);
+		mbc.add();
+		add(choice);
+		add(confirm);
+		date1 = new DateChooser(this, 210, 88);
+		date2 = new DateChooser(this, 210, 110);
+		repaint();
+	}
+
+	private void iniAccount() {
+		removeAll();
+		mbc.add();
+		add(choice);
+		dataA.removeAllElements();
+		tableI.setVisible(false);
+		tableO.setVisible(false);
+		tableA.setVisible(true);
+		tableC.setVisible(false);
+		begin.setVisible(false);
+		end.setVisible(false);
+		ArrayList<AccountVO> accountlist = account.observeList();
+		for (int i = 0; i < accountlist.size(); i++) {
+			Vector<String> vector=new Vector<String>();
+			vector.add(accountlist.get(i).getName());
+			vector.add(Double.toString(accountlist.get(i).getBalance()));
+			dataA.add(vector);
+		}
+		tableA.resetData();
+		repaint();
+	}
+	
+	private void changeData(BussinessVO bvo)
+	{
+		ArrayList<PaymentSheetVO> in = (ArrayList<PaymentSheetVO>) bvo.in;
+		ArrayList<OutVO> out = (ArrayList<OutVO>) bvo.out;
+		for (int i = 0; i < in.size(); i++) {
+			Vector<String> vector=new Vector<String>();
+			vector.add(in.get(i).getPaymentInformation().getTime());
+			vector.add(Double.toString(in.get(i).getPaymentInformation().getAmount()));
+			vector.add(in.get(i).getPaymentInformation().getInDeliverId());
+			vector.add(in.get(i).getBarIds());
+			dataI.add(vector);
+		}
+		for (int i = 0; i < out.size(); i++) {
+			Vector<String> vector=new Vector<String>();
+			vector.add(out.get(i).getOutInformation().getDate());
+			vector.add(Double.toString(out.get(i).getOutInformation().getNum()));
+			vector.add(out.get(i).getOutInformation().getPerson());
+			vector.add(out.get(i).getOutInformation().getAccount());
+			vector.add(out.get(i).getOutInformation().getReason());
+			vector.add(out.get(i).getOutInformation().getComments());
+			dataO.add(vector);
+		}
+
+		repaint();
 	}
 
 	@Override
