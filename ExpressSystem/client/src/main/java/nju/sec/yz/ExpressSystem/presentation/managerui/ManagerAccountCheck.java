@@ -71,7 +71,7 @@ public class ManagerAccountCheck extends JPanel {
 	private Vector<String> nameC=new Vector<String>();
 	
 	private static final int in_x=144;
-	private static final int in_y=117;
+	private static final int in_y=130;
 	private static final int out_x=144;
 	private static final int out_y=274;
 	private static final int w=320;
@@ -109,17 +109,15 @@ public class ManagerAccountCheck extends JPanel {
 		nameC.add("总支出");
 		nameC.add("总利润");
 		
-		begin=new JLabel();
-		begin.setText("起始时间");
-		begin.setBounds(139,92,100,30);
+		begin=new JLabel("起始时间");
+		begin.setBounds(139,82,100,25);
 		begin.setFont(new Font("Dialog", 1, 15));
 		begin.setForeground(Color.white);
 		begin.setVisible(false);
 		add(begin);
 		
-		end=new JLabel();
-		end.setText("结束时间");
-		end.setBounds(139,116,100,30);
+		end=new JLabel("结束时间");
+		end.setBounds(139,107,100,25);
 		end.setFont(new Font("Dialog", 1, 15));
 		end.setForeground(Color.white);
 		end.setVisible(false);
@@ -127,23 +125,16 @@ public class ManagerAccountCheck extends JPanel {
 
 		tableI=new newTable(dataI,nameI,this,false);
 		tableI.setBounds(in_x,in_y,w,h);
-		tableI.join();
-		tableI.setVisible(false);
 		
 		tableO=new newTable(dataO,nameO,this,false);
 		tableO.setBounds(out_x,out_y,w,h);
-		tableO.join();
-		tableO.setVisible(false);
 		
 		tableA=new newTable(dataA,nameA,this,false);
-		tableA.setBounds(in_x,in_y,2*w,h);
+		tableA.setBounds(in_x,in_y,w,h);
 		tableA.join();
-		tableA.setVisible(false);
 		
 		tableC=new newTable(dataC,nameC,this,false);
-		tableC.setBounds(in_x,in_y,2*w,h);
-		tableC.join();
-		tableC.setVisible(false);
+		tableC.setBounds(in_x,in_y,w,h);
 		
 		warning= new JLabel();
 		warning.setBounds(198, 490, 463 - 198, 30);
@@ -186,19 +177,15 @@ public class ManagerAccountCheck extends JPanel {
 				}
 			}
 		});
-		add(confirm);
 	}
 
 	private void iniCost() {
 		removeAll();
-		tableI.setVisible(false);
-		tableO.setVisible(false);
-		tableA.setVisible(false);
-		tableC.setVisible(true);
-		begin.setVisible(false);
-		end.setVisible(false);
 		mbc.add();
 		add(choice);
+		tableC.join();
+		begin.setVisible(false);
+		end.setVisible(false);
 		dataC.removeAllElements();
 		ProfitVO prvo = finance.makeCostReceipt();
 		Vector<String> vector=new Vector<String>();
@@ -212,15 +199,16 @@ public class ManagerAccountCheck extends JPanel {
 
 	private void iniOperate() {
 		removeAll();
-		tableI.setVisible(true);
-		tableO.setVisible(true);
-		tableA.setVisible(false);
-		tableC.setVisible(false);
-		begin.setVisible(true);
-		end.setVisible(true);
 		mbc.add();
 		add(choice);
 		add(confirm);
+		add(choice);
+		add(begin);
+		add(end);
+		tableI.join();
+		tableO.join();
+		begin.setVisible(true);
+		end.setVisible(true);
 		date1 = new DateChooser(this, 210, 88);
 		date2 = new DateChooser(this, 210, 110);
 		repaint();
@@ -231,10 +219,7 @@ public class ManagerAccountCheck extends JPanel {
 		mbc.add();
 		add(choice);
 		dataA.removeAllElements();
-		tableI.setVisible(false);
-		tableO.setVisible(false);
-		tableA.setVisible(true);
-		tableC.setVisible(false);
+		tableA.join();
 		begin.setVisible(false);
 		end.setVisible(false);
 		ArrayList<AccountVO> accountlist = account.observeList();
