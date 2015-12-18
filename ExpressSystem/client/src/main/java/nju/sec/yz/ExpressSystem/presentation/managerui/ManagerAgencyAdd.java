@@ -60,7 +60,7 @@ public class ManagerAgencyAdd extends JPanel {
 		this.mbc = mbc;
 		mbc.changePanel(this);
 		mbc.change();
-
+		title.add("下属营业厅编号");
 		iniManagerAgencyAdd();
 	}
 
@@ -72,32 +72,18 @@ public class ManagerAgencyAdd extends JPanel {
 		String[] type={"营业厅","中转中心"};
 		AgencyType=new JComboBox(type);
 		AgencyType.setBounds(214, 57, 85, 20);
-		add(AgencyType);
-		confirmPosition();
-//		this.removeAll();
-		original();
+		original(1);
 		
 		AgencyType.addActionListener(new ActionListener(){           
 			public void actionPerformed(ActionEvent e) {
-				if(AgencyType.getSelectedItem().equals("营业厅")){
-					original();
-					positions.setVisible(false);
-					TransitId.setVisible(true);
-					t.setVisible(true);
-					confirmPosition();
-					repaint();
+				if(((String)AgencyType.getSelectedItem()).equals("营业厅")){
+					original(1);
 				}else{
 					//中转中心
-					original();
-					positions.setVisible(true);
-					TransitId.setVisible(false);
-					t.setVisible(false);
-					confirmTransit();
-					repaint();
+					original(2);
 				}
               }
 		});
-		
 	}
 		
 	private void confirmTransit(){
@@ -125,12 +111,13 @@ public class ManagerAgencyAdd extends JPanel {
 				} else {
 					ArrayList<PositionVO> Ids=new ArrayList<PositionVO>();
 					for(int i=0;i<positions.getRowCount()-1;i++){
-						PositionVO pvo=new PositionVO();
-						pvo.setTransitId(Id.getText());
-						pvo.setId(positions.getValueAt(i, 1,false));
-//						Ids.add((String) positionId.getValueAt(i, 1));
-						Ids.add(pvo);
-						
+						if(positions.getValueAt(i,0,false)!=null)
+						{
+							PositionVO pvo=new PositionVO();
+							pvo.setTransitId(Id.getText());
+							pvo.setId(positions.getValueAt(i,0,false));
+							Ids.add(pvo);
+						}
 					}
 					TransitVO vo=new TransitVO(name.getText().toString(),Id.getText(),Ids,Location.getText());
 				ResultMessage result=manager.addTransit(vo);
@@ -142,7 +129,6 @@ public class ManagerAgencyAdd extends JPanel {
 					warning.setForeground(Color.red);
 					warning.setVisible(true);
 					add(warning);
-					
 					repaint();
 				}else{
 					//失败
@@ -169,8 +155,6 @@ public class ManagerAgencyAdd extends JPanel {
 		add(confirm);
 		setVisible(true);
 
-		title.add("订单条形码号");
-		
 		confirm.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				// 判断必填项是否填写完成
@@ -216,8 +200,10 @@ public class ManagerAgencyAdd extends JPanel {
 
 	}
 
-	private void original() {
-		// TODO Auto-generated method stub
+	private void original(int n) {
+		removeAll();
+		mbc.add();
+		add(AgencyType);
 		
 		Location=new JTextField();
 		Location.setBounds(204, 89, 78, 18);
@@ -230,24 +216,31 @@ public class ManagerAgencyAdd extends JPanel {
 		name=new JTextField();
 		name.setBounds(190, 147, 140, 18);
 		add(name);
-		
-		TransitId=new JTextField();
-		TransitId.setBounds(247, 179, 140, 18);
-		add(TransitId);
-		
-		t=new JLabel("所属中转中心");
-		t.setBounds(149, 181,90,25);
-		t.setFont(new Font("Dialog", 1, 15));
-		t.setForeground(Color.white);
-		t.setVisible(false);
-		add(t);
-		
-		positions = new newTable(data,title,this,true);
-		positions.setBounds(141,200,321,191);
-		positions.initialBlank(1);
-		positions.join();
-		positions.setVisible(false);
+		if(n==1)
+		{
+			TransitId=new JTextField();
+			TransitId.setBounds(250, 173, 140, 18);
+			add(TransitId);
 			
+			t=new JLabel("所属中转中心");
+			t.setBounds(152,170,100,25);
+			t.setFont(new Font("Dialog", 1, 15));
+			t.setForeground(Color.white);
+			add(t);
+
+			confirmPosition();
+		}
+		else
+		{
+			data.removeAllElements();
+			positions = new newTable(data,title,this,true);
+			positions.setBounds(141,200,321,191);
+			positions.initialBlank(1);
+			positions.join();
+			positions.setVisible(true);
+			
+			confirmTransit();
+		}
 		repaint();
 		
 	}    

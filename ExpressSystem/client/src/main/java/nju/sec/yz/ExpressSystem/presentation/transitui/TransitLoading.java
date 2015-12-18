@@ -112,7 +112,7 @@ public class TransitLoading extends JPanel{
 		
 		barId = new newTable(data,name,this,true);
 		barId.setBounds(141,218,321,191);
-		barId.initialBlank(2);
+		barId.initialBlank(1);
 		barId.join();
 		
 		fare = new newJLabel();
