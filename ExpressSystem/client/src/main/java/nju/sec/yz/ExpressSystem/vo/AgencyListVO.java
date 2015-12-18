@@ -19,5 +19,8 @@ public class AgencyListVO {
 		transits=new ArrayList<>();
 		positions=new ArrayList<>();
 	}
-	
+	public AgencyListVO(List<TransitVO> t,List<PositionVO> p) {
+		transits=t;
+		positions=p;
+	}
 }
