@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -23,6 +22,10 @@ import nju.sec.yz.ExpressSystem.common.InventoryInInformation;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.presentation.DateChooser;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJCombo;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJText;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.InventoryInSheetVO;
 import nju.sec.yz.ExpressSystem.vo.TransitVO;
@@ -35,16 +38,16 @@ public class InventoryIn extends JPanel{
 	private ClientControler maincontroler;
 	
 	
-	private JTextField barId;
+	private newJText barId;
 	private JComboBox destination;
 	
-	private JComboBox block;
-	private JTextField row;
-	private JTextField shelf;
-	private JTextField position;
+	private newJCombo block;
+	private newJText row;
+	private newJText shelf;
+	private newJText position;
 	
-	private JButton confirm;
-	private JLabel warning=new JLabel();
+	private newJBut confirm;
+	private newJLabel warning=new newJLabel();
 	
 	private DateChooser date;
 	
@@ -64,44 +67,44 @@ public class InventoryIn extends JPanel{
 		InventoryButtonComponents ibc=new InventoryButtonComponents(maincontroler,this);
 		
 		
-		barId=new JTextField();
+		barId=new newJText();
 		barId.setBounds(213, 59, 182, 18);
 		add(barId);
 		
-		date =new DateChooser(this,213,82);
+		date =new DateChooser(this,216,82);
 		
 		ArrayList<TransitVO> trans=manager.observeAllTransit();
 		String[] desti=new String[trans.size()];
 		for(int i=0;i<trans.size();i++){
 			desti[i]=trans.get(i).getName();
 		}
-		destination=new JComboBox(desti);
-		destination.setBounds(202, 110, 98, 20);
+		destination=new newJCombo(desti);
+		destination.setBounds(202, 110, 110, 20);
 		add(destination);
 		
 		String[] blo={"航运区","铁运区","汽运区","机动区"};
-		block=new JComboBox(blo);
-		block.setBounds(193,142,58,19);
+		block=new newJCombo(blo);
+		block.setBounds(193,141,70,19);
 		add(block);
 		
-		row=new JTextField();
-		row.setBounds(339, 142, 58, 19);
+		row=new newJText();
+		row.setBounds(339, 141, 70, 19);
 		add(row);
 		
-		shelf=new JTextField();
-		shelf.setBounds(193, 168, 58, 19);
+		shelf=new newJText();
+		shelf.setBounds(193, 166, 70, 19);
 		add(shelf);
 		
-		position=new JTextField();
-		position.setBounds(339, 168, 58, 19);
+		position=new newJText();
+		position.setBounds(339, 166, 70, 19);
 		add(position);
 
 		
 		/*
 		 * 确定
 		 */
-		ImageIcon cinfirmIcon = new ImageIcon("graphic/deliver/button/confirm.png");
-		confirm = new JButton(cinfirmIcon);
+//		ImageIcon cinfirmIcon = new ImageIcon("graphic/deliver/button/confirm.png");
+		confirm = new newJBut("确定");
 		confirm.setBounds(363, 199, 76, 27);
 		add(confirm);
 		setVisible(true);
@@ -112,13 +115,7 @@ public class InventoryIn extends JPanel{
 				if ((barId.getText().equals("")) || (row.getText().equals(""))
 						|| (shelf.getText().equals("")) || (position.getText().equals(""))
 						) {
-					warning.setText("尚未完成对带*必填项的填写");
-					warning.setBounds(198, 490, 463 - 198, 30);
-					warning.setFont(new Font("Dialog", 1, 15));
-					warning.setForeground(Color.red);
-					warning.setVisible(true);
-					add(warning);
-					repaint();
+					warning.NotFilled();
 				} else {
 					// translate data
 					InventoryInInformation invenInInf = new InventoryInInformation(date.getTime(),
@@ -133,28 +130,10 @@ public class InventoryIn extends JPanel{
 					// 判断输入的信息是否正确
 					ResultMessage result = inventoryservice.in(vo);
 					// 失败
-					if (result.getResult() == Result.FAIL) {
-
-						warning.setText(result.getMessage());
-						warning.setBounds(138, 490, 463 - 138, 30);
-						warning.setFont(new Font("Dialog", 1, 15));
-						warning.setForeground(Color.red);
-						add(warning);
-						repaint();
-					} else {
-						// 提交成功
-						warning.setText("提交成功");
-						warning.setBounds(270, 490, 70, 30);
-						warning.setFont(new Font("Dialog", 1, 15));
-						warning.setForeground(Color.red);
-						warning.setVisible(true);
-						add(warning);
-
-						repaint();
-					}
+					warning.Reply(result);
 				}
-				
-				
+				add(warning);
+				repaint();
 			
 			}
 		});

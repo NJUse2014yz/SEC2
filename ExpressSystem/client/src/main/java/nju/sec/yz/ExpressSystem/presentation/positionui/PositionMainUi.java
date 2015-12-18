@@ -41,7 +41,7 @@ public class PositionMainUi extends JPanel{
 	@Override
 	public void paintComponent(Graphics g) {
 
-		Image img01 = new ImageIcon("graphic/account/background/main_background.jpg").getImage();
+		Image img01 = new ImageIcon("graphic/position/background/main_background.png").getImage();
 
 		g.drawImage(img01, 0, 0, 490, 550, null);
 

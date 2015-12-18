@@ -20,6 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -84,6 +85,13 @@ public class newTable{
 	public void setJComboBox(JComboBox choose,int column)
 	{
 		table.getColumnModel().getColumn(column).setCellEditor(new DefaultCellEditor(choose));
+	}
+	/**
+	 * 设置多选
+	 */
+	public void setSelectionMode()
+	{
+		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 	}
 	/**
 	 * 得到model
@@ -159,6 +167,22 @@ public class newTable{
 		{
 			return (String) model.getValueAt(r, c);
 		}
+	}
+	/**
+	 * 获得表格的选中行
+	 * @return int[] 选中编号的数组
+	 */
+	public int[] getSelectedRows()
+	{
+		return table.getSelectedRows();
+	}
+	/**
+	 * 设置表格是否可选
+	 */
+	public void setTableSelect()
+	{
+		table.setColumnSelectionAllowed(false);
+		table.setRowSelectionAllowed(true);
 	}
 	/**
 	 * 获得表格的行数

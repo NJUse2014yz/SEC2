@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -29,6 +30,7 @@ import nju.sec.yz.ExpressSystem.presentation.componentui.newJCombo;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJScroll;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJText;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.InventoryOutSheetVO;
 import nju.sec.yz.ExpressSystem.vo.TransitOutVO;
@@ -49,16 +51,14 @@ private InventoryBlService inventoryservice=new InventoryController();
 	
 	private newJBut searchBarId;
 	private newJBut confirm;
-	private newJLabel warning=new newJLabel();
+	private newJLabel warning;
 	
-	private JTable table;
-	private TableModel model;
-	private newJScroll jsc;
+	private newTable table;
 	
 	private DateChooser date ;
 	
-	String[][] TableData={};
-	String[] Title={"快递单号"};
+	private Vector<Vector<String>> data=new Vector<Vector<String>>();
+	private Vector<String> name=new Vector<String>();
 	
 	public InventoryOut(ClientControler maincontroler){
 		this.maincontroler=maincontroler;
@@ -71,7 +71,7 @@ private InventoryBlService inventoryservice=new InventoryController();
 		setVisible(true);
 		
 		InventoryButtonComponents ibc=new InventoryButtonComponents(maincontroler,this);
-		
+		name.add("快递单号");
 		
 //		barId=new JTextField();
 //		barId.setBounds(213, 59, 182, 18);
@@ -85,8 +85,14 @@ private InventoryBlService inventoryservice=new InventoryController();
 			desti[i]=trans.get(i).getName();
 		}
 		destination=new newJCombo(desti);
-		destination.setBounds(202, 110, 98, 20);
+		destination.setBounds(202, 110, 120, 20);
 		add(destination);
+		
+		warning=new newJLabel();
+		warning.setForeground(Color.red);
+		warning.setBounds(138, 490, 463 - 138, 30);
+		warning.setFont(new Font("Dialog", 1, 15));
+		add(warning);
 		
 		String[] blo={"飞机","火车","汽车"};
 		transportType=new newJCombo(blo);
@@ -94,49 +100,40 @@ private InventoryBlService inventoryservice=new InventoryController();
 		add(transportType);
 		
 		transitSheetId=new newJText();
-		transitSheetId.setBounds(323, 59, 134, 18);
+		transitSheetId.setBounds(310, 57, 154, 18);
 		add(transitSheetId);
 		
-		model=new DefaultTableModel(TableData,Title);
-		table=new JTable(model);
-		jsc=new newJScroll(table);
-		jsc.setBounds(143,127,321,196);
+		table=new newTable(data,name,this,false);
+		table.setBounds(143,177,321,196);
+		table.join();
 		
-		
-		/*
-		 * 	生成货单表格
-		 */
 		searchBarId = new newJBut("确定");
-		searchBarId.setBounds(363, 199, 76, 27);
+		searchBarId.setBounds(363, 131, 76, 27);
 		add(searchBarId);
 		
 		searchBarId.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				warning.setForeground(Color.red);
-				warning.setBounds(138, 490, 463 - 138, 30);
+				
 				// 判断必填项是否填写完成
-				if ((transitSheetId.getText().equals("")) || (transitSheetId.getText().equals(""))
-						) {
+				if ((transitSheetId.getText().equals(""))
+						|| (transitSheetId.getText().equals(""))) {
 					warning.setText("尚未填写中转单号");
+					warning.setVisible(true);
 				} else {
 					// translate data
-					TransitOutVO vo=inventoryservice.getBarIdList(transitSheetId.getText());
-					if(vo==null){
+					TransitOutVO vo = inventoryservice
+							.getBarIdList(transitSheetId.getText());
+					if (vo == null) {
 						warning.setText("中转单号输入错误");
+						warning.setVisible(true);
 					} else {
 						// 提交成功
-						ArrayList<String> barIdList=(ArrayList<String>) vo.barIds;
-						TableData=new String[barIdList.size()][1];
-						for(int c=0;c<barIdList.size();c++){
-							TableData[c][0]=barIdList.get(c);
-						}
-						model=new DefaultTableModel(TableData,Title);
-						table.setModel(model);
-						table.repaint();
-						
+						warning.setVisible(false);
+						ArrayList<String> barIdList = (ArrayList<String>) vo.barIds;
+						changeData(barIdList);
+						table.resetData();
 					}
 				}
-				add(warning);
 				repaint();
 			}
 		});
@@ -147,22 +144,16 @@ private InventoryBlService inventoryservice=new InventoryController();
 		 */
 //		ImageIcon cinfirmIcon = new ImageIcon("graphic/deliver/button/confirm.png");
 		confirm = new newJBut("确定");
-		confirm.setBounds(363, 199, 76, 27);
+		confirm.setBounds(464, 199, 76, 27);
 		add(confirm);
-		setVisible(false);
+		confirm.setVisible(false);
 
 		confirm.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				// 判断必填项是否填写完成
-				if ((barId.getText().equals("")) || (transitSheetId.getText().equals(""))
+				if ((transitSheetId.getText().equals(""))
 						) {
-					warning.setText("尚未完成对带*必填项的填写");
-					warning.setBounds(198, 490, 463 - 198, 30);
-					warning.setFont(new Font("Dialog", 1, 15));
-					warning.setForeground(Color.red);
-					warning.setVisible(true);
-					add(warning);
-					repaint();
+					warning.NotFilled();
 				} else {
 					// translate data
 					InventoryOutInformation invenOutInf = new InventoryOutInformation(date.getTime(),
@@ -170,31 +161,23 @@ private InventoryBlService inventoryservice=new InventoryController();
 							getType(transportType.getSelectedItem().toString()),
 							transitSheetId.getText()
 							);
-					
-					InventoryOutSheetVO vo = new InventoryOutSheetVO(invenOutInf,barId.getText().toString());
-					// 判断输入的信息是否正确
-					ResultMessage result = inventoryservice.out(vo);
-					// 失败
-					if (result.getResult() == Result.FAIL) {
-
-						warning.setText(result.getMessage());
-						warning.setBounds(138, 490, 463 - 138, 30);
-						warning.setFont(new Font("Dialog", 1, 15));
-						warning.setForeground(Color.red);
-						add(warning);
-						repaint();
-					} else {
-						// 提交成功
-						warning.setText("提交成功");
-						warning.setBounds(270, 490, 70, 30);
-						warning.setFont(new Font("Dialog", 1, 15));
-						warning.setForeground(Color.red);
-						warning.setVisible(true);
-						add(warning);
-
-						repaint();
+					//为每个barId制作单子
+					warning.setForeground(Color.red);
+					warning.setText("提交成功");
+					for(int c=table.getRowCount()-1;c>=0;c--){
+						InventoryOutSheetVO vo = new InventoryOutSheetVO(invenOutInf,table.getValueAt(c, 0,false));
+						ResultMessage result = inventoryservice.out(vo);
+						if(result.getResult()==Result.SUCCESS){
+							table.getModel().removeRow(c);
+						}else{
+							warning.setText("提交失败");
+							break;
+						}
 					}
+					
 				}
+				add(warning);
+				repaint();
 			}
 		});
 	}
@@ -212,7 +195,14 @@ private InventoryBlService inventoryservice=new InventoryController();
 			return null;
 		}
 	}
-	
+	private void changeData(ArrayList<String> bars)
+	{
+		for(int c=0;c<bars.size();c++){
+			Vector<String> vector=new Vector<String>();
+			vector.add(bars.get(c));
+			data.add(vector);
+		}
+	}
 	
 
 	@Override 
