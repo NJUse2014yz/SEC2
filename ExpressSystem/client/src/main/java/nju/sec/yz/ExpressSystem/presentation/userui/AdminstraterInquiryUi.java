@@ -54,9 +54,9 @@ public class AdminstraterInquiryUi extends JPanel{
 	private static final int scroll_y=98;
 	private static final int scroll_w=319;
 	private static final int scroll_h=191;
-	private static final int back_x=348;
+	private static final int back_x=358;
 	private static final int back_y=301;
-	private static final int back_w=110;
+	private static final int back_w=100;
 	private static final int back_h=25;
 	private static final int warning_x=198;
 	private static final int warning_y=488;
@@ -64,8 +64,8 @@ public class AdminstraterInquiryUi extends JPanel{
 	private static final int warning_h=30;
 	
 	private ImageIcon searchIcon=new ImageIcon("graphic/adminstrater/button/search_button.jpg");
-	private ImageIcon backIcon=new ImageIcon("graphic/adminstrater/button/back_button.jpg");
-	private ImageIcon confirmIcon=new ImageIcon("graphic/adminstrater/button/confirm_button.jpg");
+//	private ImageIcon backIcon=new ImageIcon("graphic/adminstrater/button/back_button.jpg");
+//	private ImageIcon confirmIcon=new ImageIcon("graphic/adminstrater/button/confirm_button.jpg");
 	
 	public AdminstraterInquiryUi(ClientControler clientControler,AdminstraterButtonComponents bc) {
 		super();
@@ -123,6 +123,7 @@ public class AdminstraterInquiryUi extends JPanel{
 		
 		back=new newJBut("返回原列表");
 		back.setBounds(back_x, back_y, back_w, back_h);
+		back.setMargin(new java.awt.Insets(0,0,0,0)); 
 		back.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
 			{

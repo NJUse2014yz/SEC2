@@ -38,19 +38,20 @@ public class DeliverButtonComponents{
 		 */
 //		ImageIcon OrderInIcon = new ImageIcon("graphic/deliver/button/buttonOrderIn.png");
 		OrderInButton = new newJBut("订单输入");
-		OrderInButton.setBounds(14, 50, 108, 41);
+		OrderInButton.setBounds(13, 50, 108, 41);
 		panel.add(OrderInButton);
 		panel.setVisible(true);
 
 //		ImageIcon OrderSearchIcon = new ImageIcon("graphic/deliver/button/buttonOrderSearch.png");
 		OrderSearchButton = new newJBut("订单查询");
-		OrderSearchButton.setBounds(14, 92, 108, 41);
+		OrderSearchButton.setBounds(13, 92, 108, 41);
 		panel.add(OrderSearchButton);
 		panel.setVisible(true);
 
 //		ImageIcon ReceiveInIcon = new ImageIcon("graphic/deliver/button/buttonReceiveIn.png");
 		ReceiveInButton = new newJBut("收件信息输入");
-		ReceiveInButton.setBounds(14, 134, 108, 41);
+		ReceiveInButton.setBounds(13, 134, 108, 41);
+		ReceiveInButton.setMargin(new java.awt.Insets(0,0,0,0)); 
 		panel.add(ReceiveInButton);
 		panel.setVisible(true);
 

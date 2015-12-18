@@ -100,7 +100,7 @@ private InventoryBlService inventoryservice=new InventoryController();
 		add(transportType);
 		
 		transitSheetId=new newJText();
-		transitSheetId.setBounds(323, 59, 134, 18);
+		transitSheetId.setBounds(310, 57, 154, 18);
 		add(transitSheetId);
 		
 		table=new newTable(data,name,this,false);

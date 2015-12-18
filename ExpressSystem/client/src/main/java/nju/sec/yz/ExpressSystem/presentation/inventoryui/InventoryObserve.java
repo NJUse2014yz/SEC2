@@ -13,15 +13,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 import nju.sec.yz.ExpressSystem.bl.inventorybl.InventoryController;
 import nju.sec.yz.ExpressSystem.blservice.inventoryBlService.InventoryBlService;
 import nju.sec.yz.ExpressSystem.common.InventoryInInformation;
 import nju.sec.yz.ExpressSystem.presentation.DateChooser;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.InventoryInSheetVO;
@@ -33,9 +31,9 @@ private InventoryBlService inventoryservice=new InventoryController();
 	
 	private ClientControler maincontroler;
 
-	private JButton confirm;
-	private JLabel warning;
-	private JLabel total;
+	private newJBut confirm;
+	private newJLabel warning=new newJLabel();
+	private newJLabel total;
 	private newTable table;
 	private Vector<Vector<String>> data=new Vector<Vector<String>>();
 	private Vector<String> name=new Vector<String>();
@@ -44,8 +42,8 @@ private InventoryBlService inventoryservice=new InventoryController();
 	private DateChooser date1;
 	private DateChooser date2;
 	
-	ImageIcon cinfirmIcon = new ImageIcon("graphic/deliver/button/confirm.png");
-	InventoryButtonComponents ibc=new InventoryButtonComponents(maincontroler,this);
+//	ImageIcon cinfirmIcon = new ImageIcon("graphic/deliver/button/confirm.png");
+	
 
 	public InventoryObserve(ClientControler maincontroler){
 		this.maincontroler=maincontroler;
@@ -57,6 +55,8 @@ private InventoryBlService inventoryservice=new InventoryController();
 		setLayout(null);
 		setSize(490, 550);
 		setVisible(true);
+		
+		InventoryButtonComponents ibc=new InventoryButtonComponents(maincontroler,this);
 		
 		name.add("快递编号");
 		name.add("入库日期");
@@ -73,20 +73,14 @@ private InventoryBlService inventoryservice=new InventoryController();
 		table.setBounds(140,117,319, 208);
 		table.join();
 		
-		total=new JLabel();
+		total=new newJLabel();
 		total.setBounds(229, 334, 62, 23);
-		total.setForeground(Color.GRAY);
-		total.setFont(new Font("Dialog", 0, 18));
 		add(total);
 		
-		warning=new JLabel();
 		warning.setBounds(138, 490, 463 - 138, 30);
-		warning.setFont(new Font("Dialog", 1, 15));
 		warning.setForeground(Color.red);
-		warning.setVisible(false);
-		add(warning);
 		
-		confirm = new JButton(cinfirmIcon);
+		confirm = new newJBut("确定");
 		confirm.setBounds(140+319-76, 87, 76, 27);
 		add(confirm);
 		setVisible(true);
@@ -98,13 +92,13 @@ private InventoryBlService inventoryservice=new InventoryController();
 
 				if (daystart > dayend) {
 					// 失败
-					warning.setText("数据有问题");
+					warning.setText("日期数据有问题");
 					warning.setVisible(true);
-					repaint();
 				} else {
 					// 成功
 					InventoryListVO vo = inventoryservice.observeStock(
 							date1.getTime(), date2.getTime());
+					if(involist!=null){
 					involist = (ArrayList<InventoryInSheetVO>) inventoryservice
 							.checkStock().inList;
 					changeData(involist);
@@ -112,8 +106,14 @@ private InventoryBlService inventoryservice=new InventoryController();
 					// 需要得到一个当前数目的值
 					total.setText(Integer.toString(involist.size()));
 					total.setVisible(true);
-					repaint();
+					warning.setText("");
+				}else{
+					warning.setText("不存在相关数据");
 				}
+					
+				}
+				add(warning);
+				repaint();
 			}
 		});
 		

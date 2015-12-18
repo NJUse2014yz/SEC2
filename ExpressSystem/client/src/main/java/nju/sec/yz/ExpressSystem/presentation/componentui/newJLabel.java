@@ -60,6 +60,7 @@ public class newJLabel extends JLabel {
 	private void init(){
 		setFont(new Font("Microsoft YaHei", Font.PLAIN, 15));
 		setForeground(Color.LIGHT_GRAY);
+		setVisible(true);
 	}
 	
 	
