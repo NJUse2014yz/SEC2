@@ -96,8 +96,6 @@ public class ManagerAgencyAdd extends JPanel {
 					repaint();
 				}
               }
-
-			  
 		});
 		
 	}
