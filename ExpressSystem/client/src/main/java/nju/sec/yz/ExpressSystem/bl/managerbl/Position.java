@@ -1,6 +1,5 @@
 package nju.sec.yz.ExpressSystem.bl.managerbl;
 
-import java.rmi.RemoteException;
 import java.util.List;
 
 import nju.sec.yz.ExpressSystem.bl.accountbl.Initialable;
@@ -8,7 +7,6 @@ import nju.sec.yz.ExpressSystem.bl.deliverbl.ValidHelper;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.po.PositionPO;
-import nju.sec.yz.ExpressSystem.po.TransitPO;
 import nju.sec.yz.ExpressSystem.vo.PositionVO;
 import nju.sec.yz.ExpressSystem.vo.TransitVO;
 
@@ -20,8 +18,7 @@ public class Position implements Initialable<PositionVO, PositionPO>{
 	public ResultMessage addPosition(PositionVO av) {
 
 		if (!isValidPosition(av.getId()))
-			return new ResultMessage(Result.FAIL, "亲，咱们的营业厅编号是城市编码加三位数字哟~");
-
+			return new ResultMessage(Result.FAIL, "亲，咱们营业厅编号是城市编码加三位数哟~");
 		Transit transit=new Transit();
 
 		TransitVO transitVO=null;
@@ -36,7 +33,10 @@ public class Position implements Initialable<PositionVO, PositionPO>{
 
 		if (transitVO == null)
 			return new ResultMessage(Result.FAIL, "找不到所属的中转中心~");
-
+		
+		if(!isValidPositionAndTransit(av.id,av.transitId))
+			return new ResultMessage(Result.FAIL, "亲，营业厅编号跟中转中心id不对应哟");
+		
 		List<PositionVO> positions = transitVO.getPositions();
 		for (PositionVO position : positions) {
 			if (position.getId().equals(av.getId()))
@@ -49,6 +49,7 @@ public class Position implements Initialable<PositionVO, PositionPO>{
 		ResultMessage message = transit.updateTransit(transitVO);
 		return message;
 	}
+	
 	
 	public PositionVO findPosition(String id){
 		Transit transitHelper=new Transit();
@@ -102,6 +103,12 @@ public class Position implements Initialable<PositionVO, PositionPO>{
 		if (id.length() != 6 && id.length() != 7)
 			return false;
 
+		return true;
+	}
+	
+	private boolean isValidPositionAndTransit(String id, String transitId) {
+		if(!id.substring(0, 3).equals(transitId.substring(0, 3)))
+			return false;
 		return true;
 	}
 
