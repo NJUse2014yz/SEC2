@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -22,6 +23,7 @@ import javax.swing.table.TableModel;
 import nju.sec.yz.ExpressSystem.bl.managerbl.ManagerController;
 import nju.sec.yz.ExpressSystem.blservice.managerBlService.StaffBlService;
 import nju.sec.yz.ExpressSystem.common.Status;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.PositionVO;
 import nju.sec.yz.ExpressSystem.vo.StaffVO;
@@ -32,9 +34,10 @@ public class ManagerStaffDelete extends JPanel {
 	private ClientControler maincontroler;
 	private ManagerButtonComponent mbc;
 	private JTextField searchnum;
-	private JTable table;
-	private TableModel model;
-	private JScrollPane jsc;
+	
+	private newTable table;
+	private Vector<Vector<String>> data=new Vector<Vector<String>>();
+	private Vector<String> title=new Vector<String>();
 
 	private JLabel warning = new JLabel();
 
@@ -55,17 +58,18 @@ public class ManagerStaffDelete extends JPanel {
 		setSize(490, 550);
 		setVisible(true);
 		
-		table=new JTable(null);
+		title.add("人员编号");
+		title.add("姓名");
+		title.add("职务");
+		title.add("所属机构");
+		
+		table=new newTable(data,title,this,false);
 		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		table.setColumnSelectionAllowed(false);
-		table.setRowSelectionAllowed(true);
+		table.setTableSelect();
+		table.setBounds(137,94,318,181);
+		table.join();
 
-		jsc=new JScrollPane(table);
-		jsc.setVisible(true);
-	    jsc.setBounds(137,94,318,181);
-	    add(jsc);
-
-		original();
+		changeData(manager.observeStaff());
 		
 		searchnum=new JTextField();
 	    searchnum.setBounds(216, 62, 220, 21);
@@ -101,14 +105,10 @@ public class ManagerStaffDelete extends JPanel {
 					repaint();
 				}else{
 					StaffVO staff=manager.observeStaff(searchnum.getText());
-					
-					
-					
-					String[] columnTitle={"人员编号","姓名","职务","所属机构"};
-					String[][] TableData ={{staff.getId(),staff.getName(),getpower(staff.getPower()),staff.getAgency()}};
-					model=new DefaultTableModel(TableData,columnTitle);
-					table.setModel(model);
-					table.repaint();
+					ArrayList<StaffVO> sl=new ArrayList<StaffVO>();
+					sl.add(staff);
+					changeData(sl);
+					table.resetData();
 				}
 		
 		}
@@ -118,8 +118,8 @@ public class ManagerStaffDelete extends JPanel {
 	
 		back.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				original();
-				repaint();
+				changeData(manager.observeStaff());
+				table.resetData();
 			}
 		});	
 		
@@ -127,7 +127,9 @@ public class ManagerStaffDelete extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				int[] deletelines = table.getSelectedRows();
 				for (int i = 0; i < deletelines.length; i++) {
-					manager.deleteStaff(((String) table.getValueAt(deletelines[i], 0)));
+					manager.deleteStaff((table.getValueAt(deletelines[i], 0,false)));
+					changeData(manager.observeStaff());
+					table.resetData();
 				}
 			}
 		});
@@ -157,20 +159,17 @@ public class ManagerStaffDelete extends JPanel {
 	}
 	
 	
-	private void original(){
-		ArrayList<StaffVO> allstaff=manager.observeStaff();
-		
-		String[][] TableData = new String[allstaff.size()][4];
-		String[] columnTitle={"人员编号","姓名","职务","所属机构"};
+	private void changeData(ArrayList<StaffVO> allstaff){
+		data.removeAllElements();
 		for(int i=0;i<allstaff.size();i++){
-			TableData[i][0]=allstaff.get(i).getId();
-			TableData[i][1]=allstaff.get(i).getName();
-			TableData[i][2]=getpower(allstaff.get(i).getPower());
-			TableData[i][3]=allstaff.get(i).getAgency();
-			}
+			Vector<String> vector=new Vector<String>();
+			vector.add(allstaff.get(i).getId());
+			vector.add(allstaff.get(i).getName());
+			vector.add(getpower(allstaff.get(i).getPower()));
+			vector.add(allstaff.get(i).getAgency());
+			data.add(vector);
+		}
 		
-		model=new DefaultTableModel(TableData,columnTitle);
-		table.setModel(model);
 	}
 		
 	@Override

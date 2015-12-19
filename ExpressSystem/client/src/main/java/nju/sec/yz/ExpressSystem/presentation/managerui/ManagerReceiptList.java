@@ -68,13 +68,8 @@ public class ManagerReceiptList extends JPanel {
 	private JComboBox type;
 
 	private newTable table;
-//	private JTable table;
-//	private TableModel model;
-//	private JScrollPane jsc;
 	private Vector<Vector<String>> data=new Vector<Vector<String>>();
 	private Vector<String> name=new Vector<String>();
-//	private Object[][] TableData = {};
-//	private String[] title;
 
 	private newJBut pass;
 	private newJBut passAll;
