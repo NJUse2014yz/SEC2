@@ -9,14 +9,11 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.Vector;
 
-import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 
 import nju.sec.yz.ExpressSystem.bl.accountbl.Collection;
 import nju.sec.yz.ExpressSystem.bl.accountbl.FinanceController;
@@ -26,6 +23,9 @@ import nju.sec.yz.ExpressSystem.blservice.deliverBlService.DeliverBlService;
 import nju.sec.yz.ExpressSystem.common.PaymentInformation;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJCombo;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.PositionControler;
@@ -54,12 +54,12 @@ public class PositionPayUi extends JPanel{
 	private static final int warning_w=275;
 	private static final int warning_h=30;
 	
-	private ImageIcon confirmIcon=new ImageIcon("graphic/position/button/button_confirm.png");
+//	private ImageIcon confirmIcon=new ImageIcon("graphic/position/button/button_confirm.png");
 
 	private newTable table;
-	private JButton confirm;
-	private JLabel warning;
-	private JComboBox<String> account;
+	private newJBut confirm;
+	private newJLabel warning=new newJLabel();
+	private newJCombo account;
 	private String[] accounts={"a"};
 	private Vector<String> name=new Vector<String>();
 	private Vector<Vector<String>> data=new Vector<Vector<String>>();
@@ -102,17 +102,15 @@ public class PositionPayUi extends JPanel{
 		
 		table=new newTable(data,name,this,false);
 		table.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
-		table.setJComboBox(new JComboBox(accounts), 4);
+		table.setJComboBox(new newJCombo(accounts), 4);
 		table.join();
 		
-		warning=new JLabel();
-		warning.setBounds(warning_x, warning_y, warning_w, warning_h);
-		warning.setFont(new Font("Dialog", 1, 15));
 		warning.setForeground(Color.red);
+		warning.setBounds(warning_x, warning_y, warning_w, warning_h);
 		add(warning);
 		warning.setVisible(false);
 		
-		confirm=new JButton(confirmIcon);
+		confirm=new newJBut("确定");
 		confirm.setBounds(button_x, button_y, button_w, button_h);
 		add(confirm);
 		confirm.addMouseListener(new MouseAdapter(){

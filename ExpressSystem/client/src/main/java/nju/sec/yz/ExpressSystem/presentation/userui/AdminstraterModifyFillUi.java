@@ -145,6 +145,7 @@ public class AdminstraterModifyFillUi extends JPanel{
 		warning.setVisible(false);
 		
 		back=new newJBut("返回原列表");
+		back.setMargin(new java.awt.Insets(0,0,0,0)); 
 		back.setBounds(back_x, back_y, back_w, back_h);
 		back.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)

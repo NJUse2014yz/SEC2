@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -21,6 +20,10 @@ import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.Sex;
 import nju.sec.yz.ExpressSystem.presentation.DateChooser;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJCombo;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJText;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.POSITION_CONTROL;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.PositionControler;
@@ -32,58 +35,58 @@ public class PositionDriverModifyFillUi extends JPanel{
 	private DriverBlService driverBl;
 	private ButtonComponents bc;
 
-	private JTextField driverId;
-	private JTextField name;
-	private JComboBox sex;
+	private newJText driverId;
+	private newJText name;
+	private newJCombo sex;
 	private DateChooser date;
-	private JTextField id;
-	private JTextField cellphone;
-	private JTextField agency;
+	private newJText id;
+	private newJText cellphone;
+	private newJText agency;
 	private DateChooser limit;
-	private JButton confirm;
-	private JButton back;
-	private JLabel warning;
+	private newJBut confirm;
+	private newJBut back;
+	private newJLabel warning;
 	private DriverVO drivervo;
 	
 	private String[] sArr=new String[]{"男","女"};
 	private Sex seX;
 	
-	private static final int driverId_x=252;
-	private static final int driverId_y=65;
+	private static final int driverId_x=225;
+	private static final int driverId_y=63;
 	private static final int driverId_w=191;
-	private static final int name_x=194;
-	private static final int name_y=92;
+	private static final int name_x=187;
+	private static final int name_y=89;
 	private static final int name_w=60;
 	private static final int sex_x=331;
-	private static final int sex_y=92;
+	private static final int sex_y=90;
 	private static final int sex_w=67;
 	private static final int date_x=233;
 	private static final int date_y=119;
-	private static final int id_x=224;
+	private static final int id_x=217;
 	private static final int id_y=144;
 	private static final int id_w=193;
-	private static final int cellphone_x=192;
-	private static final int cellphone_y=175;
+	private static final int cellphone_x=183;
+	private static final int cellphone_y=171;
 	private static final int cellphone_w=194;
 	private static final int agency_x=217;
-	private static final int agency_y=200;
-	private static final int agency_w=148;
+	private static final int agency_y=196;
+	private static final int agency_w=160;
 	private static final int limit_x=234;
 	private static final int limit_y=224;
 	private static final int confirm_x=390;
 	private static final int confirm_y=257;
 	private static final int confirm_w=72;
 	private static final int confirm_h=24;
-	private static int back_x=270;
-	private static int back_y=232;
-	private static int back_w=90;
-	private static int back_h=20;
+	private static int back_x=280;
+	private static int back_y=257;
+	private static int back_w=100;
+	private static int back_h=24;
 	private static final int warning_x=197;
 	private static final int warning_y=487;
 	private static final int warning_w=275;
 	private static final int warning_h=30;
-	private ImageIcon confirmIcon=new ImageIcon("graphic/position/button/button_confirm.png");
-	private ImageIcon backIcon=new ImageIcon("graphic/position/button/button_back.png");
+//	private ImageIcon confirmIcon=new ImageIcon("graphic/position/button/button_confirm.png");
+//	private ImageIcon backIcon=new ImageIcon("graphic/position/button/button_back.png");
 	
 	private static final int h=20;
 	
@@ -104,17 +107,15 @@ public class PositionDriverModifyFillUi extends JPanel{
 		setLayout(null);
 		setSize(490, 550);
 		
-		driverId=new JTextField();
+		driverId=new newJText(drivervo.getId());
 		driverId.setBounds(driverId_x, driverId_y, driverId_w, h);
-		driverId.setText(drivervo.getId());
 		add(driverId);
 		
-		name=new JTextField();
+		name=new newJText(drivervo.getName());
 		name.setBounds(name_x, name_y, name_w, h);
-		name.setText(drivervo.getName());
 		add(name);
 		
-		sex=new JComboBox(sArr);
+		sex=new newJCombo(sArr);
 		sex.setBounds(sex_x, sex_y, sex_w, h);
 		switch(drivervo.getSex())
 		{
@@ -129,40 +130,38 @@ public class PositionDriverModifyFillUi extends JPanel{
 		
 		date=new DateChooser(this,date_x,date_y);
 		
-		id=new JTextField();
+		id=new newJText(drivervo.getPersonID());
 		id.setBounds(id_x, id_y, id_w, h);
-		id.setText(drivervo.getPersonID());
 		add(id);
 		
-		cellphone=new JTextField();
+		cellphone=new newJText(drivervo.getPhoneNumber());
 		cellphone.setBounds(cellphone_x, cellphone_y, cellphone_w, h);
-		cellphone.setText(drivervo.getPhoneNumber());
 		add(cellphone);
 		
-		agency=new JTextField();
+		agency=new newJText(drivervo.getAgency());
 		agency.setBounds(agency_x, agency_y, agency_w, h);
-		agency.setText(drivervo.getAgency());
 		add(agency);
 		
 		limit=new DateChooser(this,limit_x,limit_y);
 		
-		warning=new JLabel();
+		warning=new newJLabel();
 		warning.setBounds(warning_x, warning_y, warning_w, warning_h);
-		warning.setFont(new Font("Dialog", 1, 15));
 		warning.setForeground(Color.red);
 		add(warning);
 		warning.setVisible(false);
 		
-		back=new JButton(backIcon);
+		back=new newJBut("返回原列表");
 		back.setBounds(back_x,back_y,back_w,back_h);
+		back.setMargin(new java.awt.Insets(0,0,0,0)); 
 		back.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e)
 			{
-				controler.positionChangePanel(POSITION_CONTROL.CAR_MODIFY);
+				controler.positionChangePanel(POSITION_CONTROL.DRIVER_MODIFY);
 			}
 		});
+		add(back);
 		
-		confirm=new JButton(confirmIcon);
+		confirm=new newJBut("确定");
 		confirm.setBounds(confirm_x,confirm_y,confirm_w,confirm_h);
 		confirm.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e)

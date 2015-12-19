@@ -18,6 +18,9 @@ import nju.sec.yz.ExpressSystem.blservice.carAndDriverBlService.CarBlService;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.presentation.DateChooser;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJText;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.PositionControler;
 import nju.sec.yz.ExpressSystem.vo.CarVO;
@@ -27,32 +30,32 @@ public class PositionCarAddUi extends JPanel{
 	private PositionControler controler;
 	
 	private CarBlService carBl;
-	private JTextField JTcarId;
-	private JTextField JTcarCard;
-	private JTextField JTmechine;
-	private JTextField JTdipan;
+	private newJText JTcarId;
+	private newJText JTcarCard;
+	private newJText JTmechine;
+	private newJText JTdipan;
 	private DateChooser buyTime;
-	private JLabel workTime;
-	private JButton confirm;
-	private JLabel warning;
+	private newJLabel workTime;
+	private newJBut confirm;
+	private newJLabel warning;
 	private ButtonComponents bc;
 	
 	private static int carId_x=220;
-	private static int carId_y=66;
+	private static int carId_y=63;
 	private static int carId_w=182;
-	private static int carCard_x=252;
-	private static int carCard_y=91;
+	private static int carCard_x=215;
+	private static int carCard_y=87;
 	private static int carCard_w=182;
-	private static int mechine_x=235;
-	private static int mechine_y=119;
+	private static int mechine_x=230;
+	private static int mechine_y=115;
 	private static int mechine_w=90;
-	private static int dipan_x=206;
-	private static int dipan_y=147;
+	private static int dipan_x=200;
+	private static int dipan_y=144;
 	private static int dipan_w=90;
 	private static int buyTime_x=218;
-	private static int buyTime_y=174;
+	private static int buyTime_y=168;
 	private static int workTime_x=218;
-	private static int workTime_y=195;
+	private static int workTime_y=190;
 	private static int confirm_x=370;
 	private static int confirm_y=232;
 	private static int confirm_w=72;
@@ -82,38 +85,35 @@ public class PositionCarAddUi extends JPanel{
 		setLayout(null);
 		setSize(490, 550);
 
-		JTcarId=new JTextField();
+		JTcarId=new newJText();
 		JTcarId.setBounds(carId_x, carId_y, carCard_w, h);
 		add(JTcarId);
 		
-		JTcarCard=new JTextField();
+		JTcarCard=new newJText();
 		JTcarCard.setBounds(carCard_x, carCard_y, carCard_w, h);
 		add(JTcarCard);
 		
-		JTmechine=new JTextField();
+		JTmechine=new newJText();
 		JTmechine.setBounds(mechine_x, mechine_y, mechine_w, h);
 		add(JTmechine);
 		
-		JTdipan=new JTextField();
+		JTdipan=new newJText();
 		JTdipan.setBounds(dipan_x, dipan_y, dipan_w, h);
 		add(JTdipan);
 		
 		buyTime=new DateChooser(this, buyTime_x, buyTime_y);
 		
-		workTime=new JLabel();
-		workTime.setFont(new Font("Dialog",1,10));
-		workTime.setForeground(Color.WHITE);
+		workTime=new newJLabel();
 		workTime.setBounds(workTime_x, workTime_y, warning_w, warning_h);
 		add(workTime);
 
-		warning=new JLabel();
+		warning=new newJLabel();
 		warning.setBounds(warning_x, warning_y, warning_w, warning_h);
-		warning.setFont(new Font("Dialog", 1, 15));
 		warning.setForeground(Color.red);
 		add(warning);
 		warning.setVisible(false);
 		
-		confirm=new JButton(confirmIcon);
+		confirm=new newJBut("确定");
 		confirm.setBounds(confirm_x,confirm_y,confirm_w,confirm_h);
 		confirm.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e)

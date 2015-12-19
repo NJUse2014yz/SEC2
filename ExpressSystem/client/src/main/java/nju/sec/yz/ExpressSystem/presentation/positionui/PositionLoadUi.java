@@ -15,23 +15,21 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
 import nju.sec.yz.ExpressSystem.bl.deliverbl.DeliverController;
-import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptSaveService;
 import nju.sec.yz.ExpressSystem.blservice.deliverBlService.DeliverBlService;
 import nju.sec.yz.ExpressSystem.blservice.managerBlService.ConstBlService;
-import nju.sec.yz.ExpressSystem.blservice.receiptBlService.ReceiptBlService;
 import nju.sec.yz.ExpressSystem.common.LoadInformation;
 import nju.sec.yz.ExpressSystem.common.ReceiptType;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.presentation.DateChooser;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJCombo;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJText;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.PositionControler;
@@ -46,47 +44,47 @@ public class PositionLoadUi extends JPanel{
 	private DateChooser date;
 	private ArrayList<String> bars;
 
-	private JComboBox JCdestination;
-	private JLabel JLtransportId;
-	private JTextField JTPositionId;
-	private JTextField JTCarId;
-	private JComboBox JCloadtime;
-	private JTextField JTsuperviserId;
-	private JTextField JTdriverId;
-	private JLabel fare;
+	private newJCombo JCdestination;
+	private newJLabel JLtransportId;
+	private newJText JTPositionId;
+	private newJText JTCarId;
+	private newJCombo JCloadtime;
+	private newJText JTsuperviserId;
+	private newJText JTdriverId;
+	private newJLabel fare;
 	private newTable table;
-	private JButton confirm;
-	private JLabel warning;
+	private newJBut confirm;
+	private newJLabel warning;
 	private Vector<String> name=new Vector<String>();
 	private Vector<Vector<String>> data=new Vector<Vector<String>>();
 	private DefaultTableModel model;
 
 	private static final int destination_x=193;
 	private static final int destination_y=63;
-	private static final int destination_w=102;
+	private static final int destination_w=122;
 	private static final int destination_h=20;
 	private static final int transportId_x=206;
 	private static final int transportId_y=90;
 	private static final int transportId_w=182;
 	private static final int transportId_h=20;
-	private static final int positionId_x=240;
-	private static final int positionId_y=115;
-	private static final int positionId_w=182;
+	private static final int positionId_x=235;
+	private static final int positionId_y=112;
+	private static final int positionId_w=100;
 	private static final int positionId_h=20;
-	private static final int carId_x=222;
-	private static final int carId_y=143;
+	private static final int carId_x=218;
+	private static final int carId_y=140;
 	private static final int carId_w=90;
 	private static final int carId_h=20;
 	private static final int loadtime_x=208;
 	private static final int loadtime_y=168;
 	private static final int loadtime_w=95;
 	private static final int loadtime_h=20;
-	private static final int driverId_x=194;
-	private static final int driverId_y=195;
+	private static final int driverId_x=190;
+	private static final int driverId_y=194;
 	private static final int driverId_w=67;
 	private static final int driverId_h=20;
-	private static final int superviserId_x=325;
-	private static final int superviserId_y=195;
+	private static final int superviserId_x=321;
+	private static final int superviserId_y=194;
 	private static final int superviserId_w=67;
 	private static final int superviserId_h=20;
 	private static final int fare_x=185;
@@ -99,8 +97,8 @@ public class PositionLoadUi extends JPanel{
 	private static final int bars_h=135;
 	private static final int confirm_x=396;
 	private static final int confirm_y=392;
-	private static final int confirm_w=65;
-	private static final int confirm_h=20;
+	private static final int confirm_w=72;
+	private static final int confirm_h=24;
 	private static final int warning_x=198;
 	private static final int warning_y=490;
 	private static final int warning_w=275;
@@ -111,7 +109,7 @@ public class PositionLoadUi extends JPanel{
 	private static final int scroll_h=134;
 	
 	
-	ImageIcon confirmIcon=new ImageIcon("graphic/position/button/button_confirm.png");
+//	ImageIcon confirmIcon=new ImageIcon("graphic/position/button/button_confirm.png");
 	
 	private static String[] des;
 	public PositionLoadUi(ClientControler mainControler,ButtonComponents bc){
@@ -143,32 +141,30 @@ public class PositionLoadUi extends JPanel{
 		{
 			des[i]=destination.get(i);
 		}
-		JCdestination=new JComboBox(des);
+		JCdestination=new newJCombo(des);
 		JCdestination.setBounds(destination_x, destination_y, destination_w, destination_h);
 		add(JCdestination);
 		
 		
-		JTPositionId = new JTextField();
+		JTPositionId = new newJText();
 		JTPositionId.setText(deliverBl.getCurrentPosition().id);
 		JTPositionId.setBounds(positionId_x,positionId_y,positionId_w,positionId_h);
 		add(JTPositionId);
 		
-		JLtransportId=new JLabel();
+		JLtransportId=new newJLabel();
 		JLtransportId.setBounds(transportId_x, transportId_y, transportId_w, transportId_h);
-		JLtransportId.setFont(new Font("Dialog", 1, 15));
-		JLtransportId.setForeground(Color.white);
 		add(JLtransportId);
 		JLtransportId.setVisible(false);
 		
-		JTCarId = new JTextField();
+		JTCarId = new newJText();
 		JTCarId.setBounds(carId_x,carId_y,carId_w,carId_h);
 		add(JTCarId);
 		
-		JTdriverId = new JTextField();
+		JTdriverId = new newJText();
 		JTdriverId.setBounds(driverId_x,driverId_y,driverId_w,driverId_h);
 		add(JTdriverId);
 		
-		JTsuperviserId = new JTextField();
+		JTsuperviserId = new newJText();
 		JTsuperviserId.setBounds(superviserId_x,superviserId_y,superviserId_w,superviserId_h);
 		add(JTsuperviserId);
 		
@@ -177,21 +173,18 @@ public class PositionLoadUi extends JPanel{
 		table.join();
 		model=table.getModel();
 		
-		warning=new JLabel();
+		warning=new newJLabel();
 		warning.setBounds(warning_x, warning_y, warning_w, warning_h);
-		warning.setFont(new Font("Dialog", 1, 15));
 		warning.setForeground(Color.red);
 		add(warning);
 		warning.setVisible(false);
 		
-		fare=new JLabel();
+		fare=new newJLabel();
 		fare.setBounds(fare_x,fare_y,fare_w,fare_h);
-		fare.setFont(new Font("Dialog", 1, 15));
-		fare.setForeground(Color.white);
 		add(fare);
 		fare.setVisible(false);
 		
-		confirm=new JButton(confirmIcon);
+		confirm=new newJBut("确定");
 		confirm.setBounds(confirm_x, confirm_y, confirm_w, confirm_h);
 		add(confirm);
 		confirm.addMouseListener(new MouseAdapter() {
