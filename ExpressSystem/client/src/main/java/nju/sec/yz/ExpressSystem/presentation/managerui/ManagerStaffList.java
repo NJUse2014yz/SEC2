@@ -56,6 +56,11 @@ public class ManagerStaffList extends JPanel {
 		setSize(490, 550);
 		setVisible(true);
 		
+		name.add("人员编号");
+		name.add("姓名");
+		name.add("职务");
+		name.add("所属机构");
+		name.add("登录ID");
 		
 		table=new newTable(data,name,this,false);
 	    table.setBounds(137,94,318,181);
@@ -158,6 +163,7 @@ public class ManagerStaffList extends JPanel {
 			vector.add(allstaff.get(i).getName());
 			vector.add(getpower(allstaff.get(i).getPower()));
 			vector.add(allstaff.get(i).getAgency());
+			vector.add(allstaff.get(i).getLoginId());
 			data.add(vector);
 		}
 		table.resetData();

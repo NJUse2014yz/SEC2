@@ -79,6 +79,7 @@ public class ManagerStaffObserve extends JPanel{
 		name.add("姓名");
 		name.add("职务");
 		name.add("所属机构");
+		name.add("登录ID");
 	    
 		search.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -139,6 +140,7 @@ public class ManagerStaffObserve extends JPanel{
 			vector.add(allstaff.get(i).getName());
 			vector.add(getpower(allstaff.get(i).getPower()));
 			vector.add(allstaff.get(i).getAgency());
+			vector.add(allstaff.get(i).getLoginId());
 			data.add(vector);
 		}
 		table.resetData();

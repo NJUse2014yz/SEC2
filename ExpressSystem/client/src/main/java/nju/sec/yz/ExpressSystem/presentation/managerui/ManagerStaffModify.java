@@ -48,6 +48,9 @@ public class ManagerStaffModify extends JPanel {
 
 	// 所属机构
 	private JComboBox agency;
+	
+	private JLabel loginId;
+	private JLabel loginid;
 
 	public ManagerStaffModify(ClientControler maincontroler, ManagerButtonComponent mbc, String staffId) {
 		this.maincontroler = maincontroler;
@@ -109,6 +112,18 @@ public class ManagerStaffModify extends JPanel {
 		agency.setSelectedItem(vo.getAgency());
 		agency.setBounds(218,160,110,20);
 		add(agency);
+		
+		loginId=new JLabel(vo.getLoginId());
+		loginId.setFont(new Font("Dialog", 1, 15));
+		loginId.setForeground(Color.white);
+		loginId.setBounds(218, 162, 83, 18);
+		add(loginId);
+		
+		loginid=new JLabel("登录ID");
+		loginid.setFont(new Font("Dialog", 1, 15));
+		loginid.setForeground(Color.white);
+		loginid.setBounds(188, 162, 60, 18);
+		add(loginid);
 		
 		/*
 		 * 确定
