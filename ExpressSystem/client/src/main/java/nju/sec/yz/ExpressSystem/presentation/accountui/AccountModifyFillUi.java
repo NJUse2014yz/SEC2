@@ -25,7 +25,7 @@ import nju.sec.yz.ExpressSystem.vo.AccountVO;
 public class AccountModifyFillUi extends JPanel{
 	private AccountButtonComponents bc;
 	private ClientControler mainControler;
-//	private AccountControler controler;
+	private AccountControler controler;
 	private AccountBlService accountBl;
 	private AccountVO avo;
 	
@@ -56,7 +56,7 @@ public class AccountModifyFillUi extends JPanel{
 	public AccountModifyFillUi(ClientControler mainControler,AccountButtonComponents bc,String name){
 		super();
 		this.mainControler=mainControler;
-//		controler=mainControler.accountControler;
+		controler=mainControler.accountControler;
 		this.bc=bc;
 		accountBl=new AccountController();
 		avo=accountBl.observeAccount(name);

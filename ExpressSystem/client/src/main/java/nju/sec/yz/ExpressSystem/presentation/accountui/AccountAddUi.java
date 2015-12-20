@@ -24,7 +24,7 @@ import nju.sec.yz.ExpressSystem.vo.AccountVO;
 public class AccountAddUi extends JPanel{
 	private AccountButtonComponents bc;
 	private ClientControler mainControler;
-//	private AccountControler controler;
+	private AccountControler controler;
 	private AccountBlService accountBl;
 	
 	private JTextField name;
@@ -51,7 +51,7 @@ public class AccountAddUi extends JPanel{
 	public AccountAddUi(ClientControler mainControler,AccountButtonComponents bc){
 		super();
 		this.mainControler=mainControler;
-//		controler=mainControler.accountControler;
+		controler=mainControler.accountControler;
 		this.bc=bc;
 		accountBl=new AccountController();
 		initAccountUi();

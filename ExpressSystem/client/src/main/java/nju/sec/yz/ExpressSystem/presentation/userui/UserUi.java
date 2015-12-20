@@ -130,10 +130,7 @@ public class UserUi extends JPanel{
 							new MainSwitchPanelListener(MAIN_CONTROL.DELIVER,controler,0);
 							break;
 						case 'E':
-							new MainSwitchPanelListener(MAIN_CONTROL.S_ACCOUNTER,controler,0);
-							break;
-						case 'e':
-							new MainSwitchPanelListener(MAIN_CONTROL.J_ACCOUNTER,controler,0);
+							new MainSwitchPanelListener(MAIN_CONTROL.ACCOUNTER,controler,0);
 							break;
 						case 'F':
 							new MainSwitchPanelListener(MAIN_CONTROL.ADMINSTRATER,controler,0);

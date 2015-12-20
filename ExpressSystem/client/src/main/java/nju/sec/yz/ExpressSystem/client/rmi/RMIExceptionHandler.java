@@ -21,7 +21,7 @@ public class RMIExceptionHandler {
 	 * 然后退出系统
 	 */
 	static public void handleRMIException(){
-		/*
+		
 		try {
 			System.out.println("trying to connect again...");
 			Thread.sleep(5000);
@@ -32,7 +32,7 @@ public class RMIExceptionHandler {
 		}  catch (ClientInitException e) {
 			e.printStackTrace();
 			handleRMIException();
-		}*/
+		}
 	}
 	
 	static public void handleInitRMIException(){

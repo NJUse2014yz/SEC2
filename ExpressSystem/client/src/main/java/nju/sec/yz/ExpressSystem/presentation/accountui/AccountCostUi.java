@@ -1,34 +1,26 @@
 package nju.sec.yz.ExpressSystem.presentation.accountui;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
-import javax.swing.table.DefaultTableModel;
 
 import nju.sec.yz.ExpressSystem.bl.accountbl.FinanceController;
 import nju.sec.yz.ExpressSystem.blservice.accountBlService.FinanceBlSevice;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.presentation.DateChooser;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJCombo;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJText;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.AccountControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.OutVO;
-import nju.sec.yz.ExpressSystem.vo.ProfitVO;
 
 public class AccountCostUi extends JPanel{
 	private AccountButtonComponents bc;
@@ -36,35 +28,35 @@ public class AccountCostUi extends JPanel{
 //	private AccountControler controler;
 	private FinanceBlSevice financeBl;
 	
-	private JButton confirm;
+	private newJBut confirm;
 	private DateChooser date;
-	private JTextField amount;
-	private JTextField person;
-	private JTextField account;
-	private JTextField ps;
-	private JComboBox detail;
-	private JLabel warning;
+	private newJText amount;
+	private newJText person;
+	private newJText account;
+	private newJText ps;
+	private newJCombo detail;
+	private newJLabel warning;
 
 	private static final int date_x=236;
 	private static final int date_y=63;
 	private static final int amount_x=236;
-	private static final int amount_y=105;
+	private static final int amount_y=91;
 	private static final int amount_w=90;
 	private static final int account_x=236;
-	private static final int account_y=150;
+	private static final int account_y=116;
 	private static final int account_w=197;
 	private static final int person_x=236;
-	private static final int person_y=195;
+	private static final int person_y=141;
 	private static final int person_w=90;
 	private static final int ps_x=236;
-	private static final int ps_y=326;
+	private static final int ps_y=194;
 	private static final int ps_w=90;
 	private static final int detail_x=236;
-	private static final int detail_y=250;
+	private static final int detail_y=168;
 	private static final int detail_w=90;	
 	private static final int height=20;
 	private static final int confirm_x=396;
-	private static final int confirm_y=459;
+	private static final int confirm_y=218;
 	private static final int confirm_w=72;
 	private static final int confirm_h=24;
 	private static final int warning_x=198;
@@ -90,30 +82,29 @@ public class AccountCostUi extends JPanel{
 		
 		date=new DateChooser(this,date_x,date_y);
 		
-		amount=new JTextField();
+		amount=new newJText();
 		amount.setBounds(amount_x, amount_y, amount_w, height);
 		add(amount);
-		account=new JTextField();
+		account=new newJText();
 		account.setBounds(account_x, account_y, account_w, height);
 		add(account);
-		person=new JTextField();
+		person=new newJText();
 		person.setBounds(person_x, person_y, person_w, height);
 		add(person);
-		detail=new JComboBox(new String[]{"租金","运费","人员工资","奖励"});
+		detail=new newJCombo(new String[]{"租金","运费","人员工资","奖励"});
 		detail.setBounds(detail_x, detail_y, detail_w, height);
 		add(detail);
-		ps=new JTextField();
+		ps=new newJText();
 		ps.setBounds(ps_x, ps_y, ps_w, height);
 		add(ps);
 		
-		warning=new JLabel();
+		warning=new newJLabel();
 		warning.setBounds(warning_x, warning_y, warning_w, warning_h);
-		warning.setFont(new Font("Dialog", 1, 15));
 		warning.setForeground(Color.red);
 		add(warning);
 		warning.setVisible(false);
 		
-		confirm=new JButton(confirmIcon);
+		confirm=new newJBut("确定");
 		confirm.setBounds(confirm_x, confirm_y, confirm_w, confirm_h);
 		confirm.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)

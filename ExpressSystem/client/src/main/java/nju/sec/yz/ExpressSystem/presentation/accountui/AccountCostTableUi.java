@@ -23,7 +23,7 @@ import nju.sec.yz.ExpressSystem.vo.ProfitVO;
 public class AccountCostTableUi extends JPanel{
 	private AccountButtonComponents bc;
 	private ClientControler mainControler;
-//	private AccountControler controler;
+	private AccountControler controler;
 	private FinanceBlSevice financeBl;
 	private ProfitVO pvo;
 	
@@ -52,7 +52,7 @@ public class AccountCostTableUi extends JPanel{
 	public AccountCostTableUi(ClientControler mainControler,AccountButtonComponents bc){
 		super();
 		this.mainControler=mainControler;
-//		controler=mainControler.accountControler;
+		controler=mainControler.accountControler;
 		this.bc=bc;
 		financeBl=new FinanceController();
 		initAccountUi();

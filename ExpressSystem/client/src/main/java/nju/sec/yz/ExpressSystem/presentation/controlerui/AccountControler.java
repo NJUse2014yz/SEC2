@@ -18,10 +18,10 @@ import nju.sec.yz.ExpressSystem.presentation.positionui.PositionArriveUi;
 public class AccountControler {
 	private ClientControler mainControler;
 	public static AccountButtonComponents bc;
-	public AccountControler(ClientControler mainControler,int n)
+	public AccountControler(ClientControler mainControler)
 	{
 		this.mainControler=mainControler;
-		this.bc=new AccountButtonComponents(mainControler,n);
+		this.bc=new AccountButtonComponents(mainControler);
 	}
 	public void accountChangePanel(ACCOUNT_CONTROL n)
 	{

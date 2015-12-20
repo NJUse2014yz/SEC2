@@ -17,6 +17,7 @@ import nju.sec.yz.ExpressSystem.presentation.userui.AdminstraterMainUi;
 import nju.sec.yz.ExpressSystem.presentation.userui.AdminstraterMainUiTest;
 import nju.sec.yz.ExpressSystem.presentation.userui.UserOrderSearchUi;
 import nju.sec.yz.ExpressSystem.presentation.userui.UserUi;
+import nju.sec.yz.ExpressSystem.presentation.userui.UserUiTest;
 
 /**
  * 
@@ -26,8 +27,7 @@ import nju.sec.yz.ExpressSystem.presentation.userui.UserUi;
 public class ClientControler{
 	public DeliverControler deliverControler=new DeliverControler(this);
 	public AdminstraterControler adminstraterControler=new AdminstraterControler(this);
-	public AccountControler accountControler0=new AccountControler(this,0);
-	public AccountControler accountControler1=new AccountControler(this,1);
+	public AccountControler accountControler=new AccountControler(this);
 	public InventoryControler inventoryControler=new InventoryControler(this);
 	public ManagerControler managerControler=new ManagerControler(this);
 	public TransitControler transitControler=new TransitControler(this);
@@ -71,11 +71,8 @@ public class ClientControler{
 		case INVENTORY:
 			mainFrame.nextPanel(new InventoryMainUi(this));
 			break;
-		case S_ACCOUNTER:
-			mainFrame.nextPanel(new AccountMainUi(this,accountControler0.bc));
-			break;
-		case J_ACCOUNTER:
-			mainFrame.nextPanel(new AccountMainUi(this,accountControler1.bc));
+		case ACCOUNTER:
+			mainFrame.nextPanel(new AccountMainUi(this,accountControler.bc));
 			break;
 		case MANAGER:
 			mainFrame.nextPanel(new ManagerMainUi(this,managerControler.mbc));

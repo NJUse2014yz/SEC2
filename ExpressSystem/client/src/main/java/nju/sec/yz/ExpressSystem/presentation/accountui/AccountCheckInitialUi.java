@@ -6,39 +6,26 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
-import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
-import javax.swing.table.DefaultTableModel;
 
 import nju.sec.yz.ExpressSystem.bl.accountbl.InitialController;
 import nju.sec.yz.ExpressSystem.blservice.accountBlService.InitialBlService;
-import nju.sec.yz.ExpressSystem.common.InventoryInInformation;
-import nju.sec.yz.ExpressSystem.common.Result;
-import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.Status;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJCombo;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ACCOUNT_CONTROL;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.AccountControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
-import nju.sec.yz.ExpressSystem.vo.AccountVO;
-import nju.sec.yz.ExpressSystem.vo.CarVO;
 import nju.sec.yz.ExpressSystem.vo.InitialVO;
-import nju.sec.yz.ExpressSystem.vo.InventoryInSheetVO;
-import nju.sec.yz.ExpressSystem.vo.PositionVO;
-import nju.sec.yz.ExpressSystem.vo.StaffVO;
-import nju.sec.yz.ExpressSystem.vo.TransitVO;
 
 public class AccountCheckInitialUi extends JPanel{
 	private AccountButtonComponents bc;
@@ -47,11 +34,11 @@ public class AccountCheckInitialUi extends JPanel{
 	private InitialBlService initialBl;
 	private InitialVO iv;
 	
-	private JButton buttonAG;
-	private JButton buttonS;
-	private JButton buttonC;
-	private JButton buttonA;
-	private JButton buttonI;
+	private newJBut buttonAG;
+	private newJBut buttonS;
+	private newJBut buttonC;
+	private newJBut buttonA;
+	private newJBut buttonI;
 	
 	private newTable tableT;
 	private newTable tableP;
@@ -60,15 +47,15 @@ public class AccountCheckInitialUi extends JPanel{
 	private newTable tableA;
 	private newTable tableI;
 	
-	private JComboBox<String> choose;
-	private JButton backI;
-	private JButton confirm;
-	private JLabel warningT;
-	private JLabel warningS;
-	private JLabel warningC;
-	private JLabel warningA;
-	private JLabel warningI;
-	private JLabel warning;
+	private newJCombo choose;
+	private newJBut backI;
+	private newJBut confirm;
+	private newJLabel warningT;
+	private newJLabel warningS;
+	private newJLabel warningC;
+	private newJLabel warningA;
+	private newJLabel warningI;
+	private newJLabel warning;
 	
 	private String[] power=new String[]{"总经理","高级财务人员","低级财务人员","中转中心业务员","中转中心仓库管理人员","营业厅业务员","快递员","管理员"};
 	private Vector<Vector<String>> dataT=new Vector<Vector<String>>();
@@ -86,12 +73,12 @@ public class AccountCheckInitialUi extends JPanel{
 	private String num;
 	private String[] years;
 	
-	private static final int backI_x=418;
-	private static final int backI_y=59;
-	private static final int backI_w=50;
-	private static final int backI_h=22;
-	private static final int year_x=153;
-	private static final int year_y=83;
+	private static final int backI_x=390;
+	private static final int backI_y=435;
+	private static final int backI_w=72;
+	private static final int backI_h=24;
+	private static final int year_x=170;
+	private static final int year_y=55;
 	private static final int year_w=90;
 	private static final int year_h=20;
 	private static final int scroll_x=146;
@@ -111,9 +98,9 @@ public class AccountCheckInitialUi extends JPanel{
 	private static final int warning_w=275;
 	private static final int warning_h=20;
 	private static final int button_x=170;
-	private static final int button_y=50;
+	private static final int button_y=80;
 	private static final int button_w=45;
-	private static final int button_h=34;
+	private static final int button_h=24;
 	
 	private ImageIcon confirmIcon=new ImageIcon("graphic/account/button/confirm_button.jpg");
 	private ImageIcon AGIcon=new ImageIcon("graphic/account/button/button_AG.jpg");
@@ -137,7 +124,7 @@ public class AccountCheckInitialUi extends JPanel{
 		{
 			years[i]=yearT.get(i);
 		}
-		choose=new JComboBox<String>(years);
+		choose=new newJCombo(years);
 		
 		nameT.add("名称");
 		nameT.add("编号");
@@ -225,7 +212,7 @@ public class AccountCheckInitialUi extends JPanel{
 		});
 		add(choose);
 		
-		backI=new JButton(backIcon);
+		backI=new newJBut("返回");
 		backI.setBounds(backI_x, backI_y, backI_w, backI_h);
 		backI.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
@@ -235,7 +222,8 @@ public class AccountCheckInitialUi extends JPanel{
 		});
 		add(backI);
 		
-		buttonAG=new JButton(AGIcon);
+		buttonAG=new newJBut("机构",Color.white);
+		buttonAG.setMargin(new java.awt.Insets(0,0,0,0));
 		buttonAG.setBounds(button_x, button_y,button_w,button_h);
 		buttonAG.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
@@ -250,8 +238,9 @@ public class AccountCheckInitialUi extends JPanel{
 		});
 		add(buttonAG);
 		
-		buttonS=new JButton(SIcon);
+		buttonS=new newJBut("人员",Color.white);
 		buttonS.setBounds(button_x+(button_w+5), button_y,button_w,button_h);
+		buttonS.setMargin(new java.awt.Insets(0,0,0,0));
 		buttonS.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
 			{
@@ -265,7 +254,8 @@ public class AccountCheckInitialUi extends JPanel{
 		});
 		add(buttonS);
 		
-		buttonC=new JButton(CIcon);
+		buttonC=new newJBut("车辆",Color.white);
+		buttonC.setMargin(new java.awt.Insets(0,0,0,0));
 		buttonC.setBounds(button_x+2*(button_w+5), button_y,button_w,button_h);
 		buttonC.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
@@ -280,7 +270,8 @@ public class AccountCheckInitialUi extends JPanel{
 		});
 		add(buttonC);
 		
-		buttonA=new JButton(ACIcon);
+		buttonA=new newJBut("账户",Color.white);
+		buttonA.setMargin(new java.awt.Insets(0,0,0,0));
 		buttonA.setBounds(button_x+3*(button_w+5), button_y,button_w,button_h);
 		buttonA.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
@@ -295,7 +286,8 @@ public class AccountCheckInitialUi extends JPanel{
 		});
 		add(buttonA);
 		
-		buttonI=new JButton(IIcon);
+		buttonI=new newJBut("库存",Color.white);
+		buttonI.setMargin(new java.awt.Insets(0,0,0,0));
 		buttonI.setBounds(button_x+4*(button_w+5), button_y,button_w,button_h);
 		buttonI.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
@@ -310,9 +302,8 @@ public class AccountCheckInitialUi extends JPanel{
 		});
 		add(buttonI);
 		
-		warning=new JLabel();
+		warning=new newJLabel();
 		warning.setBounds(warning_x, warning_y, warning_w, warning_h);
-		warning.setFont(new Font("Dialog", 1, 15));
 		warning.setForeground(Color.red);
 		add(warning);
 		warning.setVisible(false);

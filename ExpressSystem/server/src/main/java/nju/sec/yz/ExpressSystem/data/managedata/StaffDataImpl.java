@@ -50,7 +50,7 @@ public class StaffDataImpl extends UnicastRemoteObject implements StaffDataServi
 		
 		List<StaffPO> StaffPOs = findAll();
 		for(StaffPO po:StaffPOs){
-			if(isSame(spo, po))
+			if(po.getId().equals(spo.getId()))
 				return new ResultMessage(Result.FAIL,"人员信息已存在");
 		}
 		
@@ -58,16 +58,6 @@ public class StaffDataImpl extends UnicastRemoteObject implements StaffDataServi
 
 		ResultMessage message = saveData(StaffPOs);
 		return message;
-	}
-	
-	private boolean isSame(StaffPO staff1,StaffPO staff2){
-		if(!staff1.getAgency().equals(staff2.getAgency()))
-			return false;
-		if(!staff1.getId().equals(staff2.getId()))
-			return false;
-		if(staff1.getPower()!=staff2.getPower())
-			return false;
-		return true;
 	}
 
 	@Override

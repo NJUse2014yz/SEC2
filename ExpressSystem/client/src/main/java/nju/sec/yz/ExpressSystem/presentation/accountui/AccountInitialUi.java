@@ -6,22 +6,15 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
-import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
-import javax.swing.table.DefaultTableModel;
 
 import nju.sec.yz.ExpressSystem.bl.accountbl.InitialController;
 import nju.sec.yz.ExpressSystem.blservice.accountBlService.InitialBlService;
@@ -29,6 +22,8 @@ import nju.sec.yz.ExpressSystem.common.InventoryInInformation;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.Status;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ACCOUNT_CONTROL;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.AccountControler;
@@ -53,12 +48,13 @@ public class AccountInitialUi extends JPanel{
 	private boolean A=false;
 	private boolean I=false;
 	
-	private JButton check;
-	private JButton buttonAG;
-	private JButton buttonS;
-	private JButton buttonC;
-	private JButton buttonA;
-	private JButton buttonI;
+//	private JButton check;
+	private newJBut check;
+	private newJBut buttonAG;
+	private newJBut buttonS;
+	private newJBut buttonC;
+	private newJBut buttonA;
+	private newJBut buttonI;
 	private newTable tableT;
 	private newTable tableP;
 	private newTable tableS;
@@ -66,13 +62,13 @@ public class AccountInitialUi extends JPanel{
 	private newTable tableA;
 	private newTable tableI;
 	
-	private JButton confirm;
-	private JLabel warningT;
-	private JLabel warningS;
-	private JLabel warningC;
-	private JLabel warningA;
-	private JLabel warningI;
-	private JLabel warning;
+	private newJBut confirm;
+	private newJLabel warningT;
+	private newJLabel warningS;
+	private newJLabel warningC;
+	private newJLabel warningA;
+	private newJLabel warningI;
+	private newJLabel warning;
 	private Vector<Vector<String>> dataT=new Vector<Vector<String>>();
 	private Vector<Vector<String>> dataP=new Vector<Vector<String>>();
 	private Vector<Vector<String>> dataS=new Vector<Vector<String>>();
@@ -105,7 +101,7 @@ public class AccountInitialUi extends JPanel{
 	private static final int scrollP_y=223;
 	private static final int scrollP_w=300;
 	private static final int scrollP_h=110;
-	private static final int confirm_x=406;
+	private static final int confirm_x=390;
 	private static final int confirm_y=435;
 	private static final int confirm_w=72;
 	private static final int confirm_h=24;
@@ -134,16 +130,16 @@ public class AccountInitialUi extends JPanel{
 	private static final int warning_w=275;
 	private static final int warning_h=20;
 	private static final int button_x=170;
-	private static final int button_y=50;
+	private static final int button_y=60;
 	private static final int button_w=45;
-	private static final int button_h=34;
+	private static final int button_h=24;
 	
-	private ImageIcon confirmIcon=new ImageIcon("graphic/account/button/confirm_button.jpg");
-	private ImageIcon AGIcon=new ImageIcon("graphic/account/button/button_AG.jpg");
-	private ImageIcon SIcon=new ImageIcon("graphic/account/button/button_S.jpg");
-	private ImageIcon CIcon=new ImageIcon("graphic/account/button/button_C.jpg");
-	private ImageIcon ACIcon=new ImageIcon("graphic/account/button/button_AC.jpg");
-	private ImageIcon IIcon=new ImageIcon("graphic/account/button/button_I.jpg");
+//	private ImageIcon confirmIcon=new ImageIcon("graphic/account/button/confirm_button.jpg");
+//	private ImageIcon AGIcon=new ImageIcon("graphic/account/button/button_AG.jpg");
+//	private ImageIcon SIcon=new ImageIcon("graphic/account/button/button_S.jpg");
+//	private ImageIcon CIcon=new ImageIcon("graphic/account/button/button_C.jpg");
+//	private ImageIcon ACIcon=new ImageIcon("graphic/account/button/button_AC.jpg");
+//	private ImageIcon IIcon=new ImageIcon("graphic/account/button/button_I.jpg");
 	private ImageIcon checkIcon=new ImageIcon("graphic/account/button/check_button.gif");
 	
 	public AccountInitialUi(ClientControler mainControler,AccountButtonComponents bc){
@@ -189,8 +185,10 @@ public class AccountInitialUi extends JPanel{
 		setLayout(null);
 		setSize(490, 550);
 		
-		buttonAG=new JButton(AGIcon);
+		
+		buttonAG=new newJBut("机构",Color.white);
 		buttonAG.setBounds(button_x, button_y,button_w,button_h);
+		buttonAG.setMargin(new java.awt.Insets(0,0,0,0));
 		buttonAG.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
 			{
@@ -204,8 +202,9 @@ public class AccountInitialUi extends JPanel{
 		});
 		add(buttonAG);
 		
-		buttonS=new JButton(SIcon);
+		buttonS=new newJBut("人员",Color.white);
 		buttonS.setBounds(button_x+(button_w+5), button_y,button_w,button_h);
+		buttonS.setMargin(new java.awt.Insets(0,0,0,0));
 		buttonS.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
 			{
@@ -219,7 +218,8 @@ public class AccountInitialUi extends JPanel{
 		});
 		add(buttonS);
 		
-		buttonC=new JButton(CIcon);
+		buttonC=new newJBut("车辆",Color.white);
+		buttonC.setMargin(new java.awt.Insets(0,0,0,0));
 		buttonC.setBounds(button_x+2*(button_w+5), button_y,button_w,button_h);
 		buttonC.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
@@ -234,7 +234,8 @@ public class AccountInitialUi extends JPanel{
 		});
 		add(buttonC);
 		
-		buttonA=new JButton(ACIcon);
+		buttonA=new newJBut("账户",Color.white);
+		buttonA.setMargin(new java.awt.Insets(0,0,0,0));
 		buttonA.setBounds(button_x+3*(button_w+5), button_y,button_w,button_h);
 		buttonA.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
@@ -249,7 +250,8 @@ public class AccountInitialUi extends JPanel{
 		});
 		add(buttonA);
 		
-		buttonI=new JButton(IIcon);
+		buttonI=new newJBut("库存",Color.white);
+		buttonI.setMargin(new java.awt.Insets(0,0,0,0));
 		buttonI.setBounds(button_x+4*(button_w+5), button_y,button_w,button_h);
 		buttonI.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
@@ -264,8 +266,10 @@ public class AccountInitialUi extends JPanel{
 		});
 		add(buttonI);
 		
-		check=new JButton(checkIcon);
-		check.setBounds(check_x, check_y, check_w, check_h);
+//		check=new JButton(checkIcon);
+//		check.setBounds(check_x, check_y, check_w, check_h);
+		check=new newJBut("查看");
+		check.setBounds(confirm_x-90, confirm_y, confirm_w, confirm_h);
 		check.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
 			{
@@ -316,49 +320,43 @@ public class AccountInitialUi extends JPanel{
 		tableI.join();
 		
 		
-		warningT=new JLabel();
+		warningT=new newJLabel();
 		warningT.setBounds(warningT_x, warningT_y, warningT_w, warningT_h);
-		warningT.setFont(new Font("Dialog", 1, 15));
 		warningT.setForeground(Color.red);
 		add(warningT);
 		warningT.setVisible(false);
 		
-		warningS=new JLabel();
+		warningS=new newJLabel();
 		warningS.setBounds(warningS_x, warningS_y, warningS_w, warningS_h);
-		warningS.setFont(new Font("Dialog", 1, 15));
 		warningS.setForeground(Color.red);
 		add(warningS);
 		warningS.setVisible(false);
 		
-		warningC=new JLabel();
+		warningC=new newJLabel();
 		warningC.setBounds(warningC_x, warningC_y, warningC_w, warningC_h);
-		warningC.setFont(new Font("Dialog", 1, 15));
 		warningC.setForeground(Color.red);
 		add(warningC);
 		warningC.setVisible(false);
 		
-		warningI=new JLabel();
+		warningI=new newJLabel();
 		warningI.setBounds(warningI_x, warningI_y, warningI_w, warningI_h);
-		warningI.setFont(new Font("Dialog", 1, 15));
 		warningI.setForeground(Color.red);
 		add(warningI);
 		warningI.setVisible(false);
 		
-		warningA=new JLabel();
+		warningA=new newJLabel();
 		warningA.setBounds(warningA_x, warningA_y, warningA_w, warningA_h);
-		warningA.setFont(new Font("Dialog", 1, 15));
 		warningA.setForeground(Color.red);
 		add(warningA);
 		warningA.setVisible(false);
 		
-		warning=new JLabel();
+		warning=new newJLabel();
 		warning.setBounds(warning_x, warning_y, warning_w, warning_h);
-		warning.setFont(new Font("Dialog", 1, 15));
 		warning.setForeground(Color.red);
 		add(warning);
 		warning.setVisible(false);
 		
-		confirm=new JButton(confirmIcon);
+		confirm=new newJBut("确定");
 		confirm.setBounds(confirm_x, confirm_y, confirm_w, confirm_h);
 		confirm.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
