@@ -184,4 +184,20 @@ public class ConstDataImpl extends UnicastRemoteObject implements ConstDataServi
 		return null;
 	}
 
+	
+	public static void main(String[] args) {
+		try {
+			ConstDataImpl data=new ConstDataImpl();
+			ConstDao dao=data.getDao();
+			List<CityPO> list=dao.getDistances();
+			for(CityPO po:list){
+				CityInformation info=po.getCityInformation();
+				System.out.println(info.getFromCity()+" "+info.getFromID()+" "+info.getToCity()+" "+info.getToID());
+			}
+			
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

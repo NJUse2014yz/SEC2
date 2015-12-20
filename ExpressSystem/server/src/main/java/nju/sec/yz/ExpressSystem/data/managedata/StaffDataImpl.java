@@ -143,5 +143,17 @@ public class StaffDataImpl extends UnicastRemoteObject implements StaffDataServi
             return new ArrayList<>();
         }
 	}
+	
+	public static void main(String[] args) {
+		try {
+			StaffDataImpl data=new StaffDataImpl();
+			List<StaffPO> list=data.findAll();
+			for(StaffPO staff:list){
+				System.out.println(staff.getLoginId()+" "+staff.getName()+" "+staff.getAgency());
+			}
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
 
 }
