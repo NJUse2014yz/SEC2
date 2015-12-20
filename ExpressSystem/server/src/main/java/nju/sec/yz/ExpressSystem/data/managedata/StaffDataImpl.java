@@ -50,7 +50,7 @@ public class StaffDataImpl extends UnicastRemoteObject implements StaffDataServi
 		
 		List<StaffPO> StaffPOs = findAll();
 		for(StaffPO po:StaffPOs){
-			if(po.getId().equals(spo.getId()))
+			if(po.getLoginId().equals(spo.getLoginId()))
 				return new ResultMessage(Result.FAIL,"人员信息已存在");
 		}
 		
@@ -69,7 +69,7 @@ public class StaffDataImpl extends UnicastRemoteObject implements StaffDataServi
 		}
 		List<StaffPO> StaffPOs = findAll();
 		for (StaffPO po : StaffPOs) {
-			String carID = po.get;
+			String carID = po.getLoginId();
 			if (id.equals(carID))
 				return po;
 		}
@@ -87,7 +87,7 @@ public class StaffDataImpl extends UnicastRemoteObject implements StaffDataServi
 		}
 		List<StaffPO> StaffPOs = findAll();
 		for (int i=0;i<StaffPOs.size();i++) {
-			String carID = StaffPOs.get(i).getId();
+			String carID = StaffPOs.get(i).getLoginId();
 			if (id.equals(carID)){
 				StaffPOs.remove(i);
 				ResultMessage message=saveData(StaffPOs);
@@ -106,12 +106,12 @@ public class StaffDataImpl extends UnicastRemoteObject implements StaffDataServi
 			return new ResultMessage(Result.FAIL, "系统错误");
 		}
 			
-		String id=spo.getId();
+		String id=spo.getLoginId();
 
 		List<StaffPO> StaffPOs = findAll();
 		for (int i = 0; i < StaffPOs.size(); i++) {
 			StaffPO po = StaffPOs.get(i);
-			String carID = po.getId();
+			String carID = po.getLoginId();
 			if (id.equals(carID)) {
 				StaffPOs.remove(i);
 				StaffPOs.add(spo);
