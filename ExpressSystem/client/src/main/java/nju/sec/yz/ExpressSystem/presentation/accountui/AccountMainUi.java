@@ -14,17 +14,23 @@ public class AccountMainUi extends JPanel{
 	private AccountButtonComponents bc;
 	private ClientControler mainControler;
 //	private AccountControler controler;
+	private String str;
 	
-	public AccountMainUi(ClientControler mainControler,AccountButtonComponents bc){
+	public AccountMainUi(ClientControler mainControler,AccountButtonComponents bc,String str){
 		super();
 		this.mainControler=mainControler;
 //		controler=mainControler.accountControler;
 		this.bc=bc;
+		this.str=str;
 		initAccountUi();
 	}
 	private void initAccountUi() {
 		bc.changePanel(this);
 		bc.init();
+		if(str=="junior"){
+			bc.setType("junior");
+			bc.changeForJunior();
+		}
 		setLayout(null);
 		setSize(490, 550);
 		setVisible(true);

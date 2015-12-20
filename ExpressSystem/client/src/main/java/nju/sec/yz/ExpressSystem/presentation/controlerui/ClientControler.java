@@ -71,8 +71,11 @@ public class ClientControler{
 		case INVENTORY:
 			mainFrame.nextPanel(new InventoryMainUi(this));
 			break;
-		case ACCOUNTER:
-			mainFrame.nextPanel(new AccountMainUi(this,accountControler.bc));
+		case SENIOR_ACCOUNTANCY:
+			mainFrame.nextPanel(new AccountMainUi(this,accountControler.bc,"senior"));
+			break;
+		case JUNIOR_ACCOUNTANCY:
+			mainFrame.nextPanel(new AccountMainUi(this,accountControler.bc,"junior"));
 			break;
 		case MANAGER:
 			mainFrame.nextPanel(new ManagerMainUi(this,managerControler.mbc));

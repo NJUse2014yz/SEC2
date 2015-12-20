@@ -1,10 +1,8 @@
 package nju.sec.yz.ExpressSystem.presentation.accountui;
 
 import java.awt.Color;
-<<<<<<< HEAD
-=======
 import java.awt.Font;
->>>>>>> origin/master
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -81,13 +79,15 @@ public class AccountButtonComponents{
 		//退出当前帐户
 		private newJLabel leaveButton;
 	
+		//用String str表示属性是senior或者junior
+		private String str="senior";
 
 		private Color framecolor=new Color(110,119,237);
 		
 //		public AccountButtonComponents(ClientControler maincontroler){
 
-		public AccountButtonComponents(ClientControler maincontroler,int n){
-			this.n=n;
+		public AccountButtonComponents(ClientControler maincontroler){
+//			this.n=n;
 
 			this.maincontroler=maincontroler;
 		}
@@ -192,16 +192,19 @@ public class AccountButtonComponents{
 //					accountButton.setIcon(accountIcon1);
 					accountButton.setLocation(Button_x, account_y1);
 					logButton.setLocation(Button_x,log_y1);
-					if(n==0)
-					{
-						warning.setVisible(false);
-						maincontroler.accountControler0.accountChangePanel(ACCOUNT_CONTROL.INCOME);
-					}
-					else
-					{
-						warning.setVisible(false);
-						maincontroler.accountControler1.accountChangePanel(ACCOUNT_CONTROL.INCOME);
-					}
+					
+					dependForJunior();
+					maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.INCOME);
+//					if(n==0)
+//					{
+//						warning.setVisible(false);
+//						maincontroler.accountControler0.accountChangePanel(ACCOUNT_CONTROL.INCOME);
+//					}
+//					else
+//					{
+//						warning.setVisible(false);
+//						maincontroler.accountControler1.accountChangePanel(ACCOUNT_CONTROL.INCOME);
+//					}
 				}
 			});
 			initialButton.addMouseListener(new MouseAdapter() {
@@ -216,16 +219,19 @@ public class AccountButtonComponents{
 //					accountButton.setIcon(accountIcon1);
 					accountButton.setLocation(Button_x, account_y1);
 					logButton.setLocation(Button_x,log_y1);
-					if(n==0)
-					{
-						warning.setVisible(false);
-						maincontroler.accountControler0.accountChangePanel(ACCOUNT_CONTROL.INITIAL);
-					}
-					else
-					{
-						warning.setVisible(false);
-						maincontroler.accountControler1.accountChangePanel(ACCOUNT_CONTROL.INITIAL);
-					}
+					
+					dependForJunior();
+					maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.INITIAL);
+//					if(n==0)
+//					{
+//						warning.setVisible(false);
+//						maincontroler.accountControler0.accountChangePanel(ACCOUNT_CONTROL.INITIAL);
+//					}
+//					else
+//					{
+//						warning.setVisible(false);
+//						maincontroler.accountControler1.accountChangePanel(ACCOUNT_CONTROL.INITIAL);
+//					}
 				}
 			});
 			costButton.addMouseListener(new MouseAdapter() {
@@ -240,16 +246,19 @@ public class AccountButtonComponents{
 //					accountButton.setIcon(accountIcon1);
 					accountButton.setLocation(Button_x, account_y1);
 					logButton.setLocation(Button_x,log_y1);
-					if(n==0)
-					{
-						warning.setVisible(false);
-						maincontroler.accountControler0.accountChangePanel(ACCOUNT_CONTROL.COST);
-					}
-					else
-					{
-						warning.setVisible(false);
-						maincontroler.accountControler1.accountChangePanel(ACCOUNT_CONTROL.COST);
-					}
+					
+					dependForJunior();
+					maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.COST);
+//					if(n==0)
+//					{
+//						warning.setVisible(false);
+//						maincontroler.accountControler0.accountChangePanel(ACCOUNT_CONTROL.COST);
+//					}
+//					else
+//					{
+//						warning.setVisible(false);
+//						maincontroler.accountControler1.accountChangePanel(ACCOUNT_CONTROL.COST);
+//					}
 				}
 			});
 			tableButton.addMouseListener(new MouseAdapter() {
@@ -268,16 +277,18 @@ public class AccountButtonComponents{
 					operateButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e1)
 						{
-							if(n==0)
-							{
-								warning.setVisible(false);
-								maincontroler.accountControler0.accountChangePanel(ACCOUNT_CONTROL.TABLE_OPERATE);
-							}
-							else
-							{
-								warning.setVisible(false);
-								maincontroler.accountControler1.accountChangePanel(ACCOUNT_CONTROL.TABLE_OPERATE);
-							}
+							dependForJunior();
+							maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.TABLE_OPERATE);
+//							if(n==0)
+//							{
+//								warning.setVisible(false);
+//								maincontroler.accountControler0.accountChangePanel(ACCOUNT_CONTROL.TABLE_OPERATE);
+//							}
+//							else
+//							{
+//								warning.setVisible(false);
+//								maincontroler.accountControler1.accountChangePanel(ACCOUNT_CONTROL.TABLE_OPERATE);
+//							}
 						}
 					});
 					chengbenButton.setLocation(Button_x,account_y1+button_h1+2);
@@ -285,16 +296,18 @@ public class AccountButtonComponents{
 					chengbenButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e1)
 						{
-							if(n==0)
-							{
-								warning.setVisible(false);
-								maincontroler.accountControler0.accountChangePanel(ACCOUNT_CONTROL.TABLE_COST);
-							}
-							else
-							{
-								warning.setVisible(false);
-								maincontroler.accountControler1.accountChangePanel(ACCOUNT_CONTROL.TABLE_COST);
-							}
+							dependForJunior();
+							maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.TABLE_COST);
+//							if(n==0)
+//							{
+//								warning.setVisible(false);
+//								maincontroler.accountControler0.accountChangePanel(ACCOUNT_CONTROL.TABLE_COST);
+//							}
+//							else
+//							{
+//								warning.setVisible(false);
+//								maincontroler.accountControler1.accountChangePanel(ACCOUNT_CONTROL.TABLE_COST);
+//							}
 						}
 					});
 					panel.repaint();
@@ -314,15 +327,16 @@ public class AccountButtonComponents{
 					addButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e1)
 						{
-							if(n==0)
-							{
-								warning.setVisible(false);
-								maincontroler.accountControler0.accountChangePanel(ACCOUNT_CONTROL.ADD_ACCOUNT);
-							}
-							else
-							{
-								warning.setVisible(true);
-							}
+							maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.ADD_ACCOUNT);
+//							if(n==0)
+//							{
+//								warning.setVisible(false);
+//								maincontroler.accountControler0.accountChangePanel(ACCOUNT_CONTROL.ADD_ACCOUNT);
+//							}
+//							else
+//							{
+//								warning.setVisible(true);
+//							}
 						}
 					});
 					deleteButton.setLocation(Button_x,log_y1+button_h2+2);
@@ -330,15 +344,17 @@ public class AccountButtonComponents{
 					deleteButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e1)
 						{
-							if(n==0)
-							{
-								warning.setVisible(false);
-								maincontroler.accountControler0.accountChangePanel(ACCOUNT_CONTROL.DELETE_ACCOUNT);
-							}
-							else
-							{
-								warning.setVisible(true);
-							}
+							maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.ADD_ACCOUNT);
+//							
+//							if(n==0)
+//							{
+//								warning.setVisible(false);
+//								maincontroler.accountControler0.accountChangePanel(ACCOUNT_CONTROL.DELETE_ACCOUNT);
+//							}
+//							else
+//							{
+//								warning.setVisible(true);
+//							}
 						}
 					});
 					modifyButton.setLocation(Button_x,log_y1+button_h2*2+4);
@@ -346,15 +362,17 @@ public class AccountButtonComponents{
 					modifyButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e1)
 						{
-							if(n==0)
-							{
-								warning.setVisible(false);
-								maincontroler.accountControler0.accountChangePanel(ACCOUNT_CONTROL.MODIFY_ACCOUNTLIST);
-							}
-							else
-							{
-								warning.setVisible(true);
-							}
+							maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.ADD_ACCOUNT);
+//							
+//							if(n==0)
+//							{
+//								warning.setVisible(false);
+//								maincontroler.accountControler0.accountChangePanel(ACCOUNT_CONTROL.MODIFY_ACCOUNTLIST);
+//							}
+//							else
+//							{
+//								warning.setVisible(true);
+//							}
 						}
 					});
 					inquiryButton.setLocation(Button_x,log_y1+button_h2*3+6);
@@ -362,16 +380,18 @@ public class AccountButtonComponents{
 					inquiryButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e1)
 						{
-							if(n==0)
-							{
-								warning.setVisible(false);
-								maincontroler.accountControler0.accountChangePanel(ACCOUNT_CONTROL.ENQUIRY_ACCOUNT);
-							}
-							else
-							{
-								warning.setVisible(false);
-								maincontroler.accountControler1.accountChangePanel(ACCOUNT_CONTROL.ENQUIRY_ACCOUNT);
-							}
+							maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.ADD_ACCOUNT);
+//							
+//							if(n==0)
+//							{
+//								warning.setVisible(false);
+//								maincontroler.accountControler0.accountChangePanel(ACCOUNT_CONTROL.ENQUIRY_ACCOUNT);
+//							}
+//							else
+//							{
+//								warning.setVisible(false);
+//								maincontroler.accountControler1.accountChangePanel(ACCOUNT_CONTROL.ENQUIRY_ACCOUNT);
+//							}
 						}
 					});
 					panel.repaint();
@@ -379,6 +399,8 @@ public class AccountButtonComponents{
 			});
 			logButton.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
+					operateButton.setVisible(false);
+					chengbenButton.setVisible(false);
 					addButton.setVisible(false);
 					modifyButton.setVisible(false);
 					deleteButton.setVisible(false);
@@ -387,16 +409,17 @@ public class AccountButtonComponents{
 //					accountButton.setIcon(accountIcon1);
 					accountButton.setLocation(Button_x, account_y1);
 					logButton.setLocation(Button_x,log_y1);
-					if(n==0)
-					{
-						warning.setVisible(false);
-						maincontroler.accountControler0.accountChangePanel(ACCOUNT_CONTROL.LOG_CHECK);
-					}
-					else
-					{
-						warning.setVisible(false);
-						maincontroler.accountControler1.accountChangePanel(ACCOUNT_CONTROL.LOG_CHECK);
-					}
+					maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.LOG_CHECK);
+//					if(n==0)
+//					{
+//						warning.setVisible(false);
+//						maincontroler.accountControler0.accountChangePanel(ACCOUNT_CONTROL.LOG_CHECK);
+//					}
+//					else
+//					{
+//						warning.setVisible(false);
+//						maincontroler.accountControler1.accountChangePanel(ACCOUNT_CONTROL.LOG_CHECK);
+//					}
 				}
 			});
 			/*
@@ -437,5 +460,22 @@ public class AccountButtonComponents{
 			panel.add(operateButton);
 			panel.add(chengbenButton);
 			panel.add(warning);
+		}
+		public void setType(String str){
+			this.str=str;
+		}
+		
+		public void changeForJunior(){
+			accountButton.setVisible(false);
+		}
+		
+		private void dependForJunior(){
+			if(str.equals("junior")){
+				accountButton.setVisible(false);
+				addButton.setVisible(false);
+				deleteButton.setVisible(false);
+				modifyButton.setVisible(false);
+				inquiryButton.setVisible(false);
+			}
 		}
 }
