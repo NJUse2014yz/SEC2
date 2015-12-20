@@ -18,15 +18,11 @@ public class RMIExceptionHandler {
 	
 	/**
 	 * 断网时提示出错
-	 * 然后退出系统
 	 */
 	static public void handleRMIException(){
 		RMIExceptionFrame view=new RMIExceptionFrame();
 	}
 	
-	static public void handleInitRMIException(){
-		RMIExceptionFrame view=new RMIExceptionFrame();
-	}
 	
 	
 	

@@ -30,7 +30,7 @@ public class RMIExceptionPanel extends JPanel{
 		
 		this.setLayout(null);
 		connect=new newJBut("重连",Color.BLACK);
-		connect.setBounds(RMIExceptionFrame.WIDTH/2-100,190,WIDTH_OF_BUTTON,HEIGHT_OF_BUTTON);
+		connect.setBounds(RMIExceptionFrame.WIDTH/2-100,205,WIDTH_OF_BUTTON,HEIGHT_OF_BUTTON);
 		connect.addActionListener(new ActionListener() {
 			
 			@Override
@@ -43,7 +43,7 @@ public class RMIExceptionPanel extends JPanel{
 		add(connect);
 		
 		exit=new newJBut("退出",Color.BLACK);
-		exit.setBounds(RMIExceptionFrame.WIDTH/2+25,190,WIDTH_OF_BUTTON,HEIGHT_OF_BUTTON);
+		exit.setBounds(RMIExceptionFrame.WIDTH/2+25,205,WIDTH_OF_BUTTON,HEIGHT_OF_BUTTON);
 		exit.addActionListener(new ActionListener() {
 			
 			@Override
