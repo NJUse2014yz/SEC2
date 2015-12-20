@@ -1,5 +1,6 @@
 package nju.sec.yz.ExpressSystem.presentation.accountui;
 
+import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -8,17 +9,17 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ACCOUNT_CONTROL;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
-import nju.sec.yz.ExpressSystem.presentation.controlerui.DELIVER_CONTROL;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.MAIN_CONTROL;
-import nju.sec.yz.ExpressSystem.presentation.controlerui.POSITION_CONTROL;
 
 public class AccountButtonComponents{
 	public int a=0;
 		private static JPanel panel;
 	
-		private static final int Button_x=14;
+		private static final int Button_x=13;
 		private static final int Button_w=108;
 		private static final int Button_h=41;
 		private static final int income_y=52;
@@ -27,49 +28,51 @@ public class AccountButtonComponents{
 		private static final int table_y=181;
 		private static final int account_y1=224;
 		private static final int account_y2=342;
-		private static final int account_y3=291;
-		private static final int log_y1=264;
-		private static final int log_y2=384;
-		private static final int log_y3=334;
+		private static final int account_y3=298;
+		private static final int log_y1=267;
+		private static final int log_y2=376;
+		private static final int log_y3=341;
 		private static final int button_w=108;
 		private static final int button_h1=35;
 		private static final int button_h2=28;
 		private ClientControler maincontroler;
 	
 		// 侧边栏功能选择项
-		private static JButton incomeButton;
-		private static JButton initialButton;
-		private static JButton costButton;
-		private static JButton tableButton;
-		private static JButton accountButton;
-		private static JButton operateButton;
-		private static JButton chengbenButton;
-		private static JButton logButton;
-		private static JButton addButton;
-		private static JButton modifyButton;
-		private static JButton deleteButton;
-		private static JButton inquiryButton;
+		private static newJBut incomeButton;
+		private static newJBut initialButton;
+		private static newJBut costButton;
+		private static newJBut tableButton;
+		private static newJBut accountButton;
+		private static newJBut operateButton;
+		private static newJBut chengbenButton;
+		private static newJBut logButton;
+		private static newJBut addButton;
+		private static newJBut modifyButton;
+		private static newJBut deleteButton;
+		private static newJBut inquiryButton;
 		
-		ImageIcon inquiryIcon = new ImageIcon("graphic/account/button/inquiry_button.jpg");
-		ImageIcon incomeIcon = new ImageIcon("graphic/account/button/income_button.jpg");
-		ImageIcon initialIcon = new ImageIcon("graphic/account/button/initial_button.jpg");
-		ImageIcon costIcon = new ImageIcon("graphic/account/button/cost_button.jpg");
-		ImageIcon tableIcon1 = new ImageIcon("graphic/account/button/table_button1.jpg");
-		ImageIcon tableIcon2 = new ImageIcon("graphic/account/button/table_button2.jpg");
-		ImageIcon accountIcon1 = new ImageIcon("graphic/account/button/account_button1.jpg");
-		ImageIcon accountIcon2 = new ImageIcon("graphic/account/button/account_button2.jpg");
-		ImageIcon logIcon = new ImageIcon("graphic/account/button/log_button.jpg");
-		ImageIcon addIcon = new ImageIcon("graphic/account/button/add_button.jpg");
-		ImageIcon deleteIcon = new ImageIcon("graphic/account/button/delete_button.jpg");
-		ImageIcon modifyIcon = new ImageIcon("graphic/account/button/modify_button.jpg");
-		ImageIcon operateIcon = new ImageIcon("graphic/account/button/operate_button.jpg");
-		ImageIcon chengbenIcon = new ImageIcon("graphic/account/button/chengben_button.jpg");
+//		ImageIcon inquiryIcon = new ImageIcon("graphic/account/button/inquiry_button.jpg");
+//		ImageIcon incomeIcon = new ImageIcon("graphic/account/button/income_button.jpg");
+//		ImageIcon initialIcon = new ImageIcon("graphic/account/button/initial_button.jpg");
+//		ImageIcon costIcon = new ImageIcon("graphic/account/button/cost_button.jpg");
+//		ImageIcon tableIcon1 = new ImageIcon("graphic/account/button/table_button1.jpg");
+//		ImageIcon tableIcon2 = new ImageIcon("graphic/account/button/table_button2.jpg");
+//		ImageIcon accountIcon1 = new ImageIcon("graphic/account/button/account_button1.jpg");
+//		ImageIcon accountIcon2 = new ImageIcon("graphic/account/button/account_button2.jpg");
+//		ImageIcon logIcon = new ImageIcon("graphic/account/button/log_button.jpg");
+//		ImageIcon addIcon = new ImageIcon("graphic/account/button/add_button.jpg");
+//		ImageIcon deleteIcon = new ImageIcon("graphic/account/button/delete_button.jpg");
+//		ImageIcon modifyIcon = new ImageIcon("graphic/account/button/modify_button.jpg");
+//		ImageIcon operateIcon = new ImageIcon("graphic/account/button/operate_button.jpg");
+//		ImageIcon chengbenIcon = new ImageIcon("graphic/account/button/chengben_button.jpg");
 		ImageIcon ExitIcon = new ImageIcon("graphic/common/exit.gif");
 		// 退出系统
 		private JButton exitButton;
 		//退出当前帐户
-		private JLabel leaveButton;
+		private newJLabel leaveButton;
 	
+		private Color framecolor=new Color(110,119,237);
+		
 		public AccountButtonComponents(ClientControler maincontroler){
 			this.maincontroler=maincontroler;
 		}
@@ -84,61 +87,63 @@ public class AccountButtonComponents{
 		}
 		public void init(){
 			
-			incomeButton = new JButton(incomeIcon);
+			incomeButton = new newJBut("收款结算");
 			incomeButton.setBounds(Button_x, income_y, Button_w, Button_h);
 			
-			initialButton = new JButton(initialIcon);
+			initialButton = new newJBut("期初建账");
 			initialButton.setBounds(Button_x, initial_y, Button_w, Button_h);
 
 			
-			costButton = new JButton(costIcon);
+			costButton = new newJBut("成本管理");
 			costButton.setBounds(Button_x, cost_y, Button_w, Button_h);
 			
 			
-			tableButton = new JButton(tableIcon1);
+			tableButton = new newJBut("统计报表");
 			tableButton.setBounds(Button_x, table_y, Button_w, Button_h);
 
 			
-			accountButton = new JButton(accountIcon1);
+			accountButton = new newJBut("账户管理");
 			accountButton.setBounds(Button_x, account_y1, Button_w, Button_h);
 
 			
-			logButton = new JButton(logIcon);
+			logButton = new newJBut("日志查询");
 			logButton.setBounds(Button_x, log_y1, Button_w, Button_h);
 
 			
-			addButton = new JButton(addIcon);
+			addButton = new newJBut("增加",framecolor);
 			addButton.setSize(button_w, button_h2);
 //			addButton.setBounds(Button_x, load_y1, Button_w, Button_h);
 			addButton.setVisible(false);
 
 			
-			deleteButton = new JButton(deleteIcon);
+			deleteButton = new newJBut("删除",framecolor);
 			deleteButton.setSize(button_w, button_h2);
 //			deleteButton.setBounds(Button_x, load_y1, Button_w, Button_h);
 			deleteButton.setVisible(false);
 
 			
-			modifyButton = new JButton(modifyIcon);
+			modifyButton = new newJBut("修改",framecolor);
 			modifyButton.setSize(button_w, button_h2);
 //			modifyButton.setBounds(Button_x, load_y1, Button_w, Button_h);
 			modifyButton.setVisible(false);
 
 			
-			inquiryButton = new JButton(inquiryIcon);
+			inquiryButton = new newJBut("查询",framecolor);
 			inquiryButton.setSize(button_w, button_h2);
 //			inquiryButton.setBounds(Button_x, load_y1, Button_w, Button_h);
 			inquiryButton.setVisible(false);
 			
-			operateButton=new JButton(operateIcon);
+			operateButton=new newJBut("经营情况表",framecolor);
 			operateButton.setSize(button_w, button_h1);
+			operateButton.setMargin(new java.awt.Insets(0,0,0,0));
 			operateButton.setVisible(false);
 			
-			chengbenButton=new JButton(chengbenIcon);
+			chengbenButton=new newJBut("成本收益表",framecolor);
 			chengbenButton.setSize(button_w, button_h1);
+			chengbenButton.setMargin(new java.awt.Insets(0,0,0,0));
 			chengbenButton.setVisible(false);
 			//离开当前账户
-			leaveButton=new JLabel();
+			leaveButton=new newJLabel("注销",Color.white,Color.yellow);
 			leaveButton.setBounds(433, 21, 37, 20);
 			leaveButton.setVisible(true);
 			
@@ -158,8 +163,8 @@ public class AccountButtonComponents{
 					inquiryButton.setVisible(false);
 					chengbenButton.setVisible(false);
 					operateButton.setVisible(false);
-					tableButton.setIcon(tableIcon1);
-					accountButton.setIcon(accountIcon1);
+//					tableButton.setIcon(tableIcon1);
+//					accountButton.setIcon(accountIcon1);
 					accountButton.setLocation(Button_x, account_y1);
 					logButton.setLocation(Button_x,log_y1);
 					maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.INCOME);
@@ -173,8 +178,8 @@ public class AccountButtonComponents{
 					inquiryButton.setVisible(false);
 					chengbenButton.setVisible(false);
 					operateButton.setVisible(false);
-					tableButton.setIcon(tableIcon1);
-					accountButton.setIcon(accountIcon1);
+//					tableButton.setIcon(tableIcon1);
+//					accountButton.setIcon(accountIcon1);
 					accountButton.setLocation(Button_x, account_y1);
 					logButton.setLocation(Button_x,log_y1);
 					maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.INITIAL);
@@ -188,8 +193,8 @@ public class AccountButtonComponents{
 					inquiryButton.setVisible(false);
 					chengbenButton.setVisible(false);
 					operateButton.setVisible(false);
-					tableButton.setIcon(tableIcon1);
-					accountButton.setIcon(accountIcon1);
+//					tableButton.setIcon(tableIcon1);
+//					accountButton.setIcon(accountIcon1);
 					accountButton.setLocation(Button_x, account_y1);
 					logButton.setLocation(Button_x,log_y1);
 					maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.COST);
@@ -202,8 +207,8 @@ public class AccountButtonComponents{
 					modifyButton.setVisible(false);
 					deleteButton.setVisible(false);
 					inquiryButton.setVisible(false);
-					tableButton.setIcon(tableIcon2);
-					accountButton.setIcon(accountIcon1);
+//					tableButton.setIcon(tableIcon2);
+//					accountButton.setIcon(accountIcon1);
 					accountButton.setLocation(Button_x, account_y3);
 					logButton.setLocation(Button_x,log_y3);
 					operateButton.setLocation(Button_x, account_y1);
@@ -214,7 +219,7 @@ public class AccountButtonComponents{
 							maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.TABLE_OPERATE);
 						}
 					});
-					chengbenButton.setLocation(Button_x,account_y1+button_h1);
+					chengbenButton.setLocation(Button_x,account_y1+button_h1+2);
 					chengbenButton.setVisible(true);
 					chengbenButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e1)
@@ -230,10 +235,10 @@ public class AccountButtonComponents{
 //					maincontroler.positionControler.positionChangePanel(POSITION_CONTROL.DELIVE);
 					chengbenButton.setVisible(false);
 					operateButton.setVisible(false);
-					tableButton.setIcon(tableIcon1);
-					accountButton.setIcon(accountIcon2);
+//					tableButton.setIcon(tableIcon1);
+//					accountButton.setIcon(accountIcon2);
 					accountButton.setLocation(Button_x, account_y1);
-					logButton.setLocation(Button_x,log_y2);
+					logButton.setLocation(Button_x,log_y2+12);
 					addButton.setLocation(Button_x,log_y1);
 					addButton.setVisible(true);
 					addButton.addMouseListener(new MouseAdapter(){
@@ -242,7 +247,7 @@ public class AccountButtonComponents{
 							maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.ADD_ACCOUNT);
 						}
 					});
-					deleteButton.setLocation(Button_x,log_y1+button_h2);
+					deleteButton.setLocation(Button_x,log_y1+button_h2+2);
 					deleteButton.setVisible(true);
 					deleteButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e1)
@@ -250,7 +255,7 @@ public class AccountButtonComponents{
 							maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.DELETE_ACCOUNT);
 						}
 					});
-					modifyButton.setLocation(Button_x,log_y1+button_h2*2);
+					modifyButton.setLocation(Button_x,log_y1+button_h2*2+4);
 					modifyButton.setVisible(true);
 					modifyButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e1)
@@ -258,7 +263,7 @@ public class AccountButtonComponents{
 							maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.MODIFY_ACCOUNTLIST);
 						}
 					});
-					inquiryButton.setLocation(Button_x,log_y1+button_h2*3);
+					inquiryButton.setLocation(Button_x,log_y1+button_h2*3+6);
 					inquiryButton.setVisible(true);
 					inquiryButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e1)
@@ -275,8 +280,8 @@ public class AccountButtonComponents{
 					modifyButton.setVisible(false);
 					deleteButton.setVisible(false);
 					inquiryButton.setVisible(false);
-					tableButton.setIcon(tableIcon1);
-					accountButton.setIcon(accountIcon1);
+//					tableButton.setIcon(tableIcon1);
+//					accountButton.setIcon(accountIcon1);
 					accountButton.setLocation(Button_x, account_y1);
 					logButton.setLocation(Button_x,log_y1);
 					maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.LOG_CHECK);

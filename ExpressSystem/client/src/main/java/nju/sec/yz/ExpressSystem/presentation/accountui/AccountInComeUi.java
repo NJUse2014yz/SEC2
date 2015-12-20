@@ -4,29 +4,25 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
-import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 
-import nju.sec.yz.ExpressSystem.bl.accountbl.Finance;
 import nju.sec.yz.ExpressSystem.bl.accountbl.FinanceController;
 import nju.sec.yz.ExpressSystem.bl.managerbl.ManagerController;
 import nju.sec.yz.ExpressSystem.blservice.accountBlService.FinanceBlSevice;
 import nju.sec.yz.ExpressSystem.common.PaymentInformation;
 import nju.sec.yz.ExpressSystem.presentation.DateChooser;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJCombo;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.AccountControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
@@ -42,13 +38,13 @@ public class AccountInComeUi extends JPanel{
 	private ManagerController managerController;
 	private FinanceBlSevice finance;
 	
-	private JLabel total;
+	private newJLabel total;
 	private String[] positions;
 	private DateChooser date;
-	private JComboBox choose;
+	private newJCombo choose;
 	private newTable table;
 //	private JButton back;
-	private JButton confirm;
+	private newJBut confirm;
 	private Vector<String> name=new Vector<String>();
 	private Vector<Vector<String>> data=new Vector<Vector<String>>();
 	
@@ -57,22 +53,22 @@ public class AccountInComeUi extends JPanel{
 	private static final int total_w=90;
 	private static final int total_h=30;
 	private static int date_x=183;
-	private static int date_y=67;
+	private static int date_y=66;
 	private static int choose_x=240;
-	private static int choose_y=94;
-	private static int choose_w=170;
+	private static int choose_y=92;
+	private static int choose_w=150;
 	private static int choose_h=20;
 	private static int scroll_x=139;
 	private static int scroll_y=122;
 	private static int scroll_w=317;
 	private static int scroll_h=267;
-	private static int confirm_x=412;
-	private static int confirm_y=95;
+	private static int confirm_x=400;
+	private static int confirm_y=92;
 	private static int confirm_w=72;
 	private static int confirm_h=24;
 	
-	private ImageIcon backIcon=new ImageIcon("graphic/account/button/back_button.jpg");
-	private ImageIcon confirmIcon=new ImageIcon("graphic/account/button/confirm_button.jpg");
+//	private ImageIcon backIcon=new ImageIcon("graphic/account/button/back_button.jpg");
+//	private ImageIcon confirmIcon=new ImageIcon("graphic/account/button/confirm_button.jpg");
 	
 	public AccountInComeUi(ClientControler mainControler,AccountButtonComponents bc){
 		super();
@@ -118,7 +114,7 @@ public class AccountInComeUi extends JPanel{
 		setSize(490, 550);
 		
 		date=new DateChooser(this,date_x,date_y);
-		choose=new JComboBox(positions);
+		choose=new newJCombo(positions);
 		choose.setBounds(choose_x, choose_y, choose_w, choose_h);
 		add(choose);
 		
@@ -127,7 +123,7 @@ public class AccountInComeUi extends JPanel{
 		table.stopAutoRewidth();
 		table.join();
 		
-		confirm=new JButton(confirmIcon);
+		confirm=new newJBut("确定");
 		confirm.setBounds(confirm_x, confirm_y, confirm_w, confirm_h);
 		add(confirm);
 		confirm.addMouseListener(new MouseAdapter(){
@@ -146,10 +142,8 @@ public class AccountInComeUi extends JPanel{
 			}
 		});
 		
-		total=new JLabel();
+		total=new newJLabel();
 		total.setBounds(total_x, total_y, total_w, total_h);
-		total.setFont(new Font("Dialog", 1, 15));
-		total.setForeground(Color.white);
 		add(total);
 		total.setVisible(false);
 		

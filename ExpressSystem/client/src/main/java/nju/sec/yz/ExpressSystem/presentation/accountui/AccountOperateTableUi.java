@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -14,14 +13,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 
 import nju.sec.yz.ExpressSystem.bl.accountbl.FinanceController;
 import nju.sec.yz.ExpressSystem.blservice.accountBlService.FinanceBlSevice;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.presentation.DateChooser;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.AccountControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
@@ -40,8 +38,8 @@ public class AccountOperateTableUi extends JPanel{
 	private DateChooser end;
 	private newTable tableIn;
 	private newTable tableOut;
-	private JButton confirm;
-	private JButton excle;
+	private newJBut confirm;
+	private newJBut excle;
 	private JLabel warning;
 	private Vector<String> nameIn=new Vector<String>();
 	private Vector<String> nameOut=new Vector<String>();
@@ -58,21 +56,21 @@ public class AccountOperateTableUi extends JPanel{
 	private static final int out_y=274;
 	private static final int w=320;
 	private static final int h=144;
-	private static final int confirm_x=404;
+	private static final int confirm_x=392;
 	private static final int confirm_y=84;
 	private static final int confirm_w=72;
 	private static final int confirm_h=24;
-	private static final int excle_x=380;
+	private static final int excle_x=350;
 	private static final int excle_y=420;
-	private static final int excle_w=80;
+	private static final int excle_w=110;
 	private static final int excle_h=27;	
 	private static final int warning_x=198;
 	private static final int warning_y=490;
 	private static final int warning_w=275;
 	private static final int warning_h=30;
 	
-	private ImageIcon confirmIcon=new ImageIcon("graphic/account/button/confirm_button.jpg");
-	private ImageIcon excleIcon=new ImageIcon("graphic/account/button/excel_button.jpg");
+//	private ImageIcon confirmIcon=new ImageIcon("graphic/account/button/confirm_button.jpg");
+//	private ImageIcon excleIcon=new ImageIcon("graphic/account/button/excel_button.jpg");
 	public AccountOperateTableUi(ClientControler mainControler,
 			AccountButtonComponents bc) {
 		super();
@@ -116,7 +114,7 @@ public class AccountOperateTableUi extends JPanel{
 		add(warning);
 		warning.setVisible(false);
 		
-		confirm=new JButton(confirmIcon);
+		confirm=new newJBut("确定");
 		confirm.setBounds(confirm_x,confirm_y,confirm_w,confirm_h);
 		confirm.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
@@ -136,7 +134,8 @@ public class AccountOperateTableUi extends JPanel{
 		});
 		add(confirm);
 		
-		excle=new JButton(excleIcon);
+		excle=new newJBut("导出Excel");
+		excle.setMargin(new java.awt.Insets(0,0,0,0));
 		excle.setBounds(excle_x, excle_y, excle_w, excle_h);
 		excle.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
