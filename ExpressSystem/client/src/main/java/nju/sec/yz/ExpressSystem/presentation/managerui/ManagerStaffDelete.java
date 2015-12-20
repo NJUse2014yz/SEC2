@@ -121,7 +121,7 @@ public class ManagerStaffDelete extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				int[] deletelines = table.getSelectedRows();
 				for (int i = 0; i < deletelines.length; i++) {
-					manager.deleteStaff(((String) table.getValueAt(deletelines[i], 0,false)));
+					manager.deleteStaff(((String) table.getValueAt(deletelines[i],4,false)));
 					changeData(manager.observeStaff());
 				}
 			}
