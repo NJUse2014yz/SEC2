@@ -6,6 +6,8 @@ import java.util.List;
 
 import nju.sec.yz.ExpressSystem.bl.accountbl.Initialable;
 import nju.sec.yz.ExpressSystem.bl.deliverbl.ValidHelper;
+import nju.sec.yz.ExpressSystem.bl.userbl.User;
+import nju.sec.yz.ExpressSystem.bl.userbl.UserInfo;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
 import nju.sec.yz.ExpressSystem.client.rmi.RMIExceptionHandler;
 import nju.sec.yz.ExpressSystem.common.Result;
@@ -14,6 +16,7 @@ import nju.sec.yz.ExpressSystem.common.Status;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.StaffDataService;
 import nju.sec.yz.ExpressSystem.po.StaffPO;
 import nju.sec.yz.ExpressSystem.vo.StaffVO;
+import nju.sec.yz.ExpressSystem.vo.UserVO;
 
 /**
  * 人员的领域模型对象
@@ -40,14 +43,53 @@ public class Staff implements Initialable<StaffVO, StaffPO>{
 		}
 		//创建PO并保存
 		try {
+			String loginId=createLoginId(sv);
+			
+			/*
+			 * 保存个人信息
+			 */
 			StaffPO po=changeVOToPO(sv);
+			po.setLoginId(loginId);
 			message=data.insert(po);
+			if(message.getResult()==Result.FAIL)
+				return message;
+			
+			message=saveLoginId(loginId, sv);
+			
 		} catch (RemoteException e) {
 			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 			return new ResultMessage(Result.FAIL,"系统错误");
 		}
 		return message;
+	}
+	
+	/**
+	 * 保存个人账号
+	 */
+	private ResultMessage saveLoginId(String loginId,StaffVO vo){
+		String password=loginId;//初始密码和账号相同
+		UserVO userInfo=new UserVO(loginId, vo.getName(), password, vo.getPower());
+		User user=new User();
+		ResultMessage message=user.add(userInfo);
+		if(message.getResult()==Result.FAIL)
+			return new ResultMessage(Result.FAIL,"添加员工账号时出现冲突，请联系系统管理员");
+		
+		return new ResultMessage(Result.SUCCESS);
+	}
+
+	/**
+	 * 生成个人账号
+	 */
+	private String createLoginId(StaffVO vo){
+		AgencyInfo agencyService=new Transit();
+		String agencyId=agencyService.getId(vo.getAgency());
+		String loginId="";
+		//总公司人员账号前面没有机构id
+		if(agencyId!=null)
+			loginId=loginId+agencyId;
+		loginId=loginId+vo.getPower().str+vo.getId();//机构id+x+三位数字id
+		return loginId;
 	}
 
 	
@@ -56,6 +98,11 @@ public class Staff implements Initialable<StaffVO, StaffPO>{
 		//调用data层方法,验证id是否存在
 		try {
 			result=data.delete(id);
+			if(result.getResult()==Result.FAIL)
+				return result;
+			//删除账户
+			User user=new User();
+			user.del(id);
 		} catch (RemoteException e) {
 			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
@@ -125,7 +172,7 @@ public class Staff implements Initialable<StaffVO, StaffPO>{
 		String id=po.getId();
 		Status power=po.getPower();
 		String agency=po.getAgency();
-		StaffVO vo=new StaffVO(name, id, power, agency);
+		StaffVO vo=new StaffVO(name, id, power, agency,po.getLoginId());
 		return vo;
 	}
 	
@@ -136,20 +183,25 @@ public class Staff implements Initialable<StaffVO, StaffPO>{
 		Status power=sv.getPower();
 		String agency=sv.getAgency();
 		StaffPO po=new StaffPO(name, id, power, agency);
+		po.setLoginId(sv.getLoginId());
 		return po;
 	}
 	private String isValid(StaffVO sv) {
 		String id=sv.getId();
 		
 		if(!isId(id))
-			return "看看ID输对没";
+			return "人员编号是三位数字哦~";
 		return "success";
 	}
 	private boolean isId(String id) {
 		if(!ValidHelper.isNumber(id))
 			return false;
 		int len=id.length();
-		if(len!=4&&len!=8&&len!=10)
+		/**
+		 * @author cong
+		 * 人员编号改为三位数字
+		 */
+		if(len!=Status.LENGTH_OF_NUMBER)
 			return false;
 		return true;
 	}
@@ -158,15 +210,18 @@ public class Staff implements Initialable<StaffVO, StaffPO>{
 		ResultMessage message = new ResultMessage(Result.FAIL);
 
 		List<StaffPO> pos = new ArrayList<>();
-		for (StaffVO Staff : staffs) {
-			String validResult = isValid(Staff);
+		for (StaffVO staff : staffs) {
+			String validResult = isValid(staff);
 			if (!validResult.equals("success"))
-				return new ResultMessage(Result.FAIL, "第"+(staffs.indexOf(Staff)+1) + "个职员信息的 " + validResult);
-
-			StaffPO po = this.changeVOToPO(Staff);
+				return new ResultMessage(Result.FAIL, "第"+(staffs.indexOf(staff)+1) + "个职员信息的 " + validResult);
+			String loginId=createLoginId(staff);
+			
+			StaffPO po = this.changeVOToPO(staff);
+			po.setLoginId(loginId);
 			pos.add(po);
 		}
-
+		
+		
 		try {
 			message = data.init(pos);
 		} catch (RemoteException e) {

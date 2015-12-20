@@ -23,6 +23,9 @@ public class StaffPO implements Serializable{
 	//所属机构
 	private String agency;
 	
+	//用登录账号标记员工
+	private String loginId;
+	
 	public String getName() {
 		return name;
 	}
@@ -63,5 +66,13 @@ public class StaffPO implements Serializable{
 		this.id = id;
 		this.power = power;
 		this.agency = agency;
+	}
+
+	public String getLoginId() {
+		return loginId;
+	}
+
+	public void setLoginId(String loginId) {
+		this.loginId = loginId;
 	}
 }

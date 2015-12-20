@@ -93,6 +93,7 @@ public class InventoryCheck extends JPanel{
 	private void changeData(ArrayList<InventoryInSheetVO> involist)
 	{
 		data.removeAllElements();
+		System.out.println(involist.size());
 		if(involist!=null){
 		for(int i=0;i<involist.size();i++){
 			InventoryInInformation temp=involist.get(i).getInventoryInInformation();
