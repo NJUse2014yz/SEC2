@@ -69,7 +69,7 @@ public class StaffDataImpl extends UnicastRemoteObject implements StaffDataServi
 		}
 		List<StaffPO> StaffPOs = findAll();
 		for (StaffPO po : StaffPOs) {
-			String carID = po.getId();
+			String carID = po.get;
 			if (id.equals(carID))
 				return po;
 		}

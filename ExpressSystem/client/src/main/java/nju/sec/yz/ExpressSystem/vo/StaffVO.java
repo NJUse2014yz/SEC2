@@ -22,14 +22,11 @@ public class StaffVO {
 	// 所属机构
 	private String agency;
 	
+	//用登录账号标记人员
+	private String loginId;
 	
-	public StaffVO(String name, String id, Status power, String agency) {
-		super();
-		this.name = name;
-		this.id = id;
-		this.power = power;
-		this.agency = agency;
-	}
+	
+	
 
 	public String getName() {
 		return name;
@@ -61,6 +58,14 @@ public class StaffVO {
 
 	public void setAgency(String agency) {
 		this.agency = agency;
+	}
+
+	public String getLoginId() {
+		return loginId;
+	}
+
+	public void setLoginId(String loginId) {
+		this.loginId = loginId;
 	}
 
 
