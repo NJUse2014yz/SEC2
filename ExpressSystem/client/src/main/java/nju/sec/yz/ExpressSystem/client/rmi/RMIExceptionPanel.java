@@ -25,6 +25,8 @@ public class RMIExceptionPanel extends JPanel{
 	
 	private JFrame frame;
 	
+	private boolean isConnecting=false;
+	
 	public RMIExceptionPanel(JFrame frame) {
 		this.frame=frame;
 		
@@ -35,9 +37,11 @@ public class RMIExceptionPanel extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				if(isConnecting)
+					return;
+				isConnecting=true;
 				InitRMI model=new InitRMI();
-				model.initForever();
-				frame.setVisible(false);
+				model.initForever(frame);
 			}
 		});
 		add(connect);
