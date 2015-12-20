@@ -263,7 +263,6 @@ public class Collection implements ReceiptService{
 		PaymentVO vo=new PaymentVO();
 		vo.paymentList=vos;
 		vo.sum=sum;
-		System.out.println(vos.size());
 		return vo;
 		
 	}

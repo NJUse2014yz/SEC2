@@ -16,6 +16,8 @@ import nju.sec.yz.ExpressSystem.bl.accountbl.FinanceController;
 import nju.sec.yz.ExpressSystem.blservice.accountBlService.FinanceBlSevice;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.AccountControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.ProfitVO;
@@ -27,11 +29,11 @@ public class AccountCostTableUi extends JPanel{
 	private FinanceBlSevice financeBl;
 	private ProfitVO pvo;
 	
-	private JLabel in;
-	private JLabel out;
-	private JLabel get;
-	private JButton excle;
-	private JLabel warning;
+	private newJLabel in;
+	private newJLabel out;
+	private newJLabel get;
+	private newJBut excle;
+	private newJLabel warning;
 	
 	private static final int x=189;
 	private static final int in_y=75;
@@ -41,7 +43,7 @@ public class AccountCostTableUi extends JPanel{
 	private static final int h=20;
 	private static final int excle_x=362;
 	private static final int excle_y=169;
-	private static final int excle_w=79;
+	private static final int excle_w=100;
 	private static final int excle_h=24;
 	private static final int warning_x=198;
 	private static final int warning_y=490;
@@ -63,31 +65,28 @@ public class AccountCostTableUi extends JPanel{
 		setLayout(null);
 		setSize(490, 550);
 		
-		in=new JLabel();
+		in=new newJLabel();
 		in.setBounds(x, in_y, w, h);
-		in.setFont(new Font("Dialog", 1, 15));
 		in.setForeground(Color.white);
 		add(in);
 		
-		out=new JLabel();
+		out=new newJLabel();
 		out.setBounds(x, out_y, w, h);
-		out.setFont(new Font("Dialog", 1, 15));
 		out.setForeground(Color.white);
 		add(out);
 		
-		get=new JLabel();
+		get=new newJLabel();
 		get.setBounds(x, get_y, w, h);
-		get.setFont(new Font("Dialog", 1, 15));
 		get.setForeground(Color.white);
 		add(get);
 		
-		excle=new JButton(excleIcon);
+		excle=new newJBut("导出Excel");
+		excle.setMargin(new java.awt.Insets(0,0,0,0));
 		excle.setBounds(excle_x, excle_y, excle_w, excle_h);
 		add(excle);
 		
-		warning=new JLabel();
+		warning=new newJLabel();
 		warning.setBounds(warning_x, warning_y, warning_w, warning_h);
-		warning.setFont(new Font("Dialog", 1, 15));
 		warning.setForeground(Color.red);
 		add(warning);
 		warning.setVisible(false);
