@@ -3,9 +3,12 @@ package nju.sec.yz.ExpressSystem.bl.managerbl;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import nju.sec.yz.ExpressSystem.bl.accountbl.Initialable;
 import nju.sec.yz.ExpressSystem.bl.deliverbl.ValidHelper;
+import nju.sec.yz.ExpressSystem.bl.receiptbl.Message;
+import nju.sec.yz.ExpressSystem.bl.tool.StringTool;
 import nju.sec.yz.ExpressSystem.bl.userbl.User;
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
 import nju.sec.yz.ExpressSystem.client.rmi.RMIExceptionHandler;
@@ -14,6 +17,7 @@ import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.Status;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.StaffDataService;
 import nju.sec.yz.ExpressSystem.po.StaffPO;
+import nju.sec.yz.ExpressSystem.vo.MessageVO;
 import nju.sec.yz.ExpressSystem.vo.StaffVO;
 import nju.sec.yz.ExpressSystem.vo.UserVO;
 
@@ -37,7 +41,7 @@ public class Staff implements Initialable<StaffVO, StaffPO> {
 
 	/**
 	 * 添加人员信息，同时添加系统账号
-	 * TODO 发送消息给总经理
+	 * 发送消息给管理员
 	 * @param sv
 	 * @return
 	 */
@@ -51,7 +55,6 @@ public class Staff implements Initialable<StaffVO, StaffPO> {
 		// 创建PO并保存
 		try {
 			String loginId = createLoginId(sv);
-
 			/*
 			 * 保存个人信息
 			 */
@@ -62,6 +65,9 @@ public class Staff implements Initialable<StaffVO, StaffPO> {
 				return message;
 
 			message = saveLoginId(loginId, sv);
+			if(message.getResult()==Result.FAIL)
+				return message;
+			sendAddMessage(loginId, sv);
 		} catch (RemoteException e) {
 			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
@@ -69,6 +75,18 @@ public class Staff implements Initialable<StaffVO, StaffPO> {
 		}
 		return message;
 	}
+	
+	/**
+	 * 发送添加账户的消息
+	 */
+	private void sendAddMessage(String loginId,StaffVO vo){
+		String message="总经理添加人员："+vo.getName()+StringTool.nextLine();
+		message=message+"系统已自动添加账号："+loginId;
+		Message messageService=new Message();
+		messageService.send(new MessageVO("admin", message));
+	}
+	
+	
 	
 	/**
 	 * 保存个人账号
@@ -98,6 +116,13 @@ public class Staff implements Initialable<StaffVO, StaffPO> {
 		return loginId;
 	}
 
+	private void sendDeleteMessage(String loginId){
+		String message="总经理删除人员"+StringTool.nextLine();
+		message=message+"系统已自动删除账号："+loginId;
+		Message messageService=new Message();
+		messageService.send(new MessageVO("admin", message));
+	}
+	
 	/**
 	 * 删除人员信息
 	 * 同时删除系统账号
@@ -114,6 +139,7 @@ public class Staff implements Initialable<StaffVO, StaffPO> {
 			//删除账户
 			User user=new User();
 			user.del(id);
+			sendDeleteMessage(id);
 		} catch (RemoteException e) {
 			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
@@ -146,8 +172,10 @@ public class Staff implements Initialable<StaffVO, StaffPO> {
 			message=this.saveLoginId(loginId, sv);
 			if(message.getResult()==Result.FAIL)
 				return message;
+			sendAddMessage(loginId, sv);
 			User user=new User();
 			user.del(sv.getLoginId());
+			sendDeleteMessage(loginId);
 		} catch (RemoteException e) {
 			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
