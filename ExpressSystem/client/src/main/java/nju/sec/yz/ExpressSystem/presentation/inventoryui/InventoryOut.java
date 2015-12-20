@@ -87,7 +87,6 @@ private InventoryBlService inventoryservice=new InventoryController();
 		warning=new newJLabel();
 		warning.setForeground(Color.red);
 		warning.setBounds(138, 490, 463 - 138, 30);
-		warning.setFont(new Font("Dialog", 1, 15));
 		add(warning);
 		
 		
@@ -124,7 +123,7 @@ private InventoryBlService inventoryservice=new InventoryController();
 						warning.setVisible(true);
 					} else {
 						// 提交成功
-						warning.setVisible(false);
+						warning.setText("");
 						/**
 						 * 自动显示目的地与运输方式
 						 */
@@ -135,6 +134,7 @@ private InventoryBlService inventoryservice=new InventoryController();
 						ArrayList<String> barIdList = (ArrayList<String>) vo.barIds;
 						changeData(barIdList);
 						table.resetData();
+						confirm.setVisible(true);
 					}
 				}
 				repaint();
@@ -147,7 +147,7 @@ private InventoryBlService inventoryservice=new InventoryController();
 		 */
 //		ImageIcon cinfirmIcon = new ImageIcon("graphic/deliver/button/confirm.png");
 		confirm = new newJBut("确定");
-		confirm.setBounds(464, 199, 76, 27);
+		confirm.setBounds(463-72, 380, 72, 24);
 		add(confirm);
 		confirm.setVisible(false);
 
