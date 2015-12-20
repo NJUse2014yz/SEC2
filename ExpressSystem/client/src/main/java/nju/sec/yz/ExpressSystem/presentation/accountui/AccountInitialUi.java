@@ -466,7 +466,7 @@ public class AccountInitialUi extends JPanel{
 						String d=tableS.getValueAt(i,3,false).toString();
 						if(!a.equals("")&&!b.equals("")&&!d.equals(""))
 						{
-							StaffVO sv=new StaffVO(a,b,pow,d);
+							StaffVO sv=new StaffVO(a,b,pow,d,null);
 							svl.add(sv);
 						}
 					}

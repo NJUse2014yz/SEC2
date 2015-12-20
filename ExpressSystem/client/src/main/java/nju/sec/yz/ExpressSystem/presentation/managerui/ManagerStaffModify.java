@@ -102,7 +102,8 @@ public class ManagerStaffModify extends JPanel {
 				count++;
 			}
 		}
-		
+		agencyId.add("总公司");
+		count++;
 		String[] s=new String[count];
 		agency=new JComboBox(agencyId.toArray(s));
 		agency.setSelectedItem(vo.getAgency());
