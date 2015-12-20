@@ -30,12 +30,12 @@ public class AccountButtonComponents{
 		private static final int initial_y=95;
 		private static final int cost_y=138;
 		private static final int table_y=181;
-		private static final int account_y1=224;
-		private static final int account_y2=342;
-		private static final int account_y3=298;
-		private static final int log_y1=267;
-		private static final int log_y2=376;
-		private static final int log_y3=341;
+		private static final int log_y1=224;
+		private static final int log_y2=224;
+		private static final int log_y3=298;
+		private static final int account_y1=267;
+		private static final int account_y2=267;
+		private static final int account_y3=341;
 		private static final int button_w=108;
 		private static final int button_h1=35;
 		private static final int button_h2=28;
@@ -272,7 +272,7 @@ public class AccountButtonComponents{
 //					accountButton.setIcon(accountIcon1);
 					accountButton.setLocation(Button_x, account_y3);
 					logButton.setLocation(Button_x,log_y3);
-					operateButton.setLocation(Button_x, account_y1);
+					operateButton.setLocation(Button_x, log_y1);
 					operateButton.setVisible(true);
 					operateButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e1)
@@ -291,7 +291,7 @@ public class AccountButtonComponents{
 //							}
 						}
 					});
-					chengbenButton.setLocation(Button_x,account_y1+button_h1+2);
+					chengbenButton.setLocation(Button_x,log_y1+button_h1+2);
 					chengbenButton.setVisible(true);
 					chengbenButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e1)
@@ -321,8 +321,8 @@ public class AccountButtonComponents{
 //					tableButton.setIcon(tableIcon1);
 //					accountButton.setIcon(accountIcon2);
 					accountButton.setLocation(Button_x, account_y1);
-					logButton.setLocation(Button_x,log_y2+12);
-					addButton.setLocation(Button_x,log_y1);
+					logButton.setLocation(Button_x,log_y2);
+					addButton.setLocation(Button_x,account_y1+2+Button_h);
 					addButton.setVisible(true);
 					addButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e1)
@@ -339,7 +339,7 @@ public class AccountButtonComponents{
 //							}
 						}
 					});
-					deleteButton.setLocation(Button_x,log_y1+button_h2+2);
+					deleteButton.setLocation(Button_x,account_y1+2*2+button_h2*1+Button_h);
 					deleteButton.setVisible(true);
 					deleteButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e1)
@@ -357,7 +357,7 @@ public class AccountButtonComponents{
 //							}
 						}
 					});
-					modifyButton.setLocation(Button_x,log_y1+button_h2*2+4);
+					modifyButton.setLocation(Button_x,account_y1+2*3+button_h2*2+Button_h);
 					modifyButton.setVisible(true);
 					modifyButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e1)
@@ -375,7 +375,7 @@ public class AccountButtonComponents{
 //							}
 						}
 					});
-					inquiryButton.setLocation(Button_x,log_y1+button_h2*3+6);
+					inquiryButton.setLocation(Button_x,account_y1+2*4+button_h2*3+Button_h);
 					inquiryButton.setVisible(true);
 					inquiryButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e1)

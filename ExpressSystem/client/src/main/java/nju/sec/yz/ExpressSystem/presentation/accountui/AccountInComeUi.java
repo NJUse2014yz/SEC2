@@ -81,12 +81,14 @@ public class AccountInComeUi extends JPanel{
 		
 		ArrayList<PositionVO> positionlist=new ArrayList<PositionVO>();
 		ArrayList<TransitVO> transitvo=managerController.observeAllTransit();
+		System.out.println(transitvo.size());
 		if(transitvo!=null)
 		{
 			List<PositionVO> pvo;
 			for(int i=0;i<transitvo.size();i++)
 			{
 				pvo=transitvo.get(i).getPositions();
+				System.out.println(pvo.size());
 				for(int j=0;j<pvo.size();j++)
 				{
 					positionlist.add(pvo.get(j));

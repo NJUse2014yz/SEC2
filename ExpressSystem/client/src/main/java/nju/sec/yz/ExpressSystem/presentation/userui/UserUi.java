@@ -110,7 +110,7 @@ public class UserUi extends JPanel{
 				{	
 					if(JTpassword.getText().equals("admin"))
 					{
-						new MainSwitchPanelListener(MAIN_CONTROL.ADMINSTRATER,controler,0);
+						new MainSwitchPanelListener(MAIN_CONTROL.ADMINSTRATER,controler);
 					}
 					else
 					{
@@ -118,28 +118,28 @@ public class UserUi extends JPanel{
 						switch(id)
 						{
 						case 'A':
-							new MainSwitchPanelListener(MAIN_CONTROL.INVENTORY,controler,0);
+							new MainSwitchPanelListener(MAIN_CONTROL.INVENTORY,controler);
 							break;
 						case 'B':
-							new MainSwitchPanelListener(MAIN_CONTROL.TRANSITER,controler,0);
+							new MainSwitchPanelListener(MAIN_CONTROL.TRANSITER,controler);
 							break;					
 						case 'C':
-							new MainSwitchPanelListener(MAIN_CONTROL.POSITION,controler,0);
+							new MainSwitchPanelListener(MAIN_CONTROL.POSITION,controler);
 							break;
 						case 'D':
-							new MainSwitchPanelListener(MAIN_CONTROL.DELIVER,controler,0);
+							new MainSwitchPanelListener(MAIN_CONTROL.DELIVER,controler);
 							break;
 						case 'E':
-							new MainSwitchPanelListener(MAIN_CONTROL.JUNIOR_ACCOUNTANCY,controler,0);
+							new MainSwitchPanelListener(MAIN_CONTROL.SENIOR_ACCOUNTANCY,controler);
 							break;
 						case 'F':
-							new MainSwitchPanelListener(MAIN_CONTROL.ADMINSTRATER,controler,0);
+							new MainSwitchPanelListener(MAIN_CONTROL.ADMINSTRATER,controler);
 							break;
 						case 'S':
-							new MainSwitchPanelListener(MAIN_CONTROL.MANAGER,controler,0);
+							new MainSwitchPanelListener(MAIN_CONTROL.MANAGER,controler);
 							break;	
 						case 'e':
-							new MainSwitchPanelListener(MAIN_CONTROL.JUNIOR_ACCOUNTANCY,controler,1);
+							new MainSwitchPanelListener(MAIN_CONTROL.JUNIOR_ACCOUNTANCY,controler);
 							break;	
 						}
 					}

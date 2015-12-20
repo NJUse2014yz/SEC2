@@ -273,7 +273,7 @@ public class AccountInitialUi extends JPanel{
 		check.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
 			{
-				mainControler.accountControler0.accountChangePanel(ACCOUNT_CONTROL.CHECK_INITIAL);
+				mainControler.accountControler.accountChangePanel(ACCOUNT_CONTROL.CHECK_INITIAL);
 				System.out.println("checkInitial");
 			}
 		});
