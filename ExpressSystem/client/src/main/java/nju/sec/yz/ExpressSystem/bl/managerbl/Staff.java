@@ -35,6 +35,12 @@ public class Staff implements Initialable<StaffVO, StaffPO> {
 		}
 	}
 
+	/**
+	 * 添加人员信息，同时添加系统账号
+	 * TODO 发送消息给总经理
+	 * @param sv
+	 * @return
+	 */
 	public ResultMessage addStaff(StaffVO sv) {
 		ResultMessage message = null;
 		// 验证information
@@ -92,6 +98,12 @@ public class Staff implements Initialable<StaffVO, StaffPO> {
 		return loginId;
 	}
 
+	/**
+	 * 删除人员信息
+	 * 同时删除系统账号
+	 * @param id
+	 * @return
+	 */
 	public ResultMessage deleteStaff(String id) {
 		ResultMessage result = null;
 		// 调用data层方法,验证id是否存在
@@ -110,6 +122,10 @@ public class Staff implements Initialable<StaffVO, StaffPO> {
 		return result;
 	}
 
+	/**
+	 * 更新员工信息
+	 * 若修改了人员编号，职务或者机构，则需要删除原有系统账户，添加新账户
+	 */
 	public ResultMessage modifyStaff(StaffVO sv) {
 		ResultMessage message = null;
 		// 验证改过之后的vo
@@ -120,12 +136,24 @@ public class Staff implements Initialable<StaffVO, StaffPO> {
 		StaffPO po = changeVOToPO(sv);
 		try {
 			message = data.update(po);
+			if(message.getResult()==Result.FAIL)
+				return message;
+			String loginId=createLoginId(sv);
+			if(loginId.equals(sv.getLoginId()))//未修改机构，职务和人员编号
+				return new ResultMessage(Result.SUCCESS);
+			
+			//已修改,先添加新账户，再删除旧账户
+			message=this.saveLoginId(loginId, sv);
+			if(message.getResult()==Result.FAIL)
+				return message;
+			User user=new User();
+			user.del(sv.getLoginId());
 		} catch (RemoteException e) {
 			RMIExceptionHandler.handleRMIException();
 			e.printStackTrace();
 			return new ResultMessage(Result.FAIL, "系统错误");
 		}
-		return message;
+		return new ResultMessage(Result.SUCCESS);
 	}
 
 	public StaffVO observeStaff(String id) {
