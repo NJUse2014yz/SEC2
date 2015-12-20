@@ -77,7 +77,7 @@ public class AccountDeleteUi extends JPanel{
 	public AccountDeleteUi(ClientControler mainControler,AccountButtonComponents bc){
 		super();
 		this.mainControler=mainControler;
-		controler=mainControler.accountControler;
+//		controler=mainControler.accountControler;
 		this.bc=bc;
 		accountBl=new AccountController();
 		avl=accountBl.observeList();

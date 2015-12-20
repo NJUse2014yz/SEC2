@@ -32,7 +32,7 @@ import nju.sec.yz.ExpressSystem.vo.PaymentSheetVO;
 public class AccountOperateTableUi extends JPanel{
 	private AccountButtonComponents bc;
 	private ClientControler mainControler;
-	private AccountControler controler;
+//	private AccountControler controler;
 	private FinanceBlSevice financeBl;
 	private BussinessVO bussinessvo;
 	
@@ -77,7 +77,7 @@ public class AccountOperateTableUi extends JPanel{
 			AccountButtonComponents bc) {
 		super();
 		this.mainControler=mainControler;
-		controler=mainControler.accountControler;
+//		controler=mainControler.accountControler;
 		this.bc=bc;
 		financeBl=new FinanceController();
 		nameIn.add("收款日期");

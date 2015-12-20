@@ -28,7 +28,7 @@ import nju.sec.yz.ExpressSystem.vo.LogVO;
 public class AccountChechLogUi extends JPanel{
 	private AccountButtonComponents bc;
 	private ClientControler mainControler;
-	private AccountControler controler;
+//	private AccountControler controler;
 	private LogBlService logBl;
 	
 	private DateChooser date;
@@ -55,7 +55,7 @@ public class AccountChechLogUi extends JPanel{
 	public AccountChechLogUi(ClientControler mainControler,AccountButtonComponents bc){
 		super();
 		this.mainControler=mainControler;
-		controler=mainControler.accountControler;
+//		controler=mainControler.accountControler;
 		this.bc=bc;
 		logBl=new LogController();
 		name.add("时间");
