@@ -69,7 +69,7 @@ public class ManagerSalaryModify extends JPanel {
 
 		confirm.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				if(e.getClickCount()==2){
+//				if(e.getClickCount()==2){
 				// translate data
 				for (int i = 0; i < table.getRowCount(); i++) {
 					SalaryImformation salaryImformation = new SalaryImformation(
@@ -97,7 +97,7 @@ public class ManagerSalaryModify extends JPanel {
 					}
 				}
 			}
-			}
+//			}
 		});
 
 	}
