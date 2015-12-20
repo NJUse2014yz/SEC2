@@ -21,9 +21,9 @@ public class Client {
 
     public static void main(String[] args) {
         try {
+        	ClientControler control=new ClientControler();
+        	control.showFrame();
             RMIHelper.init();
-            ClientControler control=new ClientControler();
-    		control.showFrame();
         } catch (ClientInitException e) {
             e.printStackTrace();
             RMIExceptionHandler.handleInitRMIException();
