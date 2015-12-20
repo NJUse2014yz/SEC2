@@ -42,6 +42,9 @@ public class ManagerSalaryObserve extends JPanel {
 		setLayout(null);
 		setSize(490, 550);
 		setVisible(true);
+		
+		name.add("职务");
+		name.add("薪水");
 
 		table=new newTable(data,name,this,false);
 	    table.setBounds(138,64,318,181);
