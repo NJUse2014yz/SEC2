@@ -144,7 +144,7 @@ public class ManagerStaffModify extends JPanel {
 					repaint();
 				} else {
 					// translate data
-					StaffVO vo=new StaffVO(name.getText(),id.getText(),getstatus(power),agency.getSelectedItem().toString(),id.getText());
+					StaffVO vo=new StaffVO(name.getText(),id.getText(),getstatus(power),agency.getSelectedItem().toString(),null);
 					// 判断输入的信息是否正确
 					ResultMessage result = manager.addStaff(vo);
 					// 失败
