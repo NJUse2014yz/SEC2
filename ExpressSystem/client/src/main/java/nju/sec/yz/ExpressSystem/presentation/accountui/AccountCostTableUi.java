@@ -16,6 +16,8 @@ import nju.sec.yz.ExpressSystem.bl.accountbl.FinanceController;
 import nju.sec.yz.ExpressSystem.blservice.accountBlService.FinanceBlSevice;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.AccountControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.ProfitVO;
@@ -27,10 +29,10 @@ public class AccountCostTableUi extends JPanel{
 	private FinanceBlSevice financeBl;
 	private ProfitVO pvo;
 	
-	private JLabel in;
-	private JLabel out;
-	private JLabel get;
-	private JButton excle;
+	private newJLabel in;
+	private newJLabel out;
+	private newJLabel get;
+	private newJBut excle;
 	private JLabel warning;
 	
 	private static final int x=189;
