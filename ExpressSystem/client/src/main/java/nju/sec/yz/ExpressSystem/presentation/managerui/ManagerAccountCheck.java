@@ -235,6 +235,8 @@ public class ManagerAccountCheck extends JPanel {
 	
 	private void changeData(BussinessVO bvo)
 	{
+		dataI.removeAllElements();
+		dataO.removeAllElements();
 		ArrayList<PaymentSheetVO> in = (ArrayList<PaymentSheetVO>) bvo.in;
 		ArrayList<OutVO> out = (ArrayList<OutVO>) bvo.out;
 		for (int i = 0; i < in.size(); i++) {

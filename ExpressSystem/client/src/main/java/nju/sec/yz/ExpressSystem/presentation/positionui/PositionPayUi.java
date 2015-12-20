@@ -143,8 +143,8 @@ public class PositionPayUi extends JPanel{
 	}
 	private void changeData(List<CollectionRecordVO> paylist)
 	{
-		if(payList.size()!=0)
-		{
+//		if(payList.size()!=0)
+//		{
 			data.removeAllElements();
 			for(int i=0;i<payList.size();i++)
 			{
@@ -157,7 +157,7 @@ public class PositionPayUi extends JPanel{
 				data.add(vector);
 			}
 			
-		}
+//		}
 	}
 	
 	

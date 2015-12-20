@@ -159,6 +159,8 @@ public class AccountOperateTableUi extends JPanel{
 	}
 	private void changeData(BussinessVO bl)
 	{
+		dataIn.removeAllElements();
+		dataOut.removeAllElements();
 		List<PaymentSheetVO> invo=bl.in;
 		List<OutVO> outvo=bl.out;
 		for(int i=0;i<invo.size();i++)
