@@ -38,7 +38,7 @@ import nju.sec.yz.ExpressSystem.vo.TransitVO;
 public class AccountInitialUi extends JPanel{
 	private AccountButtonComponents bc;
 	private ClientControler mainControler;
-	private AccountControler controler;
+//	private AccountControler controler;
 	private InitialBlService initialBl;
 	
 	private boolean P=false;
@@ -145,7 +145,7 @@ public class AccountInitialUi extends JPanel{
 	public AccountInitialUi(ClientControler mainControler,AccountButtonComponents bc){
 		super();
 		this.mainControler=mainControler;
-		controler=mainControler.accountControler;
+//		controler=mainControler.accountControler;
 		this.bc=bc;
 		initialBl=new InitialController();
 
@@ -273,7 +273,7 @@ public class AccountInitialUi extends JPanel{
 		check.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
 			{
-				controler.accountChangePanel(ACCOUNT_CONTROL.CHECK_INITIAL);
+				mainControler.accountControler0.accountChangePanel(ACCOUNT_CONTROL.CHECK_INITIAL);
 				System.out.println("checkInitial");
 			}
 		});

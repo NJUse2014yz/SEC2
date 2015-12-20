@@ -30,7 +30,7 @@ import nju.sec.yz.ExpressSystem.vo.InitialVO;
 public class AccountCheckInitialUi extends JPanel{
 	private AccountButtonComponents bc;
 	private ClientControler mainControler;
-	private AccountControler controler;
+//	private AccountControler controler;
 	private InitialBlService initialBl;
 	private InitialVO iv;
 	
@@ -113,7 +113,7 @@ public class AccountCheckInitialUi extends JPanel{
 	public AccountCheckInitialUi(ClientControler mainControler,AccountButtonComponents bc){
 		super();
 		this.mainControler=mainControler;
-		controler=mainControler.accountControler;
+//		controler=mainControler.accountControler;
 		this.bc=bc;
 		initialBl=new InitialController();
 		List<String> yearT=initialBl.getDates();
@@ -217,7 +217,7 @@ public class AccountCheckInitialUi extends JPanel{
 		backI.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
 			{
-				controler.accountChangePanel(ACCOUNT_CONTROL.INITIAL);
+				mainControler.accountControler0.accountChangePanel(ACCOUNT_CONTROL.INITIAL);
 			}
 		});
 		add(backI);

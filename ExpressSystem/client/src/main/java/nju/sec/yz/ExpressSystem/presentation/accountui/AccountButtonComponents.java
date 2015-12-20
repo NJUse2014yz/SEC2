@@ -1,6 +1,10 @@
 package nju.sec.yz.ExpressSystem.presentation.accountui;
 
 import java.awt.Color;
+<<<<<<< HEAD
+=======
+import java.awt.Font;
+>>>>>>> origin/master
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -16,8 +20,10 @@ import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.MAIN_CONTROL;
 
 public class AccountButtonComponents{
-	public int a=0;
+		public int a=0;
+		private int n=0;
 		private static JPanel panel;
+		private JLabel warning;
 	
 		private static final int Button_x=13;
 		private static final int Button_w=108;
@@ -35,6 +41,10 @@ public class AccountButtonComponents{
 		private static final int button_w=108;
 		private static final int button_h1=35;
 		private static final int button_h2=28;
+		private static final int warning_x=198;
+		private static final int warning_y=490;
+		private static final int warning_w=275;
+		private static final int warning_h=30;
 		private ClientControler maincontroler;
 	
 		// 侧边栏功能选择项
@@ -71,14 +81,21 @@ public class AccountButtonComponents{
 		//退出当前帐户
 		private newJLabel leaveButton;
 	
+
 		private Color framecolor=new Color(110,119,237);
 		
-		public AccountButtonComponents(ClientControler maincontroler){
+//		public AccountButtonComponents(ClientControler maincontroler){
+
+		public AccountButtonComponents(ClientControler maincontroler,int n){
+			this.n=n;
+
 			this.maincontroler=maincontroler;
 		}
-		public AccountButtonComponents(ClientControler maincontroler,JPanel panel){
+		public AccountButtonComponents(ClientControler maincontroler,JPanel panel,int n){
 			this.maincontroler=maincontroler;
 			this.panel=panel;
+			this.n=n;
+			
 			init();
 		}
 		public void changePanel(JPanel panel)
@@ -152,6 +169,14 @@ public class AccountButtonComponents{
 			exitButton.setBorder(null);
 			exitButton.setContentAreaFilled(false); 
 			exitButton.setBounds(490-19,0,19,19);
+			
+			warning=new JLabel();
+			warning.setText("对不起，您的权限不够");
+			warning.setBounds(warning_x, warning_y, warning_w, warning_h);
+			warning.setFont(new Font("Dialog", 1, 15));
+			warning.setForeground(Color.red);
+			warning.setVisible(false);
+			
 			change();
 		}
 		public void change(){
@@ -167,7 +192,16 @@ public class AccountButtonComponents{
 //					accountButton.setIcon(accountIcon1);
 					accountButton.setLocation(Button_x, account_y1);
 					logButton.setLocation(Button_x,log_y1);
-					maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.INCOME);
+					if(n==0)
+					{
+						warning.setVisible(false);
+						maincontroler.accountControler0.accountChangePanel(ACCOUNT_CONTROL.INCOME);
+					}
+					else
+					{
+						warning.setVisible(false);
+						maincontroler.accountControler1.accountChangePanel(ACCOUNT_CONTROL.INCOME);
+					}
 				}
 			});
 			initialButton.addMouseListener(new MouseAdapter() {
@@ -182,7 +216,16 @@ public class AccountButtonComponents{
 //					accountButton.setIcon(accountIcon1);
 					accountButton.setLocation(Button_x, account_y1);
 					logButton.setLocation(Button_x,log_y1);
-					maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.INITIAL);
+					if(n==0)
+					{
+						warning.setVisible(false);
+						maincontroler.accountControler0.accountChangePanel(ACCOUNT_CONTROL.INITIAL);
+					}
+					else
+					{
+						warning.setVisible(false);
+						maincontroler.accountControler1.accountChangePanel(ACCOUNT_CONTROL.INITIAL);
+					}
 				}
 			});
 			costButton.addMouseListener(new MouseAdapter() {
@@ -197,7 +240,16 @@ public class AccountButtonComponents{
 //					accountButton.setIcon(accountIcon1);
 					accountButton.setLocation(Button_x, account_y1);
 					logButton.setLocation(Button_x,log_y1);
-					maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.COST);
+					if(n==0)
+					{
+						warning.setVisible(false);
+						maincontroler.accountControler0.accountChangePanel(ACCOUNT_CONTROL.COST);
+					}
+					else
+					{
+						warning.setVisible(false);
+						maincontroler.accountControler1.accountChangePanel(ACCOUNT_CONTROL.COST);
+					}
 				}
 			});
 			tableButton.addMouseListener(new MouseAdapter() {
@@ -216,7 +268,16 @@ public class AccountButtonComponents{
 					operateButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e1)
 						{
-							maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.TABLE_OPERATE);
+							if(n==0)
+							{
+								warning.setVisible(false);
+								maincontroler.accountControler0.accountChangePanel(ACCOUNT_CONTROL.TABLE_OPERATE);
+							}
+							else
+							{
+								warning.setVisible(false);
+								maincontroler.accountControler1.accountChangePanel(ACCOUNT_CONTROL.TABLE_OPERATE);
+							}
 						}
 					});
 					chengbenButton.setLocation(Button_x,account_y1+button_h1+2);
@@ -224,7 +285,16 @@ public class AccountButtonComponents{
 					chengbenButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e1)
 						{
-							maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.TABLE_COST);
+							if(n==0)
+							{
+								warning.setVisible(false);
+								maincontroler.accountControler0.accountChangePanel(ACCOUNT_CONTROL.TABLE_COST);
+							}
+							else
+							{
+								warning.setVisible(false);
+								maincontroler.accountControler1.accountChangePanel(ACCOUNT_CONTROL.TABLE_COST);
+							}
 						}
 					});
 					panel.repaint();
@@ -244,7 +314,15 @@ public class AccountButtonComponents{
 					addButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e1)
 						{
-							maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.ADD_ACCOUNT);
+							if(n==0)
+							{
+								warning.setVisible(false);
+								maincontroler.accountControler0.accountChangePanel(ACCOUNT_CONTROL.ADD_ACCOUNT);
+							}
+							else
+							{
+								warning.setVisible(true);
+							}
 						}
 					});
 					deleteButton.setLocation(Button_x,log_y1+button_h2+2);
@@ -252,7 +330,15 @@ public class AccountButtonComponents{
 					deleteButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e1)
 						{
-							maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.DELETE_ACCOUNT);
+							if(n==0)
+							{
+								warning.setVisible(false);
+								maincontroler.accountControler0.accountChangePanel(ACCOUNT_CONTROL.DELETE_ACCOUNT);
+							}
+							else
+							{
+								warning.setVisible(true);
+							}
 						}
 					});
 					modifyButton.setLocation(Button_x,log_y1+button_h2*2+4);
@@ -260,7 +346,15 @@ public class AccountButtonComponents{
 					modifyButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e1)
 						{
-							maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.MODIFY_ACCOUNTLIST);
+							if(n==0)
+							{
+								warning.setVisible(false);
+								maincontroler.accountControler0.accountChangePanel(ACCOUNT_CONTROL.MODIFY_ACCOUNTLIST);
+							}
+							else
+							{
+								warning.setVisible(true);
+							}
 						}
 					});
 					inquiryButton.setLocation(Button_x,log_y1+button_h2*3+6);
@@ -268,7 +362,16 @@ public class AccountButtonComponents{
 					inquiryButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e1)
 						{
-							maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.ENQUIRY_ACCOUNT);
+							if(n==0)
+							{
+								warning.setVisible(false);
+								maincontroler.accountControler0.accountChangePanel(ACCOUNT_CONTROL.ENQUIRY_ACCOUNT);
+							}
+							else
+							{
+								warning.setVisible(false);
+								maincontroler.accountControler1.accountChangePanel(ACCOUNT_CONTROL.ENQUIRY_ACCOUNT);
+							}
 						}
 					});
 					panel.repaint();
@@ -284,7 +387,16 @@ public class AccountButtonComponents{
 //					accountButton.setIcon(accountIcon1);
 					accountButton.setLocation(Button_x, account_y1);
 					logButton.setLocation(Button_x,log_y1);
-					maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.LOG_CHECK);
+					if(n==0)
+					{
+						warning.setVisible(false);
+						maincontroler.accountControler0.accountChangePanel(ACCOUNT_CONTROL.LOG_CHECK);
+					}
+					else
+					{
+						warning.setVisible(false);
+						maincontroler.accountControler1.accountChangePanel(ACCOUNT_CONTROL.LOG_CHECK);
+					}
 				}
 			});
 			/*
@@ -324,5 +436,6 @@ public class AccountButtonComponents{
 			panel.add(leaveButton);
 			panel.add(operateButton);
 			panel.add(chengbenButton);
+			panel.add(warning);
 		}
 }

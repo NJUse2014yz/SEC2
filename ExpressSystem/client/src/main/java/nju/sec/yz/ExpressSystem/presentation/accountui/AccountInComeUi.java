@@ -34,7 +34,7 @@ import nju.sec.yz.ExpressSystem.vo.TransitVO;
 public class AccountInComeUi extends JPanel{
 	private AccountButtonComponents bc;
 	private ClientControler mainControler;
-	private AccountControler controler;
+//	private AccountControler controler;
 	private ManagerController managerController;
 	private FinanceBlSevice finance;
 	
@@ -73,7 +73,7 @@ public class AccountInComeUi extends JPanel{
 	public AccountInComeUi(ClientControler mainControler,AccountButtonComponents bc){
 		super();
 		this.mainControler=mainControler;
-		controler=mainControler.accountControler;
+//		controler=mainControler.accountControler;
 		finance=new FinanceController();
 		managerController=new ManagerController();
 		this.bc=bc;

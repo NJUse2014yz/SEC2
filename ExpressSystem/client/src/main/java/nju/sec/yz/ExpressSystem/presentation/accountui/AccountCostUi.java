@@ -25,7 +25,7 @@ import nju.sec.yz.ExpressSystem.vo.OutVO;
 public class AccountCostUi extends JPanel{
 	private AccountButtonComponents bc;
 	private ClientControler mainControler;
-	private AccountControler controler;
+//	private AccountControler controler;
 	private FinanceBlSevice financeBl;
 	
 	private newJBut confirm;
@@ -68,7 +68,7 @@ public class AccountCostUi extends JPanel{
 	public AccountCostUi(ClientControler mainControler, AccountButtonComponents bc){
 		super();
 		this.mainControler=mainControler;
-		controler=mainControler.accountControler;
+//		controler=mainControler.accountControler;
 		this.bc=bc;
 		financeBl=new FinanceController();
 		initAccountUi();
