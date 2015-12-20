@@ -6,6 +6,8 @@ import java.util.List;
 
 import nju.sec.yz.ExpressSystem.bl.deliverbl.CollectionRecord;
 import nju.sec.yz.ExpressSystem.bl.deliverbl.ValidHelper;
+import nju.sec.yz.ExpressSystem.bl.managerbl.AgencyInfo;
+import nju.sec.yz.ExpressSystem.bl.managerbl.Transit;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptID;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptSaveService;
@@ -22,15 +24,11 @@ import nju.sec.yz.ExpressSystem.common.ReceiptType;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.InDataService;
-import nju.sec.yz.ExpressSystem.po.OutPO;
 import nju.sec.yz.ExpressSystem.po.PaymentSheetPO;
-import nju.sec.yz.ExpressSystem.po.PositionPO;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
-import nju.sec.yz.ExpressSystem.po.TransitLoadSheetPO;
 import nju.sec.yz.ExpressSystem.vo.PaymentSheetVO;
 import nju.sec.yz.ExpressSystem.vo.PaymentVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
-import nju.sec.yz.ExpressSystem.vo.TransitLoadSheetVO;
 /**
  * 收款单的领域模型对象
  * @author 周聪
@@ -244,7 +242,10 @@ public class Collection implements ReceiptService{
 		
 	}
 	
-	public PaymentVO getByPosition(String date,String positionId){
+	public PaymentVO getByPosition(String date,String positionName){
+		AgencyInfo agencyService=new Transit();
+		String positionId=agencyService.getId(positionName);
+		
 		List<PaymentSheetPO> pos=new ArrayList<>();
 		List<PaymentSheetVO> vos=new ArrayList<>();
 		double sum=0.0;
@@ -262,6 +263,7 @@ public class Collection implements ReceiptService{
 		PaymentVO vo=new PaymentVO();
 		vo.paymentList=vos;
 		vo.sum=sum;
+		System.out.println(vos.size());
 		return vo;
 		
 	}

@@ -11,6 +11,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import nju.sec.yz.ExpressSystem.common.PaymentInformation;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.data.fileUtility.SerializableFileHelper;
@@ -134,8 +135,11 @@ public class InDataImpl extends UnicastRemoteObject implements InDataService{
 			InDataImpl data=new InDataImpl();
 			List<PaymentSheetPO> pos=data.findAll();
 			for(PaymentSheetPO po:pos){
-				System.out.println(po.getPaymentInformation().getTime());
+				PaymentInformation info=po.getPaymentInformation();
+				System.out.println(info.getTime()+" "+info.getPositionId());
+				info.setPositionId("025001");
 			}
+			
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

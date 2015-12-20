@@ -286,10 +286,17 @@ public class User implements UserInfo{
 				return false;
 			break;
 		case 'E':
-			if(pow!=Status.JUNIOR_ACCOUNTANCY&&pow!=Status.SENIOR_ACCOUNTANCY)
+			if(pow!=Status.SENIOR_ACCOUNTANCY)
 				return false;
 			String number4=id.substring(id.length()-3);
 			if(!is3Number(number4))
+				return false;
+			break;
+		case 'e':
+			if(pow!=Status.JUNIOR_ACCOUNTANCY)
+				return false;
+			String number7=id.substring(id.length()-3);
+			if(!is3Number(number7))
 				return false;
 			break;
 		case 'S':
