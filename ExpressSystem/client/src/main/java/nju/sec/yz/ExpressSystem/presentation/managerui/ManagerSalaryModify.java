@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -23,6 +24,7 @@ import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.SalaryImformation;
 import nju.sec.yz.ExpressSystem.common.Status;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.SalaryVO;
 
@@ -31,17 +33,13 @@ public class ManagerSalaryModify extends JPanel {
 	private ClientControler maincontroler;
 	private ManagerButtonComponent mbc;
 
-	private ArrayList<SalaryVO> powersalary;
-
-	private JTable table;
-	private JScrollPane jsc;
+	private newTable table;
+	private Vector<Vector<String>> data=new Vector<Vector<String>>();
+	private Vector<String> name=new Vector<String>();
 
 	private JButton confirm;
 
 	private JLabel warning = new JLabel();
-
-	private String[] columnTitle = { "职务", "薪水" };
-	private String[][] TableData = {};
 
 	public ManagerSalaryModify(ClientControler maincontroler, ManagerButtonComponent mbc) {
 		this.maincontroler = maincontroler;
@@ -56,25 +54,13 @@ public class ManagerSalaryModify extends JPanel {
 		setSize(490, 550);
 		setVisible(true);
 
-		powersalary = manager.observeSalary();
-
-		if (powersalary.size() != 0) {
-			TableData = new String[powersalary.size()][2];
-
-			for (int i = 0; i < powersalary.size(); i++) {
-				SalaryImformation temp = powersalary.get(i).getSalaryImformation();
-				TableData[i][0] = getpower(temp.getPower());
-				TableData[i][1] = Integer.toString(temp.getSalary());
-			}
-		}
-		TableModel model = new DefaultTableModel(TableData, columnTitle);
-		table=new JTable(model);
-		table.setEnabled(false);
-
-		jsc = new JScrollPane(table);
-		jsc.setVisible(true);
-		jsc.setBounds(138, 64, 318, 190);
-		add(jsc);
+		name.add("职务");
+		name.add("薪水");
+		
+		table=new newTable(data,name,this,false);
+		table.setBounds(138, 64, 318, 190);
+		table.join();
+		changeData(manager.observeSalary());
 
 		ImageIcon cinfirmIcon = new ImageIcon("graphic/manager/button/confirm.png");
 		confirm = new JButton(cinfirmIcon);
@@ -85,10 +71,10 @@ public class ManagerSalaryModify extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				if(e.getClickCount()==2){
 				// translate data
-				for (int i = 0; i < powersalary.size(); i++) {
+				for (int i = 0; i < table.getRowCount(); i++) {
 					SalaryImformation salaryImformation = new SalaryImformation(
-							getstatus(table.getValueAt(i, 0).toString()),
-							Integer.parseInt((String) table.getValueAt(i, 1)));
+							getstatus(table.getValueAt(i, 0,false).toString()),
+							Integer.parseInt((String) table.getValueAt(i, 1,false)));
 					SalaryVO sv = new SalaryVO(salaryImformation);
 					ResultMessage result = manager.modifySalary(sv);
 					if (result.getResult() == Result.FAIL) {
@@ -162,7 +148,18 @@ public class ManagerSalaryModify extends JPanel {
 
 		}
 	}
-
+	private void changeData(ArrayList<SalaryVO> powersalary)
+	{
+		data.removeAllElements();
+		for (int i = 0; i < powersalary.size(); i++) {
+			Vector<String> vector=new Vector<String>();
+			SalaryImformation temp = powersalary.get(i).getSalaryImformation();
+			vector.add(getpower(temp.getPower()));
+			vector.add(Integer.toString(temp.getSalary()));
+			data.add(vector);
+		}
+		table.resetData();
+	}
 	@Override
 	public void paintComponent(Graphics g) {
 

@@ -3,6 +3,7 @@ package nju.sec.yz.ExpressSystem.presentation.managerui;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -15,6 +16,7 @@ import nju.sec.yz.ExpressSystem.bl.managerbl.ManagerController;
 import nju.sec.yz.ExpressSystem.blservice.managerBlService.SalaryBlService;
 import nju.sec.yz.ExpressSystem.common.SalaryImformation;
 import nju.sec.yz.ExpressSystem.common.Status;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.SalaryVO;
 
@@ -24,14 +26,9 @@ public class ManagerSalaryObserve extends JPanel {
 
 	private ManagerButtonComponent mbc;
 
-	private ArrayList<SalaryVO> powersalary;
-	
-	private JTable table;
-	private JScrollPane jsc;
-
-	
-	private String[] columnTitle={"职务","薪水"};
-	private String[][] TableData={};
+	private newTable table;
+	private Vector<Vector<String>> data=new Vector<Vector<String>>();
+	private Vector<String> name=new Vector<String>();
 	
 	public ManagerSalaryObserve(ClientControler maincontroler, ManagerButtonComponent mbc) {
 		this.maincontroler = maincontroler;
@@ -45,28 +42,11 @@ public class ManagerSalaryObserve extends JPanel {
 		setLayout(null);
 		setSize(490, 550);
 		setVisible(true);
-		
-		
-		
-		
-		powersalary=manager.observeSalary();
-		if(powersalary.size()!=0){
-		TableData=new String[powersalary.size()][2];
-		for(int i=0;i<powersalary.size();i++){
-			SalaryImformation temp=powersalary.get(i).getSalaryImformation();
-			TableData[i][0]=getpower(temp.getPower());
-			TableData[i][1]=Integer.toString(temp.getSalary());
-		}
-		}
-		TableModel model=new DefaultTableModel(TableData,columnTitle);
-		table=new JTable(model);
-		table.setEnabled(false);
-		
-		jsc=new JScrollPane(table);
-		jsc.setVisible(true);
-	    jsc.setBounds(138,64,318,181);
-	    add(jsc);
-		
+
+		table=new newTable(data,name,this,false);
+	    table.setBounds(138,64,318,181);
+	    table.join();
+		changeData(manager.observeSalary());
 	}
 	private String getpower(Status power) {
 		switch(power){
@@ -89,6 +69,18 @@ public class ManagerSalaryObserve extends JPanel {
 		default:
 			return null;
 		}
+	}
+	private void changeData(ArrayList<SalaryVO> sl)
+	{
+		data.removeAllElements();
+		for(int i=0;i<sl.size();i++){
+			Vector<String> vector=new Vector<String>();
+			SalaryImformation temp=sl.get(i).getSalaryImformation();
+			vector.add(getpower(temp.getPower()));
+			vector.add(Integer.toString(temp.getSalary()));
+			data.add(vector);
+		}
+		table.resetData();
 	}
 	@Override
 	public void paintComponent(Graphics g) {
