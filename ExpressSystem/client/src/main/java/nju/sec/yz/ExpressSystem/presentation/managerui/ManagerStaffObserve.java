@@ -147,7 +147,7 @@ public class ManagerStaffObserve extends JPanel{
 	@Override
 	public void paintComponent(Graphics g) {
 
-		Image img01 = new ImageIcon("graphic/manager/background/background03.png").getImage();
+		Image img01 = new ImageIcon("graphic/manager/background/background09.png").getImage();
 
 		g.drawImage(img01, 0, 0, 490, 550, null);
 
