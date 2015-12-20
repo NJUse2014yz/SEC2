@@ -49,7 +49,7 @@ public class AccountInComeUi extends JPanel{
 	private Vector<Vector<String>> data=new Vector<Vector<String>>();
 	
 	private static final int total_x=192;
-	private static final int total_y=416;
+	private static final int total_y=410;
 	private static final int total_w=90;
 	private static final int total_h=30;
 	private static int date_x=183;
@@ -81,14 +81,12 @@ public class AccountInComeUi extends JPanel{
 		
 		ArrayList<PositionVO> positionlist=new ArrayList<PositionVO>();
 		ArrayList<TransitVO> transitvo=managerController.observeAllTransit();
-		System.out.println(transitvo.size());
 		if(transitvo!=null)
 		{
 			List<PositionVO> pvo;
 			for(int i=0;i<transitvo.size();i++)
 			{
 				pvo=transitvo.get(i).getPositions();
-				System.out.println(pvo.size());
 				for(int j=0;j<pvo.size();j++)
 				{
 					positionlist.add(pvo.get(j));
@@ -134,13 +132,23 @@ public class AccountInComeUi extends JPanel{
 				PaymentVO pv=finance.checkReceipt(date.getTime(), positions[choose.getSelectedIndex()]);
 				if(pv!=null)
 				{
+					
 					List<PaymentSheetVO> sheetlist=pv.paymentList;
 					changeData(sheetlist);
+					
+					double all=0.0;
+					for(int c=0;c<sheetlist.size();c++){
+						all+=sheetlist.get(c).getPaymentInformation().getAmount();
+					}
+					total.setText(Double.toString(all));
 				}
 				else
 				{
+					total.setText("0");
+					
 					changeData(new ArrayList<PaymentSheetVO>());
 				}
+				total.setVisible(true);
 			}
 		});
 		

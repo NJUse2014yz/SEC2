@@ -344,7 +344,7 @@ public class AccountButtonComponents{
 					deleteButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e1)
 						{
-							maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.ADD_ACCOUNT);
+							maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.DELETE_ACCOUNT);
 //							
 //							if(n==0)
 //							{
@@ -362,7 +362,7 @@ public class AccountButtonComponents{
 					modifyButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e1)
 						{
-							maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.ADD_ACCOUNT);
+							maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.MODIFY_ACCOUNTLIST);
 //							
 //							if(n==0)
 //							{
@@ -380,7 +380,7 @@ public class AccountButtonComponents{
 					inquiryButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e1)
 						{
-							maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.ADD_ACCOUNT);
+							maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.ENQUIRY_ACCOUNT);
 //							
 //							if(n==0)
 //							{
