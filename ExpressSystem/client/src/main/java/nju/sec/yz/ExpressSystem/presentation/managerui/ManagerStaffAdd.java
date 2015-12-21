@@ -46,6 +46,8 @@ public class ManagerStaffAdd extends JPanel{
 	// 所属机构
 	private newJCombo agency;
 	
+	private newJText logId;
+	
 	private newJBut confirmButton;
 	private newJLabel warning=new newJLabel();
 
@@ -69,6 +71,10 @@ public class ManagerStaffAdd extends JPanel{
 		id=new newJText();
 		id.setBounds(218, 102, 83, 18);
 		add(id);
+		
+		logId=new newJText();
+		logId.setBounds(218, 191, 83, 18);
+		add(logId);
 		
 		String[] status={
 				"快递员",
@@ -124,7 +130,7 @@ public class ManagerStaffAdd extends JPanel{
 					
 				} else {
 					// translate data
-					StaffVO vo=new StaffVO(name.getText(),id.getText(),getstatus(power),agency.getSelectedItem().toString(),null);
+					StaffVO vo=new StaffVO(name.getText(),id.getText(),getstatus(power),agency.getSelectedItem().toString(),logId.getText().toString());
 					// 判断输入的信息是否正确
 					ResultMessage result = manager.addStaff(vo);
 					// 失败

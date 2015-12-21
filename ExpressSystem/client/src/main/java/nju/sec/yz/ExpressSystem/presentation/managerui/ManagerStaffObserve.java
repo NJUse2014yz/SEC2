@@ -75,6 +75,7 @@ private newJBut back;
 	    
 //	    ImageIcon backIcon = new ImageIcon("graphic/manager/button/back.png");
 		back = new newJBut("显示全部");
+		back.setMargin(new java.awt.Insets(0,0,0,0));
 		back.setBounds(361, 286, 90, 24);
 		add(back);
 	    

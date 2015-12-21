@@ -51,6 +51,8 @@ public class ManagerStaffModify extends JPanel {
 
 	// 所属机构
 	private newJCombo agency;
+	//登录帐号
+	private newJText logId;
 
 	public ManagerStaffModify(ClientControler maincontroler, ManagerButtonComponent mbc, String staffId) {
 		this.maincontroler = maincontroler;
@@ -75,6 +77,10 @@ public class ManagerStaffModify extends JPanel {
 		id=new newJText(vo.getId());
 		id.setBounds(218, 102, 83, 18);
 		add(id);
+		
+		logId=new newJText(vo.getLoginId());
+		logId.setBounds(218, 193, 83, 18);
+		add(logId);
 		
 		String[] status={
 				"快递员",
@@ -143,7 +149,8 @@ public class ManagerStaffModify extends JPanel {
 				} else {
 					// translate data
 					StaffVO vo=new StaffVO(name.getText().toString(),id.getText().toString(),
-							getstatus(power),agency.getSelectedItem().toString());
+							getstatus(power),agency.getSelectedItem().toString(),
+							logId.getText().toString());
 					// 判断输入的信息是否正确
 					ResultMessage result = manager.addStaff(vo);
 					warning.Reply(result);

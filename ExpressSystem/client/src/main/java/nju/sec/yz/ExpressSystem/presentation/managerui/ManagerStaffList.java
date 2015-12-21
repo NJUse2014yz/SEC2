@@ -41,6 +41,8 @@ public class ManagerStaffList extends JPanel {
 
 	private JButton search;
 	private newJBut back;
+	
+	private ArrayList<StaffVO> allstaff;
 
 	public ManagerStaffList(ClientControler maincontroler, ManagerButtonComponent mbc) {
 		this.maincontroler = maincontroler;
@@ -85,6 +87,7 @@ public class ManagerStaffList extends JPanel {
 	    
 //	    ImageIcon backIcon = new ImageIcon("graphic/manager/button/back.png");
 	    back = new newJBut("显示全部");
+	    back.setMargin(new java.awt.Insets(0,0,0,0));
 		back.setBounds(370, 286, 81, 20);
 		add(back);
 	    
@@ -103,10 +106,8 @@ public class ManagerStaffList extends JPanel {
 				}else{
 					StaffVO staff=manager.observeStaff(searchnum.getText());
 					
-					
-					
-					String[] columnTitle={"人员编号","姓名","职务","所属机构"};
-					String[][] TableData ={{staff.getId(),staff.getName(),getpower(staff.getPower()),staff.getAgency()}};
+					String[] columnTitle={"人员编号","姓名","职务","所属机构","登录帐号"};
+					String[][] TableData ={{staff.getId(),staff.getName(),getpower(staff.getPower()),staff.getAgency(),staff.getLoginId()}};
 					model=new DefaultTableModel(TableData,columnTitle);
 					table.setModel(model);
 					table.repaint();
@@ -124,7 +125,8 @@ public class ManagerStaffList extends JPanel {
 			 public void mouseClicked(MouseEvent e) {
 //				 if(e.getClickCount()==2){//鼠标双击
 					 int num=table.getSelectedRow();
-						 maincontroler.mainFrame.nextPanel(new ManagerStaffModify(maincontroler,mbc,table.getValueAt(num, 0).toString()));
+//					 System.out.println(num);
+						 maincontroler.mainFrame.nextPanel(new ManagerStaffModify(maincontroler,mbc,allstaff.get(num).getId()));
 					 
 					 }
 //				 }
@@ -166,7 +168,7 @@ public class ManagerStaffList extends JPanel {
 	
 	
 	private void original(){
-		ArrayList<StaffVO> allstaff=manager.observeStaff();
+		allstaff=manager.observeStaff();
 		
 		String[][] TableData = new String[allstaff.size()][4];
 		String[] columnTitle={"人员编号","姓名","职务","所属机构"};
