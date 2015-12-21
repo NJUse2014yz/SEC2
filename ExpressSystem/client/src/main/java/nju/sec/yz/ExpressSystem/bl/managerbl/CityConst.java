@@ -91,7 +91,7 @@ public class CityConst implements CityDistanceService {
 		CityInformation info=cp.getCityInformation();
 		CityInformation infoCopy=this.copyInfo(info);
 		CityInformation infoCopy2=new CityInformation(info.getToCity(), info.getToID(), 
-								info.getFromCity(), info.getToID(), info.getDistance());
+								info.getFromCity(), info.getFromID(), info.getDistance());
 		CityPO po=new CityPO(infoCopy);
 		CityPO po2=new CityPO(infoCopy2);
 		try {

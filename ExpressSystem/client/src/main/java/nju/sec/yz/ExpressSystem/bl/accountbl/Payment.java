@@ -23,6 +23,7 @@ import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.dataservice.accountDataSevice.OutDataService;
 import nju.sec.yz.ExpressSystem.po.OutPO;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
+import nju.sec.yz.ExpressSystem.vo.AccountVO;
 import nju.sec.yz.ExpressSystem.vo.OutVO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 
@@ -127,10 +128,13 @@ public class Payment implements ReceiptService {
 			return new ResultMessage(Result.FAIL, "看看日期是不是输错了~");
 		if (info.getNum() <= 0)
 			return new ResultMessage(Result.FAIL, "付款金额必须是正数~");
-		Account account = new Account();
-		if (account.observeAccount(info.getAccount()) == null)
+		Account accountService = new Account();
+		AccountVO account=accountService.observeAccount(info.getAccount()); 
+		if (account== null)
 			return new ResultMessage(Result.FAIL, "账户不存在~");
-
+		if((account.getBalance()-info.getNum())<0)
+			return new ResultMessage(Result.FAIL,"余额不足");
+		
 		return new ResultMessage(Result.SUCCESS);
 	}
 

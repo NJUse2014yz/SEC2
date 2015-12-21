@@ -351,7 +351,12 @@ public class AccountCheckInitialUi extends JPanel{
 	}
 	private void changeData(InitialVO iv)
 	{
-		
+		dataA.removeAllElements();
+		dataC.removeAllElements();
+		dataI.removeAllElements();
+		dataP.removeAllElements();
+		dataS.removeAllElements();
+		dataT.removeAllElements();
 		for(int i=0;i<iv.transits.size();i++)
 		{
 			Vector<String> vector=new Vector<String>();
