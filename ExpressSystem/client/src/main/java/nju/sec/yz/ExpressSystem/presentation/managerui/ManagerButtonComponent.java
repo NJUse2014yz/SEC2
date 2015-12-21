@@ -1,5 +1,6 @@
 package nju.sec.yz.ExpressSystem.presentation.managerui;
 
+import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -8,58 +9,61 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.MAIN_CONTROL;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.MANAGER_CONTROL;
-import nju.sec.yz.ExpressSystem.presentation.controlerui.POSITION_CONTROL;
 
 public class ManagerButtonComponent {
 
 	private ClientControler maincontroler;
 	private JPanel panel;
 	
-	private JButton agency;
-	private JButton staff;
-	private JButton salary;
-	private JButton city;
-	private JButton receiptApprove;
-	private JButton accountCheck;
-	private JButton logCheck;
-	private JButton add;
-	private JButton delete;
-	private JButton modify;
-	private JButton observe;
+	private newJBut agency;
+	private newJBut staff;
+	private newJBut salary;
+	private newJBut city;
+	private newJBut receiptApprove;
+	private newJBut accountCheck;
+	private newJBut logCheck;
+	private newJBut add;
+	private newJBut delete;
+	private newJBut modify;
+	private newJBut observe;
 	
-	private JButton[] buttons = { agency, staff, salary, city, receiptApprove, accountCheck, logCheck };
+	private newJBut[] buttons = { agency, staff, salary, city, receiptApprove, accountCheck, logCheck };
 	
 	private int width=109;
 	private int height1=43;
 	private int height2=24;
 	
-	ImageIcon agencyIcon1 = new ImageIcon("graphic/manager/button/agency1.png");
-	ImageIcon agencyIcon2 = new ImageIcon("graphic/manager/button/agency2.png");
-	ImageIcon staffIcon1 = new ImageIcon("graphic/manager/button/staff1.png");
-	ImageIcon staffIcon2 = new ImageIcon("graphic/manager/button/staff2.png");
-	ImageIcon salaryIcon1 = new ImageIcon("graphic/manager/button/salary1.png");
-	ImageIcon salaryIcon2 = new ImageIcon("graphic/manager/button/salary2.png");
-	ImageIcon constIcon1 = new ImageIcon("graphic/manager/button/const1.png");
-	ImageIcon constIcon2 = new ImageIcon("graphic/manager/button/const2.png");
-	ImageIcon receiptIcon = new ImageIcon("graphic/manager/button/receipt.png");
-	ImageIcon accountIcon = new ImageIcon("graphic/manager/button/account.png");
-	ImageIcon logIcon = new ImageIcon("graphic/manager/button/log.png");
-	ImageIcon addIcon = new ImageIcon("graphic/manager/button/add.png");
-	ImageIcon deleteIcon = new ImageIcon("graphic/manager/button/delete.png");
-	ImageIcon modifyIcon = new ImageIcon("graphic/manager/button/modify.png");
-	ImageIcon observeIcon = new ImageIcon("graphic/manager/button/observe.png");
+	private Color framecolor=new Color(110,119,237);
+	
+//	ImageIcon agencyIcon1 = new ImageIcon("graphic/manager/button/agency1.png");
+//	ImageIcon agencyIcon2 = new ImageIcon("graphic/manager/button/agency2.png");
+//	ImageIcon staffIcon1 = new ImageIcon("graphic/manager/button/staff1.png");
+//	ImageIcon staffIcon2 = new ImageIcon("graphic/manager/button/staff2.png");
+//	ImageIcon salaryIcon1 = new ImageIcon("graphic/manager/button/salary1.png");
+//	ImageIcon salaryIcon2 = new ImageIcon("graphic/manager/button/salary2.png");
+//	ImageIcon constIcon1 = new ImageIcon("graphic/manager/button/const1.png");
+//	ImageIcon constIcon2 = new ImageIcon("graphic/manager/button/const2.png");
+//	ImageIcon receiptIcon = new ImageIcon("graphic/manager/button/receipt.png");
+//	ImageIcon accountIcon = new ImageIcon("graphic/manager/button/account.png");
+//	ImageIcon logIcon = new ImageIcon("graphic/manager/button/log.png");
+//	ImageIcon addIcon = new ImageIcon("graphic/manager/button/add.png");
+//	ImageIcon deleteIcon = new ImageIcon("graphic/manager/button/delete.png");
+//	ImageIcon modifyIcon = new ImageIcon("graphic/manager/button/modify.png");
+//	ImageIcon observeIcon = new ImageIcon("graphic/manager/button/observe.png");
 	ImageIcon ExitIcon = new ImageIcon("graphic/common/exit.gif");
 	
-	private ImageIcon[] imgs = { agencyIcon1, agencyIcon2, staffIcon1, staffIcon2, salaryIcon1, salaryIcon2, constIcon1,
-			constIcon2, receiptIcon,null,accountIcon,null,logIcon,null };
+//	private ImageIcon[] imgs = { agencyIcon1, agencyIcon2, staffIcon1, staffIcon2, salaryIcon1, salaryIcon2, constIcon1,
+//			constIcon2, receiptIcon,null,accountIcon,null,logIcon,null };
 	
 	// 退出系统
 	private JButton exitButton;
 	//退出当前帐户
-	private JLabel leaveButton;
+	private newJLabel leaveButton;
 	
 	public ManagerButtonComponent(ClientControler maincontroler) {
 		this.maincontroler=maincontroler;
@@ -78,7 +82,7 @@ public class ManagerButtonComponent {
 		setOriginal();
 		
 		//离开当前账户
-		leaveButton=new JLabel();
+		leaveButton=new newJLabel("注销",Color.white,Color.yellow);
 		leaveButton.setBounds(433, 21, 37, 20);
 		leaveButton.setVisible(true);
 		
@@ -159,8 +163,9 @@ public class ManagerButtonComponent {
 				
 				for(int count=1;count<=3;count++){
 					buttons[count-1].setLocation(13,50+height1*(count-1));
-					buttons[count-1].setIcon(imgs[2*count-2]);
+//					buttons[count-1].setIcon(imgs[2*count-2]);
 				}
+				add.setVisible(false);
 				
 				modify.setLocation(13,50+height1*3+height2*0);
 				modify.setVisible(true);
@@ -172,10 +177,10 @@ public class ManagerButtonComponent {
 				
 				for(int count=4;count<=buttons.length;count++){
 					buttons[count-1].setLocation(13,50+height1*(count-1)+height2*2);
-					buttons[count-1].setIcon(imgs[2*count-2]);
+//					buttons[count-1].setIcon(imgs[2*count-2]);
 				}
 				
-				buttons[2].setIcon(imgs[5]);
+//				buttons[2].setIcon(imgs[5]);
 				
 				
 				modify.addMouseListener(new MouseAdapter(){
@@ -201,7 +206,7 @@ public class ManagerButtonComponent {
 				
 				for(int count=1;count<=4;count++){
 					buttons[count-1].setLocation(13,50+height1*(count-1));
-					buttons[count-1].setIcon(imgs[2*count-2]);
+//					buttons[count-1].setIcon(imgs[2*count-2]);
 				}
 				add.setLocation(13,50+height1*4);
 				add.setVisible(true);
@@ -217,10 +222,10 @@ public class ManagerButtonComponent {
 				
 				for(int count=5;count<=buttons.length;count++){
 					buttons[count-1].setLocation(13,50+height1*(count-1)+height2*3);
-					buttons[count-1].setIcon(imgs[2*count-2]);
+//					buttons[count-1].setIcon(imgs[2*count-2]);
 				}
 				
-				buttons[3].setIcon(imgs[7]);
+//				buttons[3].setIcon(imgs[7]);
 				
 				
 				add.addMouseListener(new MouseAdapter(){
@@ -337,40 +342,40 @@ public class ManagerButtonComponent {
 	}
 	
 	public void setOriginal(){
-		buttons[0] = new JButton(agencyIcon1);
+		buttons[0] = new newJBut("机构管理");
 		buttons[0].setBounds(13, 50, width, height1);
 		
-		buttons[1] = new JButton(staffIcon1);
+		buttons[1] = new newJBut("人员管理");
 		buttons[1].setBounds(13, 50+height1*1, width, height1);
 		
-		buttons[2] = new JButton(salaryIcon1);
+		buttons[2] = new newJBut("薪水策略");
 		buttons[2].setBounds(13, 50+height1*2, width, height1);
 		
-		buttons[3] = new JButton(constIcon1);
+		buttons[3] = new newJBut("常量管理");
 		buttons[3].setBounds(13, 50+height1*3, width, height1);
 		
-		buttons[4] = new JButton(receiptIcon);
+		buttons[4] = new newJBut("单据审批");
 		buttons[4].setBounds(13, 50+height1*4, width, height1);
 		
-		buttons[5] = new JButton(accountIcon);
+		buttons[5] = new newJBut("账目查询");
 		buttons[5].setBounds(13, 50+height1*5, width, height1);
 		
-		buttons[6] = new JButton(logIcon);
+		buttons[6] = new newJBut("日志查看");
 		buttons[6].setBounds(13, 50+height1*6, width, height1);
 		
-		add = new JButton(addIcon);
+		add = new newJBut("增加",framecolor);
 		add.setSize(width, height2);
 		add.setVisible(false);
 		
-		delete = new JButton(deleteIcon);
+		delete = new newJBut("删除",framecolor);
 		delete.setSize(width, height2);
 		delete.setVisible(false);
 		
-		modify = new JButton(modifyIcon);
+		modify = new newJBut("修改",framecolor);
 		modify.setSize(width, height2);
 		modify.setVisible(false);
 		
-		observe = new JButton(observeIcon);
+		observe = new newJBut("查询",framecolor);
 		observe.setSize(width, height2);
 		observe.setVisible(false);
 		
@@ -379,12 +384,12 @@ public class ManagerButtonComponent {
 	public void changeForButtons(int i){
 		for(int count=1;count<=i;count++){
 			buttons[count-1].setLocation(13,50+height1*(count-1));
-			buttons[count-1].setIcon(imgs[2*count-2]);
+//			buttons[count-1].setIcon(imgs[2*count-2]);
 		}
 		
 		for(int count=i+1;count<=buttons.length;count++){
 			buttons[count-1].setLocation(13,50+height1*(count-1)+height2*4);
-			buttons[count-1].setIcon(imgs[2*count-2]);
+//			buttons[count-1].setIcon(imgs[2*count-2]);
 		}
 		
 		add.setLocation(13,50+height1*i);
@@ -400,7 +405,7 @@ public class ManagerButtonComponent {
 		observe.setVisible(true);
 		
 		
-		buttons[i-1].setIcon(imgs[2*i-1]);
+//		buttons[i-1].setIcon(imgs[2*i-1]);
 		
 	}
 	

@@ -9,22 +9,19 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Vector;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 import nju.sec.yz.ExpressSystem.bl.managerbl.ManagerController;
 import nju.sec.yz.ExpressSystem.blservice.managerBlService.AgencyBlService;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
-import nju.sec.yz.ExpressSystem.presentation.positionui.PositionArriveUi;
 import nju.sec.yz.ExpressSystem.vo.AgencyListVO;
 import nju.sec.yz.ExpressSystem.vo.PositionVO;
 import nju.sec.yz.ExpressSystem.vo.TransitVO;
@@ -40,9 +37,9 @@ public class ManagerAgencyList extends JPanel{
 	private Vector<String> name=new Vector<String>();
 	
 	private JButton search;
-	private JButton back;
+	private newJBut back;
 	
-	private JLabel warning=new JLabel();
+	private newJLabel warning=new newJLabel();
 	
 	private ArrayList<TransitVO> transits;
 	private ArrayList<PositionVO> positions;
@@ -79,16 +76,17 @@ public class ManagerAgencyList extends JPanel{
 		original();
 		
 		warning.setBounds(198, 490, 463 - 198, 30);
-		warning.setFont(new Font("Dialog", 1, 15));
 		warning.setForeground(Color.red);
 		warning.setVisible(false);
 		add(warning);
 		
 		searchnum=new JTextField();
-		searchnum.setBounds(216, 62, 220, 21);
+		searchnum.setBorder(BorderFactory.createLineBorder(Color.white,0));
+	    searchnum.setBounds(216, 62, 220, 21);
 		add(searchnum);
 		
 		search=new JButton();
+		search.setBorderPainted(false);
 		search.setBackground(new Color(0,0,255));  
 		search.setOpaque(false); //设置背景透明
 		search.setBounds(436,62,21,21);
@@ -127,7 +125,6 @@ public class ManagerAgencyList extends JPanel{
 				 if(num<transits.size()){
 					 reference=new ArrayList<String>();
 					 reference.add(transits.get(num).getId());
-					 System.out.println(reference.size());
 				 }else{
 					 reference=new ArrayList<String>();
 					 reference.add(positions.get(num-transits.size()).getTransitId());
@@ -142,9 +139,10 @@ public class ManagerAgencyList extends JPanel{
 			});
 			
 			
-			ImageIcon backIcon = new ImageIcon("graphic/manager/button/back.png");
-			back = new JButton(backIcon);
-			back.setBounds(370, 286, 81, 20);
+//			ImageIcon backIcon = new ImageIcon("graphic/manager/button/back.png");
+			back = new newJBut("显示全部");
+			back.setBounds(351, 286, 100, 24);
+			back.setMargin(new java.awt.Insets(0,0,0,0));
 			add(back);
 			
 			back.addMouseListener(new MouseAdapter() {

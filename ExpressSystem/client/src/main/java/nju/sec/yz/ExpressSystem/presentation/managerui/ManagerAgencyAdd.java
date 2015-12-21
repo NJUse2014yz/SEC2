@@ -16,23 +16,19 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 import nju.sec.yz.ExpressSystem.bl.managerbl.ManagerController;
 import nju.sec.yz.ExpressSystem.blservice.managerBlService.AgencyBlService;
-import nju.sec.yz.ExpressSystem.common.LoadInformation;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJCombo;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJText;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.PositionVO;
-import nju.sec.yz.ExpressSystem.vo.TransitLoadSheetVO;
 import nju.sec.yz.ExpressSystem.vo.TransitVO;
 
 public class ManagerAgencyAdd extends JPanel {
@@ -41,19 +37,19 @@ public class ManagerAgencyAdd extends JPanel {
 	private ManagerButtonComponent mbc;
 
 	
-	private JComboBox AgencyType;
-	private JTextField Location;
-	private JTextField TransitId;
-	private JTextField name;
-	private JTextField Id;
-	private JLabel t;
+	private newJCombo AgencyType;
+	private newJText Location;
+	private newJText TransitId;
+	private newJText name;
+	private newJText Id;
+	private newJLabel t;
 	private newTable positions;
 	private Vector<Vector<String>> data=new Vector<Vector<String>>();
 	private Vector<String> title=new Vector<String>();
 	
-	private JButton confirm;
+	private newJBut confirm;
 	
-	JLabel warning=new JLabel();
+	private newJLabel warning=new newJLabel();
 	
 	public ManagerAgencyAdd(ClientControler maincontroler, ManagerButtonComponent mbc) {
 		this.maincontroler = maincontroler;
@@ -70,7 +66,7 @@ public class ManagerAgencyAdd extends JPanel {
 		setVisible(true);
 		
 		String[] type={"营业厅","中转中心"};
-		AgencyType=new JComboBox(type);
+		AgencyType=new newJCombo(type);
 		AgencyType.setBounds(214, 57, 85, 20);
 		original(1);
 		
@@ -90,8 +86,8 @@ public class ManagerAgencyAdd extends JPanel {
 		/*
 		 * 确定
 		 */
-		ImageIcon cinfirmIcon = new ImageIcon("graphic/manager/button/confirm.png");
-		confirm = new JButton(cinfirmIcon);
+//		ImageIcon cinfirmIcon = new ImageIcon("graphic/manager/button/confirm.png");
+		confirm = new newJBut("确定");
 		confirm.setBounds(382, 417, 72, 24);
 		add(confirm);
 		setVisible(true);
@@ -101,13 +97,7 @@ public class ManagerAgencyAdd extends JPanel {
 				// 判断必填项是否填写完成
 				if ((Location.getText().equals("")) || (name.getText().equals(""))
 						|| (Id.getText().equals("")) ) {
-					warning.setText("尚未完成对必填项的填写");
-					warning.setBounds(198, 490, 463 - 198, 30);
-					warning.setFont(new Font("Dialog", 1, 15));
-					warning.setForeground(Color.red);
-					warning.setVisible(true);
-					add(warning);
-					repaint();
+					warning.NotFilled();
 				} else {
 					ArrayList<PositionVO> Ids=new ArrayList<PositionVO>();
 					for(int i=0;i<positions.getRowCount()-1;i++){
@@ -121,25 +111,10 @@ public class ManagerAgencyAdd extends JPanel {
 					}
 					TransitVO vo=new TransitVO(name.getText().toString(),Id.getText(),Ids,Location.getText());
 				ResultMessage result=manager.addTransit(vo);
-				//成功
-				if(result.getResult()==Result.SUCCESS){
-					warning.setText("提交成功");
-					warning.setBounds(270, 490, 70, 30);
-					warning.setFont(new Font("Dialog", 1, 15));
-					warning.setForeground(Color.red);
-					warning.setVisible(true);
-					add(warning);
-					repaint();
-				}else{
-					//失败
-					warning.setText(result.getMessage());
-					warning.setBounds(138, 490, 463 - 138, 30);
-					warning.setFont(new Font("Dialog", 1, 15));
-					warning.setForeground(Color.red);
-					add(warning);
-					repaint();
+				warning.Reply(result);
 				}
-				}
+				add(warning);
+				repaint();
 			}
 		});	
 
@@ -149,8 +124,8 @@ public class ManagerAgencyAdd extends JPanel {
 		/*
 		 * 确定
 		 */
-		ImageIcon cinfirmIcon = new ImageIcon("graphic/manager/button/confirm.png");
-		confirm = new JButton(cinfirmIcon);
+//		ImageIcon cinfirmIcon = new ImageIcon("graphic/manager/button/confirm.png");
+		confirm = new newJBut("确定");
 		confirm.setBounds(382, 417, 72, 24);
 		add(confirm);
 		setVisible(true);
@@ -160,13 +135,7 @@ public class ManagerAgencyAdd extends JPanel {
 				// 判断必填项是否填写完成
 				if ((Id.getText().equals("")) || (name.getText().equals(""))
 						|| (TransitId.getText().equals("")) || (Location.getText().equals(""))) {
-					warning.setText("尚未完成对必填项的填写");
-					warning.setBounds(198, 490, 463 - 198, 30);
-					warning.setFont(new Font("Dialog", 1, 15));
-					warning.setForeground(Color.red);
-					warning.setVisible(true);
-					add(warning);
-					repaint();
+					warning.NotFilled();
 				} else {
 				PositionVO vo=new PositionVO();
 				vo.setName(name.getText());
@@ -176,25 +145,10 @@ public class ManagerAgencyAdd extends JPanel {
 				
 				ResultMessage result=manager.addPosition(vo);
 				//成功
-				if(result.getResult()==Result.SUCCESS){
-					warning.setText("提交成功");
-					warning.setBounds(270, 490, 70, 30);
-					warning.setFont(new Font("Dialog", 1, 15));
-					warning.setForeground(Color.red);
-					warning.setVisible(true);
-					add(warning);
-					
-					repaint();
-				}else{
-					//失败
-					warning.setText(result.getMessage());
-					warning.setBounds(138, 490, 463 - 138, 30);
-					warning.setFont(new Font("Dialog", 1, 15));
-					warning.setForeground(Color.red);
-					add(warning);
-					repaint();
+				warning.Reply(result);
 				}
-				}
+				add(warning);
+				repaint();
 			}
 		});	
 
@@ -205,25 +159,25 @@ public class ManagerAgencyAdd extends JPanel {
 		mbc.add();
 		add(AgencyType);
 		
-		Location=new JTextField();
+		Location=new newJText();
 		Location.setBounds(204, 89, 78, 18);
 		add(Location);
 		
-		Id=new JTextField();
+		Id=new newJText();
 		Id.setBounds(190, 118, 73, 18);
 		add(Id);
 		
-		name=new JTextField();
+		name=new newJText();
 		name.setBounds(190, 147, 140, 18);
 		add(name);
 		if(n==1)
 		{
-			TransitId=new JTextField();
+			TransitId=new newJText();
 			TransitId.setBounds(250, 173, 140, 18);
 			add(TransitId);
 			
-			t=new JLabel("所属中转中心");
-			t.setBounds(152,170,100,25);
+			t=new newJLabel("所属中转中心");
+			t.setBounds(155,170,100,25);
 			t.setFont(new Font("Dialog", 1, 15));
 			t.setForeground(Color.white);
 			add(t);

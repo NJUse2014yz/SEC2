@@ -8,9 +8,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -22,10 +22,10 @@ import javax.swing.table.TableModel;
 import nju.sec.yz.ExpressSystem.bl.managerbl.ManagerController;
 import nju.sec.yz.ExpressSystem.blservice.managerBlService.StaffBlService;
 import nju.sec.yz.ExpressSystem.common.Status;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
-import nju.sec.yz.ExpressSystem.vo.PositionVO;
 import nju.sec.yz.ExpressSystem.vo.StaffVO;
-import nju.sec.yz.ExpressSystem.vo.TransitVO;
 
 public class ManagerStaffDelete extends JPanel {
 	private StaffBlService manager = new ManagerController();
@@ -36,11 +36,11 @@ public class ManagerStaffDelete extends JPanel {
 	private TableModel model;
 	private JScrollPane jsc;
 
-	private JLabel warning = new JLabel();
+	private newJLabel warning = new newJLabel();
 
 	private JButton search;
-	private JButton back;
-	private JButton confirm;
+	private newJBut back;
+	private newJBut confirm;
 
 	public ManagerStaffDelete(ClientControler maincontroler, ManagerButtonComponent mbc) {
 		this.maincontroler = maincontroler;
@@ -68,22 +68,24 @@ public class ManagerStaffDelete extends JPanel {
 		original();
 		
 		searchnum=new JTextField();
+		searchnum.setBorder(BorderFactory.createLineBorder(Color.white,0));
 	    searchnum.setBounds(216, 62, 220, 21);
 	    add(searchnum);
 	    
 	    search=new JButton();
+	    search.setBorderPainted(false);
 	    search.setBackground(new Color(0,0,255));  
 	    search.setOpaque(false); //设置背景透明
 	    search.setBounds(436,62,21,21);
 	    add(search);
 	    
-	    ImageIcon backIcon = new ImageIcon("graphic/manager/button/back.png");
-		back = new JButton(backIcon);
+//	    ImageIcon backIcon = new ImageIcon("graphic/manager/button/back.png");
+		back = new newJBut("返回原列表");
 		back.setBounds(290, 286, 81, 20);
 		add(back);
 	    
-	    ImageIcon cinfirmIcon = new ImageIcon("graphic/manager/button/confirm.png");
-		confirm = new JButton(cinfirmIcon);
+//	    ImageIcon cinfirmIcon = new ImageIcon("graphic/manager/button/confirm.png");
+		confirm = new newJBut("删除");
 		confirm.setBounds(385, 286, 72, 20);
 		add(confirm);
 	    
@@ -94,7 +96,6 @@ public class ManagerStaffDelete extends JPanel {
 				if (searchnum.getText().equals("")) {
 					warning.setText("信息未填写");
 					warning.setBounds(198, 490, 463 - 198, 30);
-					warning.setFont(new Font("Dialog", 1, 15));
 					warning.setForeground(Color.red);
 					warning.setVisible(true);
 					add(warning);

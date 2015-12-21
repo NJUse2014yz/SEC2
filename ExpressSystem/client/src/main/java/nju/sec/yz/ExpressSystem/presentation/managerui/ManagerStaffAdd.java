@@ -20,6 +20,10 @@ import nju.sec.yz.ExpressSystem.blservice.managerBlService.StaffBlService;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.Status;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJCombo;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJText;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.PositionVO;
 import nju.sec.yz.ExpressSystem.vo.StaffVO;
@@ -31,19 +35,19 @@ public class ManagerStaffAdd extends JPanel{
 	private ManagerButtonComponent mbc;
 
 	// 姓名
-	private JTextField name;
+	private newJText name;
 
 	// 人员编号
-	private JTextField id;
+	private newJText id;
 
 	// 职位，权限
-	private JComboBox power;
+	private newJCombo power;
 
 	// 所属机构
-	private JComboBox agency;
+	private newJCombo agency;
 	
-	private JButton confirmButton;
-	private JLabel warning=new JLabel();
+	private newJBut confirmButton;
+	private newJLabel warning=new newJLabel();
 
 	public ManagerStaffAdd(ClientControler maincontroler,ManagerButtonComponent mbc) {
 		this.maincontroler=maincontroler;
@@ -58,11 +62,11 @@ public class ManagerStaffAdd extends JPanel{
 		setSize(490, 550);
 		setVisible(true);
 		
-		name=new JTextField();
+		name=new newJText();
 		name.setBounds(193, 72, 74, 18);
 		add(name);
 		
-		id=new JTextField();
+		id=new newJText();
 		id.setBounds(218, 102, 83, 18);
 		add(id);
 		
@@ -76,7 +80,7 @@ public class ManagerStaffAdd extends JPanel{
 				"总经理",
 				"管理员"
 		};
-		power=new JComboBox(status);
+		power=new newJCombo(status);
 		power.setBounds(187,131,116,20);
 		add(power);
 		
@@ -96,7 +100,8 @@ public class ManagerStaffAdd extends JPanel{
 		}
 		
 		String[] s=new String[count];
-		agency=new JComboBox(agencyId.toArray(s));
+		agency=new newJCombo(agencyId.toArray(s));
+		agency.addItem("总公司");
 		agency.setBounds(218,160,110,20);
 		add(agency);
 		
@@ -105,9 +110,9 @@ public class ManagerStaffAdd extends JPanel{
 		/*
 		 * 确定
 		 */
-		ImageIcon cinfirmIcon = new ImageIcon("graphic/deliver/button/confirm.png");
-		confirmButton = new JButton(cinfirmIcon);
-		confirmButton.setBounds(378, 256, 76, 27);
+//		ImageIcon cinfirmIcon = new ImageIcon("graphic/deliver/button/confirm.png");
+		confirmButton = new newJBut("确定");
+		confirmButton.setBounds(378, 256, 72, 24);
 		add(confirmButton);
 		setVisible(true);
 
@@ -115,38 +120,17 @@ public class ManagerStaffAdd extends JPanel{
 			public void mouseClicked(MouseEvent e) {
 				// 判断必填项是否填写完成
 				if ((name.getText().equals("")) || (id.getText().equals(""))) {
-					warning.setText("尚未完成对带*必填项的填写");
-					warning.setBounds(198, 490, 463 - 198, 30);
-					warning.setFont(new Font("Dialog", 1, 15));
-					warning.setForeground(Color.red);
-					warning.setVisible(true);
-					add(warning);
-					repaint();
+					warning.NotFilled();
+					
 				} else {
 					// translate data
 					StaffVO vo=new StaffVO(name.getText(),id.getText(),getstatus(power),agency.getSelectedItem().toString(),null);
 					// 判断输入的信息是否正确
 					ResultMessage result = manager.addStaff(vo);
 					// 失败
-					if (result.getResult() == Result.FAIL) {
-
-						warning.setText(result.getMessage());
-						warning.setBounds(138, 490, 463 - 138, 30);
-						warning.setFont(new Font("Dialog", 1, 15));
-						warning.setForeground(Color.red);
-						add(warning);
-						repaint();
-					} else {
-						// 提交成功
-						warning.setText("提交成功");
-						warning.setBounds(270, 490, 70, 30);
-						warning.setFont(new Font("Dialog", 1, 15));
-						warning.setForeground(Color.red);
-						warning.setVisible(true);
-						add(warning);
-
-						repaint();
-					}
+					warning.Reply(result);
+					add(warning);
+					repaint();
 				}
 			}
 		});

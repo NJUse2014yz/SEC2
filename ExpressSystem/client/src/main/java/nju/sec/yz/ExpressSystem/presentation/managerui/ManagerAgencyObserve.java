@@ -13,14 +13,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 import nju.sec.yz.ExpressSystem.bl.managerbl.ManagerController;
 import nju.sec.yz.ExpressSystem.blservice.managerBlService.AgencyBlService;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.PositionVO;
@@ -33,14 +30,14 @@ public class ManagerAgencyObserve extends JPanel{
 	
 	private ArrayList<String> num;
 
-	private JLabel location;
-	private JLabel Id;
-	private JLabel name;
-	private JLabel TransitId;
+	private newJLabel location;
+	private newJLabel Id;
+	private newJLabel name;
+	private newJLabel TransitId;
 	private newTable table;
-	private JButton back;
+	private newJBut back;
 
-	private JLabel warning = new JLabel();
+	private newJLabel warning = new newJLabel();
 	private JLabel transit;
 	
 	private Vector<Vector<String>> data=new Vector<Vector<String>>();
@@ -62,23 +59,17 @@ public class ManagerAgencyObserve extends JPanel{
 		setSize(490, 550);
 		setVisible(true);
 		
-		location = new JLabel();
+		location = new newJLabel();
 		location.setBounds(204, 89, 78, 18);
 		add(location);
-		location.setFont(new Font("Dialog", 1, 15));
-		location.setForeground(Color.white);
 		
-		Id = new JLabel();
+		Id = new newJLabel();
 		Id.setBounds(190, 118, 73, 18);
 		add(Id);
-		Id.setFont(new Font("Dialog", 1, 15));
-		Id.setForeground(Color.white);
 
-		name = new JLabel();
+		name = new newJLabel();
 		name.setBounds(190, 147, 180, 18);
 		add(name);
-		name.setFont(new Font("Dialog", 1, 15));
-		name.setForeground(Color.white);
 
 		title.add("所在地");
 		title.add("编号");
@@ -88,9 +79,10 @@ public class ManagerAgencyObserve extends JPanel{
 		table.setBounds(137,200,318,181);
 		table.join();
 		
-		ImageIcon backIcon = new ImageIcon("graphic/manager/button/back.png");
-		back = new JButton(backIcon);
-		back.setBounds(370, 360, 81, 20);
+//		ImageIcon backIcon = new ImageIcon("graphic/manager/button/back.png");
+		back = new newJBut("返回原列表 ");
+		back.setMargin(new java.awt.Insets(0,0,0,0));
+		back.setBounds(370, 390, 100, 24);
 		add(back);
 
 		back.addMouseListener(new MouseAdapter() {
@@ -132,12 +124,10 @@ public class ManagerAgencyObserve extends JPanel{
 		add(transit);
 	
 		String transit = listVO.get(count).getTransitId();
-		TransitId = new JLabel();
+		TransitId = new newJLabel();
 		TransitId.setText(transit);
 		TransitId.setBounds(247, 179, 140, 18);
 		add(TransitId);
-		TransitId.setFont(new Font("Dialog", 1, 15));
-		TransitId.setForeground(Color.white);
 	
 		
 	}

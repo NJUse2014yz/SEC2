@@ -9,21 +9,17 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Vector;
 
-import javax.swing.DefaultListSelectionModel;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 import nju.sec.yz.ExpressSystem.bl.managerbl.ManagerController;
-import nju.sec.yz.ExpressSystem.bl.managerbl.Position;
 import nju.sec.yz.ExpressSystem.blservice.managerBlService.AgencyBlService;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.AgencyListVO;
@@ -40,11 +36,11 @@ public class ManagerAgencyDelete extends JPanel{
 	private Vector<Vector<String>> data=new Vector<Vector<String>>();
 	private Vector<String> name=new Vector<String>();
 	
-	private JLabel warning=new JLabel();
+	private newJLabel warning=new newJLabel();
 	
 	private JButton search;
-	private JButton back;
-	private JButton confirm;
+	private newJBut back;
+	private newJBut confirm;
 	
 	private ArrayList<TransitVO> transits;
 	private ArrayList<PositionVO> positions;
@@ -75,28 +71,30 @@ public class ManagerAgencyDelete extends JPanel{
 		original();
 	    
 	    searchnum=new JTextField();
-	    searchnum.setBounds(216, 62, 220, 21);
+	    searchnum.setBorder(BorderFactory.createLineBorder(Color.white,0));
+	    searchnum.setBounds(216, 62, 220, 20);
 	    add(searchnum);
 	    
 	    search=new JButton();
+	    search.setBorderPainted(false);
 	    search.setBackground(new Color(0,0,255));  
 	    search.setOpaque(false); //设置背景透明
-	    search.setBounds(436,62,21,21);
+	    search.setBounds(436,62,21,20);
 	    add(search);
 	    
 	    ImageIcon backIcon = new ImageIcon("graphic/manager/button/back.png");
-		back = new JButton(backIcon);
-		back.setBounds(290, 286, 81, 20);
+		back = new newJBut("显示全部");
+		back.setMargin(new java.awt.Insets(0,0,0,0));
+		back.setBounds(281, 286, 90, 24);
 		add(back);
 	    
-	    ImageIcon cinfirmIcon = new ImageIcon("graphic/manager/button/confirm.png");
-		confirm = new JButton(cinfirmIcon);
-		confirm.setBounds(385, 286, 72, 20);
+//	    ImageIcon cinfirmIcon = new ImageIcon("graphic/manager/button/confirm.png");
+		confirm = new newJBut("删除");
+		confirm.setBounds(385, 286, 72, 24);
 		add(confirm);
 	    
 		
 		warning.setBounds(198, 490, 463 - 198, 30);
-		warning.setFont(new Font("Dialog", 1, 15));
 		warning.setForeground(Color.red);
 		warning.setVisible(false);
 		add(warning);
@@ -154,7 +152,6 @@ public class ManagerAgencyDelete extends JPanel{
 	}
 	private	void changeData(AgencyListVO agency)
 	{
-		System.out.println(data.size());
 		data.removeAllElements();
 		transits=(ArrayList<TransitVO>) agency.transits;
 		positions=(ArrayList<PositionVO>) agency.positions;
