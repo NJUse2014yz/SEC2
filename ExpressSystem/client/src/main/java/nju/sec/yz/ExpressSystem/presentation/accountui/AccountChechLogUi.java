@@ -13,16 +13,14 @@ import java.util.Vector;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 
 import nju.sec.yz.ExpressSystem.bl.accountbl.LogController;
 import nju.sec.yz.ExpressSystem.blservice.accountBlService.LogBlService;
 import nju.sec.yz.ExpressSystem.presentation.DateChooser;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.AccountControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
-import nju.sec.yz.ExpressSystem.vo.AccountVO;
 import nju.sec.yz.ExpressSystem.vo.LogVO;
 
 public class AccountChechLogUi extends JPanel{
@@ -33,7 +31,7 @@ public class AccountChechLogUi extends JPanel{
 	
 	private DateChooser date;
 	private newTable table;
-	private JButton all;
+	private newJBut all;
 	private ArrayList<LogVO> logs;
 	private Vector<Vector<String>> data=new Vector<Vector<String>>(); 
 	private Vector<String> name=new Vector<String>();
@@ -45,9 +43,9 @@ public class AccountChechLogUi extends JPanel{
 	private static final int scroll_y=109;
 	private static final int scroll_w=316;
 	private static final int scroll_h=184;
-	private static final int all_x=358;
-	private static final int all_y=310;
-	private static final int all_w=91;
+	private static final int all_x=390;
+	private static final int all_y=71;
+	private static final int all_w=72;
 	private static final int all_h=24;
 	
 	private ImageIcon allIcon=new ImageIcon("graphic/account/button/showall_button.jpg");
@@ -98,7 +96,7 @@ public class AccountChechLogUi extends JPanel{
 		table.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
 		table.join();
 		
-		all=new JButton(allIcon);
+		all=new newJBut("确定");
 		all.setBounds(all_x, all_y, all_w, all_h);
 		all.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)

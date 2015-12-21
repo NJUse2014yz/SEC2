@@ -17,6 +17,9 @@ import nju.sec.yz.ExpressSystem.bl.accountbl.AccountController;
 import nju.sec.yz.ExpressSystem.blservice.accountBlService.AccountBlService;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJText;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.AccountControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.AccountVO;
@@ -27,18 +30,18 @@ public class AccountAddUi extends JPanel{
 	private AccountControler controler;
 	private AccountBlService accountBl;
 	
-	private JTextField name;
-	private JTextField amount;
-	private JButton confirm;
-	private JLabel warning;
+	private newJText name;
+	private newJText amount;
+	private newJBut confirm;
+	private newJLabel warning;
 	
 	private static final int x=198;
 	private static final int name_y=75;
-	private static final int amount_y=104;
+	private static final int amount_y=101;
 	private static final int w=152;
 	private static final int h=18;
-	private static final int confirm_x=331;
-	private static final int confirm_y=148;
+	private static final int confirm_x=381;
+	private static final int confirm_y=178;
 	private static final int confirm_w=72;
 	private static final int confirm_h=24;
 	private static final int warning_x=198;
@@ -62,27 +65,26 @@ public class AccountAddUi extends JPanel{
 		setLayout(null);
 		setSize(490, 550);
 		
-		name=new JTextField();
+		name=new newJText();
 		name.setBounds(x, name_y, w, h);
 		add(name);
 		
-		amount=new JTextField();
+		amount=new newJText();
 		amount.setBounds(x, amount_y, w, h);
 		add(amount);
 		
-		warning=new JLabel();
+		warning=new newJLabel();
 		warning.setBounds(warning_x, warning_y, warning_w, warning_h);
-		warning.setFont(new Font("Dialog", 1, 15));
 		warning.setForeground(Color.red);
 		add(warning);
 		warning.setVisible(false);
 		
-		confirm=new JButton(confirmIcon);
+		confirm=new newJBut("确定");
 		confirm.setBounds(confirm_x, confirm_y, confirm_w, confirm_h);
 		confirm.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
 			{
-				AccountVO avo=new AccountVO(name.getText(),Integer.parseInt((amount.getText())));
+				AccountVO avo=new AccountVO(name.getText(),Double.parseDouble((amount.getText())));
 				ResultMessage result=accountBl.addAccount(avo);
 				if(result.getResult()==Result.SUCCESS)
 				{

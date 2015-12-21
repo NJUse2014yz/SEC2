@@ -10,18 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import nju.sec.yz.ExpressSystem.bl.accountbl.AccountController;
 import nju.sec.yz.ExpressSystem.blservice.accountBlService.AccountBlService;
-import nju.sec.yz.ExpressSystem.common.Result;
-import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.AccountControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
@@ -36,7 +34,7 @@ public class AccountModifyUi extends JPanel{
 	private JTextField JTsearch;
 	private JButton JBsearch;
 	private newTable table;
-	private JLabel warning;
+	private newJLabel warning;
 	private List<AccountVO> avo;
 	private Vector<Vector<String>> data=new Vector<Vector<String>>(); 
 	private Vector<String> name=new Vector<String>();
@@ -79,9 +77,11 @@ public class AccountModifyUi extends JPanel{
 		setSize(490, 550);
 		
 		JTsearch=new JTextField();
+		JTsearch.setBorder(BorderFactory.createLineBorder(Color.white,0));
 		JTsearch.setBounds(jt_x, jt_y, jt_w, jt_h);
 		add(JTsearch);
 		JBsearch=new JButton(searchIcon);
+		JBsearch.setBorderPainted(false);
 		JBsearch.setBounds(search_x,search_y,search_w,search_h);
 		JBsearch.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
@@ -118,9 +118,8 @@ public class AccountModifyUi extends JPanel{
 		});
 		table.join();
 		
-		warning=new JLabel();
+		warning=new newJLabel();
 		warning.setBounds(warning_x, warning_y, warning_w, warning_h);
-		warning.setFont(new Font("Dialog", 1, 15));
 		warning.setForeground(Color.red);
 		add(warning);
 		warning.setVisible(false);

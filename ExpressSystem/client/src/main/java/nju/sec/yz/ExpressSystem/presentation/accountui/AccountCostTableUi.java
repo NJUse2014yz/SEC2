@@ -36,9 +36,9 @@ public class AccountCostTableUi extends JPanel{
 	private newJLabel warning;
 	
 	private static final int x=189;
-	private static final int in_y=75;
-	private static final int out_y=99;
-	private static final int get_y=126;
+	private static final int in_y=73;
+	private static final int out_y=97;
+	private static final int get_y=124;
 	private static final int w=90;
 	private static final int h=20;
 	private static final int excle_x=362;

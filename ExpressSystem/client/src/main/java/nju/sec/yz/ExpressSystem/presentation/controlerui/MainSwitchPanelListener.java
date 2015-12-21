@@ -12,11 +12,11 @@ public class MainSwitchPanelListener implements MouseListener{
 		this.controler=controler;
 		controler.mainChangePanel(order);
 	}
-	public MainSwitchPanelListener(MAIN_CONTROL n,ClientControler controler)
-	{
-		this.order=n;
-		this.controler=controler;
-	}
+//	public MainSwitchPanelListener(MAIN_CONTROL n,ClientControler controler)
+//	{
+//		this.order=n;
+//		this.controler=controler;
+//	}
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub

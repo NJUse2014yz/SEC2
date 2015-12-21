@@ -11,13 +11,15 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import nju.sec.yz.ExpressSystem.bl.accountbl.AccountController;
 import nju.sec.yz.ExpressSystem.blservice.accountBlService.AccountBlService;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJText;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.AccountControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.AccountVO;
@@ -29,21 +31,21 @@ public class AccountModifyFillUi extends JPanel{
 	private AccountBlService accountBl;
 	private AccountVO avo;
 	
-	private JTextField name;
-	private JLabel amount;
-	private JButton confirm;
-	private JLabel warning;
+	private newJText name;
+	private newJLabel amount;
+	private newJBut confirm;
+	private newJLabel warning;
 	
-	private static final int name_x=193;
-	private static final int name_y=73;
+	private static final int name_x=198;
+	private static final int name_y=75;
 	private static final int name_w=152;
-	private static final int name_h=17;
-	private static final int amount_x=193;
-	private static final int amount_y=102;
+	private static final int name_h=18;
+	private static final int amount_x=198;
+	private static final int amount_y=101;
 	private static final int amount_w=70;
 	private static final int amount_h=20;
-	private static final int confirm_x=331;
-	private static final int confirm_y=148;
+	private static final int confirm_x=381;
+	private static final int confirm_y=178;
 	private static final int confirm_w=72;
 	private static final int confirm_h=24;
 	private static final int warning_x=198;
@@ -68,25 +70,22 @@ public class AccountModifyFillUi extends JPanel{
 		setLayout(null);
 		setSize(490, 550);
 		
-		name=new JTextField();
+		name=new newJText(avo.getName());
 		name.setBounds(name_x, name_y, name_w, name_h);
 		add(name);
 		
-		amount=new JLabel();
+		amount=new newJLabel();
 		amount.setBounds(amount_x, amount_y, amount_w, amount_h);
-		amount.setFont(new Font("Dialog", 1, 15));
-		amount.setForeground(Color.white);
 		amount.setText(Double.toString(avo.getBalance()));
 		add(amount);
 		
-		warning=new JLabel();
+		warning=new newJLabel();
 		warning.setBounds(warning_x, warning_y, warning_w, warning_h);
-		warning.setFont(new Font("Dialog", 1, 15));
 		warning.setForeground(Color.red);
 		add(warning);
 		warning.setVisible(false);
 		
-		confirm=new JButton(confirmIcon);
+		confirm=new newJBut("确定");
 		confirm.setBounds(confirm_x, confirm_y, confirm_w, confirm_h);
 		confirm.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)

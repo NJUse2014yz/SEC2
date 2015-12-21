@@ -6,6 +6,7 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import nju.sec.yz.ExpressSystem.presentation.componentui.MessageDeclare;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.AdminstraterControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 
@@ -20,6 +21,7 @@ public class AdminstraterMainUi extends JPanel{
 		this.mainControler=clientControler;
 		this.controler=mainControler.adminstraterControler;
 		initAdminstraterUi();
+		MessageDeclare message=new MessageDeclare(this);
 	}
 	private void initAdminstraterUi()
 	{

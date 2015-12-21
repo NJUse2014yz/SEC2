@@ -1,7 +1,6 @@
 package nju.sec.yz.ExpressSystem.presentation.accountui;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -10,23 +9,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import nju.sec.yz.ExpressSystem.bl.accountbl.AccountController;
 import nju.sec.yz.ExpressSystem.blservice.accountBlService.AccountBlService;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.AccountControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.AccountVO;
-import nju.sec.yz.ExpressSystem.vo.UserVO;
 
 public class AccountDeleteUi extends JPanel{
 	private AccountButtonComponents bc;
@@ -37,9 +35,9 @@ public class AccountDeleteUi extends JPanel{
 	private JTextField JTsearch;
 	private JButton JBsearch;
 	private newTable table;
-	private JButton back;
-	private JButton confirm;
-	private JLabel warning;
+	private newJBut back;
+	private newJBut confirm;
+	private newJLabel warning;
 	private Vector<String> name=new Vector<String>();
 	private Vector<Vector<String>> data=new Vector<Vector<String>>();
 	private List<AccountVO> avl;
@@ -56,9 +54,9 @@ public class AccountDeleteUi extends JPanel{
 	private static final int scroll_y=94;
 	private static final int scroll_w=315;
 	private static final int scroll_h=125;
-	private static final int back_x=304;
+	private static final int back_x=284;
 	private static final int back_y=229;
-	private static final int back_w=80;
+	private static final int back_w=100;
 	private static final int back_h=24;
 	private static final int confirm_x=398;
 	private static final int confirm_y=229;
@@ -70,8 +68,8 @@ public class AccountDeleteUi extends JPanel{
 	private static final int warning_h=30;
 	
 	private ImageIcon searchIcon=new ImageIcon("graphic/account/button/search_button.jpg");
-	private ImageIcon backIcon=new ImageIcon("graphic/account/button/back_button.jpg");
-	private ImageIcon confirmIcon=new ImageIcon("graphic/account/button/confirm_button.jpg");
+//	private ImageIcon backIcon=new ImageIcon("graphic/account/button/back_button.jpg");
+//	private ImageIcon confirmIcon=new ImageIcon("graphic/account/button/confirm_button.jpg");
 	
 	
 	public AccountDeleteUi(ClientControler mainControler,AccountButtonComponents bc){
@@ -93,9 +91,11 @@ public class AccountDeleteUi extends JPanel{
 		setSize(490, 550);
 		
 		JTsearch=new JTextField();
+		JTsearch.setBorder(BorderFactory.createLineBorder(Color.white,0));
 		JTsearch.setBounds(jt_x, jt_y, jt_w, jt_h);
 		add(JTsearch);
 		JBsearch=new JButton(searchIcon);
+		JBsearch.setBorderPainted(false);
 		JBsearch.setBounds(search_x,search_y,search_w,search_h);
 		JBsearch.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
@@ -126,7 +126,8 @@ public class AccountDeleteUi extends JPanel{
 		table.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
 		table.join();
 		
-		back=new JButton(backIcon);
+		back=new newJBut("返回原列表");
+		back.setMargin(new java.awt.Insets(0,0,0,0));
 		back.setBounds(back_x, back_y, back_w, back_h);
 		back.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
@@ -147,7 +148,7 @@ public class AccountDeleteUi extends JPanel{
 		});
 		add(back);
 		
-		confirm=new JButton(confirmIcon);
+		confirm=new newJBut("确定");
 		confirm.setBounds(confirm_x, confirm_y, confirm_w, confirm_h);
 		confirm.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
@@ -170,9 +171,8 @@ public class AccountDeleteUi extends JPanel{
 		});
 		add(confirm);
 		
-		warning=new JLabel();
+		warning=new newJLabel();
 		warning.setBounds(warning_x, warning_y, warning_w, warning_h);
-		warning.setFont(new Font("Dialog", 1, 15));
 		warning.setForeground(Color.red);
 		add(warning);
 		warning.setVisible(false);
