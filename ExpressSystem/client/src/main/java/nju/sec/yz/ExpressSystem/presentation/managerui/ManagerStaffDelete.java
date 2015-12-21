@@ -81,12 +81,13 @@ public class ManagerStaffDelete extends JPanel {
 	    
 //	    ImageIcon backIcon = new ImageIcon("graphic/manager/button/back.png");
 		back = new newJBut("返回原列表");
-		back.setBounds(290, 286, 81, 20);
+		back.setMargin(new java.awt.Insets(0,0,0,0));;
+		back.setBounds(271, 286, 100, 24);
 		add(back);
 	    
 //	    ImageIcon cinfirmIcon = new ImageIcon("graphic/manager/button/confirm.png");
 		confirm = new newJBut("删除");
-		confirm.setBounds(385, 286, 72, 20);
+		confirm.setBounds(385, 286, 72, 24);
 		add(confirm);
 	    
 	    

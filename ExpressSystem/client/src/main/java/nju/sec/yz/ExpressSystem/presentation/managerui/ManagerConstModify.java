@@ -12,13 +12,8 @@ import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 import nju.sec.yz.ExpressSystem.bl.managerbl.ManagerController;
 import nju.sec.yz.ExpressSystem.blservice.managerBlService.ConstBlService;
@@ -26,11 +21,13 @@ import nju.sec.yz.ExpressSystem.common.CityInformation;
 import nju.sec.yz.ExpressSystem.common.PriceInformation;
 import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJText;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.CityVO;
 import nju.sec.yz.ExpressSystem.vo.PriceVO;
-import nju.sec.yz.ExpressSystem.vo.SalaryVO;
 
 public class ManagerConstModify extends JPanel {
 	private ConstBlService manager = new ManagerController();
@@ -41,14 +38,14 @@ public class ManagerConstModify extends JPanel {
 	private Vector<Vector<String>> data=new Vector<Vector<String>>();
 	private Vector<String> name=new Vector<String>();
 
-	private JTextField priceForCar;
-	private JTextField priceForTrain;
-	private JTextField priceForPlane;
-	private JTextField standard;
+	private newJText priceForCar;
+	private newJText priceForTrain;
+	private newJText priceForPlane;
+	private newJText standard;
 
-	private JButton confirm;
+	private newJBut confirm;
 
-	private JLabel warning = new JLabel();
+	private newJLabel warning = new newJLabel();
 	
 	private ArrayList<CityVO> cities;
 
@@ -85,32 +82,29 @@ public class ManagerConstModify extends JPanel {
 
 //		PriceInformation pinf = new PriceInformation();
 
-		priceForPlane = new JTextField();
-		priceForPlane.setText(Double.toString(pinf.getPriceForPlane()));
+		priceForPlane = new newJText(Double.toString(pinf.getPriceForPlane()));
 		priceForPlane.setBounds(208, 279, 70, 18);
 		add(priceForPlane);
 
-		priceForTrain = new JTextField();
-		priceForTrain.setText(Double.toString(pinf.getPriceForTrain()));
+		priceForTrain = new newJText(Double.toString(pinf.getPriceForTrain()));
 		priceForTrain.setBounds(208, 308, 70, 18);
 		add(priceForTrain);
 
-		priceForCar = new JTextField();
-		priceForCar.setText(Double.toString(pinf.getPriceForCar()));
+		priceForCar = new newJText(Double.toString(pinf.getPriceForCar()));
 		priceForCar.setBounds(208, 339, 70, 18);
 		add(priceForCar);
 
-		standard = new JTextField();
-		standard.setText(Double.toString(pinf.getStandard()));
+		standard = new newJText(Double.toString(pinf.getStandard()));
 		standard.setBounds(265, 367, 70, 18);
 		add(standard);
 
 		/*
 		 * 确定
 		 */
-		ImageIcon cinfirmIcon = new ImageIcon("graphic/manager/button/modifyconfirm.png");
-		confirm = new JButton(cinfirmIcon);
-		confirm.setBounds(377, 380, 72, 25);
+//		ImageIcon cinfirmIcon = new ImageIcon("graphic/manager/button/modifyconfirm.png");
+		confirm = new newJBut("确认修改");
+		confirm.setMargin(new java.awt.Insets(0,0,0,0));
+		confirm.setBounds(359, 380, 90, 24);
 		add(confirm);
 		setVisible(true);
 
@@ -136,11 +130,7 @@ public class ManagerConstModify extends JPanel {
 				}
 				if (hasBlank||(priceForCar.getText().equals("")) || (priceForTrain.getText().equals(""))
 						|| (priceForPlane.getText().equals("")) || (standard.getText().equals(""))) {
-					warning.setText("尚未完成对必填项的填写");
-					warning.setBounds(198, 490, 463 - 198, 30);
-					warning.setFont(new Font("Dialog", 1, 15));
-					warning.setForeground(Color.red);
-					warning.setVisible(true);
+					warning.NotFilled();
 					add(warning);
 					repaint();
 				} else {
@@ -158,10 +148,7 @@ public class ManagerConstModify extends JPanel {
 
 							warning.setText(tableresult.getMessage());
 							warning.setBounds(138, 490, 463 - 138, 30);
-							warning.setFont(new Font("Dialog", 1, 15));
 							warning.setForeground(Color.red);
-							add(warning);
-							repaint();
 							break;
 						} else {
 							PriceInformation pinf = new PriceInformation();
@@ -179,22 +166,19 @@ public class ManagerConstModify extends JPanel {
 
 								warning.setText(priceresult.getMessage());
 								warning.setBounds(138, 490, 463 - 138, 30);
-								warning.setFont(new Font("Dialog", 1, 15));
 								warning.setForeground(Color.red);
-								add(warning);
-								repaint();
 							} else {
 
 								// 提交成功
 								warning.setText("提交成功");
 								warning.setBounds(270, 490, 70, 30);
-								warning.setFont(new Font("Dialog", 1, 15));
 								warning.setForeground(Color.red);
 								warning.setVisible(true);
-								add(warning);
 							}
 
 						}
+						add(warning);
+						repaint();
 					}
 				}
 			}

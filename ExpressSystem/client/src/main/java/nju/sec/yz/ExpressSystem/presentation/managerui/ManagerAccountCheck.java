@@ -1,7 +1,6 @@
 package nju.sec.yz.ExpressSystem.presentation.managerui;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -9,24 +8,20 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 import nju.sec.yz.ExpressSystem.bl.accountbl.AccountController;
 import nju.sec.yz.ExpressSystem.bl.accountbl.FinanceController;
 import nju.sec.yz.ExpressSystem.blservice.accountBlService.AccountBlService;
 import nju.sec.yz.ExpressSystem.blservice.accountBlService.FinanceBlSevice;
 import nju.sec.yz.ExpressSystem.presentation.DateChooser;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJCombo;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.AccountVO;
@@ -45,10 +40,10 @@ public class ManagerAccountCheck extends JPanel {
 	private ClientControler maincontroler;
 	private ManagerButtonComponent mbc;
 
-	private JComboBox choice;
+	private newJCombo choice;
 
-	private JLabel begin;
-	private JLabel end;
+	private newJLabel begin;
+	private newJLabel end;
 	
 	private newTable tableI;
 	private newTable tableO;
@@ -57,9 +52,9 @@ public class ManagerAccountCheck extends JPanel {
 
 	private DateChooser date1;
 	private DateChooser date2;
-	private JButton confirm;
+	private newJBut confirm;
 
-	private JLabel warning;
+	private newJLabel warning;
 	
 	private Vector<Vector<String>> dataI=new Vector<Vector<String>>();
 	private Vector<String> nameI=new Vector<String>();
@@ -109,17 +104,13 @@ public class ManagerAccountCheck extends JPanel {
 		nameC.add("总支出");
 		nameC.add("总利润");
 		
-		begin=new JLabel("起始时间");
+		begin=new newJLabel("起始时间");
 		begin.setBounds(139,82,100,25);
-		begin.setFont(new Font("Dialog", 1, 15));
-		begin.setForeground(Color.white);
 		begin.setVisible(false);
 		add(begin);
 		
-		end=new JLabel("结束时间");
+		end=new newJLabel("结束时间");
 		end.setBounds(139,107,100,25);
-		end.setFont(new Font("Dialog", 1, 15));
-		end.setForeground(Color.white);
 		end.setVisible(false);
 		add(end);
 
@@ -136,15 +127,14 @@ public class ManagerAccountCheck extends JPanel {
 		tableC=new newTable(dataC,nameC,this,false);
 		tableC.setBounds(in_x,in_y,w,h);
 		
-		warning= new JLabel();
+		warning= new newJLabel();
 		warning.setBounds(198, 490, 463 - 198, 30);
-		warning.setFont(new Font("Dialog", 1, 15));
 		warning.setForeground(Color.red);
 		warning.setVisible(false);
 		add(warning);
 		
-		choice = new JComboBox(new String[]{"账户信息","经营情况表","成本收益表"});
-		choice.setBounds(244, 62, 80, 21);
+		choice = new newJCombo(new String[]{"账户信息","经营情况表","成本收益表"});
+		choice.setBounds(242, 60, 110, 21);
 		add(choice);
 		choice.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -160,7 +150,7 @@ public class ManagerAccountCheck extends JPanel {
 			}
 		});
 		
-		confirm = new JButton(confirmIcon);
+		confirm = new newJBut("确定");
 		confirm.setBounds(392, 104, 72, 24);
 		confirm.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -209,8 +199,8 @@ public class ManagerAccountCheck extends JPanel {
 		tableO.join();
 		begin.setVisible(true);
 		end.setVisible(true);
-		date1 = new DateChooser(this, 210, 88);
-		date2 = new DateChooser(this, 210, 110);
+		date1 = new DateChooser(this, 210, 85);
+		date2 = new DateChooser(this, 210, 109);
 		repaint();
 	}
 

@@ -8,9 +8,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -22,6 +22,8 @@ import javax.swing.table.TableModel;
 import nju.sec.yz.ExpressSystem.bl.managerbl.ManagerController;
 import nju.sec.yz.ExpressSystem.blservice.managerBlService.StaffBlService;
 import nju.sec.yz.ExpressSystem.common.Status;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.StaffVO;
 
@@ -35,10 +37,10 @@ public class ManagerStaffList extends JPanel {
 	private TableModel model;
 	private JScrollPane jsc;
 	
-	private JLabel warning=new JLabel();
+	private newJLabel warning=new newJLabel();
 
 	private JButton search;
-	private JButton back;
+	private newJBut back;
 
 	public ManagerStaffList(ClientControler maincontroler, ManagerButtonComponent mbc) {
 		this.maincontroler = maincontroler;
@@ -70,17 +72,19 @@ public class ManagerStaffList extends JPanel {
 		original();
 		
 		searchnum=new JTextField();
-	    searchnum.setBounds(216, 62, 220, 21);
+		searchnum.setBorder(BorderFactory.createLineBorder(Color.white,0));
+		searchnum.setBounds(216, 62, 220, 21);
 	    add(searchnum);
 	    
 	    search=new JButton();
+	    search.setBorderPainted(false);
 	    search.setBackground(new Color(0,0,255));  
 	    search.setOpaque(false); //设置背景透明
 	    search.setBounds(436,62,21,21);
 	    add(search);
 	    
-	    ImageIcon backIcon = new ImageIcon("graphic/manager/button/back.png");
-		back = new JButton(backIcon);
+//	    ImageIcon backIcon = new ImageIcon("graphic/manager/button/back.png");
+	    back = new newJBut("显示全部");
 		back.setBounds(370, 286, 81, 20);
 		add(back);
 	    
@@ -92,7 +96,6 @@ public class ManagerStaffList extends JPanel {
 				if (searchnum.getText().equals("")) {
 					warning.setText("信息未填写");
 					warning.setBounds(198, 490, 463 - 198, 30);
-					warning.setFont(new Font("Dialog", 1, 15));
 					warning.setForeground(Color.red);
 					warning.setVisible(true);
 					add(warning);

@@ -176,7 +176,7 @@ public class ManagerReceiptList extends JPanel {
 		// ImageIcon passIcon = new
 		// ImageIcon("graphic/manager/button/pass.png");
 		pass = new newJBut("通过");
-		pass.setBounds(467 - 75, 262, 75, 27);
+		pass.setBounds(467 - 75, 262, 75, 24);
 		add(pass);
 
 		pass.addMouseListener(new MouseAdapter() {
@@ -210,7 +210,8 @@ public class ManagerReceiptList extends JPanel {
 		// ImageIcon passAllIcon = new
 		// ImageIcon("graphic/manager/button/passAll.png");
 		passAll = new newJBut("全部通过");
-		passAll.setBounds(467 - 160, 262, 75, 27);
+		passAll.setMargin(new java.awt.Insets(0,0,0,0));
+		passAll.setBounds(467 - 160, 262, 75, 24);
 		add(passAll);
 
 		passAll.addMouseListener(new MouseAdapter() {
@@ -239,7 +240,7 @@ public class ManagerReceiptList extends JPanel {
 		});
 
 		modify = new newJBut("修改");
-		modify.setBounds(467 - 245, 262, 75, 27);
+		modify.setBounds(467 - 245, 262, 75, 24);
 		add(modify);
 
 		modify.addMouseListener(new MouseAdapter() {

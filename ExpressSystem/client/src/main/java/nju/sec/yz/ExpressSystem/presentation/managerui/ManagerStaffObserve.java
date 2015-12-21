@@ -8,20 +8,21 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import nju.sec.yz.ExpressSystem.bl.managerbl.ManagerController;
 import nju.sec.yz.ExpressSystem.blservice.managerBlService.StaffBlService;
 import nju.sec.yz.ExpressSystem.common.Status;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.StaffVO;
 
@@ -34,10 +35,10 @@ private JTable table;
 private TableModel model;
 private JScrollPane jsc;
 
-private JLabel warning=new JLabel();
+private newJLabel warning=new newJLabel();
 
 private JButton search;
-private JButton back;
+private newJBut back;
 	public ManagerStaffObserve(ClientControler maincontroler,ManagerButtonComponent mbc) {
 		this.maincontroler=maincontroler;
 		this.mbc=mbc;
@@ -61,18 +62,20 @@ private JButton back;
 		original();
 		
 		searchnum=new JTextField();
+		searchnum.setBorder(BorderFactory.createLineBorder(Color.white,0));
 	    searchnum.setBounds(216, 62, 220, 21);
 	    add(searchnum);
 	    
 	    search=new JButton();
+	    search.setBorderPainted(false);
 	    search.setBackground(new Color(0,0,255));  
 	    search.setOpaque(false); //设置背景透明
 	    search.setBounds(436,62,21,21);
 	    add(search);
 	    
-	    ImageIcon backIcon = new ImageIcon("graphic/manager/button/back.png");
-		back = new JButton(backIcon);
-		back.setBounds(370, 286, 81, 20);
+//	    ImageIcon backIcon = new ImageIcon("graphic/manager/button/back.png");
+		back = new newJBut("显示全部");
+		back.setBounds(361, 286, 90, 24);
 		add(back);
 	    
 	   

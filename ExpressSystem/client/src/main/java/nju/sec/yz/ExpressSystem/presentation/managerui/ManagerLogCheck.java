@@ -4,26 +4,21 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 import nju.sec.yz.ExpressSystem.bl.accountbl.LogController;
 import nju.sec.yz.ExpressSystem.blservice.accountBlService.LogBlService;
 import nju.sec.yz.ExpressSystem.presentation.DateChooser;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
-import nju.sec.yz.ExpressSystem.vo.BussinessVO;
 import nju.sec.yz.ExpressSystem.vo.LogVO;
 
 public class ManagerLogCheck extends JPanel{
@@ -36,7 +31,7 @@ public class ManagerLogCheck extends JPanel{
 	private Vector<Vector<String>> data=new Vector<Vector<String>>();
 	private Vector<String> name=new Vector<String>();
 	private DateChooser date;
-	private JButton back;
+	private newJBut back;
 	
 	public ManagerLogCheck(ClientControler maincontroler,ManagerButtonComponent mbc) {
 		this.maincontroler=maincontroler;
@@ -80,8 +75,9 @@ public class ManagerLogCheck extends JPanel{
 		});
 		
 		
-		ImageIcon backIcon =new ImageIcon("graphic/manager/button/allList.png");
-		back=new JButton(backIcon);
+//		ImageIcon backIcon =new ImageIcon("graphic/manager/button/allList.png");
+		back=new newJBut("显示全部");
+		back.setMargin(new java.awt.Insets(0,0,0,0));
 		back.setBounds(357,300,90,23);
 		add(back);
 		

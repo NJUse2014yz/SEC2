@@ -11,15 +11,12 @@ import java.util.Vector;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 import nju.sec.yz.ExpressSystem.bl.managerbl.ManagerController;
 import nju.sec.yz.ExpressSystem.blservice.managerBlService.ConstBlService;
 import nju.sec.yz.ExpressSystem.common.CityInformation;
 import nju.sec.yz.ExpressSystem.common.PriceInformation;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.CityVO;
@@ -34,10 +31,10 @@ public class ManagerConstObserve extends JPanel {
 	private Vector<Vector<String>> data=new Vector<Vector<String>>();
 	private Vector<String> name=new Vector<String>();
 
-	private JLabel priceForCar;
-	private JLabel priceForTrain;
-	private JLabel priceForPlane;
-	private JLabel standard;
+	private newJLabel priceForCar;
+	private newJLabel priceForTrain;
+	private newJLabel priceForPlane;
+	private newJLabel standard;
 
 	public ManagerConstObserve(ClientControler maincontroler, ManagerButtonComponent mbc) {
 		this.maincontroler = maincontroler;
@@ -63,38 +60,26 @@ public class ManagerConstObserve extends JPanel {
 		changeData(cities);
 		
 		table=new newTable(data,name,this,false);
-		table.setBounds(133, 76, 320, 184);
+		table.setBounds(133, 76, 300, 184);
 		table.join();
 
 		PriceVO pv = manager.observePrize();
 		PriceInformation pinf=pv.getPriceInformation();
 
-		priceForPlane = new JLabel();
-		priceForPlane.setText(Double.toString(pinf.getPriceForPlane()));
+		priceForPlane = new newJLabel(Double.toString(pinf.getPriceForPlane()));
 		priceForPlane.setBounds(216, 259, 70, 27);
-		priceForPlane.setForeground(Color.GRAY);
-		priceForPlane.setFont(new Font("Dialog", 0, 18));
 		add(priceForPlane);
 
-		priceForTrain = new JLabel();
-		priceForTrain.setText(Double.toString(pinf.getPriceForTrain()));
+		priceForTrain = new newJLabel(Double.toString(pinf.getPriceForTrain()));
 		priceForTrain.setBounds(216, 289, 70, 27);
-		priceForTrain.setForeground(Color.GRAY);
-		priceForTrain.setFont(new Font("Dialog", 0, 18));
 		add(priceForTrain);
 
-		priceForCar = new JLabel();
-		priceForCar.setText(Double.toString(pinf.getPriceForCar()));
+		priceForCar = new newJLabel(Double.toString(pinf.getPriceForCar()));
 		priceForCar.setBounds(216, 319, 70, 27);
-		priceForCar.setForeground(Color.GRAY);
-		priceForCar.setFont(new Font("Dialog", 0, 18));
 		add(priceForCar);
 
-		standard = new JLabel();
-		standard.setText(Double.toString(pinf.getStandard()));
+		standard = new newJLabel(Double.toString(pinf.getStandard()));
 		standard.setBounds(286, 348, 70, 27);
-		standard.setForeground(Color.GRAY);
-		standard.setFont(new Font("Dialog", 0, 18));
 		add(standard);
 
 	}

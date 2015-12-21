@@ -118,13 +118,13 @@ public class ManagerStaffModify extends JPanel {
 		 */
 		ImageIcon cinfirmIcon = new ImageIcon("graphic/deliver/button/confirm.png");
 		confirm = new newJBut("确定");
-		confirm.setBounds(378, 256, 76, 20);
+		confirm.setBounds(378, 256, 72, 24);
 		add(confirm);
 		setVisible(true);
 		
 		ImageIcon backIcon = new ImageIcon("graphic/manager/button/back.png");
 		back = new newJBut("返回原列表");
-		back.setBounds(271, 256, 100, 20);
+		back.setBounds(271, 256, 100, 24);
 		add(back);
 		
 		back.addMouseListener(new MouseAdapter() {
