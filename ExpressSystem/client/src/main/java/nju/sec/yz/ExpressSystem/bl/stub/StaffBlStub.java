@@ -30,7 +30,7 @@ public class StaffBlStub implements StaffBlService {
 	@Override
 	public StaffVO observeStaff(String id) {
 		// TODO 自动生成的方法存根
-		return new StaffVO("刘强东", "s001", Status.MANAGER,"京东");
+		return new StaffVO("刘强东", "s001", Status.MANAGER,"京东","S001");
 	}
 
 	@Override
