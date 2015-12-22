@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import nju.sec.yz.ExpressSystem.bl.inventorybl.InventoryController;
 import nju.sec.yz.ExpressSystem.blservice.inventoryBlService.InventoryBlService;
 import nju.sec.yz.ExpressSystem.common.InventoryInInformation;
+import nju.sec.yz.ExpressSystem.common.InventoryOutInformation;
 import nju.sec.yz.ExpressSystem.presentation.DateChooser;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
@@ -24,6 +25,7 @@ import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.InventoryInSheetVO;
 import nju.sec.yz.ExpressSystem.vo.InventoryListVO;
+import nju.sec.yz.ExpressSystem.vo.InventoryOutSheetVO;
 
 public class InventoryObserve extends JPanel{
 
@@ -34,11 +36,14 @@ private InventoryBlService inventoryservice=new InventoryController();
 	private newJBut confirm;
 	private newJLabel warning=new newJLabel();
 	private newJLabel total;
-	private newTable table;
-	private Vector<Vector<String>> data=new Vector<Vector<String>>();
-	private Vector<String> name=new Vector<String>();
+	private newTable table1;
+	private newTable table2;
+	private Vector<Vector<String>> data1=new Vector<Vector<String>>();
+	private Vector<Vector<String>> data2=new Vector<Vector<String>>();
+	private Vector<String> name1=new Vector<String>();
+	private Vector<String> name2=new Vector<String>();
 	private ArrayList<InventoryInSheetVO> involist;
-	private ArrayList<InventoryInSheetVO> outvolist;
+	private ArrayList<InventoryOutSheetVO> outvolist;
 	
 	private DateChooser date1;
 	private DateChooser date2;
@@ -59,23 +64,32 @@ private InventoryBlService inventoryservice=new InventoryController();
 		
 		InventoryButtonComponents ibc=new InventoryButtonComponents(maincontroler,this);
 		
-		name.add("快递编号");
-		name.add("入库日期");
-		name.add("目的地");
-		name.add("区号");
-		name.add("排号");
-		name.add("架号");
-		name.add("位号");
+		name1.add("快递编号");
+		name1.add("入库日期");
+		name1.add("目的地");
+		name1.add("区号");
+		name1.add("排号");
+		name1.add("架号");
+		name1.add("位号");
+		
+		name2.add("快递编号");
+		name2.add("出库日期");
+		name2.add("目的地");
+		
 		
 		date1=new DateChooser(this,214,60);
 		date2=new DateChooser(this,214,87);
 		
-		table = new newTable(data,name,this,false);
-		table.setBounds(140,117,319, 208);
-		table.join();
+		table1 = new newTable(data1,name1,this,false);
+		table1.setBounds(140,117,319, 148);
+		table1.join();
+		
+		table2 = new newTable(data2,name2,this,false);
+		table2.setBounds(140,275,319, 148);
+		table2.join();
 		
 		total=new newJLabel();
-		total.setBounds(229, 334, 62, 23);
+		total.setBounds(229, 432, 62, 23);
 		add(total);
 		
 		warning.setBounds(138, 490, 463 - 138, 30);
@@ -99,13 +113,16 @@ private InventoryBlService inventoryservice=new InventoryController();
 					// 成功
 					InventoryListVO vo = inventoryservice.observeStock(
 							date1.getTime(), date2.getTime());
-					if(involist!=null){
-					involist = (ArrayList<InventoryInSheetVO>) inventoryservice
-							.checkStock().inList;
-					changeData(involist);
-					table.resetData();
+					involist=(ArrayList<InventoryInSheetVO>) vo.inList;
+					outvolist=(ArrayList<InventoryOutSheetVO>) vo.outList;
+					if((involist!=null)||(outvolist!=null)){
+//					involist = (ArrayList<InventoryInSheetVO>) inventoryservice
+//							.checkStock().inList;
+					changeData(involist,outvolist);
+					table1.resetData();
+					table2.resetData();
 					// 需要得到一个当前数目的值
-					total.setText(Integer.toString(involist.size()));
+					total.setText(Integer.toString(involist.size()-outvolist.size()));
 					total.setVisible(true);
 					warning.setText("");
 				}else{
@@ -125,9 +142,10 @@ private InventoryBlService inventoryservice=new InventoryController();
 		Image img01=new ImageIcon("graphic/inventory/background/background05.png").getImage();
 		g.drawImage(img01, 0, 0, 490, 550, null);
 	}
-	private void changeData(ArrayList<InventoryInSheetVO> involist)
+	private void changeData(ArrayList<InventoryInSheetVO> involist,ArrayList<InventoryOutSheetVO> outvolist)
 	{
-		data.removeAllElements();
+		data1.removeAllElements();
+		data2.removeAllElements();
 		for(int i=0;i<involist.size();i++){
 			InventoryInInformation temp=involist.get(i).getInventoryInInformation();
 			Vector<String> vector=new Vector<String>();
@@ -135,10 +153,19 @@ private InventoryBlService inventoryservice=new InventoryController();
 			vector.add(temp.getTime());
 			vector.add(temp.getDestination());
 			vector.add(Integer.toString(temp.getBlock()));
+			vector.add(Integer.toString(temp.getShelf()));
+			vector.add(Integer.toString(temp.getRow()));
 			vector.add(Integer.toString(temp.getPositon()));
+			data1.add(vector);
+		}
+		for(int i=0;i<outvolist.size();i++){
+			InventoryOutInformation temp=outvolist.get(i).getInventoryOutInformation();
+			Vector<String> vector=new Vector<String>();
 			vector.add(involist.get(i).getBarId());
-			vector.add(involist.get(i).getBarId());
-			data.add(vector);
+			vector.add(temp.getTime());
+			vector.add(temp.getDestination());
+			
+			data2.add(vector);
 		}
 	}
 }
