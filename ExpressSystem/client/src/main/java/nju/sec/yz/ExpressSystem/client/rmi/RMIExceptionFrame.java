@@ -24,7 +24,7 @@ public class RMIExceptionFrame {
 		frame.setSize(WIDTH, HEIGHT);
 		frame.setLocationRelativeTo(frame);
 		
-		panel=new RMIExceptionPanel(frame);
+		panel=new RMIExceptionPanel(this);
 		frame.add(panel);
 		frame.setVisible(true);
 	}
@@ -33,6 +33,7 @@ public class RMIExceptionFrame {
 	
 	public void exit(){
 		frame.setVisible(false);
+		panel.destruct();
 	}
 	
 	public static void main(String[] args) {

@@ -26,15 +26,22 @@ public class StaffVO {
 	private String loginId;
 	
 	
-	
-
-	public StaffVO(String name, String id, Status power, String agency, String loginId) {
+	public StaffVO(String name, String id, Status power, String agency,String loginId) {
 		super();
 		this.name = name;
 		this.id = id;
 		this.power = power;
 		this.agency = agency;
 		this.loginId = loginId;
+	}
+
+	public StaffVO(String name, String id, Status power, String agency) {
+		super();
+		this.name = name;
+		this.id = id;
+		this.power = power;
+		this.agency = agency;
+//		this.loginId = loginId;
 	}
 
 	public String getName() {
