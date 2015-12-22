@@ -38,6 +38,7 @@ private InventoryBlService inventoryservice=new InventoryController();
 	private Vector<Vector<String>> data=new Vector<Vector<String>>();
 	private Vector<String> name=new Vector<String>();
 	private ArrayList<InventoryInSheetVO> involist;
+	private ArrayList<InventoryInSheetVO> outvolist;
 	
 	private DateChooser date1;
 	private DateChooser date2;
