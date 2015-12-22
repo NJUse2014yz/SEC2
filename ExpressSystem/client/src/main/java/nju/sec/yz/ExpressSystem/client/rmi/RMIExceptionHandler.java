@@ -1,12 +1,5 @@
 package nju.sec.yz.ExpressSystem.client.rmi;
 
-import java.rmi.RemoteException;
-
-import javax.swing.JOptionPane;
-
-import nju.sec.yz.ExpressSystem.client.ClientInitException;
-import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
-import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 
 /**
  * 处理RMI异常
@@ -15,11 +8,23 @@ import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
  */
 public class RMIExceptionHandler {
 
+	/**
+	 * 解决异常时设为true
+	 * 解决异常后在initRMI设为false
+	 */
+	static boolean isHandling=false;
 	
 	/**
 	 * 断网时提示出错
 	 */
 	static public void handleRMIException(){
+		//正在解决异常
+		if(isHandling){
+			System.out.println("is handling...");
+			return;
+		}
+			
+		isHandling=true;
 		RMIExceptionFrame view=new RMIExceptionFrame();
 	}
 	

@@ -11,23 +11,37 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import nju.sec.yz.ExpressSystem.client.ClientInitException;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
 
 public class RMIExceptionPanel extends JPanel{
+	
+	private static final int IMAGE_SIZE=2;
 	
 	static final int WIDTH_OF_BUTTON=75;
 	
 	static final int HEIGHT_OF_BUTTON=30;
 	
+	private static final Image DOT=new ImageIcon("graphic/RMI/1.gif").getImage();
+	
+	
+	
 	private JButton connect;
 	
 	private JButton exit;
 	
-	private JFrame frame;
+	private RMIExceptionFrame frame;
+	
+	private int connectCounts=-1;
 	
 	private boolean isConnecting=false;
 	
-	public RMIExceptionPanel(JFrame frame) {
+	private CountThread counter;
+	
+	public RMIExceptionPanel(RMIExceptionFrame frame) {
+		
+		
+		
 		this.frame=frame;
 		
 		this.setLayout(null);
@@ -42,6 +56,10 @@ public class RMIExceptionPanel extends JPanel{
 				isConnecting=true;
 				InitRMI model=new InitRMI();
 				model.initForever(frame);
+				
+				connectCounts=0;
+				counter=new CountThread();
+				RMIExceptionPanel.this.repaint();
 			}
 		});
 		add(connect);
@@ -59,10 +77,57 @@ public class RMIExceptionPanel extends JPanel{
 	}
 	
 	
+	public void destruct(){
+		if(counter!=null){
+			counter.stop();
+			counter=null;
+		}
+			
+	}
+	
 
 	@Override
 	public void paintComponent(Graphics g){
 		Image exceptionIcon=new ImageIcon("graphic/RMI/RMIException.jpg").getImage();
+		
+		Image connecting=new ImageIcon("graphic/RMI/connecting.gif").getImage();
+		
+		
 		g.drawImage(exceptionIcon, 0, 0,RMIExceptionFrame.WIDTH,RMIExceptionFrame.HEIGHT, null);
+		
+		if(connectCounts==-1)
+			return;
+		g.drawImage(connecting ,85, 170,160,30, null);
+		int first=175;
+		for(int i=0;i<connectCounts;i++){
+			g.drawImage(DOT ,first, 170, null);
+			first+=10;
+		}
+		
 	}
+	
+	private class CountThread extends Thread{
+		
+		public CountThread(){
+			this.start();
+		}
+		
+		@Override
+		public void run(){
+			while(true){
+				try {
+					Thread.sleep(1000);
+					connectCounts=(connectCounts+1)%5;
+					RMIExceptionPanel.this.repaint();
+				}  catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+
+		}
+			
+		
+	}
+	
+	
 }

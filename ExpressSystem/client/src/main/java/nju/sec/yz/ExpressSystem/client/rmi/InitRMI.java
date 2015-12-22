@@ -5,13 +5,13 @@ import javax.swing.JFrame;
 import nju.sec.yz.ExpressSystem.client.ClientInitException;
 
 public class InitRMI {
-	public void initForever(JFrame frame){
+	public void initForever(RMIExceptionFrame frame){
 		new InitThread(frame);
 	}
 	
 	private class InitThread extends Thread{
-		private JFrame frame;
-		public InitThread(JFrame frame){
+		private RMIExceptionFrame frame;
+		public InitThread(RMIExceptionFrame frame){
 			this.start();
 			this.frame=frame;
 		}
@@ -31,7 +31,8 @@ public class InitRMI {
 					e.printStackTrace();
 				}
 			}
-			frame.setVisible(false);
+			frame.exit();
+			RMIExceptionHandler.isHandling=false;
 		}
 			
 		

@@ -117,17 +117,15 @@ public class Staff implements Initialable<StaffVO, StaffPO> {
 	}
 
 	private void sendDeleteMessage(String loginId){
-		String message="总经理删除人员"+StringTool.nextLine();
-		message=message+"系统已自动删除账号："+loginId;
+		String message="总经理已删除或修改人员信息"+StringTool.nextLine();
+		message=message+"请确认是否删除账号："+loginId;
 		Message messageService=new Message();
 		messageService.send(new MessageVO("admin", message));
 	}
 	
 	/**
 	 * 删除人员信息
-	 * 同时删除系统账号
-	 * @param id
-	 * @return
+	 * 提示管理员删除
 	 */
 	public ResultMessage deleteStaff(String id) {
 		ResultMessage result = null;
@@ -136,9 +134,7 @@ public class Staff implements Initialable<StaffVO, StaffPO> {
 			result=data.delete(id);
 			if(result.getResult()==Result.FAIL)
 				return result;
-			//删除账户
-			User user=new User();
-			user.del(id);
+			
 			sendDeleteMessage(id);
 		} catch (RemoteException e) {
 			RMIExceptionHandler.handleRMIException();
@@ -169,13 +165,11 @@ public class Staff implements Initialable<StaffVO, StaffPO> {
 			if(loginId.equals(sv.getLoginId()))//未修改机构，职务和人员编号
 				return new ResultMessage(Result.SUCCESS);
 			
-			//已修改,先添加新账户，再删除旧账户
+			//已修改,先添加新账户，再提示删除旧账户
 			message=this.saveLoginId(loginId, sv);
 			if(message.getResult()==Result.FAIL)
 				return message;
 			sendAddMessage(loginId, sv);
-			User user=new User();
-			user.del(sv.getLoginId());
 			sendDeleteMessage(loginId);
 		} catch (RemoteException e) {
 			RMIExceptionHandler.handleRMIException();
