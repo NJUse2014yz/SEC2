@@ -1,39 +1,26 @@
 package nju.sec.yz.ExpressSystem.presentation.userui;
 
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumn;
 
-import nju.sec.yz.ExpressSystem.bl.deliverbl.Deliver;
 import nju.sec.yz.ExpressSystem.bl.deliverbl.DeliverController;
 import nju.sec.yz.ExpressSystem.blservice.deliverBlService.DeliverBlService;
-import nju.sec.yz.ExpressSystem.common.GoodInformation;
-import nju.sec.yz.ExpressSystem.common.OrderInformation;
-import nju.sec.yz.ExpressSystem.common.SendInformation;
-import nju.sec.yz.ExpressSystem.common.ToAndFromInformation;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.MAIN_CONTROL;
 import nju.sec.yz.ExpressSystem.vo.DeliverVO;
-import nju.sec.yz.ExpressSystem.vo.OrderVO;
 
 public class UserOrderSearchUi extends JPanel {
 	ClientControler mainControler;
@@ -42,11 +29,11 @@ public class UserOrderSearchUi extends JPanel {
 	private JButton confirmButton;
 	private JTextField searchnumber;
 	//提示信息
-	private JLabel warning;
+	private newJLabel warning;
 	// 退出系统
 	private JButton exitButton;
 	//退出当前帐户
-	private JLabel leaveButton;
+	private newJLabel leaveButton;
 	
 	private newTable table;
 	private Vector<Vector<String>> data=new Vector<Vector<String>>();
@@ -76,11 +63,11 @@ public class UserOrderSearchUi extends JPanel {
 
 		confirmButton = new JButton(SearchIcon);
 		confirmButton.setBounds(441, 72, 23, 21);
+		confirmButton.setBorderPainted(false);
 		add(confirmButton);
 
-		warning=new JLabel();
+		warning=new newJLabel();
 		warning.setBounds(250,490,100,30);
-		warning.setFont(new Font("Dialog",1,15));
 		warning.setForeground(Color.red);
 		warning.setVisible(false);
 		add(warning);
@@ -100,11 +87,12 @@ public class UserOrderSearchUi extends JPanel {
 			});
 		
 		searchnumber = new JTextField();
+		searchnumber.setBorder(BorderFactory.createLineBorder(Color.white,0));
 		searchnumber.setBounds(221, 72, 219, 20);
 		add(searchnumber);
 		
 		//离开当前账户
-		leaveButton=new JLabel();
+		leaveButton=new newJLabel("注销",Color.white,Color.yellow);
 		leaveButton.setBounds(433, 21, 37, 20);
 		add(leaveButton);			
 		

@@ -87,6 +87,7 @@ public class ClientControler{
 			System.out.println("wrong state");
 			break;
 		}
+		mainFrame.setVisible(true);
 	}
 	public static void main(String[] args)
 	{

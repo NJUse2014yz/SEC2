@@ -6,8 +6,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -16,14 +16,13 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import nju.sec.yz.ExpressSystem.bl.deliverbl.DeliverController;
-import nju.sec.yz.ExpressSystem.bl.userbl.User;
 import nju.sec.yz.ExpressSystem.bl.userbl.UserController;
 import nju.sec.yz.ExpressSystem.blservice.deliverBlService.DeliverBlService;
 import nju.sec.yz.ExpressSystem.blservice.userBlService.UserBlService;
 import nju.sec.yz.ExpressSystem.common.Result;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
-import nju.sec.yz.ExpressSystem.presentation.controlerui.DELIVER_CONTROL;
-import nju.sec.yz.ExpressSystem.presentation.controlerui.DeliverSwitchPanelListener;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.MAIN_CONTROL;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.MainSwitchPanelListener;
 
@@ -58,11 +57,11 @@ public class UserUi extends JPanel{
 	private JTextField JTbarId;
 	private JTextField JTuserName;
 	private JPasswordField JTpassword;
-	private JButton login;
+	private newJBut login;
 	private JButton search;
-	private JLabel warning;
+	private newJLabel warning;
 	
-	private ImageIcon login_button=new ImageIcon("graphic/main/button/login_button.png");
+//	private ImageIcon login_button=new ImageIcon("graphic/main/button/login_button.png");
 	private ImageIcon search_button=new ImageIcon("graphic/main/button/search_button.png");
 	private Image background = new ImageIcon("graphic/main/background/main_background.png").getImage();
 	// 退出系统
@@ -81,26 +80,28 @@ public class UserUi extends JPanel{
 		this.setLayout(null);
 		this.setSize(B_WIDTH,B_HEIGHT);
 
-		this.warning=new JLabel();
-		this.warning.setFont(new Font("Dialog",1,12));
+		this.warning=new newJLabel();
 		this.warning.setForeground(Color.red);
 		this.warning.setBounds(warning_x,warning_y,warning_w,height);
 		this.add(warning);
 		this.warning.setVisible(false);
 		
 		this.JTbarId=new JTextField();
+		JTbarId.setBorder(BorderFactory.createLineBorder(Color.white,0));
 		this.JTbarId.setBounds(searchin_x,searchin_y,searchin_w,height);
 		this.add(JTbarId);
 		
 		this.JTuserName=new JTextField();
+		JTuserName.setBorder(BorderFactory.createLineBorder(Color.white,0));
 		this.JTuserName.setBounds(username_x,username_y,username_w,height);
 		this.add(JTuserName);
 		
 		this.JTpassword=new JPasswordField();
+		JTpassword.setBorder(BorderFactory.createLineBorder(Color.white,0));
 		this.JTpassword.setBounds(password_x,password_y,password_w,height);
 		this.add(JTpassword);
 		
-		this.login=new JButton(login_button);
+		this.login=new newJBut("登录");
 		this.login.setBounds(login_x,login_y,login_w, height);
 		this.login.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -155,6 +156,7 @@ public class UserUi extends JPanel{
 		this.add(login);
 		
 		this.search=new JButton(search_button);
+		search.setBorderPainted(false);
 		this.search.setBounds(search_x,search_y,search_w, height);
 		this.search.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e) {

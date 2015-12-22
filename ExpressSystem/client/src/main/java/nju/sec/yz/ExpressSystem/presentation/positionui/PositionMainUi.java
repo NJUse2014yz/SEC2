@@ -22,6 +22,7 @@ public class PositionMainUi extends JPanel{
 		controler=mainControler.positionControler;
 		this.bc=bc;
 		initPositionMainUi();
+		setVisible(true);
 	}
 
 	private void initPositionMainUi() {
@@ -29,7 +30,7 @@ public class PositionMainUi extends JPanel{
 		bc.init();
 		setLayout(null);
 		setSize(490, 550);
-		setVisible(true);
+		
 
 
 		//显示消息列表
