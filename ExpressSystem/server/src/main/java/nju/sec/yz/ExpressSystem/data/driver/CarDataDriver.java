@@ -35,7 +35,7 @@ public class CarDataDriver {
 		CarPO cpo=cds.find(null);
 			System.out.println(cpo.getId());
 			
-		ArrayList<CarPO> array=cds.findAll();
+		ArrayList<CarPO> array=cds.findAll(null);
 		System.out.println(((array.get(1)).getNumber()));
 		
 		

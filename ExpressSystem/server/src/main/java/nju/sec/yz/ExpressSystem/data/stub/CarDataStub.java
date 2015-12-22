@@ -39,8 +39,9 @@ public class CarDataStub implements CarDataService{
 		return null;
 	}
 	
+
 	@Override
-	public ArrayList<CarPO> findAll() throws RemoteException{
+	public ArrayList<CarPO> findAll(String positionId) throws RemoteException {
 		ArrayList<CarPO> array=new ArrayList<CarPO>();
 		return array;
 	}

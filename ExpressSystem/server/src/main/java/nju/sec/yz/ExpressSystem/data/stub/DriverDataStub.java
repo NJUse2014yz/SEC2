@@ -35,7 +35,7 @@ public class DriverDataStub implements DriverDataService{
 		return null;
 	}
 	@Override
-	public ArrayList<DriverPO> findAll() throws RemoteException{
+	public ArrayList<DriverPO> findAll(String p) throws RemoteException{
 		ArrayList<DriverPO> array=new ArrayList<DriverPO>();
 		array.add(new DriverPO("001A001","李林","19800406","025001001","18339409234",Sex.MALE,"20170930"));
 		return array;

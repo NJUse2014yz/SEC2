@@ -14,7 +14,7 @@ import nju.sec.yz.ExpressSystem.vo.StaffVO;
 public class StaffBlDriver {
 	public void drive(StaffBlService staffBlService) {
 		// 1
-		ResultMessage message1 = staffBlService.addStaff(new StaffVO("刘强东", "s001", Status.MANAGER, "京东"));
+		ResultMessage message1 = staffBlService.addStaff(new StaffVO("刘强东", "s001", Status.MANAGER, "京东", "S001"));
 
 		System.out.println("不好意思，操作失败哟");
 		// 2
@@ -22,7 +22,7 @@ public class StaffBlDriver {
 
 		System.out.println("不好意思，操作失败哟");
 		// 3
-		ResultMessage message3 = staffBlService.modifyStaff(new StaffVO("刘强东", "s001", Status.MANAGER, "京东"));
+		ResultMessage message3 = staffBlService.modifyStaff(new StaffVO("刘强东", "s001", Status.MANAGER, "京东", "S001"));
 
 		System.out.println("不好意思，操作失败哟");
 		// 4

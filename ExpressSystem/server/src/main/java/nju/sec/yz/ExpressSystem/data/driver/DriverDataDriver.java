@@ -36,7 +36,7 @@ public class DriverDataDriver {
 		DriverPO dpo=dds.find(null);
 				System.out.println(dpo.getLicenseDeadLine());
 				
-		ArrayList<DriverPO> array= dds.findAll();
+		ArrayList<DriverPO> array= dds.findAll(null);
 		System.out.println(array.get(0).getName());
 				
 	}
