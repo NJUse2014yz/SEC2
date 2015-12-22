@@ -63,9 +63,10 @@ public class ManagerStaffList extends JPanel {
 		name.add("姓名");
 		name.add("职务");
 		name.add("所属机构");
+		name.add("登录帐号");
 		
 		table=new newTable(data,name,this,false);
-		table.setBounds(216,94, 220, 21);
+		table.setBounds(140,94, 320, 180);
 		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		table.setTableSelect();
 		table.join();
@@ -120,8 +121,9 @@ public class ManagerStaffList extends JPanel {
 			 public void mouseClicked(MouseEvent e) {
 //				 if(e.getClickCount()==2){//鼠标双击
 					 int num=table.getSelectedRow();
-//					 System.out.println(num);
-						 maincontroler.mainFrame.nextPanel(new ManagerStaffModify(maincontroler,mbc,allstaff.get(num).getId()));
+					 System.out.println(num);
+					 System.out.println(table.getValueAt(num, 4, false));
+						 maincontroler.mainFrame.nextPanel(new ManagerStaffModify(maincontroler,mbc,table.getValueAt(num, 4, false)));
 					 
 					 }
 //				 }
@@ -168,6 +170,7 @@ public class ManagerStaffList extends JPanel {
 			vector.add(allstaff.get(i).getName());
 			vector.add(getpower(allstaff.get(i).getPower()));
 			vector.add(allstaff.get(i).getAgency());
+			vector.add(allstaff.get(i).getLoginId());
 			data.add(vector);
 		}
 		table.resetData();

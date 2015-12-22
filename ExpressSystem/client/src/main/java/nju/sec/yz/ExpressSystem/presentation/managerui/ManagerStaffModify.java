@@ -69,6 +69,9 @@ public class ManagerStaffModify extends JPanel {
 		setVisible(true);
 
 		StaffVO vo = manager.observeStaff(staffId);
+		if(vo==null){
+			System.out.println("LLLLLLLLLLLLLLLLLL");
+		}
 		
 		name=new newJText(vo.getName());
 		name.setBounds(193, 72, 74, 18);
@@ -78,8 +81,11 @@ public class ManagerStaffModify extends JPanel {
 		id.setBounds(218, 102, 83, 18);
 		add(id);
 		
+		if(vo.getLoginId()==null){
+			System.out.println("!!!!!!!!!!!!!!!!!!!!!!!");
+		}
 		logId=new newJText(vo.getLoginId());
-		logId.setBounds(218, 193, 83, 18);
+		logId.setBounds(218, 188, 83, 18);
 		add(logId);
 		
 		String[] status={
@@ -128,8 +134,9 @@ public class ManagerStaffModify extends JPanel {
 		add(confirm);
 		setVisible(true);
 		
-		ImageIcon backIcon = new ImageIcon("graphic/manager/button/back.png");
+//		ImageIcon backIcon = new ImageIcon("graphic/manager/button/back.png");
 		back = new newJBut("返回原列表");
+		back.setMargin(new java.awt.Insets(0,0,0,0));
 		back.setBounds(271, 256, 100, 24);
 		add(back);
 		
@@ -211,7 +218,7 @@ public class ManagerStaffModify extends JPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 
-		Image img01 = new ImageIcon("graphic/manager/background/background07.png").getImage();
+		Image img01 = new ImageIcon("graphic/manager/background/background10.png").getImage();
 
 		g.drawImage(img01, 0, 0, 490, 550, null);
 

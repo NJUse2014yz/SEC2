@@ -62,14 +62,16 @@ public class ManagerStaffDelete extends JPanel {
 		name.add("姓名");
 		name.add("职务");
 		name.add("所属机构");
+		name.add("登录帐号");
 		
 		table=new newTable(data,name,this,false);
-		table.setBounds(216,94, 220, 21);
+		table.setBounds(140,94, 320, 180);
 		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		table.setTableSelect();
 		table.join();
 		
 		changeData(manager.observeStaff());
+		System.out.println(manager.observeStaff().size());
 	    
 	    search=new JButton();
 	    search.setBorderPainted(false);
@@ -118,7 +120,7 @@ public class ManagerStaffDelete extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				int[] deletelines = table.getSelectedRows();
 				for (int i = 0; i < deletelines.length; i++) {
-					manager.deleteStaff(((String) table.getValueAt(deletelines[i], 0,false)));
+					manager.deleteStaff(((String) table.getValueAt(deletelines[i], 4,false)));
 				}
 				changeData(manager.observeStaff());
 			}
@@ -151,12 +153,14 @@ public class ManagerStaffDelete extends JPanel {
 	
 	private void changeData(ArrayList<StaffVO> allstaff){
 		data.removeAllElements();
+		System.out.println(allstaff.size());
 		for(int i=0;i<allstaff.size();i++){
 			Vector<String> vector=new Vector<String>();
 			vector.add(allstaff.get(i).getId());
 			vector.add(allstaff.get(i).getName());
 			vector.add(getpower(allstaff.get(i).getPower()));
 			vector.add(allstaff.get(i).getAgency());
+			vector.add(allstaff.get(i).getLoginId());
 			data.add(vector);
 		}
 		table.resetData();
