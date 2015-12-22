@@ -120,7 +120,6 @@ public class ManagerAgencyDelete extends JPanel{
 					{
 						warning.setVisible(false);
 						changeData(agency);
-						table.resetData();
 					}
 				}
 			}
@@ -171,6 +170,7 @@ public class ManagerAgencyDelete extends JPanel{
 			vector.add(temp2.getName());
 			data.add(vector);
 		}
+		table.resetData();
 	}
 	
 	private void original(){
@@ -185,7 +185,6 @@ public class ManagerAgencyDelete extends JPanel{
 			}
 		}
 		changeData(new AgencyListVO(t,p));
-		table.resetData();
 	}
 		
 	@Override

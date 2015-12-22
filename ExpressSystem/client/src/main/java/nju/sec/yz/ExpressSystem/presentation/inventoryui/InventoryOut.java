@@ -133,7 +133,6 @@ private InventoryBlService inventoryservice=new InventoryController();
 						destination.setVisible(true);
 						ArrayList<String> barIdList = (ArrayList<String>) vo.barIds;
 						changeData(barIdList);
-						table.resetData();
 						confirm.setVisible(true);
 					}
 				}

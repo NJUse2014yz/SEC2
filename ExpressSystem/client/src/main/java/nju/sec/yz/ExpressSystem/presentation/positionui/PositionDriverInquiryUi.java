@@ -73,6 +73,12 @@ public class PositionDriverInquiryUi extends JPanel{
 		this.bc=bc;
 		driverBl=new DriverController();
 		drivers=driverBl.getAll();
+		
+		table=new newTable(data,name,this,false);
+		table.stopAutoRewidth();
+		table.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
+		table.join();
+		
 		changeData(drivers);
 		name.add("司机编号");
 		name.add("姓名");
@@ -92,11 +98,6 @@ public class PositionDriverInquiryUi extends JPanel{
 		setLayout(null);
 		setSize(490, 550);
 		
-		table=new newTable(data,name,this,false);
-		table.stopAutoRewidth();
-		table.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
-		table.join();
-		
 		searchButton=new JButton(searchIcon);
 		searchButton.setBorderPainted(false);
 		searchButton.setBounds(search_button_x,search_button_y,search_button_w,search_button_h);
@@ -107,7 +108,6 @@ public class PositionDriverInquiryUi extends JPanel{
 					ArrayList<DriverVO> dl=new ArrayList<DriverVO>();
 					dl.add(driverBl.getSingle(search.getText()));
 					changeData(dl);
-					table.resetData();
 				}
 				else{
 					warning.setText("编号输入有误，请重新输入");
@@ -129,7 +129,6 @@ public class PositionDriverInquiryUi extends JPanel{
 			public void mouseClicked(MouseEvent e)
 			{
 				changeData(drivers);
-				table.resetData();
 			}
 		});
 		add(back);
@@ -162,6 +161,7 @@ public class PositionDriverInquiryUi extends JPanel{
 			vector.add(dl.get(i).getLicenseDeadLine());
 			data.add(vector);
 		}
+		table.resetData();
 	}
 	private String e2s(Sex s)
 	{

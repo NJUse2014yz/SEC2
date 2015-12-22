@@ -77,6 +77,11 @@ public class AdminstraterInquiryUi extends JPanel{
 		name.add("密码");
 		name.add("权限");
 		name.add("姓名");
+		
+		table=new newTable(data,name,this,false);
+		table.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
+		table.join();
+		
 		uvl=userBl.getAll();
 		changeData(uvl);
 		initAdminstraterUi();
@@ -104,7 +109,6 @@ public class AdminstraterInquiryUi extends JPanel{
 				if(userBl.getSingle(input.getText())!=null)
 				{
 					changeData(uvl);
-					table.resetData();
 				}
 			else{
 				warning.setText("Id不存在");
@@ -117,10 +121,6 @@ public class AdminstraterInquiryUi extends JPanel{
 		});
 		add(search);
 		
-		table=new newTable(data,name,this,false);
-		table.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
-		table.join();
-		
 		back=new newJBut("返回原列表");
 		back.setBounds(back_x, back_y, back_w, back_h);
 		back.setMargin(new java.awt.Insets(0,0,0,0)); 
@@ -129,7 +129,6 @@ public class AdminstraterInquiryUi extends JPanel{
 			{
 				uvl=userBl.getAll();
 				changeData(uvl);
-				table.resetData();
 			}
 		});
 		add(back);
@@ -154,6 +153,7 @@ public class AdminstraterInquiryUi extends JPanel{
 			vector.add(uvl.get(i).getName());
 			data.add(vector);
 		}
+		table.resetData();
 	}
 	private String getStatus(UserVO uv){
 		if(uv!=null)

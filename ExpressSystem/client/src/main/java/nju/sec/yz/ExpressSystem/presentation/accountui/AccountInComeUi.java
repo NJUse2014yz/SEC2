@@ -177,6 +177,7 @@ public class AccountInComeUi extends JPanel{
 				data.add(vector);
 			}
 		}
+		table.resetData();
 	}
 	@Override
 	public void paintComponent(Graphics g) {

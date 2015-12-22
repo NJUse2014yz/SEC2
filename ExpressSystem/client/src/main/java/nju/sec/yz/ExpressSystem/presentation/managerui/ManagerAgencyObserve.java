@@ -133,6 +133,7 @@ public class ManagerAgencyObserve extends JPanel{
 	}
 	private void changeData(TransitVO vo)
 	{
+		data.removeAllElements();
 		for(int i=0;i<vo.getPositions().size();i++){
 			Vector<String> vector=new Vector<String>();
 			PositionVO temp=vo.getPositions().get(i);
@@ -141,6 +142,7 @@ public class ManagerAgencyObserve extends JPanel{
 			vector.add(temp.getName());
 			data.add(vector);
 		}
+		table.resetData();
 	}
 	@Override
 	public void paintComponent(Graphics g) {

@@ -78,6 +78,12 @@ public class PositionPayUi extends JPanel{
 		name.add("收款快递员");
 		name.add("快递单条形码号");
 		name.add("账户");
+		
+		table=new newTable(data,name,this,false);
+		table.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
+		table.setJComboBox(new newJCombo(accounts), 4);
+		table.join();
+		
 		changeData(payList);
 		
 		List<String> accountList=deliverBl.getAccounts();
@@ -98,11 +104,6 @@ public class PositionPayUi extends JPanel{
 //		bc.change();
 		setLayout(null);
 		setSize(490, 550);
-		
-		table=new newTable(data,name,this,false);
-		table.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
-		table.setJComboBox(new newJCombo(accounts), 4);
-		table.join();
 		
 		warning.setForeground(Color.red);
 		warning.setBounds(warning_x, warning_y, warning_w, warning_h);
@@ -142,21 +143,18 @@ public class PositionPayUi extends JPanel{
 	}
 	private void changeData(List<CollectionRecordVO> paylist)
 	{
-		if(payList.size()!=0)
+		data.removeAllElements();
+		for(int i=0;i<payList.size();i++)
 		{
-			data.removeAllElements();
-			for(int i=0;i<payList.size();i++)
-			{
-				Vector<String> vector=new Vector<String>();
-				vector.add(payList.get(i).getTime());
-				vector.add(Double.toString(payList.get(i).getAmount()));
-				vector.add(payList.get(i).getDeliverId());
-				vector.add(payList.get(i).getBarId());
-				vector.add("");
-				data.add(vector);
-			}
-			
+			Vector<String> vector=new Vector<String>();
+			vector.add(payList.get(i).getTime());
+			vector.add(Double.toString(payList.get(i).getAmount()));
+			vector.add(payList.get(i).getDeliverId());
+			vector.add(payList.get(i).getBarId());
+			vector.add("");
+			data.add(vector);
 		}
+		table.resetData();
 	}
 	
 	

@@ -53,6 +53,11 @@ public class UserOrderSearchUi extends JPanel {
 		name.add("物流轨迹");
 		name.add("时间");
 		trails= ordervo.trails;
+		
+		table = new newTable(data, name, this, false);
+		table.setBounds(144, 105, 315, 177);
+		table.join();
+		
 		changeData(trails);
 		initDeliverOrderSearch();
 	}
@@ -81,7 +86,6 @@ public class UserOrderSearchUi extends JPanel {
 					repaint();
 				}else{
 					changeData(ordervo.trails);
-					table.resetData();
 				}
 			}
 			});
@@ -116,10 +120,6 @@ public class UserOrderSearchUi extends JPanel {
 			}
 		});
 		
-		table = new newTable(data, name, this, false);
-		table.setBounds(144, 105, 315, 177);
-		table.join();
-		
 	}
 	@Override
 	public void paintComponent(Graphics g) {
@@ -144,6 +144,7 @@ public class UserOrderSearchUi extends JPanel {
 			vector.add(temp[1]);
 			data.add(vector);
 		}
+		table.resetData();
 	}
 }
 

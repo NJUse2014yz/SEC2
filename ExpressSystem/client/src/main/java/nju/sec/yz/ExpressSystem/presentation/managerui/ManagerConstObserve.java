@@ -103,6 +103,7 @@ public class ManagerConstObserve extends JPanel {
 //				 System.out.println(TableData[i][3]);
 //			}
 		}
+		table.resetData();
 	}
 	@Override
 	public void paintComponent(Graphics g) {

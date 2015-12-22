@@ -61,13 +61,13 @@ public class InventoryCheck extends JPanel{
 		
 		InventoryListVO vo=inventoryservice.checkStock();
 
-		ArrayList<InventoryInSheetVO> involist=(ArrayList<InventoryInSheetVO>) inventoryservice.checkStock().inList;
-		changeData(involist);
-		
 		table = new newTable(data,name,this,false);
 		table.setBounds(136,62,325, 208);
 		table.stopAutoRewidth();
 		table.join();
+		
+		ArrayList<InventoryInSheetVO> involist=(ArrayList<InventoryInSheetVO>) inventoryservice.checkStock().inList;
+		changeData(involist);
 		
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 		String temp=df.format(new Date());// new Date()为获取当前系统时间
@@ -106,6 +106,7 @@ public class InventoryCheck extends JPanel{
 			vector.add(Integer.toString(temp.getPositon()));
 			data.add(vector);
 		}
+		table.resetData();
 		}
 	}
 	@Override

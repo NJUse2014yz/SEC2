@@ -68,6 +68,17 @@ public class PositionCarModifyUi extends JPanel{
 		this.bc=bc;
 		carBl=new CarController();
 		cars=carBl.getAll();
+		
+		table=new newTable(data,name,this,false);
+		table.stopAutoRewidth();
+		table.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e){
+				mainControler.mainFrame.nextPanel(new PositionCarModifyFillUi(mainControler,bc,data.get(table.getSelectedRow()).get(0)));
+			}
+		});
+		table.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
+		table.join();
+		
 		changeData(cars);
 		name.add("车辆代号");
 		name.add("车牌号");
@@ -85,16 +96,6 @@ public class PositionCarModifyUi extends JPanel{
 		setLayout(null);
 		setSize(490, 550);
 		
-		table=new newTable(data,name,this,false);
-		table.stopAutoRewidth();
-		table.addMouseListener(new MouseAdapter(){
-			public void mouseClicked(MouseEvent e){
-				mainControler.mainFrame.nextPanel(new PositionCarModifyFillUi(mainControler,bc,data.get(table.getSelectedRow()).get(0)));
-			}
-		});
-		table.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
-		table.join();
-		
 		searchButton=new JButton(searchIcon);
 		searchButton.setBorderPainted(false);
 		searchButton.setBounds(search_button_x,search_button_y,search_button_w,search_button_h);
@@ -105,7 +106,6 @@ public class PositionCarModifyUi extends JPanel{
 					ArrayList<CarVO> cl=new ArrayList<CarVO>();
 					cl.add(carBl.getSingle(search.getText()));
 					changeData(cl);
-					table.resetData();
 				}
 				else{
 					warning.setText("编号输入有误，请重新输入");
@@ -143,6 +143,7 @@ public class PositionCarModifyUi extends JPanel{
 			vector.add(Integer.toString(cl.get(i).getWorktime()));
 			data.add(vector);
 		}
+		table.resetData();
 	}
 	
 	

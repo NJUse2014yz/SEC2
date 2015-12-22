@@ -79,6 +79,11 @@ public class AccountDeleteUi extends JPanel{
 		this.bc=bc;
 		accountBl=new AccountController();
 		avl=accountBl.observeList();
+		
+		table=new newTable(data,name,this,false);
+		table.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
+		table.join();
+		
 		changeData(avl);
 		name.add("名称");
 		name.add("余额");
@@ -106,7 +111,6 @@ public class AccountDeleteUi extends JPanel{
 				if(av!=null)
 				{
 					changeData(al);
-					table.resetData();
 				}
 				else
 				{
@@ -122,10 +126,6 @@ public class AccountDeleteUi extends JPanel{
 		JBsearch.setBounds(search_x, search_y, search_w, search_h);
 		add(JBsearch);
 		
-		table=new newTable(data,name,this,false);
-		table.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
-		table.join();
-		
 		back=new newJBut("返回原列表");
 		back.setMargin(new java.awt.Insets(0,0,0,0));
 		back.setBounds(back_x, back_y, back_w, back_h);
@@ -136,7 +136,6 @@ public class AccountDeleteUi extends JPanel{
 				if(avo!=null)
 				{
 					changeData(avo);
-					table.resetData();
 				}
 				else
 				{
@@ -159,7 +158,6 @@ public class AccountDeleteUi extends JPanel{
 					warning.setText("删除成功");
 					avl=accountBl.observeList();//用remove更好？
 					changeData(avl);
-					table.resetData();
 				}
 				else
 				{
@@ -189,6 +187,7 @@ public class AccountDeleteUi extends JPanel{
 			vector.add(Double.toString(avo.get(i).getBalance()));
 			data.add(vector);
 		}
+		table.resetData();
 	}
 	@Override
 	public void paintComponent(Graphics g) {

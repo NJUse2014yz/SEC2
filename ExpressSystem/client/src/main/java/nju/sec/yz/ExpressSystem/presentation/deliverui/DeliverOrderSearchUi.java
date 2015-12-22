@@ -84,12 +84,13 @@ public class DeliverOrderSearchUi extends JPanel {
 		name.add("体积");
 		name.add("品名");
 		name.add("尺寸");
+
 		
 		table = new newTable(data, name, this, false);
 		table.setBounds(144, 105, 315, 177);
 		table.stopAutoRewidth();
 		table.join();
-
+		
 		confirmButton = new JLabel();
 		confirmButton.setBounds(441, 72, 23, 21);
 		add(confirmButton);
@@ -115,7 +116,6 @@ public class DeliverOrderSearchUi extends JPanel {
 				}else{
 					warning.setText("");
 					changeData(sheetvo);
-					table.resetData();
 				}
 				}
 			}
@@ -158,6 +158,8 @@ public class DeliverOrderSearchUi extends JPanel {
 		vector.add(good.getName());
 		vector.add(good.getSize()); 
 		data.add(vector);
+		
+		table.resetData();
 	}
 	@Override
 	public void paintComponent(Graphics g) {

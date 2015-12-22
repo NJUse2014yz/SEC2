@@ -159,8 +159,6 @@ public class ManagerAccountCheck extends JPanel {
 				if (bvo != null) {
 					warning.setVisible(false);
 					changeData(bvo);
-					tableI.resetData();
-					tableO.resetData();
 				} else {
 					warning.setText("日期选择有误，请重新选择");
 					warning.setVisible(true);
@@ -245,8 +243,8 @@ public class ManagerAccountCheck extends JPanel {
 			vector.add(out.get(i).getOutInformation().getComments());
 			dataO.add(vector);
 		}
-
-		repaint();
+		tableI.resetData();
+		tableO.resetData();
 	}
 
 	@Override

@@ -48,11 +48,13 @@ public class ManagerSalaryObserve extends JPanel {
 		name.add("职务");
 		name.add("薪水");
 		
-		powersalary=manager.observeSalary();
-		changeData(powersalary);
 		table=new newTable(data,name,this,false);
 		table.setBounds(138,64,318,181);
 		table.join();
+		
+		powersalary=manager.observeSalary();
+		changeData(powersalary);
+
 		
 	}
 	private String getpower(Status power) {
@@ -79,6 +81,7 @@ public class ManagerSalaryObserve extends JPanel {
 	}
 	private void changeData(ArrayList<SalaryVO> powersalary)
 	{
+		data.removeAllElements();
 		for(int i=0;i<powersalary.size();i++){
 			Vector<String> vector=new Vector<String>();
 			SalaryImformation temp=powersalary.get(i).getSalaryImformation();

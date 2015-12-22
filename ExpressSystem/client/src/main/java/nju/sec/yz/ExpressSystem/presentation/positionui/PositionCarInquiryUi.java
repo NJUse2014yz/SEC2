@@ -80,6 +80,12 @@ public class PositionCarInquiryUi extends JPanel{
 		name.add("底盘号");
 		name.add("购买时间");
 		name.add("服役时间");
+		
+		table=new newTable(data,name,this,false);
+		table.stopAutoRewidth();
+		table.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
+		table.join();
+		
 		cars=carBl.getAll();
 		changeData(cars);
 		initDeliverMainUi();
@@ -92,11 +98,6 @@ public class PositionCarInquiryUi extends JPanel{
 		setLayout(null);
 		setSize(490, 550);
 		
-		table=new newTable(data,name,this,false);
-		table.stopAutoRewidth();
-		table.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
-		table.join();
-		
 		searchButton=new JButton(searchIcon);
 		searchButton.setBorderPainted(false);
 		searchButton.setBounds(search_button_x,search_button_y,search_button_w,search_button_h);
@@ -107,7 +108,6 @@ public class PositionCarInquiryUi extends JPanel{
 					ArrayList<CarVO> cl=new ArrayList<CarVO>();
 					cl.add(carBl.getSingle(search.getText()));
 					changeData(cl);
-					table.resetData();
 				}
 				else{
 					warning.setText("编号输入有误，请重新输入");
@@ -129,7 +129,6 @@ public class PositionCarInquiryUi extends JPanel{
 			public void mouseClicked(MouseEvent e)
 			{
 				changeData(cars);
-				table.resetData();
 			}
 		});
 		add(back);
@@ -158,6 +157,7 @@ public class PositionCarInquiryUi extends JPanel{
 			vector.add(Integer.toString(cl.get(i).getWorktime()));
 			data.add(vector);
 		}
+		table.resetData();
 	}
 	
 	

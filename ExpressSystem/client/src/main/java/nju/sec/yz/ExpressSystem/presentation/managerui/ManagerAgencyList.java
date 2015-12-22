@@ -111,7 +111,6 @@ public class ManagerAgencyList extends JPanel{
 					{
 						warning.setVisible(false);
 						changeData(agency);
-						table.resetData();
 					}
 				}
 			}
@@ -164,7 +163,6 @@ public class ManagerAgencyList extends JPanel{
 			}
 		}
 		changeData(new AgencyListVO(t,p));
-		table.resetData();
 	}
 	private	void changeData(AgencyListVO agency)
 	{
@@ -188,6 +186,7 @@ public class ManagerAgencyList extends JPanel{
 			vector.add(temp2.getName());
 			data.add(vector);
 		}
+		table.resetData();
 	}
 	@Override
 	public void paintComponent(Graphics g) {

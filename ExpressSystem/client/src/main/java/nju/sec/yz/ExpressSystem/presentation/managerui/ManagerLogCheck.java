@@ -62,7 +62,6 @@ public class ManagerLogCheck extends JPanel{
 			public void insertUpdate(DocumentEvent e) {
 				ArrayList<LogVO> loglist=log.getByTime(date.getTime());
 				changeData(loglist);
-				table.resetData();
 			}
 			@Override
 			public void removeUpdate(DocumentEvent e) {
@@ -92,7 +91,6 @@ public class ManagerLogCheck extends JPanel{
 		// TODO Auto-generated method stub
 		ArrayList<LogVO> allvo=log.getAll();
 		changeData(allvo);
-		table.resetData();
 	}
 	private void changeData(ArrayList<LogVO> loglist)
 	{
@@ -104,6 +102,7 @@ public class ManagerLogCheck extends JPanel{
 			vector.add(loglist.get(i).getOperation());
 			data.add(vector);
 		}
+		table.resetData();
 	}
 
 	@Override

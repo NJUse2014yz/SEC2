@@ -60,6 +60,11 @@ public class AccountChechLogUi extends JPanel{
 		name.add("人员");
 		name.add("操作");
 		logs=logBl.getAll();
+		
+		table=new newTable(data,name,this,false);
+		table.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
+		table.join();
+		
 		if(logs!=null)
 		{
 			changeData(logs);
@@ -88,13 +93,10 @@ public class AccountChechLogUi extends JPanel{
 				if(logs!=null)
 				{
 					changeData(logs);
-					table.resetData();
 				}
 			}
 		});
-		table=new newTable(data,name,this,false);
-		table.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
-		table.join();
+
 		
 		all=new newJBut("确定");
 		all.setBounds(all_x, all_y, all_w, all_h);
@@ -105,7 +107,6 @@ public class AccountChechLogUi extends JPanel{
 				if(logs!=null)
 				{
 					changeData(logs);
-					table.resetData();
 				}
 			}
 		});
@@ -124,6 +125,7 @@ public class AccountChechLogUi extends JPanel{
 			vector.add(ll.get(i).getOperation());
 			data.add(vector);
 		}
+		table.resetData();
 	}
 	@Override
 	public void paintComponent(Graphics g) {

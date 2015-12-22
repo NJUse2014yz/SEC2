@@ -65,6 +65,17 @@ public class AccountModifyUi extends JPanel{
 		this.bc=bc;
 		accountBl=new AccountController();
 		avo=accountBl.observeList();
+		
+		table=new newTable(data,name,this,false);
+		table.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
+		table.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e)
+			{
+				mainControler.mainFrame.nextPanel(new AccountModifyFillUi(mainControler,bc,table.getValueAt(table.getSelectedRow(), 0, false)));
+			}
+		});
+		table.join();
+		
 		changeData(avo);
 		name.add("名称");
 		name.add("余额");
@@ -92,7 +103,6 @@ public class AccountModifyUi extends JPanel{
 				if(av!=null)
 				{
 					changeData(al);
-					table.resetData();
 				}
 				else
 				{
@@ -107,16 +117,6 @@ public class AccountModifyUi extends JPanel{
 		JBsearch=new JButton(searchIcon);
 		JBsearch.setBounds(search_x, search_y, search_w, search_h);
 		add(JBsearch);
-		
-		table=new newTable(data,name,this,false);
-		table.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
-		table.addMouseListener(new MouseAdapter(){
-			public void mouseClicked(MouseEvent e)
-			{
-				mainControler.mainFrame.nextPanel(new AccountModifyFillUi(mainControler,bc,table.getValueAt(table.getSelectedRow(), 0, false)));
-			}
-		});
-		table.join();
 		
 		warning=new newJLabel();
 		warning.setBounds(warning_x, warning_y, warning_w, warning_h);
@@ -136,6 +136,7 @@ public class AccountModifyUi extends JPanel{
 			vector.add(Double.toString(avo.get(i).getBalance()));
 			data.add(vector);
 		}
+		table.resetData();
 	}
 	@Override
 	public void paintComponent(Graphics g) {

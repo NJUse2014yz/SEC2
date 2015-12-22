@@ -17,10 +17,7 @@ import nju.sec.yz.ExpressSystem.presentation.userui.AdminstraterMainUi;
 import nju.sec.yz.ExpressSystem.presentation.userui.AdminstraterMainUiTest;
 import nju.sec.yz.ExpressSystem.presentation.userui.UserOrderSearchUi;
 import nju.sec.yz.ExpressSystem.presentation.userui.UserUi;
-<<<<<<< HEAD
-=======
 
->>>>>>> 875fced827522236ee653a74799cfba0dcd0d88a
 
 /**
  * 

@@ -123,8 +123,7 @@ public class AccountOperateTableUi extends JPanel{
 				if(bussinessvo!=null){
 					warning.setVisible(false);			
 					changeData(bussinessvo);
-					tableIn.resetData();
-					tableOut.resetData();
+					
 				}
 				else{
 					warning.setText("日期选择有误，请重新选择");
@@ -182,7 +181,8 @@ public class AccountOperateTableUi extends JPanel{
 			vector.add(outvo.get(i).getOutInformation().getComments());
 			dataOut.add(vector);
 		}		
-
+		tableIn.resetData();
+		tableOut.resetData();
 	}
 	@Override
 	public void paintComponent(Graphics g) {

@@ -119,8 +119,6 @@ private InventoryBlService inventoryservice=new InventoryController();
 //					involist = (ArrayList<InventoryInSheetVO>) inventoryservice
 //							.checkStock().inList;
 					changeData(involist,outvolist);
-					table1.resetData();
-					table2.resetData();
 					// 需要得到一个当前数目的值
 					total.setText(Integer.toString(involist.size()-outvolist.size()));
 					total.setVisible(true);
@@ -167,5 +165,7 @@ private InventoryBlService inventoryservice=new InventoryController();
 			
 			data2.add(vector);
 		}
+		table1.resetData();
+		table2.resetData();
 	}
 }

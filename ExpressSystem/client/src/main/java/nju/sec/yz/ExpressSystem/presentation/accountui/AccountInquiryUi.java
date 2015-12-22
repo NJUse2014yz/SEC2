@@ -72,6 +72,11 @@ public class AccountInquiryUi extends JPanel{
 		this.bc=bc;
 		accountBl=new AccountController();
 		avo=accountBl.observeList();
+		
+		table=new newTable(data,name,this,false);
+		table.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
+		table.join();
+		
 		changeData(avo);
 		name.add("名称");
 		name.add("余额");
@@ -99,7 +104,6 @@ public class AccountInquiryUi extends JPanel{
 				if(av!=null)
 				{
 					changeData(al);
-					table.resetData();
 				}
 				else
 				{
@@ -125,7 +129,6 @@ public class AccountInquiryUi extends JPanel{
 				if(avo!=null)
 				{
 					changeData(avo);
-					table.resetData();
 				}
 				else
 				{
@@ -135,10 +138,6 @@ public class AccountInquiryUi extends JPanel{
 			}
 		});
 		add(back);
-		
-		table=new newTable(data,name,this,false);
-		table.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
-		table.join();
 		
 		warning=new newJLabel();
 		warning.setBounds(warning_x, warning_y, warning_w, warning_h);
@@ -158,6 +157,7 @@ public class AccountInquiryUi extends JPanel{
 			vector.add(Double.toString(avo.get(i).getBalance()));
 			data.add(vector);
 		}
+		table.resetData();
 	}
 	@Override
 	public void paintComponent(Graphics g) {

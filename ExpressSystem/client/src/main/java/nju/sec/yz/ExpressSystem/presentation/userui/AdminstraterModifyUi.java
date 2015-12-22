@@ -78,6 +78,17 @@ public class AdminstraterModifyUi extends JPanel{
 		name.add("密码");
 		name.add("权限");
 		name.add("姓名");
+		
+		table=new newTable(data,name,this,false);
+		table.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
+		table.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e)
+			{
+				mainControler.mainFrame.nextPanel(new AdminstraterModifyFillUi(mainControler,bc,data.get(table.getSelectedRow()).get(0)));
+			}
+		});
+		table.join();
+		
 		changeData(uvl);
 		initAdminstraterUi();
 	}
@@ -105,7 +116,6 @@ public class AdminstraterModifyUi extends JPanel{
 				if(uv!=null)
 				{
 					changeData(ul);
-					table.resetData();
 				}else{
 					warning.setText("Id不存在");
 					warning.setForeground(Color.red);
@@ -117,16 +127,6 @@ public class AdminstraterModifyUi extends JPanel{
 		});
 		add(search);
 		
-		table=new newTable(data,name,this,false);
-		table.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
-		table.addMouseListener(new MouseAdapter(){
-			public void mouseClicked(MouseEvent e)
-			{
-				mainControler.mainFrame.nextPanel(new AdminstraterModifyFillUi(mainControler,bc,data.get(table.getSelectedRow()).get(0)));
-			}
-		});
-		table.join();
-		
 		back=new newJBut("返回原列表");
 		back.setBounds(back_x, back_y, back_w, back_h);
 		back.setMargin(new java.awt.Insets(0,0,0,0)); 
@@ -135,7 +135,6 @@ public class AdminstraterModifyUi extends JPanel{
 			{
 				uvl=userBl.getAll();
 				changeData(uvl);
-				table.resetData();
 			}
 		});
 		add(back);
@@ -157,6 +156,7 @@ public class AdminstraterModifyUi extends JPanel{
 			vector.add(ul.get(i).getName());
 			data.add(vector);
 		}
+		table.resetData();
 	}
 	public String getStatus(Status po){
 	
