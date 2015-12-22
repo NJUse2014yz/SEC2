@@ -84,7 +84,7 @@ public class AccountListUi extends JPanel{
 //	private 
 	private void initAccountUi() {
 		bc.changePanel(this);
-		bc.change();
+//		bc.change();
 		setLayout(null);
 		setSize(490, 550);
 		

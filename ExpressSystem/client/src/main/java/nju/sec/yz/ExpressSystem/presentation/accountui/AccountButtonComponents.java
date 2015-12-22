@@ -98,9 +98,14 @@ public class AccountButtonComponents{
 			
 			init();
 		}
+		public void changePanel(JPanel panel,int n)
+		{
+			this.panel=panel;
+		}
 		public void changePanel(JPanel panel)
 		{
 			this.panel=panel;
+			add();
 		}
 		public void init(){
 			

@@ -26,7 +26,7 @@ public class PositionMainUi extends JPanel{
 	}
 
 	private void initPositionMainUi() {
-		bc.changePanel(this);
+		bc.changePanel(this,0);
 		bc.init();
 		setLayout(null);
 		setSize(490, 550);

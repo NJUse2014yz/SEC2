@@ -92,7 +92,7 @@ public class PositionCarModifyFillUi extends JPanel{
 	private void initDeliverMainUi() {
 		
 		bc.changePanel(this);
-		bc.change();
+//		bc.change();
 		setLayout(null);
 		setSize(490, 550);
 
@@ -131,6 +131,7 @@ public class PositionCarModifyFillUi extends JPanel{
 		back.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e)
 			{
+				System.out.println("13");
 				controler.positionChangePanel(POSITION_CONTROL.CAR_MODIFY);
 			}
 		});

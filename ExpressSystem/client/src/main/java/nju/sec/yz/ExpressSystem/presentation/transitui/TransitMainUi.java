@@ -23,7 +23,7 @@ public class TransitMainUi extends JPanel{
 			this.mainControler=mainControler;
 			controler=mainControler.transitControler;
 			this.tbc=tbc;
-			tbc.setNextPanel(this);
+			tbc.setNextPanel(this,0);
 			tbc.iniTransit();
 			initTransitMainUi();
 			

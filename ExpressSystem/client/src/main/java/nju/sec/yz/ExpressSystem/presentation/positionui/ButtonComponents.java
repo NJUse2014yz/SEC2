@@ -46,18 +46,6 @@ public class ButtonComponents{
 		private static newJBut deleteButton;
 		private static newJBut inquiryButton;
 		
-//		ImageIcon inquiryIcon = new ImageIcon("graphic/position/button/button_inquiry.png");
-//		ImageIcon arriveIcon = new ImageIcon("graphic/position/button/button_arrive.png");
-//		ImageIcon deliveIcon = new ImageIcon("graphic/position/button/button_delive.png");
-//		ImageIcon payIcon = new ImageIcon("graphic/position/button/button_pay.png");
-//		ImageIcon carIcon1 = new ImageIcon("graphic/position/button/button_car1.png");
-//		ImageIcon carIcon2 = new ImageIcon("graphic/position/button/button_car2.png");
-//		ImageIcon driverIcon1 = new ImageIcon("graphic/position/button/button_driver1.png");
-//		ImageIcon driverIcon2 = new ImageIcon("graphic/position/button/button_driver2.png");
-//		ImageIcon loadIcon = new ImageIcon("graphic/position/button/button_load.png");
-//		ImageIcon addIcon = new ImageIcon("graphic/position/button/button_add.png");
-//		ImageIcon deleteIcon = new ImageIcon("graphic/position/button/button_delete.png");
-//		ImageIcon modifyIcon = new ImageIcon("graphic/position/button/button_modify.png");
 		ImageIcon ExitIcon = new ImageIcon("graphic/common/exit.gif");
 		// 退出系统
 		private JButton exitButton;
@@ -74,9 +62,14 @@ public class ButtonComponents{
 			this.panel=panel;
 			init();
 		}
+		public void changePanel(JPanel panel,int n)
+		{
+			this.panel=panel;
+		}
 		public void changePanel(JPanel panel)
 		{
 			this.panel=panel;
+			add();
 		}
 		public void init(){
 			
@@ -138,6 +131,7 @@ public class ButtonComponents{
 			change();
 		}
 		public void change(){
+			
 			arriveButton.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
 					addButton.setVisible(false);
@@ -148,6 +142,7 @@ public class ButtonComponents{
 //					driverButton.setIcon(driverIcon1);
 					driverButton.setLocation(Button_x, driver_y1);
 					loadButton.setLocation(Button_x,load_y1);
+					System.out.println("1");
 					maincontroler.positionControler.positionChangePanel(POSITION_CONTROL.ARRIVE);
 				}
 			});
@@ -161,6 +156,7 @@ public class ButtonComponents{
 //					driverButton.setIcon(driverIcon1);
 					driverButton.setLocation(Button_x, driver_y1);
 					loadButton.setLocation(Button_x,load_y1);
+					System.out.println("2");
 					maincontroler.positionControler.positionChangePanel(POSITION_CONTROL.DELIVE);
 				}
 			});
@@ -174,6 +170,7 @@ public class ButtonComponents{
 //					driverButton.setIcon(driverIcon1);
 					driverButton.setLocation(Button_x, driver_y1);
 					loadButton.setLocation(Button_x,load_y1);
+					System.out.println("4");
 					maincontroler.positionControler.positionChangePanel(POSITION_CONTROL.GETPAY);
 				}
 			});
@@ -186,6 +183,7 @@ public class ButtonComponents{
 					addButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e1)
 						{
+							System.out.println("7");
 							maincontroler.positionControler.positionChangePanel(POSITION_CONTROL.CAR_ADD);
 						}
 					});
@@ -194,6 +192,7 @@ public class ButtonComponents{
 					deleteButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e1)
 						{
+							System.out.println("8");
 							maincontroler.positionControler.positionChangePanel(POSITION_CONTROL.CAR_DELETE);
 						}
 					});
@@ -202,6 +201,7 @@ public class ButtonComponents{
 					modifyButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e1)
 						{
+							System.out.println("12");
 							maincontroler.positionControler.positionChangePanel(POSITION_CONTROL.CAR_MODIFY);
 						}
 					});
@@ -210,6 +210,7 @@ public class ButtonComponents{
 					inquiryButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e1)
 						{
+							System.out.println("8");
 							maincontroler.positionControler.positionChangePanel(POSITION_CONTROL.CAR_INQUIRY);
 						}
 					});
@@ -229,6 +230,7 @@ public class ButtonComponents{
 					addButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e1)
 						{
+							System.out.println("5");
 							maincontroler.positionControler.positionChangePanel(POSITION_CONTROL.DRIVER_ADD);
 						}
 					});
@@ -237,6 +239,7 @@ public class ButtonComponents{
 					deleteButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e1)
 						{
+							System.out.println("11");
 							maincontroler.positionControler.positionChangePanel(POSITION_CONTROL.DRIVER_DELETE);
 						}
 					});
@@ -245,6 +248,7 @@ public class ButtonComponents{
 					modifyButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e1)
 						{
+							System.out.println("6");
 							maincontroler.positionControler.positionChangePanel(POSITION_CONTROL.DRIVER_MODIFY);
 						}
 					});
@@ -253,6 +257,7 @@ public class ButtonComponents{
 					inquiryButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e1)
 						{
+							System.out.println("10");
 							maincontroler.positionControler.positionChangePanel(POSITION_CONTROL.DRIVER_INQUIRY);
 						}
 					});
@@ -271,6 +276,7 @@ public class ButtonComponents{
 //					driverButton.setIcon(driverIcon1);
 					driverButton.setLocation(Button_x, driver_y1);
 					loadButton.setLocation(Button_x,load_y1);
+					System.out.println("3");
 					maincontroler.positionControler.positionChangePanel(POSITION_CONTROL.LOAD);
 				}
 			});

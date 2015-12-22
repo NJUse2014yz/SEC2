@@ -56,9 +56,14 @@ public class AdminstraterButtonComponents{
 			this.panel=panel;
 			init();
 		}
+		public void changePanel(JPanel panel,int n)
+		{
+			this.panel=panel;
+		}
 		public void changePanel(JPanel panel)
 		{
 			this.panel=panel;
+			add();
 		}
 		public void init(){
 			manageButton = new newJBut("用户管理");

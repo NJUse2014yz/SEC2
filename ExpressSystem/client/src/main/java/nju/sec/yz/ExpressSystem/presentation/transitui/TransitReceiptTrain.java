@@ -61,7 +61,7 @@ public class TransitReceiptTrain extends JPanel {
 		this.maincontrol = maincontrol;
 		this.tbc = tbc;
 		tbc.setNextPanel(this);
-		tbc.change();
+//		tbc.change();
 		iniTransReceiptTrain();
 
 	}

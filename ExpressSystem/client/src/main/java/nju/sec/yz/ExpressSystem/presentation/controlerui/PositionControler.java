@@ -33,30 +33,21 @@ public class PositionControler {
 		case ARRIVE:
 			mainControler.mainFrame.nextPanel(new PositionArriveUi(this.mainControler,bc));
 			break;
-//		case ARRIVE_SUCCESS:
-//			break;
 		case DELIVE:
 			mainControler.mainFrame.nextPanel(new PositionDeliveUi(this.mainControler,bc));
 			break;
-//		case DELIVE_SUCCESS:
-//			mainControler.mainFrame.nextPanel(new PositionPayUi(this.mainControler));
-//			break;
 		case GETPAY:
 			mainControler.mainFrame.nextPanel(new PositionPayUi(this.mainControler,bc));
 			break;
 		case CAR_ADD:
 			mainControler.mainFrame.nextPanel(new PositionCarAddUi(this.mainControler,bc));
 			break;
-//		case CAR_ADD_SUCCESS:
-//			break;
 		case CAR_DELETE:
 			mainControler.mainFrame.nextPanel(new PositionCarDeleteUi(this.mainControler,bc));
 			break;
 		case CAR_MODIFY:
 			mainControler.mainFrame.nextPanel(new PositionCarModifyUi(this.mainControler,bc));
 			break;
-//		case CAR_MODIFY_SUCCESS:
-//			break;
 		case CAR_INQUIRY:
 			mainControler.mainFrame.nextPanel(new PositionCarInquiryUi(this.mainControler,bc));
 			break;
@@ -69,16 +60,12 @@ public class PositionControler {
 		case DRIVER_MODIFY:
 			mainControler.mainFrame.nextPanel(new PositionDriverModifyUi(this.mainControler,bc));
 			break;
-//		case DRIVER_MODIFY_SUCCESS:
-//			break;
 		case DRIVER_INQUIRY:
 			mainControler.mainFrame.nextPanel(new PositionDriverInquiryUi(this.mainControler,bc));
 			break;
 		case LOAD:
 			mainControler.mainFrame.nextPanel(new PositionLoadUi(this.mainControler,bc));
 			break;
-//		case LOAD_SUCCESS:
-//			break;
 		default:
 			System.out.println("wrong state");
 			break;

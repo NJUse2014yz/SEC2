@@ -59,7 +59,7 @@ public class ManagerStaffModify extends JPanel {
 		this.mbc = mbc;
 		this.staffId = staffId;
 		mbc.changePanel(this);
-		mbc.change();
+//		mbc.change();
 		iniManagerStaffModify();
 	}
 

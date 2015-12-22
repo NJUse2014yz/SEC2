@@ -25,7 +25,7 @@ public class AccountMainUi extends JPanel{
 		initAccountUi();
 	}
 	private void initAccountUi() {
-		bc.changePanel(this);
+		bc.changePanel(this,0);
 		bc.init();
 		if(str=="junior"){
 			bc.setType("junior");

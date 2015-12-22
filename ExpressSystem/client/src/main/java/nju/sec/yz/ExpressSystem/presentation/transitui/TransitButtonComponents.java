@@ -58,11 +58,15 @@ public class TransitButtonComponents {
 		iniTransit();
 	}
 
-	
-	public void setNextPanel(JPanel panel){
+	public void setNextPanel(JPanel panel,int n)
+	{
 		this.panel=panel;
 	}
-
+	public void setNextPanel(JPanel panel)
+	{
+		this.panel=panel;
+		addComponent();
+	}
 	private void addComponent(){
 		panel.add(TransitLoading);
 		panel.add(TransitReceive);

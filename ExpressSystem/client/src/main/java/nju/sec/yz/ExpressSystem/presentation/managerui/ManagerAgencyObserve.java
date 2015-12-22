@@ -50,7 +50,7 @@ public class ManagerAgencyObserve extends JPanel{
 		this.mbc=mbc;
 		this.num=num;
 		mbc.changePanel(this);
-		mbc.change();
+//		mbc.change();
 		iniManagerAgencyObserve();
 	}
 

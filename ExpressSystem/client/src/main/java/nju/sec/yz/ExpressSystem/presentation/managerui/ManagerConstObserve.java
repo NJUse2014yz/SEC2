@@ -40,7 +40,7 @@ public class ManagerConstObserve extends JPanel {
 		this.maincontroler = maincontroler;
 		this.mbc = mbc;
 		mbc.changePanel(this);
-		mbc.change();
+//		mbc.change();
 		iniManagerConstObserve();
 	}
 

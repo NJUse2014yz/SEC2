@@ -95,7 +95,7 @@ public class PositionDriverAddUi extends JPanel{
 	private void initDeliverMainUi() {
 
 		bc.changePanel(this);
-		bc.change();
+//		bc.change();
 		setLayout(null);
 		setSize(490, 550);
 		

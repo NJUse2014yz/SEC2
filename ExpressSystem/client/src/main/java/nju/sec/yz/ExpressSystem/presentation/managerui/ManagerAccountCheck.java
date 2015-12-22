@@ -82,7 +82,7 @@ public class ManagerAccountCheck extends JPanel {
 
 	private void iniManagerAccountCheck() {
 		mbc.changePanel(this);
-		mbc.change();
+//		mbc.change();
 
 		setLayout(null);
 		setSize(490, 550);

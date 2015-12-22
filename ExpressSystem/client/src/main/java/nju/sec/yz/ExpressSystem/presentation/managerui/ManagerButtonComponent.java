@@ -76,7 +76,6 @@ public class ManagerButtonComponent {
 		init();
 	}
 	
-
 	public void init() {
 		
 		setOriginal();
@@ -93,7 +92,7 @@ public class ManagerButtonComponent {
 		exitButton.setBounds(490-19,0,19,19);
 		change();
 	}
-	
+
 	public void change() {
 		
 		buttons[0].addMouseListener(new MouseAdapter() {
@@ -336,9 +335,14 @@ public class ManagerButtonComponent {
 
 
 
-	public void changePanel(JPanel panel) {
+	public void changePanel(JPanel panel,int n)
+	{
 		this.panel=panel;
-		
+	}
+	public void changePanel(JPanel panel)
+	{
+		this.panel=panel;
+		add();
 	}
 	
 	public void setOriginal(){

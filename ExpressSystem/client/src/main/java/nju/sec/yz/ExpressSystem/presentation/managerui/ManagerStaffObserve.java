@@ -46,7 +46,7 @@ private newJBut back;
 		this.maincontroler=maincontroler;
 		this.mbc=mbc;
 		mbc.changePanel(this);
-		mbc.change();
+//		mbc.change();
 		iniManagerStaffObserve();
 	}
 

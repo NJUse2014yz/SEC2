@@ -200,11 +200,13 @@ private InventoryBlService inventoryservice=new InventoryController();
 	}
 	private void changeData(ArrayList<String> bars)
 	{
+		data.removeAllElements();
 		for(int c=0;c<bars.size();c++){
 			Vector<String> vector=new Vector<String>();
 			vector.add(bars.get(c));
 			data.add(vector);
 		}
+		table.resetData();
 	}
 	
 

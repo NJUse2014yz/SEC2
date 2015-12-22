@@ -54,7 +54,7 @@ public class ManagerAgencyList extends JPanel{
 		this.mbc=mbc;
 		this.type=str;
 		mbc.changePanel(this);
-		mbc.change();
+//		mbc.change();
 		iniManagerAgencyList();
 	}
 

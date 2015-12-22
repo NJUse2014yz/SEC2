@@ -66,7 +66,7 @@ public class AccountModifyFillUi extends JPanel{
 	}
 	private void initAccountUi() {
 		bc.changePanel(this);
-		bc.change();
+//		bc.change();
 		setLayout(null);
 		setSize(490, 550);
 		

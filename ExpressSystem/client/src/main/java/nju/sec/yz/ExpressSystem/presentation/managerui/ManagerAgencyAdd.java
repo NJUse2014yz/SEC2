@@ -55,7 +55,7 @@ public class ManagerAgencyAdd extends JPanel {
 		this.maincontroler = maincontroler;
 		this.mbc = mbc;
 		mbc.changePanel(this);
-		mbc.change();
+//		mbc.change();
 		title.add("下属营业厅编号");
 		iniManagerAgencyAdd();
 	}

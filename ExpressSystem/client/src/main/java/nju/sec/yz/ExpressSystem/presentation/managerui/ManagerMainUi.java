@@ -19,7 +19,7 @@ public class ManagerMainUi extends JPanel {
 	
 	private void iniManagerMain() {
 //		ManagerButtonComponent mbc=new ManagerButtonComponent(maincontroler, this);
-		mbc.changePanel(this);
+		mbc.changePanel(this,0);
 		mbc.init();
 		
 		setLayout(null);

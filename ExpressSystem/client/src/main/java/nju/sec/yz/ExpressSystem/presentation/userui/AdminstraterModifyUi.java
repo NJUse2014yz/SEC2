@@ -84,7 +84,7 @@ public class AdminstraterModifyUi extends JPanel{
 	private void initAdminstraterUi()
 	{
 		bc.changePanel(this);
-		bc.change();
+//		bc.change();
 		setLayout(null);
 		setSize(490,550);
 		

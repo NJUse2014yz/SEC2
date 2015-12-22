@@ -49,7 +49,7 @@ public class ManagerStaffDelete extends JPanel {
 		this.maincontroler = maincontroler;
 		this.mbc = mbc;
 		mbc.changePanel(this);
-		mbc.change();
+//		mbc.change();
 		iniManagerStaffDelete();
 	}
 

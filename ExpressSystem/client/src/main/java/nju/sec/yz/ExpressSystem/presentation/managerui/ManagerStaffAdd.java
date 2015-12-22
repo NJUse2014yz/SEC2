@@ -55,7 +55,7 @@ public class ManagerStaffAdd extends JPanel{
 		this.maincontroler=maincontroler;
 		this.mbc=mbc;
 		mbc.changePanel(this);
-		mbc.change();
+//		mbc.change();
 		iniManagerStaffAdd();
 	}
 
