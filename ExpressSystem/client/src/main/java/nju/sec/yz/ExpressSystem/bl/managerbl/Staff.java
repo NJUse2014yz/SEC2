@@ -97,7 +97,7 @@ public class Staff implements Initialable<StaffVO, StaffPO> {
 		User user=new User();
 		ResultMessage message=user.add(userInfo);
 		if(message.getResult()==Result.FAIL)
-			return new ResultMessage(Result.FAIL,"添加员工账号时出现冲突，请联系系统管理员");
+			return new ResultMessage(Result.FAIL,"添加登录账号失败,"+"如需添加账号请联系管理员");
 		
 		return new ResultMessage(Result.SUCCESS);
 	}
@@ -147,7 +147,7 @@ public class Staff implements Initialable<StaffVO, StaffPO> {
 
 	/**
 	 * 更新员工信息
-	 * 若修改了人员编号，职务或者机构，则需要删除原有系统账户，添加新账户
+	 * 若修改了人员编号，职务或者机构，则需要提示删除原有系统账户，添加新账户
 	 */
 	public ResultMessage modifyStaff(StaffVO sv) {
 		ResultMessage message = null;
