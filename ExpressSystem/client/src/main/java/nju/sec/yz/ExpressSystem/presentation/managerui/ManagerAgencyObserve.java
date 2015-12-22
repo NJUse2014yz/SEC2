@@ -76,7 +76,7 @@ public class ManagerAgencyObserve extends JPanel{
 		title.add("名称");
 		
 		table=new newTable(data,title,this,false);
-		table.setBounds(137,200,318,181);
+		table.setBounds(137,94,318,181);
 		table.join();
 		
 //		ImageIcon backIcon = new ImageIcon("graphic/manager/button/back.png");

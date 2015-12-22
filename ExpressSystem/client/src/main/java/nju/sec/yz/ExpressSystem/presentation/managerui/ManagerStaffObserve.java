@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -15,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -23,6 +25,7 @@ import nju.sec.yz.ExpressSystem.blservice.managerBlService.StaffBlService;
 import nju.sec.yz.ExpressSystem.common.Status;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.StaffVO;
 
@@ -31,9 +34,9 @@ public class ManagerStaffObserve extends JPanel{
 	private ClientControler maincontroler;
 private  ManagerButtonComponent mbc;
 private JTextField searchnum;
-private JTable table;
-private TableModel model;
-private JScrollPane jsc;
+private newTable table;
+private Vector<Vector<String>> data=new Vector<Vector<String>>();
+private Vector<String> name=new Vector<String>();
 
 private newJLabel warning=new newJLabel();
 
@@ -52,14 +55,18 @@ private newJBut back;
 		setSize(490, 550);
 		setVisible(true);
 
-		table=new JTable(null);
+		name.add("人员编号");
+		name.add("姓名");
+		name.add("职务");
+		name.add("所属机构");
 		
-		jsc=new JScrollPane(table);
-		jsc.setVisible(true);
-	    jsc.setBounds(137,94,318,181);
-	    add(jsc);
-
-		original();
+		table=new newTable(data,name,this,false);
+		table.setBounds(216,94, 220, 21);
+		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		table.setTableSelect();
+		table.join();
+		
+		changeData(manager.observeStaff());
 		
 		searchnum=new JTextField();
 		searchnum.setBorder(BorderFactory.createLineBorder(Color.white,0));
@@ -94,14 +101,8 @@ private newJBut back;
 					repaint();
 				}else{
 					StaffVO staff=manager.observeStaff(searchnum.getText());
-					
-					
-					
-					String[] columnTitle={"人员编号","姓名","职务","所属机构"};
-					String[][] TableData ={{staff.getId(),staff.getName(),getpower(staff.getPower()),staff.getAgency()}};
-					model=new DefaultTableModel(TableData,columnTitle);
-					table.setModel(model);
-					table.repaint();
+					ArrayList<StaffVO> sl=new ArrayList<StaffVO>();
+					changeData(sl);
 				}
 		
 		}
@@ -111,7 +112,7 @@ private newJBut back;
 		
 		back.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				original();
+				changeData(manager.observeStaff());
 				repaint();
 			}
 		});	
@@ -143,20 +144,17 @@ private newJBut back;
 	}
 	
 	
-	private void original(){
-		ArrayList<StaffVO> allstaff=manager.observeStaff();
-		
-		String[][] TableData = new String[allstaff.size()][4];
-		String[] columnTitle={"人员编号","姓名","职务","所属机构"};
+	private void changeData(ArrayList<StaffVO> allstaff){
+		data.removeAllElements();
 		for(int i=0;i<allstaff.size();i++){
-			TableData[i][0]=allstaff.get(i).getId();
-			TableData[i][1]=allstaff.get(i).getName();
-			TableData[i][2]=getpower(allstaff.get(i).getPower());
-			TableData[i][3]=allstaff.get(i).getAgency();
-			}
-		
-		model=new DefaultTableModel(TableData,columnTitle);
-		table.setModel(model);
+			Vector<String> vector=new Vector<String>();
+			vector.add(allstaff.get(i).getId());
+			vector.add(allstaff.get(i).getName());
+			vector.add(getpower(allstaff.get(i).getPower()));
+			vector.add(allstaff.get(i).getAgency());
+			data.add(vector);
+		}
+		table.resetData();
 	}
 		
 	@Override
