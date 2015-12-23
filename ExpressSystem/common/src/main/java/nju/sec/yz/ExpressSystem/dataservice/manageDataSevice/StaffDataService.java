@@ -17,7 +17,7 @@ public interface StaffDataService extends Remote{
 	public ResultMessage insert(StaffPO spo) throws RemoteException;
 	public StaffPO find(String id) throws RemoteException;
 	public ResultMessage delete(String id) throws RemoteException;
-	public ResultMessage update(StaffPO spo) throws RemoteException;
 	public ResultMessage init(List<StaffPO> staffs) throws RemoteException;
 	public ArrayList<StaffPO> findAll( ) throws RemoteException;
+	public ResultMessage update(String loginId, StaffPO po) throws RemoteException;
 }

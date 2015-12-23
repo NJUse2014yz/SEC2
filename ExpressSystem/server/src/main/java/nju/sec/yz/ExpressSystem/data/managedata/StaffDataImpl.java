@@ -99,20 +99,20 @@ public class StaffDataImpl extends UnicastRemoteObject implements StaffDataServi
 	}
 
 	@Override
-	public ResultMessage update(StaffPO spo) throws RemoteException {
+	public ResultMessage update(String loginId,StaffPO spo) throws RemoteException {
 		System.out.println("updating a StaffPO...");
-		if(spo==null){
+		if(spo==null||loginId==null){
 			System.out.println("更新的StaffPO是空的！！！");
 			return new ResultMessage(Result.FAIL, "系统错误");
 		}
 			
-		String id=spo.getLoginId();
+		
 
 		List<StaffPO> StaffPOs = findAll();
 		for (int i = 0; i < StaffPOs.size(); i++) {
 			StaffPO po = StaffPOs.get(i);
 			String carID = po.getLoginId();
-			if (id.equals(carID)) {
+			if (loginId.equals(carID)) {
 				StaffPOs.remove(i);
 				StaffPOs.add(spo);
 				ResultMessage message=saveData(StaffPOs);

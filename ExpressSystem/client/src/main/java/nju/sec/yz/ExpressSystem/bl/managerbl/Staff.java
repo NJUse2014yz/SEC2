@@ -81,7 +81,7 @@ public class Staff implements Initialable<StaffVO, StaffPO> {
 	 */
 	private void sendAddMessage(String loginId,StaffVO vo){
 		String message="总经理添加人员："+vo.getName()+StringTool.nextLine();
-		message=message+"系统已自动添加账号："+loginId;
+		message=message+"系统已自动添加账号："+loginId+StringTool.nextLine();;
 		Message messageService=new Message();
 		messageService.send(new MessageVO("admin", message));
 	}
@@ -118,7 +118,7 @@ public class Staff implements Initialable<StaffVO, StaffPO> {
 
 	private void sendDeleteMessage(String loginId){
 		String message="总经理已删除或修改人员信息"+StringTool.nextLine();
-		message=message+"请确认是否删除账号："+loginId;
+		message=message+"请确认是否删除账号："+loginId+StringTool.nextLine();;
 		Message messageService=new Message();
 		messageService.send(new MessageVO("admin", message));
 	}
@@ -158,12 +158,12 @@ public class Staff implements Initialable<StaffVO, StaffPO> {
 		// vo转po,数据库更新po
 		StaffPO po = changeVOToPO(sv);
 		try {
-			message = data.update(po);
-			if(message.getResult()==Result.FAIL)
-				return message;
+			
 			String loginId=createLoginId(sv);
 			if(loginId.equals(sv.getLoginId()))//未修改机构，职务和人员编号
 				return new ResultMessage(Result.SUCCESS);
+			po.setLoginId(loginId);
+			message = data.update(sv.getLoginId(),po);
 			
 			//已修改,先添加新账户，再提示删除旧账户
 			message=this.saveLoginId(loginId, sv);
@@ -219,7 +219,9 @@ public class Staff implements Initialable<StaffVO, StaffPO> {
 		String id = po.getId();
 		Status power = po.getPower();
 		String agency = po.getAgency();
+		String loginId=po.getLoginId();
 		StaffVO vo = new StaffVO(name, id, power, agency,po.getLoginId());
+		vo.setLoginId(loginId);
 		return vo;
 	}
 
@@ -229,7 +231,9 @@ public class Staff implements Initialable<StaffVO, StaffPO> {
 		String id = sv.getId();
 		Status power = sv.getPower();
 		String agency = sv.getAgency();
+		String loginId=sv.getLoginId();
 		StaffPO po = new StaffPO(name, id, power, agency);
+		po.setLoginId(loginId);
 		return po;
 	}
 

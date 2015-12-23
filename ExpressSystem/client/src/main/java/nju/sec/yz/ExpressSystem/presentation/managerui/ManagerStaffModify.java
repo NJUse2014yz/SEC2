@@ -159,7 +159,7 @@ public class ManagerStaffModify extends JPanel {
 							getstatus(power),agency.getSelectedItem().toString(),
 							logId.getText().toString());
 					// 判断输入的信息是否正确
-					ResultMessage result = manager.addStaff(vo);
+					ResultMessage result = manager.modifyStaff(vo);
 					warning.Reply(result);
 					}
 				add(warning);
