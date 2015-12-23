@@ -35,7 +35,7 @@ public class StaffBlStub implements StaffBlService {
 
 	@Override
 	public ArrayList<StaffVO> observeStaff() {
-		StaffVO svo=new StaffVO("刘强东", "s001", Status.MANAGER,"京东");
+		StaffVO svo=new StaffVO("刘强东", "s001", Status.MANAGER,"京东", "S001");
 		ArrayList<StaffVO> list = new ArrayList<StaffVO>();
 		list.add(svo);
 		return  list;
