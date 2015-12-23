@@ -1,7 +1,5 @@
 package nju.sec.yz.ExpressSystem.client.rmi;
 
-import javax.swing.JFrame;
-
 import nju.sec.yz.ExpressSystem.client.ClientInitException;
 
 public class InitRMI {

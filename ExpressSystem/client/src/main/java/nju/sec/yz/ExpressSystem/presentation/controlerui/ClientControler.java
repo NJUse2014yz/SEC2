@@ -4,18 +4,11 @@ import javax.swing.JPanel;
 
 import nju.sec.yz.ExpressSystem.presentation.accountui.AccountMainUi;
 import nju.sec.yz.ExpressSystem.presentation.deliverui.DeliverMainUi;
-import nju.sec.yz.ExpressSystem.presentation.deliverui.DeliverMainUiTest;
-import nju.sec.yz.ExpressSystem.presentation.deliverui.DeliverOrderSearchUi;
 import nju.sec.yz.ExpressSystem.presentation.inventoryui.InventoryMainUi;
-import nju.sec.yz.ExpressSystem.presentation.inventoryui.InventoryMainUiTest;
 import nju.sec.yz.ExpressSystem.presentation.managerui.ManagerMainUi;
-import nju.sec.yz.ExpressSystem.presentation.managerui.ManagerMainUiTest;
 import nju.sec.yz.ExpressSystem.presentation.positionui.PositionMainUi;
 import nju.sec.yz.ExpressSystem.presentation.transitui.TransitMainUi;
-import nju.sec.yz.ExpressSystem.presentation.transitui.TransitMainUiTest;
 import nju.sec.yz.ExpressSystem.presentation.userui.AdminstraterMainUi;
-import nju.sec.yz.ExpressSystem.presentation.userui.AdminstraterMainUiTest;
-import nju.sec.yz.ExpressSystem.presentation.userui.UserOrderSearchUi;
 import nju.sec.yz.ExpressSystem.presentation.userui.UserUi;
 
 

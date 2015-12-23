@@ -36,9 +36,9 @@ public class RMIExceptionFrame {
 		panel.destruct();
 	}
 	
-	public static void main(String[] args) {
-		RMIExceptionFrame frame=new RMIExceptionFrame();
-	}
-	
+//	public static void main(String[] args) {
+//		RMIExceptionFrame frame=new RMIExceptionFrame();
+//	}
+//	
 	
 }
