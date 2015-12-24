@@ -257,14 +257,50 @@ public class ManagerButtonComponent {
 		
 		buttons[4].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e){
-				setOriginal();
+//				setOriginal();
+				buttons[0].setBounds(13, 50, width, height1);
+				
+				buttons[1].setBounds(13, 50+height1*1, width, height1);
+				
+				buttons[2].setBounds(13, 50+height1*2, width, height1);
+				
+				buttons[3].setBounds(13, 50+height1*3, width, height1);
+				
+				buttons[4].setBounds(13, 50+height1*4, width, height1);
+				
+				buttons[5].setBounds(13, 50+height1*5, width, height1);
+				
+				buttons[6].setBounds(13, 50+height1*6, width, height1);
+				
+				add.setVisible(false);
+				delete.setVisible(false);
+				modify.setVisible(false);
+				observe.setVisible(false);
 				maincontroler.managerControler.managerChangePanel(MANAGER_CONTROL.RECEIPT_LIST);
 			}
 		});
 		
 		buttons[5].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e){
-				setOriginal();
+//				setOriginal();
+				buttons[0].setBounds(13, 50, width, height1);
+				
+				buttons[1].setBounds(13, 50+height1*1, width, height1);
+				
+				buttons[2].setBounds(13, 50+height1*2, width, height1);
+				
+				buttons[3].setBounds(13, 50+height1*3, width, height1);
+				
+				buttons[4].setBounds(13, 50+height1*4, width, height1);
+				
+				buttons[5].setBounds(13, 50+height1*5, width, height1);
+				
+				buttons[6].setBounds(13, 50+height1*6, width, height1);
+				
+				add.setVisible(false);
+				delete.setVisible(false);
+				modify.setVisible(false);
+				observe.setVisible(false);
 				maincontroler.managerControler.managerChangePanel(MANAGER_CONTROL.ACCOUNT_CHECK);
 			
 			}
@@ -272,7 +308,25 @@ public class ManagerButtonComponent {
 		
 		buttons[6].addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e){
-				setOriginal();
+//				setOriginal();
+				buttons[0].setBounds(13, 50, width, height1);
+				
+				buttons[1].setBounds(13, 50+height1*1, width, height1);
+				
+				buttons[2].setBounds(13, 50+height1*2, width, height1);
+				
+				buttons[3].setBounds(13, 50+height1*3, width, height1);
+				
+				buttons[4].setBounds(13, 50+height1*4, width, height1);
+				
+				buttons[5].setBounds(13, 50+height1*5, width, height1);
+				
+				buttons[6].setBounds(13, 50+height1*6, width, height1);
+				
+				add.setVisible(false);
+				delete.setVisible(false);
+				modify.setVisible(false);
+				observe.setVisible(false);
 				maincontroler.managerControler.managerChangePanel(MANAGER_CONTROL.LOG_CHECK);
 			
 			}
