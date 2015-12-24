@@ -51,7 +51,6 @@ public class CollectionRecord {
 	public List<CollectionRecordVO> getRecords(){
 		
 		String positionId=this.getCurrentPositionID();
-		System.out.println(positionId);
 		List<CollectionRecordVO> vos=new ArrayList<>();
 		List<CollectionRecordPO> pos=null;
 		

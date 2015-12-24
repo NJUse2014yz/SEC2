@@ -30,6 +30,7 @@ public interface DeliverBlService {
 	
 	/**
 	 * 到达单输入中转单编号获得条形码号列表
+	 * 前置条件：制定到达单时填写的中转单号目的地为当前机构
 	 */
 	public BarIdsVO getBarIdList(String transitSheetId);
 	
@@ -54,21 +55,50 @@ public interface DeliverBlService {
 	public List<String> getValidAgency();
 	
 	/**
-	 * 
+	 * 营业厅制定收款单时可选的账户列表名称
 	 */
 	public List<String> getAccounts();
 	
-	//寄件单
+	/**
+	 * 获得当前营业厅的收款记录
+	 */
+	public List<CollectionRecordVO> getCollectionRecords();
+	
+	/**
+	 * 寄件单
+	 * @param vo
+	 * @return
+	 */
 	public ResultMessage deliverReceipt (SendSheetVO vo);
-	//收件单
+	/**
+	 * 收件单
+	 * @param vo
+	 * @return
+	 */
 	public ResultMessage  recieveReceipt(ReceiveVO vo);
-	//营业厅装车单
+	/**
+	 * 营业厅装车单
+	 * @param vo
+	 * @return
+	 */
 	public ResultMessage positionLoadingReceipt (OfficeLoadSheetVO vo);
-	//营业厅到达单
+	/**
+	 * 营业厅到达单
+	 * @param vo
+	 * @return
+	 */
 	public ResultMessage positionReceiveReceipt(OfficeArriveSheetVO vo);
-	//营业厅派件单
+	/**
+	 * 营业厅派件单
+	 * @param vo
+	 * @return
+	 */
 	public ResultMessage positionSendReceipt(DeliverySheetVO vo);
-	//中转中心到达单
+	/**
+	 * 中转中心到达单
+	 * @param vo
+	 * @return
+	 */
 	public ResultMessage transitReceiveReceipt(TransitArriveSheetVO vo);
 	//中转中心装车单
 	public ResultMessage transitLoadingReceipt (TransitLoadSheetVO vo);
@@ -82,9 +112,5 @@ public interface DeliverBlService {
 	
 	public ResultMessage transitCarReceipt(TransitSheetVO vo);
 	
-	/**
-	 * 获得营业厅的收款记录
-	 */
-	public List<CollectionRecordVO> getCollectionRecords();
 }
 

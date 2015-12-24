@@ -12,7 +12,7 @@ import nju.sec.yz.ExpressSystem.vo.PriceVO;
  */
 public interface ConstBlService {
 	public ResultMessage modifyCity(CityVO cv);
-	//public CityPO find(String beginPlace,String endPlace) throws RemoteException;
+
 	public CityVO observeCity(String beginPlace,String endPlace) ;
 	public List<CityVO> observeAllCity();
 	public ResultMessage addCity(CityVO cp);

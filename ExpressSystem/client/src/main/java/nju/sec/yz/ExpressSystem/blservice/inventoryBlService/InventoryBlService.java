@@ -24,16 +24,40 @@ public interface InventoryBlService {
 	 */
 	public List<String> getValidDestination();
 	
-	//库存查看
+	/**
+	 * 库存查看
+	 * @param begin 开始时间
+	 * @param end	结束时间
+	 * @return
+	 */
 	public InventoryListVO observeStock(String begin,String end);
-	//库存盘点
+	
+	/**
+	 * 库存盘点
+	 * @return 当前库存中未出库的入库单
+	 */
 	public InventoryListVO checkStock();
-	//导出excel
+	
+	/**
+	 * 导出excel
+	 * @return
+	 */
 	public ResultMessage exportToExcel();
-	//入库
+	
+	/**
+	 * 入库
+	 * @param iisvo
+	 * @return
+	 */
 	public ResultMessage in(InventoryInSheetVO iisvo);
-	//出库
+	
+	/**
+	 * 出库
+	 * @param iosvo
+	 * @return
+	 */
 	public ResultMessage out(InventoryOutSheetVO iosvo);
+	
 	/**
 	 * @author cong
 	 * 设置库存警报比例

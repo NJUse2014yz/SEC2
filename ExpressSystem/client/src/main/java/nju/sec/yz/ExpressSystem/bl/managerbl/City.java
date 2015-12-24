@@ -3,13 +3,11 @@ package nju.sec.yz.ExpressSystem.bl.managerbl;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
-
 import nju.sec.yz.ExpressSystem.client.DatafactoryProxy;
 import nju.sec.yz.ExpressSystem.client.rmi.RMIExceptionHandler;
 import nju.sec.yz.ExpressSystem.dataservice.manageDataSevice.CityIdDataService;
 import nju.sec.yz.ExpressSystem.po.CityIdPO;
 import nju.sec.yz.ExpressSystem.vo.CityIdVO;
-import nju.sec.yz.ExpressSystem.vo.CityVO;
 
 /**
  * 维护所有城市名称和编号

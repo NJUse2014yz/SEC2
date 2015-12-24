@@ -12,15 +12,39 @@ import nju.sec.yz.ExpressSystem.vo.AccountVO;
  *
  */
 public interface AccountBlService{
-	//add
+	
+	/**
+	 * add
+	 * @param av
+	 * @return
+	 */
 	public ResultMessage addAccount(AccountVO av);
-	//delete
+	
+	/**
+	 * delete
+	 * @param id
+	 * @return
+	 */
 	public ResultMessage deleteAccount(String id);
-	//modify
+	
+	/**
+	 * modify
+	 * @param av
+	 * @return
+	 */
 	public ResultMessage modifyAccount(AccountVO av);
-	//observe
+	
+	/**
+	 * observe
+	 * @param id
+	 * @return
+	 */
 	public AccountVO observeAccount(String id);
-	//显示账户列表
+	
+	/**
+	 * 显示账户列表
+	 * @return
+	 */
 	public ArrayList<AccountVO> observeList();
 	
 	
