@@ -141,7 +141,6 @@ public class Staff implements Initialable<StaffVO, StaffPO> {
 			e.printStackTrace();
 			return new ResultMessage(Result.FAIL, "系统错误");
 		}
-		System.out.println(result.getMessage());
 		return result;
 	}
 
