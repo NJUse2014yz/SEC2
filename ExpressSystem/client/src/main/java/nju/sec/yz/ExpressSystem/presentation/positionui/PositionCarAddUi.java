@@ -134,13 +134,15 @@ public class PositionCarAddUi extends JPanel{
 					{
 						warning.setText("提交成功");
 						warning.setVisible(true);
+						workTime.setText(message[1]+"年");
+						workTime.setVisible(true);
 					}
 					else{
 						warning.setText(message[0]);
 						warning.setVisible(true);
 					}
-					workTime.setText(message[1]+"年");
-					workTime.setVisible(true);
+//					workTime.setText(message[1]+"年");
+//					workTime.setVisible(true);
 					repaint();
 				}
 			}

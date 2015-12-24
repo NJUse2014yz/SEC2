@@ -37,6 +37,7 @@ public class InventoryCheck extends JPanel{
 	private Vector<String> name=new Vector<String>();
 	
 	private newJLabel time=new newJLabel();
+	private newJLabel warning=new newJLabel();
 	
 	public InventoryCheck(ClientControler maincontroler){
 		this.maincontroler=maincontroler;
@@ -107,6 +108,12 @@ public class InventoryCheck extends JPanel{
 			data.add(vector);
 		}
 		table.resetData();
+		}else{
+			warning.setForeground(Color.red);
+			warning.setText("无相关库存信息");
+			warning.setBounds(138, 490, 463 - 138, 30);
+			add(warning);
+			warning.setVisible(true);
 		}
 	}
 	@Override
