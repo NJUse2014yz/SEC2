@@ -74,6 +74,7 @@ public class PositionPayUi extends JPanel{
 		deliverBl=new DeliverController();
 		receiptBl=new Collection();
 		payList=deliverBl.getCollectionRecords();
+		
 		name.add("收款日期");
 		name.add("收款金额");
 		name.add("收款快递员");

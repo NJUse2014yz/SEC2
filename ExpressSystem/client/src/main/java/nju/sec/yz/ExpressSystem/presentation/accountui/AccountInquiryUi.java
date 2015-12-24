@@ -74,13 +74,14 @@ public class AccountInquiryUi extends JPanel{
 		accountBl=new AccountController();
 		avo=accountBl.observeList();
 		
+		name.add("名称");
+		name.add("余额");
+		
 		table=new newTable(data,name,this,false);
 		table.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
 		table.join();
 		
 		changeData(avo);
-		name.add("名称");
-		name.add("余额");
 		initAccountUi();
 	}
 	private void initAccountUi() {

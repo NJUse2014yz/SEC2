@@ -78,13 +78,15 @@ public class AccountListUi extends JPanel{
 		accountBl=new AccountController();
 		avl=accountBl.observeList();
 		
+		name.add("名称");
+		name.add("余额");
+		
 		table=new newTable(data,name,this,false);
 		table.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
 		table.join();
 		
 		changeData(avl);
-		name.add("名称");
-		name.add("余额");
+
 		initAccountUi();
 	}
 //	private 
