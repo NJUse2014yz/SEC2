@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Vector;
 
@@ -164,7 +165,7 @@ public class AccountOperateTableUi extends JPanel{
 		{
 			Vector<String> vector=new Vector<String>();
 			vector.add(invo.get(i).getPaymentInformation().getTime());
-			vector.add(Double.toString(invo.get(i).getPaymentInformation().getAmount()));
+			vector.add(new DecimalFormat(".00").format(invo.get(i).getPaymentInformation().getAmount()));
 			vector.add(invo.get(i).getPaymentInformation().getInDeliverId());
 			vector.add(invo.get(i).getBarIds());
 			vector.add(invo.get(i).getPaymentInformation().getPositionId());
@@ -174,7 +175,7 @@ public class AccountOperateTableUi extends JPanel{
 		{
 			Vector<String> vector=new Vector<String>();
 			vector.add(outvo.get(i).getOutInformation().getDate());
-			vector.add(Double.toString(outvo.get(i).getOutInformation().getNum()));
+			vector.add(new DecimalFormat(".00").format(outvo.get(i).getOutInformation().getNum()));
 			vector.add(outvo.get(i).getOutInformation().getPerson());
 			vector.add(outvo.get(i).getOutInformation().getAccount());
 			vector.add(outvo.get(i).getOutInformation().getReason());

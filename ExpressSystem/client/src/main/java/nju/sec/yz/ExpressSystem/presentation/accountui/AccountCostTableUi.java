@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DecimalFormat;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -93,9 +94,9 @@ public class AccountCostTableUi extends JPanel{
 		
 		pvo=financeBl.makeCostReceipt();
 		if(pvo!=null){
-			in.setText(Double.toString(pvo.in));
-			out.setText(Double.toString(pvo.out));
-			get.setText(Double.toString(pvo.profit));
+			in.setText(new DecimalFormat(".00").format(pvo.in));
+			out.setText(new DecimalFormat(".00").format(pvo.out));
+			get.setText(new DecimalFormat(".00").format(pvo.profit));
 			excle.addMouseListener(new MouseAdapter(){
 				public void mouseClicked(MouseEvent e)
 				{

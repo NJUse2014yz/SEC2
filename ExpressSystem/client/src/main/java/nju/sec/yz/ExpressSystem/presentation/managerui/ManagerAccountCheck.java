@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -177,9 +178,9 @@ public class ManagerAccountCheck extends JPanel {
 		dataC.removeAllElements();
 		ProfitVO prvo = finance.makeCostReceipt();
 		Vector<String> vector=new Vector<String>();
-		vector.add(Double.toString(prvo.in));
-		vector.add(Double.toString(prvo.out));
-		vector.add(Double.toString(prvo.profit));
+		vector.add(new DecimalFormat(".00").format(prvo.in));
+		vector.add(new DecimalFormat(".00").format(prvo.out));
+		vector.add(new DecimalFormat(".00").format(prvo.profit));
 		dataC.add(vector);
 		tableC.resetData();
 		repaint();
@@ -214,7 +215,7 @@ public class ManagerAccountCheck extends JPanel {
 		for (int i = 0; i < accountlist.size(); i++) {
 			Vector<String> vector=new Vector<String>();
 			vector.add(accountlist.get(i).getName());
-			vector.add(Double.toString(accountlist.get(i).getBalance()));
+			vector.add(new DecimalFormat(".00").format(accountlist.get(i).getBalance()));
 			dataA.add(vector);
 		}
 		tableA.resetData();
@@ -228,7 +229,7 @@ public class ManagerAccountCheck extends JPanel {
 		for (int i = 0; i < in.size(); i++) {
 			Vector<String> vector=new Vector<String>();
 			vector.add(in.get(i).getPaymentInformation().getTime());
-			vector.add(Double.toString(in.get(i).getPaymentInformation().getAmount()));
+			vector.add(new DecimalFormat(".00").format(in.get(i).getPaymentInformation().getAmount()));
 			vector.add(in.get(i).getPaymentInformation().getInDeliverId());
 			vector.add(in.get(i).getBarIds());
 			dataI.add(vector);
@@ -236,7 +237,7 @@ public class ManagerAccountCheck extends JPanel {
 		for (int i = 0; i < out.size(); i++) {
 			Vector<String> vector=new Vector<String>();
 			vector.add(out.get(i).getOutInformation().getDate());
-			vector.add(Double.toString(out.get(i).getOutInformation().getNum()));
+			vector.add(new DecimalFormat(".00").format(out.get(i).getOutInformation().getNum()));
 			vector.add(out.get(i).getOutInformation().getPerson());
 			vector.add(out.get(i).getOutInformation().getAccount());
 			vector.add(out.get(i).getOutInformation().getReason());

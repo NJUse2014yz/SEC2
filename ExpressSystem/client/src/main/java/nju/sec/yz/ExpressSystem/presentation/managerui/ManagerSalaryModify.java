@@ -151,6 +151,7 @@ public class ManagerSalaryModify extends JPanel {
 	}
 	private void changeData(ArrayList<SalaryVO> powersalary)
 	{
+		data.removeAllElements();
 		if (powersalary.size() != 0) {
 			for (int i = 0; i < powersalary.size(); i++) {
 				Vector<String> vector=new Vector<String>();

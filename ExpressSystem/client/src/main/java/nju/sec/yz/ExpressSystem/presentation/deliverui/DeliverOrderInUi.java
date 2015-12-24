@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -171,7 +172,7 @@ public class DeliverOrderInUi extends JPanel {
 						add(predictTime);
 
 						JLabel costForAll = new newJLabel();
-						costForAll.setText(Double.toString(cost) + "元");
+						costForAll.setText(new DecimalFormat(".00").format(cost) + "元");
 						costForAll.setBounds(193, 428, 70, 30);
 //						costForAll.setForeground(Color.GRAY);
 //						costForAll.setFont(new Font("Dialog", 0, 18));

@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -324,7 +325,7 @@ public class ManagerReceiptList extends JPanel {
 			vector.add(tempvo.getId());
 			vector.add(tempvo.getMakePerson());
 			vector.add(tempInf.getDate());
-			vector.add(((Double) tempInf.getNum()).toString());
+			vector.add(new DecimalFormat(".00").format(tempInf.getNum()));
 			vector.add(tempInf.getPerson());
 			vector.add(tempInf.getAccount());
 			vector.add(tempInf.getReason());
@@ -385,7 +386,7 @@ public class ManagerReceiptList extends JPanel {
 			vector.add(tempInf.getPositionId());
 			vector.add(tempInf.getTime());
 			vector.add(tempInf.getInDeliverId());
-			vector.add(((Double) tempInf.getAmount()).toString());
+			vector.add(new DecimalFormat(".00").format(tempInf.getAmount()).toString());
 			vector.add(tempInf.getAccount());
 			data.add(vector);
 		}
@@ -457,7 +458,7 @@ public class ManagerReceiptList extends JPanel {
 			vector.add(good.getTotal());
 			vector.add(good.getWeight());
 			vector.add(good.getName());
-			vector.add(((Double) tempInf.getCostForAll()).toString());
+			vector.add(new DecimalFormat(".00").format(tempInf.getCostForAll()).toString());
 			vector.add(((Integer) tempInf.getPredictTime()).toString());
 			data.add(vector);
 		}
@@ -538,7 +539,7 @@ public class ManagerReceiptList extends JPanel {
 			vector.add(tempInf.getCarId());
 			vector.add(tempInf.getOfficerId());
 			vector.add(tempInf.getDriverId());
-			vector.add(((Double) tempInf.getFare()).toString());
+			vector.add(new DecimalFormat(".00").format(tempInf.getFare()).toString());
 			data.add(vector);
 		}
 //		table.resetData();
@@ -938,7 +939,7 @@ public class ManagerReceiptList extends JPanel {
 			vector.add(tempInf.getCarId());
 			vector.add(tempInf.getOfficerId());
 			vector.add(tempInf.getDriverId());
-			vector.add(((Double) tempInf.getFare()).toString());
+			vector.add(new DecimalFormat(".00").format(tempInf.getFare()).toString());
 			data.add(vector);
 		}
 //		table.resetData();

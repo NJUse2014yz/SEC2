@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -154,7 +155,7 @@ public class AccountInquiryUi extends JPanel{
 		{
 			Vector<String> vector=new Vector<String>();
 			vector.add(avo.get(i).getName());
-			vector.add(Double.toString(avo.get(i).getBalance()));
+			vector.add(new DecimalFormat(".00").format(avo.get(i).getBalance()));
 			data.add(vector);
 		}
 		table.resetData();

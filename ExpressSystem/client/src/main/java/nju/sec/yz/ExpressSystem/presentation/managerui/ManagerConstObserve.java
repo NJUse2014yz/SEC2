@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -96,7 +97,7 @@ public class ManagerConstObserve extends JPanel {
 			vector.add(temp.getFromID());
 			vector.add(temp.getToCity());
 			vector.add(temp.getToID());
-			vector.add(Double.toString(temp.getDistance()));
+			vector.add(new DecimalFormat(".00").format(temp.getDistance()));
 			data.add(vector);
 //			if(i==(cities.size()-1))
 //			{

@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Vector;
 
@@ -148,7 +149,7 @@ public class PositionPayUi extends JPanel{
 		{
 			Vector<String> vector=new Vector<String>();
 			vector.add(payList.get(i).getTime());
-			vector.add(Double.toString(payList.get(i).getAmount()));
+			vector.add(new DecimalFormat(".00").format(payList.get(i).getAmount()));
 			vector.add(payList.get(i).getDeliverId());
 			vector.add(payList.get(i).getBarId());
 			vector.add("");

@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -172,7 +173,7 @@ public class AccountInComeUi extends JPanel{
 				vector.add(psvoi.getTime());
 				vector.add(psvoi.getPositionId());
 				vector.add(psvoi.getInDeliverId());
-				vector.add(Double.toString(psvoi.getAmount()));
+				vector.add(new DecimalFormat(".00").format(psvoi.getAmount()));
 				vector.add("");
 				data.add(vector);
 			}

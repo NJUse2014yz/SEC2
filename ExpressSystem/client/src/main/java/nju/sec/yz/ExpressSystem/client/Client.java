@@ -1,5 +1,7 @@
 package nju.sec.yz.ExpressSystem.client;
 
+import java.text.DecimalFormat;
+
 import nju.sec.yz.ExpressSystem.client.rmi.RMIExceptionHandler;
 import nju.sec.yz.ExpressSystem.client.rmi.RMIHelper;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
@@ -15,6 +17,5 @@ public class Client {
             e.printStackTrace();
             RMIExceptionHandler.handleRMIException();
         }
-
     }
 }
