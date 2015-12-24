@@ -102,6 +102,7 @@ public class ManagerReceiptList extends JPanel {
 
 		table=new newTable(data,name,this,false);
 		table.setBounds(134, 100, 333, 157);
+		table.stopAutoRewidth();
 		table.join();
 
 		type.addActionListener(new ActionListener() {
@@ -307,7 +308,10 @@ public class ManagerReceiptList extends JPanel {
 		name.add("付款账号");
 		name.add("条目");
 		name.add("账户");
-
+//		table=new newTable(data,name,this,false);
+//		table.setBounds(134, 100, 333, 157);
+//		table.stopAutoRewidth();
+//		table.join();
 		for (int c = 0; c < volist.size(); c++) {
 			Vector<String> vector=new Vector<String>();
 			String tempId = volist.get(c).getId();
@@ -327,22 +331,11 @@ public class ManagerReceiptList extends JPanel {
 			vector.add(tempInf.getComments());
 			data.add(vector);
 		}
-		table.resetData();
+//		table.resetData();
+		table.getModel().setDataVector(data, name);
 	}
 
 	private ReceiptVO modifyOut(int c, String Id) {
-		name.removeAllElements();
-		data.removeAllElements();
-		name.add("填写日期");
-		name.add("表单号");
-		name.add("填表人");
-		name.add("付款时间");
-		name.add("收款金额");
-		name.add("收款人");
-		name.add("付款账号");
-		name.add("条目");
-		name.add("账户");
-		
 		OutVO tempvo = (OutVO) receipt.getSingle((Id));
 		OutInformation tempInf = tempvo.getOutInformation();
 
@@ -374,6 +367,10 @@ public class ManagerReceiptList extends JPanel {
 		name.add("收款人");
 		name.add("收款金额");
 		name.add("收款账户");
+//		table=new newTable(data,name,this,false);
+//		table.setBounds(134, 100, 333, 157);
+//		table.stopAutoRewidth();
+//		table.join();
 		for (int c = 0; c < volist.size(); c++) {
 			Vector<String> vector=new Vector<String>();
 			String tempId = volist.get(c).getId();
@@ -392,7 +389,8 @@ public class ManagerReceiptList extends JPanel {
 			vector.add(tempInf.getAccount());
 			data.add(vector);
 		}
-		table.resetData();
+//		table.resetData();
+		table.getModel().setDataVector(data, name);
 	}
 
 	private ReceiptVO modifyPayment(int c, String Id) {
@@ -432,7 +430,10 @@ public class ManagerReceiptList extends JPanel {
 		name.add("品名");
 		name.add("快递费");
 		name.add("预计送达时间");
-
+//		table=new newTable(data,name,this,false);
+//		table.setBounds(134, 100, 333, 157);
+//		table.stopAutoRewidth();
+//		table.join();
 		for (int c = 0; c < volist.size(); c++) {
 			Vector<String> vector=new Vector<String>();
 			String tempId = volist.get(c).getId();
@@ -460,7 +461,8 @@ public class ManagerReceiptList extends JPanel {
 			vector.add(((Integer) tempInf.getPredictTime()).toString());
 			data.add(vector);
 		}
-		table.resetData();
+//		table.resetData();
+		table.getModel().setDataVector(data, name);
 	}
 
 	private ReceiptVO modifyDelReip(int c, String Id) {
@@ -514,7 +516,10 @@ public class ManagerReceiptList extends JPanel {
 		name.add("监装员");
 		name.add("装运员");
 		name.add("运费");
-
+//		table=new newTable(data,name,this,false);
+//		table.setBounds(134, 100, 333, 157);
+//		table.stopAutoRewidth();
+//		table.join();
 		for (int c = 0; c < volist.size(); c++) {
 			Vector<String> vector=new Vector<String>();
 			String tempId = volist.get(c).getId();
@@ -536,7 +541,8 @@ public class ManagerReceiptList extends JPanel {
 			vector.add(((Double) tempInf.getFare()).toString());
 			data.add(vector);
 		}
-		table.resetData();
+//		table.resetData();
+		table.getModel().setDataVector(data, name);
 	}
 
 	private ReceiptVO modifyPosLoad(int c, String Id) {
@@ -572,7 +578,10 @@ public class ManagerReceiptList extends JPanel {
 		name.add("收件时间");
 		name.add("中转单编号");
 		name.add("出发地");
-
+//		table=new newTable(data,name,this,false);
+//		table.setBounds(134, 100, 333, 157);
+//		table.stopAutoRewidth();
+//		table.join();
 		for (int c = 0; c < volist.size(); c++) {
 			Vector<String> vector=new Vector<String>();
 			String tempId = volist.get(c).getId();
@@ -589,7 +598,8 @@ public class ManagerReceiptList extends JPanel {
 			vector.add(tempInf.getDeparture());
 			data.add(vector);
 		}
-		table.resetData();
+//		table.resetData();
+		table.getModel().setDataVector(data, name);
 	}
 
 	private ReceiptVO modifyPosReseive(int c, String Id) {
@@ -619,6 +629,10 @@ public class ManagerReceiptList extends JPanel {
 		name.add("填表人");
 		name.add("派件时间");
 		name.add("派件人");
+//		table=new newTable(data,name,this,false);
+//		table.setBounds(134, 100, 333, 157);
+//		table.stopAutoRewidth();
+//		table.join();
 		for (int c = 0; c < volist.size(); c++) {
 			Vector<String> vector=new Vector<String>();
 			String tempId = volist.get(c).getId();
@@ -634,7 +648,8 @@ public class ManagerReceiptList extends JPanel {
 			vector.add(tempInf.getOutDeliverId());
 			data.add(vector);
 		}
-		table.resetData();
+//		table.resetData();
+		table.getModel().setDataVector(data, name);
 	}
 
 	private ReceiptVO modifyPosSend(int c, String Id) {
@@ -667,7 +682,10 @@ public class ManagerReceiptList extends JPanel {
 		name.add("到达地");
 		name.add("监装员");
 		name.add("押运员");
-
+//		table=new newTable(data,name,this,false);
+//		table.setBounds(134, 100, 333, 157);
+//		table.stopAutoRewidth();
+//		table.join();
 		for (int c = 0; c < volist.size(); c++) {
 			Vector<String> vector=new Vector<String>();
 			String tempId = volist.get(c).getId();
@@ -687,7 +705,8 @@ public class ManagerReceiptList extends JPanel {
 			vector.add(tempInf.getDriverId());
 			data.add(vector);
 		}
-		table.resetData();
+//		table.resetData();
+		table.getModel().setDataVector(data, name);
 	}
 
 	private ReceiptVO modifyTransCar(int c, String Id) {
@@ -724,7 +743,10 @@ public class ManagerReceiptList extends JPanel {
 		name.add("到达地");
 		name.add("车厢号");
 		name.add("押运员");
-
+//		table=new newTable(data,name,this,false);
+//		table.setBounds(134, 100, 333, 157);
+//		table.stopAutoRewidth();
+//		table.join();
 		for (int c = 0; c < volist.size(); c++) {
 			Vector<String> vector=new Vector<String>();
 			String tempId = volist.get(c).getId();
@@ -744,7 +766,8 @@ public class ManagerReceiptList extends JPanel {
 			vector.add(tempInf.getCarriageId());
 			data.add(vector);
 		}
-		table.resetData();
+//		table.resetData();
+		table.getModel().setDataVector(data, name);
 	}
 
 	private ReceiptVO modifyTransTrain(int c, String Id) {
@@ -781,7 +804,10 @@ public class ManagerReceiptList extends JPanel {
 		name.add("到达地");
 		name.add("货柜号");
 		name.add("押运员");
-
+//		table=new newTable(data,name,this,false);
+//		table.setBounds(134, 100, 333, 157);
+//		table.stopAutoRewidth();
+//		table.join();
 		for (int c = 0; c < volist.size(); c++) {
 			Vector<String> vector=new Vector<String>();
 			String tempId = volist.get(c).getId();
@@ -801,7 +827,8 @@ public class ManagerReceiptList extends JPanel {
 			vector.add(tempInf.getShelfId());
 			data.add(vector);
 		}
-		table.resetData();
+//		table.resetData();
+		table.getModel().setDataVector(data, name);
 	}
 
 	private ReceiptVO modifyTranFlight(int c, String Id) {
@@ -829,13 +856,16 @@ public class ManagerReceiptList extends JPanel {
 	private void iniTransReceive() {
 		name.removeAllElements();
 		data.removeAllElements();
-		name.add("填写日期");
-		name.add("表单号");
-		name.add("填表人");
-		name.add("接收时间");
-		name.add("中转单编号");
-		name.add("出发地");
-
+//		name.add("填写日期");
+//		name.add("表单号");
+//		name.add("填表人");
+//		name.add("接收时间");
+//		name.add("中转单编号");
+//		name.add("出发地");
+		table=new newTable(data,name,this,false);
+		table.setBounds(134, 100, 333, 157);
+		table.stopAutoRewidth();
+		table.join();
 		for (int c = 0; c < volist.size(); c++) {
 			Vector<String> vector=new Vector<String>();
 			String tempId = volist.get(c).getId();
@@ -851,7 +881,8 @@ public class ManagerReceiptList extends JPanel {
 			vector.add(tempInf.getDeparture());
 			data.add(vector);
 		}
-		table.resetData();
+//		table.resetData();
+		table.getModel().setDataVector(data, name);
 
 	}
 
@@ -887,7 +918,10 @@ public class ManagerReceiptList extends JPanel {
 		name.add("监装员");
 		name.add("押运员");
 		name.add("运费");
-
+//		table=new newTable(data,name,this,false);
+//		table.setBounds(134, 100, 333, 157);
+//		table.stopAutoRewidth();
+//		table.join();
 		for (int c = 0; c < volist.size(); c++) {
 			Vector<String> vector=new Vector<String>();
 			String tempId = volist.get(c).getId();
@@ -907,7 +941,8 @@ public class ManagerReceiptList extends JPanel {
 			vector.add(((Double) tempInf.getFare()).toString());
 			data.add(vector);
 		}
-		table.resetData();
+//		table.resetData();
+		table.getModel().setDataVector(data, name);
 
 	}
 
@@ -947,6 +982,10 @@ public class ManagerReceiptList extends JPanel {
 		name.add("架号");
 		name.add("位号");
 		name.add("中转中心");
+//		table=new newTable(data,name,this,false);
+//		table.setBounds(134, 100, 333, 157);
+//		table.stopAutoRewidth();
+//		table.join();
 		for (int c = 0; c < volist.size(); c++) {
 			Vector<String> vector=new Vector<String>();
 			String tempId = volist.get(c).getId();
@@ -966,7 +1005,8 @@ public class ManagerReceiptList extends JPanel {
 			vector.add(tempInf.getTransit());
 			data.add(vector);
 		}
-		table.resetData();
+//		table.resetData();
+		table.getModel().setDataVector(data, name);
 	}
 
 	private ReceiptVO modifyInvenIn(int c, String Id) {
@@ -1003,7 +1043,10 @@ public class ManagerReceiptList extends JPanel {
 		name.add("排号");
 		name.add("架号");
 		name.add("位号");
-
+//		table=new newTable(data,name,this,false);
+//		table.setBounds(134, 100, 333, 157);
+//		table.stopAutoRewidth();
+//		table.join();
 		for (int c = 0; c < volist.size(); c++) {
 			Vector<String> vector=new Vector<String>();
 			String tempId = volist.get(c).getId();
@@ -1020,7 +1063,8 @@ public class ManagerReceiptList extends JPanel {
 			vector.add(getType(tempInf.getTransportType()));
 			data.add(vector);
 		}
-		table.resetData();
+//		table.resetData();
+		table.getModel().setDataVector(data, name);
 	}
 	public String getType(TransportType str){
 		switch(str){

@@ -69,13 +69,13 @@ public class ManagerConstModify extends JPanel {
 		name.add("距离");
 		// table;
 		cities = (ArrayList<CityVO>) manager.observeAllCity();
-		
-		changeData(cities);
-		
+	
 		table=new newTable(data,name,this,false);
 		table.setBounds(133, 76, 320, 184);
 		table.join();
-
+		
+		changeData(cities);
+		
 		// 四个常量描述
 		PriceVO pv = manager.observePrize();
 		PriceInformation pinf=pv.getPriceInformation();

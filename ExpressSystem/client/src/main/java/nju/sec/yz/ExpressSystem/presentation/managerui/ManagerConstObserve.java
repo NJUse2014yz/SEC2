@@ -57,12 +57,13 @@ public class ManagerConstObserve extends JPanel {
 		
 		// table;
 		ArrayList<CityVO> cities = (ArrayList<CityVO>) manager.observeAllCity();
-		changeData(cities);
 		
 		table=new newTable(data,name,this,false);
 		table.setBounds(133, 76, 300, 184);
 		table.join();
-
+		
+		changeData(cities);
+		
 		PriceVO pv = manager.observePrize();
 		PriceInformation pinf=pv.getPriceInformation();
 

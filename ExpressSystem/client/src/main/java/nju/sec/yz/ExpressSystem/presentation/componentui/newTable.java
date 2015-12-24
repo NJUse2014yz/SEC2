@@ -60,6 +60,8 @@ public class newTable{
 	 */
 	public void resetData()
 	{
+//		model.setDataVector(dataVector, columnIdentifiers);
+//		table.getTableHeader().
 		table.updateUI();
 	}
 	/**
