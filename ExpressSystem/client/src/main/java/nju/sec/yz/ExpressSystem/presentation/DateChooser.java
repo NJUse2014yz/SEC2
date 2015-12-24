@@ -525,7 +525,8 @@ import javax.swing.event.AncestorListener;
      
      
      public String getTime(){
-    	 String temp=sdf.format(select.getTime());
+//    	 String temp=sdf.format(select.getTime());
+    	 String temp=showDate.getText();
     	 String result="";
     	 for(int i=0;i<temp.length();i++){
     		 char ch=temp.charAt(i);

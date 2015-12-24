@@ -9,10 +9,8 @@ import java.io.Serializable;
 public class ResultMessage implements Serializable{
 
 	private Result result;
-	
-	
-
-	private String message;//备注
+	//备注
+	private String message;
 	
 	public ResultMessage(Result result){
 		this.result=result;

@@ -1,7 +1,6 @@
 package nju.sec.yz.ExpressSystem.presentation.positionui;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -13,7 +12,6 @@ import java.util.Vector;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -27,10 +25,10 @@ import nju.sec.yz.ExpressSystem.presentation.controlerui.PositionControler;
 import nju.sec.yz.ExpressSystem.vo.CarVO;
 
 public class PositionCarModifyUi extends JPanel{
-	private ClientControler mainControler;
+	private final ClientControler mainControler;
 	private PositionControler controler;
 	private CarBlService carBl;
-	private ButtonComponents bc;
+	private final ButtonComponents bc;
 	
 	private JTextField search;
 	private JButton searchButton;
@@ -61,7 +59,7 @@ public class PositionCarModifyUi extends JPanel{
 	
 	private ImageIcon searchIcon=new ImageIcon("graphic/position/button/search_button.png");
 
-	public PositionCarModifyUi(ClientControler mainControler,ButtonComponents bc){
+	public PositionCarModifyUi(final ClientControler mainControler,final ButtonComponents bc){
 		super();
 		this.mainControler=mainControler;
 		controler=mainControler.positionControler;

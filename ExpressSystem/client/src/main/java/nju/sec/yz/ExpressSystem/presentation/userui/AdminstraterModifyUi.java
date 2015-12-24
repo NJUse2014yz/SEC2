@@ -28,7 +28,7 @@ import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.UserVO;
 
 public class AdminstraterModifyUi extends JPanel{
-	private AdminstraterButtonComponents bc;
+	private final AdminstraterButtonComponents bc;
 	private ClientControler mainControler;
 	private AdminstraterControler controler;
 	private UserBlService userBl;
@@ -67,7 +67,7 @@ public class AdminstraterModifyUi extends JPanel{
 	private ImageIcon backIcon=new ImageIcon("graphic/adminstrater/button/back_button.jpg");
 	private ImageIcon confirmIcon=new ImageIcon("graphic/adminstrater/button/confirm_button.jpg");
 	
-	public AdminstraterModifyUi(ClientControler clientControler,AdminstraterButtonComponents bc) {
+	public AdminstraterModifyUi(ClientControler clientControler,final AdminstraterButtonComponents bc) {
 		super();
 		this.bc=bc;
 		this.mainControler=clientControler;
