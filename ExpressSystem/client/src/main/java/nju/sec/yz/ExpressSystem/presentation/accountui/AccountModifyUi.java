@@ -1,7 +1,6 @@
 package nju.sec.yz.ExpressSystem.presentation.accountui;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -14,7 +13,6 @@ import java.util.Vector;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -27,8 +25,8 @@ import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.AccountVO;
 
 public class AccountModifyUi extends JPanel{
-	private AccountButtonComponents bc;
-	private ClientControler mainControler;
+	private final AccountButtonComponents bc;
+	private final ClientControler mainControler;
 	private AccountControler controler;
 	private AccountBlService accountBl;
 	
@@ -59,7 +57,7 @@ public class AccountModifyUi extends JPanel{
 	
 	private ImageIcon searchIcon=new ImageIcon("graphic/account/button/search_button.jpg");
 	
-	public AccountModifyUi(ClientControler mainControler,AccountButtonComponents bc){
+	public AccountModifyUi(final ClientControler mainControler,final AccountButtonComponents bc){
 		super();
 		this.mainControler=mainControler;
 		controler=mainControler.accountControler;

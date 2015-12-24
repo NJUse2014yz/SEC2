@@ -8,10 +8,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import nju.sec.yz.ExpressSystem.client.ClientInitException;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
 
 public class RMIExceptionPanel extends JPanel{
@@ -30,7 +28,7 @@ public class RMIExceptionPanel extends JPanel{
 	
 	private JButton exit;
 	
-	private RMIExceptionFrame frame;
+	private final RMIExceptionFrame frame;
 	
 	private int connectCounts=-1;
 	
@@ -38,7 +36,7 @@ public class RMIExceptionPanel extends JPanel{
 	
 	private CountThread counter;
 	
-	public RMIExceptionPanel(RMIExceptionFrame frame) {
+	public RMIExceptionPanel(final RMIExceptionFrame frame) {
 		
 		
 		
