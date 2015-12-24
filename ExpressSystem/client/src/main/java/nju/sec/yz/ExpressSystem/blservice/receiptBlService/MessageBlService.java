@@ -17,6 +17,8 @@ public interface MessageBlService {
 	
 	/**
 	 * 标记已读消息
+	 * 前置条件	用户确定已读消息
+	 * 后置条件	删除消息
 	 */
 	public void hasRead(String messageId);
 	
