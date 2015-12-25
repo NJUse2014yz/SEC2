@@ -95,7 +95,7 @@ public class TransitReceiptHelper {
 		Deliver deliver = new Deliver();
 		DeliverStateVO vo = deliver.getDeliverState(barId);
 
-		if (vo == null)// 物流信息不存在
+		if (vo == null||vo.nextAgency==null)// 物流信息不存在
 			return false;
 		else if (!vo.nextAgency.equals(currentAgency)){// 下个机构id不是当前机构
 			
