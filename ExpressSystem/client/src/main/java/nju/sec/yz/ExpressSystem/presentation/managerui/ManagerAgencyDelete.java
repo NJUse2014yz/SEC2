@@ -82,7 +82,7 @@ public class ManagerAgencyDelete extends JPanel{
 	    search.setBounds(436,62,21,20);
 	    add(search);
 	    
-	    ImageIcon backIcon = new ImageIcon("graphic/manager/button/back.png");
+//	    ImageIcon backIcon = new ImageIcon("graphic/manager/button/back.png");
 		back = new newJBut("显示全部");
 		back.setMargin(new java.awt.Insets(0,0,0,0));
 		back.setBounds(281, 286, 90, 24);
