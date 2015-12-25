@@ -10,6 +10,15 @@ import nju.sec.yz.ExpressSystem.vo.SalaryVO;
  * 薪水策略
  */
 public interface SalaryBlService {
+	
+	/**
+	 * 
+	 */
 	public ResultMessage modifySalary (SalaryVO sv);
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public ArrayList<SalaryVO> observeSalary();
 }

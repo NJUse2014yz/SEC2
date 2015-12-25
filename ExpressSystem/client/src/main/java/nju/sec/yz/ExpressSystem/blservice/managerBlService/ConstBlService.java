@@ -11,11 +11,32 @@ import nju.sec.yz.ExpressSystem.vo.PriceVO;
  * 常量制定--改和查
  */
 public interface ConstBlService {
+	/**
+	 * 
+	 * @param cv
+	 * @return
+	 */
 	public ResultMessage modifyCity(CityVO cv);
 
+	/**
+	 * 
+	 */
 	public CityVO observeCity(String beginPlace,String endPlace) ;
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public List<CityVO> observeAllCity();
+	
+	/**
+	 * 
+	 */
 	public ResultMessage addCity(CityVO cp);
+	
+	/**
+	 * 
+	 */
 	public ResultMessage deleteCity(String beginPlace,String endPlace);
 	
 	/**
@@ -23,6 +44,14 @@ public interface ConstBlService {
 	 */
 	public List<String> getCities();
 	
+	/**
+	 * 
+	 */
 	public ResultMessage modifyPrice(PriceVO pp);
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public PriceVO observePrize();
 }
