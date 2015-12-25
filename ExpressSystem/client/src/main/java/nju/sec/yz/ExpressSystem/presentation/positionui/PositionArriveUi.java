@@ -94,6 +94,12 @@ public class PositionArriveUi extends JPanel{
 		initDeliverMainUi();
 	}
 	private void initDeliverMainUi() {
+		/**
+		 * @author cong
+		 * 初始化data
+		 */
+		data=new Vector<>();
+		
 		bc.changePanel(this);
 //		bc.change();
 		setLayout(null);
@@ -137,7 +143,6 @@ public class PositionArriveUi extends JPanel{
 				List<String> bars=vo.barIds;
 				departure.setText(vo.fromAgency);
 				departure.setVisible(true);
-				System.out.println("here");
 				if(bars!=null)
 				{	for(int i=0;i<bars.size();i++)
 					{
@@ -175,6 +180,9 @@ public class PositionArriveUi extends JPanel{
 				 
 				OfficeArriveSheetVO sheet=new OfficeArriveSheetVO();
 				ArriveInformation ai=new ArriveInformation();
+				/**
+				 * n==0
+				 */
 				for(int i=0;i<n;i++)
 				{
 					if(table.getValueAt(i, 1, true).equals("完整"))

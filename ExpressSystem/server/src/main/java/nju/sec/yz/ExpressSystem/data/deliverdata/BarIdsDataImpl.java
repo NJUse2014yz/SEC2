@@ -143,9 +143,7 @@ public class BarIdsDataImpl extends UnicastRemoteObject implements BarIdsDataSer
 				
 			}
 			
-			
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
