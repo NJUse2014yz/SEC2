@@ -1,6 +1,7 @@
 package nju.sec.yz.ExpressSystem.presentation.userui;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -60,7 +61,7 @@ public class UserUi extends JPanel{
 	private newJLabel warning;
 	
 //	private ImageIcon login_button=new ImageIcon("graphic/main/button/login_button.png");
-	private ImageIcon search_button=new ImageIcon("graphic/main/button/search_button.png");
+	private ImageIcon search_button=new ImageIcon("graphic/main/button/new_search.png");
 	private Image background = new ImageIcon("graphic/main/background/main_background.png").getImage();
 	// 退出系统
 	private JButton exitButton;
@@ -84,6 +85,8 @@ public class UserUi extends JPanel{
 		this.add(warning);
 		this.warning.setVisible(false);
 		
+		
+		
 		this.JTbarId=new JTextField();
 		JTbarId.setBorder(BorderFactory.createLineBorder(Color.white,0));
 		this.JTbarId.setBounds(searchin_x,searchin_y,searchin_w,height);
@@ -98,6 +101,13 @@ public class UserUi extends JPanel{
 		JTpassword.setBorder(BorderFactory.createLineBorder(Color.white,0));
 		this.JTpassword.setBounds(password_x,password_y,password_w,height);
 		this.add(JTpassword);
+		
+		Font font = new Font("Microsoft YaHei",Font.PLAIN,15);
+		JTbarId.setFont(font);
+		JTuserName.setFont(font);
+		JTpassword.setFont(font);
+		
+		
 		
 		this.login=new newJBut("登录");
 		this.login.setBounds(login_x,login_y,login_w, height);

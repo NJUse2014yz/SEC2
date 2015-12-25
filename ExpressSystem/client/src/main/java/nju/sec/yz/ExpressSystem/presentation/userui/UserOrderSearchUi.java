@@ -67,7 +67,7 @@ public class UserOrderSearchUi extends JPanel {
 		setVisible(true);
 
 		confirmButton = new JButton(SearchIcon);
-		confirmButton.setBounds(441, 72, 23, 21);
+		confirmButton.setBounds(440, 72, 22, 20);
 		confirmButton.setBorderPainted(false);
 		add(confirmButton);
 
