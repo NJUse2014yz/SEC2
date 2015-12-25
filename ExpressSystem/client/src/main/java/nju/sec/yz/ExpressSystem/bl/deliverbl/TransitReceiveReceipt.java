@@ -84,11 +84,11 @@ public class TransitReceiveReceipt implements ReceiptService {
 
 		Deliver deliver = new Deliver();
 		DeliverStateVO vo = deliver.getDeliverState(barId);
-
-		if (vo == null)// 物流信息不存在
+		System.out.println("state:"+vo.state);
+		if (vo == null||vo.nextAgency==null)// 物流信息不存在
 			return false;
 
-		else if (vo.state != DeliveryState.OFFICE_OUT && vo.state != DeliveryState.TRANSIT_OUT)
+		else if (vo.state != DeliveryState.OFFICE_OUT && vo.state != DeliveryState.INVENTORY_OUT)
 			return false;
 		return true;
 	}

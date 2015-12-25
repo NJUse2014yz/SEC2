@@ -53,7 +53,7 @@ public class RecieveReceipt {
 		
 		DeliverStateVO state=deliver.getDeliverState(barID);
 		
-		if(state==null)
+		if(state==null||state.nextAgency==null)
 			return "亲，系统中不存在订单"+barID;
 		
 		if(state.state!=DeliveryState.DELIVING)

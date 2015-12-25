@@ -164,7 +164,7 @@ public class ReceiptDataImpl extends UnicastRemoteObject implements ReceiptDataS
 			for(ReceiptPO po:list){
 				System.out.println(po.getType()+" "+po.getMakePerson()+" "+po.getId());
 			}
-			InventoryInSheetPO po=(InventoryInSheetPO)list.get(list.size()-1);
+			
 			
 			
 		} catch (RemoteException e) {

@@ -11,18 +11,44 @@ import nju.sec.yz.ExpressSystem.vo.PriceVO;
  * 常量制定--改和查
  */
 public interface ConstBlService {
+	/**
+	 * 修改城市常量
+	 * @param cv
+	 * @return
+	 */
 	public ResultMessage modifyCity(CityVO cv);
 
+	/**
+	 * 根据出发地和到达地获得单个城市常量
+	 */
 	public CityVO observeCity(String beginPlace,String endPlace) ;
-	public List<CityVO> observeAllCity();
-	public ResultMessage addCity(CityVO cp);
-	public ResultMessage deleteCity(String beginPlace,String endPlace);
 	
 	/**
-	 * 获得所有城市名称
+	 * 查看所有城市常量
+	 * @return
 	 */
-	public List<String> getCities();
+	public List<CityVO> observeAllCity();
 	
+	/**
+	 * 添加城市常量
+	 */
+	public ResultMessage addCity(CityVO cp);
+	
+	/**
+	 * 删除城市常量
+	 */
+	public ResultMessage deleteCity(String beginPlace,String endPlace);
+	
+	
+	
+	/**
+	 * 修改价格常量
+	 */
 	public ResultMessage modifyPrice(PriceVO pp);
+	
+	/**
+	 * 获得价格常量
+	 * @return
+	 */
 	public PriceVO observePrize();
 }

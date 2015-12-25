@@ -90,11 +90,11 @@ public class PositionReceiveReceipt implements ReceiptService {
 		DeliverStateVO vo=deliver.getDeliverState(barId);
 		
 		
-		if(vo==null)//物流信息不存在
+		if (vo == null||vo.nextAgency==null)// 物流信息不存在
 			return false;
 		
 	
-		else if(vo.state!=DeliveryState.OFFICE_OUT&&vo.state!=DeliveryState.TRANSIT_OUT)
+		else if(vo.state!=DeliveryState.OFFICE_OUT&&vo.state!=DeliveryState.INVENTORY_OUT)
 			return false;
 		return true;
 	}
