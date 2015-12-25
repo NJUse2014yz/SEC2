@@ -84,7 +84,8 @@ public class TransitButtonComponents {
 				fight.setVisible(false);
 				train.setVisible(false);
 				car.setVisible(false);
-				TransitReceive.setBounds(12, 134, 108, 41);
+//				TransitReceive.setBounds(12, 134, 108, 41);
+				TransitReceive.setLocation(12,134);
 //				TransitReceipt.setIcon(receiptIcon01);
 				maincontroler.transitControler.transitChangePanel(TRANSIT_CONTROL.TRANSIT);
 			}
@@ -95,7 +96,8 @@ public class TransitButtonComponents {
 				fight.setVisible(false);
 				train.setVisible(false);
 				car.setVisible(false);
-				TransitReceive.setBounds(12, 134, 108, 41);
+//				TransitReceive.setBounds(12, 134, 108, 41);
+				TransitReceive.setLocation(12,134);
 //				TransitReceipt.setIcon(receiptIcon01);
 				maincontroler.transitControler.transitChangePanel(TRANSIT_CONTROL.ARRIVE);
 			}
@@ -104,38 +106,37 @@ public class TransitButtonComponents {
 		TransitReceipt.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 //				TransitReceipt.setIcon(receiptIcon02);
-				TransitReceive.setBounds(12, 134+27*3, 108, 41);
-				fight.setLocation(12, 134);
-				train.setLocation(12, 134+27);
-				car.setLocation(12, 134+27*2);
-				panel.add(fight);
-				panel.add(train);
-				panel.add(car);
+//				TransitReceive.setBounds(12, 134+27*3, 108, 41);
+				TransitReceive.setLocation(12,134+27*3);
+//				fight.setLocation(12, 134);
+//				train.setLocation(12, 134+27);
+//				car.setLocation(12, 134+27*2);
+//				panel.add(fight);
+//				panel.add(train);
+//				panel.add(car);
 				fight.setVisible(true);
 				train.setVisible(true);
 				car.setVisible(true);
 				
+				panel.repaint();
 				//三个子选项
-				fight.addMouseListener(new MouseAdapter() {
-					public void mouseClicked(MouseEvent e) {
-						maincontroler.transitControler.transitChangePanel(TRANSIT_CONTROL.FLIGHT_LOAD);
-					}
-				});
-				
-				train.addMouseListener(new MouseAdapter() {
-					public void mouseClicked(MouseEvent e) {
-						maincontroler.transitControler.transitChangePanel(TRANSIT_CONTROL.TRAIN_LOAD);
-					}
-				});
-				
-				car.addMouseListener(new MouseAdapter() {
-					public void mouseClicked(MouseEvent e) {
-						maincontroler.transitControler.transitChangePanel(TRANSIT_CONTROL.CAR_LOAD);
-					}
-				});
-				
-				
-				
+//				fight.addMouseListener(new MouseAdapter() {
+//					public void mouseClicked(MouseEvent e) {
+//						maincontroler.transitControler.transitChangePanel(TRANSIT_CONTROL.FLIGHT_LOAD);
+//					}
+//				});
+//				
+//				train.addMouseListener(new MouseAdapter() {
+//					public void mouseClicked(MouseEvent e) {
+//						maincontroler.transitControler.transitChangePanel(TRANSIT_CONTROL.TRAIN_LOAD);
+//					}
+//				});
+//				
+//				car.addMouseListener(new MouseAdapter() {
+//					public void mouseClicked(MouseEvent e) {
+//						maincontroler.transitControler.transitChangePanel(TRANSIT_CONTROL.CAR_LOAD);
+//					}
+//				});
 			}
 		});
 		
@@ -194,6 +195,7 @@ public class TransitButtonComponents {
 		
 		fight= new newJBut("航运管理",framecolor);
 		fight.setSize(109,27);
+		
 		fight.setVisible(false);
 		
 		
@@ -205,6 +207,29 @@ public class TransitButtonComponents {
 		car= new newJBut("汽运管理",framecolor);
 		car.setSize(109,27);
 		car.setVisible(false);
+		
+
+		fight.setLocation(12, 134);
+		train.setLocation(12, 134+27);
+		car.setLocation(12, 134+27*2);
+		
+		fight.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				maincontroler.transitControler.transitChangePanel(TRANSIT_CONTROL.FLIGHT_LOAD);
+			}
+		});
+		
+		train.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				maincontroler.transitControler.transitChangePanel(TRANSIT_CONTROL.TRAIN_LOAD);
+			}
+		});
+		
+		car.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				maincontroler.transitControler.transitChangePanel(TRANSIT_CONTROL.CAR_LOAD);
+			}
+		});
 		
 		change();
 	}
