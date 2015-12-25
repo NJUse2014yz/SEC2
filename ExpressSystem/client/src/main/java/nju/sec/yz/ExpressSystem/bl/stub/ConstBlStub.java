@@ -51,11 +51,7 @@ public class ConstBlStub implements ConstBlService {
 		return price;
 	}
 
-	@Override
-	public List<String> getCities() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	@Override
 	public List<CityVO> observeAllCity() {

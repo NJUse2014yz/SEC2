@@ -134,11 +134,7 @@ public class ManagerController implements AgencyBlService,ConstBlService,SalaryB
 	}
 
 
-	@Override
-	public List<String> getCities() {
-		City city=new City();
-		return city.getCities();
-	}
+	
 
 	@Override
 	public ResultMessage addTransit(TransitVO av) {
