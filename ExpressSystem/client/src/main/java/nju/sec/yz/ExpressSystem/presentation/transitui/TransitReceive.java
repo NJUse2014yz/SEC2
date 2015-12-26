@@ -7,9 +7,11 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -28,6 +30,7 @@ import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJCombo;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJText;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.BarIdsVO;
 import nju.sec.yz.ExpressSystem.vo.TransitArriveSheetVO;
@@ -46,16 +49,13 @@ public class TransitReceive extends JPanel {
 	private newJBut searchInf;
 	private newJBut confirm;
 	
-//	private JTextField departure;
 	private newJLabel departure;
-	private newJCombo state;
 	private newJText transitSheetId;
-	// private JTextField transitId;
-
-	private JTable table;
-	private TableModel model;
-	private JScrollPane jsc;
-
+	String[] sta={"完整","损坏","丢失"};
+	private newTable table;
+	private Vector<Vector<String>> data=new Vector<Vector<String>>();
+	private Vector<String> name=new Vector<String>();
+	
 	private newJLabel warning = new newJLabel();
 
 	private DateChooser date;
@@ -75,10 +75,13 @@ public class TransitReceive extends JPanel {
 		
 		date=new DateChooser(this,222,80);
 		
+		name.add("快递单号");
+		name.add("到达状态");
 		
-//		transitId=new JTextField();
-//		transitId.setBounds(252, 136, 93, 15);
-//		add(transitId);
+ 		table = new newTable(data,name,this,false);
+ 		table.setJComboBox(new newJCombo(sta), 1);
+ 	    table.setBounds(141,138,321,191);
+ 	    table.join();
 		
 		transitSheetId=new newJText();
 		transitSheetId.setBounds(222, 58, 122, 18);
@@ -104,38 +107,25 @@ public class TransitReceive extends JPanel {
 						confirm.setVisible(false);
 					} else {
 		        	BarIdsVO vo= deliverBlService.getBarIdList(transitSheetId.getText());
-		        	ArrayList Ids=(ArrayList) vo.barIds;
+		        	ArrayList<String> Ids=(ArrayList<String>) vo.barIds;
 		        	
 		        	departure=new newJLabel(vo.fromAgency);
 		    		departure.setBounds(204, 109,140, 18);
 		    		add(departure);
 		    		
-		        	String[] sta={"完整","损坏","丢失"};
-		     		state=new newJCombo(sta);
-		     		
-		     		Object[][] TableData=new Object[Ids.size()][3];
-		     		String[] columnTitle={"编号","快递单号","到达状态"};
+		     		//
+		    		data.removeAllElements();
 		     		for(int i=0;i<Ids.size();i++){
-		     			TableData[i][0]=i+1;
-		     			TableData[i][1]=Ids.get(i);
+		     			Vector<String> vector=new Vector<String>();
+		     			vector.add(Ids.get(i));
+		     			vector.add("");
+		     			data.add(vector);
 		     		}
-		     		
+		     		table.resetData();
+		     		//
 		     		warning.setText("");
 		     		
-		     		model = new DefaultTableModel(TableData,columnTitle);
-		     		table = new JTable(model);
-		     		table.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(state));
-		     		
-		     		table.getColumnModel().getColumn(0).setMaxWidth(30);
-		     		table.getColumnModel().getColumn(2).setMinWidth(80);
-		     		
-		     	      //将JTable对象放在JScrollPane中，并将该JScrollPane放在窗口中显示出来  
-		     	      JScrollPane jsc=new JScrollPane(table);  
-		     	      jsc.setVisible(true);
-		     	      jsc.setBounds(141,138,321,191);
-		     	      add(jsc);
-		     	      
-		     	      confirm.setVisible(true);
+		     	    confirm.setVisible(true);
 		     		
 		         }
 		         repaint();
@@ -160,8 +150,8 @@ public class TransitReceive extends JPanel {
 					arrive.setTransitSheetId(transitSheetId.getText());
 				
 					ArrayList<ArriveState> statelist=new ArrayList<ArriveState>();
-					for(int i=0;i<model.getRowCount();i++){
-						String temp=(String) table.getCellEditor(i,2).getCellEditorValue();
+					for(int i=0;i<table.getRowCount();i++){
+						String temp=table.getValueAt(i, 1, true);
 						statelist.add(getState(temp));
 					}
 					arrive.setState(statelist);
