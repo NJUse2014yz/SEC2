@@ -1,7 +1,6 @@
 package nju.sec.yz.ExpressSystem.bl.deliverbl;
 
 import java.util.List;
-
 import nju.sec.yz.ExpressSystem.bl.managerbl.Position;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptID;
 import nju.sec.yz.ExpressSystem.bl.receiptbl.ReceiptList;

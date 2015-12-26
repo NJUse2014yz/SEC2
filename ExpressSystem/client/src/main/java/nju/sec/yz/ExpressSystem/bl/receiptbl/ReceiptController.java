@@ -1,7 +1,6 @@
 package nju.sec.yz.ExpressSystem.bl.receiptbl;
 
-import java.util.ArrayList;
-
+import java.util.List;
 import nju.sec.yz.ExpressSystem.blservice.receiptBlService.ReceiptBlService;
 import nju.sec.yz.ExpressSystem.common.ReceiptType;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
@@ -15,7 +14,7 @@ import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
 public class ReceiptController implements ReceiptBlService{
 
 	@Override
-	public ArrayList<ReceiptVO> getAll() {
+	public List<ReceiptVO> getAll() {
 		ReceiptList list=new ReceiptList();
 		return list.getAll();
 	}
@@ -33,7 +32,7 @@ public class ReceiptController implements ReceiptBlService{
 	}
 
 	@Override
-	public ArrayList<ReceiptVO> getByType(ReceiptType type) {
+	public List<ReceiptVO> getByType(ReceiptType type) {
 		ReceiptList list=new ReceiptList();
 		return list.getByType(type);
 	}

@@ -10,6 +10,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 import javax.swing.ImageIcon;
@@ -76,7 +77,7 @@ public class ManagerReceiptList extends JPanel {
 	private newJBut passAll;
 	private newJBut modify;
 
-	private ArrayList<ReceiptVO> volist;
+	private List<ReceiptVO> volist;
 
 	private newJLabel warning = new newJLabel();
 

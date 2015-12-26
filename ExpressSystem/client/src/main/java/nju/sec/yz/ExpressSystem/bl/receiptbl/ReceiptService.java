@@ -1,6 +1,5 @@
 package nju.sec.yz.ExpressSystem.bl.receiptbl;
 
-import nju.sec.yz.ExpressSystem.common.ReceiptOperation;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.po.ReceiptPO;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
@@ -21,14 +20,14 @@ public interface  ReceiptService {
 	public ResultMessage approve(ReceiptVO vo);
 	
 	/**
-	 * 将VO转换成PO
-	 */
-	public ReceiptPO convertToPO(ReceiptVO vo);
-	
-	/**
 	 * 验证单据信息
 	 */
 	public ResultMessage isValid(ReceiptVO vo);
+	
+	/**
+	 * 获得消息
+	 */
+	public String showMessage(ReceiptVO vo);
 	
 	/**
 	 * 将PO转换成VO
@@ -36,7 +35,7 @@ public interface  ReceiptService {
 	public ReceiptVO show(ReceiptPO po);
 	
 	/**
-	 * 获得消息
+	 * 将VO转换成PO
 	 */
-	public String showMessage(ReceiptVO vo);
+	public ReceiptPO convertToPO(ReceiptVO vo);
 }

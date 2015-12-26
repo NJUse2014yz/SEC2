@@ -1,7 +1,6 @@
 package nju.sec.yz.ExpressSystem.blservice.receiptBlService;
 
-import java.util.ArrayList;
-
+import java.util.List;
 import nju.sec.yz.ExpressSystem.common.ReceiptType;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.vo.ReceiptVO;
@@ -14,7 +13,14 @@ public interface ReceiptBlService {
 	/**
 	 * 获得所有表单数据
 	 */
-	public ArrayList<ReceiptVO> getAll();
+	public List<ReceiptVO> getAll();
+	
+	/**
+	 * 获得某类型的所有单据
+	 * @param type
+	 * @return
+	 */
+	public List<ReceiptVO> getByType(ReceiptType type);
 	
 	/**
 	 * 通过id获得表单数据
@@ -28,13 +34,6 @@ public interface ReceiptBlService {
 	 * @return
 	 */
 	public ResultMessage approve(ReceiptVO vo);
-	
-	/**
-	 * 获得某类型的所有单据
-	 * @param type
-	 * @return
-	 */
-	public ArrayList<ReceiptVO> getByType(ReceiptType type);
 	
 	/**
 	 * 修改单据信息
