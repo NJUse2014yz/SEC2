@@ -37,8 +37,8 @@ public class ManagerAgencyObserve extends JPanel{
 	private newTable table;
 	private newJBut back;
 
+	private newJLabel transbel;
 	private newJLabel warning = new newJLabel();
-	private JLabel transit;
 	
 	private Vector<Vector<String>> data=new Vector<Vector<String>>();
 	private Vector<String> title=new Vector<String>();
@@ -75,9 +75,7 @@ public class ManagerAgencyObserve extends JPanel{
 		title.add("编号");
 		title.add("名称");
 		
-		table=new newTable(data,title,this,false);
-		table.setBounds(137,94,318,181);
-		table.join();
+		
 		
 //		ImageIcon backIcon = new ImageIcon("graphic/manager/button/back.png");
 		back = new newJBut("返回原列表 ");
@@ -99,6 +97,12 @@ public class ManagerAgencyObserve extends JPanel{
 			// 修改position
 			TransitVO vo = manager.observeTransit(num.get(0));
 			iniPosition(vo, num.get(1));
+			transbel=new newJLabel("所属中转中心");
+			transbel.setForeground(Color.white);
+			transbel.setBounds(147,175,91,22);
+			add(transbel);
+			
+			
 		}
 	}
 	private void iniTransit(TransitVO vo) {
@@ -118,11 +122,6 @@ public class ManagerAgencyObserve extends JPanel{
 		name.setText(listVO.get(count).getName());
 		Id.setText(Pid);
 		
-		ImageIcon filltransit = new ImageIcon("graphic/manager/button/transit.png");
-		transit = new JLabel(filltransit);
-		transit.setBounds(147, 179, 89, 21);
-		add(transit);
-	
 		String transit = listVO.get(count).getTransitId();
 		TransitId = new newJLabel();
 		TransitId.setText(transit);
@@ -133,7 +132,11 @@ public class ManagerAgencyObserve extends JPanel{
 	}
 	private void changeData(TransitVO vo)
 	{
-		data.removeAllElements();
+		table=new newTable(data,title,this,false);
+		table.setBounds(137,194,318,181);
+		table.join();
+//		data.removeAllElements();
+		if(vo.getPositions()!=null){
 		for(int i=0;i<vo.getPositions().size();i++){
 			Vector<String> vector=new Vector<String>();
 			PositionVO temp=vo.getPositions().get(i);
@@ -143,6 +146,7 @@ public class ManagerAgencyObserve extends JPanel{
 			data.add(vector);
 		}
 		table.resetData();
+		}
 	}
 	@Override
 	public void paintComponent(Graphics g) {

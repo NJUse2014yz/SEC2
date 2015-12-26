@@ -40,7 +40,7 @@ public class ManagerAgencyModify extends JPanel {
 	private newJBut back;
 
 	private newJLabel warning = new newJLabel();
-	private JLabel transit;
+	private newJLabel transitbel;
 	
 	
 	//记为positon序号
@@ -79,7 +79,7 @@ public class ManagerAgencyModify extends JPanel {
 
 		ImageIcon cinfirmIcon = new ImageIcon("graphic/manager/button/confirm.png");
 		confirm = new newJBut("确定");
-		confirm.setBounds(380, 240, 72, 20);
+		confirm.setBounds(380, 240, 72, 24);
 		add(confirm);
 
 //		ImageIcon backIcon = new ImageIcon("graphic/manager/button/back.png");
@@ -143,16 +143,16 @@ public class ManagerAgencyModify extends JPanel {
 		name.setText(listVO.get(count).getName());
 		Id.setText(Pid);
 		
-		ImageIcon filltransit = new ImageIcon("graphic/manager/button/transit.png");
-		transit = new JLabel(filltransit);
-		transit.setBounds(147, 182, 89, 21);
-		add(transit);
-
 		String transit = listVO.get(count).getTransitId();
 		TransitId = new newJText();
 		TransitId.setText(transit);
 		TransitId.setBounds(247, 179, 140, 18);
 		add(TransitId);
+		
+		transitbel=new newJLabel("所属中转中心");
+		transitbel.setForeground(Color.white);
+		transitbel.setBounds(147,175,91,22);
+		add(transitbel);
 
 		confirm.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
