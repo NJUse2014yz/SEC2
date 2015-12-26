@@ -113,6 +113,8 @@ public class ReceiptList implements ReceiptSaveService{
 		ReceiptVO vo=null;
 		try {
 			ReceiptPO po=receiptData.find(id);
+			if(po==null)
+				return null;
 			vo=this.show(po);
 		} catch (RemoteException e) {
 			RMIExceptionHandler.handleRMIException();
@@ -122,6 +124,8 @@ public class ReceiptList implements ReceiptSaveService{
 	}
 
 	ReceiptVO show(ReceiptPO po){
+		if(po==null)
+			return null;
 		ReceiptVO vo=null;
 		try {
 			ReceiptService receipt=RECEIPT_MAP.get(po.getType()).newInstance();

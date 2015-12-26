@@ -172,7 +172,7 @@ private InventoryBlService inventoryservice=new InventoryController();
 						if(result.getResult()==Result.SUCCESS){
 							table.getModel().removeRow(c);
 						}else{
-							warning.setText("提交失败");
+							warning.setText(result.getMessage());
 							break;
 						}
 					}

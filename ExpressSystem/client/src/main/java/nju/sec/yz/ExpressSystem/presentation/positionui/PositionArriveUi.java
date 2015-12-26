@@ -193,6 +193,7 @@ public class PositionArriveUi extends JPanel{
 						ai.addState(arriveState);
 					}
 				}
+				ai.setDeparture(departure.getText());
 				ai.setTime(date.getTime());
 				ai.setTransitSheetId(JTtranferId.getText());
 				sheet.setOfficeArrive(ai);
