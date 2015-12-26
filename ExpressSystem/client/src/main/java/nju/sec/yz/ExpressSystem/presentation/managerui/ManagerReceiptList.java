@@ -107,7 +107,6 @@ public class ManagerReceiptList extends JPanel {
 		table.join();
 
 		type.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
@@ -309,10 +308,7 @@ public class ManagerReceiptList extends JPanel {
 		name.add("付款账号");
 		name.add("条目");
 		name.add("账户");
-//		table=new newTable(data,name,this,false);
-//		table.setBounds(134, 100, 333, 157);
-//		table.stopAutoRewidth();
-//		table.join();
+
 		for (int c = 0; c < volist.size(); c++) {
 			Vector<String> vector=new Vector<String>();
 			String tempId = volist.get(c).getId();
@@ -334,6 +330,7 @@ public class ManagerReceiptList extends JPanel {
 		}
 //		table.resetData();
 		table.getModel().setDataVector(data, name);
+		repaint();
 	}
 
 	private ReceiptVO modifyOut(int c, String Id) {
@@ -392,6 +389,7 @@ public class ManagerReceiptList extends JPanel {
 		}
 //		table.resetData();
 		table.getModel().setDataVector(data, name);
+		repaint();
 	}
 
 	private ReceiptVO modifyPayment(int c, String Id) {
@@ -464,6 +462,7 @@ public class ManagerReceiptList extends JPanel {
 		}
 //		table.resetData();
 		table.getModel().setDataVector(data, name);
+		repaint();
 	}
 
 	private ReceiptVO modifyDelReip(int c, String Id) {
@@ -544,6 +543,7 @@ public class ManagerReceiptList extends JPanel {
 		}
 //		table.resetData();
 		table.getModel().setDataVector(data, name);
+		repaint();
 	}
 
 	private ReceiptVO modifyPosLoad(int c, String Id) {
@@ -601,6 +601,7 @@ public class ManagerReceiptList extends JPanel {
 		}
 //		table.resetData();
 		table.getModel().setDataVector(data, name);
+		repaint();
 	}
 
 	private ReceiptVO modifyPosReseive(int c, String Id) {
@@ -651,6 +652,7 @@ public class ManagerReceiptList extends JPanel {
 		}
 //		table.resetData();
 		table.getModel().setDataVector(data, name);
+		repaint();
 	}
 
 	private ReceiptVO modifyPosSend(int c, String Id) {
@@ -708,6 +710,7 @@ public class ManagerReceiptList extends JPanel {
 		}
 //		table.resetData();
 		table.getModel().setDataVector(data, name);
+		repaint();
 	}
 
 	private ReceiptVO modifyTransCar(int c, String Id) {
@@ -769,6 +772,7 @@ public class ManagerReceiptList extends JPanel {
 		}
 //		table.resetData();
 		table.getModel().setDataVector(data, name);
+		repaint();
 	}
 
 	private ReceiptVO modifyTransTrain(int c, String Id) {
@@ -830,6 +834,7 @@ public class ManagerReceiptList extends JPanel {
 		}
 //		table.resetData();
 		table.getModel().setDataVector(data, name);
+		repaint();
 	}
 
 	private ReceiptVO modifyTranFlight(int c, String Id) {
@@ -863,10 +868,10 @@ public class ManagerReceiptList extends JPanel {
 		name.add("接收时间");
 		name.add("中转单编号");
 		name.add("出发地");
-		table=new newTable(data,name,this,false);
-		table.setBounds(134, 100, 333, 157);
-		table.stopAutoRewidth();
-		table.join();
+//		table=new newTable(data,name,this,false);
+//		table.setBounds(134, 100, 333, 157);
+//		table.stopAutoRewidth();
+//		table.join();
 		System.out.println(volist.size());
 		for (int c = 0; c < volist.size(); c++) {
 			Vector<String> vector=new Vector<String>();
@@ -885,6 +890,7 @@ public class ManagerReceiptList extends JPanel {
 		}
 //		table.resetData();
 		table.getModel().setDataVector(data, name);
+		repaint();
 
 	}
 
@@ -945,7 +951,7 @@ public class ManagerReceiptList extends JPanel {
 		}
 //		table.resetData();
 		table.getModel().setDataVector(data, name);
-
+		repaint();
 	}
 
 	private ReceiptVO modifyTransLoad(int c, String Id) {
@@ -1009,6 +1015,7 @@ public class ManagerReceiptList extends JPanel {
 		}
 //		table.resetData();
 		table.getModel().setDataVector(data, name);
+		repaint();
 	}
 
 	private ReceiptVO modifyInvenIn(int c, String Id) {
@@ -1067,6 +1074,7 @@ public class ManagerReceiptList extends JPanel {
 		}
 //		table.resetData();
 		table.getModel().setDataVector(data, name);
+		repaint();
 	}
 	public String getType(TransportType str){
 		switch(str){
