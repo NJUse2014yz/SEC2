@@ -857,16 +857,17 @@ public class ManagerReceiptList extends JPanel {
 	private void iniTransReceive() {
 		name.removeAllElements();
 		data.removeAllElements();
-//		name.add("填写日期");
-//		name.add("表单号");
-//		name.add("填表人");
-//		name.add("接收时间");
-//		name.add("中转单编号");
-//		name.add("出发地");
+		name.add("填写日期");
+		name.add("表单号");
+		name.add("填表人");
+		name.add("接收时间");
+		name.add("中转单编号");
+		name.add("出发地");
 		table=new newTable(data,name,this,false);
 		table.setBounds(134, 100, 333, 157);
 		table.stopAutoRewidth();
 		table.join();
+		System.out.println(volist.size());
 		for (int c = 0; c < volist.size(); c++) {
 			Vector<String> vector=new Vector<String>();
 			String tempId = volist.get(c).getId();
