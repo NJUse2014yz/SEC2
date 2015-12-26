@@ -15,7 +15,7 @@ private ClientControler mainControler;
 		this.mainControler=mainControler;
 	}
 	
-	public void deliverChangePanel(INVENTORY_CONTROL n)
+	public void deliverChangePanel(InventoryControl n)
 	{
 		switch(n)
 		{

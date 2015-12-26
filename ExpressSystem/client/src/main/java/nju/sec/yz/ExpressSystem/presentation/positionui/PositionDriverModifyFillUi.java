@@ -25,7 +25,7 @@ import nju.sec.yz.ExpressSystem.presentation.componentui.newJCombo;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJText;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
-import nju.sec.yz.ExpressSystem.presentation.controlerui.POSITION_CONTROL;
+import nju.sec.yz.ExpressSystem.presentation.controlerui.PositionControl;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.PositionControler;
 import nju.sec.yz.ExpressSystem.vo.DriverVO;
 
@@ -157,7 +157,7 @@ public class PositionDriverModifyFillUi extends JPanel{
 			public void mouseClicked(MouseEvent e)
 			{
 				System.out.println("14");
-				controler.positionChangePanel(POSITION_CONTROL.DRIVER_MODIFY);
+				controler.positionChangePanel(PositionControl.DRIVER_MODIFY);
 			}
 		});
 		add(back);

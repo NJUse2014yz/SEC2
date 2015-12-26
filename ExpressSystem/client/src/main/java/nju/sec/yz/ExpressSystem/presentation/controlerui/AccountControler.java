@@ -23,7 +23,7 @@ public class AccountControler {
 		this.mainControler=mainControler;
 		this.bc=new AccountButtonComponents(mainControler);
 	}
-	public void accountChangePanel(ACCOUNT_CONTROL n)
+	public void accountChangePanel(AccountControl n)
 	{
 		switch(n)
 		{	

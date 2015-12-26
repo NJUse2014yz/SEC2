@@ -12,8 +12,8 @@ import javax.swing.JPanel;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
-import nju.sec.yz.ExpressSystem.presentation.controlerui.MAIN_CONTROL;
-import nju.sec.yz.ExpressSystem.presentation.controlerui.MANAGER_CONTROL;
+import nju.sec.yz.ExpressSystem.presentation.controlerui.MainControl;
+import nju.sec.yz.ExpressSystem.presentation.controlerui.ManagerControl;
 
 public class ManagerButtonComponent {
 
@@ -102,25 +102,25 @@ public class ManagerButtonComponent {
 				add.addMouseListener(new MouseAdapter(){
 					public void mouseClicked(MouseEvent e1)
 					{
-						maincontroler.managerControler.managerChangePanel(MANAGER_CONTROL.AGENCY_ADD);
+						maincontroler.managerControler.managerChangePanel(ManagerControl.AGENCY_ADD);
 					}
 				});
 				delete.addMouseListener(new MouseAdapter(){
 					public void mouseClicked(MouseEvent e1)
 					{
-						maincontroler.managerControler.managerChangePanel(MANAGER_CONTROL.AGENCY_DELETE);
+						maincontroler.managerControler.managerChangePanel(ManagerControl.AGENCY_DELETE);
 					}
 				});
 				modify.addMouseListener(new MouseAdapter(){
 					public void mouseClicked(MouseEvent e1)
 					{
-						maincontroler.managerControler.managerChangePanel(MANAGER_CONTROL.AGENCY_LIST);
+						maincontroler.managerControler.managerChangePanel(ManagerControl.AGENCY_LIST);
 					}
 				});
 				observe.addMouseListener(new MouseAdapter(){
 					public void mouseClicked(MouseEvent e1)
 					{
-						maincontroler.managerControler.managerChangePanel(MANAGER_CONTROL.AGENCY_INQUIRY);
+						maincontroler.managerControler.managerChangePanel(ManagerControl.AGENCY_INQUIRY);
 					}
 				});
 			}
@@ -133,25 +133,25 @@ public class ManagerButtonComponent {
 				add.addMouseListener(new MouseAdapter(){
 					public void mouseClicked(MouseEvent e1)
 					{
-						maincontroler.managerControler.managerChangePanel(MANAGER_CONTROL.STAFF_ADD);
+						maincontroler.managerControler.managerChangePanel(ManagerControl.STAFF_ADD);
 					}
 				});
 				delete.addMouseListener(new MouseAdapter(){
 					public void mouseClicked(MouseEvent e1)
 					{
-						maincontroler.managerControler.managerChangePanel(MANAGER_CONTROL.STAFF_DELETE);
+						maincontroler.managerControler.managerChangePanel(ManagerControl.STAFF_DELETE);
 					}
 				});
 				modify.addMouseListener(new MouseAdapter(){
 					public void mouseClicked(MouseEvent e1)
 					{
-						maincontroler.managerControler.managerChangePanel(MANAGER_CONTROL.STAFF_LIST);
+						maincontroler.managerControler.managerChangePanel(ManagerControl.STAFF_LIST);
 					}
 				});
 				observe.addMouseListener(new MouseAdapter(){
 					public void mouseClicked(MouseEvent e1)
 					{
-						maincontroler.managerControler.managerChangePanel(MANAGER_CONTROL.STAFF_INQUIRY);
+						maincontroler.managerControler.managerChangePanel(ManagerControl.STAFF_INQUIRY);
 					}
 				});
 			}
@@ -185,13 +185,13 @@ public class ManagerButtonComponent {
 				modify.addMouseListener(new MouseAdapter(){
 					public void mouseClicked(MouseEvent e1)
 					{
-						maincontroler.managerControler.managerChangePanel(MANAGER_CONTROL.SALARY_MODIFY);
+						maincontroler.managerControler.managerChangePanel(ManagerControl.SALARY_MODIFY);
 					}
 				});
 				observe.addMouseListener(new MouseAdapter(){
 					public void mouseClicked(MouseEvent e1)
 					{
-						maincontroler.managerControler.managerChangePanel(MANAGER_CONTROL.SALARY_INQUIRY);
+						maincontroler.managerControler.managerChangePanel(ManagerControl.SALARY_INQUIRY);
 					}
 				});
 				
@@ -230,7 +230,7 @@ public class ManagerButtonComponent {
 				add.addMouseListener(new MouseAdapter(){
 					public void mouseClicked(MouseEvent e1)
 					{
-						maincontroler.managerControler.managerChangePanel(MANAGER_CONTROL.CONST_ADD);
+						maincontroler.managerControler.managerChangePanel(ManagerControl.CONST_ADD);
 					}
 				});
 //				delete.addMouseListener(new MouseAdapter(){
@@ -242,13 +242,13 @@ public class ManagerButtonComponent {
 				modify.addMouseListener(new MouseAdapter(){
 					public void mouseClicked(MouseEvent e1)
 					{
-						maincontroler.managerControler.managerChangePanel(MANAGER_CONTROL.CONST_MODIFY);
+						maincontroler.managerControler.managerChangePanel(ManagerControl.CONST_MODIFY);
 					}
 				});
 				observe.addMouseListener(new MouseAdapter(){
 					public void mouseClicked(MouseEvent e1)
 					{
-						maincontroler.managerControler.managerChangePanel(MANAGER_CONTROL.CONST_INQUIRY);
+						maincontroler.managerControler.managerChangePanel(ManagerControl.CONST_INQUIRY);
 					}
 				});
 				
@@ -276,7 +276,7 @@ public class ManagerButtonComponent {
 				delete.setVisible(false);
 				modify.setVisible(false);
 				observe.setVisible(false);
-				maincontroler.managerControler.managerChangePanel(MANAGER_CONTROL.RECEIPT_LIST);
+				maincontroler.managerControler.managerChangePanel(ManagerControl.RECEIPT_LIST);
 			}
 		});
 		
@@ -301,7 +301,7 @@ public class ManagerButtonComponent {
 				delete.setVisible(false);
 				modify.setVisible(false);
 				observe.setVisible(false);
-				maincontroler.managerControler.managerChangePanel(MANAGER_CONTROL.ACCOUNT_CHECK);
+				maincontroler.managerControler.managerChangePanel(ManagerControl.ACCOUNT_CHECK);
 			
 			}
 		});
@@ -327,7 +327,7 @@ public class ManagerButtonComponent {
 				delete.setVisible(false);
 				modify.setVisible(false);
 				observe.setVisible(false);
-				maincontroler.managerControler.managerChangePanel(MANAGER_CONTROL.LOG_CHECK);
+				maincontroler.managerControler.managerChangePanel(ManagerControl.LOG_CHECK);
 			
 			}
 		});
@@ -346,7 +346,7 @@ public class ManagerButtonComponent {
 		
 		leaveButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				maincontroler.mainChangePanel(MAIN_CONTROL.LOGIN);
+				maincontroler.mainChangePanel(MainControl.LOGIN);
 			}
 		});
 		

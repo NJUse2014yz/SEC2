@@ -23,7 +23,7 @@ import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJText;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
-import nju.sec.yz.ExpressSystem.presentation.controlerui.POSITION_CONTROL;
+import nju.sec.yz.ExpressSystem.presentation.controlerui.PositionControl;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.PositionControler;
 import nju.sec.yz.ExpressSystem.vo.CarVO;
 
@@ -132,7 +132,7 @@ public class PositionCarModifyFillUi extends JPanel{
 			public void mouseClicked(MouseEvent e)
 			{
 				System.out.println("13");
-				controler.positionChangePanel(POSITION_CONTROL.CAR_MODIFY);
+				controler.positionChangePanel(PositionControl.CAR_MODIFY);
 			}
 		});
 		add(back);

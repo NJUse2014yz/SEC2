@@ -31,7 +31,7 @@ public ManagerButtonComponent mbc;
 		this.mainControler=mainControler;
 		this.mbc=new ManagerButtonComponent(mainControler);
 	}
-	public void managerChangePanel(MANAGER_CONTROL n)
+	public void managerChangePanel(ManagerControl n)
 	{
 		switch(n)
 		{

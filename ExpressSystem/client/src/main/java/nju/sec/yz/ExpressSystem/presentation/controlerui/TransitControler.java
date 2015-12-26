@@ -20,7 +20,7 @@ public TransitButtonComponents tbc;
 		this.mainControler=mainControler;
 		this.tbc=new TransitButtonComponents(mainControler);
 	}
-	public void transitChangePanel(TRANSIT_CONTROL n)
+	public void transitChangePanel(TransitControl n)
 	{
 		switch(n)
 		{

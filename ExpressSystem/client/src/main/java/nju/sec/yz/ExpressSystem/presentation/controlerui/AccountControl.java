@@ -1,6 +1,6 @@
 package nju.sec.yz.ExpressSystem.presentation.controlerui;
 
-public enum ACCOUNT_CONTROL {
+public enum AccountControl {
 	ACCOUNT_MAIN,
 	INCOME,
 	INITIAL,CHECK_INITIAL,

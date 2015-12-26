@@ -22,8 +22,7 @@ import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
-import nju.sec.yz.ExpressSystem.presentation.controlerui.MAIN_CONTROL;
-import nju.sec.yz.ExpressSystem.presentation.controlerui.MainSwitchPanelListener;
+import nju.sec.yz.ExpressSystem.presentation.controlerui.MainControl;
 
 public class UserUi extends JPanel{
 	private UserBlService userBlService;
@@ -119,7 +118,7 @@ public class UserUi extends JPanel{
 				{	
 					if(JTpassword.getText().equals("admin"))
 					{
-						new MainSwitchPanelListener(MAIN_CONTROL.ADMINSTRATER,controler);
+						controler.mainChangePanel(MainControl.ADMINSTRATER);
 					}
 					else
 					{
@@ -127,28 +126,28 @@ public class UserUi extends JPanel{
 						switch(id)
 						{
 						case 'A':
-							new MainSwitchPanelListener(MAIN_CONTROL.INVENTORY,controler);
+							controler.mainChangePanel(MainControl.INVENTORY);
 							break;
 						case 'B':
-							new MainSwitchPanelListener(MAIN_CONTROL.TRANSITER,controler);
+							controler.mainChangePanel(MainControl.TRANSITER);
 							break;					
 						case 'C':
-							new MainSwitchPanelListener(MAIN_CONTROL.POSITION,controler);
+							controler.mainChangePanel(MainControl.POSITION);
 							break;
 						case 'D':
-							new MainSwitchPanelListener(MAIN_CONTROL.DELIVER,controler);
+							controler.mainChangePanel(MainControl.DELIVER);
 							break;
 						case 'E':
-							new MainSwitchPanelListener(MAIN_CONTROL.SENIOR_ACCOUNTANCY,controler);
+							controler.mainChangePanel(MainControl.SENIOR_ACCOUNTANCY);
 							break;
 						case 'F':
-							new MainSwitchPanelListener(MAIN_CONTROL.ADMINSTRATER,controler);
+							controler.mainChangePanel(MainControl.ADMINSTRATER);
 							break;
 						case 'S':
-							new MainSwitchPanelListener(MAIN_CONTROL.MANAGER,controler);
+							controler.mainChangePanel(MainControl.MANAGER);
 							break;	
 						case 'e':
-							new MainSwitchPanelListener(MAIN_CONTROL.JUNIOR_ACCOUNTANCY,controler);
+							controler.mainChangePanel(MainControl.JUNIOR_ACCOUNTANCY);
 							break;	
 						}
 					}

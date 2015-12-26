@@ -19,7 +19,7 @@ import nju.sec.yz.ExpressSystem.blservice.deliverBlService.DeliverBlService;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
-import nju.sec.yz.ExpressSystem.presentation.controlerui.MAIN_CONTROL;
+import nju.sec.yz.ExpressSystem.presentation.controlerui.MainControl;
 import nju.sec.yz.ExpressSystem.vo.DeliverVO;
 
 public class UserOrderSearchUi extends JPanel {
@@ -116,7 +116,7 @@ public class UserOrderSearchUi extends JPanel {
 		
 		leaveButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				mainControler.mainChangePanel(MAIN_CONTROL.LOGIN);
+				mainControler.mainChangePanel(MainControl.LOGIN);
 			}
 		});
 		

@@ -1,6 +1,6 @@
 package nju.sec.yz.ExpressSystem.presentation.controlerui;
 
-public enum POSITION_CONTROL {
+public enum PositionControl {
 	POSITION_MAIN,
 	ARRIVE,
 	DELIVE,

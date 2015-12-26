@@ -23,7 +23,7 @@ import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJCombo;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJText;
-import nju.sec.yz.ExpressSystem.presentation.controlerui.ADMINSTRATER_CONTROL;
+import nju.sec.yz.ExpressSystem.presentation.controlerui.AdminstraterControl;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.AdminstraterControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.UserVO;
@@ -150,7 +150,7 @@ public class AdminstraterModifyFillUi extends JPanel{
 		back.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
 			{
-				controler.adminstraterChangePanel(ADMINSTRATER_CONTROL.USER_LIST);
+				controler.adminstraterChangePanel(AdminstraterControl.USER_LIST);
 			}
 		});
 		add(back);

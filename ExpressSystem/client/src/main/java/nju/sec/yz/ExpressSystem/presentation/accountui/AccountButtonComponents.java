@@ -13,9 +13,9 @@ import javax.swing.JPanel;
 
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
-import nju.sec.yz.ExpressSystem.presentation.controlerui.ACCOUNT_CONTROL;
+import nju.sec.yz.ExpressSystem.presentation.controlerui.AccountControl;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
-import nju.sec.yz.ExpressSystem.presentation.controlerui.MAIN_CONTROL;
+import nju.sec.yz.ExpressSystem.presentation.controlerui.MainControl;
 
 public class AccountButtonComponents{
 		public int a=0;
@@ -199,7 +199,7 @@ public class AccountButtonComponents{
 					logButton.setLocation(Button_x,log_y1);
 					
 					dependForJunior();
-					maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.INCOME);
+					maincontroler.accountControler.accountChangePanel(AccountControl.INCOME);
 //					if(n==0)
 //					{
 //						warning.setVisible(false);
@@ -226,7 +226,7 @@ public class AccountButtonComponents{
 					logButton.setLocation(Button_x,log_y1);
 					
 					dependForJunior();
-					maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.INITIAL);
+					maincontroler.accountControler.accountChangePanel(AccountControl.INITIAL);
 //					if(n==0)
 //					{
 //						warning.setVisible(false);
@@ -253,7 +253,7 @@ public class AccountButtonComponents{
 					logButton.setLocation(Button_x,log_y1);
 					
 					dependForJunior();
-					maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.COST);
+					maincontroler.accountControler.accountChangePanel(AccountControl.COST);
 //					if(n==0)
 //					{
 //						warning.setVisible(false);
@@ -283,7 +283,7 @@ public class AccountButtonComponents{
 						public void mouseClicked(MouseEvent e1)
 						{
 							dependForJunior();
-							maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.TABLE_OPERATE);
+							maincontroler.accountControler.accountChangePanel(AccountControl.TABLE_OPERATE);
 //							if(n==0)
 //							{
 //								warning.setVisible(false);
@@ -302,7 +302,7 @@ public class AccountButtonComponents{
 						public void mouseClicked(MouseEvent e1)
 						{
 							dependForJunior();
-							maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.TABLE_COST);
+							maincontroler.accountControler.accountChangePanel(AccountControl.TABLE_COST);
 //							if(n==0)
 //							{
 //								warning.setVisible(false);
@@ -332,7 +332,7 @@ public class AccountButtonComponents{
 					addButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e1)
 						{
-							maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.ADD_ACCOUNT);
+							maincontroler.accountControler.accountChangePanel(AccountControl.ADD_ACCOUNT);
 //							if(n==0)
 //							{
 //								warning.setVisible(false);
@@ -349,7 +349,7 @@ public class AccountButtonComponents{
 					deleteButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e1)
 						{
-							maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.DELETE_ACCOUNT);
+							maincontroler.accountControler.accountChangePanel(AccountControl.DELETE_ACCOUNT);
 //							
 //							if(n==0)
 //							{
@@ -367,7 +367,7 @@ public class AccountButtonComponents{
 					modifyButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e1)
 						{
-							maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.MODIFY_ACCOUNTLIST);
+							maincontroler.accountControler.accountChangePanel(AccountControl.MODIFY_ACCOUNTLIST);
 //							
 //							if(n==0)
 //							{
@@ -385,7 +385,7 @@ public class AccountButtonComponents{
 					inquiryButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e1)
 						{
-							maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.ENQUIRY_ACCOUNT);
+							maincontroler.accountControler.accountChangePanel(AccountControl.ENQUIRY_ACCOUNT);
 //							
 //							if(n==0)
 //							{
@@ -414,7 +414,7 @@ public class AccountButtonComponents{
 //					accountButton.setIcon(accountIcon1);
 					accountButton.setLocation(Button_x, account_y1);
 					logButton.setLocation(Button_x,log_y1);
-					maincontroler.accountControler.accountChangePanel(ACCOUNT_CONTROL.LOG_CHECK);
+					maincontroler.accountControler.accountChangePanel(AccountControl.LOG_CHECK);
 //					if(n==0)
 //					{
 //						warning.setVisible(false);
@@ -441,7 +441,7 @@ public class AccountButtonComponents{
 			
 			leaveButton.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
-					maincontroler.mainChangePanel(MAIN_CONTROL.LOGIN);
+					maincontroler.mainChangePanel(MainControl.LOGIN);
 				}
 			});
 			

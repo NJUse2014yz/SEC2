@@ -24,7 +24,7 @@ public class PositionControler {
 		this.mainControler=mainControler;
 		this.bc=new ButtonComponents(mainControler);
 	}
-	public void positionChangePanel(POSITION_CONTROL n)
+	public void positionChangePanel(PositionControl n)
 	{
 		switch(n)
 		{

@@ -12,8 +12,8 @@ import javax.swing.JPanel;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
-import nju.sec.yz.ExpressSystem.presentation.controlerui.DELIVER_CONTROL;
-import nju.sec.yz.ExpressSystem.presentation.controlerui.MAIN_CONTROL;
+import nju.sec.yz.ExpressSystem.presentation.controlerui.DeliverControl;
+import nju.sec.yz.ExpressSystem.presentation.controlerui.MainControl;
 
 public class DeliverButtonComponents{
 
@@ -57,17 +57,17 @@ public class DeliverButtonComponents{
 
 		OrderInButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				mainControler.deliverControler.deliverChangePanel(DELIVER_CONTROL.ORDER_IN);
+				mainControler.deliverControler.deliverChangePanel(DeliverControl.ORDER_IN);
 			}
 		});
 		OrderSearchButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				mainControler.deliverControler.deliverChangePanel(DELIVER_CONTROL.DELIVERY_INQUIRY);
+				mainControler.deliverControler.deliverChangePanel(DeliverControl.DELIVERY_INQUIRY);
 			}
 		});
 		ReceiveInButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				mainControler.deliverControler.deliverChangePanel(DELIVER_CONTROL.RECEIVE_IN);
+				mainControler.deliverControler.deliverChangePanel(DeliverControl.RECEIVE_IN);
 			}
 		});
 		
@@ -96,7 +96,7 @@ public class DeliverButtonComponents{
 		panel.add(leaveButton);
 		leaveButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				mainControler.mainChangePanel(MAIN_CONTROL.LOGIN);
+				mainControler.mainChangePanel(MainControl.LOGIN);
 			}
 		});
 	}

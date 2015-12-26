@@ -12,8 +12,8 @@ import javax.swing.JPanel;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
-import nju.sec.yz.ExpressSystem.presentation.controlerui.INVENTORY_CONTROL;
-import nju.sec.yz.ExpressSystem.presentation.controlerui.MAIN_CONTROL;
+import nju.sec.yz.ExpressSystem.presentation.controlerui.InventoryControl;
+import nju.sec.yz.ExpressSystem.presentation.controlerui.MainControl;
 
 public class InventoryButtonComponents {
 
@@ -73,27 +73,27 @@ public class InventoryButtonComponents {
 		
 		in.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				maincontroler.inventoryControler.deliverChangePanel(INVENTORY_CONTROL.INVENTORY_IN);
+				maincontroler.inventoryControler.deliverChangePanel(InventoryControl.INVENTORY_IN);
 			}
 		});
 		out.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				maincontroler.inventoryControler.deliverChangePanel(INVENTORY_CONTROL.INVENTORY_OUT);
+				maincontroler.inventoryControler.deliverChangePanel(InventoryControl.INVENTORY_OUT);
 			}
 		});
 		checkstock.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				maincontroler.inventoryControler.deliverChangePanel(INVENTORY_CONTROL.INVENTORY_CHECK);
+				maincontroler.inventoryControler.deliverChangePanel(InventoryControl.INVENTORY_CHECK);
 			}
 		});
 		observestock.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				maincontroler.inventoryControler.deliverChangePanel(INVENTORY_CONTROL.INVENTORY_OBSERVE);
+				maincontroler.inventoryControler.deliverChangePanel(InventoryControl.INVENTORY_OBSERVE);
 			}
 		});
 		setAlertRate.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				maincontroler.inventoryControler.deliverChangePanel(INVENTORY_CONTROL.INVENTORY_SET);
+				maincontroler.inventoryControler.deliverChangePanel(InventoryControl.INVENTORY_SET);
 			}
 		});
 		
@@ -122,7 +122,7 @@ public class InventoryButtonComponents {
 		panel.add(leaveButton);
 		leaveButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				maincontroler.mainChangePanel(MAIN_CONTROL.LOGIN);
+				maincontroler.mainChangePanel(MainControl.LOGIN);
 			}
 		});
 	

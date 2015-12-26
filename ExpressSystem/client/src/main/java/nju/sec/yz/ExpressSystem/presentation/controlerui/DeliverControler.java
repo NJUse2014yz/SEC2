@@ -15,7 +15,7 @@ public class DeliverControler {
 	{
 		this.mainControler=mainControler;
 	}
-	public void deliverChangePanel(DELIVER_CONTROL n)
+	public void deliverChangePanel(DeliverControl n)
 	{
 		switch(n)
 		{

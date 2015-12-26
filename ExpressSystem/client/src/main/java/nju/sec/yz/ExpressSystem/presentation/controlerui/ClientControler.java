@@ -43,7 +43,7 @@ public class ClientControler{
 	{
 		mainFrame.showFrame();
 	}
-	public void mainChangePanel(MAIN_CONTROL n)
+	public void mainChangePanel(MainControl n)
 	{
 		switch(n)
 		{

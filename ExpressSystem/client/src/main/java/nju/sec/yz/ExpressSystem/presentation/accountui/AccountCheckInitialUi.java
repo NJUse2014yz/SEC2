@@ -22,7 +22,7 @@ import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJCombo;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
-import nju.sec.yz.ExpressSystem.presentation.controlerui.ACCOUNT_CONTROL;
+import nju.sec.yz.ExpressSystem.presentation.controlerui.AccountControl;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.AccountControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.InitialVO;
@@ -217,7 +217,7 @@ public class AccountCheckInitialUi extends JPanel{
 		backI.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
 			{
-				mainControler.accountControler.accountChangePanel(ACCOUNT_CONTROL.INITIAL);
+				mainControler.accountControler.accountChangePanel(AccountControl.INITIAL);
 			}
 		});
 		add(backI);

@@ -1,6 +1,6 @@
 package nju.sec.yz.ExpressSystem.presentation.controlerui;
 
-public enum MANAGER_CONTROL {
+public enum ManagerControl {
 	MANAGER_MAIN,
 	AGENCY_ADD,AGENCY_ADD_SUCCESS,
 	AGENCY_DELETE,

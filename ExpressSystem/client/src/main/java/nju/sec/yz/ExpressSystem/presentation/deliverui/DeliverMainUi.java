@@ -11,9 +11,8 @@ import javax.swing.JPanel;
 
 import nju.sec.yz.ExpressSystem.presentation.componentui.MessageDeclare;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
-import nju.sec.yz.ExpressSystem.presentation.controlerui.DELIVER_CONTROL;
+import nju.sec.yz.ExpressSystem.presentation.controlerui.DeliverControl;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.DeliverControler;
-import nju.sec.yz.ExpressSystem.presentation.controlerui.DeliverSwitchPanelListener;
 
 public class DeliverMainUi extends JPanel {
 

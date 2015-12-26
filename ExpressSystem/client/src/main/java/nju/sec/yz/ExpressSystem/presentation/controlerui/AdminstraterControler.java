@@ -16,7 +16,7 @@ public class AdminstraterControler {
 		this.mainControler=mainControler;
 		bc=new AdminstraterButtonComponents(mainControler);
 	}
-	public void adminstraterChangePanel(ADMINSTRATER_CONTROL n)
+	public void adminstraterChangePanel(AdminstraterControl n)
 	{
 		switch(n)
 		{

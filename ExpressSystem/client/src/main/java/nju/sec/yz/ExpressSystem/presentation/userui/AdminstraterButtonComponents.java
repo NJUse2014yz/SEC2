@@ -11,9 +11,9 @@ import javax.swing.JPanel;
 
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
-import nju.sec.yz.ExpressSystem.presentation.controlerui.ADMINSTRATER_CONTROL;
+import nju.sec.yz.ExpressSystem.presentation.controlerui.AdminstraterControl;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
-import nju.sec.yz.ExpressSystem.presentation.controlerui.MAIN_CONTROL;
+import nju.sec.yz.ExpressSystem.presentation.controlerui.MainControl;
 
 public class AdminstraterButtonComponents{
 	public int a=0;
@@ -114,7 +114,7 @@ public class AdminstraterButtonComponents{
 					addButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e1)
 						{
-							maincontroler.adminstraterControler.adminstraterChangePanel(ADMINSTRATER_CONTROL.USER_ADD);
+							maincontroler.adminstraterControler.adminstraterChangePanel(AdminstraterControl.USER_ADD);
 						}
 					});
 					deleteButton.setLocation(Button_x,manage_y1+Button_h+button_h);
@@ -122,7 +122,7 @@ public class AdminstraterButtonComponents{
 					deleteButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e1)
 						{
-							maincontroler.adminstraterControler.adminstraterChangePanel(ADMINSTRATER_CONTROL.USER_DELETE);
+							maincontroler.adminstraterControler.adminstraterChangePanel(AdminstraterControl.USER_DELETE);
 						}
 					});
 					modifyButton.setLocation(Button_x,manage_y1+Button_h+button_h*2);
@@ -130,7 +130,7 @@ public class AdminstraterButtonComponents{
 					modifyButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e1)
 						{
-							maincontroler.adminstraterControler.adminstraterChangePanel(ADMINSTRATER_CONTROL.USER_LIST);
+							maincontroler.adminstraterControler.adminstraterChangePanel(AdminstraterControl.USER_LIST);
 						}
 					});
 					inquiryButton.setLocation(Button_x,manage_y1+Button_h+button_h*3);
@@ -138,7 +138,7 @@ public class AdminstraterButtonComponents{
 					inquiryButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e1)
 						{
-							maincontroler.adminstraterControler.adminstraterChangePanel(ADMINSTRATER_CONTROL.USER_INQUIRY);
+							maincontroler.adminstraterControler.adminstraterChangePanel(AdminstraterControl.USER_INQUIRY);
 						}
 					});
 					panel.repaint();
@@ -156,7 +156,7 @@ public class AdminstraterButtonComponents{
 			
 			leaveButton.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
-					maincontroler.mainChangePanel(MAIN_CONTROL.LOGIN);
+					maincontroler.mainChangePanel(MainControl.LOGIN);
 				}
 			});
 			

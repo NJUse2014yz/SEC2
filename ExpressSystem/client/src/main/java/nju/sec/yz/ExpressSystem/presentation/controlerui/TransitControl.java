@@ -1,6 +1,6 @@
 package nju.sec.yz.ExpressSystem.presentation.controlerui;
 
-public enum TRANSIT_CONTROL {
+public enum TransitControl {
 	TRANSIT_MAIN,
 	FLIGHT_LOAD,FLIGHT_LOAD_SUCCESS,
 	TRAIN_LOAD,TRAON_LOAD_SUCCESS,

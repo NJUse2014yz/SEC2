@@ -12,8 +12,8 @@ import javax.swing.JPanel;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
-import nju.sec.yz.ExpressSystem.presentation.controlerui.MAIN_CONTROL;
-import nju.sec.yz.ExpressSystem.presentation.controlerui.TRANSIT_CONTROL;
+import nju.sec.yz.ExpressSystem.presentation.controlerui.MainControl;
+import nju.sec.yz.ExpressSystem.presentation.controlerui.TransitControl;
 
 public class TransitButtonComponents {
 	private ClientControler maincontroler;
@@ -87,7 +87,7 @@ public class TransitButtonComponents {
 //				TransitReceive.setBounds(12, 134, 108, 41);
 				TransitReceive.setLocation(12,134);
 //				TransitReceipt.setIcon(receiptIcon01);
-				maincontroler.transitControler.transitChangePanel(TRANSIT_CONTROL.TRANSIT);
+				maincontroler.transitControler.transitChangePanel(TransitControl.TRANSIT);
 			}
 		});
 		
@@ -99,7 +99,7 @@ public class TransitButtonComponents {
 //				TransitReceive.setBounds(12, 134, 108, 41);
 				TransitReceive.setLocation(12,134);
 //				TransitReceipt.setIcon(receiptIcon01);
-				maincontroler.transitControler.transitChangePanel(TRANSIT_CONTROL.ARRIVE);
+				maincontroler.transitControler.transitChangePanel(TransitControl.ARRIVE);
 			}
 		});
 		
@@ -165,7 +165,7 @@ public class TransitButtonComponents {
 		
 		leaveButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				maincontroler.mainChangePanel(MAIN_CONTROL.LOGIN);
+				maincontroler.mainChangePanel(MainControl.LOGIN);
 			}
 		});
 		
@@ -215,19 +215,19 @@ public class TransitButtonComponents {
 		
 		fight.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				maincontroler.transitControler.transitChangePanel(TRANSIT_CONTROL.FLIGHT_LOAD);
+				maincontroler.transitControler.transitChangePanel(TransitControl.FLIGHT_LOAD);
 			}
 		});
 		
 		train.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				maincontroler.transitControler.transitChangePanel(TRANSIT_CONTROL.TRAIN_LOAD);
+				maincontroler.transitControler.transitChangePanel(TransitControl.TRAIN_LOAD);
 			}
 		});
 		
 		car.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				maincontroler.transitControler.transitChangePanel(TRANSIT_CONTROL.CAR_LOAD);
+				maincontroler.transitControler.transitChangePanel(TransitControl.CAR_LOAD);
 			}
 		});
 		

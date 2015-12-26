@@ -1,6 +1,6 @@
 package nju.sec.yz.ExpressSystem.presentation.controlerui;
 
-public enum INVENTORY_CONTROL {
+public enum InventoryControl {
 	INVENTORY_MAIN,
 	INVENTORY_IN,IN_SUCCESS,
 	INVENTORY_OUT,OUT_SUCCESS,
