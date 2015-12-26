@@ -44,7 +44,6 @@ public class PositionArriveUi extends JPanel{
 	private ButtonComponents bc;
 	private Vector<String> name=new Vector<String>();
 	private Vector<Vector<String>> data;
-	private int n=0;
 	
 	private newJLabel departure;
 	private newJText JTtranferId;
@@ -180,18 +179,19 @@ public class PositionArriveUi extends JPanel{
 				 
 				OfficeArriveSheetVO sheet=new OfficeArriveSheetVO();
 				ArriveInformation ai=new ArriveInformation();
-				/**
-				 * n==0
-				 */
-				for(int i=0;i<n;i++)
+
+				for(int i=0;i<table.getRowCount();i++)
 				{
-					if(table.getValueAt(i, 1, true).equals("完整"))
-						arriveState=ArriveState.PERFECT;
-					else if(table.getValueAt(i, 1, true).equals("损坏"))
-						arriveState=ArriveState.BROKEN;
-					else if(table.getValueAt(i, 1, true).equals("丢失"))
-						arriveState=ArriveState.LOST;
-					ai.addState(arriveState);
+					if(!table.getValueAt(i, 0,false).equals(""))
+					{
+						if(table.getValueAt(i, 1, true).equals("完整"))
+							arriveState=ArriveState.PERFECT;
+						else if(table.getValueAt(i, 1, true).equals("损坏"))
+							arriveState=ArriveState.BROKEN;
+						else if(table.getValueAt(i, 1, true).equals("丢失"))
+							arriveState=ArriveState.LOST;
+						ai.addState(arriveState);
+					}
 				}
 				ai.setTime(date.getTime());
 				ai.setTransitSheetId(JTtranferId.getText());
