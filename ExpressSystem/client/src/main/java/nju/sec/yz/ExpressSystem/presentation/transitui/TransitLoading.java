@@ -61,7 +61,6 @@ public class TransitLoading extends JPanel{
 		this.maincontrol=maincontrol;
 		this.tbc=tbc;
 		tbc.setNextPanel(this);
-		tbc.iniTransit();
 		
 		initTransitLoading();
 	}
