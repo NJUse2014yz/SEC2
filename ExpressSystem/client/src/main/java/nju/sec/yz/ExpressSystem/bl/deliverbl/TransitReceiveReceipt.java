@@ -47,7 +47,7 @@ public class TransitReceiveReceipt implements ReceiptService {
 		List<String> barIds = list.getBarIds(info.getTransitSheetId()).barIds;
 		for (String barId : barIds) {
 			if (!isRightTrail(barId))
-				return new ResultMessage(Result.FAIL, "中转单还没通过审批~");
+				return new ResultMessage(Result.FAIL, "出库单还没通过审批~");
 		}
 		if (list.isArrived(info.getTransitSheetId()))
 			return new ResultMessage(Result.FAIL, "这到达单已经填过了哦~");
