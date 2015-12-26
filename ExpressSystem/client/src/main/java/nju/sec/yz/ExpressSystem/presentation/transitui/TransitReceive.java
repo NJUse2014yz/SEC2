@@ -64,7 +64,6 @@ public class TransitReceive extends JPanel {
 		this.maincontrol = maincontrol;
 		this.tbc = tbc;
 		tbc.setNextPanel(this);
-		tbc.iniTransit();
 
 		initTransitReceive();
 	}

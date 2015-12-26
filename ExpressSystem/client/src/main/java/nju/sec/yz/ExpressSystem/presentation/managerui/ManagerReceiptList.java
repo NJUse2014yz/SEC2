@@ -191,8 +191,6 @@ public class ManagerReceiptList extends JPanel {
 
 		});
 
-		// ImageIcon passAllIcon = new
-		// ImageIcon("graphic/manager/button/passAll.png");
 		passAll = new newJBut("全部通过");
 		passAll.setMargin(new java.awt.Insets(0,0,0,0));
 		passAll.setBounds(467 - 160, 262, 75, 24);
@@ -365,10 +363,6 @@ public class ManagerReceiptList extends JPanel {
 		name.add("收款人");
 		name.add("收款金额");
 		name.add("收款账户");
-//		table=new newTable(data,name,this,false);
-//		table.setBounds(134, 100, 333, 157);
-//		table.stopAutoRewidth();
-//		table.join();
 		for (int c = 0; c < volist.size(); c++) {
 			Vector<String> vector=new Vector<String>();
 			String tempId = volist.get(c).getId();
@@ -429,10 +423,7 @@ public class ManagerReceiptList extends JPanel {
 		name.add("品名");
 		name.add("快递费");
 		name.add("预计送达时间");
-//		table=new newTable(data,name,this,false);
-//		table.setBounds(134, 100, 333, 157);
-//		table.stopAutoRewidth();
-//		table.join();
+
 		for (int c = 0; c < volist.size(); c++) {
 			Vector<String> vector=new Vector<String>();
 			String tempId = volist.get(c).getId();
@@ -516,10 +507,6 @@ public class ManagerReceiptList extends JPanel {
 		name.add("监装员");
 		name.add("装运员");
 		name.add("运费");
-//		table=new newTable(data,name,this,false);
-//		table.setBounds(134, 100, 333, 157);
-//		table.stopAutoRewidth();
-//		table.join();
 		for (int c = 0; c < volist.size(); c++) {
 			Vector<String> vector=new Vector<String>();
 			String tempId = volist.get(c).getId();
@@ -579,10 +566,6 @@ public class ManagerReceiptList extends JPanel {
 		name.add("收件时间");
 		name.add("中转单编号");
 		name.add("出发地");
-//		table=new newTable(data,name,this,false);
-//		table.setBounds(134, 100, 333, 157);
-//		table.stopAutoRewidth();
-//		table.join();
 		for (int c = 0; c < volist.size(); c++) {
 			Vector<String> vector=new Vector<String>();
 			String tempId = volist.get(c).getId();
@@ -631,10 +614,6 @@ public class ManagerReceiptList extends JPanel {
 		name.add("填表人");
 		name.add("派件时间");
 		name.add("派件人");
-//		table=new newTable(data,name,this,false);
-//		table.setBounds(134, 100, 333, 157);
-//		table.stopAutoRewidth();
-//		table.join();
 		for (int c = 0; c < volist.size(); c++) {
 			Vector<String> vector=new Vector<String>();
 			String tempId = volist.get(c).getId();
@@ -685,10 +664,6 @@ public class ManagerReceiptList extends JPanel {
 		name.add("到达地");
 		name.add("监装员");
 		name.add("押运员");
-//		table=new newTable(data,name,this,false);
-//		table.setBounds(134, 100, 333, 157);
-//		table.stopAutoRewidth();
-//		table.join();
 		for (int c = 0; c < volist.size(); c++) {
 			Vector<String> vector=new Vector<String>();
 			String tempId = volist.get(c).getId();
@@ -747,10 +722,6 @@ public class ManagerReceiptList extends JPanel {
 		name.add("到达地");
 		name.add("车厢号");
 		name.add("押运员");
-//		table=new newTable(data,name,this,false);
-//		table.setBounds(134, 100, 333, 157);
-//		table.stopAutoRewidth();
-//		table.join();
 		for (int c = 0; c < volist.size(); c++) {
 			Vector<String> vector=new Vector<String>();
 			String tempId = volist.get(c).getId();
@@ -809,10 +780,6 @@ public class ManagerReceiptList extends JPanel {
 		name.add("到达地");
 		name.add("货柜号");
 		name.add("押运员");
-//		table=new newTable(data,name,this,false);
-//		table.setBounds(134, 100, 333, 157);
-//		table.stopAutoRewidth();
-//		table.join();
 		for (int c = 0; c < volist.size(); c++) {
 			Vector<String> vector=new Vector<String>();
 			String tempId = volist.get(c).getId();
@@ -868,10 +835,6 @@ public class ManagerReceiptList extends JPanel {
 		name.add("接收时间");
 		name.add("中转单编号");
 		name.add("出发地");
-//		table=new newTable(data,name,this,false);
-//		table.setBounds(134, 100, 333, 157);
-//		table.stopAutoRewidth();
-//		table.join();
 		System.out.println(volist.size());
 		for (int c = 0; c < volist.size(); c++) {
 			Vector<String> vector=new Vector<String>();
@@ -926,10 +889,6 @@ public class ManagerReceiptList extends JPanel {
 		name.add("监装员");
 		name.add("押运员");
 		name.add("运费");
-//		table=new newTable(data,name,this,false);
-//		table.setBounds(134, 100, 333, 157);
-//		table.stopAutoRewidth();
-//		table.join();
 		for (int c = 0; c < volist.size(); c++) {
 			Vector<String> vector=new Vector<String>();
 			String tempId = volist.get(c).getId();
@@ -990,10 +949,6 @@ public class ManagerReceiptList extends JPanel {
 		name.add("架号");
 		name.add("位号");
 		name.add("中转中心");
-//		table=new newTable(data,name,this,false);
-//		table.setBounds(134, 100, 333, 157);
-//		table.stopAutoRewidth();
-//		table.join();
 		for (int c = 0; c < volist.size(); c++) {
 			Vector<String> vector=new Vector<String>();
 			String tempId = volist.get(c).getId();
@@ -1052,10 +1007,6 @@ public class ManagerReceiptList extends JPanel {
 		name.add("排号");
 		name.add("架号");
 		name.add("位号");
-//		table=new newTable(data,name,this,false);
-//		table.setBounds(134, 100, 333, 157);
-//		table.stopAutoRewidth();
-//		table.join();
 		for (int c = 0; c < volist.size(); c++) {
 			Vector<String> vector=new Vector<String>();
 			String tempId = volist.get(c).getId();
