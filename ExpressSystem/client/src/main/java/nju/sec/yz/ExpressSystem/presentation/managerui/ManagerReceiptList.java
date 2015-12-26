@@ -183,7 +183,8 @@ public class ManagerReceiptList extends JPanel {
 						warning.setText("提交成功");
 						warning.setBounds(270, 490, 70, 30);
 						add(warning);
-
+						data.remove(deletelines[c]);
+						table.resetData();
 						repaint();
 					}
 				}
@@ -214,7 +215,8 @@ public class ManagerReceiptList extends JPanel {
 						warning.setText("提交成功");
 						warning.setBounds(270, 490, 70, 30);
 						add(warning);
-
+						data.remove(changedlines[c]);
+						table.resetData();
 						repaint();
 					}
 				}
