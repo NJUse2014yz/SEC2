@@ -81,13 +81,6 @@ public class PositionPayUi extends JPanel{
 		name.add("快递单条形码号");
 		name.add("账户");
 		
-		table=new newTable(data,name,this,false);
-		table.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
-		table.setJComboBox(new newJCombo(accounts), 4);
-		table.join();
-		
-		changeData(payList);
-		
 		List<String> accountList=deliverBl.getAccounts();
 		if(accountList.size()!=0)
 		{
@@ -98,6 +91,14 @@ public class PositionPayUi extends JPanel{
 				accounts[i]=accountList.get(i-1);
 			}
 		}
+		
+		table=new newTable(data,name,this,false);
+		table.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
+		table.setJComboBox(new newJCombo(accounts), 4);
+		table.join();
+		
+		changeData(payList);
+
 		initDeliverMainUi();
 	}
 
