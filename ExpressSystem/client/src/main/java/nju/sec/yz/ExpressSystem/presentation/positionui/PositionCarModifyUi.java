@@ -67,6 +67,13 @@ public class PositionCarModifyUi extends JPanel{
 		carBl=new CarController();
 		cars=carBl.getAll();
 		
+		name.add("车辆代号");
+		name.add("车牌号");
+		name.add("发动机号");
+		name.add("底盘号");
+		name.add("购买时间");
+		name.add("服役时间");
+		
 		table=new newTable(data,name,this,false);
 		table.stopAutoRewidth();
 		table.addMouseListener(new MouseAdapter(){
@@ -78,12 +85,7 @@ public class PositionCarModifyUi extends JPanel{
 		table.join();
 		
 		changeData(cars);
-		name.add("车辆代号");
-		name.add("车牌号");
-		name.add("发动机号");
-		name.add("底盘号");
-		name.add("购买时间");
-		name.add("服役时间");
+		
 		initDeliverMainUi();
 	}
 

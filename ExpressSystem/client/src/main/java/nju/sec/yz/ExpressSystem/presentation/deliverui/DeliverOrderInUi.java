@@ -78,6 +78,9 @@ public class DeliverOrderInUi extends JPanel {
 
 	// 提示信息
 	private newJLabel warning = new newJLabel();
+	JLabel predictTime = new newJLabel();
+	JLabel costForAll = new newJLabel();
+	
 	//城市选项
 	private String[] city;
 
@@ -171,7 +174,8 @@ public class DeliverOrderInUi extends JPanel {
 //						predictTime.setVisible(true);
 						add(predictTime);
 
-						JLabel costForAll = new newJLabel();
+//						JLabel predictTime = new newJLabel();
+//						JLabel costForAll = new newJLabel();
 						costForAll.setText(new DecimalFormat(".00").format(cost) + "元");
 						costForAll.setBounds(193, 428, 70, 30);
 //						costForAll.setForeground(Color.GRAY);

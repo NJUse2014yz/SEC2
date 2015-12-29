@@ -84,7 +84,7 @@ public class newTable{
 	 * @param choose JComboBox 下拉框
 	 * @param column int 在表格的第几列
 	 */
-	public void setJComboBox(JComboBox choose,int column)
+	public void setJComboBox(newJCombo choose,int column)
 	{
 		table.getColumnModel().getColumn(column).setCellEditor(new DefaultCellEditor(choose));
 	}

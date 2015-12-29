@@ -107,7 +107,7 @@ public class TransitReceiptCar extends JPanel{
 		add(fare);
 		
 		carTransitId = new newJLabel();
-		carTransitId.setBounds(290, 165, 140, 22);
+		carTransitId.setBounds(290, 165, 170, 22);
 		carTransitId.setVisible(false);
 		add(carTransitId);
 		
@@ -133,11 +133,11 @@ public class TransitReceiptCar extends JPanel{
 						|| (transiterId.getText().equals("")) ) {
 					warning.NotFilled();
 					
-					fare.setText("KKKKKKKK");
-					fare.setVisible(true);
+//					fare.setText("KKKKKKKK");
+//					fare.setVisible(true);
 				
-					carTransitId.setText("AAAAAAAAAAAAAAAA");
-					carTransitId.setVisible(true);
+//					carTransitId.setText("AAAAAAAAAAAAAAAA");
+//					carTransitId.setVisible(true);
 				} 
 				else
 				{
@@ -161,7 +161,7 @@ public class TransitReceiptCar extends JPanel{
 				if(result.getResult()==Result.SUCCESS){
 					
 					String[] message=result.getMessage().split(" ");
-					fare.setText(message[0] + "元");
+					fare.setText(message[0].substring(0, message[0].indexOf('.')+2) + "元");
 					fare.setVisible(true);
 				
 					carTransitId.setText(message[1]);

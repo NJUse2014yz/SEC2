@@ -111,7 +111,7 @@ public class TransitReceiptFlight extends JPanel{
 		add(fare);
 		
 		flightTransitId = new newJLabel();
-		flightTransitId.setBounds(290, 163, 140, 22);
+		flightTransitId.setBounds(290, 163, 170, 22);
 		flightTransitId.setVisible(false);
 		add(flightTransitId);
 		
@@ -156,7 +156,7 @@ public class TransitReceiptFlight extends JPanel{
 				warning.Reply(result);
 				if(result.getResult()==Result.SUCCESS){
 					String[] message=result.getMessage().split(" ");
-					fare.setText(message[0] + "元");
+					fare.setText(message[0].substring(0, message[0].indexOf('.')+2) + "元");
 					fare.setVisible(true);
 				
 					flightTransitId.setText(message[1]);

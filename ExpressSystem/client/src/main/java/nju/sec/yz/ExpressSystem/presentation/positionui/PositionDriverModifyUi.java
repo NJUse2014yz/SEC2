@@ -66,6 +66,15 @@ public class PositionDriverModifyUi extends JPanel{
 		driverBl=new DriverController();
 		drivers=driverBl.getAll();
 		
+		name.add("司机编号");
+		name.add("姓名");
+		name.add("性别");
+		name.add("出生日期");
+		name.add("身份证号");
+		name.add("手机");
+		name.add("车辆单位");
+		name.add("行驶证期限");
+		
 		table=new newTable(data,name,this,false);
 		table.stopAutoRewidth();
 		table.addMouseListener(new MouseAdapter(){
@@ -77,14 +86,7 @@ public class PositionDriverModifyUi extends JPanel{
 		table.join();
 		
 		changeData(drivers);
-		name.add("司机编号");
-		name.add("姓名");
-		name.add("性别");
-		name.add("出生日期");
-		name.add("身份证号");
-		name.add("手机");
-		name.add("车辆单位");
-		name.add("行驶证期限");
+		
 		initDeliverMainUi();
 	}
 

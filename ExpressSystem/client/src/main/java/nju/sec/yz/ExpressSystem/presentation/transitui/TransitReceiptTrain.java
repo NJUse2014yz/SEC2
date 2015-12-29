@@ -103,7 +103,7 @@ public class TransitReceiptTrain extends JPanel {
 		add(transiterId);
 
 		trainTransitId = new newJLabel();
-		trainTransitId.setBounds(290, 164, 140, 22);
+		trainTransitId.setBounds(290, 164, 170, 22);
 		trainTransitId.setVisible(false);
 		add(trainTransitId);
 		
@@ -155,7 +155,7 @@ public class TransitReceiptTrain extends JPanel {
 					if (result.getResult() == Result.SUCCESS) {
 
 						String[] message=result.getMessage().split(" ");
-						fare.setText(message[0] + "元");
+						fare.setText(message[0].substring(0, message[0].indexOf('.')+2) + "元");
 						fare.setVisible(true);
 					
 						trainTransitId.setText(message[1]);

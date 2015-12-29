@@ -1,7 +1,6 @@
 package nju.sec.yz.ExpressSystem.presentation.positionui;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -10,11 +9,7 @@ import java.util.List;
 import java.util.Vector;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import nju.sec.yz.ExpressSystem.bl.deliverbl.DeliverController;
 import nju.sec.yz.ExpressSystem.bl.managerbl.ManagerController;
@@ -23,10 +18,10 @@ import nju.sec.yz.ExpressSystem.blservice.managerBlService.ConstBlService;
 import nju.sec.yz.ExpressSystem.common.ArriveInformation;
 import nju.sec.yz.ExpressSystem.common.ArriveState;
 import nju.sec.yz.ExpressSystem.common.ReceiptType;
-import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.presentation.DateChooser;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJCombo;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJText;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
@@ -105,7 +100,7 @@ public class PositionArriveUi extends JPanel{
 		setSize(490, 550);
 		
 		table=new newTable(data,name,this,false);
-		table.setJComboBox(new JComboBox(new String[]{"完整","丢失","损坏"}), 1);
+		table.setJComboBox(new newJCombo(new String[]{"完整","丢失","损坏"}), 1);
 		table.setBounds(scroll_x,scroll_y,scroll_w,scroll_h);
 		table.join();
 		

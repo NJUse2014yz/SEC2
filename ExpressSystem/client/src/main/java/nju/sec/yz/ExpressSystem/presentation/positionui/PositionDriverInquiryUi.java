@@ -74,12 +74,6 @@ public class PositionDriverInquiryUi extends JPanel{
 		driverBl=new DriverController();
 		drivers=driverBl.getAll();
 		
-		table=new newTable(data,name,this,false);
-		table.stopAutoRewidth();
-		table.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
-		table.join();
-		
-		changeData(drivers);
 		name.add("司机编号");
 		name.add("姓名");
 		name.add("性别");
@@ -88,6 +82,14 @@ public class PositionDriverInquiryUi extends JPanel{
 		name.add("手机");
 		name.add("车辆单位");
 		name.add("行驶证期限");
+		
+		table=new newTable(data,name,this,false);
+		table.stopAutoRewidth();
+		table.setBounds(scroll_x, scroll_y, scroll_w, scroll_h);
+		table.join();
+		
+		changeData(drivers);
+		
 		initDeliverMainUi();
 	}
 

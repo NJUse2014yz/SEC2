@@ -1,7 +1,6 @@
 package nju.sec.yz.ExpressSystem.presentation.accountui;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -11,9 +10,6 @@ import java.util.List;
 import java.util.Vector;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import nju.sec.yz.ExpressSystem.bl.accountbl.InitialController;
@@ -23,10 +19,10 @@ import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.common.Status;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJCombo;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newTable;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.AccountControl;
-import nju.sec.yz.ExpressSystem.presentation.controlerui.AccountControler;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.AccountVO;
 import nju.sec.yz.ExpressSystem.vo.CarVO;
@@ -293,7 +289,7 @@ public class AccountInitialUi extends JPanel{
 		tableP.join();
 		
 		tableS=new newTable(dataS,nameS,this,true);
-		tableS.setJComboBox(new JComboBox(power), 2);
+		tableS.setJComboBox(new newJCombo(power), 2);
 		tableS.setBounds(scroll_x,scroll_y,scroll_w,scroll_h);
 		tableS.setVisible(false);
 		tableS.initialBlank(nameS.size());
