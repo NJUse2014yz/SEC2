@@ -154,7 +154,6 @@ public class ReceiptList implements ReceiptSaveService{
 			if(this.getSingle(vo.getId())==null)
 				return new ResultMessage(Result.FAIL,"已经审批过了~");
 			
-			
 			//单据信息更新交给相应receipt处理
 			ReceiptService receipt=RECEIPT_MAP.get(vo.getType()).newInstance();
 			message=receipt.approve(vo);

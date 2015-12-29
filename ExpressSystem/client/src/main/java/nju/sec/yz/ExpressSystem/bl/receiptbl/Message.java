@@ -66,14 +66,11 @@ public class Message{
 		UserInfo user=new User();
 		String currentUser=user.getCurrentID();
 		
-		
 		List<MessageVO> messages=new ArrayList<>();
 		
 		try {
 			List<MessagePO> pos=data.getMessages(currentUser);
-			System.out.println("get "+pos.size()+" messages");
 			for(MessagePO po:pos){
-				
 				MessageVO message=new MessageVO(po.getMessageId(), po.getToPersonId(), po.getMessage());
 				messages.add(message);
 			}
