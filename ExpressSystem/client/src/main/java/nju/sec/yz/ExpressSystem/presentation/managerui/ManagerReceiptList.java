@@ -201,7 +201,7 @@ public class ManagerReceiptList extends JPanel {
 		passAll.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				System.out.println("BBBBBBBBBBBBBBBBBBBBBB");
-				int[] changedlines = table.getSelectedRows();
+//				int[] changedlines = table.getSelectedRows();
 				for (int c = 0; c < volist.size(); c++) {
 
 					ResultMessage tempresult = receipt.approve(modifyVO(c, volist.get(c).getId()));
@@ -216,7 +216,7 @@ public class ManagerReceiptList extends JPanel {
 						warning.setText("提交成功");
 						warning.setBounds(270, 490, 70, 30);
 						add(warning);
-						data.remove(changedlines[c]);
+						data.remove(c);
 						table.resetData();
 						repaint();
 					}
