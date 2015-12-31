@@ -219,6 +219,8 @@ public class ManagerButtonComponent {
 				observe.setLocation(13,50+height1*4+height2*2);
 				observe.setVisible(true);
 				
+				delete.setVisible(false);
+				
 				for(int count=5;count<=buttons.length;count++){
 					buttons[count-1].setLocation(13,50+height1*(count-1)+height2*3);
 //					buttons[count-1].setIcon(imgs[2*count-2]);

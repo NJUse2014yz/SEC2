@@ -126,7 +126,8 @@ public class TransitReceiveReceipt implements ReceiptService {
 
 		// 获得本中转中心名称
 		Transit transit = new Transit();
-		String transitId = vo.getId().split(IdType.TRANSIT_RECEIVE_RECEIPT.getIdStr())[0];
+		String transitId = vo.getId().split(IdType.TRANSIT_RECEIVE_RECEIPT.getIdStr())[0].split("A")[0];;
+		
 		String transitName = transit.observeTransit(transitId).getName();
 
 		// 更新物流信息

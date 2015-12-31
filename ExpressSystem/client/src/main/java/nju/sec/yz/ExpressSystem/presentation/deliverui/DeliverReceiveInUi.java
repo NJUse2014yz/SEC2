@@ -9,7 +9,6 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -20,6 +19,7 @@ import nju.sec.yz.ExpressSystem.common.Result;
 import nju.sec.yz.ExpressSystem.common.ResultMessage;
 import nju.sec.yz.ExpressSystem.presentation.DateChooser;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJBut;
+import nju.sec.yz.ExpressSystem.presentation.componentui.newJLabel;
 import nju.sec.yz.ExpressSystem.presentation.componentui.newJText;
 import nju.sec.yz.ExpressSystem.presentation.controlerui.ClientControler;
 import nju.sec.yz.ExpressSystem.vo.ReceiveVO;
@@ -35,7 +35,7 @@ public class DeliverReceiveInUi extends JPanel{
 	// 确定选项
 	private JButton confirmButton;
 	
-	private JLabel warning=new JLabel();
+	private newJLabel warning=new newJLabel();
 	
 	public DeliverReceiveInUi(ClientControler controler) {
 		iniDeliverReceiveIn();
@@ -77,15 +77,9 @@ public class DeliverReceiveInUi extends JPanel{
 			//判断必填项是否填写完成
 			
 			if((id.getText().equals(""))||(receiver.getText().equals(""))){
-				warning.setText("尚未完成对带*必填项的填写");
-				warning.setBounds(198, 490, 463 - 198, 30);
-				warning.setFont(new Font("Dialog", 1, 15));
-				warning.setForeground(Color.red);
-				warning.setVisible(true);
-				add(warning);
-				repaint();
+				warning.NotFilled();
+				
 			}else{
-				System.out.println("LLLLLLLLLLLLLLLLL");
 				ReceiveInformation reInfor=new ReceiveInformation(id.getText(), receiver.getText(), date.getTime());
 				ReceiveVO reVO=new ReceiveVO();
 				reVO.setReceiveInformation(reInfor);
@@ -93,26 +87,11 @@ public class DeliverReceiveInUi extends JPanel{
 				System.out.println(reVO.getReceiveInformation().getId());
 				// 失败
 				System.out.println(result== null);
-				if (result.getResult() == Result.FAIL) {
-					warning.setText(result.getMessage());
-					warning.setBounds(138, 490, 463 - 138, 30);
-					warning.setFont(new Font("Dialog", 1, 15));
-					warning.setForeground(Color.red);
-					add(warning);
-					repaint();
-				} else {
-					 //提交成功
-					warning.setText("提交成功");
-					warning.setBounds(270, 490, 70, 30);
-					warning.setFont(new Font("Dialog", 1, 15));
-					warning.setForeground(Color.red);
-					warning.setVisible(true);
-					add(warning);
-					confirmButton.setEnabled(false);
-					repaint();
-					}
+				warning.Reply(result);
 				
 				}	
+			add(warning);
+			repaint();
 			
 			}
 			

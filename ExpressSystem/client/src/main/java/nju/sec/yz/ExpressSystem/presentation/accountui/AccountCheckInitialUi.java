@@ -118,7 +118,7 @@ public class AccountCheckInitialUi extends JPanel{
 		initialBl=new InitialController();
 		List<String> yearT=initialBl.getDates();
 		int n=yearT.size();
-		System.out.println(n);
+//		System.out.println(n);
 		years=new String[n];
 		for(int i=0;i<n;i++)
 		{
@@ -195,9 +195,11 @@ public class AccountCheckInitialUi extends JPanel{
 		tableI.join();
 		
 		choose.setBounds(year_x,year_y,year_w,year_h);
+		choose.setSelectedIndex(0);
 		choose.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e)
 			{
+				
 				num=years[choose.getSelectedIndex()];
 				iv=initialBl.observeInitial(num);
 				changeData(iv);
@@ -207,6 +209,8 @@ public class AccountCheckInitialUi extends JPanel{
 				tableC.resetData();
 				tableA.resetData();
 				tableI.resetData();
+				
+				System.out.println("SSSSSSSSSSSSSSSSSSS");
 			}
 			
 		});
@@ -365,10 +369,10 @@ public class AccountCheckInitialUi extends JPanel{
 			vector.add(iv.transits.get(i).location);
 			dataT.add(vector);
 		}
-		
 		for(int i=0;i<iv.transits.size();i++)
 		{
-			for(int j=0;j<iv.transits.get(i).positions.size();i++)
+			System.out.println(iv.transits.get(i).positions.size());
+			for(int j=0;j<iv.transits.get(i).positions.size();j++)
 			{
 				Vector<String> vector=new Vector<String>();
 				vector.add(iv.transits.get(i).positions.get(j).name);

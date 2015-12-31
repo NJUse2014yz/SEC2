@@ -111,7 +111,7 @@ public class TransitReceiptFlight extends JPanel{
 		add(fare);
 		
 		flightTransitId = new newJLabel();
-		flightTransitId.setBounds(290, 163, 170, 22);
+		flightTransitId.setBounds(290, 163, 180, 22);
 		flightTransitId.setVisible(false);
 		add(flightTransitId);
 		

@@ -103,7 +103,7 @@ public class TransitLoading extends JPanel{
 		add(driverId);
 		
 		transportId = new newJLabel();
-		transportId.setBounds(290, 167, 140, 18);
+		transportId.setBounds(285, 167, 180, 18);
 		transportId.setVisible(false);
 		add(transportId);
 		

@@ -103,7 +103,7 @@ public class TransitReceiptTrain extends JPanel {
 		add(transiterId);
 
 		trainTransitId = new newJLabel();
-		trainTransitId.setBounds(290, 164, 170, 22);
+		trainTransitId.setBounds(290, 164, 180, 22);
 		trainTransitId.setVisible(false);
 		add(trainTransitId);
 		

@@ -107,7 +107,7 @@ public class TransitReceiptCar extends JPanel{
 		add(fare);
 		
 		carTransitId = new newJLabel();
-		carTransitId.setBounds(290, 165, 170, 22);
+		carTransitId.setBounds(290, 165, 180, 22);
 		carTransitId.setVisible(false);
 		add(carTransitId);
 		
