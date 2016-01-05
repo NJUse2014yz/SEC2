@@ -145,9 +145,14 @@ public class PositionReceiveReceipt implements ReceiptService {
 		//更新物流信息
 		Deliver deliver=new Deliver();
 		for(int i=0;i<barIds.size();i++){
+			DeliveryState deliveryState=DeliveryState.OFFICE_IN;
 			String trail=positionName+"已收入。";
 			trail=trail+states.get(i)+" "+info.getTime();
-			deliver.updateDeliverInfo(barIds.get(i), trail, DeliveryState.OFFICE_IN,positionId);
+			if(states.get(i)==ArriveState.LOST)
+				deliveryState=DeliveryState.LOST;
+			if(states.get(i)==ArriveState.BROKEN)
+				deliveryState=DeliveryState.BROKEN;
+			deliver.updateDeliverInfo(barIds.get(i), trail, deliveryState,positionId);
 		}
 		
 		return new ResultMessage(Result.SUCCESS);

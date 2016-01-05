@@ -134,8 +134,13 @@ public class TransitReceiveReceipt implements ReceiptService {
 		Deliver deliver = new Deliver();
 		for (int i = 0; i < barIds.size(); i++) {
 			String trail = transitName + "已收入。";
+			DeliveryState deliveryState=DeliveryState.TRANSIT_IN;
 			trail = trail + states.get(i) + " " + info.getTime();
-			deliver.updateDeliverInfo(barIds.get(i), trail, DeliveryState.TRANSIT_IN, transitId);
+			if(states.get(i)==ArriveState.LOST)
+				deliveryState=DeliveryState.LOST;
+			if(states.get(i)==ArriveState.BROKEN)
+				deliveryState=DeliveryState.BROKEN;
+			deliver.updateDeliverInfo(barIds.get(i), trail, deliveryState, transitId);
 		}
 
 		return new ResultMessage(Result.SUCCESS);

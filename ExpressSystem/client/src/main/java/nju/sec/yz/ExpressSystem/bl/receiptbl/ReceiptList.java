@@ -149,7 +149,6 @@ public class ReceiptList implements ReceiptSaveService{
 	
 	public ResultMessage approve(ReceiptVO vo) {
 		ResultMessage message=null;
-		System.out.println("正在审批"+vo.getType());
 		try {
 			if(this.getSingle(vo.getId())==null)
 				return new ResultMessage(Result.FAIL,"已经审批过了~");
@@ -166,7 +165,6 @@ public class ReceiptList implements ReceiptSaveService{
 			showMessage=showMessage+receipt.showMessage(vo)+StringTool.nextLine();
 			Message sender=new Message();
 			sender.send(new MessageVO(vo.getMakePerson(), showMessage));
-			
 		} catch (InstantiationException | IllegalAccessException e) {
 			e.printStackTrace();
 			return new ResultMessage(Result.FAIL,"系统错误");
